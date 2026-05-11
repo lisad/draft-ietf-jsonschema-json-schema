@@ -4,16 +4,16 @@
 
 This is the working area for the individual Internet-Draft, "JSON Schema".
 
-* [Editor's Copy](https://lisad.github.io/draft-dusseault-json-schema/#go.draft-dusseault-json-schema.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-dusseault-json-schema)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-dusseault-json-schema)
-* [Compare Editor's Copy to Individual Draft](https://lisad.github.io/draft-dusseault-json-schema/#go.draft-dusseault-json-schema.diff)
+* [Editor's Copy](https://lisad.github.io/draft-ietf-jsonschema-json-schema/#go.draft-ietf-jsonschema-json-schema.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-jsonschema-json-schema)
+* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-ietf-jsonschema-json-schema)
+* [Compare Editor's Copy to Individual Draft](https://lisad.github.io/draft-ietf-jsonschema-json-schema/#go.draft-ietf-jsonschema-json-schema.diff)
 
 
 ## Contributing
 
 See the
-[guidelines for contributions](https://github.com/lisad/draft-dusseault-json-schema/blob/main/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/lisad/draft-ietf-jsonschema-json-schema/blob/main/CONTRIBUTING.md).
 
 The contributing file also has tips on how to make contributions, if you
 don't already know how to do that.
