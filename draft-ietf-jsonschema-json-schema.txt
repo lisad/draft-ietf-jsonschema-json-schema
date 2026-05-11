@@ -5,13 +5,13 @@
 Network Working Group                                       L. Dusseault
 Internet-Draft                                  Data Transfer Initiative
 Intended status: Informational                                 A. Wright
-Expires: 29 October 2026                                                
+Expires: 12 November 2026                                               
                                                               H. Andrews
-                                                           27 April 2026
+                                                             11 May 2026
 
 
                               JSON Schema
-                   draft-dusseault-json-schema-latest
+                draft-ietf-jsonschema-json-schema-latest
 
 Abstract
 
@@ -38,7 +38,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 October 2026.
+   This Internet-Draft will expire on 12 November 2026.
 
 Copyright Notice
 
