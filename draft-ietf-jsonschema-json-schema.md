@@ -1,6 +1,6 @@
 ---
 title: JSON Schema
-docname: draft-dusseault-json-schema-latest
+docname: draft-ietf-jsonschema-json-schema-latest
 category: info
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 area: ART
