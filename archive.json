@@ -1,7 +1,7 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-10T00:50:14.661225+00:00",
-  "repo": "lisad/draft-dusseault-json-schema",
+  "timestamp": "2026-05-12T00:45:57.781598+00:00",
+  "repo": "lisad/draft-ietf-jsonschema-json-schema",
   "labels": [
     {
       "name": "bug",
@@ -55,7 +55,7 @@
       "number": 1,
       "id": "PR_kwDOR8mbas7UgNDN",
       "title": "Moving Henry's suggestions over and adapting slightly",
-      "url": "https://github.com/lisad/draft-dusseault-json-schema/pull/1",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/1",
       "state": "MERGED",
       "author": "lisad",
       "authorAssociation": "OWNER",
@@ -64,10 +64,10 @@
       "body": "Compared to Henry's suggested text - I really cut out the behavior of readonly/writeonly because that's not in scope and clearer if we just say how the annotation output allows the implementation to control its behavior.",
       "createdAt": "2026-04-22T04:28:44Z",
       "updatedAt": "2026-04-27T16:22:44Z",
-      "baseRepository": "lisad/draft-dusseault-json-schema",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "1ee0721d16ca7920adb53b992056537683c28eae",
-      "headRepository": "lisad/draft-dusseault-json-schema",
+      "headRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "headRefName": "better-annotation-def",
       "headRefOid": "00eedc8d7af77f6a6a9f652a22d8cec0c0f549b1",
       "closedAt": "2026-04-27T16:22:44Z",
