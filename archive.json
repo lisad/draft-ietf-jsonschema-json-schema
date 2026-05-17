@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-14T00:52:17.486962+00:00",
+  "timestamp": "2026-05-17T00:51:53.161951+00:00",
   "repo": "lisad/draft-ietf-jsonschema-json-schema",
   "labels": [
     {
@@ -49,7 +49,119 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 2,
+      "id": "I_kwDOR8mbas8AAAABCTA9hQ",
+      "title": "Add a link to the github repo to the draft itself",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/issues/2",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "As suggested by Rich Salz (~ may 12)",
+      "createdAt": "2026-05-14T20:40:59Z",
+      "updatedAt": "2026-05-14T20:40:59Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 3,
+      "id": "I_kwDOR8mbas8AAAABCTbuQw",
+      "title": "Use the term \u201cJSON text\u201d to describe JSON's top-level construct, consistent with RFC8259",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/issues/3",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "This would generally replace \"JSON Document\"\nSuggested by Tim Bray 5/12",
+      "createdAt": "2026-05-14T21:51:18Z",
+      "updatedAt": "2026-05-14T22:49:14Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "karenetheridge",
+          "authorAssociation": "NONE",
+          "body": "It's not text though. A JSON Schema construct is not JSON text, but rather a deserialized document that follows the JSON document model: nested objects, arrays, strings, numbers, booleans and nulls.\n\nIt's important to consider that all of the specification deals with the abstract data after it has been deserialized from whatever text form it came in (which is often JSON, but YAML is a very popular data format as well). And some JSON documents are composed dynamically and were never serialized into text form to begin with.\n\n(where can I see these suggestions?)",
+          "createdAt": "2026-05-14T22:02:45Z",
+          "updatedAt": "2026-05-14T22:02:45Z"
+        },
+        {
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "body": "Official comments on this draft are all on the JSON Schema WG's mailing list (https://datatracker.ietf.org/wg/jsonschema/about/).  You can find Tim Bray's comments there.  I'm not necessarily going to track everything in Github issues, nor will I necessarily follow up on github issue responses, this is more for transparency, personal task management, and communication between the authors. ",
+          "createdAt": "2026-05-14T22:49:14Z",
+          "updatedAt": "2026-05-14T22:49:14Z"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "id": "I_kwDOR8mbas8AAAABCTcNIA",
+      "title": "Contextualize example in 4.1.2; the previous discussion emphasizes the role of $-prefixed keywords, but there aren\u2019t any here.",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/issues/4",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Tim bray: \n\"4.1.2, the example is sort of surprising; the previous discussion emphasizes the role of $-prefixed keywords, but there aren\u2019t any here.\"",
+      "createdAt": "2026-05-14T21:52:28Z",
+      "updatedAt": "2026-05-14T22:11:14Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "karenetheridge",
+          "authorAssociation": "NONE",
+          "body": "Clarify? There are no examples at https://www.ietf.org/archive/id/draft-ietf-jsonschema-json-schema-00.html#section-4.1.2.",
+          "createdAt": "2026-05-14T22:11:14Z",
+          "updatedAt": "2026-05-14T22:11:14Z"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "id": "I_kwDOR8mbas8AAAABCTc8ng",
+      "title": "Resolve the consistency about two properties with same key in JSON Schema v JSON.",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/issues/5",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Tim Bray: \"Since an object cannot have two properties with the same key,\u201d Yes it can, per 8259. Maybe json schemas should be I-JSON?\n",
+      "createdAt": "2026-05-14T21:54:18Z",
+      "updatedAt": "2026-05-14T22:16:42Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "karenetheridge",
+          "authorAssociation": "NONE",
+          "body": "Yes, this was flagged as an oversight in the last draft.\n\nHowever, is I-JSON an adequate substitute given that it recommends avoiding top-level constructs that are neither objects nor arrays (https://datatracker.ietf.org/doc/html/rfc7493#section-4.1)?  A single boolean value is a valid JSON Schema and is not uncommon in practical use, especially when embedded in other documents such as OpenAPI.",
+          "createdAt": "2026-05-14T22:16:12Z",
+          "updatedAt": "2026-05-14T22:16:42Z"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "I_kwDOR8mbas8AAAABCTpyTA",
+      "title": "Use 'member' instead of value as RFC8259 does",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/issues/6",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Tim Bray:  5.1.2 \"The values of the object properties MUST be booleans.\u201d The 8259 terminology is \u201cmembers\u201d not \u201cproperties\u201d\n",
+      "createdAt": "2026-05-14T22:32:06Z",
+      "updatedAt": "2026-05-14T22:32:06Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
   "pulls": [
     {
       "number": 1,
