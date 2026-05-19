@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-17T00:51:53.161951+00:00",
+  "timestamp": "2026-05-19T00:53:42.406780+00:00",
   "repo": "lisad/draft-ietf-jsonschema-json-schema",
   "labels": [
     {
@@ -78,7 +78,7 @@
       "labels": [],
       "body": "This would generally replace \"JSON Document\"\nSuggested by Tim Bray 5/12",
       "createdAt": "2026-05-14T21:51:18Z",
-      "updatedAt": "2026-05-14T22:49:14Z",
+      "updatedAt": "2026-05-18T22:32:46Z",
       "closedAt": null,
       "comments": [
         {
@@ -94,6 +94,13 @@
           "body": "Official comments on this draft are all on the JSON Schema WG's mailing list (https://datatracker.ietf.org/wg/jsonschema/about/).  You can find Tim Bray's comments there.  I'm not necessarily going to track everything in Github issues, nor will I necessarily follow up on github issue responses, this is more for transparency, personal task management, and communication between the authors. ",
           "createdAt": "2026-05-14T22:49:14Z",
           "updatedAt": "2026-05-14T22:49:14Z"
+        },
+        {
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "body": "See proposal today to mailing list",
+          "createdAt": "2026-05-18T22:32:46Z",
+          "updatedAt": "2026-05-18T22:32:46Z"
         }
       ]
     },
@@ -158,6 +165,54 @@
       "body": "Tim Bray:  5.1.2 \"The values of the object properties MUST be booleans.\u201d The 8259 terminology is \u201cmembers\u201d not \u201cproperties\u201d\n",
       "createdAt": "2026-05-14T22:32:06Z",
       "updatedAt": "2026-05-14T22:32:06Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 7,
+      "id": "I_kwDOR8mbas8AAAABCpiapQ",
+      "title": "Make intended status of draft Proposed Standard",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/issues/7",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "I think that's generally understood to be the intent, now if I only know how to make it happen with the IETF draft template syntax",
+      "createdAt": "2026-05-18T21:33:32Z",
+      "updatedAt": "2026-05-18T21:33:32Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 8,
+      "id": "I_kwDOR8mbas8AAAABCpj0PA",
+      "title": "Make L. Dusseault \"Editor\" of the JSON Schema document",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/issues/8",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "I've tried to make this happen with the draft template tools but haven't been successful yet... rather be \"editor\" than \"author\" if that's possible",
+      "createdAt": "2026-05-18T21:37:37Z",
+      "updatedAt": "2026-05-18T21:37:37Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 9,
+      "id": "I_kwDOR8mbas8AAAABCp0hEQ",
+      "title": "Handle duplicate definitions of how to handle unrecognized keywords",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/issues/9",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Eliot's mail:\n---\nIn Section 2.1:\n\nUnrecognized individual keywords simply have their values treated as annotations [...]\n\nIn Section 13.4, it reads:\n\nImplementations SHOULD treat keywords they do not recognize, or that they recognize but do not support, as annotations, where the value of the keyword is the value of the annotation. Whether an implementation collects these annotations or not, they MUST otherwise ignore the keywords.\n\n---\nWorth looking at eventually, other rewritings may make this moot.  \n",
+      "createdAt": "2026-05-18T22:34:21Z",
+      "updatedAt": "2026-05-18T22:34:21Z",
       "closedAt": null,
       "comments": []
     }
