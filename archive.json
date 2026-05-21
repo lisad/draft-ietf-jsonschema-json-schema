@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-19T00:53:42.406780+00:00",
+  "timestamp": "2026-05-21T00:55:12.239308+00:00",
   "repo": "lisad/draft-ietf-jsonschema-json-schema",
   "labels": [
     {
@@ -292,6 +292,32 @@
           ]
         }
       ]
+    },
+    {
+      "number": 10,
+      "id": "PR_kwDOR8mbas7dHoJJ",
+      "title": "Add pointer to GitHub repository",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/10",
+      "state": "OPEN",
+      "author": "richsalz",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-05-19T14:53:02Z",
+      "updatedAt": "2026-05-19T14:53:02Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "ff658b807d576c159186214654f91fd60dba5f15",
+      "headRepository": "richsalz/draft-ietf-jsonschema-json-schema",
+      "headRefName": "add-some-stuff",
+      "headRefOid": "beabed6bea5bb18ad3c4a1ee7c071a783a2a87ee",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
