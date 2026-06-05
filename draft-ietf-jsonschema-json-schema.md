@@ -77,7 +77,7 @@ normative:
 
 JSON Schema defines the media type "application/schema+json", a JSON-based format
 for describing the structure of JSON data.
-JSON Schema asserts what a JSON document must look like,
+A JSON Schema asserts some constraints on structure and contents for a structured document,
 ways to extract information from it,
 and how to interact with it.
 The "application/schema-instance+json" media type provides additional
@@ -90,7 +90,8 @@ for "application/json" documents.
 
 ...
 
-JSON Schemas are JSON documents that describe and constrain other JSON documents.
+JSON Schemas are documents that describe and constrain structured documents, particularly
+JSON texts.
 JSON Schema defines validation, documentation, hyperlink navigation,
 and interaction control of JSON data.
 
@@ -123,9 +124,11 @@ instance, returns a standard annotation output.
 
 ### Validation
 
-A JSON Schema document (a _schema_) notates a grammar that describes a language of JSON documents:
-That is, it describes a set of JSON documents by listing rules to classify an _input_, some arbritrary JSON document, as within or not within the set.
-The largest possible set is that of all JSON documents (all documents that are valid `application/json`).
+In computer science terms, a JSON Schema document (a _schema_) notates a _grammar_
+that describes a _language_ of structured documents.
+That is, a schema describes a set of structured documents by listing rules to classify
+an _input_ as within or not within the set.
+The largest possible set is that of all syntactically valid structured inputs.
 The smallest set is the empty set.
 
 A _validator_ (also known as an _acceptor_) is a process that tests if a particular input is described by the schema, by evaluating it against the requirements.
@@ -158,7 +161,7 @@ an instance of a particular JSON Schema.
 
 ### Keywords
 
-JSON Schema uses *keywords* to assert constraints on JSON documents or provide
+JSON Schema uses *keywords* to assert constraints on structured documents or provide
 annotations with additional information.  Additional keywords combine other
 keywords or provide references to sub-schemas, features which allow more
 complex JSON data structures.
@@ -204,32 +207,33 @@ These terms are all defined in the context of JSON Schema.  These quick
 definitions may not be enough to completely comprehend roles and uses, but may still
 provide a useful quick reference.
 
-**JSON Document**
+**JSON Text**
 
-A JSON document is an information resource (series of octets) described by the
-application/json media type.
+A JSON text is an information resource (series of octets) described by the
+application/json media type, as defined in {{RFC8259}}.
 
 **Input**
 
-A JSON document supplied to a validator or other implementation, in order to
+A JSON text or other serialized or structured data, supplied to a validator
+or other implementation, in order to
 compare it to a schema, is an input until it is known to be in the valid set
 for that schema.
 
 **Instance**
 
-A JSON document that is in the valid set for a given schema is an *instance*
+A structured document that is in the valid set for a given schema is an *instance*
 of that schema.
 
 **Object**
 
 *Object* is defined for JSON in {{!RFC8259}} and has the same meaning here.
 
-**Schema / Schema Document**
+**Schema**
 
-A JSON Schema document, or simply a *schema*, is a JSON document used to describe
-and constrain JSON Documents.  Used in validation, the schema defines the valid
+A JSON Schema document, or simply a *schema*, is used to describe
+and constrain structured documents.  Used in validation, the schema defines the valid
 set, or all possible instances that validate successfully.
-As a JSON document, a schema may also be an instance of some meta-schema.
+As a structured document, a schema may also be an instance of some meta-schema.
 
 **Schema Resource**
 
@@ -306,7 +310,7 @@ even when playing the role of an instance.
 ### Trivial schema documents
 
 The schema values "true" and "false" are trivial schemas. The valid set
-for the 'true' schema is all possible JSON documents, and the valid set
+for the 'true' schema is all possible syntactically correct inputs, and the valid set
 for the 'false' schema is empty.
 The trivial boolean schemas exist to clarify schema author intent and
 facilitate schema processing optimizations.  They behave identically
@@ -400,7 +404,7 @@ rather than relying on having the original JSON representation Unicode
 characters available.
 
 Since an object cannot have two properties with the same key, behavior for a
-JSON document that tries to define two properties with
+document that tries to define two properties with
 the same key in a single object is undefined.
 
 Note that JSON Schema vocabularies are free to define their own extended
@@ -590,8 +594,8 @@ The "$schema" keyword is both used as a JSON Schema dialect identifier and
 as the identifier of a resource which is itself a JSON Schema, which describes the
 set of valid schemas written for this particular dialect.
 
-The value of this keyword MUST be a
-(containing a scheme, per {{!RFC3986, Section 3}}) and this URI MUST be normalized.
+The value of this keyword MUST be an absolute URI
+({{!RFC3986, Section 3}}) and this URI MUST be normalized.
 The current schema MUST be valid against the meta-schema identified by this URI.
 
 If this URI identifies a retrievable resource, that resource SHOULD be of
@@ -617,7 +621,7 @@ processed in a manner consistent with the semantic definitions contained
 within the vocabulary.
 
 The value of this keyword MUST be an object.  The property names in the
-object MUST be URIs (containing a scheme) and this URI MUST be normalized.
+object MUST be absolute URIs and each URI MUST be normalized.
 Each URI that appears as a property name identifies a specific set of
 keywords and their semantics.
 
@@ -2442,7 +2446,7 @@ are provided in {{id-examples}}.
 
 ## Compound Documents
 
-A Compound Schema Document is defined as a JSON document (sometimes called a "bundled" schema)
+A Compound Schema Document is defined as a JSON resource (sometimes called a "bundled" schema)
 which has multiple embedded JSON Schema Resources bundled into the same document to
 ease transportation.
 
@@ -2544,7 +2548,7 @@ resources or other hypermedia resources, and
 the rest of this document assumes no one protocol, nor does it even assume
 network access.  However since HTTP resources in JSON with JSON Schemas
 to describe them are pretty common in Web APIs, this section
-describes how to process JSON documents in a more RESTful
+describes how to process JSON texts in a more RESTful
 manner when using protocols that support media types and
 Web linking ({{?RFC8288}}).
 
@@ -2638,7 +2642,7 @@ schema object with no subschemas.
 Keywords MAY be defined with a partial value, such as a URI-reference,
 which must be resolved against another value, such as another
 URI-reference or a full URI, which is found through the lexical
-structure of the JSON document.  The "$id", "$ref", and
+structure of the structured document.  The "$id", "$ref", and
 "$dynamicRef" core keywords, and the "base" JSON Hyper-Schema
 keyword, are examples of this sort of behavior.
 
@@ -2790,7 +2794,7 @@ an input with the schema.
 
 ## Assertions
 
-JSON Schema can be used to assert constraints on a JSON document, which
+JSON Schema can be used to assert constraints on a structured document, which
 either passes or fails the assertions.  This approach can be used to validate
 conformance with the constraints, or document what is needed to satisfy them.
 
@@ -4089,7 +4093,7 @@ Compared to the "2020-12" version of JSON Schema, this draft makes the following
       For now, identifying the keyword set is deemed sufficient as that,
       along with meta-schema validation, is how the current "vocabularies"
       work today.  Any future vocabulary document format will be specified
-      as a JSON document, so using text/html or other non-JSON formats
+      with JSON, so using text/html or other non-JSON formats
       in the meantime will not produce any future ambiguity.
 
 [^3]: This requirement allows implementations to find all vocabulary
