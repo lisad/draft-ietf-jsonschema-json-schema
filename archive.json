@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-21T00:55:12.239308+00:00",
+  "timestamp": "2026-06-07T00:59:24.101957+00:00",
   "repo": "lisad/draft-ietf-jsonschema-json-schema",
   "labels": [
     {
@@ -318,6 +318,139 @@
       "mergeCommit": null,
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 11,
+      "id": "PR_kwDOR8mbas7jPRNh",
+      "title": "Attempts to clarify between JSON Text and JSON Document",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/11",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "JSON Text is defined in RFC8259.  We were occasionally using JSON Document when we meant JSON Text, but more often we were using JSON Document when we meant \"structured document\".",
+      "createdAt": "2026-06-05T19:40:02Z",
+      "updatedAt": "2026-06-06T05:28:37Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "ff658b807d576c159186214654f91fd60dba5f15",
+      "headRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "headRefName": "json-text-clarify",
+      "headRefOid": "e90676f45884e6129b967bbba26972d9eab59440",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "awwright",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I wouldn't object to saying \"JSON Text\" uniformly (that wouldn't be wrong). In my view, although most implementations will operate over some abstraction like a document model, this ought not be _necessary_.\r\n\r\nAs long as you're following the requirements of JSON, reasons you wouldn't want to hide away the original syntax would be to present an error message, e.g. \"At line 5, column 3, found string `\"foo` but expected number (per schema.json line 40)\" The reason most implementations don't do this is because of the complexity of writing such a completely integrated parser+validator ([but it's possible](https://github.com/awwright/jsonschemaparse)).\r\n\r\nHowever I still think the term \"JSON Document\" is useful in that it is allowing for such an abstraction, and the term \"document\" is fairly well defined in the Web world, so it shouldn't be new to anyone (especially \"XML document\").\r\n\r\nIf I recall, one of the versions I worked on had something to the effect of \"A JSON document is a JSON text [RFC 8259] that is treated as a Web resource\"",
+          "createdAt": "2026-06-05T19:58:04Z",
+          "updatedAt": "2026-06-05T19:58:04Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOR8mbas8AAAABCKTIbQ",
+          "commit": {
+            "abbreviatedOid": "e90676f"
+          },
+          "author": "awwright",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2026-06-05T21:53:18Z",
+          "updatedAt": "2026-06-05T21:53:39Z",
+          "comments": [
+            {
+              "originalPosition": 129,
+              "body": "This is another reasonable term we could use",
+              "createdAt": "2026-06-05T21:53:18Z",
+              "updatedAt": "2026-06-05T21:53:39Z"
+            },
+            {
+              "originalPosition": 109,
+              "body": "This may have gotten mangled somewhere, but this is supposed to clarify that by \"absolute URI\" we mean \"a full URI without a fragment\" and not the common parlance of \"a full URI, as opposed to relative URI reference\"",
+              "createdAt": "2026-06-05T21:53:23Z",
+              "updatedAt": "2026-06-05T21:53:39Z"
+            },
+            {
+              "originalPosition": 15,
+              "body": "Is \"structured document\" well defined? (As opposed to an unstructured document?)\n\nIf the goal is to emphasize compatibility with abstract data models or non-JSON inputs, I would just include a small note like \"JSON (or other compatible form, behaving according to its equivalent representation as JSON)\"",
+              "createdAt": "2026-06-05T21:53:27Z",
+              "updatedAt": "2026-06-05T21:53:39Z"
+            },
+            {
+              "originalPosition": 5,
+              "body": "This feels more wordy and less specific... Maybe \"A schema may assert constraints for JSON values,\"",
+              "createdAt": "2026-06-05T21:53:29Z",
+              "updatedAt": "2026-06-05T21:53:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABCKg2zg",
+          "commit": {
+            "abbreviatedOid": "e90676f"
+          },
+          "author": "karenetheridge",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-05T22:38:09Z",
+          "updatedAt": "2026-06-05T22:38:09Z",
+          "comments": [
+            {
+              "originalPosition": 129,
+              "body": "Not really.. \"schema resource\" is already defined and means something quite different.\r\n\r\nMy preference would be to avoid using the word \"JSON\" as much as possible when not immediately followed by the word \"Schema\", as it continues to muddy the distinction between serialized JSON text and a deserialized chunk of data which might or might not have been represented by JSON text when transmitted or stored.",
+              "createdAt": "2026-06-05T22:38:09Z",
+              "updatedAt": "2026-06-05T22:38:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABCKhdrg",
+          "commit": {
+            "abbreviatedOid": "e90676f"
+          },
+          "author": "karenetheridge",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-05T22:40:08Z",
+          "updatedAt": "2026-06-05T22:40:08Z",
+          "comments": [
+            {
+              "originalPosition": 109,
+              "body": "The source for this paragraph is https://json-schema.org/draft/2020-12/json-schema-core#section-8.1.1:\r\n\r\n\"The value of this keyword MUST be a [URI](https://json-schema.org/draft/2020-12/json-schema-core#RFC3986) [[RFC3986](https://json-schema.org/draft/2020-12/json-schema-core#RFC3986)] (containing a scheme) and this URI MUST be normalized.\"",
+              "createdAt": "2026-06-05T22:40:08Z",
+              "updatedAt": "2026-06-05T22:40:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABCMBZxw",
+          "commit": {
+            "abbreviatedOid": "e90676f"
+          },
+          "author": "awwright",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-06T05:28:37Z",
+          "updatedAt": "2026-06-06T05:28:37Z",
+          "comments": [
+            {
+              "originalPosition": 109,
+              "body": "Oh OK, so the clarification is important for exactly the opposite reason then; to clarify we mean \"full URI (with a scheme, possibly containing a fragment; as opposed to relative URI or absolute URI, respectively)\"",
+              "createdAt": "2026-06-06T05:28:37Z",
+              "updatedAt": "2026-06-06T05:28:37Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
