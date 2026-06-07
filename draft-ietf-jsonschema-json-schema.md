@@ -4072,6 +4072,10 @@ and Karen Etheridge.
 
 [^22]
 
+## draft-dusseault-json-schema-01
+
+* Add link to GitHub repository.
+
 ## draft-dusseault-json-schema-00
 
 Compared to the "2020-12" version of JSON Schema, this draft makes the following changes.
