@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "properties": {
+    "home_address": { "$ref": "#address-model" },
+    "work_address": { "$ref": "#address-model" }
+  },
+  "$defs": {
+    "utils": {
+      "new": {
+        "reusable": {
+          "address": {
+            "$anchor": "address-model",
+            "type": "object",
+            "required": ["street", "city"],
+            "properties": {
+              "street": { "type": "string" },
+              "city": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

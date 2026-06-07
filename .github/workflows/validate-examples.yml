@@ -1,0 +1,24 @@
+name: Validate examples
+
+on:
+  pull_request:
+    paths:
+      - 'examples/**'
+
+jobs:
+  validate-json:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate JSON files
+        run: |
+          failed=0
+          for f in examples/*.json; do
+            if python -m json.tool "$f" > /dev/null 2>&1; then
+              echo "OK: $f"
+            else
+              echo "INVALID: $f"
+              failed=1
+            fi
+          done
+          exit $failed

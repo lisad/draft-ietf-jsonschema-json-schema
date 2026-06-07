@@ -594,6 +594,8 @@ The value of this keyword MUST be a
 (containing a scheme, per {{!RFC3986, Section 3}}) and this URI MUST be normalized.
 The current schema MUST be valid against the meta-schema identified by this URI.
 
+
+
 If this URI identifies a retrievable resource, that resource SHOULD be of
 media type "application/schema+json".
 
@@ -767,6 +769,22 @@ the same resource, using any combination of "$anchor" and/or
 "$dynamicAnchor", is undefined.  Implementations MAY
 raise an error if such usage is detected.
 
+#### Example {#anchor-example}
+
+In this example, more than one property can hold an address object. The
+address object is defined somewhere else in the schema, and to avoid breaking
+references to the address object any time it is moved or the words "utils",
+"new", or "reusable" are renamed, the model is given an anchor and
+the anchor is used to refer to it.  The extra layers and names are not
+needed in a schema this short, but in a much larger schema they could
+help with maintainability and readability.
+
+~~~~~~~~~~
+{::include ./examples/anchor.json}
+~~~~~~~~~~
+
+For an example of `$dynamicAnchor` see {{recursive-example}}.
+
 ## Definitions and References
 
 ### "$ref" and "$dynamicRef" {#refs}
@@ -815,8 +833,8 @@ an identically named fragment with "$dynamicAnchor".
 Otherwise, its behavior is identical to "$ref", and no runtime
 resolution is needed.
 
-For a full example using these keyword, see
-{{recursive-example}}.[^7]
+For an example of `$ref`, see the example of `$anchor` above in {{anchor-example}}.
+For an example of `$dynamicRef`, see {{recursive-example}}.[^7]
 
 ### "$defs" {#defs}
 
