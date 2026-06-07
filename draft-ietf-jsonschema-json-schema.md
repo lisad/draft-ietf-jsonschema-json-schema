@@ -77,9 +77,8 @@ normative:
 
 JSON Schema defines the media type "application/schema+json", a JSON-based format
 for describing the structure of JSON data.
-A JSON Schema asserts some constraints on structure and contents for a structured document,
-ways to extract information from it,
-and how to interact with it.
+A JSON Schema may assert constraints on a structured document,
+ways to extract information from it, and how to interact with it.
 The "application/schema-instance+json" media type provides additional
 feature-rich integration with "application/schema+json" beyond what can be offered
 for "application/json" documents.
@@ -88,10 +87,9 @@ for "application/json" documents.
 
 # Introduction
 
-...
 
 JSON Schemas are documents that describe and constrain structured documents, particularly
-JSON texts.
+but not exclusively JSON texts.
 JSON Schema defines validation, documentation, hyperlink navigation,
 and interaction control of JSON data.
 
@@ -2446,8 +2444,8 @@ are provided in {{id-examples}}.
 
 ## Compound Documents
 
-A Compound Schema Document is defined as a JSON resource (sometimes called a "bundled" schema)
-which has multiple embedded JSON Schema Resources bundled into the same document to
+A Compound Schema Document (sometimes called a "bundled" schema)
+has multiple embedded JSON Schema Resources bundled into the same document to
 ease transportation.
 
 Each embedded Schema Resource MUST be treated as an individual Schema Resource, following standard
