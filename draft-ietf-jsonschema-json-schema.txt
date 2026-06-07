@@ -5,9 +5,9 @@
 Network Working Group                                       L. Dusseault
 Internet-Draft                                  Data Transfer Initiative
 Intended status: Informational                                 A. Wright
-Expires: 12 November 2026                                               
+Expires: 9 December 2026                                                
                                                               H. Andrews
-                                                             11 May 2026
+                                                             7 June 2026
 
 
                               JSON Schema
@@ -22,6 +22,13 @@ Abstract
    schema-instance+json" media type provides additional feature-rich
    integration with "application/schema+json" beyond what can be offered
    for "application/json" documents.
+
+Discussion Venues
+
+   This note is to be removed before publishing as an RFC.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/lisad/draft-ietf-jsonschema-json-schema.
 
 Status of This Memo
 
@@ -38,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 November 2026.
+   This Internet-Draft will expire on 9 December 2026.
 
 Copyright Notice
 
@@ -240,7 +247,8 @@ Table of Contents
    Appendix E.  References and generative use cases
    Appendix F.  Acknowledgments
    Appendix G.  Change Log
-     G.1.  draft-dusseault-json-schema-00
+     G.1.  draft-dusseault-json-schema-01
+     G.2.  draft-dusseault-json-schema-00
    Authors' Addresses
 
 1.  Introduction
@@ -4581,7 +4589,11 @@ Appendix G.  Change Log
 
    // This section to be removed before leaving Internet-Draft status.
 
-G.1.  draft-dusseault-json-schema-00
+G.1.  draft-dusseault-json-schema-01
+
+   *  Add link to GitHub repository.
+
+G.2.  draft-dusseault-json-schema-00
 
    Compared to the "2020-12" version of JSON Schema, this draft makes
    the following changes.
