@@ -592,7 +592,7 @@ The "$schema" keyword is both used as a JSON Schema dialect identifier and
 as the identifier of a resource which is itself a JSON Schema, which describes the
 set of valid schemas written for this particular dialect.
 
-The value of this keyword MUST be a full URI
+The value of this keyword MUST be a full `URI`
 ({{!RFC3986, Section 3}}) and this URI MUST be normalized.
 The current schema MUST be valid against the meta-schema identified by this URI.
 
