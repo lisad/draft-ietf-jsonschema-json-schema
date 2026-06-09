@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-07T00:59:24.101957+00:00",
+  "timestamp": "2026-06-09T00:52:56.543153+00:00",
   "repo": "lisad/draft-ietf-jsonschema-json-schema",
   "labels": [
     {
@@ -55,15 +55,15 @@
       "id": "I_kwDOR8mbas8AAAABCTA9hQ",
       "title": "Add a link to the github repo to the draft itself",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/issues/2",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "lisad",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "As suggested by Rich Salz (~ may 12)",
       "createdAt": "2026-05-14T20:40:59Z",
-      "updatedAt": "2026-05-14T20:40:59Z",
-      "closedAt": null,
+      "updatedAt": "2026-06-07T21:47:16Z",
+      "closedAt": "2026-06-07T21:47:16Z",
       "comments": []
     },
     {
@@ -164,9 +164,24 @@
       "labels": [],
       "body": "Tim Bray:  5.1.2 \"The values of the object properties MUST be booleans.\u201d The 8259 terminology is \u201cmembers\u201d not \u201cproperties\u201d\n",
       "createdAt": "2026-05-14T22:32:06Z",
-      "updatedAt": "2026-05-14T22:32:06Z",
+      "updatedAt": "2026-06-08T20:29:33Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "awwright",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This is a tough call since JSON Schema uses the term \"property\" for this function in a very significant way, as a keyword name.\n\nAlso note how this language is inconsistent even among the parallel JSON specifications, for example, ECMA uses the term \"name/value pair\" exclusively.\n\nThe specification doesn't seem to relate its own \"property\" to the 8259 \"member\" at all though, this should be corrected at the very least.",
+          "createdAt": "2026-06-08T03:26:13Z",
+          "updatedAt": "2026-06-08T03:26:13Z"
+        },
+        {
+          "author": "karenetheridge",
+          "authorAssociation": "NONE",
+          "body": "I raised this on the list: https://mailarchive.ietf.org/arch/msg/json/cYRrRFk5jLHtpmbg7IPzRaxTeLc/ (item 10)",
+          "createdAt": "2026-06-08T20:29:32Z",
+          "updatedAt": "2026-06-08T20:29:32Z"
+        }
+      ]
     },
     {
       "number": 7,
@@ -298,24 +313,26 @@
       "id": "PR_kwDOR8mbas7dHoJJ",
       "title": "Add pointer to GitHub repository",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/10",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "richsalz",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-05-19T14:53:02Z",
-      "updatedAt": "2026-05-19T14:53:02Z",
+      "updatedAt": "2026-06-07T20:42:57Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "ff658b807d576c159186214654f91fd60dba5f15",
       "headRepository": "richsalz/draft-ietf-jsonschema-json-schema",
       "headRefName": "add-some-stuff",
       "headRefOid": "beabed6bea5bb18ad3c4a1ee7c071a783a2a87ee",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-06-07T20:34:56Z",
+      "mergedAt": "2026-06-07T20:34:56Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "31e79ea16673e58a9a851db930bf8dccda2c4d2b"
+      },
       "comments": [],
       "reviews": []
     },
@@ -331,13 +348,13 @@
       "labels": [],
       "body": "JSON Text is defined in RFC8259.  We were occasionally using JSON Document when we meant JSON Text, but more often we were using JSON Document when we meant \"structured document\".",
       "createdAt": "2026-06-05T19:40:02Z",
-      "updatedAt": "2026-06-06T05:28:37Z",
+      "updatedAt": "2026-06-08T20:31:19Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
-      "baseRefOid": "ff658b807d576c159186214654f91fd60dba5f15",
+      "baseRefOid": "31e79ea16673e58a9a851db930bf8dccda2c4d2b",
       "headRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "headRefName": "json-text-clarify",
-      "headRefOid": "e90676f45884e6129b967bbba26972d9eab59440",
+      "headRefOid": "03004058c0bd05228a9736486b04a695c99b1fe7",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -449,8 +466,214 @@
               "updatedAt": "2026-06-06T05:28:37Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABCP0teQ",
+          "commit": {
+            "abbreviatedOid": "e90676f"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-07T20:40:15Z",
+          "updatedAt": "2026-06-07T20:40:15Z",
+          "comments": [
+            {
+              "originalPosition": 109,
+              "body": "I think this is fixed then; I believe it's aligned with the URI specs ?",
+              "createdAt": "2026-06-07T20:40:15Z",
+              "updatedAt": "2026-06-07T20:40:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABCP0-TQ",
+          "commit": {
+            "abbreviatedOid": "e90676f"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-07T20:41:52Z",
+          "updatedAt": "2026-06-07T20:41:52Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "yes thanks that's simpler",
+              "createdAt": "2026-06-07T20:41:52Z",
+              "updatedAt": "2026-06-07T20:41:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABCP2gfA",
+          "commit": {
+            "abbreviatedOid": "e90676f"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-07T20:54:31Z",
+          "updatedAt": "2026-06-07T20:54:31Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "I suppose it is not well-defined, but it is both to avoid saying either \"JSON Document\" or \"JSON Text\" when talking about abstract data models.   If we need to define \"structured document\" well, probably the simplest would be to say \"structurally compatible with JSON\". ",
+              "createdAt": "2026-06-07T20:54:31Z",
+              "updatedAt": "2026-06-07T20:54:31Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABCP2m9A",
+          "commit": {
+            "abbreviatedOid": "e90676f"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-07T20:55:38Z",
+          "updatedAt": "2026-06-07T20:55:38Z",
+          "comments": [
+            {
+              "originalPosition": 129,
+              "body": "iterating, I think i can dodge \"JSON document\" or \"JSON resource\" here too and make the sentence simpler.",
+              "createdAt": "2026-06-07T20:55:38Z",
+              "updatedAt": "2026-06-07T20:55:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABCP3M7Q",
+          "commit": {
+            "abbreviatedOid": "e90676f"
+          },
+          "author": "karenetheridge",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-07T21:04:49Z",
+          "updatedAt": "2026-06-07T21:04:49Z",
+          "comments": [
+            {
+              "originalPosition": 109,
+              "body": "By fixed, do you mean that this line is still being omitted? I think it needs to stay in some form.",
+              "createdAt": "2026-06-07T21:04:49Z",
+              "updatedAt": "2026-06-07T21:04:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABCQTxLw",
+          "commit": {
+            "abbreviatedOid": "e90676f"
+          },
+          "author": "awwright",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-08T02:17:36Z",
+          "updatedAt": "2026-06-08T02:17:36Z",
+          "comments": [
+            {
+              "originalPosition": 129,
+              "body": "I think \"schema\" would be sufficient here, but with respect to using the term \"JSON\", the specification doesn't make any distinction between a JSON text and an abstract representation in that value space, and there's no difference that implementations are obligated to follow. While the behavior is only defined over JSON values, there's no need to carve out language to permit intermediate representations, that's implicitly legal.",
+              "createdAt": "2026-06-08T02:17:36Z",
+              "updatedAt": "2026-06-08T02:18:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABCQquSA",
+          "commit": {
+            "abbreviatedOid": "5a6dc90"
+          },
+          "author": "awwright",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-08T04:38:59Z",
+          "updatedAt": "2026-06-08T04:39:00Z",
+          "comments": [
+            {
+              "originalPosition": 109,
+              "body": "A small nit, I would say simply \"URI\" so as not to suggest an unqualified \"URI\" is a different technical term; the casual term \"full URI\" is what I offer in parentheses.",
+              "createdAt": "2026-06-08T04:38:59Z",
+              "updatedAt": "2026-06-08T04:39:12Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABCV2c5w",
+          "commit": {
+            "abbreviatedOid": "e90676f"
+          },
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-08T17:57:25Z",
+          "updatedAt": "2026-06-08T17:57:25Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "@lisad it might help to look at the OpenAPI media type registry.  It shows the complexities of using JSON Schema to work with a fairly wide variety of formats.  Some are pretty trivial (JSON sequences are treated like arrays... go figure!) and others are definitely not (`applicaction/x-www-form-urlencoded`, `multipart/form-data`, all other `multipart/*` types, and `application/xml` (or any `application/*+xml` all require either extension schema keywords or parallel Objects to handle the mapping).\r\n\r\nI feel like we're going through some contortions to satisfy some griping about terminology that I don't think really settled into a clear, actionable complaint.  I still don't understand why we can't simply define the \"data model\" (or \"equivalence class\" or whatever - I seriously _do not care what it is called_ as long as it doesn't redefine an existing term) and talk about how schemas work with it.  _This is how literally everything in the JSON Schema world **actually works** and it feels very strange to contort ourselves to avoid it._\r\n\r\n-----\r\n\r\nI also feel like the mailing list got questions of schema representation and input/instance representation conflated a bit.  While schemas need to also be representable in YAML (again, because that's how real world schema usage often works), I'm not aware of any serious efforts to represent schemas as XML, or `text/event-stream`, or (heaven forbit) `applicatin/x-www-form-urlencoded` \ud83e\udd23 \r\n\r\nFurther, by calling schemas \"documents\" I think we're creating confusion due to many schemas consisting of _multiple documents_ (some of which embed representations of multiple resources).  Schemas can't easily be treated as single documents or resources.  They are really graphs (because references cannot be removed as a pre-processing step), and the single-or-multiple-document representation is just for being able to address and transfer the schemas.\r\n\r\nBut this gets back to fundamental REST principles:  Representations are not resources.  They have a well-define relationship with resources, but they are not, themselves, the resources.\r\n\r\n-----\r\n\r\nJust to draw a line under it:  I really want to see the RFC match what the real-world JSON Schema community has been doing for over a decade.  To me, that is the point of the charter.",
+              "createdAt": "2026-06-08T17:57:25Z",
+              "updatedAt": "2026-06-08T17:57:25Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABCWbXtQ",
+          "commit": {
+            "abbreviatedOid": "e90676f"
+          },
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-08T19:19:41Z",
+          "updatedAt": "2026-06-08T19:19:41Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "@lisad I forgot to include the link to the OpenAPI Media Types Registry: https://spec.openapis.org/registry/media-type/index.html",
+              "createdAt": "2026-06-08T19:19:41Z",
+              "updatedAt": "2026-06-08T19:19:42Z"
+            }
+          ]
         }
       ]
+    },
+    {
+      "number": 12,
+      "id": "PR_kwDOR8mbas7jsZX9",
+      "title": "Adds an initial example that works for both ref and anchor, and example-checking script",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/12",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "This includes a github workflow definition that checks that all the examples in the examples folder are legit.\r\nThe new example is included in the document on make, not inline, so it can be checked as valid JSON. (We might also check as valid JSON Schema, so that things like $ref to $anchor don't break accidentally, but that might require longer less readable examples -- TBD.  ) \r\n\r\nThe new example is in the section on $anchor but it also serves as a neat example of $ref.",
+      "createdAt": "2026-06-07T21:34:12Z",
+      "updatedAt": "2026-06-07T21:34:45Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "31e79ea16673e58a9a851db930bf8dccda2c4d2b",
+      "headRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "headRefName": "add-examples",
+      "headRefOid": "cabb6c432efa16f7074630f4556d4db7a3ddd5f9",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
