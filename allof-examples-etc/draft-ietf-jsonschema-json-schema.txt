@@ -1323,7 +1323,7 @@ Table of Contents
   "allOf": [
     {
       "if": {
-        "properties": { "country": { "const": "Canada" } },
+        "properties": { "country": { "const": "Canada" } }
       },
       "then": {
         "properties": {
@@ -1333,7 +1333,7 @@ Table of Contents
     },
     {
       "if": {
-        "properties": { "country": { "const": "USA" } },
+        "properties": { "country": { "const": "USA" } }
       },
       "then": {
         "properties": {
