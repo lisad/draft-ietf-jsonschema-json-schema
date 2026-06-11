@@ -1,0 +1,32 @@
+{
+  "$defs": {
+    "task": {
+      "$anchor": "task",
+      "type": "object",
+      "required": ["title", "deadline"],
+      "properties": {
+        "title": { "type": "string" },
+        "deadline": { "type": "string", "format": "date" },
+        "done": { "type": "boolean" }
+      }
+    },
+    "collection": {
+      "$anchor": "collection",
+      "type": "object",
+      "required": ["items"],
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": { "$ref": "#task" }
+        }
+      }
+    },
+    "project": {
+      "allOf": [
+        { "$ref": "#task" },
+        { "$ref": "#collection" }
+      ]
+    }
+  },
+  "$ref": "#/$defs/project"
+}

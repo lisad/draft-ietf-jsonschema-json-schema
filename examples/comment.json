@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "$defs": {
+    "imap-number": {
+      "type": "integer",
+      "minimum": 0,
+      "exclusiveMaximum": 4294967296,
+      "$comment": "IMAP 'number' defined in ABNF as unsigned 32-bit integer"
+    }
+  },
+  "properties": {
+    "last_uid": {
+      "$ref": "#/$defs/imap-number"
+    },
+    "recent_uid": {
+      "$ref": "#/$defs/imap-number"
+    }
+  }
+}

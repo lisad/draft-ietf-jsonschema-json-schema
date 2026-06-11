@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "properties": {
+    "country": { "type": "string" },
+    "postal_code": { "type": "string" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "country": { "const": "Canada" } },
+      },
+      "then": {
+        "properties": {
+          "postal_code": { "pattern": "^[A-Z][0-9][A-Z] [0-9][A-Z][0-9]$" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "country": { "const": "USA" } },
+      },
+      "then": {
+        "properties": {
+          "postal_code": { "pattern": "^[0-9]{5}$" }
+        }
+      }
+    }
+  ]
+}
