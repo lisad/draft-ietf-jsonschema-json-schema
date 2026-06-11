@@ -7,7 +7,7 @@
   "allOf": [
     {
       "if": {
-        "properties": { "country": { "const": "Canada" } },
+        "properties": { "country": { "const": "Canada" } }
       },
       "then": {
         "properties": {
@@ -17,7 +17,7 @@
     },
     {
       "if": {
-        "properties": { "country": { "const": "USA" } },
+        "properties": { "country": { "const": "USA" } }
       },
       "then": {
         "properties": {
