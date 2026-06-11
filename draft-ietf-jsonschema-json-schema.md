@@ -847,10 +847,15 @@ The keyword does not directly affect the validation result.
 This keyword's value MUST be an object.
 Each member value of this object MUST be a valid JSON Schema.
 
-See the example for `$comment` below in {{comment-example}},
-where the constraint on some property values to be 32-bit unsigned integers
-is made into a definition that can be reused.
+### Example {#defs-example}
 
+In this partial schema for an IMAP folder representation in JSON,
+a reusable definition for 32-bit unsigned integers is factored out and
+referenced in multiple property definitions.
+
+~~~~~~~~~~
+{::include ./examples/defs-example.json}
+~~~~~~~~~~
 
 ## "$comment"
 
@@ -882,14 +887,8 @@ Implementations MUST NOT take any other action based on the presence, absence,
 or contents of "$comment" properties.  In particular, the value of "$comment"
 MUST NOT be collected as an annotation result.
 
-### Example {#comment-example}
-
-In this partial schema for an IMAP folder representation in JSON,
-schema authors see the comment to understand why the type is defined as it is.
-
-~~~~~~~~~~
-{::include ./examples/comment.json}
-~~~~~~~~~~
+For an example using `$comment`, see {{defs-example}} above, where a comment
+explains to schema maintainers where a value limit comes from.
 
 # Subschema keywords
 
