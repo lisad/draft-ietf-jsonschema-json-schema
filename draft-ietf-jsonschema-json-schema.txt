@@ -988,6 +988,43 @@ Table of Contents
    "$dynamicAnchor", is undefined.  Implementations MAY raise an error
    if such usage is detected.
 
+4.1.4.1.  Example
+
+   In this example, more than one property can hold an address object.
+   The address object is defined somewhere else in the schema, and to
+   avoid breaking references to the address object any time it is moved
+   or the words "utils", "new", or "reusable" are renamed, the model is
+   given an anchor and the anchor is used to refer to it.  The extra
+   layers and names are not needed in a schema this short, but in a much
+   larger schema they could help with maintainability and readability.
+
+   {
+     "type": "object",
+     "properties": {
+       "home_address": { "$ref": "#address-model" },
+       "work_address": { "$ref": "#address-model" }
+     },
+     "$defs": {
+       "utils": {
+         "new": {
+           "reusable": {
+             "address": {
+               "$anchor": "address-model",
+               "type": "object",
+               "required": ["street", "city"],
+               "properties": {
+                 "street": { "type": "string" },
+                 "city": { "type": "string" }
+               }
+             }
+           }
+         }
+       }
+     }
+   }
+
+   For an example of $dynamicAnchor see Appendix C.
+
 4.2.  Definitions and References
 
 4.2.1.  "$ref" and "$dynamicRef"
@@ -1040,7 +1077,8 @@ Table of Contents
    Otherwise, its behavior is identical to "$ref", and no runtime
    resolution is needed.
 
-   For a full example using these keyword, see Appendix C.
+   For an example of $ref, see the example of $anchor above in
+   Section 4.1.4.1.  For an example of $dynamicRef, see Appendix C.
    // The difference between the hyper-schema meta-schema in pre-2019
    // drafts and an this draft dramatically demonstrates the utility of
    // these keywords.
