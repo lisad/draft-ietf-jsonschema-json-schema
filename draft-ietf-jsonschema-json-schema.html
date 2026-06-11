@@ -11,9 +11,8 @@
 <meta content='
        JSON Schema defines the media type "application/schema+json", a JSON-based format
 for describing the structure of JSON data.
-JSON Schema asserts what a JSON document must look like,
-ways to extract information from it,
-and how to interact with it.
+A JSON Schema may assert constraints on a structured document,
+ways to extract information from it, and how to interact with it.
 The "application/schema-instance+json" media type provides additional
 feature-rich integration with "application/schema+json" beyond what can be offered
 for "application/json" documents. 
@@ -1057,7 +1056,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Dusseault, et al.</td>
-<td class="center">Expires 9 December 2026</td>
+<td class="center">Expires 13 December 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1070,12 +1069,12 @@ svg {
 <dd class="internet-draft">draft-ietf-jsonschema-json-schema-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-06-07" class="published">7 June 2026</time>
+<time datetime="2026-06-11" class="published">11 June 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-12-09">9 December 2026</time></dd>
+<dd class="expires"><time datetime="2026-12-13">13 December 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1096,9 +1095,8 @@ svg {
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">JSON Schema defines the media type "application/schema+json", a JSON-based format
 for describing the structure of JSON data.
-JSON Schema asserts what a JSON document must look like,
-ways to extract information from it,
-and how to interact with it.
+A JSON Schema may assert constraints on a structured document,
+ways to extract information from it, and how to interact with it.
 The "application/schema-instance+json" media type provides additional
 feature-rich integration with "application/schema+json" beyond what can be offered
 for "application/json" documents.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
@@ -1108,7 +1106,8 @@ for "application/json" documents.<a href="#section-abstract-1" class="pilcrow">�
 <a href="#name-discussion-venues" class="section-name selfRef">Discussion Venues</a>
       </h2>
 <p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
-<p id="section-note.1-2">Source for this draft and an issue tracker can be found at
+<p id="section-note.1-2">The jsonschema WG is where this draft is discussed.
+Source for this draft can be found at
     <span><a href="https://github.com/lisad/draft-ietf-jsonschema-json-schema">https://github.com/lisad/draft-ietf-jsonschema-json-schema</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
@@ -1130,7 +1129,7 @@ for "application/json" documents.<a href="#section-abstract-1" class="pilcrow">�
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 9 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 13 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1821,19 +1820,19 @@ for "application/json" documents.<a href="#section-abstract-1" class="pilcrow">�
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">...<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">JSON Schemas are JSON documents that describe and constrain other JSON documents.
+<p id="section-1-1">JSON Schemas are documents that describe and constrain structured documents, particularly
+but not exclusively JSON texts.
 JSON Schema defines validation, documentation, hyperlink navigation,
-and interaction control of JSON data.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">This specification defines JSON Schema core terminology and mechanisms, including
+and interaction control of JSON data.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">This specification defines JSON Schema core terminology and mechanisms, including
 pointing to another JSON Schema by reference,
 dereferencing a JSON Schema reference,
 specifying the dialect being used,
 specifying a dialect's vocabulary requirements,
-and defining the expected output.<a href="#section-1-3" class="pilcrow">¶</a></p>
-<p id="section-1-4">The status of this document is literally a draft, and it is not ready for implementors
+and defining the expected output.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">The status of this document is literally a draft, and it is not ready for implementors
 to adopt in place of widely implemented versions of JSON Schema.  It is a proposed
-starting point for a WG and a wide consensus process.<a href="#section-1-4" class="pilcrow">¶</a></p>
+starting point for a WG and a wide consensus process.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <div id="notational-conventions">
 <section id="section-1.1">
         <h3 id="name-notational-conventions">
@@ -1860,9 +1859,11 @@ instance, returns a standard annotation output.<a href="#section-1.2-1" class="p
           <h4 id="name-validation">
 <a href="#section-1.2.1" class="section-number selfRef">1.2.1. </a><a href="#name-validation" class="section-name selfRef">Validation</a>
           </h4>
-<p id="section-1.2.1-1">A JSON Schema document (a <em>schema</em>) notates a grammar that describes a language of JSON documents:
-That is, it describes a set of JSON documents by listing rules to classify an <em>input</em>, some arbritrary JSON document, as within or not within the set.
-The largest possible set is that of all JSON documents (all documents that are valid <code>application/json</code>).
+<p id="section-1.2.1-1">In computer science terms, a JSON Schema document (a <em>schema</em>) notates a <em>grammar</em>
+that describes a <em>language</em> of structured documents.
+That is, a schema describes a set of structured documents by listing rules to classify
+an <em>input</em> as within or not within the set.
+The largest possible set is that of all syntactically valid structured inputs.
 The smallest set is the empty set.<a href="#section-1.2.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.2.1-2">A <em>validator</em> (also known as an <em>acceptor</em>) is a process that tests if a particular input is described by the schema, by evaluating it against the requirements.
 An accepted input is called an <em>instance</em> of the schema, and a rejected input is called a <em>violation</em> of the schema.<a href="#section-1.2.1-2" class="pilcrow">¶</a></p>
@@ -1902,7 +1903,7 @@ an instance of a particular JSON Schema.<a href="#section-1.2.3-1" class="pilcro
           <h4 id="name-keywords">
 <a href="#section-1.2.4" class="section-number selfRef">1.2.4. </a><a href="#name-keywords" class="section-name selfRef">Keywords</a>
           </h4>
-<p id="section-1.2.4-1">JSON Schema uses <em>keywords</em> to assert constraints on JSON documents or provide
+<p id="section-1.2.4-1">JSON Schema uses <em>keywords</em> to assert constraints on structured documents or provide
 annotations with additional information.  Additional keywords combine other
 keywords or provide references to sub-schemas, features which allow more
 complex JSON data structures.<a href="#section-1.2.4-1" class="pilcrow">¶</a></p>
@@ -1955,23 +1956,24 @@ when declaring which vocabularies are in use.<a href="#section-1.2.5-2" class="p
 <p id="section-2-1">These terms are all defined in the context of JSON Schema.  These quick
 definitions may not be enough to completely comprehend roles and uses, but may still
 provide a useful quick reference.<a href="#section-2-1" class="pilcrow">¶</a></p>
-<p id="section-2-2"><strong>JSON Document</strong><a href="#section-2-2" class="pilcrow">¶</a></p>
-<p id="section-2-3">A JSON document is an information resource (series of octets) described by the
-application/json media type.<a href="#section-2-3" class="pilcrow">¶</a></p>
+<p id="section-2-2"><strong>JSON Text</strong><a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-3">A JSON text is an information resource (series of octets) described by the
+application/json media type, as defined in <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>.<a href="#section-2-3" class="pilcrow">¶</a></p>
 <p id="section-2-4"><strong>Input</strong><a href="#section-2-4" class="pilcrow">¶</a></p>
-<p id="section-2-5">A JSON document supplied to a validator or other implementation, in order to
+<p id="section-2-5">A JSON text or other serialized or structured data, supplied to a validator
+or other implementation, in order to
 compare it to a schema, is an input until it is known to be in the valid set
 for that schema.<a href="#section-2-5" class="pilcrow">¶</a></p>
 <p id="section-2-6"><strong>Instance</strong><a href="#section-2-6" class="pilcrow">¶</a></p>
-<p id="section-2-7">A JSON document that is in the valid set for a given schema is an <em>instance</em>
+<p id="section-2-7">A structured document that is in the valid set for a given schema is an <em>instance</em>
 of that schema.<a href="#section-2-7" class="pilcrow">¶</a></p>
 <p id="section-2-8"><strong>Object</strong><a href="#section-2-8" class="pilcrow">¶</a></p>
 <p id="section-2-9"><em>Object</em> is defined for JSON in <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span> and has the same meaning here.<a href="#section-2-9" class="pilcrow">¶</a></p>
-<p id="section-2-10"><strong>Schema / Schema Document</strong><a href="#section-2-10" class="pilcrow">¶</a></p>
-<p id="section-2-11">A JSON Schema document, or simply a <em>schema</em>, is a JSON document used to describe
-and constrain JSON Documents.  Used in validation, the schema defines the valid
+<p id="section-2-10"><strong>Schema</strong><a href="#section-2-10" class="pilcrow">¶</a></p>
+<p id="section-2-11">A JSON Schema document, or simply a <em>schema</em>, is used to describe
+and constrain structured documents.  Used in validation, the schema defines the valid
 set, or all possible instances that validate successfully.
-As a JSON document, a schema may also be an instance of some meta-schema.<a href="#section-2-11" class="pilcrow">¶</a></p>
+As a structured document, a schema may also be an instance of some meta-schema.<a href="#section-2-11" class="pilcrow">¶</a></p>
 <p id="section-2-12"><strong>Schema Resource</strong><a href="#section-2-12" class="pilcrow">¶</a></p>
 <p id="section-2-13">A JSON <em>Schema resource</em> is a schema uniquely identified by a URI, in
 contrast to an anonymous schema which has no URI.  A schema is
@@ -2037,7 +2039,7 @@ even when playing the role of an instance.<a href="#section-3.1-4" class="pilcro
 <a href="#section-3.1.1" class="section-number selfRef">3.1.1. </a><a href="#name-trivial-schema-documents" class="section-name selfRef">Trivial schema documents</a>
           </h4>
 <p id="section-3.1.1-1">The schema values "true" and "false" are trivial schemas. The valid set
-for the 'true' schema is all possible JSON documents, and the valid set
+for the 'true' schema is all possible syntactically correct inputs, and the valid set
 for the 'false' schema is empty.
 The trivial boolean schemas exist to clarify schema author intent and
 facilitate schema processing optimizations.  They behave identically
@@ -2155,7 +2157,7 @@ keywords to precisely interpret formatted strings within the data model
 rather than relying on having the original JSON representation Unicode
 characters available.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <p id="section-3.2-4">Since an object cannot have two properties with the same key, behavior for a
-JSON document that tries to define two properties with
+document that tries to define two properties with
 the same key in a single object is undefined.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
 <p id="section-3.2-5">Note that JSON Schema vocabularies are free to define their own extended
 type system.  This should not be confused with the core types
@@ -2383,8 +2385,8 @@ may be evaluated, as they are capable of impacting the behavior of other keyword
 <p id="section-4.1.1-1">The "$schema" keyword is both used as a JSON Schema dialect identifier and
 as the identifier of a resource which is itself a JSON Schema, which describes the
 set of valid schemas written for this particular dialect.<a href="#section-4.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1.1-2">The value of this keyword MUST be a
-(containing a scheme, per <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>], <a href="https://rfc-editor.org/rfc/rfc3986#section-3" class="relref">Section 3</a></span>) and this URI MUST be normalized.
+<p id="section-4.1.1-2">The value of this keyword MUST be a full <code>URI</code>
+(<span>[<a href="#RFC3986" class="cite xref">RFC3986</a>], <a href="https://rfc-editor.org/rfc/rfc3986#section-3" class="relref">Section 3</a></span>) and this URI MUST be normalized.
 The current schema MUST be valid against the meta-schema identified by this URI.<a href="#section-4.1.1-2" class="pilcrow">¶</a></p>
 <p id="section-4.1.1-3">If this URI identifies a retrievable resource, that resource SHOULD be of
 media type "application/schema+json".<a href="#section-4.1.1-3" class="pilcrow">¶</a></p>
@@ -2410,7 +2412,7 @@ a dialect. Any vocabulary that is understood by the implementation MUST be
 processed in a manner consistent with the semantic definitions contained
 within the vocabulary.<a href="#section-4.1.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.1.2-2">The value of this keyword MUST be an object.  The property names in the
-object MUST be URIs (containing a scheme) and this URI MUST be normalized.
+object MUST be absolute URIs and each URI MUST be normalized.
 Each URI that appears as a property name identifies a specific set of
 keywords and their semantics.<a href="#section-4.1.2-2" class="pilcrow">¶</a></p>
 <p id="section-4.1.2-3">The URI MAY be a URL, but the nature of the retrievable resource is
@@ -2420,7 +2422,7 @@ media type such as text/html or text/plain, as the vocabulary URI.<span class="c
   For now, identifying the keyword set is deemed sufficient as that,
   along with meta-schema validation, is how the current "vocabularies"
   work today.  Any future vocabulary document format will be specified
-  as a JSON document, so using text/html or other non-JSON formats
+  with JSON, so using text/html or other non-JSON formats
   in the meantime will not produce any future ambiguity.</span><a href="#section-4.1.2-3" class="pilcrow">¶</a></p>
 <p id="section-4.1.2-4">The values of the object properties MUST be booleans.
 If the value is true, then implementations that do not recognize
@@ -4563,8 +4565,8 @@ are provided in <a href="#id-examples" class="auto internal xref">Appendix A</a>
         <h3 id="name-compound-documents">
 <a href="#section-11.3" class="section-number selfRef">11.3. </a><a href="#name-compound-documents" class="section-name selfRef">Compound Documents</a>
         </h3>
-<p id="section-11.3-1">A Compound Schema Document is defined as a JSON document (sometimes called a "bundled" schema)
-which has multiple embedded JSON Schema Resources bundled into the same document to
+<p id="section-11.3-1">A Compound Schema Document (sometimes called a "bundled" schema)
+has multiple embedded JSON Schema Resources bundled into the same document to
 ease transportation.<a href="#section-11.3-1" class="pilcrow">¶</a></p>
 <p id="section-11.3-2">Each embedded Schema Resource MUST be treated as an individual Schema Resource, following standard
 schema loading and processing requirements, including determining vocabulary support.<a href="#section-11.3-2" class="pilcrow">¶</a></p>
@@ -4691,7 +4693,7 @@ resources or other hypermedia resources, and
 the rest of this document assumes no one protocol, nor does it even assume
 network access.  However since HTTP resources in JSON with JSON Schemas
 to describe them are pretty common in Web APIs, this section
-describes how to process JSON documents in a more RESTful
+describes how to process JSON texts in a more RESTful
 manner when using protocols that support media types and
 Web linking (<span>[<a href="#RFC8288" class="cite xref">RFC8288</a>]</span>).<a href="#section-11.5-1" class="pilcrow">¶</a></p>
 <div id="linking-to-a-schema">
@@ -4791,7 +4793,7 @@ schema object with no subschemas.<a href="#section-12.1-2" class="pilcrow">¶</a
 <p id="section-12.1-3">Keywords MAY be defined with a partial value, such as a URI-reference,
 which must be resolved against another value, such as another
 URI-reference or a full URI, which is found through the lexical
-structure of the JSON document.  The "$id", "$ref", and
+structure of the structured document.  The "$id", "$ref", and
 "$dynamicRef" core keywords, and the "base" JSON Hyper-Schema
 keyword, are examples of this sort of behavior.<a href="#section-12.1-3" class="pilcrow">¶</a></p>
 <p id="section-12.1-4">Note that some keywords, such as "$schema", apply to the lexical
@@ -4956,7 +4958,7 @@ an input with the schema.<a href="#section-12.6.1-3" class="pilcrow">¶</a></p>
         <h3 id="name-assertions">
 <a href="#section-12.7" class="section-number selfRef">12.7. </a><a href="#name-assertions" class="section-name selfRef">Assertions</a>
         </h3>
-<p id="section-12.7-1">JSON Schema can be used to assert constraints on a JSON document, which
+<p id="section-12.7-1">JSON Schema can be used to assert constraints on a structured document, which
 either passes or fails the assertions.  This approach can be used to validate
 conformance with the constraints, or document what is needed to satisfy them.<a href="#section-12.7-1" class="pilcrow">¶</a></p>
 <p id="section-12.7-2">JSON Schema implementations produce a single boolean result when evaluating

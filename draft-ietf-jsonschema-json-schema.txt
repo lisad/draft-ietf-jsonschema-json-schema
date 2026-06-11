@@ -5,9 +5,9 @@
 Network Working Group                                       L. Dusseault
 Internet-Draft                                  Data Transfer Initiative
 Intended status: Informational                                 A. Wright
-Expires: 9 December 2026                                                
+Expires: 13 December 2026                                               
                                                               H. Andrews
-                                                             7 June 2026
+                                                            11 June 2026
 
 
                               JSON Schema
@@ -16,19 +16,20 @@ Expires: 9 December 2026
 Abstract
 
    JSON Schema defines the media type "application/schema+json", a JSON-
-   based format for describing the structure of JSON data.  JSON Schema
-   asserts what a JSON document must look like, ways to extract
-   information from it, and how to interact with it.  The "application/
-   schema-instance+json" media type provides additional feature-rich
-   integration with "application/schema+json" beyond what can be offered
-   for "application/json" documents.
+   based format for describing the structure of JSON data.  A JSON
+   Schema may assert constraints on a structured document, ways to
+   extract information from it, and how to interact with it.  The
+   "application/schema-instance+json" media type provides additional
+   feature-rich integration with "application/schema+json" beyond what
+   can be offered for "application/json" documents.
 
 Discussion Venues
 
    This note is to be removed before publishing as an RFC.
 
-   Source for this draft and an issue tracker can be found at
-   https://github.com/lisad/draft-ietf-jsonschema-json-schema.
+   The jsonschema WG is where this draft is discussed.  Source for this
+   draft can be found at https://github.com/lisad/draft-ietf-jsonschema-
+   json-schema.
 
 Status of This Memo
 
@@ -45,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 December 2026.
+   This Internet-Draft will expire on 13 December 2026.
 
 Copyright Notice
 
@@ -253,11 +254,10 @@ Table of Contents
 
 1.  Introduction
 
-   ...
-
-   JSON Schemas are JSON documents that describe and constrain other
-   JSON documents.  JSON Schema defines validation, documentation,
-   hyperlink navigation, and interaction control of JSON data.
+   JSON Schemas are documents that describe and constrain structured
+   documents, particularly but not exclusively JSON texts.  JSON Schema
+   defines validation, documentation, hyperlink navigation, and
+   interaction control of JSON data.
 
    This specification defines JSON Schema core terminology and
    mechanisms, including pointing to another JSON Schema by reference,
@@ -290,12 +290,12 @@ Table of Contents
 
 1.2.1.  Validation
 
-   A JSON Schema document (a _schema_) notates a grammar that describes
-   a language of JSON documents: That is, it describes a set of JSON
-   documents by listing rules to classify an _input_, some arbritrary
-   JSON document, as within or not within the set.  The largest possible
-   set is that of all JSON documents (all documents that are valid
-   application/json).  The smallest set is the empty set.
+   In computer science terms, a JSON Schema document (a _schema_)
+   notates a _grammar_ that describes a _language_ of structured
+   documents.  That is, a schema describes a set of structured documents
+   by listing rules to classify an _input_ as within or not within the
+   set.  The largest possible set is that of all syntactically valid
+   structured inputs.  The smallest set is the empty set.
 
    A _validator_ (also known as an _acceptor_) is a process that tests
    if a particular input is described by the schema, by evaluating it
@@ -348,10 +348,10 @@ Table of Contents
 
 1.2.4.  Keywords
 
-   JSON Schema uses _keywords_ to assert constraints on JSON documents
-   or provide annotations with additional information.  Additional
-   keywords combine other keywords or provide references to sub-schemas,
-   features which allow more complex JSON data structures.
+   JSON Schema uses _keywords_ to assert constraints on structured
+   documents or provide annotations with additional information.
+   Additional keywords combine other keywords or provide references to
+   sub-schemas, features which allow more complex JSON data structures.
 
    In formal language theory, JSON Schema resembles a context-free
    language, as most keywords are context-free.  Thus, JSON instances
@@ -399,34 +399,35 @@ Table of Contents
    quick definitions may not be enough to completely comprehend roles
    and uses, but may still provide a useful quick reference.
 
-   *JSON Document*
+   *JSON Text*
 
-   A JSON document is an information resource (series of octets)
-   described by the application/json media type.
+   A JSON text is an information resource (series of octets) described
+   by the application/json media type, as defined in [RFC8259].
 
    *Input*
 
-   A JSON document supplied to a validator or other implementation, in
-   order to compare it to a schema, is an input until it is known to be
-   in the valid set for that schema.
+   A JSON text or other serialized or structured data, supplied to a
+   validator or other implementation, in order to compare it to a
+   schema, is an input until it is known to be in the valid set for that
+   schema.
 
    *Instance*
 
-   A JSON document that is in the valid set for a given schema is an
-   _instance_ of that schema.
+   A structured document that is in the valid set for a given schema is
+   an _instance_ of that schema.
 
    *Object*
 
    _Object_ is defined for JSON in [RFC8259] and has the same meaning
    here.
 
-   *Schema / Schema Document*
+   *Schema*
 
-   A JSON Schema document, or simply a _schema_, is a JSON document used
-   to describe and constrain JSON Documents.  Used in validation, the
-   schema defines the valid set, or all possible instances that validate
-   successfully.  As a JSON document, a schema may also be an instance
-   of some meta-schema.
+   A JSON Schema document, or simply a _schema_, is used to describe and
+   constrain structured documents.  Used in validation, the schema
+   defines the valid set, or all possible instances that validate
+   successfully.  As a structured document, a schema may also be an
+   instance of some meta-schema.
 
    *Schema Resource*
 
@@ -505,12 +506,12 @@ Table of Contents
 3.1.1.  Trivial schema documents
 
    The schema values "true" and "false" are trivial schemas.  The valid
-   set for the 'true' schema is all possible JSON documents, and the
-   valid set for the 'false' schema is empty.  The trivial boolean
-   schemas exist to clarify schema author intent and facilitate schema
-   processing optimizations.  They behave identically to the following
-   schema objects (where "not" is part of the subschema application
-   vocabulary defined in this document).
+   set for the 'true' schema is all possible syntactically correct
+   inputs, and the valid set for the 'false' schema is empty.  The
+   trivial boolean schemas exist to clarify schema author intent and
+   facilitate schema processing optimizations.  They behave identically
+   to the following schema objects (where "not" is part of the subschema
+   application vocabulary defined in this document).
 
    true  Always passes validation, as if the empty schema {}
 
@@ -595,8 +596,8 @@ Table of Contents
    representation Unicode characters available.
 
    Since an object cannot have two properties with the same key,
-   behavior for a JSON document that tries to define two properties with
-   the same key in a single object is undefined.
+   behavior for a document that tries to define two properties with the
+   same key in a single object is undefined.
 
    Note that JSON Schema vocabularies are free to define their own
    extended type system.  This should not be confused with the core
@@ -786,9 +787,9 @@ Table of Contents
    Schema, which describes the set of valid schemas written for this
    particular dialect.
 
-   The value of this keyword MUST be a (containing a scheme, per
-   [RFC3986], Section 3) and this URI MUST be normalized.  The current
-   schema MUST be valid against the meta-schema identified by this URI.
+   The value of this keyword MUST be a full URI ([RFC3986], Section 3)
+   and this URI MUST be normalized.  The current schema MUST be valid
+   against the meta-schema identified by this URI.
 
    If this URI identifies a retrievable resource, that resource SHOULD
    be of media type "application/schema+json".
@@ -815,9 +816,9 @@ Table of Contents
    the vocabulary.
 
    The value of this keyword MUST be an object.  The property names in
-   the object MUST be URIs (containing a scheme) and this URI MUST be
-   normalized.  Each URI that appears as a property name identifies a
-   specific set of keywords and their semantics.
+   the object MUST be absolute URIs and each URI MUST be normalized.
+   Each URI that appears as a property name identifies a specific set of
+   keywords and their semantics.
 
    The URI MAY be a URL, but the nature of the retrievable resource is
    currently undefined, and reserved for future use.  Vocabulary authors
@@ -827,8 +828,8 @@ Table of Contents
    // identifying the keyword set is deemed sufficient as that, along
    // with meta-schema validation, is how the current "vocabularies"
    // work today.  Any future vocabulary document format will be
-   // specified as a JSON document, so using text/html or other non-JSON
-   // formats in the meantime will not produce any future ambiguity.
+   // specified with JSON, so using text/html or other non-JSON formats
+   // in the meantime will not produce any future ambiguity.
 
    The values of the object properties MUST be booleans.  If the value
    is true, then implementations that do not recognize the vocabulary
@@ -2724,9 +2725,9 @@ Table of Contents
 
 11.3.  Compound Documents
 
-   A Compound Schema Document is defined as a JSON document (sometimes
-   called a "bundled" schema) which has multiple embedded JSON Schema
-   Resources bundled into the same document to ease transportation.
+   A Compound Schema Document (sometimes called a "bundled" schema) has
+   multiple embedded JSON Schema Resources bundled into the same
+   document to ease transportation.
 
    Each embedded Schema Resource MUST be treated as an individual Schema
    Resource, following standard schema loading and processing
@@ -2851,9 +2852,9 @@ Table of Contents
    hypermedia resources, and the rest of this document assumes no one
    protocol, nor does it even assume network access.  However since HTTP
    resources in JSON with JSON Schemas to describe them are pretty
-   common in Web APIs, this section describes how to process JSON
-   documents in a more RESTful manner when using protocols that support
-   media types and Web linking ([RFC8288]).
+   common in Web APIs, this section describes how to process JSON texts
+   in a more RESTful manner when using protocols that support media
+   types and Web linking ([RFC8288]).
 
 11.5.1.  Linking to a Schema
 
@@ -2939,7 +2940,7 @@ Table of Contents
    Keywords MAY be defined with a partial value, such as a URI-
    reference, which must be resolved against another value, such as
    another URI-reference or a full URI, which is found through the
-   lexical structure of the JSON document.  The "$id", "$ref", and
+   lexical structure of the structured document.  The "$id", "$ref", and
    "$dynamicRef" core keywords, and the "base" JSON Hyper-Schema
    keyword, are examples of this sort of behavior.
 
@@ -3089,10 +3090,10 @@ Table of Contents
 
 12.7.  Assertions
 
-   JSON Schema can be used to assert constraints on a JSON document,
-   which either passes or fails the assertions.  This approach can be
-   used to validate conformance with the constraints, or document what
-   is needed to satisfy them.
+   JSON Schema can be used to assert constraints on a structured
+   document, which either passes or fails the assertions.  This approach
+   can be used to validate conformance with the constraints, or document
+   what is needed to satisfy them.
 
    JSON Schema implementations produce a single boolean result when
    evaluating an input against schema assertions.
