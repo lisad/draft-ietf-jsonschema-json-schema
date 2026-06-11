@@ -94,8 +94,8 @@ Table of Contents
      4.2.  Definitions and References
        4.2.1.  "$ref" and "$dynamicRef"
        4.2.2.  "$defs"
+       4.2.3.  Example
      4.3.  "$comment"
-       4.3.1.  Example
    5.  Subschema keywords
      5.1.  Keyword Independence
      5.2.  Keywords for Applying Subschemas in Place
@@ -1093,9 +1093,31 @@ Table of Contents
    This keyword's value MUST be an object.  Each member value of this
    object MUST be a valid JSON Schema.
 
-   See the example for $comment below in Section 4.3.1, where the
-   constraint on some property values to be 32-bit unsigned integers is
-   made into a definition that can be reused.
+4.2.3.  Example
+
+   In this partial schema for an IMAP folder representation in JSON, a
+   reusable definition for 32-bit unsigned integers is factored out and
+   referenced in multiple property definitions.
+
+{
+  "type": "object",
+  "$defs": {
+    "imap-number": {
+      "type": "integer",
+      "minimum": 0,
+      "exclusiveMaximum": 4294967296,
+      "$comment": "IMAP 'number' defined in ABNF as unsigned 32-bit integer"
+    }
+  },
+  "properties": {
+    "last_uid": {
+      "$ref": "#/$defs/imap-number"
+    },
+    "recent_uid": {
+      "$ref": "#/$defs/imap-number"
+    }
+  }
+}
 
 4.3.  "$comment"
 
@@ -1128,31 +1150,9 @@ Table of Contents
    absence, or contents of "$comment" properties.  In particular, the
    value of "$comment" MUST NOT be collected as an annotation result.
 
-4.3.1.  Example
-
-   In this partial schema for an IMAP folder representation in JSON,
-   schema authors see the comment to understand why the type is defined
-   as it is.
-
-{
-  "type": "object",
-  "$defs": {
-    "imap-number": {
-      "type": "integer",
-      "minimum": 0,
-      "exclusiveMaximum": 4294967296,
-      "$comment": "IMAP 'number' defined in ABNF as unsigned 32-bit integer"
-    }
-  },
-  "properties": {
-    "last_uid": {
-      "$ref": "#/$defs/imap-number"
-    },
-    "recent_uid": {
-      "$ref": "#/$defs/imap-number"
-    }
-  }
-}
+   For an example using $comment, see Section 4.2.3 above, where a
+   comment explains to schema maintainers where a value limit comes
+   from.
 
 5.  Subschema keywords
 

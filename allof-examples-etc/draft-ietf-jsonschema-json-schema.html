@@ -1262,15 +1262,13 @@ Source for this draft can be found at
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.2">
                     <p id="section-toc.1-1.4.2.2.2.2.1"><a href="#section-4.2.2" class="auto internal xref">4.2.2</a>.  <a href="#name-defs" class="internal xref">"$defs"</a></p>
 </li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.3">
+                    <p id="section-toc.1-1.4.2.2.2.3.1"><a href="#section-4.2.3" class="auto internal xref">4.2.3</a>.  <a href="#name-example-2" class="internal xref">Example</a></p>
+</li>
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3">
                 <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-comment" class="internal xref">"$comment"</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3.2.1">
-                    <p id="section-toc.1-1.4.2.3.2.1.1"><a href="#section-4.3.1" class="auto internal xref">4.3.1</a>.  <a href="#name-example-2" class="internal xref">Example</a></p>
-</li>
-                </ul>
 </li>
             </ul>
 </li>
@@ -2701,9 +2699,39 @@ authors to inline re-usable JSON Schemas into a more general schema.
 The keyword does not directly affect the validation result.<a href="#section-4.2.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.2.2-2">This keyword's value MUST be an object.
 Each member value of this object MUST be a valid JSON Schema.<a href="#section-4.2.2-2" class="pilcrow">¶</a></p>
-<p id="section-4.2.2-3">See the example for <code>$comment</code> below in <a href="#comment-example" class="auto internal xref">Section 4.3.1</a>,
-where the constraint on some property values to be 32-bit unsigned integers
-is made into a definition that can be reused.<a href="#section-4.2.2-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="defs-example">
+<section id="section-4.2.3">
+          <h4 id="name-example-2">
+<a href="#section-4.2.3" class="section-number selfRef">4.2.3. </a><a href="#name-example-2" class="section-name selfRef">Example</a>
+          </h4>
+<p id="section-4.2.3-1">In this partial schema for an IMAP folder representation in JSON,
+a reusable definition for 32-bit unsigned integers is factored out and
+referenced in multiple property definitions.<a href="#section-4.2.3-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-4.2.3-2">
+<pre>
+{
+  "type": "object",
+  "$defs": {
+    "imap-number": {
+      "type": "integer",
+      "minimum": 0,
+      "exclusiveMaximum": 4294967296,
+      "$comment": "IMAP 'number' defined in ABNF as unsigned 32-bit integer"
+    }
+  },
+  "properties": {
+    "last_uid": {
+      "$ref": "#/$defs/imap-number"
+    },
+    "recent_uid": {
+      "$ref": "#/$defs/imap-number"
+    }
+  }
+}
+</pre><a href="#section-4.2.3-2" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 </section>
@@ -2735,38 +2763,8 @@ schemas is a concern.<a href="#section-4.3-5" class="pilcrow">¶</a></p>
 <p id="section-4.3-6">Implementations MUST NOT take any other action based on the presence, absence,
 or contents of "$comment" properties.  In particular, the value of "$comment"
 MUST NOT be collected as an annotation result.<a href="#section-4.3-6" class="pilcrow">¶</a></p>
-<div id="comment-example">
-<section id="section-4.3.1">
-          <h4 id="name-example-2">
-<a href="#section-4.3.1" class="section-number selfRef">4.3.1. </a><a href="#name-example-2" class="section-name selfRef">Example</a>
-          </h4>
-<p id="section-4.3.1-1">In this partial schema for an IMAP folder representation in JSON,
-schema authors see the comment to understand why the type is defined as it is.<a href="#section-4.3.1-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-4.3.1-2">
-<pre>
-{
-  "type": "object",
-  "$defs": {
-    "imap-number": {
-      "type": "integer",
-      "minimum": 0,
-      "exclusiveMaximum": 4294967296,
-      "$comment": "IMAP 'number' defined in ABNF as unsigned 32-bit integer"
-    }
-  },
-  "properties": {
-    "last_uid": {
-      "$ref": "#/$defs/imap-number"
-    },
-    "recent_uid": {
-      "$ref": "#/$defs/imap-number"
-    }
-  }
-}
-</pre><a href="#section-4.3.1-2" class="pilcrow">¶</a>
-</div>
-</section>
-</div>
+<p id="section-4.3-7">For an example using <code>$comment</code>, see <a href="#defs-example" class="auto internal xref">Section 4.2.3</a> above, where a comment
+explains to schema maintainers where a value limit comes from.<a href="#section-4.3-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
