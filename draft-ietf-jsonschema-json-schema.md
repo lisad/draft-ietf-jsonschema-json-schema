@@ -4110,7 +4110,9 @@ and Karen Etheridge.
 
 ## draft-dusseault-json-schema-01
 
-* Add link to GitHub repository.
+* Clarify terminology by using JSON Text when talking about serialized JSON, and
+structured document when talking about what a schema operates on.
+* Add examples for $anchor, $ref, $defs, $comment, allOf, if and then
 
 ## draft-dusseault-json-schema-00
 
