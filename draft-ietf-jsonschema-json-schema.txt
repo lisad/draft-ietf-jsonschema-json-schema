@@ -2,9 +2,9 @@
 
 
 
-Network Working Group                                       L. Dusseault
+Network Working Group                                  L. Dusseault, Ed.
 Internet-Draft                                  Data Transfer Initiative
-Intended status: Informational                                 A. Wright
+Intended status: Standards Track                               A. Wright
 Expires: 14 December 2026                                               
                                                               H. Andrews
                                                             12 June 2026
@@ -483,7 +483,7 @@ Table of Contents
 
    This section is the start of normative requirements especially for
    implementations.  However, a practitioner may wish to check the basic
-   meaning of terms defined above and skip toSection 12 where specific
+   meaning of terms defined above and skip to Section 12 where specific
    keywords and purposes begin to be defined.
 
 3.1.  JSON Schema Documents
@@ -4749,7 +4749,7 @@ G.2.  draft-dusseault-json-schema-00
 
 Authors' Addresses
 
-   Lisa Dusseault
+   Lisa Dusseault (editor)
    Data Transfer Initiative
    Email: lisa@rtfm.com
 
