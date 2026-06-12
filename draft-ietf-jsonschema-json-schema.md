@@ -1,7 +1,7 @@
 ---
 title: JSON Schema
 docname: draft-ietf-jsonschema-json-schema-latest
-category: info
+category: std
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 area: ART
 consensus: true
@@ -16,6 +16,7 @@ author:
     name: Lisa Dusseault
     email: lisa@rtfm.com
     organization: Data Transfer Initiative
+    role: editor
  -
     ins: A. Wright
     name: Austin Wright
@@ -284,7 +285,7 @@ documentation, data or code based on a schema.
 
 This section is the start of normative requirements especially for
 implementations.  However, a practitioner may wish to check the basic meaning
-of terms defined above and skip to{{keyword-behaviors}} where specific keywords
+of terms defined above and skip to {{keyword-behaviors}} where specific keywords
 and purposes begin to be defined.
 
 ## JSON Schema Documents {#schema-document}
