@@ -1056,7 +1056,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Dusseault, et al.</td>
-<td class="center">Expires 13 December 2026</td>
+<td class="center">Expires 14 December 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1069,12 +1069,12 @@ svg {
 <dd class="internet-draft">draft-ietf-jsonschema-json-schema-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-06-11" class="published">11 June 2026</time>
+<time datetime="2026-06-12" class="published">12 June 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-12-13">13 December 2026</time></dd>
+<dd class="expires"><time datetime="2026-12-14">14 December 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1129,7 +1129,7 @@ Source for this draft can be found at
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 13 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 14 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1261,6 +1261,9 @@ Source for this draft can be found at
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.2">
                     <p id="section-toc.1-1.4.2.2.2.2.1"><a href="#section-4.2.2" class="auto internal xref">4.2.2</a>.  <a href="#name-defs" class="internal xref">"$defs"</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.3">
+                    <p id="section-toc.1-1.4.2.2.2.3.1"><a href="#section-4.2.3" class="auto internal xref">4.2.3</a>.  <a href="#name-example-2" class="internal xref">Example</a></p>
 </li>
                 </ul>
 </li>
@@ -1511,7 +1514,7 @@ Source for this draft can be found at
                 <p id="section-toc.1-1.9.2.5.1"><a href="#section-9.5" class="auto internal xref">9.5</a>.  <a href="#name-contentschema" class="internal xref">"contentSchema"</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.6">
-                <p id="section-toc.1-1.9.2.6.1"><a href="#section-9.6" class="auto internal xref">9.6</a>.  <a href="#name-example-2" class="internal xref">Example</a></p>
+                <p id="section-toc.1-1.9.2.6.1"><a href="#section-9.6" class="auto internal xref">9.6</a>.  <a href="#name-example-5" class="internal xref">Example</a></p>
 </li>
             </ul>
 </li>
@@ -2696,22 +2699,38 @@ authors to inline re-usable JSON Schemas into a more general schema.
 The keyword does not directly affect the validation result.<a href="#section-4.2.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.2.2-2">This keyword's value MUST be an object.
 Each member value of this object MUST be a valid JSON Schema.<a href="#section-4.2.2-2" class="pilcrow">¶</a></p>
-<p id="section-4.2.2-3">As an example, here is a schema describing an array of positive
-integers, where the positive integer constraint is a subschema in
-"$defs":<a href="#section-4.2.2-3" class="pilcrow">¶</a></p>
-<div class="lang-json sourcecode" id="section-4.2.2-4">
+</section>
+</div>
+<div id="defs-example">
+<section id="section-4.2.3">
+          <h4 id="name-example-2">
+<a href="#section-4.2.3" class="section-number selfRef">4.2.3. </a><a href="#name-example-2" class="section-name selfRef">Example</a>
+          </h4>
+<p id="section-4.2.3-1">In this partial schema for an IMAP folder representation in JSON,
+a reusable definition for 32-bit unsigned integers is factored out and
+referenced in multiple property definitions.<a href="#section-4.2.3-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-4.2.3-2">
 <pre>
 {
-    "type": "array",
-    "items": { "$ref": "#/$defs/positiveInteger" },
-    "$defs": {
-        "positiveInteger": {
-            "type": "integer",
-            "exclusiveMinimum": 0
-        }
+  "type": "object",
+  "$defs": {
+    "imap-number": {
+      "type": "integer",
+      "minimum": 0,
+      "exclusiveMaximum": 4294967296,
+      "$comment": "IMAP 'number' defined in ABNF as unsigned 32-bit integer"
     }
+  },
+  "properties": {
+    "last_uid": {
+      "$ref": "#/$defs/imap-number"
+    },
+    "recent_uid": {
+      "$ref": "#/$defs/imap-number"
+    }
+  }
 }
-</pre><a href="#section-4.2.2-4" class="pilcrow">¶</a>
+</pre><a href="#section-4.2.3-2" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -2744,6 +2763,8 @@ schemas is a concern.<a href="#section-4.3-5" class="pilcrow">¶</a></p>
 <p id="section-4.3-6">Implementations MUST NOT take any other action based on the presence, absence,
 or contents of "$comment" properties.  In particular, the value of "$comment"
 MUST NOT be collected as an annotation result.<a href="#section-4.3-6" class="pilcrow">¶</a></p>
+<p id="section-4.3-7">For an example using <code>$comment</code>, see <a href="#defs-example" class="auto internal xref">Section 4.2.3</a> above, where a comment
+explains to schema maintainers where a value limit comes from.<a href="#section-4.3-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2806,8 +2827,8 @@ branch of an "allOf" MUST NOT have an impact on a "then"
 or "else" in another branch.<a href="#section-5.2-4" class="pilcrow">¶</a></p>
 <p id="section-5.2-5">There is no default behavior for "if", "then", or "else"
 when they are not present.  In particular, they MUST NOT
-be treated as if present with an empty schema, and when
-"if" is not present, both "then" and "else" MUST be
+be treated as if present with an empty schema, and
+when "if" is not present, both "then" and "else" MUST be
 entirely ignored.<a href="#section-5.2-5" class="pilcrow">¶</a></p>
 <div id="allOf">
 <section id="section-5.2.1">
@@ -2818,6 +2839,52 @@ entirely ignored.<a href="#section-5.2-5" class="pilcrow">¶</a></p>
 Each item of the array MUST be a valid JSON Schema.<a href="#section-5.2.1-1" class="pilcrow">¶</a></p>
 <p id="section-5.2.1-2">An input validates successfully against this keyword if it validates
 successfully against all schemas defined by this keyword's value.<a href="#section-5.2.1-2" class="pilcrow">¶</a></p>
+<p id="section-5.2.1-3">The <code>allOf</code> keyword is useful for combining multiple conditionals
+in a schema.  See the example for <code>if</code> below in <a href="#allof-if-example" class="auto internal xref">Section 5.2.5.1</a>.<a href="#section-5.2.1-3" class="pilcrow">¶</a></p>
+<div id="allof-multiple-inheritance-example">
+<section id="section-5.2.1.1">
+            <h5 id="name-example-3">
+<a href="#section-5.2.1.1" class="section-number selfRef">5.2.1.1. </a><a href="#name-example-3" class="section-name selfRef">Example</a>
+            </h5>
+<p id="section-5.2.1.1-1">Another example of the utility of <code>allOf</code> is multiple inheritance.<a href="#section-5.2.1.1-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-5.2.1.1-2">
+<pre>
+{
+  "$defs": {
+    "task": {
+      "$anchor": "task",
+      "type": "object",
+      "required": ["title", "deadline"],
+      "properties": {
+        "title": { "type": "string" },
+        "deadline": { "type": "string", "format": "date" },
+        "done": { "type": "boolean" }
+      }
+    },
+    "collection": {
+      "$anchor": "collection",
+      "type": "object",
+      "required": ["items"],
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": { "$ref": "#task" }
+        }
+      }
+    },
+    "project": {
+      "allOf": [
+        { "$ref": "#task" },
+        { "$ref": "#collection" }
+      ]
+    }
+  },
+  "$ref": "#/$defs/project"
+}
+</pre><a href="#section-5.2.1.1-2" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
 </section>
 </div>
 <div id="anyof">
@@ -2877,6 +2944,48 @@ present.<a href="#section-5.2.5-4" class="pilcrow">¶</a></p>
 are being collected, they are collected from this
 keyword's subschema in the usual way, including when
 the keyword is present without either "then" or "else".<a href="#section-5.2.5-5" class="pilcrow">¶</a></p>
+<div id="allof-if-example">
+<section id="section-5.2.5.1">
+            <h5 id="name-example-4">
+<a href="#section-5.2.5.1" class="section-number selfRef">5.2.5.1. </a><a href="#name-example-4" class="section-name selfRef">Example</a>
+            </h5>
+<p id="section-5.2.5.1-1">This shows how the <code>if</code> keyword can be used to
+conditionally restrict a "postal-code" value on the "country" value.<a href="#section-5.2.5.1-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-5.2.5.1-2">
+<pre>
+{
+  "type": "object",
+  "properties": {
+    "country": { "type": "string" },
+    "postal_code": { "type": "string" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "country": { "const": "Canada" } }
+      },
+      "then": {
+        "properties": {
+          "postal_code": { "pattern": "^[A-Z][0-9][A-Z] [0-9][A-Z][0-9]$" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "country": { "const": "USA" } }
+      },
+      "then": {
+        "properties": {
+          "postal_code": { "pattern": "^[0-9]{5}$" }
+        }
+      }
+    }
+  ]
+}
+</pre><a href="#section-5.2.5.1-2" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
 </section>
 </div>
 <div id="then">
@@ -2894,6 +3003,8 @@ when the input fails to validate against its
 subschema.  Implementations MUST NOT evaluate
 the input against this keyword, for either validation
 or annotation collection purposes, in such cases.<a href="#section-5.2.6-3" class="pilcrow">¶</a></p>
+<p id="section-5.2.6-4">See the example above in <a href="#allof-if-example" class="auto internal xref">Section 5.2.5.1</a> for
+a constraint added in a <code>then</code>, conditionally upon the <code>if</code> statement.<a href="#section-5.2.6-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="else">
@@ -4101,8 +4212,8 @@ JSON Schema's data model.<a href="#section-9.5-2" class="pilcrow">¶</a></p>
 </div>
 <div id="example">
 <section id="section-9.6">
-        <h3 id="name-example-2">
-<a href="#section-9.6" class="section-number selfRef">9.6. </a><a href="#name-example-2" class="section-name selfRef">Example</a>
+        <h3 id="name-example-5">
+<a href="#section-9.6" class="section-number selfRef">9.6. </a><a href="#name-example-5" class="section-name selfRef">Example</a>
         </h3>
 <p id="section-9.6-1">Here is an example schema, illustrating the use of "contentEncoding" and
 "contentMediaType":<a href="#section-9.6-1" class="pilcrow">¶</a></p>

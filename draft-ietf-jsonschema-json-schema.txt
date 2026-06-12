@@ -5,9 +5,9 @@
 Network Working Group                                       L. Dusseault
 Internet-Draft                                  Data Transfer Initiative
 Intended status: Informational                                 A. Wright
-Expires: 13 December 2026                                               
+Expires: 14 December 2026                                               
                                                               H. Andrews
-                                                            11 June 2026
+                                                            12 June 2026
 
 
                               JSON Schema
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 December 2026.
+   This Internet-Draft will expire on 14 December 2026.
 
 Copyright Notice
 
@@ -94,6 +94,7 @@ Table of Contents
      4.2.  Definitions and References
        4.2.1.  "$ref" and "$dynamicRef"
        4.2.2.  "$defs"
+       4.2.3.  Example
      4.3.  "$comment"
    5.  Subschema keywords
      5.1.  Keyword Independence
@@ -1092,20 +1093,31 @@ Table of Contents
    This keyword's value MUST be an object.  Each member value of this
    object MUST be a valid JSON Schema.
 
-   As an example, here is a schema describing an array of positive
-   integers, where the positive integer constraint is a subschema in
-   "$defs":
+4.2.3.  Example
 
-   {
-       "type": "array",
-       "items": { "$ref": "#/$defs/positiveInteger" },
-       "$defs": {
-           "positiveInteger": {
-               "type": "integer",
-               "exclusiveMinimum": 0
-           }
-       }
-   }
+   In this partial schema for an IMAP folder representation in JSON, a
+   reusable definition for 32-bit unsigned integers is factored out and
+   referenced in multiple property definitions.
+
+{
+  "type": "object",
+  "$defs": {
+    "imap-number": {
+      "type": "integer",
+      "minimum": 0,
+      "exclusiveMaximum": 4294967296,
+      "$comment": "IMAP 'number' defined in ABNF as unsigned 32-bit integer"
+    }
+  },
+  "properties": {
+    "last_uid": {
+      "$ref": "#/$defs/imap-number"
+    },
+    "recent_uid": {
+      "$ref": "#/$defs/imap-number"
+    }
+  }
+}
 
 4.3.  "$comment"
 
@@ -1137,6 +1149,10 @@ Table of Contents
    Implementations MUST NOT take any other action based on the presence,
    absence, or contents of "$comment" properties.  In particular, the
    value of "$comment" MUST NOT be collected as an annotation result.
+
+   For an example using $comment, see Section 4.2.3 above, where a
+   comment explains to schema maintainers where a value limit comes
+   from.
 
 5.  Subschema keywords
 
@@ -1206,6 +1222,46 @@ Table of Contents
    An input validates successfully against this keyword if it validates
    successfully against all schemas defined by this keyword's value.
 
+   The allOf keyword is useful for combining multiple conditionals in a
+   schema.  See the example for if below in Section 5.2.5.1.
+
+5.2.1.1.  Example
+
+   Another example of the utility of allOf is multiple inheritance.
+
+   {
+     "$defs": {
+       "task": {
+         "$anchor": "task",
+         "type": "object",
+         "required": ["title", "deadline"],
+         "properties": {
+           "title": { "type": "string" },
+           "deadline": { "type": "string", "format": "date" },
+           "done": { "type": "boolean" }
+         }
+       },
+       "collection": {
+         "$anchor": "collection",
+         "type": "object",
+         "required": ["items"],
+         "properties": {
+           "items": {
+             "type": "array",
+             "items": { "$ref": "#task" }
+           }
+         }
+       },
+       "project": {
+         "allOf": [
+           { "$ref": "#task" },
+           { "$ref": "#collection" }
+         ]
+       }
+     },
+     "$ref": "#/$defs/project"
+   }
+
 5.2.2.  "anyOf"
 
    This keyword's value MUST be a non-empty array.  Each item of the
@@ -1253,6 +1309,41 @@ Table of Contents
    keyword's subschema in the usual way, including when the keyword is
    present without either "then" or "else".
 
+5.2.5.1.  Example
+
+   This shows how the if keyword can be used to conditionally restrict a
+   "postal-code" value on the "country" value.
+
+{
+  "type": "object",
+  "properties": {
+    "country": { "type": "string" },
+    "postal_code": { "type": "string" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "country": { "const": "Canada" } }
+      },
+      "then": {
+        "properties": {
+          "postal_code": { "pattern": "^[A-Z][0-9][A-Z] [0-9][A-Z][0-9]$" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "country": { "const": "USA" } }
+      },
+      "then": {
+        "properties": {
+          "postal_code": { "pattern": "^[0-9]{5}$" }
+        }
+      }
+    }
+  ]
+}
+
 5.2.6.  "then"
 
    This keyword's value MUST be a valid JSON Schema.
@@ -1265,6 +1356,9 @@ Table of Contents
    fails to validate against its subschema.  Implementations MUST NOT
    evaluate the input against this keyword, for either validation or
    annotation collection purposes, in such cases.
+
+   See the example above in Section 5.2.5.1 for a constraint added in a
+   then, conditionally upon the if statement.
 
 5.2.7.  "else"
 
