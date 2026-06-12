@@ -847,22 +847,15 @@ The keyword does not directly affect the validation result.
 This keyword's value MUST be an object.
 Each member value of this object MUST be a valid JSON Schema.
 
-As an example, here is a schema describing an array of positive
-integers, where the positive integer constraint is a subschema in
-"$defs":
+### Example {#defs-example}
 
-~~~ json
-{
-    "type": "array",
-    "items": { "$ref": "#/$defs/positiveInteger" },
-    "$defs": {
-        "positiveInteger": {
-            "type": "integer",
-            "exclusiveMinimum": 0
-        }
-    }
-}
-~~~
+In this partial schema for an IMAP folder representation in JSON,
+a reusable definition for 32-bit unsigned integers is factored out and
+referenced in multiple property definitions.
+
+~~~~~~~~~~
+{::include ./examples/defs-example.json}
+~~~~~~~~~~
 
 ## "$comment"
 
@@ -893,6 +886,9 @@ schemas is a concern.
 Implementations MUST NOT take any other action based on the presence, absence,
 or contents of "$comment" properties.  In particular, the value of "$comment"
 MUST NOT be collected as an annotation result.
+
+For an example using `$comment`, see {{defs-example}} above, where a comment
+explains to schema maintainers where a value limit comes from.
 
 # Subschema keywords
 
@@ -946,8 +942,8 @@ or "else" in another branch.
 
 There is no default behavior for "if", "then", or "else"
 when they are not present.  In particular, they MUST NOT
-be treated as if present with an empty schema, and when
-"if" is not present, both "then" and "else" MUST be
+be treated as if present with an empty schema, and
+when "if" is not present, both "then" and "else" MUST be
 entirely ignored.
 
 
@@ -958,6 +954,17 @@ Each item of the array MUST be a valid JSON Schema.
 
 An input validates successfully against this keyword if it validates
 successfully against all schemas defined by this keyword's value.
+
+The `allOf` keyword is useful for combining multiple conditionals
+in a schema.  See the example for `if` below in {{allof-if-example}}.
+
+#### Example {#allof-multiple-inheritance-example}
+
+Another example of the utility of `allOf` is multiple inheritance.
+
+~~~~~~~~~~
+{::include ./examples/allOf-multiple-inheritance.json}
+~~~~~~~~~~
 
 ### "anyOf"
 
@@ -1010,6 +1017,16 @@ are being collected, they are collected from this
 keyword's subschema in the usual way, including when
 the keyword is present without either "then" or "else".
 
+
+#### Example {#allof-if-example}
+
+This shows how the `if` keyword can be used to
+conditionally restrict a "postal-code" value on the "country" value.
+
+~~~~~~~~~~
+{::include ./examples/allOf-if-conditionals.json}
+~~~~~~~~~~
+
 ### "then"
 
 This keyword's value MUST be a valid JSON Schema.
@@ -1024,6 +1041,9 @@ when the input fails to validate against its
 subschema.  Implementations MUST NOT evaluate
 the input against this keyword, for either validation
 or annotation collection purposes, in such cases.
+
+See the example above in {{allof-if-example}} for
+a constraint added in a `then`, conditionally upon the `if` statement.
 
 ### "else"
 
