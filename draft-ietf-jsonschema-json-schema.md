@@ -115,6 +115,28 @@ The terms "JSON", "JSON text", "JSON value", "member", "element", "object", "arr
 "number", "string", "boolean", "true", "false", and "null" in this document are to
 be interpreted as defined in {{!RFC8259}}.
 
+## Audiences
+
+This specification has three reading audiences: authors of JSON Schemas, implementors
+of validation or other software, and authors of meta-schemas.
+
+* For schema authors, the chapter on terminology ({{terminology}}) might be the first
+read, followed by chapters about
+core keywords ({{core-keywords}}),
+subschema keywords ({{subschema-keywords}}) and
+structural keywords ({{structural-keywords}})
+as these are the keywords most commonly used when authoring schemas. In addition,
+the formats used with the `format` keyword are defined in {{format-vocab}}.  Other
+sections up to and including {{metadata}} may be interesting depending on
+the topic of the chapter.
+
+* Implementors will need to understand the requirements in sections 3 through 10 but also
+the requirements on loading and processing schemas ({{loading-and-processing}}),
+keyword behaviors ({{keyword-behaviors}}), and formatted output ({{output}}).
+
+* Authors of meta-schemas including extensions to JSON Schema will want to read
+the chapter on {{extensibility}} and {{vocabularies-appendix}}.
+
 ## Functionality
 
 A JSON Schema implementation takes input in the form of a JSON-compatible data
@@ -281,12 +303,9 @@ An implementation is software that implements this specification.  Some
 implementations validate inputs, but some implementations generate
 documentation, data or code based on a schema.
 
-# Overall Definitions and Requirements
+# Overall Definitions and Requirements {#overall}
 
-This section is the start of normative requirements especially for
-implementations.  However, a practitioner may wish to check the basic meaning
-of terms defined above and skip to {{keyword-behaviors}} where specific keywords
-and purposes begin to be defined.
+This section is the start of normative requirements.
 
 ## JSON Schema Documents {#schema-document}
 
@@ -555,7 +574,7 @@ as an annotation, but can optionally be used as an assertion.  The
 {{content}} keywords are annotations for working with documents
 embedded as JSON strings.
 
-# Core Keywords
+# Core Keywords {#core-keywords}
 
 Core keywords MUST be implemented by any processor indicating support
 for the "application/jsonschema+json" media type.
@@ -891,7 +910,7 @@ MUST NOT be collected as an annotation result.
 For an example using `$comment`, see {{defs-example}} above, where a comment
 explains to schema maintainers where a value limit comes from.
 
-# Subschema keywords
+# Subschema keywords {#subschema-keywords}
 
 This section defines keywords that
 are RECOMMENDED for use as the basis of other vocabularies.
@@ -1363,7 +1382,7 @@ This annotation affects the behavior of "unevaluatedProperties" in parent schema
 Omitting this keyword has the same assertion behavior as
 an empty schema.
 
-# Keywords for Structural Validation
+# Keywords for Structural Validation {#structural-keywords}
 
 Validation keywords in a schema impose requirements for successful validation of an
 input.  These keywords are all assertions without any annotation behavior.
@@ -2064,7 +2083,7 @@ JSON data structures: first the header, and then the payload.  Since the
 JWT media type ensures that the JWT can be represented in a JSON string,
 there is no need for further encoding or decoding.
 
-# A Vocabulary for Basic Meta-Data Annotations
+# A Vocabulary for Basic Meta-Data Annotations {#metadata}
 
 These general-purpose annotation keywords provide commonly used information
 for documentation and user interface display purposes.  They are not intended
@@ -2240,7 +2259,7 @@ an additional example.  If "examples" is absent, "default"
 MAY still be used in this manner.
 
 
-# Loading and Processing Schemas
+# Loading and Processing Schemas {#loading-and-processing}
 
 ## Loading a Schema
 
@@ -3056,7 +3075,7 @@ parts of an input outside the current evaluation location.
 Keywords that allow adjusting the location using a Relative JSON Pointer SHOULD
 default to using the current location if a default is desireable.
 
-# Output Formatting
+# Output Formatting {#output}
 
 JSON Schema is defined to be platform-independent.  As such, to increase compatibility
 across platforms, implementations SHOULD conform to a standard validation output
@@ -3879,7 +3898,7 @@ were moved under "$defs".  It is the matching "$dynamicAnchor" values
 which tell us how to resolve the dynamic reference, not any sort of
 correlation in JSON structure.
 
-# Working with vocabularies
+# Working with vocabularies {#vocabularies-appendix}
 
 ## Best practices for vocabulary and meta-schema authors"
 
