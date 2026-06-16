@@ -1236,6 +1236,10 @@ checking the names in "properties" and the patterns in
 "patternProperties" against the input property set.
 Implementations that do not support annotation collection MUST do so.[^13]
 
+One of the most frequent examples of using "additionalProperties" is to
+give it a value of `false` to forbid unspecified properties.  See
+the extended examples in {{dereferencing}} etc.
+
 In the example above for {{properties}}, the "phone_numbers" field
 can have any internal properties with names such as "home", "office" or
 "cell", but the value for any property inside "phone_numbers" is
