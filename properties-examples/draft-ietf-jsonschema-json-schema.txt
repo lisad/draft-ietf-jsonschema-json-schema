@@ -1573,13 +1573,14 @@ Table of Contents
    // spec-issue-1172.md) for further details.
 
    One of the most frequent examples of using "additionalProperties" is
-   to give it a value of false to forbid unspecified properties.  See
-   the extended examples in Section 11.2 etc.
+   to give it a value of false to forbid all unspecified properties.
+   See Section 13.4 for an example of this.
 
    In the example above for Section 5.4.1, the "phone_numbers" field can
    have any internal properties with names such as "home", "office" or
    "cell", but the value for any property inside "phone_numbers" is
-   constrained to the format of a phone number.
+   constrained to the format of a phone number by
+   "additionalProperties".
 
 5.4.3.  "patternProperties"
 
