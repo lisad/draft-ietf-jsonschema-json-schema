@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-14T01:01:35.576704+00:00",
+  "timestamp": "2026-06-16T01:08:30.163837+00:00",
   "repo": "lisad/draft-ietf-jsonschema-json-schema",
   "labels": [
     {
@@ -228,6 +228,54 @@
       "body": "Eliot's mail:\n---\nIn Section 2.1:\n\nUnrecognized individual keywords simply have their values treated as annotations [...]\n\nIn Section 13.4, it reads:\n\nImplementations SHOULD treat keywords they do not recognize, or that they recognize but do not support, as annotations, where the value of the keyword is the value of the annotation. Whether an implementation collects these annotations or not, they MUST otherwise ignore the keywords.\n\n---\nWorth looking at eventually, other rewritings may make this moot.  \n",
       "createdAt": "2026-05-18T22:34:21Z",
       "updatedAt": "2026-05-18T22:34:21Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 15,
+      "id": "I_kwDOR8mbas8AAAABFkVLeg",
+      "title": "Should be explicit which chapters need to be read by which audience",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/issues/15",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "The wording in \n\n   This section is the start of normative requirements especially for\n   implementations.  However, a practitioner may wish to check the basic\n   meaning of terms defined above and skip to Section 12 where specific\n   keywords and purposes begin to be defined.\n\nthis isn't very clear on the layout of the spec and which readers it is for\n",
+      "createdAt": "2026-06-15T20:20:22Z",
+      "updatedAt": "2026-06-15T20:20:22Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 16,
+      "id": "I_kwDOR8mbas8AAAABFkW5BA",
+      "title": "Explain annotations better",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/issues/16",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "\nThe initial work on annotations/outputs was motivated by a recognition that downstream tools needed to work with the output of a validation library. \n\nAJV was an example of a tool with useful output, but people were reluctant to rely on exactly the output of that specific library.  \n\nAcknowledge that there is a performance cost, but implementations can be run in different modes - \"yes give me output\" or \"skip the output and just validate fast\"\n\n(credit to ben hutton for explaining this in a community meeting)",
+      "createdAt": "2026-06-15T20:24:27Z",
+      "updatedAt": "2026-06-15T20:24:27Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 17,
+      "id": "I_kwDOR8mbas8AAAABFla_rw",
+      "title": "Larger issues around annotations",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/issues/17",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "*This is a spot for me to gather some of the larger issues around annotations - rather than follow up to this issue, consider starting or continuing some discussion in the json mailing list.  Ideally pick one PART of this to discuss if you bring some of this to the JSON list... *\n\nFirst, annotations and output generally seem to be poorly understood.  See issue #16 for the plain issue of explaining better.    \"Annotations\" seems like a word which doesn't convey what they're for or can do.  \"Output\" even sounds weak.  If we keep annotations we should explain their utility better and provide examples.\n\nSecond, do they work the way the community wants them to work?  Greg Dennis was one of the authors yet proposes that the output should be reorganized: https://json-schema.org/blog/posts/fixing-json-schema-output.  and see also https://github.com/orgs/json-schema-org/discussions/63.\n\nThird, is this an interoperable feature?  We think so but it's hard to demonstrate the scale at which we think this is used.  (As a less abstract comparison, consider standardizing some enterprise software configuration file format, which could enable stable scripts interoperating with those files, but those scripts would not be apparent to the standards community as companies are unwilling to share their scripts.)  Members of the open-source JSON Schema community suspect that annotations are used in enterprise pipelines.  For example, an enterprise pipeline that first validates incoming documents (submissions such as applications, claims or survey responses) then sends on down the pipeline for further processing, could use an internal schema with annotations for that processing.  A standard output from the validation phase would allow the enterprise pipeline to be built in a componentized manner, and not reliant on just one JSON Schema library to produce the output of the validation phase and the input to the next phase.  \n\nFourth, can this be an extension rather than a feature of json schema standard?  Probably.  Just as today it's both an optional feature of the specification and an optional feature of libraries that do implement, annotations/output could be separated into another specifiation.  A library that implements \"JSON Schema RFCXXXXX\" would also be able to advertise to library users that it implemented \"JSON Schema annotations version YYY\" and document what option invoking the library would turn on that output format. ",
+      "createdAt": "2026-06-15T23:41:01Z",
+      "updatedAt": "2026-06-15T23:41:01Z",
       "closedAt": null,
       "comments": []
     }
@@ -739,6 +787,32 @@
       "mergeCommit": {
         "oid": "69371678b6779824d78c1e0b97bb657ced418d74"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 18,
+      "id": "PR_kwDOR8mbas7mxxsX",
+      "title": "Adds a section to explain what readers this spec is for and what to read",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/18",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "I thought I had included this previously but instead had a very confusing statement about how \"practitioners\" could skip ahead which is actually wrong; implementors need all the requirements in sections 3-10.",
+      "createdAt": "2026-06-15T23:41:59Z",
+      "updatedAt": "2026-06-15T23:41:59Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "8663a6311d1e75cbdc1910671b006c425b3abf0d",
+      "headRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "headRefName": "explain-readers",
+      "headRefOid": "742373395626e4f4da3e51df951fac0d30558f2f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
