@@ -1237,13 +1237,13 @@ checking the names in "properties" and the patterns in
 Implementations that do not support annotation collection MUST do so.[^13]
 
 One of the most frequent examples of using "additionalProperties" is to
-give it a value of `false` to forbid unspecified properties.  See
-the extended examples in {{dereferencing}} etc.
+give it a value of `false` to forbid all unspecified properties.
+See {{output-structure}} for an example of this.
 
 In the example above for {{properties}}, the "phone_numbers" field
 can have any internal properties with names such as "home", "office" or
 "cell", but the value for any property inside "phone_numbers" is
-constrained to the format of a phone number.
+constrained to the format of a phone number by "additionalProperties".
 
 ### "patternProperties"
 
@@ -3212,7 +3212,7 @@ The JSON key for nested results in failed validations is "errors"; for
 successful validations it is "annotations".  Note the plural forms, as
 a keyword with nested results can also have a local error or annotation.
 
-## Output Structure
+## Output Structure {#output-structure}
 
 The output MUST be an object containing a boolean property named "valid".  When
 additional information about the result is required, the output MUST also contain
