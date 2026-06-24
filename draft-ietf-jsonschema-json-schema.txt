@@ -5,9 +5,9 @@
 Network Working Group                                  L. Dusseault, Ed.
 Internet-Draft                                  Data Transfer Initiative
 Intended status: Standards Track                               A. Wright
-Expires: 14 December 2026                                               
+Expires: 26 December 2026                                               
                                                               H. Andrews
-                                                            12 June 2026
+                                                            24 June 2026
 
 
                               JSON Schema
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 December 2026.
+   This Internet-Draft will expire on 26 December 2026.
 
 Copyright Notice
 
@@ -66,12 +66,13 @@ Table of Contents
 
    1.  Introduction
      1.1.  Notational Conventions
-     1.2.  Functionality
-       1.2.1.  Validation
-       1.2.2.  Annotation
-       1.2.3.  Internet media types
-       1.2.4.  Keywords
-       1.2.5.  Vocabularies
+     1.2.  Audiences
+     1.3.  Functionality
+       1.3.1.  Validation
+       1.3.2.  Annotation
+       1.3.3.  Internet media types
+       1.3.4.  Keywords
+       1.3.5.  Vocabularies
    2.  Terminology
    3.  Overall Definitions and Requirements
      3.1.  JSON Schema Documents
@@ -113,8 +114,8 @@ Table of Contents
        5.3.3.  "contains"
      5.4.  Keywords for Applying Subschemas to Objects
        5.4.1.  "properties"
-       5.4.2.  "patternProperties"
-       5.4.3.  "additionalProperties"
+       5.4.2.  "additionalProperties"
+       5.4.3.  "patternProperties"
        5.4.4.  "propertyNames"
    6.  Keywords for Unevaluated Locations
      6.1.  Keyword Independence
@@ -282,14 +283,37 @@ Table of Contents
    and "null" in this document are to be interpreted as defined in
    [RFC8259].
 
-1.2.  Functionality
+1.2.  Audiences
+
+   This specification has three reading audiences: authors of JSON
+   Schemas, implementors of validation or other software, and authors of
+   meta-schemas.
+
+   *  For schema authors, the chapter on terminology (Section 2) might
+      be the first read, followed by chapters about core keywords
+      (Section 4), subschema keywords (Section 5) and structural
+      keywords (Section 7) as these are the keywords most commonly used
+      when authoring schemas.  In addition, the formats used with the
+      format keyword are defined in Section 8.  Other sections up to and
+      including Section 10 may be interesting depending on the topic of
+      the chapter.
+
+   *  Implementors will need to understand the requirements in sections
+      3 through 10 but also the requirements on loading and processing
+      schemas (Section 11), keyword behaviors (Section 12), and
+      formatted output (Section 13).
+
+   *  Authors of meta-schemas including extensions to JSON Schema will
+      want to read the chapter on Section 14 and Appendix D.
+
+1.3.  Functionality
 
    A JSON Schema implementation takes input in the form of a JSON-
    compatible data structure and performs validation and, if the input
    is accepted as a valid instance, returns a standard annotation
    output.
 
-1.2.1.  Validation
+1.3.1.  Validation
 
    In computer science terms, a JSON Schema document (a _schema_)
    notates a _grammar_ that describes a _language_ of structured
@@ -313,7 +337,7 @@ Table of Contents
    scheme that queries external data sources is possible, but outside
    the scope of this document.
 
-1.2.2.  Annotation
+1.3.2.  Annotation
 
    A JSON Schema may describe additional output to accompany an "accept"
    result, called _annotations_. An annotation is a tuple that, at the
@@ -340,14 +364,14 @@ Table of Contents
    however if the input is rejected during processing, this voids all
    annotations previously emitted from that input.
 
-1.2.3.  Internet media types
+1.3.3.  Internet media types
 
    The specification registers the "application/schema+json" media type
    to identify a JSON Schema resource, and the "application/schema-
    instance+json" media type to identify an instance of a particular
    JSON Schema.
 
-1.2.4.  Keywords
+1.3.4.  Keywords
 
    JSON Schema uses _keywords_ to assert constraints on structured
    documents or provide annotations with additional information.
@@ -376,7 +400,7 @@ Table of Contents
    additional vocabulary is included in this document and its use is
    strongly encouraged.
 
-1.2.5.  Vocabularies
+1.3.5.  Vocabularies
 
    To facilitate re-use, keywords can be organized into vocabularies.  A
    vocabulary consists of a list of keywords, together with their syntax
@@ -481,10 +505,7 @@ Table of Contents
 
 3.  Overall Definitions and Requirements
 
-   This section is the start of normative requirements especially for
-   implementations.  However, a practitioner may wish to check the basic
-   meaning of terms defined above and skip to Section 12 where specific
-   keywords and purposes begin to be defined.
+   This section is the start of normative requirements.
 
 3.1.  JSON Schema Documents
 
@@ -590,7 +611,7 @@ Table of Contents
 
    Whitespace and formatting concerns, including different lexical
    representations of numbers that are equal within the data model, are
-   outside the scope of JSON Schema.  JSON Schema Section 1.2.5 that
+   outside the scope of JSON Schema.  JSON Schema Section 1.3.5 that
    wish to work with such differences in lexical representations SHOULD
    define keywords to precisely interpret formatted strings within the
    data model rather than relying on having the original JSON
@@ -1495,28 +1516,26 @@ Table of Contents
    Omitting this keyword has the same assertion behavior as an empty
    object.
 
-5.4.2.  "patternProperties"
+   In this example, the properties of a simple contact record are
+   defined, with two properties required.
 
-   The value of "patternProperties" MUST be an object.  Each property
-   name of this object SHOULD be a valid regular expression, according
-   to the ECMA-262 regular expression dialect.  Each property value of
-   this object MUST be a valid JSON Schema.
+   {
+     "type": "object",
+     "required": ["name", "email"],
+     "properties": {
+       "name": { "type": "string" },
+       "email": { "type": "string", "format": "email" },
+       "phone_numbers": {
+         "type": "object",
+         "additionalProperties": {
+           "type": "string",
+           "pattern": "^[+]?[0-9 ().\\-]{7,20}$"
+         }
+       }
+     }
+   }
 
-   Validation succeeds if, for each input name that matches any regular
-   expressions that appear as a property name in this keyword's value,
-   the contents successfully validate against each schema that
-   corresponds to a matching regular expression.  Recall: Regular
-   expressions are not explicitly anchored.
-
-   The annotation result of this keyword is the set of instance property
-   names matched by this keyword.  This annotation affects the behavior
-   of "additionalProperties" (in this vocabulary) and
-   "unevaluatedProperties" (in the Unevaluated vocabulary).
-
-   Omitting this keyword has the same assertion behavior as an empty
-   object.
-
-5.4.3.  "additionalProperties"
+5.4.2.  "additionalProperties"
 
    The value of "additionalProperties" MUST be a valid JSON Schema.
 
@@ -1553,6 +1572,57 @@ Table of Contents
    // spec/tree/HEAD/adr/2022-04-08-cref-for-ambiguity-and-fix-later-gh-
    // spec-issue-1172.md) for further details.
 
+   One of the most frequent examples of using "additionalProperties" is
+   to give it a value of false to forbid all unspecified properties.
+   See Section 13.4 for an example of this.
+
+   In the example above for Section 5.4.1, the "phone_numbers" field can
+   have any internal properties with names such as "home", "office" or
+   "cell", but the value for any property inside "phone_numbers" is
+   constrained to the format of a phone number by
+   "additionalProperties".
+
+5.4.3.  "patternProperties"
+
+   The value of "patternProperties" MUST be an object.  Each property
+   name of this object SHOULD be a valid regular expression, according
+   to the ECMA-262 regular expression dialect.  Each property value of
+   this object MUST be a valid JSON Schema.
+
+   Validation succeeds if, for each input name that matches any regular
+   expressions that appear as a property name in this keyword's value,
+   the contents successfully validate against each schema that
+   corresponds to a matching regular expression.  Recall: Regular
+   expressions are not explicitly anchored.
+
+   The annotation result of this keyword is the set of instance property
+   names matched by this keyword.  This annotation affects the behavior
+   of "additionalProperties" (in this vocabulary) and
+   "unevaluatedProperties" (in the Unevaluated vocabulary).
+
+   Omitting this keyword has the same assertion behavior as an empty
+   object.
+
+   In this example, an alternative to the schema example in
+   Section 5.4.1, phone numbers are instead represented as top-level
+   fields ending in "_phone".  A field like "office_phone" is
+   constrained to the format given.
+
+   {
+     "type": "object",
+     "required": ["name", "email"],
+     "properties": {
+       "name": { "type": "string" },
+       "email": { "type": "string", "format": "email" }
+     },
+     "patternProperties": {
+       "_phone$": {
+         "type": "string",
+         "pattern": "^[+]?[0-9 ().\\-]{7,20}$"
+       }
+     }
+   }
+
 5.4.4.  "propertyNames"
 
    The value of "propertyNames" MUST be a valid JSON Schema.
@@ -1562,6 +1632,32 @@ Table of Contents
    property name that the schema is testing will always be a string.
 
    Omitting this keyword has the same behavior as an empty schema.
+
+   In this example, the "participants" field can have zero or one of
+   each of the roles for an incident response process, but no undefined
+   roles.
+
+{
+  "type": "object",
+  "required": ["title", "participants"],
+  "properties": {
+    "title": { "type": "string" },
+    "participants": {
+      "type": "object",
+      "propertyNames": {
+        "enum": ["incident_commander", "communications_lead", "responder", "scribe", "observer"]
+      },
+      "additionalProperties": {
+        "type": "object",
+        "required": ["name", "email"],
+        "properties": {
+          "name": { "type": "string" },
+          "email": { "type": "string", "format": "email" }
+        }
+      }
+    }
+  }
+}
 
 6.  Keywords for Unevaluated Locations
 

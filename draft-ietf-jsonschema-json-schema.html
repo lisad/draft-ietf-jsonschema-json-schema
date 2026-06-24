@@ -17,23 +17,24 @@ The "application/schema-instance+json" media type provides additional
 feature-rich integration with "application/schema+json" beyond what can be offered
 for "application/json" documents. 
     ' name="description">
-<meta content="xml2rfc 3.33.0" name="generator">
+<meta content="xml2rfc 3.34.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="JSON" name="keyword">
 <meta content="draft-ietf-jsonschema-json-schema-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.33.0
-    Python 3.12.13
-    ConfigArgParse 1.7
+  xml2rfc 3.34.0
+    Python 3.14.5
+    ConfigArgParse 1.7.5
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
-    lxml 6.0.2
-    platformdirs 4.9.6
+    lxml 6.1.1
+    natsort 8.4.0
+    platformdirs 4.10.0
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.7.0
+    wcwidth 0.8.1
 -->
 <link href="draft-ietf-jsonschema-json-schema.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1056,7 +1057,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Dusseault, et al.</td>
-<td class="center">Expires 14 December 2026</td>
+<td class="center">Expires 26 December 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1069,12 +1070,12 @@ svg {
 <dd class="internet-draft">draft-ietf-jsonschema-json-schema-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-06-12" class="published">12 June 2026</time>
+<time datetime="2026-06-24" class="published">24 June 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-12-14">14 December 2026</time></dd>
+<dd class="expires"><time datetime="2026-12-26">26 December 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1130,7 +1131,7 @@ Source for this draft can be found at
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 14 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 26 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1166,22 +1167,25 @@ Source for this draft can be found at
                 <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-notational-conventions" class="internal xref">Notational Conventions</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2">
-                <p id="section-toc.1-1.1.2.2.1"><a href="#section-1.2" class="auto internal xref">1.2</a>.  <a href="#name-functionality" class="internal xref">Functionality</a></p>
+                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="auto internal xref">1.2</a>.  <a href="#name-audiences" class="internal xref">Audiences</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.3">
+                <p id="section-toc.1-1.1.2.3.1"><a href="#section-1.3" class="auto internal xref">1.3</a>.  <a href="#name-functionality" class="internal xref">Functionality</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2.2.1">
-                    <p id="section-toc.1-1.1.2.2.2.1.1" class="keepWithNext"><a href="#section-1.2.1" class="auto internal xref">1.2.1</a>.  <a href="#name-validation" class="internal xref">Validation</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.3.2.1">
+                    <p id="section-toc.1-1.1.2.3.2.1.1" class="keepWithNext"><a href="#section-1.3.1" class="auto internal xref">1.3.1</a>.  <a href="#name-validation" class="internal xref">Validation</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2.2.2">
-                    <p id="section-toc.1-1.1.2.2.2.2.1" class="keepWithNext"><a href="#section-1.2.2" class="auto internal xref">1.2.2</a>.  <a href="#name-annotation" class="internal xref">Annotation</a></p>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.3.2.2">
+                    <p id="section-toc.1-1.1.2.3.2.2.1"><a href="#section-1.3.2" class="auto internal xref">1.3.2</a>.  <a href="#name-annotation" class="internal xref">Annotation</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2.2.3">
-                    <p id="section-toc.1-1.1.2.2.2.3.1"><a href="#section-1.2.3" class="auto internal xref">1.2.3</a>.  <a href="#name-internet-media-types" class="internal xref">Internet media types</a></p>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.3.2.3">
+                    <p id="section-toc.1-1.1.2.3.2.3.1"><a href="#section-1.3.3" class="auto internal xref">1.3.3</a>.  <a href="#name-internet-media-types" class="internal xref">Internet media types</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2.2.4">
-                    <p id="section-toc.1-1.1.2.2.2.4.1"><a href="#section-1.2.4" class="auto internal xref">1.2.4</a>.  <a href="#name-keywords" class="internal xref">Keywords</a></p>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.3.2.4">
+                    <p id="section-toc.1-1.1.2.3.2.4.1"><a href="#section-1.3.4" class="auto internal xref">1.3.4</a>.  <a href="#name-keywords" class="internal xref">Keywords</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2.2.5">
-                    <p id="section-toc.1-1.1.2.2.2.5.1"><a href="#section-1.2.5" class="auto internal xref">1.2.5</a>.  <a href="#name-vocabularies" class="internal xref">Vocabularies</a></p>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.3.2.5">
+                    <p id="section-toc.1-1.1.2.3.2.5.1"><a href="#section-1.3.5" class="auto internal xref">1.3.5</a>.  <a href="#name-vocabularies" class="internal xref">Vocabularies</a></p>
 </li>
                 </ul>
 </li>
@@ -1329,10 +1333,10 @@ Source for this draft can be found at
                     <p id="section-toc.1-1.5.2.4.2.1.1"><a href="#section-5.4.1" class="auto internal xref">5.4.1</a>.  <a href="#name-properties" class="internal xref">"properties"</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4.2.2">
-                    <p id="section-toc.1-1.5.2.4.2.2.1"><a href="#section-5.4.2" class="auto internal xref">5.4.2</a>.  <a href="#name-patternproperties" class="internal xref">"patternProperties"</a></p>
+                    <p id="section-toc.1-1.5.2.4.2.2.1"><a href="#section-5.4.2" class="auto internal xref">5.4.2</a>.  <a href="#name-additionalproperties" class="internal xref">"additionalProperties"</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4.2.3">
-                    <p id="section-toc.1-1.5.2.4.2.3.1"><a href="#section-5.4.3" class="auto internal xref">5.4.3</a>.  <a href="#name-additionalproperties" class="internal xref">"additionalProperties"</a></p>
+                    <p id="section-toc.1-1.5.2.4.2.3.1"><a href="#section-5.4.3" class="auto internal xref">5.4.3</a>.  <a href="#name-patternproperties" class="internal xref">"patternProperties"</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4.2.4">
                     <p id="section-toc.1-1.5.2.4.2.4.1"><a href="#section-5.4.4" class="auto internal xref">5.4.4</a>.  <a href="#name-propertynames" class="internal xref">"propertyNames"</a></p>
@@ -1850,102 +1854,133 @@ interpreted as described in <span>[<a href="#RFC2119" class="cite xref">RFC2119<
 be interpreted as defined in <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="functionality">
+<div id="audiences">
 <section id="section-1.2">
-        <h3 id="name-functionality">
-<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-functionality" class="section-name selfRef">Functionality</a>
+        <h3 id="name-audiences">
+<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-audiences" class="section-name selfRef">Audiences</a>
         </h3>
-<p id="section-1.2-1">A JSON Schema implementation takes input in the form of a JSON-compatible data
+<p id="section-1.2-1">This specification has three reading audiences: authors of JSON Schemas, implementors
+of validation or other software, and authors of meta-schemas.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-1.2-2.1">
+            <p id="section-1.2-2.1.1">For schema authors, the chapter on terminology (<a href="#terminology" class="auto internal xref">Section 2</a>) might be the first
+read, followed by chapters about
+core keywords (<a href="#core-keywords" class="auto internal xref">Section 4</a>),
+subschema keywords (<a href="#subschema-keywords" class="auto internal xref">Section 5</a>) and
+structural keywords (<a href="#structural-keywords" class="auto internal xref">Section 7</a>)
+as these are the keywords most commonly used when authoring schemas. In addition,
+the formats used with the <code>format</code> keyword are defined in <a href="#format-vocab" class="auto internal xref">Section 8</a>.  Other
+sections up to and including <a href="#metadata" class="auto internal xref">Section 10</a> may be interesting depending on
+the topic of the chapter.<a href="#section-1.2-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.2-2.2">
+            <p id="section-1.2-2.2.1">Implementors will need to understand the requirements in sections 3 through 10 but also
+the requirements on loading and processing schemas (<a href="#loading-and-processing" class="auto internal xref">Section 11</a>),
+keyword behaviors (<a href="#keyword-behaviors" class="auto internal xref">Section 12</a>), and formatted output (<a href="#output" class="auto internal xref">Section 13</a>).<a href="#section-1.2-2.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.2-2.3">
+            <p id="section-1.2-2.3.1">Authors of meta-schemas including extensions to JSON Schema will want to read
+the chapter on <a href="#extensibility" class="auto internal xref">Section 14</a> and <a href="#vocabularies-appendix" class="auto internal xref">Appendix D</a>.<a href="#section-1.2-2.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="functionality">
+<section id="section-1.3">
+        <h3 id="name-functionality">
+<a href="#section-1.3" class="section-number selfRef">1.3. </a><a href="#name-functionality" class="section-name selfRef">Functionality</a>
+        </h3>
+<p id="section-1.3-1">A JSON Schema implementation takes input in the form of a JSON-compatible data
 structure and performs validation and, if the input is accepted as a valid
-instance, returns a standard annotation output.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+instance, returns a standard annotation output.<a href="#section-1.3-1" class="pilcrow">¶</a></p>
 <div id="validation">
-<section id="section-1.2.1">
+<section id="section-1.3.1">
           <h4 id="name-validation">
-<a href="#section-1.2.1" class="section-number selfRef">1.2.1. </a><a href="#name-validation" class="section-name selfRef">Validation</a>
+<a href="#section-1.3.1" class="section-number selfRef">1.3.1. </a><a href="#name-validation" class="section-name selfRef">Validation</a>
           </h4>
-<p id="section-1.2.1-1">In computer science terms, a JSON Schema document (a <em>schema</em>) notates a <em>grammar</em>
+<p id="section-1.3.1-1">In computer science terms, a JSON Schema document (a <em>schema</em>) notates a <em>grammar</em>
 that describes a <em>language</em> of structured documents.
 That is, a schema describes a set of structured documents by listing rules to classify
 an <em>input</em> as within or not within the set.
 The largest possible set is that of all syntactically valid structured inputs.
-The smallest set is the empty set.<a href="#section-1.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-1.2.1-2">A <em>validator</em> (also known as an <em>acceptor</em>) is a process that tests if a particular input is described by the schema, by evaluating it against the requirements.
-An accepted input is called an <em>instance</em> of the schema, and a rejected input is called a <em>violation</em> of the schema.<a href="#section-1.2.1-2" class="pilcrow">¶</a></p>
-<p id="section-1.2.1-3">In all validator implementations, equivalent JSON values MUST return the same validation result and annotations. For example, selection between equivalent character escapes, or use of whitespace, does not affect the result. This also means that a validation keyword MUST NOT accept or reject based on third factors (those factors besides the schema and the input itself). A separate "outside verification" scheme that queries external data sources is possible, but outside the scope of this document.<a href="#section-1.2.1-3" class="pilcrow">¶</a></p>
+The smallest set is the empty set.<a href="#section-1.3.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.3.1-2">A <em>validator</em> (also known as an <em>acceptor</em>) is a process that tests if a particular input is described by the schema, by evaluating it against the requirements.
+An accepted input is called an <em>instance</em> of the schema, and a rejected input is called a <em>violation</em> of the schema.<a href="#section-1.3.1-2" class="pilcrow">¶</a></p>
+<p id="section-1.3.1-3">In all validator implementations, equivalent JSON values MUST return the same validation result and annotations. For example, selection between equivalent character escapes, or use of whitespace, does not affect the result. This also means that a validation keyword MUST NOT accept or reject based on third factors (those factors besides the schema and the input itself). A separate "outside verification" scheme that queries external data sources is possible, but outside the scope of this document.<a href="#section-1.3.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="annotation">
-<section id="section-1.2.2">
+<section id="section-1.3.2">
           <h4 id="name-annotation">
-<a href="#section-1.2.2" class="section-number selfRef">1.2.2. </a><a href="#name-annotation" class="section-name selfRef">Annotation</a>
+<a href="#section-1.3.2" class="section-number selfRef">1.3.2. </a><a href="#name-annotation" class="section-name selfRef">Annotation</a>
           </h4>
-<p id="section-1.2.2-1">A JSON Schema may describe additional output to accompany an "accept" result,
+<p id="section-1.3.2-1">A JSON Schema may describe additional output to accompany an "accept" result,
 called <em>annotations</em>. An annotation is a tuple that, at the minimum, relates a
 particular annotation keyword in the schema to a particular value within the
 instance. Annotations typically document the meaning of properties, declare
 relationships between data, or denote hyperlinks.  Several forms of output are
 defined, and the annotation process can be disabled as a performance or
-resource consumption optimization.<a href="#section-1.2.2-1" class="pilcrow">¶</a></p>
-<p id="section-1.2.2-2">Output annotations might only be "as true as" the input, and useful only for select inputs. For example, annotations may only meaningfully describe inputs with a particular "profile" link relation, or in some particular context. In any event, annotations never describe violations (rejected inputs).<a href="#section-1.2.2-2" class="pilcrow">¶</a></p>
-<p id="section-1.2.2-3">The interface to access annotations may be highly configurable depending on the implementation, in such ways as limiting output to certain annotation keywords, aggregating values together, or other features to enhance performance. Annotation output may be bypassed entirely.<a href="#section-1.2.2-3" class="pilcrow">¶</a></p>
-<p id="section-1.2.2-4">Annotations may be presented as a set, or as a stream of events, however if the input is rejected during processing, this voids all annotations previously emitted from that input.<a href="#section-1.2.2-4" class="pilcrow">¶</a></p>
+resource consumption optimization.<a href="#section-1.3.2-1" class="pilcrow">¶</a></p>
+<p id="section-1.3.2-2">Output annotations might only be "as true as" the input, and useful only for select inputs. For example, annotations may only meaningfully describe inputs with a particular "profile" link relation, or in some particular context. In any event, annotations never describe violations (rejected inputs).<a href="#section-1.3.2-2" class="pilcrow">¶</a></p>
+<p id="section-1.3.2-3">The interface to access annotations may be highly configurable depending on the implementation, in such ways as limiting output to certain annotation keywords, aggregating values together, or other features to enhance performance. Annotation output may be bypassed entirely.<a href="#section-1.3.2-3" class="pilcrow">¶</a></p>
+<p id="section-1.3.2-4">Annotations may be presented as a set, or as a stream of events, however if the input is rejected during processing, this voids all annotations previously emitted from that input.<a href="#section-1.3.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="internet-media-types">
-<section id="section-1.2.3">
+<section id="section-1.3.3">
           <h4 id="name-internet-media-types">
-<a href="#section-1.2.3" class="section-number selfRef">1.2.3. </a><a href="#name-internet-media-types" class="section-name selfRef">Internet media types</a>
+<a href="#section-1.3.3" class="section-number selfRef">1.3.3. </a><a href="#name-internet-media-types" class="section-name selfRef">Internet media types</a>
           </h4>
-<p id="section-1.2.3-1">The specification
+<p id="section-1.3.3-1">The specification
 registers the "application/schema+json" media type to identify a JSON Schema
 resource, and the "application/schema-instance+json" media type to identify
-an instance of a particular JSON Schema.<a href="#section-1.2.3-1" class="pilcrow">¶</a></p>
+an instance of a particular JSON Schema.<a href="#section-1.3.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="keywords">
-<section id="section-1.2.4">
+<section id="section-1.3.4">
           <h4 id="name-keywords">
-<a href="#section-1.2.4" class="section-number selfRef">1.2.4. </a><a href="#name-keywords" class="section-name selfRef">Keywords</a>
+<a href="#section-1.3.4" class="section-number selfRef">1.3.4. </a><a href="#name-keywords" class="section-name selfRef">Keywords</a>
           </h4>
-<p id="section-1.2.4-1">JSON Schema uses <em>keywords</em> to assert constraints on structured documents or provide
+<p id="section-1.3.4-1">JSON Schema uses <em>keywords</em> to assert constraints on structured documents or provide
 annotations with additional information.  Additional keywords combine other
 keywords or provide references to sub-schemas, features which allow more
-complex JSON data structures.<a href="#section-1.2.4-1" class="pilcrow">¶</a></p>
-<p id="section-1.2.4-2">In formal language theory, JSON Schema resembles a context-free language, as
+complex JSON data structures.<a href="#section-1.3.4-1" class="pilcrow">¶</a></p>
+<p id="section-1.3.4-2">In formal language theory, JSON Schema resembles a context-free language, as
 most keywords are context-free.  Thus, JSON instances can be validated quickly
-and simply, without I/O or querying data elsewhere in the same JSON instance.<a href="#section-1.2.4-2" class="pilcrow">¶</a></p>
-<p id="section-1.2.4-3">This document defines a core vocabulary of keywords that MUST be supported by any
+and simply, without I/O or querying data elsewhere in the same JSON instance.<a href="#section-1.3.4-2" class="pilcrow">¶</a></p>
+<p id="section-1.3.4-3">This document defines a core vocabulary of keywords that MUST be supported by any
 implementation.  Its keywords are each prefixed
 with a "$" character to emphasize their required nature.  This vocabulary
 is essential to the functioning of the "application/schema+json" media
-type, and is used to bootstrap the loading of other vocabularies.<a href="#section-1.2.4-3" class="pilcrow">¶</a></p>
-<p id="section-1.2.4-4">Additionally, this document defines a RECOMMENDED vocabulary of keywords
+type, and is used to bootstrap the loading of other vocabularies.<a href="#section-1.3.4-3" class="pilcrow">¶</a></p>
+<p id="section-1.3.4-4">Additionally, this document defines a RECOMMENDED vocabulary of keywords
 for applying subschemas conditionally, and for applying subschemas to
 the contents of objects and arrays.  Either this vocabulary or one very
 much like it is required to write schemas for non-trivial JSON instances,
 whether those schemas are intended for assertion validation, annotation,
 or both.  While not part of the required core vocabulary, for maximum
 interoperability this additional vocabulary is included in this document
-and its use is strongly encouraged.<a href="#section-1.2.4-4" class="pilcrow">¶</a></p>
+and its use is strongly encouraged.<a href="#section-1.3.4-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="vocabularies">
-<section id="section-1.2.5">
+<section id="section-1.3.5">
           <h4 id="name-vocabularies">
-<a href="#section-1.2.5" class="section-number selfRef">1.2.5. </a><a href="#name-vocabularies" class="section-name selfRef">Vocabularies</a>
+<a href="#section-1.3.5" class="section-number selfRef">1.3.5. </a><a href="#name-vocabularies" class="section-name selfRef">Vocabularies</a>
           </h4>
-<p id="section-1.2.5-1">To facilitate re-use, keywords can be organized into vocabularies. A vocabulary
+<p id="section-1.3.5-1">To facilitate re-use, keywords can be organized into vocabularies. A vocabulary
 consists of a list of keywords, together with their syntax and semantics.
 A dialect is defined as a set of vocabularies and their required support
 identified in a meta-schema.  Vocabularies, dialects and meta-schemas are not
 required features for most schema authors to understand, but must be understood
 by authors of meta-schemas and handled by implementors of validation or other
-JSON Schema processing software.<a href="#section-1.2.5-1" class="pilcrow">¶</a></p>
-<p id="section-1.2.5-2">JSON Schema can be extended either by defining additional vocabularies,
+JSON Schema processing software.<a href="#section-1.3.5-1" class="pilcrow">¶</a></p>
+<p id="section-1.3.5-2">JSON Schema can be extended either by defining additional vocabularies,
 or less formally by defining additional keywords outside of any vocabulary.
 Unrecognized individual keywords simply have their values treated as annotations,
 while the behavior with respect to an unrecognized vocabulary can be controlled
-when declaring which vocabularies are in use.<a href="#section-1.2.5-2" class="pilcrow">¶</a></p>
+when declaring which vocabularies are in use.<a href="#section-1.3.5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2012,15 +2047,12 @@ implementations validate inputs, but some implementations generate
 documentation, data or code based on a schema.<a href="#section-2-26" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="overall-definitions-and-requirements">
+<div id="overall">
 <section id="section-3">
       <h2 id="name-overall-definitions-and-req">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-overall-definitions-and-req" class="section-name selfRef">Overall Definitions and Requirements</a>
       </h2>
-<p id="section-3-1">This section is the start of normative requirements especially for
-implementations.  However, a practitioner may wish to check the basic meaning
-of terms defined above and skip to <a href="#keyword-behaviors" class="auto internal xref">Section 12</a> where specific keywords
-and purposes begin to be defined.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">This section is the start of normative requirements.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <div id="schema-document">
 <section id="section-3.1">
         <h3 id="name-json-schema-documents">
@@ -2155,7 +2187,7 @@ values depending on the type:<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2-3">Whitespace and formatting concerns, including different lexical
 representations of numbers that are equal within the data model, are
 outside the scope of JSON Schema.  JSON Schema
-<a href="#vocabularies" class="auto internal xref">Section 1.2.5</a> that wish
+<a href="#vocabularies" class="auto internal xref">Section 1.3.5</a> that wish
 to work with such differences in lexical representations SHOULD define
 keywords to precisely interpret formatted strings within the data model
 rather than relying on having the original JSON representation Unicode
@@ -3155,51 +3187,50 @@ This annotation affects the behavior of "additionalProperties" (in
 this vocabulary) and "unevaluatedProperties" in the Unevaluated vocabulary.<a href="#section-5.4.1-3" class="pilcrow">¶</a></p>
 <p id="section-5.4.1-4">Omitting this keyword has the same assertion behavior as
 an empty object.<a href="#section-5.4.1-4" class="pilcrow">¶</a></p>
-</section>
+<p id="section-5.4.1-5">In this example, the properties of a simple contact record are defined,
+with two properties required.<a href="#section-5.4.1-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-5.4.1-6">
+<pre>
+{
+  "type": "object",
+  "required": ["name", "email"],
+  "properties": {
+    "name": { "type": "string" },
+    "email": { "type": "string", "format": "email" },
+    "phone_numbers": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[+]?[0-9 ().\\-]{7,20}$"
+      }
+    }
+  }
+}
+</pre><a href="#section-5.4.1-6" class="pilcrow">¶</a>
 </div>
-<div id="patternproperties">
-<section id="section-5.4.2">
-          <h4 id="name-patternproperties">
-<a href="#section-5.4.2" class="section-number selfRef">5.4.2. </a><a href="#name-patternproperties" class="section-name selfRef">"patternProperties"</a>
-          </h4>
-<p id="section-5.4.2-1">The value of "patternProperties" MUST be an object. Each property name
-of this object SHOULD be a valid regular expression, according to the
-ECMA-262 regular expression dialect. Each property value of this object
-MUST be a valid JSON Schema.<a href="#section-5.4.2-1" class="pilcrow">¶</a></p>
-<p id="section-5.4.2-2">Validation succeeds if, for each input name that matches any
-regular expressions that appear as a property name in this keyword's value,
-the contents successfully validate against each
-schema that corresponds to a matching regular expression.
-Recall: Regular expressions are not explicitly anchored.<a href="#section-5.4.2-2" class="pilcrow">¶</a></p>
-<p id="section-5.4.2-3">The annotation result of this keyword is the set of instance
-property names matched by this keyword.
-This annotation affects the behavior of "additionalProperties" (in this
-vocabulary) and "unevaluatedProperties" (in the Unevaluated vocabulary).<a href="#section-5.4.2-3" class="pilcrow">¶</a></p>
-<p id="section-5.4.2-4">Omitting this keyword has the same assertion behavior as
-an empty object.<a href="#section-5.4.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="additionalProperties">
-<section id="section-5.4.3">
+<section id="section-5.4.2">
           <h4 id="name-additionalproperties">
-<a href="#section-5.4.3" class="section-number selfRef">5.4.3. </a><a href="#name-additionalproperties" class="section-name selfRef">"additionalProperties"</a>
+<a href="#section-5.4.2" class="section-number selfRef">5.4.2. </a><a href="#name-additionalproperties" class="section-name selfRef">"additionalProperties"</a>
           </h4>
-<p id="section-5.4.3-1">The value of "additionalProperties" MUST be a valid JSON Schema.<a href="#section-5.4.3-1" class="pilcrow">¶</a></p>
-<p id="section-5.4.3-2">The behavior of this keyword depends on the presence and
+<p id="section-5.4.2-1">The value of "additionalProperties" MUST be a valid JSON Schema.<a href="#section-5.4.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.4.2-2">The behavior of this keyword depends on the presence and
 annotation results of "properties" and "patternProperties"
 within the same schema object.
 Validation with "additionalProperties" applies only to the child
 values of input names that do not appear in the annotation
-results of either "properties" or "patternProperties".<a href="#section-5.4.3-2" class="pilcrow">¶</a></p>
-<p id="section-5.4.3-3">For all such properties, validation succeeds if the contents
-validate against the "additionalProperties" schema.<a href="#section-5.4.3-3" class="pilcrow">¶</a></p>
-<p id="section-5.4.3-4">The annotation result of this keyword is the set of input
+results of either "properties" or "patternProperties".<a href="#section-5.4.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.4.2-3">For all such properties, validation succeeds if the contents
+validate against the "additionalProperties" schema.<a href="#section-5.4.2-3" class="pilcrow">¶</a></p>
+<p id="section-5.4.2-4">The annotation result of this keyword is the set of input
 property names validated by this keyword's subschema.
 This annotation affects the behavior of "unevaluatedProperties"
-in the Unevaluated vocabulary.<a href="#section-5.4.3-4" class="pilcrow">¶</a></p>
-<p id="section-5.4.3-5">Omitting this keyword has the same assertion behavior as
-an empty schema.<a href="#section-5.4.3-5" class="pilcrow">¶</a></p>
-<p id="section-5.4.3-6">Implementations MAY choose to implement or optimize this keyword
+in the Unevaluated vocabulary.<a href="#section-5.4.2-4" class="pilcrow">¶</a></p>
+<p id="section-5.4.2-5">Omitting this keyword has the same assertion behavior as
+an empty schema.<a href="#section-5.4.2-5" class="pilcrow">¶</a></p>
+<p id="section-5.4.2-6">Implementations MAY choose to implement or optimize this keyword
 in another way that produces the same effect, such as by directly
 checking the names in "properties" and the patterns in
 "patternProperties" against the input property set.
@@ -3211,7 +3242,57 @@ Implementations that do not support annotation collection MUST do so.<span class
    that annotations from failing schemas are dropped.
    See our
    <a href="https://github.com/json-schema-org/json-schema-spec/tree/HEAD/adr/2022-04-08-cref-for-ambiguity-and-fix-later-gh-spec-issue-1172.md">Decision Record</a>
-   for further details.</span><a href="#section-5.4.3-6" class="pilcrow">¶</a></p>
+   for further details.</span><a href="#section-5.4.2-6" class="pilcrow">¶</a></p>
+<p id="section-5.4.2-7">One of the most frequent examples of using "additionalProperties" is to
+give it a value of <code>false</code> to forbid all unspecified properties.
+See <a href="#output-structure" class="auto internal xref">Section 13.4</a> for an example of this.<a href="#section-5.4.2-7" class="pilcrow">¶</a></p>
+<p id="section-5.4.2-8">In the example above for <a href="#properties" class="auto internal xref">Section 5.4.1</a>, the "phone_numbers" field
+can have any internal properties with names such as "home", "office" or
+"cell", but the value for any property inside "phone_numbers" is
+constrained to the format of a phone number by "additionalProperties".<a href="#section-5.4.2-8" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="patternproperties">
+<section id="section-5.4.3">
+          <h4 id="name-patternproperties">
+<a href="#section-5.4.3" class="section-number selfRef">5.4.3. </a><a href="#name-patternproperties" class="section-name selfRef">"patternProperties"</a>
+          </h4>
+<p id="section-5.4.3-1">The value of "patternProperties" MUST be an object. Each property name
+of this object SHOULD be a valid regular expression, according to the
+ECMA-262 regular expression dialect. Each property value of this object
+MUST be a valid JSON Schema.<a href="#section-5.4.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.4.3-2">Validation succeeds if, for each input name that matches any
+regular expressions that appear as a property name in this keyword's value,
+the contents successfully validate against each
+schema that corresponds to a matching regular expression.
+Recall: Regular expressions are not explicitly anchored.<a href="#section-5.4.3-2" class="pilcrow">¶</a></p>
+<p id="section-5.4.3-3">The annotation result of this keyword is the set of instance
+property names matched by this keyword.
+This annotation affects the behavior of "additionalProperties" (in this
+vocabulary) and "unevaluatedProperties" (in the Unevaluated vocabulary).<a href="#section-5.4.3-3" class="pilcrow">¶</a></p>
+<p id="section-5.4.3-4">Omitting this keyword has the same assertion behavior as
+an empty object.<a href="#section-5.4.3-4" class="pilcrow">¶</a></p>
+<p id="section-5.4.3-5">In this example, an alternative to the schema example in <a href="#properties" class="auto internal xref">Section 5.4.1</a>,
+phone numbers are instead represented as top-level fields ending in "_phone".
+A field like "office_phone" is constrained to the format given.<a href="#section-5.4.3-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-5.4.3-6">
+<pre>
+{
+  "type": "object",
+  "required": ["name", "email"],
+  "properties": {
+    "name": { "type": "string" },
+    "email": { "type": "string", "format": "email" }
+  },
+  "patternProperties": {
+    "_phone$": {
+      "type": "string",
+      "pattern": "^[+]?[0-9 ().\\-]{7,20}$"
+    }
+  }
+}
+</pre><a href="#section-5.4.3-6" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 <div id="propertynames">
@@ -3224,6 +3305,33 @@ Implementations that do not support annotation collection MUST do so.<span class
 the input validates against the provided schema.
 Note the property name that the schema is testing will always be a string.<a href="#section-5.4.4-2" class="pilcrow">¶</a></p>
 <p id="section-5.4.4-3">Omitting this keyword has the same behavior as an empty schema.<a href="#section-5.4.4-3" class="pilcrow">¶</a></p>
+<p id="section-5.4.4-4">In this example, the "participants" field can have zero or one of each of the
+roles for an incident response process, but no undefined roles.<a href="#section-5.4.4-4" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-5.4.4-5">
+<pre>
+{
+  "type": "object",
+  "required": ["title", "participants"],
+  "properties": {
+    "title": { "type": "string" },
+    "participants": {
+      "type": "object",
+      "propertyNames": {
+        "enum": ["incident_commander", "communications_lead", "responder", "scribe", "observer"]
+      },
+      "additionalProperties": {
+        "type": "object",
+        "required": ["name", "email"],
+        "properties": {
+          "name": { "type": "string" },
+          "email": { "type": "string", "format": "email" }
+        }
+      }
+    }
+  }
+}
+</pre><a href="#section-5.4.4-5" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 </section>
@@ -3354,7 +3462,7 @@ an empty schema.<a href="#section-6.3-7" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
-<div id="keywords-for-structural-validation">
+<div id="structural-keywords">
 <section id="section-7">
       <h2 id="name-keywords-for-structural-val">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-keywords-for-structural-val" class="section-name selfRef">Keywords for Structural Validation</a>
@@ -4282,7 +4390,7 @@ there is no need for further encoding or decoding.<a href="#section-9.6-9" class
 </div>
 </section>
 </div>
-<div id="a-vocabulary-for-basic-meta-data-annotations">
+<div id="metadata">
 <section id="section-10">
       <h2 id="name-a-vocabulary-for-basic-meta">
 <a href="#section-10" class="section-number selfRef">10. </a><a href="#name-a-vocabulary-for-basic-meta" class="section-name selfRef">A Vocabulary for Basic Meta-Data Annotations</a>
@@ -4457,7 +4565,7 @@ MAY still be used in this manner.<a href="#section-10.5-3" class="pilcrow">¶</a
 </div>
 </section>
 </div>
-<div id="loading-and-processing-schemas">
+<div id="loading-and-processing">
 <section id="section-11">
       <h2 id="name-loading-and-processing-sche">
 <a href="#section-11" class="section-number selfRef">11. </a><a href="#name-loading-and-processing-sche" class="section-name selfRef">Loading and Processing Schemas</a>
@@ -5361,7 +5469,7 @@ default to using the current location if a default is desireable.<a href="#secti
 </div>
 </section>
 </div>
-<div id="output-formatting">
+<div id="output">
 <section id="section-13">
       <h2 id="name-output-formatting">
 <a href="#section-13" class="section-number selfRef">13. </a><a href="#name-output-formatting" class="section-name selfRef">Output Formatting</a>
@@ -6582,7 +6690,7 @@ which tell us how to resolve the dynamic reference, not any sort of
 correlation in JSON structure.<a href="#appendix-C-18" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="working-with-vocabularies">
+<div id="vocabularies-appendix">
 <section id="appendix-D">
       <h2 id="name-working-with-vocabularies">
 <a href="#appendix-D" class="section-number selfRef">Appendix D. </a><a href="#name-working-with-vocabularies" class="section-name selfRef">Working with vocabularies</a>
