@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "required": ["title", "participants"],
+  "properties": {
+    "title": { "type": "string" },
+    "participants": {
+      "type": "object",
+      "propertyNames": {
+        "enum": ["incident_commander", "communications_lead", "responder", "scribe", "observer"]
+      },
+      "additionalProperties": {
+        "type": "object",
+        "required": ["name", "email"],
+        "properties": {
+          "name": { "type": "string" },
+          "email": { "type": "string", "format": "email" }
+        }
+      }
+    }
+  }
+}

@@ -1200,26 +1200,13 @@ this vocabulary) and "unevaluatedProperties" in the Unevaluated vocabulary.
 Omitting this keyword has the same assertion behavior as
 an empty object.
 
-### "patternProperties"
+In this example, the properties of a simple contact record are defined,
+with two properties required.
 
-The value of "patternProperties" MUST be an object. Each property name
-of this object SHOULD be a valid regular expression, according to the
-ECMA-262 regular expression dialect. Each property value of this object
-MUST be a valid JSON Schema.
+~~~~~~~~~~
+{::include ./examples/properties-additional.json}
+~~~~~~~~~~
 
-Validation succeeds if, for each input name that matches any
-regular expressions that appear as a property name in this keyword's value,
-the contents successfully validate against each
-schema that corresponds to a matching regular expression.
-Recall: Regular expressions are not explicitly anchored.
-
-The annotation result of this keyword is the set of instance
-property names matched by this keyword.
-This annotation affects the behavior of "additionalProperties" (in this
-vocabulary) and "unevaluatedProperties" (in the Unevaluated vocabulary).
-
-Omitting this keyword has the same assertion behavior as
-an empty object.
 
 ### "additionalProperties" {#additionalProperties}
 
@@ -1249,6 +1236,44 @@ checking the names in "properties" and the patterns in
 "patternProperties" against the input property set.
 Implementations that do not support annotation collection MUST do so.[^13]
 
+One of the most frequent examples of using "additionalProperties" is to
+give it a value of `false` to forbid all unspecified properties.
+See {{output-structure}} for an example of this.
+
+In the example above for {{properties}}, the "phone_numbers" field
+can have any internal properties with names such as "home", "office" or
+"cell", but the value for any property inside "phone_numbers" is
+constrained to the format of a phone number by "additionalProperties".
+
+### "patternProperties"
+
+The value of "patternProperties" MUST be an object. Each property name
+of this object SHOULD be a valid regular expression, according to the
+ECMA-262 regular expression dialect. Each property value of this object
+MUST be a valid JSON Schema.
+
+Validation succeeds if, for each input name that matches any
+regular expressions that appear as a property name in this keyword's value,
+the contents successfully validate against each
+schema that corresponds to a matching regular expression.
+Recall: Regular expressions are not explicitly anchored.
+
+The annotation result of this keyword is the set of instance
+property names matched by this keyword.
+This annotation affects the behavior of "additionalProperties" (in this
+vocabulary) and "unevaluatedProperties" (in the Unevaluated vocabulary).
+
+Omitting this keyword has the same assertion behavior as
+an empty object.
+
+In this example, an alternative to the schema example in {{properties}},
+phone numbers are instead represented as top-level fields ending in "_phone".
+A field like "office_phone" is constrained to the format given.
+
+~~~~~~~~~~
+{::include ./examples/properties-pattern.json}
+~~~~~~~~~~
+
 ### "propertyNames"
 
 The value of "propertyNames" MUST be a valid JSON Schema.
@@ -1258,6 +1283,13 @@ the input validates against the provided schema.
 Note the property name that the schema is testing will always be a string.
 
 Omitting this keyword has the same behavior as an empty schema.
+
+In this example, the "participants" field can have zero or one of each of the
+roles for an incident response process, but no undefined roles.
+
+~~~~~~~~~~
+{::include ./examples/propertyNames.json}
+~~~~~~~~~~
 
 # Keywords for Unevaluated Locations
 
@@ -3180,7 +3212,7 @@ The JSON key for nested results in failed validations is "errors"; for
 successful validations it is "annotations".  Note the plural forms, as
 a keyword with nested results can also have a local error or annotation.
 
-## Output Structure
+## Output Structure {#output-structure}
 
 The output MUST be an object containing a boolean property named "valid".  When
 additional information about the result is required, the output MUST also contain

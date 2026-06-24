@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "required": ["name", "email"],
+  "properties": {
+    "name": { "type": "string" },
+    "email": { "type": "string", "format": "email" },
+    "phone_numbers": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[+]?[0-9 ().\\-]{7,20}$"
+      }
+    }
+  }
+}
