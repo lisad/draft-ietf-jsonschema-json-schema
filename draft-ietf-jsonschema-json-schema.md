@@ -981,6 +981,8 @@ in a schema.  See the example for `if` below in {{allof-if-example}}.
 #### Example {#allof-multiple-inheritance-example}
 
 Another example of the utility of `allOf` is multiple inheritance.
+In this example, a project has all of the properties of a task
+and a collection.
 
 ~~~~~~~~~~
 {::include ./examples/allOf-multiple-inheritance.json}
@@ -997,6 +999,15 @@ Note that when annotations are being collected, all subschemas MUST
 be examined so that annotations are collected from each subschema
 that validates successfully.
 
+Examples of using anyOf:
+
+* Defining objects that can satisfy one or more schemas,
+such as attachments that can be a `note` or a `task` OR satisfy both schemas.
+
+* Requiring alternate fields in an object, when combined with the "required" keyword: a
+contact could require a `work_email` or require a `work_phone`, and putting
+both `require` keywords inside the `anyOf` keyword allows either to satisfy the schema.
+
 ### "oneOf"
 
 This keyword's value MUST be a non-empty array.
@@ -1005,6 +1016,12 @@ Each item of the array MUST be a valid JSON Schema.
 An input validates successfully against this keyword if it validates
 successfully against exactly one schema defined by this keyword's value.
 
+Similar to anyOf and allOf, oneOf can be used in combination with object
+definitions to allow only one object definition to be satisfied.  Compare
+to the example for "anyOf": using "oneOf" with an attachment envelope
+would allow the attachment to satisfy the `note` or `task` schema but
+not both.  A task might have a duration or a due date but not both.
+
 ### "not"
 
 This keyword's value MUST be a valid JSON Schema.
@@ -1012,6 +1029,20 @@ This keyword's value MUST be a valid JSON Schema.
 An input is valid against this keyword if it fails to validate
 successfully against the schema defined by this keyword.
 
+For example, a product schema could require the property
+`expiration_date` if the `validity` property does
+NOT have a value equal to `forever`.  Or, if
+two properties could either be present or both absent
+but not appear at the same time, this can be expressed in many ways but
+possibly the briefest is
+
+~~~ json
+  {
+    "not": {
+      "required": ["approved_date", "rejected_date"]
+    }
+  }
+~~~
 
 ### "if"
 
@@ -1063,7 +1094,8 @@ the input against this keyword, for either validation
 or annotation collection purposes, in such cases.
 
 See the example above in {{allof-if-example}} for
-a constraint added in a `then`, conditionally upon the `if` statement.
+a constraint added in a `then`, conditionally upon the `if` statement,
+and below for an example using if/then/else.
 
 ### "else"
 
@@ -1080,6 +1112,10 @@ subschema.  Implementations MUST NOT evaluate
 the input against this keyword, for either validation
 or annotation collection purposes, in such cases.
 
+~~~~~~~~~~
+{::include ./examples/if-then-else-example.json}
+~~~~~~~~~~
+
 ### "dependentSchemas"
 
 This keyword specifies subschemas that are evaluated if the input
@@ -1093,6 +1129,12 @@ instance must validate against the subschema.  Its use is
 dependent on the presence of the property.
 
 Omitting this keyword has the same behavior as an empty object.
+
+#### Example of requiring rejection reason if rejection date is set
+
+~~~~~~~~~~
+{::include ./examples/dependentSchemas.json}
+~~~~~~~~~~
 
 ## Keywords for Applying Subschemas to Arrays
 

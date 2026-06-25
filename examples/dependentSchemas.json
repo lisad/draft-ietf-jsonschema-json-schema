@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "properties": {
+    "applicant": { "type": "string" },
+    "approved_date": { "type": "string", "format": "date" },
+    "rejected_date": { "type": "string", "format": "date" },
+    "rejection_reason": { "type": "string" }
+  },
+  "required": ["applicant"],
+  "not": {
+    "required": ["approved_date", "rejected_date"]
+  },
+  "dependentSchemas": {
+    "rejected_date": {
+      "required": ["rejection_reason"]
+    }
+  }
+}
