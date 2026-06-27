@@ -1,0 +1,9 @@
+{
+  "if": { 
+    "properties": { "type": { "const": "physical" } }, 
+    "required": ["type"]
+  },
+  "then": { "required": ["street", "city"] },
+  "else": { "required": ["url"] },
+  "$comment": "Credit to jsonic.io for this example"
+}
