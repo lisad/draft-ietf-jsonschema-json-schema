@@ -5,9 +5,9 @@
 Network Working Group                                  L. Dusseault, Ed.
 Internet-Draft                                  Data Transfer Initiative
 Intended status: Standards Track                               A. Wright
-Expires: 26 December 2026                                               
+Expires: 29 December 2026                                               
                                                               H. Andrews
-                                                            24 June 2026
+                                                            27 June 2026
 
 
                               JSON Schema
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 December 2026.
+   This Internet-Draft will expire on 29 December 2026.
 
 Copyright Notice
 
@@ -1248,7 +1248,9 @@ Table of Contents
 
 5.2.1.1.  Example
 
-   Another example of the utility of allOf is multiple inheritance.
+   Another example of the utility of allOf is multiple inheritance.  In
+   this example, a project has all of the properties of a task and a
+   collection.
 
    {
      "$defs": {
@@ -1294,6 +1296,16 @@ Table of Contents
    subschemas MUST be examined so that annotations are collected from
    each subschema that validates successfully.
 
+   Examples of using anyOf:
+
+   *  Defining objects that can satisfy one or more schemas, such as
+      attachments that can be a note or a task OR satisfy both schemas.
+
+   *  Requiring alternate fields in an object, when combined with the
+      "required" keyword: a contact could require a work_email or
+      require a work_phone, and putting both require keywords inside the
+      anyOf keyword allows either to satisfy the schema.
+
 5.2.3.  "oneOf"
 
    This keyword's value MUST be a non-empty array.  Each item of the
@@ -1303,12 +1315,31 @@ Table of Contents
    successfully against exactly one schema defined by this keyword's
    value.
 
+   Similar to anyOf and allOf, oneOf can be used in combination with
+   object definitions to allow only one object definition to be
+   satisfied.  Compare to the example for "anyOf": using "oneOf" with an
+   attachment envelope would allow the attachment to satisfy the note or
+   task schema but not both.  A task might have a duration or a due date
+   but not both.
+
 5.2.4.  "not"
 
    This keyword's value MUST be a valid JSON Schema.
 
    An input is valid against this keyword if it fails to validate
    successfully against the schema defined by this keyword.
+
+   For example, a product schema could require the property
+   expiration_date if the validity property does NOT have a value equal
+   to forever.  Or, if two properties could either be present or both
+   absent but not appear at the same time, this can be expressed in many
+   ways but possibly the briefest is
+
+     {
+       "not": {
+         "required": ["approved_date", "rejected_date"]
+       }
+     }
 
 5.2.5.  "if"
 
@@ -1379,7 +1410,8 @@ Table of Contents
    annotation collection purposes, in such cases.
 
    See the example above in Section 5.2.5.1 for a constraint added in a
-   then, conditionally upon the if statement.
+   then, conditionally upon the if statement, and below for an example
+   using if/then/else.
 
 5.2.7.  "else"
 
@@ -1394,6 +1426,16 @@ Table of Contents
    NOT evaluate the input against this keyword, for either validation or
    annotation collection purposes, in such cases.
 
+   {
+     "if": {
+       "properties": { "type": { "const": "physical" } },
+       "required": ["type"]
+     },
+     "then": { "required": ["street", "city"] },
+     "else": { "required": ["url"] },
+     "$comment": "Credit to jsonic.io for this example"
+   }
+
 5.2.8.  "dependentSchemas"
 
    This keyword specifies subschemas that are evaluated if the input is
@@ -1407,6 +1449,27 @@ Table of Contents
    presence of the property.
 
    Omitting this keyword has the same behavior as an empty object.
+
+5.2.8.1.  Example of requiring rejection reason if rejection date is set
+
+   {
+     "type": "object",
+     "properties": {
+       "applicant": { "type": "string" },
+       "approved_date": { "type": "string", "format": "date" },
+       "rejected_date": { "type": "string", "format": "date" },
+       "rejection_reason": { "type": "string" }
+     },
+     "required": ["applicant"],
+     "not": {
+       "required": ["approved_date", "rejected_date"]
+     },
+     "dependentSchemas": {
+       "rejected_date": {
+         "required": ["rejection_reason"]
+       }
+     }
+   }
 
 5.3.  Keywords for Applying Subschemas to Arrays
 

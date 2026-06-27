@@ -1057,7 +1057,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Dusseault, et al.</td>
-<td class="center">Expires 26 December 2026</td>
+<td class="center">Expires 29 December 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1070,12 +1070,12 @@ svg {
 <dd class="internet-draft">draft-ietf-jsonschema-json-schema-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-06-24" class="published">24 June 2026</time>
+<time datetime="2026-06-27" class="published">27 June 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-12-26">26 December 2026</time></dd>
+<dd class="expires"><time datetime="2026-12-29">29 December 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1131,7 +1131,7 @@ Source for this draft can be found at
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 26 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 29 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -2879,7 +2879,9 @@ in a schema.  See the example for <code>if</code> below in <a href="#allof-if-ex
             <h5 id="name-example-3">
 <a href="#section-5.2.1.1" class="section-number selfRef">5.2.1.1. </a><a href="#name-example-3" class="section-name selfRef">Example</a>
             </h5>
-<p id="section-5.2.1.1-1">Another example of the utility of <code>allOf</code> is multiple inheritance.<a href="#section-5.2.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.2.1.1-1">Another example of the utility of <code>allOf</code> is multiple inheritance.
+In this example, a project has all of the properties of a task
+and a collection.<a href="#section-5.2.1.1-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.2.1.1-2">
 <pre>
 {
@@ -2932,6 +2934,18 @@ successfully against at least one schema defined by this keyword's value.
 Note that when annotations are being collected, all subschemas MUST
 be examined so that annotations are collected from each subschema
 that validates successfully.<a href="#section-5.2.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.2.2-3">Examples of using anyOf:<a href="#section-5.2.2-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.2.2-4.1">
+              <p id="section-5.2.2-4.1.1">Defining objects that can satisfy one or more schemas,
+such as attachments that can be a <code>note</code> or a <code>task</code> OR satisfy both schemas.<a href="#section-5.2.2-4.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-5.2.2-4.2">
+              <p id="section-5.2.2-4.2.1">Requiring alternate fields in an object, when combined with the "required" keyword: a
+contact could require a <code>work_email</code> or require a <code>work_phone</code>, and putting
+both <code>require</code> keywords inside the <code>anyOf</code> keyword allows either to satisfy the schema.<a href="#section-5.2.2-4.2.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
 </section>
 </div>
 <div id="oneof">
@@ -2943,6 +2957,11 @@ that validates successfully.<a href="#section-5.2.2-2" class="pilcrow">¶</a></p
 Each item of the array MUST be a valid JSON Schema.<a href="#section-5.2.3-1" class="pilcrow">¶</a></p>
 <p id="section-5.2.3-2">An input validates successfully against this keyword if it validates
 successfully against exactly one schema defined by this keyword's value.<a href="#section-5.2.3-2" class="pilcrow">¶</a></p>
+<p id="section-5.2.3-3">Similar to anyOf and allOf, oneOf can be used in combination with object
+definitions to allow only one object definition to be satisfied.  Compare
+to the example for "anyOf": using "oneOf" with an attachment envelope
+would allow the attachment to satisfy the <code>note</code> or <code>task</code> schema but
+not both.  A task might have a duration or a due date but not both.<a href="#section-5.2.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="not">
@@ -2953,6 +2972,21 @@ successfully against exactly one schema defined by this keyword's value.<a href=
 <p id="section-5.2.4-1">This keyword's value MUST be a valid JSON Schema.<a href="#section-5.2.4-1" class="pilcrow">¶</a></p>
 <p id="section-5.2.4-2">An input is valid against this keyword if it fails to validate
 successfully against the schema defined by this keyword.<a href="#section-5.2.4-2" class="pilcrow">¶</a></p>
+<p id="section-5.2.4-3">For example, a product schema could require the property
+<code>expiration_date</code> if the <code>validity</code> property does
+NOT have a value equal to <code>forever</code>.  Or, if
+two properties could either be present or both absent
+but not appear at the same time, this can be expressed in many ways but
+possibly the briefest is<a href="#section-5.2.4-3" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-5.2.4-4">
+<pre>
+  {
+    "not": {
+      "required": ["approved_date", "rejected_date"]
+    }
+  }
+</pre><a href="#section-5.2.4-4" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 <div id="if">
@@ -3037,7 +3071,8 @@ subschema.  Implementations MUST NOT evaluate
 the input against this keyword, for either validation
 or annotation collection purposes, in such cases.<a href="#section-5.2.6-3" class="pilcrow">¶</a></p>
 <p id="section-5.2.6-4">See the example above in <a href="#allof-if-example" class="auto internal xref">Section 5.2.5.1</a> for
-a constraint added in a <code>then</code>, conditionally upon the <code>if</code> statement.<a href="#section-5.2.6-4" class="pilcrow">¶</a></p>
+a constraint added in a <code>then</code>, conditionally upon the <code>if</code> statement,
+and below for an example using if/then/else.<a href="#section-5.2.6-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="else">
@@ -3055,6 +3090,19 @@ when the input successfully validates against its
 subschema.  Implementations MUST NOT evaluate
 the input against this keyword, for either validation
 or annotation collection purposes, in such cases.<a href="#section-5.2.7-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-5.2.7-4">
+<pre>
+{
+  "if": {
+    "properties": { "type": { "const": "physical" } },
+    "required": ["type"]
+  },
+  "then": { "required": ["street", "city"] },
+  "else": { "required": ["url"] },
+  "$comment": "Credit to jsonic.io for this example"
+}
+</pre><a href="#section-5.2.7-4" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 <div id="dependentschemas">
@@ -3070,6 +3118,35 @@ Each value in the object MUST be a valid JSON Schema.<a href="#section-5.2.8-2" 
 instance must validate against the subschema.  Its use is
 dependent on the presence of the property.<a href="#section-5.2.8-3" class="pilcrow">¶</a></p>
 <p id="section-5.2.8-4">Omitting this keyword has the same behavior as an empty object.<a href="#section-5.2.8-4" class="pilcrow">¶</a></p>
+<div id="example-of-requiring-rejection-reason-if-rejection-date-is-set">
+<section id="section-5.2.8.1">
+            <h5 id="name-example-of-requiring-reject">
+<a href="#section-5.2.8.1" class="section-number selfRef">5.2.8.1. </a><a href="#name-example-of-requiring-reject" class="section-name selfRef">Example of requiring rejection reason if rejection date is set</a>
+            </h5>
+<div class="alignLeft art-text artwork" id="section-5.2.8.1-1">
+<pre>
+{
+  "type": "object",
+  "properties": {
+    "applicant": { "type": "string" },
+    "approved_date": { "type": "string", "format": "date" },
+    "rejected_date": { "type": "string", "format": "date" },
+    "rejection_reason": { "type": "string" }
+  },
+  "required": ["applicant"],
+  "not": {
+    "required": ["approved_date", "rejected_date"]
+  },
+  "dependentSchemas": {
+    "rejected_date": {
+      "required": ["rejection_reason"]
+    }
+  }
+}
+</pre><a href="#section-5.2.8.1-1" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
 </section>
 </div>
 </section>
