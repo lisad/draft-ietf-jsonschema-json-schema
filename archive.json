@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-25T00:54:57.860205+00:00",
+  "timestamp": "2026-06-28T00:57:01.238478+00:00",
   "repo": "lisad/draft-ietf-jsonschema-json-schema",
   "labels": [
     {
@@ -236,16 +236,24 @@
       "id": "I_kwDOR8mbas8AAAABFkVLeg",
       "title": "Should be explicit which chapters need to be read by which audience",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/issues/15",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "lisad",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "The wording in \n\n   This section is the start of normative requirements especially for\n   implementations.  However, a practitioner may wish to check the basic\n   meaning of terms defined above and skip to Section 12 where specific\n   keywords and purposes begin to be defined.\n\nthis isn't very clear on the layout of the spec and which readers it is for\n",
       "createdAt": "2026-06-15T20:20:22Z",
-      "updatedAt": "2026-06-15T20:20:22Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-06-25T03:32:17Z",
+      "closedAt": "2026-06-25T03:32:17Z",
+      "comments": [
+        {
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "body": "fixed this in PR #18 ",
+          "createdAt": "2026-06-25T03:32:17Z",
+          "updatedAt": "2026-06-25T03:32:17Z"
+        }
+      ]
     },
     {
       "number": 16,
@@ -278,6 +286,37 @@
       "updatedAt": "2026-06-15T23:41:01Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 21,
+      "id": "I_kwDOR8mbas8AAAABGoTTJw",
+      "title": "Fix beginning of text describing annotations",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/issues/21",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "The current wording : \n\n### Annotation\n\nA JSON Schema may describe additional output to accompany an \"accept\" result,\ncalled _annotations_. An annotation is a tuple that, at the minimum, relates a\nparticular annotation keyword in the schema to a particular value within the\ninstance. Annotations typically document the meaning of properties, declare\nrelationships between data, or denote hyperlinks.  Several forms of output are\ndefined, and the annotation process can be disabled as a performance or\nresource consumption optimization.\n\n\nThe misleading thing about this right at the beginning is that it sounds so optional.  Annotations are required even if the schema in question doesn't describe additional output - because annotations are built deeply in .  The output of \"properties\" is also annotations. ",
+      "createdAt": "2026-06-25T01:49:13Z",
+      "updatedAt": "2026-06-25T20:24:25Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "karenetheridge",
+          "authorAssociation": "NONE",
+          "body": "> Annotations are required even if the schema in question doesn't describe additional output - because annotations are built deeply in\n\nNot really. Annotations aren't needed to implement `unevaluatedProperties` and `unevaluatedItems` -- that's just one way of doing it, but any sort of internal state that does something similar without the overhead of a full annotation is just fine.\n\nWe've talked about dropping the use of annotations for the \\*properties and \\*items keywords in the next version as there isn't much use for their external output.\n\nContrast that to the keywords in the 'metadata' vocabulary (default, readOnly etc) which are purely annotative, and end users do use the information they provide for other applications.",
+          "createdAt": "2026-06-25T18:39:50Z",
+          "updatedAt": "2026-06-25T18:39:50Z"
+        },
+        {
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "body": "@karenetheridge if you have a proposal for what to drop, I'd love to hear it, assuming that you're describing what you think we should do (the words \"talked about\" are pretty neutral).  We're planning to make annotations a major topic for the upcoming meeting, see if we can start getting people in the same page.",
+          "createdAt": "2026-06-25T20:24:25Z",
+          "updatedAt": "2026-06-25T20:24:25Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -858,6 +897,68 @@
         "oid": "dd4a19f74a264293045e72fbe8bbd2ff3e2a071c"
       },
       "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 20,
+      "id": "PR_kwDOR8mbas7qWpRM",
+      "title": "Adds examples up to the end of 5.2",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/20",
+      "state": "MERGED",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-06-25T01:06:51Z",
+      "updatedAt": "2026-06-27T00:45:29Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "dd4a19f74a264293045e72fbe8bbd2ff3e2a071c",
+      "headRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "headRefName": "finish-subschema-examples",
+      "headRefOid": "0adfc0eb004677d214c852692a6ccd1394be5338",
+      "closedAt": "2026-06-27T00:45:29Z",
+      "mergedAt": "2026-06-27T00:45:29Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "d5dcf1e81c1a41e276116928fd70329aefafecbc"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 22,
+      "id": "PR_kwDOR8mbas7qYtZd",
+      "title": "Moves text on implementing keywords via annotations from other keywords to appendix",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/22",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Overall, I really like this.  It furthers the goal of making the definitions of keywords readable and relevant to schema authors, and moving the implementor-specific notes (which in this case aren't requirements anyway) to an appendix.\r\n\r\nAt the same time, I think the appendix is clearer looking at the big picture along with specific examples of passing annotations and using them.  \r\n\r\nWhat needs to be checked carefully here, is whether the definition of any keyword accidentally changed, particularly \"unevaluatedItems\" - the one place where maybe defining behavior in terms of annotations was clearer than just defining behavior.  Corrections or improvements welcome. ",
+      "createdAt": "2026-06-25T03:29:37Z",
+      "updatedAt": "2026-06-27T00:45:55Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "dd4a19f74a264293045e72fbe8bbd2ff3e2a071c",
+      "headRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "headRefName": "annotations-for-implementations",
+      "headRefOid": "c4c2f67efc26b33d31aaa37a7e6df45adf3a18c6",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "body": "@karenetheridge would love you to take a look at this",
+          "createdAt": "2026-06-25T03:33:48Z",
+          "updatedAt": "2026-06-27T00:45:55Z"
+        }
+      ],
       "reviews": []
     }
   ]
