@@ -133,9 +133,8 @@ the topic of the chapter.
 * Implementors will need to understand the requirements in sections 3 through 10 but also
 the requirements on loading and processing schemas ({{loading-and-processing}}),
 keyword behaviors ({{keyword-behaviors}}), and formatted output ({{output}}).
-The appendix on using annotations to make implementations themselves simpler,
-while it is entirely optional and should not affect validation results, can be valuable
-({{annotations-appendix}}).
+Refer to the appendix on annotations ({{annotations-appendix}}) for additional
+guidance on approaches to implementing annotations.
 
 * Authors of meta-schemas including extensions to JSON Schema will want to read
 the chapter on {{extensibility}} and {{vocabularies-appendix}}.
@@ -1043,7 +1042,7 @@ the keyword is present without either "then" or "else".
 
 #### Example {#allof-if-example}
 
-This shows how the `if` keyword can be used to
+This shows how the `if` keyword can be
 conditionally restrict a "postal-code" value on the "country" value.
 
 ~~~~~~~~~~
@@ -1159,7 +1158,7 @@ instance. The annotation MUST be present if the input array to which
 this keyword's schema applies is empty.
 
 The subschema MUST be applied to every array element even after the first
-match has been found, in order to collect annotations.
+match has been found, if annotations are being collected.
 
 ## Keywords for Applying Subschemas to Objects
 
@@ -1198,8 +1197,8 @@ The value of "additionalProperties" MUST be a valid JSON Schema.
 The behavior of this keyword depends on the presence of
 "properties" and "patternProperties" within the same schema object.
 Validation with "additionalProperties" applies only to the child
-values of input names that do not appear in either "properties"
-or "patternProperties".
+values of input names that do not appear in "properties"
+match regular expressions in "patternProperties".
 
 For all such properties, validation succeeds if the contents
 validate against the "additionalProperties" schema.
@@ -1318,12 +1317,12 @@ The behavior of this keyword depends on adjacent keywords "prefixItems", "items"
 If those keywords do not limit the application of "unevaluatedItems",
 the "unevaluatedItems" subschema MUST be applied to all locations in the array.
 
-Defined in terms of annotations, if a boolean true value is present
-from any of the annotation output of "prefixItems, "items" and "contains",
-then "unevaluatedItems" MUST be ignored.  Otherwise, the subschema
+Defined in terms of annotations, if the annotation output of "prefixItems",
+"items" or "contains"  is a boolean 'true', then "unevaluatedItems" MUST be ignored.
+Otherwise, the subschema
 MUST be applied to any index greater than the largest annotation
-value for "prefixItems", which does not appear in any annotation
-value for "contains".  Implemented this way, that would mean that
+value for "prefixItems" and "items", which does not appear in any annotation
+value for "contains".  Thus,
 "prefixItems", "items", "contains", and all in-place
 applicators MUST be evaluated before this keyword can be evaluated.
 Authors of extension keywords MUST NOT define an in-place applicator
@@ -1347,7 +1346,8 @@ and "additionalProperties".
 Validation with "unevaluatedProperties" applies only to the child
 values of input names that do not appear in the "properties",
 "patternProperties", "additionalProperties", or
-nested "unevaluatedProperties".
+"unevaluatedProperties" annotation results that apply to the instance
+location being validated.
 
 For all such properties, validation succeeds if the contents
 validate against the "unevaluatedProperties" schema.
@@ -1533,12 +1533,10 @@ number of array elements permitted to match the "contains" schema.
 The value of this keyword MUST be a non-negative integer.
 
 Validation MUST always succeed against this keyword; its validation
-effect is to modify the behavior of "contains" by setting the minimum
+effect is to modify the behavior of "contains" by modifying the minimum
 number of array elements required to match the "contains" schema.
 
 Omitting this keyword has the same behavior as a value of 1.
-Because omitted keywords do not produce annotation results, "contains"
-treats the absence of this keyword as if the value were 1.
 
 ## Validation Keywords for Objects
 
@@ -3874,15 +3872,14 @@ correlation in JSON structure.
 
 # Using annotations in implementations {#annotations-appendix}
 
-While implementors are not required to use annotations to aid in
-implementation, annotations can be useful.  This implementation approach
-requires annotations to be gathered first before completing evaluation
-at each layer, but it simplifies the logic of each dependent keyword
-which can operate on annotations rather than load in the other keywords.
+Annotations gathered while evaluating some keywords can be used to
+simplify the logic of evaluating other dependent keywords.  Whether
+annotations are used in keyword evaluation or not, the implementor must make sure that
+results are identical.  Thus, this section is OPTIONAL.
 
 As an example, the `properties` keyword produces annotations which can be used
 in the implementation of `additionalProperties`, `required` and
-`unevaluatedProperties`. With this schema:
+`unevaluatedProperties`.  With this schema:
 
 ~~~~~~~~~~
 {::include ./examples/point.json}
@@ -3894,15 +3891,15 @@ implementations could use that result.
 
 | Input | "properties" annotation | "additionalProperties" result | "required" result |
 |---|---|---|---|
-| `{"X": 1, "Y": 2}` | `["X", "Y"]` | passes | passes |
-| `{"X": 1, "Y": 2, "radius": 5}` | `["X", "Y"]` | fails (`"radius"` not in annotation) | passes |
-| `{"X": 1}` | `["X"]` | passes | fails (`"Y"` absent) |
+| `{"X": 1, "Y": 2}` | `["X", "Y"]` | valid | valid |
+| `{"X": 1, "Y": 2, "radius": 5}` | `["X", "Y"]` | invalid (`"radius"` not in annotation) | valid |
+| `{"X": 1}` | `["X"]` | valid | invalid (`"Y"` absent) |
 
 Similarly, the `prefixItems` keyword produces an annotation which is
 used by `items` and `unevaluatedItems`.  The annotation value is the
 largest index to which `prefixItems` applied a subschema.  Consider
 this schema for a structured log entry with a timestamp, action, and
-username followed by optional extra fields:
+username fields, and preventing additional fields:
 
 ~~~~~~~~~~
 {::include ./examples/prefixItems.json}
@@ -3915,10 +3912,10 @@ left off, applying only to indices greater than the annotation value.
 
 | Input | "prefixItems" annotation | "items" result |
 |---|---|---|
-| `["2026-06-24T10:00:00Z", "created", "alice"]` | `2` | passes (no elements beyond index 2) |
-| `["2026-06-24T10:00:00Z", "created", "alice", "extra"]` | `2` | fails (index 3 not covered by prefix) |
-| `["2026-06-24T10:00:00Z", "created"]` | `1` | passes (no elements beyond index 1) |
-| `[]` | *(none)* | passes (no elements at all) |
+| `["2026-06-24T10:00:00Z", "created", "alice"]` | `2` | valid (no elements beyond index 2) |
+  | `["2026-06-24T10:00:00Z", "created", "alice", "extra"]` | `2` | invalid (index 3 not evaluated by `prefixItems`) |
+| `["2026-06-24T10:00:00Z", "created"]` | `1` | valid (no elements beyond index 1) |
+| `[]` | *(none)* | valid (no elements at all) |
 
 The following table summarizes which keywords produce annotations
 that can be used in the implementation of other keywords:
@@ -3928,9 +3925,9 @@ that can be used in the implementation of other keywords:
 | `properties` | set of matched property names | `additionalProperties`, `unevaluatedProperties` |
 | `patternProperties` | set of matched property names | `additionalProperties`, `unevaluatedProperties` |
 | `additionalProperties` | set of validated property names | `unevaluatedProperties` |
-| `prefixItems` | largest index applied, or `true` | `items`, `unevaluatedItems` |
+| `prefixItems` | largest index evaluated, or `true` | `items`, `unevaluatedItems` |
 | `items` | `true` if any elements evaluated | `unevaluatedItems` |
-| `contains` | array of matched indices, or `true` | `unevaluatedItems` |
+| `contains` | array of evaluated indices, or `true` | `unevaluatedItems` |
 | `unevaluatedItems` | `true` if any elements evaluated | `unevaluatedItems` in parent schemas |
 | `unevaluatedProperties` | set of validated property names | `unevaluatedProperties` in parent schemas |
 
