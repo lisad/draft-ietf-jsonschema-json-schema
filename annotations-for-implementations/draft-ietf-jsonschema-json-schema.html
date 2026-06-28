@@ -1057,7 +1057,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Dusseault, et al.</td>
-<td class="center">Expires 27 December 2026</td>
+<td class="center">Expires 30 December 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1070,12 +1070,12 @@ svg {
 <dd class="internet-draft">draft-ietf-jsonschema-json-schema-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-06-25" class="published">25 June 2026</time>
+<time datetime="2026-06-28" class="published">28 June 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-12-27">27 December 2026</time></dd>
+<dd class="expires"><time datetime="2026-12-30">30 December 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1131,7 +1131,7 @@ Source for this draft can be found at
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 27 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 30 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1880,9 +1880,8 @@ the topic of the chapter.<a href="#section-1.2-2.1.1" class="pilcrow">¶</a></p>
             <p id="section-1.2-2.2.1">Implementors will need to understand the requirements in sections 3 through 10 but also
 the requirements on loading and processing schemas (<a href="#loading-and-processing" class="auto internal xref">Section 11</a>),
 keyword behaviors (<a href="#keyword-behaviors" class="auto internal xref">Section 12</a>), and formatted output (<a href="#output" class="auto internal xref">Section 13</a>).
-The appendix on using annotations to make implementations themselves simpler,
-while it is entirely optional and should not affect validation results, can be valuable
-(<a href="#annotations-appendix" class="auto internal xref">Appendix D</a>).<a href="#section-1.2-2.2.1" class="pilcrow">¶</a></p>
+Refer to the appendix on annotations (<a href="#annotations-appendix" class="auto internal xref">Appendix D</a>) for additional
+guidance on approaches to implementing annotations.<a href="#section-1.2-2.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.2-2.3">
             <p id="section-1.2-2.3.1">Authors of meta-schemas including extensions to JSON Schema will want to read
@@ -2988,7 +2987,7 @@ the keyword is present without either "then" or "else".<a href="#section-5.2.5-5
             <h5 id="name-example-4">
 <a href="#section-5.2.5.1" class="section-number selfRef">5.2.5.1. </a><a href="#name-example-4" class="section-name selfRef">Example</a>
             </h5>
-<p id="section-5.2.5.1-1">This shows how the <code>if</code> keyword can be used to
+<p id="section-5.2.5.1-1">This shows how the <code>if</code> keyword can be
 conditionally restrict a "postal-code" value on the "country" value.<a href="#section-5.2.5.1-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.2.5.1-2">
 <pre>
@@ -3145,7 +3144,7 @@ the subschema validates successfully when applied to every index of the
 instance. The annotation MUST be present if the input array to which
 this keyword's schema applies is empty.<a href="#section-5.3.3-4" class="pilcrow">¶</a></p>
 <p id="section-5.3.3-5">The subschema MUST be applied to every array element even after the first
-match has been found, in order to collect annotations.<a href="#section-5.3.3-5" class="pilcrow">¶</a></p>
+match has been found, if annotations are being collected.<a href="#section-5.3.3-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -3205,8 +3204,8 @@ with two properties required.<a href="#section-5.4.1-5" class="pilcrow">¶</a></
 <p id="section-5.4.2-2">The behavior of this keyword depends on the presence of
 "properties" and "patternProperties" within the same schema object.
 Validation with "additionalProperties" applies only to the child
-values of input names that do not appear in either "properties"
-or "patternProperties".<a href="#section-5.4.2-2" class="pilcrow">¶</a></p>
+values of input names that do not appear in "properties"
+match regular expressions in "patternProperties".<a href="#section-5.4.2-2" class="pilcrow">¶</a></p>
 <p id="section-5.4.2-3">For all such properties, validation succeeds if the contents
 validate against the "additionalProperties" schema.<a href="#section-5.4.2-3" class="pilcrow">¶</a></p>
 <p id="section-5.4.2-4">The annotation result of this keyword is the set of input
@@ -3365,12 +3364,12 @@ vocabulary are notable exceptions:<a href="#section-6.1-1" class="pilcrow">¶</a
 <p id="section-6.2-2">The behavior of this keyword depends on adjacent keywords "prefixItems", "items", and "contains".
 If those keywords do not limit the application of "unevaluatedItems",
 the "unevaluatedItems" subschema MUST be applied to all locations in the array.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
-<p id="section-6.2-3">Defined in terms of annotations, if a boolean true value is present
-from any of the annotation output of "prefixItems, "items" and "contains",
-then "unevaluatedItems" MUST be ignored.  Otherwise, the subschema
+<p id="section-6.2-3">Defined in terms of annotations, if the annotation output of "prefixItems",
+"items" or "contains"  is a boolean 'true', then "unevaluatedItems" MUST be ignored.
+Otherwise, the subschema
 MUST be applied to any index greater than the largest annotation
-value for "prefixItems", which does not appear in any annotation
-value for "contains".  Implemented this way, that would mean that
+value for "prefixItems" and "items", which does not appear in any annotation
+value for "contains".  Thus,
 "prefixItems", "items", "contains", and all in-place
 applicators MUST be evaluated before this keyword can be evaluated.
 Authors of extension keywords MUST NOT define an in-place applicator
@@ -3394,7 +3393,8 @@ and "additionalProperties".<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 <p id="section-6.3-3">Validation with "unevaluatedProperties" applies only to the child
 values of input names that do not appear in the "properties",
 "patternProperties", "additionalProperties", or
-nested "unevaluatedProperties".<a href="#section-6.3-3" class="pilcrow">¶</a></p>
+"unevaluatedProperties" annotation results that apply to the instance
+location being validated.<a href="#section-6.3-3" class="pilcrow">¶</a></p>
 <p id="section-6.3-4">For all such properties, validation succeeds if the contents
 validate against the "unevaluatedProperties" schema.<a href="#section-6.3-4" class="pilcrow">¶</a></p>
 <p id="section-6.3-5">This means that "properties", "patternProperties", "additionalProperties",
@@ -3631,11 +3631,9 @@ number of array elements permitted to match the "contains" schema.<a href="#sect
           </h4>
 <p id="section-7.4.5-1">The value of this keyword MUST be a non-negative integer.<a href="#section-7.4.5-1" class="pilcrow">¶</a></p>
 <p id="section-7.4.5-2">Validation MUST always succeed against this keyword; its validation
-effect is to modify the behavior of "contains" by setting the minimum
+effect is to modify the behavior of "contains" by modifying the minimum
 number of array elements required to match the "contains" schema.<a href="#section-7.4.5-2" class="pilcrow">¶</a></p>
-<p id="section-7.4.5-3">Omitting this keyword has the same behavior as a value of 1.
-Because omitted keywords do not produce annotation results, "contains"
-treats the absence of this keyword as if the value were 1.<a href="#section-7.4.5-3" class="pilcrow">¶</a></p>
+<p id="section-7.4.5-3">Omitting this keyword has the same behavior as a value of 1.<a href="#section-7.4.5-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -6636,14 +6634,13 @@ correlation in JSON structure.<a href="#appendix-C-18" class="pilcrow">¶</a></p
       <h2 id="name-using-annotations-in-implem">
 <a href="#appendix-D" class="section-number selfRef">Appendix D. </a><a href="#name-using-annotations-in-implem" class="section-name selfRef">Using annotations in implementations</a>
       </h2>
-<p id="appendix-D-1">While implementors are not required to use annotations to aid in
-implementation, annotations can be useful.  This implementation approach
-requires annotations to be gathered first before completing evaluation
-at each layer, but it simplifies the logic of each dependent keyword
-which can operate on annotations rather than load in the other keywords.<a href="#appendix-D-1" class="pilcrow">¶</a></p>
+<p id="appendix-D-1">Annotations gathered while evaluating some keywords can be used to
+simplify the logic of evaluating other dependent keywords.  Whether
+annotations are used in keyword evaluation or not, the implementor must make sure that
+results are identical.  Thus, this section is OPTIONAL.<a href="#appendix-D-1" class="pilcrow">¶</a></p>
 <p id="appendix-D-2">As an example, the <code>properties</code> keyword produces annotations which can be used
 in the implementation of <code>additionalProperties</code>, <code>required</code> and
-<code>unevaluatedProperties</code>. With this schema:<a href="#appendix-D-2" class="pilcrow">¶</a></p>
+<code>unevaluatedProperties</code>.  With this schema:<a href="#appendix-D-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-D-3">
 <pre>
 {
@@ -6678,8 +6675,8 @@ implementations could use that result.<a href="#appendix-D-4" class="pilcrow">¶
             <td class="text-left" rowspan="1" colspan="1">
               <code>["X", "Y"]</code>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">passes</td>
-            <td class="text-left" rowspan="1" colspan="1">passes</td>
+            <td class="text-left" rowspan="1" colspan="1">valid</td>
+            <td class="text-left" rowspan="1" colspan="1">valid</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -6688,8 +6685,8 @@ implementations could use that result.<a href="#appendix-D-4" class="pilcrow">¶
             <td class="text-left" rowspan="1" colspan="1">
               <code>["X", "Y"]</code>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">fails (<code>"radius"</code> not in annotation)</td>
-            <td class="text-left" rowspan="1" colspan="1">passes</td>
+            <td class="text-left" rowspan="1" colspan="1">invalid (<code>"radius"</code> not in annotation)</td>
+            <td class="text-left" rowspan="1" colspan="1">valid</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -6698,8 +6695,8 @@ implementations could use that result.<a href="#appendix-D-4" class="pilcrow">¶
             <td class="text-left" rowspan="1" colspan="1">
               <code>["X"]</code>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">passes</td>
-            <td class="text-left" rowspan="1" colspan="1">fails (<code>"Y"</code> absent)</td>
+            <td class="text-left" rowspan="1" colspan="1">valid</td>
+            <td class="text-left" rowspan="1" colspan="1">invalid (<code>"Y"</code> absent)</td>
           </tr>
         </tbody>
       </table>
@@ -6707,7 +6704,7 @@ implementations could use that result.<a href="#appendix-D-4" class="pilcrow">¶
 used by <code>items</code> and <code>unevaluatedItems</code>.  The annotation value is the
 largest index to which <code>prefixItems</code> applied a subschema.  Consider
 this schema for a structured log entry with a timestamp, action, and
-username followed by optional extra fields:<a href="#appendix-D-6" class="pilcrow">¶</a></p>
+username fields, and preventing additional fields:<a href="#appendix-D-6" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-D-7">
 <pre>
 {
@@ -6741,7 +6738,7 @@ left off, applying only to indices greater than the annotation value.<a href="#a
             <td class="text-left" rowspan="1" colspan="1">
               <code>2</code>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">passes (no elements beyond index 2)</td>
+            <td class="text-left" rowspan="1" colspan="1">valid (no elements beyond index 2)</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -6750,7 +6747,7 @@ left off, applying only to indices greater than the annotation value.<a href="#a
             <td class="text-left" rowspan="1" colspan="1">
               <code>2</code>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">fails (index 3 not covered by prefix)</td>
+            <td class="text-left" rowspan="1" colspan="1">invalid (index 3 not evaluated by <code>prefixItems</code>)</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -6759,7 +6756,7 @@ left off, applying only to indices greater than the annotation value.<a href="#a
             <td class="text-left" rowspan="1" colspan="1">
               <code>1</code>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">passes (no elements beyond index 1)</td>
+            <td class="text-left" rowspan="1" colspan="1">valid (no elements beyond index 1)</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -6768,7 +6765,7 @@ left off, applying only to indices greater than the annotation value.<a href="#a
             <td class="text-left" rowspan="1" colspan="1">
               <em>(none)</em>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">passes (no elements at all)</td>
+            <td class="text-left" rowspan="1" colspan="1">valid (no elements at all)</td>
           </tr>
         </tbody>
       </table>
@@ -6815,7 +6812,7 @@ that can be used in the implementation of other keywords:<a href="#appendix-D-10
             <td class="text-left" rowspan="1" colspan="1">
               <code>prefixItems</code>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">largest index applied, or <code>true</code>
+            <td class="text-left" rowspan="1" colspan="1">largest index evaluated, or <code>true</code>
 </td>
             <td class="text-left" rowspan="1" colspan="1">
               <code>items</code>, <code>unevaluatedItems</code>
@@ -6835,7 +6832,7 @@ that can be used in the implementation of other keywords:<a href="#appendix-D-10
             <td class="text-left" rowspan="1" colspan="1">
               <code>contains</code>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">array of matched indices, or <code>true</code>
+            <td class="text-left" rowspan="1" colspan="1">array of evaluated indices, or <code>true</code>
 </td>
             <td class="text-left" rowspan="1" colspan="1">
               <code>unevaluatedItems</code>
