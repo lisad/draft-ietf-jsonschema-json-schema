@@ -1,0 +1,8 @@
+{
+  "prefixItems": [
+    { "type": "string", "format": "date-time" },
+    { "type": "string" },
+    { "type": "string" }
+  ],
+  "items": false
+}
