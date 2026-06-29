@@ -1161,6 +1161,11 @@ index of the instance, such as is produced by the "items" keyword.
 Omitting this keyword has the same assertion behavior as
 an empty array.
 
+As an example of `prefixItems`, the section on using annotations to simplify
+implementations of keyword evaluation ({{annotations-appendix}}) has
+a schema that shows using prefixItems to define a log file format
+as a list of values.
+
 ### "items"
 
 The value of "items" MUST be a valid JSON Schema.
@@ -2029,7 +2034,7 @@ JSON Schema's data model.
 The value of this property MUST be a valid JSON schema. It SHOULD be ignored if
 "contentMediaType" is not present.
 
-## Example
+## Examples of contentEncoding, contentMediaType, contentSchema
 
 Here is an example schema, illustrating the use of "contentEncoding" and
 "contentMediaType":
@@ -2062,32 +2067,9 @@ system, this MUST be UTF-8.
 This example describes a JWT that is MACed using the HMAC SHA-256
 algorithm, and requires the "iss" and "exp" fields in its claim set.
 
-~~~ json
-{
-    "type": "string",
-    "contentMediaType": "application/jwt",
-    "contentSchema": {
-        "type": "array",
-        "minItems": 2,
-        "prefixItems": [
-            {
-                "const": {
-                    "typ": "JWT",
-                    "alg": "HS256"
-                }
-            },
-            {
-                "type": "object",
-                "required": ["iss", "exp"],
-                "properties": {
-                    "iss": {"type": "string"},
-                    "exp": {"type": "integer"}
-                }
-            }
-        ]
-    }
-}
-~~~
+~~~~~~~~~~
+{::include ./examples/contentSchema-example.json}
+~~~~~~~~~~
 
 Note that "contentEncoding" does not appear.  While the "application/jwt"
 media type makes use of base64url encoding, that is defined by the media
@@ -2961,45 +2943,9 @@ to use based on the schema location that contributed the value.
 This is intended to allow flexible usage.  Collecting the schema location
 facilitates such usage.
 
-For example, consider this schema, which uses annotations and assertions from
-the validation specification ({{?I-D.bhutton-json-schema-validation}}):
-
-Note that some lines are wrapped for clarity.
-
-~~~ json
-{
-  "title": "Feature list",
-  "type": "array",
-  "prefixItems": [
-    {
-      "title": "Feature A",
-      "properties": {
-        "enabled": {
-          "$ref": "#/$defs/enabledToggle",
-          "default": true
-        }
-      }
-    },
-    {
-      "title": "Feature B",
-      "properties": {
-        "enabled": {
-          "description": "If set to null, Feature B inherits the enabled value from Feature A",
-          "$ref": "#/$defs/enabledToggle"
-        }
-      }
-    }
-  ],
-  "$defs": {
-    "enabledToggle": {
-      "title": "Enabled",
-      "description": "Whether the feature is enabled (true), disabled (false), or under automatic control (null)",
-      "type": ["boolean", "null"],
-      "default": null
-    }
-  }
-}
-~~~
+~~~~~~~~~~
+{::include ./examples/multiple-available-annotations.json}
+~~~~~~~~~~
 
 In this example, both Feature A and Feature B make use of the re-usable
 "enabledToggle" schema.  That schema uses the "title", "description",
@@ -3042,20 +2988,9 @@ or from keywords in subschemas.
 Note that the overall schema results may still include annotations
 collected from other schema locations.  Given this schema:
 
-~~~ json
-{
-    "oneOf": [
-        {
-            "title": "Integer Value",
-            "type": "integer"
-        },
-        {
-            "title": "String Value",
-            "type": "string"
-        }
-    ]
-}
-~~~
+~~~~~~~~~~
+{::include ./examples/discarded-annotation.json}
+~~~~~~~~~~
 
 Against the input `"This is a string"`, the
 title annotation "Integer Value" is discarded because the type assertion

@@ -1,0 +1,12 @@
+{
+    "oneOf": [
+        {
+            "title": "Integer Value",
+            "type": "integer"
+        },
+        {
+            "title": "String Value",
+            "type": "string"
+        }
+    ]
+}

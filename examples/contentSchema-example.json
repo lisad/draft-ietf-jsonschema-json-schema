@@ -1,0 +1,24 @@
+{
+    "type": "string",
+    "contentMediaType": "application/jwt",
+    "contentSchema": {
+        "type": "array",
+        "minItems": 2,
+        "prefixItems": [
+            {
+                "const": {
+                    "typ": "JWT",
+                    "alg": "HS256"
+                }
+            },
+            {
+                "type": "object",
+                "required": ["iss", "exp"],
+                "properties": {
+                    "iss": {"type": "string"},
+                    "exp": {"type": "integer"}
+                }
+            }
+        ]
+    }
+}
