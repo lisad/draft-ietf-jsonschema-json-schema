@@ -3198,6 +3198,9 @@ annotation result of boolean true, indicating that all remaining array
 elements have been evaluated against this keyword's subschema.<a href="#section-5.3.2-3" class="pilcrow">¶</a></p>
 <p id="section-5.3.2-4">Omitting this keyword has the same assertion behavior as
 an empty schema.<a href="#section-5.3.2-4" class="pilcrow">¶</a></p>
+<p id="section-5.3.2-5">Examples of <code>items</code> can be found in other examples in this specification.
+One of the clearest is in <a href="#output-structure" class="auto internal xref">Section 13.4</a>, where the <code>items</code> keyword
+requires the the input to be a list of points objects.<a href="#section-5.3.2-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="contains">
@@ -3222,6 +3225,33 @@ instance. The annotation MUST be present if the input array to which
 this keyword's schema applies is empty.<a href="#section-5.3.3-4" class="pilcrow">¶</a></p>
 <p id="section-5.3.3-5">The subschema MUST be applied to every array element even after the first
 match has been found, if annotations are being collected.<a href="#section-5.3.3-5" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-5.3.3-6">
+<pre>
+{
+  "type": "object",
+  "properties": {
+    "title": { "type": "string" },
+    "assignees": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "role": { "enum": ["owner", "reviewer", "observer"] }
+        },
+        "required": ["name", "role"]
+      },
+      "contains": {
+        "properties": { "role": { "const": "owner" } },
+        "required": ["role"]
+      },
+      "maxContains": 1
+    }
+  },
+  "required": ["title", "assignees"]
+}
+</pre><a href="#section-5.3.3-6" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 </section>
@@ -3699,6 +3729,9 @@ successfully if all of its elements are unique.<a href="#section-7.4.3-2" class=
 <p id="section-7.4.4-2">Validation MUST always succeed against this keyword; its validation
 effect is to modify the behavior of "contains" by setting the maximum
 number of array elements permitted to match the "contains" schema.<a href="#section-7.4.4-2" class="pilcrow">¶</a></p>
+<p id="section-7.4.4-3">As an example of <code>maxContains</code> and how it modifies <code>contains</code>, the example
+in <a href="#contains" class="auto internal xref">Section 5.3.3</a> constrains the assignees list to contain maximum one
+assignee of type 'owner', though other types of assignees are unlimited.<a href="#section-7.4.4-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="mincontains">
@@ -5650,7 +5683,7 @@ successful validation<a href="#section-13.4-2.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-13.4-3">For these examples, the following schema and input will be used.<a href="#section-13.4-3" class="pilcrow">¶</a></p>
-<div class="lang-json sourcecode" id="section-13.4-4">
+<div class="alignLeft art-text artwork" id="section-13.4-4">
 <pre>
 {
   "$id": "https://example.com/polygon",

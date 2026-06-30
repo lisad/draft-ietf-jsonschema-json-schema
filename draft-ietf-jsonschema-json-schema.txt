@@ -1515,6 +1515,10 @@ Table of Contents
    Omitting this keyword has the same assertion behavior as an empty
    schema.
 
+   Examples of items can be found in other examples in this
+   specification.  One of the clearest is in Section 13.4, where the
+   items keyword requires the the input to be a list of points objects.
+
 5.3.3.  "contains"
 
    The value of this keyword MUST be a valid JSON Schema.
@@ -1538,6 +1542,30 @@ Table of Contents
 
    The subschema MUST be applied to every array element even after the
    first match has been found, if annotations are being collected.
+
+   {
+     "type": "object",
+     "properties": {
+       "title": { "type": "string" },
+       "assignees": {
+         "type": "array",
+         "items": {
+           "type": "object",
+           "properties": {
+             "name": { "type": "string" },
+             "role": { "enum": ["owner", "reviewer", "observer"] }
+           },
+           "required": ["name", "role"]
+         },
+         "contains": {
+           "properties": { "role": { "const": "owner" } },
+           "required": ["role"]
+         },
+         "maxContains": 1
+       }
+     },
+     "required": ["title", "assignees"]
+   }
 
 5.4.  Keywords for Applying Subschemas to Objects
 
@@ -1959,6 +1987,11 @@ Table of Contents
    Validation MUST always succeed against this keyword; its validation
    effect is to modify the behavior of "contains" by setting the maximum
    number of array elements permitted to match the "contains" schema.
+
+   As an example of maxContains and how it modifies contains, the
+   example in Section 5.3.3 constrains the assignees list to contain
+   maximum one assignee of type 'owner', though other types of assignees
+   are unlimited.
 
 7.4.5.  "minContains"
 
