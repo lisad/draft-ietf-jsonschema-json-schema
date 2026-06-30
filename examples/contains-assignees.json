@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "properties": {
+    "title": { "type": "string" },
+    "assignees": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "role": { "enum": ["owner", "reviewer", "observer"] }
+        },
+        "required": ["name", "role"]
+      },
+      "contains": {
+        "properties": { "role": { "const": "owner" } },
+        "required": ["role"]
+      },
+      "maxContains": 1
+    }
+  },
+  "required": ["title", "assignees"]
+}

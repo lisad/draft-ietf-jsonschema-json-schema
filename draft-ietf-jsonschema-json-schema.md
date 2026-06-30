@@ -1178,6 +1178,10 @@ elements have been evaluated against this keyword's subschema.
 Omitting this keyword has the same assertion behavior as
 an empty schema.
 
+Examples of `items` can be found in other examples in this specification.
+One of the clearest is in {{output-structure}}, where the `items` keyword
+requires the the input to be a list of points objects.
+
 ### "contains"
 
 The value of this keyword MUST be a valid JSON Schema.
@@ -1201,6 +1205,10 @@ this keyword's schema applies is empty.
 
 The subschema MUST be applied to every array element even after the first
 match has been found, if annotations are being collected.
+
+~~~ json
+{::include ./examples/contains-assignees.json}
+~~~
 
 ## Keywords for Applying Subschemas to Objects
 
@@ -1569,6 +1577,10 @@ The value of this keyword MUST be a non-negative integer.
 Validation MUST always succeed against this keyword; its validation
 effect is to modify the behavior of "contains" by setting the maximum
 number of array elements permitted to match the "contains" schema.
+
+As an example of `maxContains` and how it modifies `contains`, the example
+in {{contains}} constrains the assignees list to contain maximum one
+assignee of type 'owner', though other types of assignees are unlimited.
 
 ### "minContains"
 
@@ -3208,26 +3220,9 @@ additional information about the result is required, the output MUST also contai
 
 For these examples, the following schema and input will be used.
 
-~~~ json
-{
-  "$id": "https://example.com/polygon",
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$defs": {
-    "point": {
-      "type": "object",
-      "properties": {
-        "x": { "type": "number" },
-        "y": { "type": "number" }
-      },
-      "additionalProperties": false,
-      "required": [ "x", "y" ]
-    }
-  },
-  "type": "array",
-  "items": { "$ref": "#/$defs/point" },
-  "minItems": 3
-}
-~~~
+~~~~~~~~~~
+{::include ./examples/output-structure-example.json}
+~~~~~~~~~~
 
 ~~~ json
 [
