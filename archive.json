@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-28T00:57:01.238478+00:00",
+  "timestamp": "2026-06-30T00:55:04.160719+00:00",
   "repo": "lisad/draft-ietf-jsonschema-json-schema",
   "labels": [
     {
@@ -317,6 +317,22 @@
           "updatedAt": "2026-06-25T20:24:25Z"
         }
       ]
+    },
+    {
+      "number": 23,
+      "id": "I_kwDOR8mbas8AAAABG-wW2A",
+      "title": "More clear about duplicate names",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/issues/23",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Post from Nico today:\nFor one draft-ietf-jsonschema-json-schema-00 does not reference RFC\n7493, so presumably it ought to say whether duplicate names in objects\nhave any meaning in this schema, or else normatively reference RFC 7493.\nIt's perfectly fine to say that they do not, that this JSON Schema does\nnot support that -- but it should be stated.",
+      "createdAt": "2026-06-28T19:51:20Z",
+      "updatedAt": "2026-06-28T19:51:20Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -932,24 +948,26 @@
       "id": "PR_kwDOR8mbas7qYtZd",
       "title": "Moves text on implementing keywords via annotations from other keywords to appendix",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/22",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "lisad",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Overall, I really like this.  It furthers the goal of making the definitions of keywords readable and relevant to schema authors, and moving the implementor-specific notes (which in this case aren't requirements anyway) to an appendix.\r\n\r\nAt the same time, I think the appendix is clearer looking at the big picture along with specific examples of passing annotations and using them.  \r\n\r\nWhat needs to be checked carefully here, is whether the definition of any keyword accidentally changed, particularly \"unevaluatedItems\" - the one place where maybe defining behavior in terms of annotations was clearer than just defining behavior.  Corrections or improvements welcome. ",
       "createdAt": "2026-06-25T03:29:37Z",
-      "updatedAt": "2026-06-27T00:45:55Z",
+      "updatedAt": "2026-06-29T20:40:07Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "dd4a19f74a264293045e72fbe8bbd2ff3e2a071c",
       "headRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "headRefName": "annotations-for-implementations",
-      "headRefOid": "c4c2f67efc26b33d31aaa37a7e6df45adf3a18c6",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "dc8891a663af47eae11d5ca4a4d325836a4cc9d5",
+      "closedAt": "2026-06-29T20:40:07Z",
+      "mergedAt": "2026-06-29T20:40:07Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "c7c16f357ffe809bdb504d590b9abf9683c559fd"
+      },
       "comments": [
         {
           "author": "lisad",
@@ -959,6 +977,177 @@
           "updatedAt": "2026-06-27T00:45:55Z"
         }
       ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOR8mbas8AAAABEXkpPw",
+          "commit": {
+            "abbreviatedOid": "c4c2f67"
+          },
+          "author": "karenetheridge",
+          "authorAssociation": "NONE",
+          "state": "CHANGES_REQUESTED",
+          "body": "Hard agree that this is a worthy improvement!\n\nA few changes here - some to bring more consistent terminology, and a few small fixes for accuracy.",
+          "createdAt": "2026-06-28T21:27:11Z",
+          "updatedAt": "2026-06-28T21:56:34Z",
+          "comments": [
+            {
+              "originalPosition": 68,
+              "body": "Perhaps change to \"if annotations are being collected\" -- there are some implementations (mine, and others) that offer different configuration modes such as not collecting annotations, or short-circuiting on the first failure result (which cannot be used if annotation collection is explicitly requested).",
+              "createdAt": "2026-06-28T21:27:11Z",
+              "updatedAt": "2026-06-28T21:56:34Z"
+            },
+            {
+              "originalPosition": 6,
+              "body": "The wording here is a bit off -- perhaps \"Refer to \\<Appendix\\> for additional guidance on various approaches to implementing annotations\" ?   Then in that section various options can be presented, while making it clear that no simplifications for the sake of efficiency are permitted to change the overall result.",
+              "createdAt": "2026-06-28T21:29:05Z",
+              "updatedAt": "2026-06-28T21:56:34Z"
+            },
+            {
+              "originalPosition": 94,
+              "body": "```suggestion\nvalues of input names that do not appear in \"properties\" or match regular expressions in \"patternProperties\".\n```",
+              "createdAt": "2026-06-28T21:30:50Z",
+              "updatedAt": "2026-06-28T21:56:34Z"
+            },
+            {
+              "originalPosition": 180,
+              "body": "```suggestion\nvalue for \"contains\". This would mean that\n\"prefixItems\", \"items\", \"contains\", and all in-place\n```\n\n..because it doesn't matter whether annotations are used, or some other implementation, to get the data that `unevaluatedItems` needs -- whatever you do, those other keywords must be evaluated first.",
+              "createdAt": "2026-06-28T21:36:10Z",
+              "updatedAt": "2026-06-28T21:56:34Z"
+            },
+            {
+              "originalPosition": 175,
+              "body": "```suggestion\nMUST be applied to any index greater than the largest annotation\nvalue for \"prefixItems\" and \"items\", which does not appear in any annotation\n```\nThis is an error here in the original text -- it omits mentioning `items`, which will produce an annotation for every item in the data instance, which means that `unevaluatedItems` has no remaining items to apply itself to.\n",
+              "createdAt": "2026-06-28T21:37:55Z",
+              "updatedAt": "2026-06-28T21:56:34Z"
+            },
+            {
+              "originalPosition": 214,
+              "body": "The original was correct; this change is not.",
+              "createdAt": "2026-06-28T21:39:29Z",
+              "updatedAt": "2026-06-28T21:56:34Z"
+            },
+            {
+              "originalPosition": 248,
+              "body": "```suggestion\neffect is to modify the behavior of \"contains\" by modifying the minimum\n```\n\nIn the absence of `minContains`, the minimum number is still set - its default is 1.",
+              "createdAt": "2026-06-28T21:41:46Z",
+              "updatedAt": "2026-06-28T21:56:34Z"
+            },
+            {
+              "originalPosition": 257,
+              "body": "I would just drop this addition entirely (while still removing the original text), as it's redundant with the previous line, and `minContains` and `maxContains` don't need to produce annotations at all: what matters is the item indices that `contains` evaluates (which itself produces annotations used by `unevaluatedItems`).",
+              "createdAt": "2026-06-28T21:45:05Z",
+              "updatedAt": "2026-06-28T21:56:34Z"
+            },
+            {
+              "originalPosition": 269,
+              "body": "```suggestion\nWhile implementors are not required to use annotations to aid in\nimplementation of the Unevaluated vocabulary, annotations can be useful.  This implementation approach\n```\n\nAnnotations are required per the spec elsewhere (unless we decide to make them optional for full compliance -- another discussion!), but indeed the `unevaluated*` keywords can be implemented by other means.",
+              "createdAt": "2026-06-28T21:47:19Z",
+              "updatedAt": "2026-06-28T21:56:35Z"
+            },
+            {
+              "originalPosition": 272,
+              "body": "I don't think this is true - evaluation has a defined order, and annotation collection is part of that process.",
+              "createdAt": "2026-06-28T21:48:57Z",
+              "updatedAt": "2026-06-28T21:58:09Z"
+            },
+            {
+              "originalPosition": 290,
+              "body": "change \"passes\" to \"valid\", \"fails\" to \"invalid\" everywhere",
+              "createdAt": "2026-06-28T21:49:46Z",
+              "updatedAt": "2026-06-28T21:56:35Z"
+            },
+            {
+              "originalPosition": 310,
+              "body": "```suggestion\n| `[\"2026-06-24T10:00:00Z\", \"created\", \"alice\", \"extra\"]` | `2` | fails (index 3 not evaluated by `prefixItems`) |\n```",
+              "createdAt": "2026-06-28T21:52:50Z",
+              "updatedAt": "2026-06-28T21:56:35Z"
+            },
+            {
+              "originalPosition": 322,
+              "body": "```suggestion\n| `prefixItems` | largest index evaluated, or `true` | `items`, `unevaluatedItems` |\n```",
+              "createdAt": "2026-06-28T21:54:23Z",
+              "updatedAt": "2026-06-28T21:56:35Z"
+            },
+            {
+              "originalPosition": 324,
+              "body": "```suggestion\n| `contains` | array of evaluated indices, or `true` | `unevaluatedItems` |\n```",
+              "createdAt": "2026-06-28T21:54:35Z",
+              "updatedAt": "2026-06-28T21:56:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABEXs2sg",
+          "commit": {
+            "abbreviatedOid": "c4c2f67"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-28T23:33:09Z",
+          "updatedAt": "2026-06-28T23:33:09Z",
+          "comments": [
+            {
+              "originalPosition": 269,
+              "body": "I agree with almost all of your edits, but I'm trying to find some way of writing this without refering to \"the Unevaluated vocabulary\" .  I found reference to specific vocabularies within this doc to be confusing as a reader.  I don't think we've decided to make annotations optional (though we could), so I'll try to make this clearer in a different way.",
+              "createdAt": "2026-06-28T23:33:09Z",
+              "updatedAt": "2026-06-28T23:33:09Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "id": "PR_kwDOR8mbas7r9UY7",
+      "title": "Adds a script that can validate example schemas in the examples folder",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/24",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Validates examples in the examples folder as valid JSON, for starters\r\nuses the jsonschema library's functionality to validate against the 2020-12 meta schema, helping avoid mistakes and retain backwards compatibility",
+      "createdAt": "2026-06-29T21:08:59Z",
+      "updatedAt": "2026-06-29T21:08:59Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "c7c16f357ffe809bdb504d590b9abf9683c559fd",
+      "headRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "headRefName": "add-validation-script",
+      "headRefOid": "2570b99ad2bd0967f75565beace9acd72ee842aa",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 25,
+      "id": "PR_kwDOR8mbas7r-2rN",
+      "title": "Adds example for contains which also illustrates maxContains",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/25",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "also in the section of 'items', points to a later section that has a clear example of 'items'\r\n",
+      "createdAt": "2026-06-29T22:34:32Z",
+      "updatedAt": "2026-06-29T22:34:32Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "c7c16f357ffe809bdb504d590b9abf9683c559fd",
+      "headRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "headRefName": "add-examples-contains",
+      "headRefOid": "16dbfa36936ef7e77be9eeed4ad237728adc0277",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
       "reviews": []
     }
   ]
