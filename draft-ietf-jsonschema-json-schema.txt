@@ -246,14 +246,14 @@ Table of Contents
    Appendix C.  Example of recursive schema extension
    Appendix D.  Using annotations in implementations
    Appendix E.  Working with vocabularies
-     E.1.  Best practices for vocabulary and meta-schema authors"
+     E.1.  Best practices for vocabulary and meta-schema authors
      E.2.  Example meta-schema with vocabulary declarations
    Appendix F.  References and generative use cases
    Appendix G.  Acknowledgments
    Appendix H.  Change Log
-     H.1.  draft-dusseault-json-schema-02
-     H.2.  draft-dusseault-json-schema-01
-     H.3.  draft-dusseault-json-schema-00
+     H.1.  draft-ietf-jsonschema-json-schema-02
+     H.2.  draft-ietf-jsonschema-json-schema-01
+     H.3.  draft-ietf-jsonschema-json-schema-00
    Authors' Addresses
 
 1.  Introduction
@@ -1357,7 +1357,7 @@ Table of Contents
    MUST also be valid against the subschema value of the "then" keyword,
    if present.
 
-   Iputs that fail to validate against this keyword's subschema MUST
+   Inputs that fail to validate against this keyword's subschema MUST
    also be valid against the subschema value of the "else" keyword, if
    present.
 
@@ -1518,7 +1518,7 @@ Table of Contents
 
    Examples of items can be found in other examples in this
    specification.  One of the clearest is in Section 13.4, where the
-   items keyword requires the the input to be a list of points objects.
+   items keyword requires the input to be a list of points objects.
 
 5.3.3.  "contains"
 
@@ -2194,7 +2194,7 @@ Table of Contents
 
    When the Format-Assertion vocabulary is declared with a value of
    true, implementations MUST provide full validation support for all of
-   the formats defined by this specificaion.  Implementations that
+   the formats defined by this specification.  Implementations that
    cannot provide full validation support MUST refuse to process the
    schema.
 
@@ -3144,7 +3144,8 @@ Table of Contents
    semantics to "$defs" do not allow for any intervening "$id" keywords,
    and therefore will behave correctly under implementations that
    attempt to use any reference target as a schema.  However, this
-   behavior is
+   behavior is implementation-specific and MUST NOT be relied upon for
+   interoperability.
 
 11.5.  RESTful / Hypermedia Schema References
 
@@ -4795,7 +4796,7 @@ Appendix D.  Using annotations in implementations
 
 Appendix E.  Working with vocabularies
 
-E.1.  Best practices for vocabulary and meta-schema authors"
+E.1.  Best practices for vocabulary and meta-schema authors
 
    Vocabulary authors should take care to avoid keyword name collisions
    if the vocabulary is intended for broad use, and potentially combined
@@ -4942,8 +4943,8 @@ E.2.  Example meta-schema with vocabulary declarations
    an implementation can only validate the syntactic usage.  In this
    case, that means validating that it is a date-formatted string (using
    "pattern" to ensure that it is validated even when "format" functions
-   purely as an annotation, as explained in the the validation
-   specification ([I-D.bhutton-json-schema-validation]).
+   purely as an annotation, as explained in the validation specification
+   ([I-D.bhutton-json-schema-validation]).
 
 Appendix F.  References and generative use cases
 
@@ -5012,7 +5013,7 @@ Appendix H.  Change Log
 
    // This section to be removed before leaving Internet-Draft status.
 
-H.1.  draft-dusseault-json-schema-02
+H.1.  draft-ietf-jsonschema-json-schema-02
 
    *  Add a section near the front of the document explaining what
       sections are written for distinct readers
@@ -5024,7 +5025,7 @@ H.1.  draft-dusseault-json-schema-02
       core text and into an informative appendix, simplifying the main
       text for readers who are not implementing
 
-H.2.  draft-dusseault-json-schema-01
+H.2.  draft-ietf-jsonschema-json-schema-01
 
    *  Clarify terminology by using JSON Text when talking about
       serialized JSON, and structured document when talking about what a
@@ -5033,7 +5034,7 @@ H.2.  draft-dusseault-json-schema-01
    *  Add examples for $anchor, $ref, $defs, $comment, allOf, if and
       then
 
-H.3.  draft-dusseault-json-schema-00
+H.3.  draft-ietf-jsonschema-json-schema-00
 
    Compared to the "2020-12" version of JSON Schema, this draft makes
    the following changes.
