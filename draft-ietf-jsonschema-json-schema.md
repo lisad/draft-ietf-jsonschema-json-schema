@@ -4232,6 +4232,15 @@ and Karen Etheridge.
 
 [^22]
 
+## draft-dusseault-json-schema-02
+
+* Add a section near the front of the document explaining what sections
+  are written for distinct readers
+* Add examples for keywords up to the end of section 6 (up to "unevaluatedProperties")
+* Move annotation implementation suggestions out of the normative core
+  text and into an informative appendix, simplifying the main text for
+  readers who are not implementing
+
 ## draft-dusseault-json-schema-01
 
 * Clarify terminology by using JSON Text when talking about serialized JSON, and

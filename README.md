@@ -17,3 +17,13 @@ As a WG document, contributions to the draft need to be made to the WG mailing l
 
 Please note that issues are used in this repository as a way of managing tasks and issues for the authors, and should
 not be used to replace mailing list discussion, lest it fragment participation.  
+
+## Building, making
+
+Check all the included examples as valid JSON and against the 2020-12 meta schema:
+
+% python3.11 validate-examples.py
+
+build HTML output:
+
+% make
