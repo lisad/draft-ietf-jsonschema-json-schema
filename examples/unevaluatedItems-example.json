@@ -1,0 +1,15 @@
+{
+  "type": "array",
+  "allOf": [
+    {
+      "prefixItems": [
+        { "type": "number", "minimum": -90, "maximum": 90 },
+        { "type": "number", "minimum": -180, "maximum": 180 }
+      ]
+    },
+    {
+      "items": { "type": "number" }
+    }
+  ],
+  "unevaluatedItems": false
+}

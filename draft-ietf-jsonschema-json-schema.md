@@ -1359,7 +1359,7 @@ vocabulary are notable exceptions:
 * "unevaluatedProperties", whose behavior depends on "properties",
 "patternProperties", "additionalProperties" and itself
 
-## "unevaluatedItems"
+## "unevaluatedItems" {#unevaluatedItems}
 
 The value of "unevaluatedItems" MUST be a valid JSON Schema.
 
@@ -1385,6 +1385,20 @@ behavior of "items".
 
 Omitting this keyword has the same assertion behavior as
 an empty schema.
+
+The `unevaluatedItems` keyword can be very similar to the `items` keyword in
+some examples, like the example in {{annotations-appendix}} where `prefixItems`
+is used to define exactly three items in a list and further items are forbidden,
+and in that example `unevaluatedItems` could replace `items`.  Here's an example
+where `unevaluatedItems` is doing work that could not be done by `items`, constraining
+a list to be only numbers (and the first two numbers must be geospatial points).
+An input with seven numbers in a list might validate, but an input with a string
+would fail on `unevaluatedItems` because the string was not evaluated by the
+`items` definition.
+
+~~~~~~~~~~
+{::include ./examples/unevaluatedItems-example.json}
+~~~~~~~~~~
 
 ## "unevaluatedProperties"
 
@@ -1412,6 +1426,20 @@ property names validated by this keyword's subschema.
 
 Omitting this keyword has the same assertion behavior as
 an empty schema.
+
+As an example of using unevaluatedProperties, imagine a schema similar
+to the one in {{unevaluatedItems}} but instead of a list, the geospatial
+data is an object such as
+
+~~~
+  {"lat": 37.77, "long": -122.42, "dist": 34.1, "alt": 35}
+~~~
+
+The additional values could all be constrained to numbers using
+
+~~~
+  "unevaluatedProperties": { "type": "number" }
+~~~
 
 # Keywords for Structural Validation {#structural-keywords}
 
@@ -1591,6 +1619,11 @@ effect is to modify the behavior of "contains" by modifying the minimum
 number of array elements required to match the "contains" schema.
 
 Omitting this keyword has the same behavior as a value of 1.
+
+The example for `contains` and `maxContains` could easily be imagined
+to use `minContains` instead.  An exercise for the reader is to extend
+the example in {{contains}} to require the assignees list to have
+exactly one owner AND at least one reviewer (hint: using `allOf` is one solution).
 
 ## Validation Keywords for Objects
 
