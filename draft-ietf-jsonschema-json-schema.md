@@ -1060,7 +1060,7 @@ keyword's subschema MUST also be valid against
 the subschema value of the "then" keyword, if
 present.
 
-Iputs that fail to validate against this
+Inputs that fail to validate against this
 keyword's subschema MUST also be valid against
 the subschema value of the "else" keyword, if
 present.
@@ -1180,7 +1180,7 @@ an empty schema.
 
 Examples of `items` can be found in other examples in this specification.
 One of the clearest is in {{output-structure}}, where the `items` keyword
-requires the the input to be a list of points objects.
+requires the input to be a list of points objects.
 
 ### "contains"
 
@@ -1744,7 +1744,7 @@ When the implementation is configured for assertion behavior, it:
 
 When the Format-Assertion vocabulary is declared with a value of true,
 implementations MUST provide full validation support for all of the formats
-defined by this specificaion. Implementations that cannot provide full
+defined by this specification. Implementations that cannot provide full
 validation support MUST refuse to process the schema.
 
 An implementation that supports the Format-Assertion vocabulary:
@@ -2654,6 +2654,7 @@ Note that single-level custom keywords with identical syntax and
 semantics to "$defs" do not allow for any intervening "$id" keywords,
 and therefore will behave correctly under implementations that attempt
 to use any reference target as a schema.  However, this behavior is
+implementation-specific and MUST NOT be relied upon for interoperability.
 
 ## RESTful / Hypermedia Schema References {#hypermedia}
 
@@ -4003,7 +4004,7 @@ that can be used in the implementation of other keywords:
 
 # Working with vocabularies {#vocabularies-appendix}
 
-## Best practices for vocabulary and meta-schema authors"
+## Best practices for vocabulary and meta-schema authors
 
 Vocabulary authors should
 take care to avoid keyword name collisions if the vocabulary is intended
@@ -4150,7 +4151,7 @@ provided as the keyword's value in the schema), an implementation can
 only validate the syntactic usage.  In this case, that means validating
 that it is a date-formatted string (using "pattern" to ensure that it is
 validated even when "format" functions purely as an annotation, as explained
-in the the validation specification ({{?I-D.bhutton-json-schema-validation}}).
+in the validation specification ({{?I-D.bhutton-json-schema-validation}}).
 
 
 # References and generative use cases
@@ -4232,7 +4233,7 @@ and Karen Etheridge.
 
 [^22]
 
-## draft-dusseault-json-schema-02
+## draft-ietf-jsonschema-json-schema-02
 
 * Add a section near the front of the document explaining what sections
   are written for distinct readers
@@ -4241,13 +4242,13 @@ and Karen Etheridge.
   text and into an informative appendix, simplifying the main text for
   readers who are not implementing
 
-## draft-dusseault-json-schema-01
+## draft-ietf-jsonschema-json-schema-01
 
 * Clarify terminology by using JSON Text when talking about serialized JSON, and
 structured document when talking about what a schema operates on.
 * Add examples for $anchor, $ref, $defs, $comment, allOf, if and then
 
-## draft-dusseault-json-schema-00
+## draft-ietf-jsonschema-json-schema-00
 
 Compared to the "2020-12" version of JSON Schema, this draft makes the following changes.
 
