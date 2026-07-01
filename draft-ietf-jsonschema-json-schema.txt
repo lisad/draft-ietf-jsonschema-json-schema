@@ -5,9 +5,9 @@
 Network Working Group                                  L. Dusseault, Ed.
 Internet-Draft                                  Data Transfer Initiative
 Intended status: Standards Track                               A. Wright
-Expires: 1 January 2027                                                 
+Expires: 2 January 2027                                                 
                                                               H. Andrews
-                                                            30 June 2026
+                                                             1 July 2026
 
 
                               JSON Schema
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 January 2027.
+   This Internet-Draft will expire on 2 January 2027.
 
 Copyright Notice
 
@@ -251,8 +251,9 @@ Table of Contents
    Appendix F.  References and generative use cases
    Appendix G.  Acknowledgments
    Appendix H.  Change Log
-     H.1.  draft-dusseault-json-schema-01
-     H.2.  draft-dusseault-json-schema-00
+     H.1.  draft-dusseault-json-schema-02
+     H.2.  draft-dusseault-json-schema-01
+     H.3.  draft-dusseault-json-schema-00
    Authors' Addresses
 
 1.  Introduction
@@ -1789,6 +1790,33 @@ Table of Contents
    Omitting this keyword has the same assertion behavior as an empty
    schema.
 
+   The unevaluatedItems keyword can be very similar to the items keyword
+   in some examples, like the example in Appendix D where prefixItems is
+   used to define exactly three items in a list and further items are
+   forbidden, and in that example unevaluatedItems could replace items.
+   Here's an example where unevaluatedItems is doing work that could not
+   be done by items, constraining a list to be only numbers (and the
+   first two numbers must be geospatial points).  An input with seven
+   numbers in a list might validate, but an input with a string would
+   fail on unevaluatedItems because the string was not evaluated by the
+   items definition.
+
+   {
+     "type": "array",
+     "allOf": [
+       {
+         "prefixItems": [
+           { "type": "number", "minimum": -90, "maximum": 90 },
+           { "type": "number", "minimum": -180, "maximum": 180 }
+         ]
+       },
+       {
+         "items": { "type": "number" }
+       }
+     ],
+     "unevaluatedItems": false
+   }
+
 6.3.  "unevaluatedProperties"
 
    The value of "unevaluatedProperties" MUST be a valid JSON Schema.
@@ -1816,6 +1844,16 @@ Table of Contents
 
    Omitting this keyword has the same assertion behavior as an empty
    schema.
+
+   As an example of using unevaluatedProperties, imagine a schema
+   similar to the one in Section 6.2 but instead of a list, the
+   geospatial data is an object such as
+
+     {"lat": 37.77, "long": -122.42, "dist": 34.1, "alt": 35}
+
+   The additional values could all be constrained to numbers using
+
+     "unevaluatedProperties": { "type": "number" }
 
 7.  Keywords for Structural Validation
 
@@ -2003,6 +2041,12 @@ Table of Contents
    schema.
 
    Omitting this keyword has the same behavior as a value of 1.
+
+   The example for contains and maxContains could easily be imagined to
+   use minContains instead.  An exercise for the reader is to extend the
+   example in Section 5.3.3 to require the assignees list to have
+   exactly one owner AND at least one reviewer (hint: using allOf is one
+   solution).
 
 7.5.  Validation Keywords for Objects
 
@@ -4968,7 +5012,19 @@ Appendix H.  Change Log
 
    // This section to be removed before leaving Internet-Draft status.
 
-H.1.  draft-dusseault-json-schema-01
+H.1.  draft-dusseault-json-schema-02
+
+   *  Add a section near the front of the document explaining what
+      sections are written for distinct readers
+
+   *  Add examples for keywords up to the end of section 6 (up to
+      "unevaluatedProperties")
+
+   *  Move annotation implementation suggestions out of the normative
+      core text and into an informative appendix, simplifying the main
+      text for readers who are not implementing
+
+H.2.  draft-dusseault-json-schema-01
 
    *  Clarify terminology by using JSON Text when talking about
       serialized JSON, and structured document when talking about what a
@@ -4977,7 +5033,7 @@ H.1.  draft-dusseault-json-schema-01
    *  Add examples for $anchor, $ref, $defs, $comment, allOf, if and
       then
 
-H.2.  draft-dusseault-json-schema-00
+H.3.  draft-dusseault-json-schema-00
 
    Compared to the "2020-12" version of JSON Schema, this draft makes
    the following changes.
