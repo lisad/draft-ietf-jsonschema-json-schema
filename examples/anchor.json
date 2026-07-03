@@ -7,17 +7,21 @@
   "$defs": {
     "utils": {
       "new": {
-        "reusable": {
-          "address": {
-            "$anchor": "address-model",
-            "type": "object",
-            "required": ["street", "city"],
-            "properties": {
-              "street": { "type": "string" },
-              "city": { "type": "string" }
-            }
+        "address": {
+          "$anchor": "address-model",
+          "type": "object",
+          "required": ["street", "city"],
+          "properties": {
+            "street": { "type": "string" },
+            "city": { "type": "string" }
           }
         }
+      },
+      "core": {
+
+      },
+      "archive": {
+
       }
     }
   }
