@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-02T00:54:38.008724+00:00",
+  "timestamp": "2026-07-09T00:42:49.564168+00:00",
   "repo": "lisad/draft-ietf-jsonschema-json-schema",
   "labels": [
     {
@@ -333,6 +333,44 @@
       "updatedAt": "2026-06-28T19:51:20Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 28,
+      "id": "I_kwDOR8mbas8AAAABH_bhng",
+      "title": "Can we require something more solid and interoperable for regex?",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/issues/28",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Juan Cruz reports this is a real interoperability problem. One developer will setup a JSON Schema that works for them, but another developer uses the JSON Schema and finds that the regex doesn't even parse (or worse, has different results).\n\nAs a practical matter, somebody writing a JSON Schema validator in a given language would have to use a library that supports ECMA for regex.  ",
+      "createdAt": "2026-07-07T18:35:33Z",
+      "updatedAt": "2026-07-08T04:35:37Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "gibson042",
+          "authorAssociation": "NONE",
+          "body": "I think it would be ideal to use [RFC 9485 I-Regexp](https://datatracker.ietf.org/doc/html/rfc9485).",
+          "createdAt": "2026-07-07T19:41:13Z",
+          "updatedAt": "2026-07-07T19:41:13Z"
+        },
+        {
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Yeah there are some SHOULDs regarding ECMA262 compliance, but I don't know that that's ever been practical across implementations.  I-Regexp (which did not exist when this topic was last discussed) does indeed seem relevant.",
+          "createdAt": "2026-07-07T20:09:00Z",
+          "updatedAt": "2026-07-07T20:09:00Z"
+        },
+        {
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "body": "@gibson042 you should by all means forward your advice to the JSON mailing list where official contributions to the JSON Schema draft are made.  I'm using this issues list to track my own TODOs or at most discussion among authors, not to gather input as that is not IETF process.",
+          "createdAt": "2026-07-08T04:35:37Z",
+          "updatedAt": "2026-07-08T04:35:37Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -1209,6 +1247,46 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 29,
+      "id": "PR_kwDOR8mbas7vYAhG",
+      "title": "Fix code fences and stale companion doc references",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/29",
+      "state": "OPEN",
+      "author": "handrews",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "We no longer have \"companion documents\" as validation has been folded into what used to be core, and hyperschema is outside of the scope of current work (I assume it will be considered an extension vocabulary if it is ever revived).",
+      "createdAt": "2026-07-08T16:30:42Z",
+      "updatedAt": "2026-07-08T16:37:09Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "b5a38fdcc3df14db3b46fd34e0ef0e2315f7b41c",
+      "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
+      "headRefName": "fix-code-fence",
+      "headRefOid": "75fc03832d46b3fab4bb3eb6ab9da1d5f56a9dbf",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOR8mbas8AAAABFYdOsQ",
+          "commit": {
+            "abbreviatedOid": "75fc038"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-07-08T16:37:08Z",
+          "updatedAt": "2026-07-08T16:37:08Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
