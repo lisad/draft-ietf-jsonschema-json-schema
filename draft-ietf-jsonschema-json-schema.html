@@ -30,11 +30,11 @@ for "application/json" documents.
     Jinja2 3.1.6
     lxml 6.1.1
     natsort 8.4.0
-    platformdirs 4.10.0
+    platformdirs 4.10.1
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.8.1
+    wcwidth 0.8.2
 -->
 <link href="draft-ietf-jsonschema-json-schema.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1057,7 +1057,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Dusseault, et al.</td>
-<td class="center">Expires 2 January 2027</td>
+<td class="center">Expires 23 January 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1070,12 +1070,12 @@ svg {
 <dd class="internet-draft">draft-ietf-jsonschema-json-schema-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-07-01" class="published">1 July 2026</time>
+<time datetime="2026-07-22" class="published">22 July 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-01-02">2 January 2027</time></dd>
+<dd class="expires"><time datetime="2027-01-23">23 January 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1131,7 +1131,7 @@ Source for this draft can be found at
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 2 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 23 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -2296,8 +2296,8 @@ SHOULD only produce assertion results based on their subschemas'
 results.  They should not define additional constraints independent
 of their subschemas.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
 <p id="section-3.3-4">Keywords which are properties within the same schema object are referred to as adjacent keywords.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
-<p id="section-3.3-5">Extension keywords, meaning those defined outside of this document
-and its companions, are free to define other behaviors as well.<a href="#section-3.3-5" class="pilcrow">¶</a></p>
+<p id="section-3.3-5">Extension keywords, meaning those defined outside of this document,
+are free to define other behaviors as well.<a href="#section-3.3-5" class="pilcrow">¶</a></p>
 <p id="section-3.3-6">A JSON Schema MAY contain properties which are not schema keywords
 or are not recognized as schema keywords.
 The behavior of such keywords is governed by <a href="#unrecognized" class="auto internal xref">Section 12.4</a>.<a href="#section-3.3-6" class="pilcrow">¶</a></p>
@@ -2506,7 +2506,7 @@ then it SHOULD assume the use of all of the most relevant vocabularies
 for that purpose.<a href="#section-4.1.2.1-2" class="pilcrow">¶</a></p>
 <p id="section-4.1.2.1-3">For example, an implementation that is a validator
 SHOULD assume the use of all vocabularies in this
-specification and the companion Validation specification.<a href="#section-4.1.2.1-3" class="pilcrow">¶</a></p>
+specification.<a href="#section-4.1.2.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="non-inheritability-of-vocabularies">
@@ -4590,7 +4590,8 @@ input values as they are typed for write-only fields.<a href="#section-10.4-7" c
 JSON representations of resources, "username" is a field meant for display
 and cannot be changed, while "password" cannot be retrieved for display
 but can be set to a new value.<a href="#section-10.4.1-1" class="pilcrow">¶</a></p>
-<p id="section-10.4.1-2"><code>json
+<div class="lang-json sourcecode" id="section-10.4.1-2">
+<pre>
 {
   "$id": "https://example.com/schema",
   "type": "object",
@@ -4605,16 +4606,20 @@ but can be set to a new value.<a href="#section-10.4.1-1" class="pilcrow">¶</a>
     }
   }
 }
-</code><a href="#section-10.4.1-2" class="pilcrow">¶</a></p>
+</pre><a href="#section-10.4.1-2" class="pilcrow">¶</a>
+</div>
 <p id="section-10.4.1-3">With the instance following instance processed:<a href="#section-10.4.1-3" class="pilcrow">¶</a></p>
-<p id="section-10.4.1-4"><code>json
+<div class="lang-json sourcecode" id="section-10.4.1-4">
+<pre>
 {
   "username": "xyz",
   "password": "123"
 }
-</code><a href="#section-10.4.1-4" class="pilcrow">¶</a></p>
+</pre><a href="#section-10.4.1-4" class="pilcrow">¶</a>
+</div>
 <p id="section-10.4.1-5">two annotation output units would be produced:<a href="#section-10.4.1-5" class="pilcrow">¶</a></p>
-<p id="section-10.4.1-6"><code>json
+<div class="lang-json sourcecode" id="section-10.4.1-6">
+<pre>
 {
   "keywordLocation": "/properties/username/readOnly",
   "absoluteKeywordLocation":
@@ -4622,8 +4627,10 @@ but can be set to a new value.<a href="#section-10.4.1-1" class="pilcrow">¶</a>
   "instanceLocation": "/username",
   "annotation": true
 }
-</code><a href="#section-10.4.1-6" class="pilcrow">¶</a></p>
-<p id="section-10.4.1-7"><code>json
+</pre><a href="#section-10.4.1-6" class="pilcrow">¶</a>
+</div>
+<div class="lang-json sourcecode" id="section-10.4.1-7">
+<pre>
 {
   "keywordLocation": "/properties/password/writeOnly",
   "absoluteKeywordLocation":
@@ -4631,7 +4638,8 @@ but can be set to a new value.<a href="#section-10.4.1-1" class="pilcrow">¶</a>
   "instanceLocation": "/password",
   "annotation": true
 }
-</code><a href="#section-10.4.1-7" class="pilcrow">¶</a></p>
+</pre><a href="#section-10.4.1-7" class="pilcrow">¶</a>
+</div>
 <p id="section-10.4.1-8">These annotations are used for context-dependent validation,
 which is performed by the application that invoked schema evaluation.<a href="#section-10.4.1-8" class="pilcrow">¶</a></p>
 <p id="section-10.4.1-9">The API's behavior when sent a readonly field in a write request or
@@ -5335,13 +5343,12 @@ an input against schema assertions.<a href="#section-12.7-2" class="pilcrow">¶<
 primitive type.  When the type of the input is not of the type
 targeted by the keyword, the input is considered to conform
 to the assertion.<a href="#section-12.7.1-1" class="pilcrow">¶</a></p>
-<p id="section-12.7.1-2">For example, the "maxLength" keyword from the companion
-validation vocabulary (<span>[<a href="#I-D.bhutton-json-schema-validation" class="cite xref">I-D.bhutton-json-schema-validation</a>]</span>):
-will only restrict certain strings
+<p id="section-12.7.1-2">For example, the "maxLength" keyword from the validation vocabulary
+(<a href="#structural-keywords" class="auto internal xref">Section 7</a>) will only restrict certain strings
 (that are too long) from being valid.  If the input is a number,
 boolean, null, array, or object, then it is valid against this assertion.<a href="#section-12.7.1-2" class="pilcrow">¶</a></p>
 <p id="section-12.7.1-3">This behavior allows keywords to be used more easily with inputs
-that can be of multiple primitive types.  The companion validation
+that can be of multiple primitive types.  The validation
 vocabulary also includes a "type" keyword which can independently
 restrict the input to one or more primitive types.  This allows
 for a concise expression of use cases such as a function that might
@@ -5431,8 +5438,7 @@ from above.<a href="#section-12.8.1-3.4.1" class="pilcrow">¶</a></p>
 to use based on the schema location that contributed the value.
 This is intended to allow flexible usage.  Collecting the schema location
 facilitates such usage.<a href="#section-12.8.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-12.8.1.1-2">For example, consider this schema, which uses annotations and assertions from
-the validation specification (<span>[<a href="#I-D.bhutton-json-schema-validation" class="cite xref">I-D.bhutton-json-schema-validation</a>]</span>):<a href="#section-12.8.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-12.8.1.1-2">For example, consider this schema:<a href="#section-12.8.1.1-2" class="pilcrow">¶</a></p>
 <p id="section-12.8.1.1-3">Note that some lines are wrapped for clarity.<a href="#section-12.8.1.1-3" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-12.8.1.1-4">
 <pre>
@@ -6220,7 +6226,7 @@ These regular expressions SHOULD be valid according to the regular expression
 dialect described in <span>[<a href="#ECMA262" class="cite xref">ECMA262</a>]</span>, Section 21.2.1.<a href="#section-16.3-1" class="pilcrow">¶</a></p>
 <p id="section-16.3-2">Unless otherwise specified by a keyword, regular expressions MUST NOT be
 considered to be implicitly anchored at either end.  All regular expression
-keywords in this specification and its companion documents are un-anchored.<a href="#section-16.3-2" class="pilcrow">¶</a></p>
+keywords in this specification are un-anchored.<a href="#section-16.3-2" class="pilcrow">¶</a></p>
 <p id="section-16.3-3">Regular expressions SHOULD be built with the "u" flag (or equivalent) to provide
 Unicode support, or processed in such a way which provides Unicode support as
 defined by ECMA-262.<a href="#section-16.3-3" class="pilcrow">¶</a></p>
@@ -6455,10 +6461,6 @@ media type.  See JSON (<span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]<
 <a href="#section-18.2" class="section-number selfRef">18.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
-<dt id="I-D.bhutton-json-schema-validation">[I-D.bhutton-json-schema-validation]</dt>
-        <dd>
-<span class="refAuthor">Wright, A.</span>, <span class="refAuthor">Andrews, H.</span>, and <span class="refAuthor">B. Hutton</span>, <span class="refTitle">"JSON Schema Validation: A Vocabulary for Structural Validation of JSON"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bhutton-json-schema-validation-01</span>, <time datetime="2022-06-10" class="refDate">10 June 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bhutton-json-schema-validation-01">https://datatracker.ietf.org/doc/html/draft-bhutton-json-schema-validation-01</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="I-D.handrews-json-schema-hyperschema">[I-D.handrews-json-schema-hyperschema]</dt>
         <dd>
 <span class="refAuthor">Andrews, H.</span> and <span class="refAuthor">A. Wright</span>, <span class="refTitle">"JSON Hyper-Schema: A Vocabulary for Hypermedia Annotation of JSON"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-handrews-json-schema-hyperschema-02</span>, <time datetime="2019-09-17" class="refDate">17 September 2019</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-handrews-json-schema-hyperschema-02">https://datatracker.ietf.org/doc/html/draft-handrews-json-schema-hyperschema-02</a>&gt;</span>. </dd>
@@ -7165,7 +7167,7 @@ provided as the keyword's value in the schema), an implementation can
 only validate the syntactic usage.  In this case, that means validating
 that it is a date-formatted string (using "pattern" to ensure that it is
 validated even when "format" functions purely as an annotation, as explained
-in the validation specification (<span>[<a href="#I-D.bhutton-json-schema-validation" class="cite xref">I-D.bhutton-json-schema-validation</a>]</span>).<a href="#appendix-E.2-10" class="pilcrow">¶</a></p>
+in <a href="#format-vocab" class="auto internal xref">Section 8</a>).<a href="#appendix-E.2-10" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -7342,7 +7344,7 @@ structured document when talking about what a schema operates on.<a href="#appen
         <div dir="auto" class="left"><span class="fn nameRole">Henry H. Andrews</span></div>
 <div class="email">
 <span>Email:</span>
-<a href="mailto:andrews_henry@yahoo.com" class="email">andrews_henry@yahoo.com</a>
+<a href="mailto:henry@henryandrews.net" class="email">henry@henryandrews.net</a>
 </div>
 </address>
 </section>

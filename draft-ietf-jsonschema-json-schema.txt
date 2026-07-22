@@ -5,9 +5,9 @@
 Network Working Group                                  L. Dusseault, Ed.
 Internet-Draft                                  Data Transfer Initiative
 Intended status: Standards Track                               A. Wright
-Expires: 2 January 2027                                                 
+Expires: 23 January 2027                                                
                                                               H. Andrews
-                                                             1 July 2026
+                                                            22 July 2026
 
 
                               JSON Schema
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 January 2027.
+   This Internet-Draft will expire on 23 January 2027.
 
 Copyright Notice
 
@@ -688,8 +688,8 @@ Table of Contents
    Keywords which are properties within the same schema object are
    referred to as adjacent keywords.
 
-   Extension keywords, meaning those defined outside of this document
-   and its companions, are free to define other behaviors as well.
+   Extension keywords, meaning those defined outside of this document,
+   are free to define other behaviors as well.
 
    A JSON Schema MAY contain properties which are not schema keywords or
    are not recognized as schema keywords.  The behavior of such keywords
@@ -896,8 +896,7 @@ Table of Contents
    relevant vocabularies for that purpose.
 
    For example, an implementation that is a validator SHOULD assume the
-   use of all vocabularies in this specification and the companion
-   Validation specification.
+   use of all vocabularies in this specification.
 
 4.1.2.2.  Non-inheritability of vocabularies
 
@@ -2725,25 +2724,45 @@ Table of Contents
    display and cannot be changed, while "password" cannot be retrieved
    for display but can be set to a new value.
 
-   json { "$id": "https://example.com/schema", "type": "object",
-   "properties": { "username": { "type": "string", "readOnly": true },
-   "password": { "type": "string", "writeOnly": true } } }
+   {
+     "$id": "https://example.com/schema",
+     "type": "object",
+     "properties": {
+       "username": {
+         "type": "string",
+         "readOnly": true
+       },
+       "password": {
+         "type": "string",
+         "writeOnly": true
+       }
+     }
+   }
 
    With the instance following instance processed:
 
-   json { "username": "xyz", "password": "123" }
+   {
+     "username": "xyz",
+     "password": "123"
+   }
 
    two annotation output units would be produced:
 
-   json { "keywordLocation": "/properties/username/readOnly",
-   "absoluteKeywordLocation":
-   "https://example.com/schema#/properties/username/readOnly",
-   "instanceLocation": "/username", "annotation": true }
+   {
+     "keywordLocation": "/properties/username/readOnly",
+     "absoluteKeywordLocation":
+       "https://example.com/schema#/properties/username/readOnly",
+     "instanceLocation": "/username",
+     "annotation": true
+   }
 
-   json { "keywordLocation": "/properties/password/writeOnly",
-   "absoluteKeywordLocation":
-   "https://example.com/schema#/properties/password/writeOnly",
-   "instanceLocation": "/password", "annotation": true }
+   {
+     "keywordLocation": "/properties/password/writeOnly",
+     "absoluteKeywordLocation":
+       "https://example.com/schema#/properties/password/writeOnly",
+     "instanceLocation": "/password",
+     "annotation": true
+   }
 
    These annotations are used for context-dependent validation, which is
    performed by the application that invoked schema evaluation.
@@ -3407,18 +3426,17 @@ Table of Contents
    type.  When the type of the input is not of the type targeted by the
    keyword, the input is considered to conform to the assertion.
 
-   For example, the "maxLength" keyword from the companion validation
-   vocabulary ([I-D.bhutton-json-schema-validation]): will only restrict
-   certain strings (that are too long) from being valid.  If the input
-   is a number, boolean, null, array, or object, then it is valid
-   against this assertion.
+   For example, the "maxLength" keyword from the validation vocabulary
+   (Section 7) will only restrict certain strings (that are too long)
+   from being valid.  If the input is a number, boolean, null, array, or
+   object, then it is valid against this assertion.
 
    This behavior allows keywords to be used more easily with inputs that
-   can be of multiple primitive types.  The companion validation
-   vocabulary also includes a "type" keyword which can independently
-   restrict the input to one or more primitive types.  This allows for a
-   concise expression of use cases such as a function that might return
-   either a string of a certain length or a null value:
+   can be of multiple primitive types.  The validation vocabulary also
+   includes a "type" keyword which can independently restrict the input
+   to one or more primitive types.  This allows for a concise expression
+   of use cases such as a function that might return either a string of
+   a certain length or a null value:
 
    {
        "type": ["string", "null"],
@@ -3492,9 +3510,7 @@ Table of Contents
    value.  This is intended to allow flexible usage.  Collecting the
    schema location facilitates such usage.
 
-   For example, consider this schema, which uses annotations and
-   assertions from the validation specification
-   ([I-D.bhutton-json-schema-validation]):
+   For example, consider this schema:
 
    Note that some lines are wrapped for clarity.
 
@@ -4183,8 +4199,7 @@ Table of Contents
 
    Unless otherwise specified by a keyword, regular expressions MUST NOT
    be considered to be implicitly anchored at either end.  All regular
-   expression keywords in this specification and its companion documents
-   are un-anchored.
+   expression keywords in this specification are un-anchored.
 
    Regular expressions SHOULD be built with the "u" flag (or equivalent)
    to provide Unicode support, or processed in such a way which provides
@@ -4381,14 +4396,6 @@ Table of Contents
               <http://www.w3.org/TR/2009/REC-xml-names-20091208/>.
 
 18.2.  Informative References
-
-   [I-D.bhutton-json-schema-validation]
-              Wright, A., Andrews, H., and B. Hutton, "JSON Schema
-              Validation: A Vocabulary for Structural Validation of
-              JSON", Work in Progress, Internet-Draft, draft-bhutton-
-              json-schema-validation-01, 10 June 2022,
-              <https://datatracker.ietf.org/doc/html/draft-bhutton-json-
-              schema-validation-01>.
 
    [I-D.handrews-json-schema-hyperschema]
               Andrews, H. and A. Wright, "JSON Hyper-Schema: A
@@ -4943,8 +4950,7 @@ E.2.  Example meta-schema with vocabulary declarations
    an implementation can only validate the syntactic usage.  In this
    case, that means validating that it is a date-formatted string (using
    "pattern" to ensure that it is validated even when "format" functions
-   purely as an annotation, as explained in the validation specification
-   ([I-D.bhutton-json-schema-validation]).
+   purely as an annotation, as explained in Section 8).
 
 Appendix F.  References and generative use cases
 
@@ -5062,4 +5068,4 @@ Authors' Addresses
 
 
    Henry H. Andrews
-   Email: andrews_henry@yahoo.com
+   Email: henry@henryandrews.net
