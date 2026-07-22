@@ -24,7 +24,7 @@ author:
  -
     ins: H. Andrews
     name: Henry H. Andrews
-    email: andrews_henry@yahoo.com
+    email: henry@henryandrews.net
 
 normative:
   ECMA262:
@@ -490,8 +490,8 @@ of their subschemas.
 
 Keywords which are properties within the same schema object are referred to as adjacent keywords.
 
-Extension keywords, meaning those defined outside of this document
-and its companions, are free to define other behaviors as well.
+Extension keywords, meaning those defined outside of this document,
+are free to define other behaviors as well.
 
 A JSON Schema MAY contain properties which are not schema keywords
 or are not recognized as schema keywords.
@@ -693,7 +693,7 @@ for that purpose.
 
 For example, an implementation that is a validator
 SHOULD assume the use of all vocabularies in this
-specification and the companion Validation specification.
+specification.
 
 #### Non-inheritability of vocabularies
 
@@ -2243,7 +2243,7 @@ JSON representations of resources, "username" is a field meant for display
 and cannot be changed, while "password" cannot be retrieved for display
 but can be set to a new value.
 
-```json
+~~~ json
 {
   "$id": "https://example.com/schema",
   "type": "object",
@@ -2258,20 +2258,20 @@ but can be set to a new value.
     }
   }
 }
-```
+~~~
 
 With the instance following instance processed:
 
-```json
+~~~ json
 {
   "username": "xyz",
   "password": "123"
 }
-```
+~~~
 
 two annotation output units would be produced:
 
-```json
+~~~ json
 {
   "keywordLocation": "/properties/username/readOnly",
   "absoluteKeywordLocation":
@@ -2279,9 +2279,9 @@ two annotation output units would be produced:
   "instanceLocation": "/username",
   "annotation": true
 }
-```
+~~~
 
-```json
+~~~ json
 {
   "keywordLocation": "/properties/password/writeOnly",
   "absoluteKeywordLocation":
@@ -2289,7 +2289,7 @@ two annotation output units would be produced:
   "instanceLocation": "/password",
   "annotation": true
 }
-```
+~~~
 
 These annotations are used for context-dependent validation,
 which is performed by the application that invoked schema evaluation.
@@ -2925,14 +2925,13 @@ primitive type.  When the type of the input is not of the type
 targeted by the keyword, the input is considered to conform
 to the assertion.
 
-For example, the "maxLength" keyword from the companion
-validation vocabulary ({{?I-D.bhutton-json-schema-validation}}):
-will only restrict certain strings
+For example, the "maxLength" keyword from the validation vocabulary
+({{structural-keywords}}) will only restrict certain strings
 (that are too long) from being valid.  If the input is a number,
 boolean, null, array, or object, then it is valid against this assertion.
 
 This behavior allows keywords to be used more easily with inputs
-that can be of multiple primitive types.  The companion validation
+that can be of multiple primitive types.  The validation
 vocabulary also includes a "type" keyword which can independently
 restrict the input to one or more primitive types.  This allows
 for a concise expression of use cases such as a function that might
@@ -3007,8 +3006,7 @@ to use based on the schema location that contributed the value.
 This is intended to allow flexible usage.  Collecting the schema location
 facilitates such usage.
 
-For example, consider this schema, which uses annotations and assertions from
-the validation specification ({{?I-D.bhutton-json-schema-validation}}):
+For example, consider this schema:
 
 Note that some lines are wrapped for clarity.
 
@@ -3665,7 +3663,7 @@ dialect described in {{ECMA262}}, Section 21.2.1.
 
 Unless otherwise specified by a keyword, regular expressions MUST NOT be
 considered to be implicitly anchored at either end.  All regular expression
-keywords in this specification and its companion documents are un-anchored.
+keywords in this specification are un-anchored.
 
 Regular expressions SHOULD be built with the "u" flag (or equivalent) to provide
 Unicode support, or processed in such a way which provides Unicode support as
@@ -4151,7 +4149,7 @@ provided as the keyword's value in the schema), an implementation can
 only validate the syntactic usage.  In this case, that means validating
 that it is a date-formatted string (using "pattern" to ensure that it is
 validated even when "format" functions purely as an annotation, as explained
-in the validation specification ({{?I-D.bhutton-json-schema-validation}}).
+in {{format-vocab}}).
 
 
 # References and generative use cases
