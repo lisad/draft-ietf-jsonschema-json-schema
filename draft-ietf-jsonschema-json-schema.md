@@ -538,7 +538,7 @@ in the ["$anchor" keyword](#anchors) section.
 
 ### Range of JSON Values
 
-An instance may be any valid JSON value as defined by JSON ({{!RFC8259}}).
+An instance may be any valid JSON value.
 JSON Schema imposes no restrictions on type: JSON Schema can describe any JSON
 value, including, for example, null.
 
