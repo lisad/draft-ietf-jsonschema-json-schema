@@ -948,14 +948,11 @@ These keywords apply subschemas to the same location in the input
 as the parent schema is being applied.  They allow combining
 or modifying the subschema results in various ways.
 
-Subschemas of these keywords evaluate the input completely independently
+With the exception of the cooperative "if", "then", and "else" keywords,
+subschemas of these keywords evaluate the input completely independently
 such that the results of one such subschema MUST NOT impact the results of sibling
 subschemas.  Therefore subschemas may be applied in
 any order.
-
-Three of these keywords work together to implement conditional
-application of a subschema based on the outcome of another subschema.
-The fourth is a shortcut for a specific conditional case.
 
 "if", "then", and "else" MUST NOT interact with each other across
 subschema boundaries.  In other words, an "if" in one
