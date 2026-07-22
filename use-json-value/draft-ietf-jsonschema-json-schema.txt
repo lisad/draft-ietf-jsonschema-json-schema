@@ -739,9 +739,9 @@ Table of Contents
 
 3.5.1.  Range of JSON Values
 
-   An instance may be any valid JSON value as defined by JSON
-   ([RFC8259]).  JSON Schema imposes no restrictions on type: JSON
-   Schema can describe any JSON value, including, for example, null.
+   An instance may be any valid JSON value.  JSON Schema imposes no
+   restrictions on type: JSON Schema can describe any JSON value,
+   including, for example, null.
 
 3.5.2.  Requirements for handling extensions
 
