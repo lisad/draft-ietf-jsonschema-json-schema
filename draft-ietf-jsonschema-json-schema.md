@@ -89,7 +89,7 @@ for "application/json" documents.
 # Introduction
 
 
-JSON Schemas are documents that describe and constrain JSON values and JSON texts.
+JSON Schemas are documents that describe and constrain JSON values.
 JSON Schema defines validation, documentation, hyperlink navigation,
 and interaction control of JSON data.
 
@@ -216,11 +216,11 @@ when declaring which vocabularies are in use.
 # Terminology
 
 Terms in this document are consistent with use in other JSON specifications, but
-may take on additional nuance in the context of JSON Schema.  These quick
-definitions may provide a useful quick reference.  More comprehensive
+may take on additional nuance in the context of JSON Schema.  These
+definitions may provide a useful reference.  More comprehensive
 requirements are later in the document.
 
-The terms "JSON", "JSON text", "member", "element", "object", "array",
+The terms "JSON", "JSON text", "JSON value", "member", "element", "object", "array",
 "number", "string", "boolean", "true", "false", and "null" in this document are to
 be interpreted as defined in {{!RFC8259}}.
 
@@ -231,17 +231,16 @@ application/json media type, as defined in {{RFC8259}}.
 
 **JSON Value**
 
-Per {{!RFC9535}}, sections 1.1 and 1.3, a *JSON Value* is "a data item
-conforming to the generic data model of JSON" and "*often*
-constructed by parsing a JSON text".  Unlike a JSON Text,
+In addition to {{!RFC8259}}'s definition, {{!RFC9535, Section 1.3}} describes a JSON value
+as "*often* constructed by parsing a JSON text" (emphasis added).  Unlike a JSON text,
 a JSON value is not required to be a
 serialized sequence of octets; it may instead be a parsed, in-memory data
 structure.  This document uses *JSON value* when referring to such parsed
-or structured data, reserving *JSON Text* for the serialized form.
+or structured data, reserving *JSON text* for the serialized form.
 
 **Input**
 
-A JSON Text or JSON Value, supplied to a validator
+A JSON text or JSON value, supplied to a validator
 or other implementation, in order to
 compare it to a schema, is an input until it is known to be in the valid set
 for that schema.
@@ -254,9 +253,9 @@ of that schema.
 **Schema**
 
 A JSON Schema document, or simply a *schema*, is used to describe
-and constrain JSON Values.  Used in validation, the schema defines the valid
+and constrain JSON values.  Used in validation, the schema defines the valid
 set, or all possible instances that validate successfully.
-A JSON Schema is also a JSON Value and may also be an instance of some meta-schema.
+A JSON Schema is also a JSON value and may also be an instance of some meta-schema.
 
 **Schema Resource**
 
