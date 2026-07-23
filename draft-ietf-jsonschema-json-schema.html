@@ -2849,20 +2849,22 @@ keywords in this vocabulary:<a href="#section-5.1-2" class="pilcrow">¶</a></p>
 <p id="section-5.2-1">These keywords apply subschemas to the same location in the input
 as the parent schema is being applied.  They allow combining
 or modifying the subschema results in various ways.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
-<p id="section-5.2-2">With the exception of the cooperative "if", "then", and "else" keywords,
-subschemas of these keywords evaluate the input completely independently
+<p id="section-5.2-2">Subschemas of these keywords evaluate the input completely independently
 such that the results of one such subschema MUST NOT impact the results of sibling
 subschemas.  Therefore subschemas may be applied in
 any order.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
-<p id="section-5.2-3">"if", "then", and "else" MUST NOT interact with each other across
+<p id="section-5.2-3">Three of these keywords work together to implement conditional
+application of a subschema based on the outcome of another subschema.
+The fourth is a shortcut for a specific conditional case.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
+<p id="section-5.2-4">"if", "then", and "else" MUST NOT interact with each other across
 subschema boundaries.  In other words, an "if" in one
 branch of an "allOf" MUST NOT have an impact on a "then"
-or "else" in another branch.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
-<p id="section-5.2-4">There is no default behavior for "if", "then", or "else"
+or "else" in another branch.<a href="#section-5.2-4" class="pilcrow">¶</a></p>
+<p id="section-5.2-5">There is no default behavior for "if", "then", or "else"
 when they are not present.  In particular, they MUST NOT
 be treated as if present with an empty schema, and
 when "if" is not present, both "then" and "else" MUST be
-entirely ignored.<a href="#section-5.2-4" class="pilcrow">¶</a></p>
+entirely ignored.<a href="#section-5.2-5" class="pilcrow">¶</a></p>
 <div id="allOf">
 <section id="section-5.2.1">
           <h4 id="name-allof">
