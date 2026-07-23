@@ -78,7 +78,7 @@ normative:
 
 JSON Schema defines the media type "application/schema+json", a JSON-based format
 for describing the structure of JSON data.
-A JSON Schema may assert constraints on a structured document,
+A JSON Schema may assert constraints on a JSON value,
 ways to extract information from it, and how to interact with it.
 The "application/schema-instance+json" media type provides additional
 feature-rich integration with "application/schema+json" beyond what can be offered
@@ -89,8 +89,7 @@ for "application/json" documents.
 # Introduction
 
 
-JSON Schemas are documents that describe and constrain structured documents, particularly
-but not exclusively JSON texts.
+JSON Schemas are documents that describe and constrain JSON values.
 JSON Schema defines validation, documentation, hyperlink navigation,
 and interaction control of JSON data.
 
@@ -110,10 +109,6 @@ starting point for a WG and a wide consensus process.
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
 interpreted as described in {{!RFC2119}}.
-
-The terms "JSON", "JSON text", "JSON value", "member", "element", "object", "array",
-"number", "string", "boolean", "true", "false", and "null" in this document are to
-be interpreted as defined in {{!RFC8259}}.
 
 ## Audiences
 
@@ -148,8 +143,8 @@ instance, returns a standard annotation output.
 ### Validation
 
 In computer science terms, a JSON Schema document (a _schema_) notates a _grammar_
-that describes a _language_ of structured documents.
-That is, a schema describes a set of structured documents by listing rules to classify
+that describes a _language_ of JSON values.
+That is, a schema describes a set of JSON values by listing rules to classify
 an _input_ as within or not within the set.
 The largest possible set is that of all syntactically valid structured inputs.
 The smallest set is the empty set.
@@ -184,7 +179,7 @@ an instance of a particular JSON Schema.
 
 ### Keywords
 
-JSON Schema uses *keywords* to assert constraints on structured documents or provide
+JSON Schema uses *keywords* to assert constraints on JSON values or provide
 annotations with additional information.  Additional keywords combine other
 keywords or provide references to sub-schemas, features which allow more
 complex JSON data structures.
@@ -220,37 +215,47 @@ when declaring which vocabularies are in use.
 
 # Terminology
 
-These terms are all defined in the context of JSON Schema.  These quick
-definitions may not be enough to completely comprehend roles and uses, but may still
-provide a useful quick reference.
+Terms in this document are consistent with use in other JSON specifications, but
+may take on additional nuance in the context of JSON Schema.  These
+definitions may provide a useful reference.  More comprehensive
+requirements are later in the document.
+
+The terms "JSON", "JSON text", "JSON value", "member", "element", "object", "array",
+"number", "string", "boolean", "true", "false", and "null" in this document are to
+be interpreted as defined in {{!RFC8259}}.
 
 **JSON Text**
 
 A JSON text is an information resource (series of octets) described by the
 application/json media type, as defined in {{RFC8259}}.
 
+**JSON Value**
+
+In addition to {{!RFC8259}}'s definition, {{?RFC9535, Section 1.3}} describes a JSON value
+as "*often* constructed by parsing a JSON text" (emphasis added).  Unlike a JSON text,
+a JSON value is not required to be a
+serialized sequence of octets; it may instead be a parsed, in-memory data
+structure.  This document uses *JSON value* when referring to such parsed
+or structured data, reserving *JSON text* for the serialized form.
+
 **Input**
 
-A JSON text or other serialized or structured data, supplied to a validator
+A JSON text or JSON value, supplied to a validator
 or other implementation, in order to
 compare it to a schema, is an input until it is known to be in the valid set
 for that schema.
 
 **Instance**
 
-A structured document that is in the valid set for a given schema is an *instance*
+A JSON value that is in the valid set for a given schema is an *instance*
 of that schema.
-
-**Object**
-
-*Object* is defined for JSON in {{!RFC8259}} and has the same meaning here.
 
 **Schema**
 
 A JSON Schema document, or simply a *schema*, is used to describe
-and constrain structured documents.  Used in validation, the schema defines the valid
+and constrain JSON values.  Used in validation, the schema defines the valid
 set, or all possible instances that validate successfully.
-As a structured document, a schema may also be an instance of some meta-schema.
+A JSON Schema is also a JSON value and may also be an instance of some meta-schema.
 
 **Schema Resource**
 
@@ -532,7 +537,7 @@ in the ["$anchor" keyword](#anchors) section.
 
 ### Range of JSON Values
 
-An instance may be any valid JSON value as defined by JSON ({{!RFC8259}}).
+An instance may be any valid JSON value.
 JSON Schema imposes no restrictions on type: JSON Schema can describe any JSON
 value, including, for example, null.
 
@@ -2900,7 +2905,7 @@ an input with the schema.
 
 ## Assertions
 
-JSON Schema can be used to assert constraints on a structured document, which
+JSON Schema can be used to assert constraints on a JSON value, which
 either passes or fails the assertions.  This approach can be used to validate
 conformance with the constraints, or document what is needed to satisfy them.
 
