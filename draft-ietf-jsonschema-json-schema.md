@@ -2632,7 +2632,7 @@ that refers to the other, a naive implementation might get stuck in an infinite
 recursive loop trying to validate the input.  Schemas SHOULD NOT make
 use of infinite recursive nesting like this; the behavior is undefined.
 
-### References to Possible Non-Schemas" {#non-schemas}
+### References to Possible Non-Schemas {#non-schemas}
 
 Subschema objects (or booleans) are recognized by their use with known
 applicator keywords or with location-reserving keywords such as
