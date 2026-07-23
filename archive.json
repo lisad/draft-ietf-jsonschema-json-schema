@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-09T00:42:49.564168+00:00",
+  "timestamp": "2026-07-23T00:39:00.305211+00:00",
   "repo": "lisad/draft-ietf-jsonschema-json-schema",
   "labels": [
     {
@@ -371,6 +371,22 @@
           "updatedAt": "2026-07-08T04:35:37Z"
         }
       ]
+    },
+    {
+      "number": 30,
+      "id": "I_kwDOR8mbas8AAAABJoqzmQ",
+      "title": "Settle \"evaluation\" vs \"validation\", and \"accepted\"/\"rejected\" vs \"valid\"/\"invalid\"",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/issues/30",
+      "state": "OPEN",
+      "author": "handrews",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Personally, my preference is to use:\n\n* \"evaluation\" unless we are very specifically and intentionally excluding annotation handling; in particular if we use the \"result infoset\" concept, it is the result of an evaluation, which may or may not have accepted the input\n* \"accepted\"/\"rejected\" rather than \"valid\"/\"invalid\", *OR* some sort of clear guidance on when to use which b/c I am trying to write a PR and struggling with this",
+      "createdAt": "2026-07-21T17:45:03Z",
+      "updatedAt": "2026-07-21T17:45:03Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -1253,24 +1269,26 @@
       "id": "PR_kwDOR8mbas7vYAhG",
       "title": "Fix code fences and stale companion doc references",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/29",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "handrews",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "We no longer have \"companion documents\" as validation has been folded into what used to be core, and hyperschema is outside of the scope of current work (I assume it will be considered an extension vocabulary if it is ever revived).",
       "createdAt": "2026-07-08T16:30:42Z",
-      "updatedAt": "2026-07-08T16:37:09Z",
+      "updatedAt": "2026-07-22T15:30:28Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "b5a38fdcc3df14db3b46fd34e0ef0e2315f7b41c",
       "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
       "headRefName": "fix-code-fence",
       "headRefOid": "75fc03832d46b3fab4bb3eb6ab9da1d5f56a9dbf",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-07-22T15:30:28Z",
+      "mergedAt": "2026-07-22T15:30:28Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "f2f235abf1d1656356fdac6fee0649ca42024182"
+      },
       "comments": [],
       "reviews": [
         {
@@ -1287,6 +1305,267 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 31,
+      "id": "PR_kwDOR8mbas70-6eD",
+      "title": "Refer to RFC9535 and use JSON Value in the spec",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/31",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-07-22T16:59:51Z",
+      "updatedAt": "2026-07-22T20:37:59Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "f2f235abf1d1656356fdac6fee0649ca42024182",
+      "headRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "headRefName": "use-json-value",
+      "headRefOid": "15854c2e76a534e0fb46af77cd2c4b4b2ad81cd5",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOR8mbas8AAAABG5dxJQ",
+          "commit": {
+            "abbreviatedOid": "6b3c642"
+          },
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "Thanks, @lisad !  I am strongly in favor of this, just a few nitpicks and editorial questions.",
+          "createdAt": "2026-07-22T19:10:49Z",
+          "updatedAt": "2026-07-22T19:24:30Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "Does it make sense to include \"and JSON texts\" here?  What we've agreed (including in the IETF meeting just now) is that JSON Schema _cannot_ describe and constrain aspects of JSON text that are not also present in the corresponding JSON value.\n\nI guess I'd like to know:\n*  what does \"and JSON texts\" adds here, beyond what \"JSON value\" already conveys?\n* is there a risk that \"and JSON texts\" continues to propagate the common misunderstanding that JSON Schema ought to be able to  distinguish between `1`, `1.0`, and `1.00`?  Because that is a recurring headache and I really want to avoid even suggesting it if possible",
+              "createdAt": "2026-07-22T19:10:49Z",
+              "updatedAt": "2026-07-22T19:24:30Z"
+            },
+            {
+              "originalPosition": 60,
+              "body": "Nitpick, take or leave as you please (although I'd suggest at least dropping one of the two \"quick\"s):\n\n```suggestion\nTerms in this document are consistent with use in other JSON specifications, but\nmay take on additional nuance in the context of JSON Schema.  These\ndefinitions may provide a useful quick reference.  Terms specific to JSON Schema\ndefined more comprehensively in later sections of this document.```",
+              "createdAt": "2026-07-22T19:13:13Z",
+              "updatedAt": "2026-07-22T19:24:30Z"
+            },
+            {
+              "originalPosition": 64,
+              "body": "\"JSON value\" is also defined in RFC8259 [Section 3](https://www.rfc-editor.org/rfc/rfc8259.html#section-3), shouldn't we include it here?",
+              "createdAt": "2026-07-22T19:16:48Z",
+              "updatedAt": "2026-07-22T19:24:30Z"
+            },
+            {
+              "originalPosition": 79,
+              "body": "Given that \"JSON value\" is normatively defined in RFC8259, do we really want to normatively cite RFC9535 here?  I would think that we would informatively cite it as an example of how we are making use of RFC8259's term.  Also, is there an editorial policy on quoting such that we should say \"(emphasis added)\"?  I have no opinion on the \"emphasis added\", I'm purely asking as a process question.\n\nPerhaps something like:\n\n```suggestion\nAs used in {{?RFC9535}} sections 1.1 and 1.3, a *JSON Value*, defined in {{!RFC8259 section 3, is \"a data item\nconforming to the generic data model of JSON\" and \"*often*\nconstructed by parsing a JSON text\" (emphasis added).  Unlike a JSON Text,\na JSON value is not required to be a\nserialized sequence of octets; it may instead be a parsed, in-memory data\nstructure.  This document uses *JSON value* when referring to such parsed\nor structured data, reserving *JSON Text* for the serialized form.\n```",
+              "createdAt": "2026-07-22T19:22:56Z",
+              "updatedAt": "2026-07-22T19:24:30Z"
+            },
+            {
+              "originalPosition": 84,
+              "body": "We were lower-casing \"text\" and \"value\" earlier, we should pick one convention and stick with it (I'm sure existing usage isn't consistent, if you want to sort that out in a follow-on PR that's fine with me.",
+              "createdAt": "2026-07-22T19:23:44Z",
+              "updatedAt": "2026-07-22T19:24:30Z"
+            },
+            {
+              "originalPosition": 103,
+              "body": "capitalization again",
+              "createdAt": "2026-07-22T19:24:01Z",
+              "updatedAt": "2026-07-22T19:24:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABG5-HRA",
+          "commit": {
+            "abbreviatedOid": "6b3c642"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-22T20:17:23Z",
+          "updatedAt": "2026-07-22T20:17:23Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "good point",
+              "createdAt": "2026-07-22T20:17:23Z",
+              "updatedAt": "2026-07-22T20:17:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABG5-Urw",
+          "commit": {
+            "abbreviatedOid": "6b3c642"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-22T20:17:49Z",
+          "updatedAt": "2026-07-22T20:17:49Z",
+          "comments": [
+            {
+              "originalPosition": 60,
+              "body": "2 quick to quit",
+              "createdAt": "2026-07-22T20:17:49Z",
+              "updatedAt": "2026-07-22T20:17:50Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABG5-luQ",
+          "commit": {
+            "abbreviatedOid": "6b3c642"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-22T20:18:21Z",
+          "updatedAt": "2026-07-22T20:18:21Z",
+          "comments": [
+            {
+              "originalPosition": 64,
+              "body": "I hadn't realized the definition in 8259 also completely works. ",
+              "createdAt": "2026-07-22T20:18:21Z",
+              "updatedAt": "2026-07-22T20:18:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABG5-xig",
+          "commit": {
+            "abbreviatedOid": "6b3c642"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-22T20:18:41Z",
+          "updatedAt": "2026-07-22T20:18:42Z",
+          "comments": [
+            {
+              "originalPosition": 79,
+              "body": "I simplified a little further",
+              "createdAt": "2026-07-22T20:18:41Z",
+              "updatedAt": "2026-07-22T20:18:42Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABG6G0eg",
+          "commit": {
+            "abbreviatedOid": "15854c2"
+          },
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Two more tiny comments, but neither are really blocking.",
+          "createdAt": "2026-07-22T20:36:09Z",
+          "updatedAt": "2026-07-22T20:37:59Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "Now I have to ask, are JSON Schemas \"documents\" or are they themselves JSON values?",
+              "createdAt": "2026-07-22T20:36:09Z",
+              "updatedAt": "2026-07-22T20:37:59Z"
+            },
+            {
+              "originalPosition": 73,
+              "body": "I'm still a little unclear on why RFC9535 is a normative rather than informative reference, but I assume you have a better grasp of that.  Just commenting in case it was an oversight.",
+              "createdAt": "2026-07-22T20:37:24Z",
+              "updatedAt": "2026-07-22T20:37:59Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 32,
+      "id": "PR_kwDOR8mbas71E8mq",
+      "title": "Remove wording from multi-document RFC approach.",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/32",
+      "state": "OPEN",
+      "author": "handrews",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The explanation of why the applicator vocabulary is in \"this document\" only made sense when other vocabularies were in a different RFC, and therefore implicitly a bit less essential. It seems more confusing than helpful now.\r\n\r\nHaving all of the non-core vocabularies RECOMMENDED was, I think, due to most people using a meta-schema that requires them all anyway, and a vague idea that people could build entirely alternate validation assertion vocabularies that would also, in some sense, be \"JSON Schema\".\r\n\r\nI'm not sure if that's still the right approach, but I opted not to change that part.  I have actually built a non-validating data definition system using the JSON Schema core with no other standard vocabs, but should that be called \"JSON Schema\"?",
+      "createdAt": "2026-07-22T20:56:27Z",
+      "updatedAt": "2026-07-22T20:56:27Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "f2f235abf1d1656356fdac6fee0649ca42024182",
+      "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
+      "headRefName": "applicator-vocab",
+      "headRefOid": "b9daf24ecc7e40b1d0b7fe90dafea0aeaacd5635",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 33,
+      "id": "PR_kwDOR8mbas71H9VF",
+      "title": "Fix conflicting paragraphs from old layout",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/33",
+      "state": "OPEN",
+      "author": "handrews",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "There were originally two subsections here, one for the logical operators (which evaluate subschemas striclty independently) and one for conditionals (in which \"if\", \"then\", and \"else\" have interactions).  When the sectoins were merged, both introductions were retained, leading to contradictory statements.",
+      "createdAt": "2026-07-22T23:35:25Z",
+      "updatedAt": "2026-07-22T23:35:25Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "f2f235abf1d1656356fdac6fee0649ca42024182",
+      "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
+      "headRefName": "conditionals",
+      "headRefOid": "5bc2f8a90b788525277f38f22fdcb8d92d5c401b",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 34,
+      "id": "PR_kwDOR8mbas71IeQ3",
+      "title": "Remove stray quotation mark.",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/34",
+      "state": "OPEN",
+      "author": "handrews",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-07-23T00:10:15Z",
+      "updatedAt": "2026-07-23T00:10:15Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "f2f235abf1d1656356fdac6fee0649ca42024182",
+      "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
+      "headRefName": "quote",
+      "headRefOid": "0eb66d2a1b69933469f3eef6b15c58b1a0ba249c",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
