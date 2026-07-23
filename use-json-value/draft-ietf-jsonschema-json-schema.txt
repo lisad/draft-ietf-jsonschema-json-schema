@@ -5,9 +5,9 @@
 Network Working Group                                  L. Dusseault, Ed.
 Internet-Draft                                  Data Transfer Initiative
 Intended status: Standards Track                               A. Wright
-Expires: 23 January 2027                                                
+Expires: 24 January 2027                                                
                                                               H. Andrews
-                                                            22 July 2026
+                                                            23 July 2026
 
 
                               JSON Schema
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 January 2027.
+   This Internet-Draft will expire on 24 January 2027.
 
 Copyright Notice
 
@@ -4394,11 +4394,6 @@ Table of Contents
               DOI 10.17487/RFC8288, October 2017,
               <https://www.rfc-editor.org/rfc/rfc8288>.
 
-   [RFC9535]  Gössner, S., Ed., Normington, G., Ed., and C. Bormann,
-              Ed., "JSONPath: Query Expressions for JSON", RFC 9535,
-              DOI 10.17487/RFC9535, February 2024,
-              <https://www.rfc-editor.org/rfc/rfc9535>.
-
    [XMLNS]    Bray, T., Hollander, D., Layman, A., Tobin, R., and H.
               Thompson, "Namespaces in XML 1.0 (Third Edition)", W3C
               Recommendation REC-xml-names-20091208, 8 December 2009,
@@ -4426,6 +4421,11 @@ Table of Contents
               Ed., "HTTP Semantics", STD 97, RFC 9110,
               DOI 10.17487/RFC9110, June 2022,
               <https://www.rfc-editor.org/rfc/rfc9110>.
+
+   [RFC9535]  Gössner, S., Ed., Normington, G., Ed., and C. Bormann,
+              Ed., "JSONPath: Query Expressions for JSON", RFC 9535,
+              DOI 10.17487/RFC9535, February 2024,
+              <https://www.rfc-editor.org/rfc/rfc9535>.
 
    [W3C.WD-fragid-best-practices-20121025]
               Tennison, J., Ed., "Best Practices for Fragment
