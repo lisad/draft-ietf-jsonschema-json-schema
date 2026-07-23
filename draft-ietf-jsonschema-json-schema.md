@@ -199,14 +199,8 @@ with a "$" character to emphasize their required nature.  This vocabulary
 is essential to the functioning of the "application/schema+json" media
 type, and is used to bootstrap the loading of other vocabularies.
 
-Additionally, this document defines a RECOMMENDED vocabulary of keywords
-for applying subschemas conditionally, and for applying subschemas to
-the contents of objects and arrays.  Either this vocabulary or one very
-much like it is required to write schemas for non-trivial JSON instances,
-whether those schemas are intended for assertion validation, annotation,
-or both.  While not part of the required core vocabulary, for maximum
-interoperability this additional vocabulary is included in this document
-and its use is strongly encouraged.
+This document further defines a RECOMMENDED set of additional vocabularies
+for standard use.
 
 ### Vocabularies
 
