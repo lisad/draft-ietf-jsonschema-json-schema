@@ -231,7 +231,7 @@ application/json media type, as defined in {{RFC8259}}.
 
 **JSON Value**
 
-In addition to {{!RFC8259}}'s definition, {{!RFC9535, Section 1.3}} describes a JSON value
+In addition to {{!RFC8259}}'s definition, {{?RFC9535, Section 1.3}} describes a JSON value
 as "*often* constructed by parsing a JSON text" (emphasis added).  Unlike a JSON text,
 a JSON value is not required to be a
 serialized sequence of octets; it may instead be a parsed, in-memory data
