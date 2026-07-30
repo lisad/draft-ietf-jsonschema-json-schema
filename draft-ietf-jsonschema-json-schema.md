@@ -128,8 +128,6 @@ the topic of the chapter.
 * Implementors will need to understand the requirements in sections 3 through 10 but also
 the requirements on loading and processing schemas ({{loading-and-processing}}),
 keyword behaviors ({{keyword-behaviors}}), and formatted output ({{output}}).
-Refer to the appendix on annotations ({{annotations-appendix}}) for additional
-guidance on approaches to implementing annotations.
 
 * Authors of meta-schemas including extensions to JSON Schema will want to read
 the chapter on {{extensibility}} and {{vocabularies-appendix}}.
@@ -298,6 +296,89 @@ A subschema can be directly inside its parent schema,
 can be elsewhere in the Schema Document (using a fragment reference), or
 in a separate document (using an absolute reference).
 
+**Input or instance location**
+
+A JSON Pointer identifying a specific point within the input,
+generally in the context of associating an error or annotation
+with it.  See above for when the input is considered to be
+an instance.
+
+**Schema location**
+
+A full (non-relative) URI identifying a schema (object or boolean),
+consisting of the absolute canonical URI plus the appropriate
+JSON Pointer URI fragment.  Note that the JSON Pointer fragment
+for the root schema is the empty string.
+
+Note also that in the absence of an absolute "$id",
+the canoncial URI is the base URI as determined by {{initial-base}}.
+
+**Evaluation path**
+
+The *evaluation path* is the possibly-empty sequence of object
+property names and array indices, including references, that
+are traversed to reach a schema location for a single, specific
+evaluation of a specific instance location.
+
+The evaluation path answers the question: "How did evaluation
+reach this point?"  It can be expressed as a JSON Pointer, although
+note that such a JSON Pointer does not correspond to a real,
+persistent JSON value.
+
+Given the following JSON Schema which, accepts all input:
+
+~~~json
+{
+  "not": false,
+  "$ref": "#/$defs/target",
+  "$defs": {
+    "target": {
+      "allOf": [true]
+    }
+  }
+}
+~~~
+
+The following evaluation paths, written as quoted JSON Pointers,
+would occur during evaluation of any input:
+
+~~~
+""
+"/not"
+"/$ref"
+"/$ref/allof/0"
+~~~
+
+Note that the "$defs" never appears as it is just a reserved
+location for schemas, and is never directly evaluated.
+Instead, we treat the reference target as if it were inline.
+
+Note also that when no references are involved, as with
+`""` and `"/not"`, the evaluation path is equivalent
+to the fragment portion of the schema location.
+
+**Schema evaluation**
+
+A *schema evaluation* is the unique evaluation of a particular
+instance location by a particular schema.  It is identified
+by the evaluation path together with the input location.
+
+An individual schema evaluation is said to be *successful*
+if the schema accepts the input, *and* it is not a sub-evaluation
+(defined below) of an unsuccessful schema evaluation.
+
+**Sub-evaluations**
+
+A schema evaluation B is a *sub-evaluation* of schema evaluation
+A if A's evaluation path is a strict prefix of B's, **and** A's
+input location is equal to or a prefix of B's.
+
+This concept is used when explaining keyword interactions across
+different schema objects.
+
+See {{eval-and-sub}} for examples of sub-evaluations and how
+they interact with schema evaluation success or failure.
+
 **Implementation**
 
 An implementation is software that implements this specification.  Some
@@ -457,6 +538,108 @@ zeros) are insignificant.
 Two equal inputs are guaranteed to yield identical validation results
 for a given schema, regardless of their original formatting.
 
+## Schema evaluations and sub-evaluations {#eval-and-sub}
+
+A schema object evaluation MUST accepts the input when all of its
+keywords accept the input and MUST reject it if any keyword rejects.
+A schema evaluation that accepts the input MUST initially be
+considered to be successful.
+
+When a schema evaluation is *unsuccessful*, then all of its
+sub-evaluations MUST also be considered to be unsuccessful,
+even if they were individually initially successful.
+
+However, once deemed unsuccessful, a schema evaluation MUST NOT
+subsequently be deemed successful.  In particular, keywords such
+as "not" that accept based on an unsuccessful sub-evaluation
+do not cause the sub-evaluation to be considered successful.
+
+Given this schema:
+
+~~~json
+{
+  "type": "object",
+  "anyOf": [
+    {
+      "additionalProperties": {
+        "not": {"type": "number"}
+      }
+    },
+    {
+      "type": "integer",
+      "properties": {
+        "foo": true
+      }
+    }
+  ]
+}
+~~~
+
+with the following input:
+
+~~~json
+{
+  "foo": "hello",
+  "bar": "world"
+}
+~~~
+
+we would get the following evaluation path + instance location tuples,
+assuming no short-circuit evaluation (the numbers are for reference
+below; neither they nor the ordering are significant):
+
+~~~
+1. "", ""                                      (accept, successful)
+2. "/anyOf/0", ""                              (accept, successful)
+3. "/anyOf/0/additionalProperties", "/foo"     (accept, successful)
+4. "/anyOf/0/additionalProperties/not", "/foo" (reject, unsuccessful)
+5. "/anyOf/0/additionalProperties", "/bar"     (accept, successful)
+6. "/anyOf/0/additionalProperties/not", "/bar" (reject, unsuccessful)
+7. "/anyOf/1", ""                              (reject, unsuccessful)
+8. "/anyOf/1/properties/foo", "/foo"           (accept, unsuccessful)
+~~~
+
+The following lists which evaluations have sub-evaluations:
+
+~~~
+1: 2, 3, 4, 5, 6, 7
+2: 3, 4, 5, 6
+3: 4
+4: n/a
+5: 6
+6: n/a
+7: 8
+8: n/a
+~~~
+
+Evaluations 2 and 7 do not have a sub-evaluation relationship
+because their evaluation paths differ and neither are
+extensions of the other.
+
+Evaluations 3 and 6 do not have a sub-evaluation relationship
+because their input locations differ and neither are
+extensions of the other, even though 3's evaluation path
+is a strict prefix of 6's.  Likewise for 5 and 4.
+
+Evaluations 3 and 5 do not have a sub-evaluation relationship
+both because of differing input locations and because their
+evaluation paths are identical rather than one being
+a strict prefix of the other.  Likewise for 4 and 6.
+
+The other non-sub-evaluation pairs are similar.
+
+Note that evaluation 8 accepted the input via the boolean
+schema `true`, but is deemed unsuccessful because it is
+a sub-evaluation of 7, which rejected the input (due to
+being rejected by the "type" keyword).
+
+On the other hand, neither 7 nor 8 are considered
+successful even though they are sub-evaluations of
+the "anyOf" which ultimately accepted the input.
+
+The rejection by 4 and 6 indicates the rejection of the "not"
+subschema, but the nature of "not" means that the keyword
+itself accpeted, as is reflected in 3 and 5.
 
 ## Keywords
 
@@ -502,6 +685,35 @@ of the keyword is the value of the annotation.
 An empty schema is a JSON Schema with no properties, or only unknown
 properties.
 
+### Keyword Interactions
+
+Schema keywords typically operate independently, without
+affecting each other's outcomes.
+
+A keyword MAY depend on the value or outcome of other keywords
+within the same schema evaluation, or within the same schema
+evaluation plus its successful sub-evaluations
+(see {{terminology}} and {{eval-and-sub}}).
+
+Many interactions within the same schema evaluation can be
+determined statically, such as the dependency of
+"additionalProperties" on "properties", or "contains" on
+"minContains" and "maxContains".
+
+In other cases, such as the dependency of "then" and "else"
+on "if", input evaluation needs to occur first.  In this
+example, the validation outcome of the "if" subschema is
+needed determine whether to evaluate "then" or "else".
+
+For dependencies from sub-evaluations, static determination,
+even when theoretically possible, is infeasible in the
+general case.
+
+Note that dependencies requiring either sub-evaluations
+or evaluation of adjacent keywords impose an ordering
+on keyword evaluation.
+
+Keywords MUST NOT define interactions outside of these mechanisms.
 
 ## Fragment Identifiers {#fragments}
 
@@ -1046,10 +1258,12 @@ possibly the briefest is
 
 This keyword's value MUST be a valid JSON Schema.
 
+Validation MUST always succeed against this keyword
+regardless of the validation outcome of it subschema.
+
 This validation outcome of this keyword's subschema
-has no direct effect on the overall validation
-result.  Rather, it controls which of the "then"
-or "else" keywords are evaluated.
+controls which of the "then" or "else" keywords are
+evaluated, but otherwise MUST be disregarded.
 
 Inputs that successfully validate against this
 keyword's subschema MUST also be valid against
@@ -1149,11 +1363,6 @@ does not constrain the length of the array.  If the array is longer
 than this keyword's value, this keyword validates only the
 prefix of matching length.
 
-This keyword produces an annotation value which is the largest
-index to which this keyword applied a subschema.  The value
-MAY be a boolean true if a subschema was applied to every
-index of the instance, such as is produced by the "items" keyword.
-
 Omitting this keyword has the same assertion behavior as
 an empty array.
 
@@ -1165,11 +1374,6 @@ This keyword applies its subschema to all input elements
 at indexes greater than the length of the "prefixItems" array
 in the same schema object.  If `prefixItems` is not present,
 "items" applies its subschema to all input array elements.
-
-If the "items" subschema is applied to any
-positions within the input array, it produces an
-annotation result of boolean true, indicating that all remaining array
-elements have been evaluated against this keyword's subschema.
 
 Omitting this keyword has the same assertion behavior as
 an empty schema.
@@ -1191,13 +1395,6 @@ The minimum and maximum numbers of occurrences are provided by the
 same schema object as "contains".  If "minContains" is absent, the
 minimum MUST be 1.  If "maxContains" is absent, the maximum MUST
 be unbounded.
-
-This keyword produces an annotation value which is an array of
-the indexes to which this keyword validates successfully when applying
-its subschema, in ascending order. The value MAY be a boolean "true" if
-the subschema validates successfully when applied to every index of the
-instance. The annotation MUST be present if the input array to which
-this keyword's schema applies is empty.
 
 The subschema MUST be applied to every array element even after the first
 match has been found, if annotations are being collected.
@@ -1221,9 +1418,6 @@ Validation succeeds if, for each name that appears in both
 the input and as a name within this keyword's value,
 the contents successfully validate against the
 corresponding schema.
-
-The annotation result of this keyword is the set of instance
-property names matched by this keyword.
 
 Omitting this keyword has the same assertion behavior as
 an empty object.
@@ -1249,9 +1443,6 @@ match regular expressions in "patternProperties".
 For all such properties, validation succeeds if the contents
 validate against the "additionalProperties" schema.
 
-The annotation result of this keyword is the set of input
-property names validated by this keyword's subschema.
-
 Omitting this keyword has the same assertion behavior as
 an empty schema.
 
@@ -1276,9 +1467,6 @@ regular expressions that appear as a property name in this keyword's value,
 the contents successfully validate against each
 schema that corresponds to a matching regular expression.
 Recall: Regular expressions are not explicitly anchored.
-
-The annotation result of this keyword is the set of instance
-property names matched by this keyword.
 
 Omitting this keyword has the same assertion behavior as
 an empty object.
@@ -1312,25 +1500,8 @@ roles for an incident response process, but no undefined roles.
 
 The purpose of these keywords is to enable schema authors to apply
 subschemas to array items or object properties that have not been
-successfully evaluated against any dynamic-scope subschema of any
-adjacent keywords.
-
-These input items or properties may have been unsuccessfully evaluated
-against one or more adjacent keyword subschemas, such as when an assertion
-in a branch of an "anyOf" fails.  Such failed evaluations are not considered
-to contribute to whether or not the item or property has been evaluated.
-Only successful evaluations are considered.
-
-If an item in an array or an object property is "successfully evaluated", it
-is logically considered to be valid in terms of the representation of the
-object or array that's expected. For example if a subschema represents a car,
-which requires between 2-4 wheels, and the value of "wheels" is 6, the input
-object is not "evaluated" to be a car, and the "wheels" property is considered
-"unevaluated (successfully as a known thing)", and does not retain any annotations.
-
-Recall that adjacent keywords are keywords within the same schema object,
-and that the dynamic-scope subschemas include reference targets as well as
-lexical subschemas.
+successfully evaluated as part of the containing schema evaluation
+or its successful sub-evaluations (see {{keyword-interactions}}).
 
 Meta-schemas that do not use "$vocabulary" SHOULD be considered to
 require this vocabulary as if its URI were present with a value of true.
@@ -1359,33 +1530,30 @@ vocabulary are notable exceptions:
 
 The value of "unevaluatedItems" MUST be a valid JSON Schema.
 
-The behavior of this keyword depends on adjacent keywords "prefixItems", "items", and "contains".
-If those keywords do not limit the application of "unevaluatedItems",
-the "unevaluatedItems" subschema MUST be applied to all locations in the array.
+The "unevalutedItems" subschema MUST be applied only to those
+items that were *not* evaluated by "prefixItems", "items", or
+"contains" in the current schema evaluation or a successful
+sub-evaluation, or by "unevaluatedItems" in a successful
+sub-evaluation.
 
-Defined in terms of annotations, if the annotation output of "prefixItems",
-"items" or "contains"  is a boolean 'true', then "unevaluatedItems" MUST be ignored.
-Otherwise, the subschema
-MUST be applied to any index greater than the largest annotation
-value for "prefixItems" and "items", which does not appear in any annotation
-value for "contains".  Thus,
-"prefixItems", "items", "contains", and all in-place
-applicators MUST be evaluated before this keyword can be evaluated.
-Authors of extension keywords MUST NOT define an in-place applicator
-that would need to be evaluated after this keyword.
-
-If the "unevaluatedItems" subschema is applied to any
-positions within the input array, it produces an
-annotation result of boolean true, analogous to the
-behavior of "items".
+This means that "prefixItems", "items", "contains",
+and all in-place applicators MUST be evaluated before this keyword can
+be evaluated.  Authors of extension keywords MUST NOT define an in-place
+applicator that would need to be evaluated after this keyword.
 
 Omitting this keyword has the same assertion behavior as
 an empty schema.
 
 The `unevaluatedItems` keyword can be very similar to the `items` keyword in
-some examples, like the example in {{annotations-appendix}} where `prefixItems`
-is used to define exactly three items in a list and further items are forbidden,
-and in that example `unevaluatedItems` could replace `items`.  Here's an example
+some examples, like the following example where `prefixItems`
+is used to define exactly three items in a list and further items are forbidden.
+
+~~~~~~~~~~
+{::include ./examples/prefixItems.json}
+~~~~~~~~~~
+
+In the above example `unevaluatedItems` could replace `items`,
+although doing so may have performance penalties.  Here's an example
 where `unevaluatedItems` is doing work that could not be done by `items`, constraining
 a list to be only numbers (and the first two numbers must be geospatial points).
 An input with seven numbers in a list might validate, but an input with a string
@@ -1400,25 +1568,17 @@ would fail on `unevaluatedItems` because the string was not evaluated by the
 
 The value of "unevaluatedProperties" MUST be a valid JSON Schema.
 
-The behavior of this keyword depends on adjacent keywords "properties", "patternProperties",
-and "additionalProperties".
-
-Validation with "unevaluatedProperties" applies only to the child
-values of input names that do not appear in the "properties",
-"patternProperties", "additionalProperties", or
-"unevaluatedProperties" annotation results that apply to the instance
-location being validated.
-
-For all such properties, validation succeeds if the contents
-validate against the "unevaluatedProperties" schema.
+The "unevalutedItems" subschema MUST be applied only to those
+properties that were *not* evaluated by "properties",
+"patternProperties", or "additionalProperties"
+in the current schema evaluation or a successful
+sub-evaluation, or by "unevaluatedProperties" in a successful
+sub-evaluation.
 
 This means that "properties", "patternProperties", "additionalProperties",
 and all in-place applicators MUST be evaluated before this keyword can
 be evaluated.  Authors of extension keywords MUST NOT define an in-place
 applicator that would need to be evaluated after this keyword.
-
-The annotation result of this keyword is the set of instance
-property names validated by this keyword's subschema.
 
 Omitting this keyword has the same assertion behavior as
 an empty schema.
@@ -2726,7 +2886,7 @@ applicators (and therefore no subschemas) is reached.  The appropriate
 location in the input is evaluated against the assertion and
 annotation keywords in the schema object.
 The interactions of those keyword results to produce the schema object
-results are governed by {{annot-assert}}, while the
+results are governed by {{eval-and-sub}}, while the
 relationship of subschema results to the results of the applicator
 keyword that applied them is described by {{applicators}}.
 
@@ -2951,8 +3111,8 @@ then including "null" in "type" would not have any useful effect.
 
 JSON Schema can annotate an instance with information, whenever the instance
 validates against the schema object containing the annotation, and all of its
-parent schema objects.  The information can be a simple value, or can be
-calculated based on the instance contents.
+parent schema objects.  The annotation value produced by each annotation
+keyword MUST be the keyword's value.
 
 Annotations are attached to specific locations in an instance.
 Since many subschemas can be applied to any single
@@ -2965,11 +3125,11 @@ which are provided to applications to use as they see fit.  JSON Schema
 implementations are not expected to make use of the collected information
 on behalf of applications.
 
-Unless otherwise specified, the value of an annotation keyword
-is the keyword's value.  However, other behaviors are possible.
-For example, JSON Hyper-Schema's ({{?I-D.handrews-json-schema-hyperschema}})
-"links" keyword is a complex annotation that produces a value based
-in part on the instance data.
+Annotations SHOULD specify their semantics as requirements on downstream
+code that makes use of JSON Schema output.  These semantics MAY
+include complex implementation requirements as seen in
+JSON Hyper-Schema's ({{?I-D.handrews-json-schema-hyperschema}})
+"links" keyword, which constructs a web link out of the instance data.
 
 While "short-circuit" evaluation is possible for assertions, collecting
 annotations requires examining all schemas that apply to an instance
@@ -2984,6 +3144,15 @@ Annotations are collected by keywords that explicitly define
 annotation-collecting behavior.  Note that boolean schemas cannot
 produce annotations as they do not make use of keywords.
 
+In final output, annotations MUST NOT be associated with
+unsuccessful schema evaluations (see {{eval-and-sub}}).
+However, note that if output is streamed as each schema evaluation
+completes, consumers MUST track whether a subsequent schema
+evaluation converts a previously-successful evaluation that
+included annotations to an unsuccessful one, and remove
+annotations associated with the now-unsuccessful evaluation
+from the final set.
+
 A collected annotation MUST include the following information:
 
 * The name of the keyword that produces the annotation
@@ -2993,7 +3162,7 @@ A collected annotation MUST include the following information:
 * The absolute schema location of the attaching keyword, as a URI.
   This MAY be omitted if it is the same as the schema location path
   from above.
-* The attached value(s)
+* The attached value
 
 #### Distinguishing Among Multiple Values
 
@@ -3072,35 +3241,6 @@ Note that there are other reasonable approaches that a different application
 might take.  For example, an application may consider the presence of
 two different values for "default" to be an error, regardless of their
 schema locations.
-
-#### Annotations and Assertions {#annot-assert}
-
-Schema objects that produce a false assertion result MUST NOT
-produce any annotation results, whether from their own keywords
-or from keywords in subschemas.
-
-Note that the overall schema results may still include annotations
-collected from other schema locations.  Given this schema:
-
-~~~ json
-{
-    "oneOf": [
-        {
-            "title": "Integer Value",
-            "type": "integer"
-        },
-        {
-            "title": "String Value",
-            "type": "string"
-        }
-    ]
-}
-~~~
-
-Against the input `"This is a string"`, the
-title annotation "Integer Value" is discarded because the type assertion
-in that schema object fails.  The title annotation "String Value"
-is kept, as the input passes the string type assertions.
 
 ## Reserved Locations
 
@@ -3218,8 +3358,10 @@ The error or annotation that is produced by the validation.
 For errors, the specific wording for the message is not defined by this
 specification.  Implementations will need to provide this.
 
-For annotations, each keyword that produces an annotation specifies its
-format.  By default, it is the keyword's value.
+For annotations, the annotation is the keyword's value.  Any additional
+implementation requirements based on the value's semantics are outside
+of the scope of this specification, and are expected to be implemented
+by code that consumes JSON Schema output.
 
 The JSON key for failed validations is "error"; for successful validations
 it is "annotation".
@@ -3934,67 +4076,6 @@ were moved under "$defs".  It is the matching "$dynamicAnchor" values
 which tell us how to resolve the dynamic reference, not any sort of
 correlation in JSON structure.
 
-
-# Using annotations in implementations {#annotations-appendix}
-
-Annotations gathered while evaluating some keywords can be used to
-simplify the logic of evaluating other dependent keywords.  Whether
-annotations are used in keyword evaluation or not, the implementor must make sure that
-results are identical.  Thus, this section is OPTIONAL.
-
-As an example, the `properties` keyword produces annotations which can be used
-in the implementation of `additionalProperties`, `required` and
-`unevaluatedProperties`.  With this schema:
-
-~~~~~~~~~~
-{::include ./examples/point.json}
-~~~~~~~~~~
-
-The following table shows the annotation result of `properties` for
-three different inputs, and how `additionalProperties` and `required`
-implementations could use that result.
-
-| Input | "properties" annotation | "additionalProperties" result | "required" result |
-|---|---|---|---|
-| `{"X": 1, "Y": 2}` | `["X", "Y"]` | valid | valid |
-| `{"X": 1, "Y": 2, "radius": 5}` | `["X", "Y"]` | invalid (`"radius"` not in annotation) | valid |
-| `{"X": 1}` | `["X"]` | valid | invalid (`"Y"` absent) |
-
-Similarly, the `prefixItems` keyword produces an annotation which is
-used by `items` and `unevaluatedItems`.  The annotation value is the
-largest index to which `prefixItems` applied a subschema.  Consider
-this schema for a structured log entry with a timestamp, action, and
-username fields, and preventing additional fields:
-
-~~~~~~~~~~
-{::include ./examples/prefixItems.json}
-~~~~~~~~~~
-
-This schema, when applied to the inputs in the table below, produces
-annotation output from `prefixItems` evaluation. Then,
-`items` uses the `prefixItems` annotation to start where `prefixItems`
-left off, applying only to indices greater than the annotation value.
-
-| Input | "prefixItems" annotation | "items" result |
-|---|---|---|
-| `["2026-06-24T10:00:00Z", "created", "alice"]` | `2` | valid (no elements beyond index 2) |
-  | `["2026-06-24T10:00:00Z", "created", "alice", "extra"]` | `2` | invalid (index 3 not evaluated by `prefixItems`) |
-| `["2026-06-24T10:00:00Z", "created"]` | `1` | valid (no elements beyond index 1) |
-| `[]` | *(none)* | valid (no elements at all) |
-
-The following table summarizes which keywords produce annotations
-that can be used in the implementation of other keywords:
-
-| Keyword | Annotation value | Used by |
-|---|---|---|
-| `properties` | set of matched property names | `additionalProperties`, `unevaluatedProperties` |
-| `patternProperties` | set of matched property names | `additionalProperties`, `unevaluatedProperties` |
-| `additionalProperties` | set of validated property names | `unevaluatedProperties` |
-| `prefixItems` | largest index evaluated, or `true` | `items`, `unevaluatedItems` |
-| `items` | `true` if any elements evaluated | `unevaluatedItems` |
-| `contains` | array of evaluated indices, or `true` | `unevaluatedItems` |
-| `unevaluatedItems` | `true` if any elements evaluated | `unevaluatedItems` in parent schemas |
-| `unevaluatedProperties` | set of validated property names | `unevaluatedProperties` in parent schemas |
 
 # Working with vocabularies {#vocabularies-appendix}
 
