@@ -551,8 +551,8 @@ Additional schema keywords and schema vocabularies MAY be defined
 by any entity.  Save for explicit agreement, schema authors SHALL NOT
 expect these additional keywords and vocabularies to be supported by
 implementations that do not explicitly document such support.
-Implementations SHOULD treat keywords they do not support as annotations,
-where the value of the keyword is the value of the annotation.
+Keywords that an implementation does not support are considered
+to be unrecognized; their behavior is governed by {{unrecognized}}.
 
 Implementations MAY provide the ability to register or load handlers
 for vocabularies that they do not support directly.  The exact mechanism
@@ -663,10 +663,9 @@ that do not recognize the vocabulary SHOULD proceed with processing
 such schemas.  The value has no impact if the implementation
 understands the vocabulary.
 
-Per {{extending}}, unrecognized
-keywords SHOULD be treated as annotations.
-This remains the case for keywords defined
-by unrecognized vocabularies.  It is not currently possible to distinguish
+Keywords defined by unrecognized values are considered to be
+unrecognized, with behavior governed by {{unrecognized}}.
+It is not currently possible to distinguish
 between unrecognized keywords that are defined in vocabularies from
 those that are not part of any vocabulary.
 
