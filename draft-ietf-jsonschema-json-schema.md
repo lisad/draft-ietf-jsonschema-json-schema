@@ -360,18 +360,40 @@ to the fragment portion of the schema location.
 **Schema evaluation**
 
 A *schema evaluation* is the unique evaluation of a particular
-instance location by a particular schema.  It is identified
+input location by a particular schema.  It is identified
 by the evaluation path together with the input location.
 
-An individual schema evaluation is said to be *successful*
-if the schema accepts the input, *and* it is not a sub-evaluation
+**Keyword evaluation**
+
+A *keyword evaluation* is the unique evaluation of a particular
+input location by a keyword within particular schema evaluation.
+It has the same input location and evaluation path as its
+containing schema evaluation, and is identified by that plus
+the keyword name.
+
+**Evaluation success**
+
+An individual keyword or schema evaluation is said to be
+*successful* if the keyword or schema (respecitvely)
+accepts the input, *and* it is not a sub-evaluation
 (defined below) of an unsuccessful schema evaluation.
+
+Note that this means that while all rejecting evaluations
+are unsuccessful, accepting evaluations can ultimately
+be considered either successful or unsuccessful depending
+on the larger context.
 
 **Sub-evaluations**
 
-A schema evaluation B is a *sub-evaluation* of schema evaluation
-A if A's evaluation path is a strict prefix of B's, **and** A's
-input location is equal to or a prefix of B's.
+A schema or keyword evaluation X is a *sub-evaluation*
+of schema evaluation S
+if S's evaluation path is a strict prefix of X's, **and** S's
+input location is equal to or a prefix of X's.
+
+Similarly, an evaluation X is a sub-evaluation of a keyword
+evaluation K if K's evaluation path, extended by the keyword
+name, is a strict prefix of X's, **and** K's input location
+is equal to or a prefix of X's.
 
 This concept is used when explaining keyword interactions across
 different schema objects.
@@ -538,7 +560,7 @@ zeros) are insignificant.
 Two equal inputs are guaranteed to yield identical validation results
 for a given schema, regardless of their original formatting.
 
-## Schema evaluations and sub-evaluations {#eval-and-sub}
+## Evaluations and sub-evaluations {#eval-and-sub}
 
 A schema object evaluation MUST accepts the input when all of its
 keywords accept the input and MUST reject it if any keyword rejects.
@@ -584,18 +606,27 @@ with the following input:
 }
 ~~~
 
-we would get the following evaluation path + instance location tuples,
-assuming no short-circuit evaluation (the numbers are for reference
-below; neither they nor the ordering are significant):
+we would get the following schema evaluations (identified by
+number purely for reference below; neither the order nor the
+numbers are significant), with individual keyword evaluations
+shown under their containing schema evaluations:
 
 ~~~
 1. "", ""                                      (accept, successful)
+    * "anyOf"                                  (accept, successful)
 2. "/anyOf/0", ""                              (accept, successful)
+    * "additionalProperties"                   (accept, successful)
 3. "/anyOf/0/additionalProperties", "/foo"     (accept, successful)
+    * "not"                                    (accept, successful)
 4. "/anyOf/0/additionalProperties/not", "/foo" (reject, unsuccessful)
+    * "type"                                   (reject, unsuccessful)
 5. "/anyOf/0/additionalProperties", "/bar"     (accept, successful)
+    * "not"                                    (accept, successful)
 6. "/anyOf/0/additionalProperties/not", "/bar" (reject, unsuccessful)
+    * "type"                                   (reject, unsuccessful)
 7. "/anyOf/1", ""                              (reject, unsuccessful)
+    * "type"                                   (reject, unsuccessful)
+    * "properties"                             (accept, unsuccessful)
 8. "/anyOf/1/properties/foo", "/foo"           (accept, unsuccessful)
 ~~~
 
