@@ -318,7 +318,7 @@ When a schema is an object, it can be seen to be a schema from the '$schema'
 keyword in the object.  See below for special treatment of the boolean schemas.
 
 
-Schemas are used to validate inputs that may be [instances](#instance) of the schema,
+Schemas are used to validate inputs that may be [instances](#input) of the schema,
 but each schema can itself
 be interpreted as an instance (see [Meta-Schemas](#meta-schemas) for when and
 how this happens).
@@ -388,10 +388,13 @@ if the resource were to be extracted to a standalone JSON Schema document.
 Whether multiple schema resources are embedded or linked with a reference,
 they are processed in the same way, with the same available behaviors.
 
-## Instance
+## Input
 
-An instance of a schema is a JSON value or document that is in the valid set of
-a schema. An instance has one of six primitive types, and a range of possible
+Any {{RFC8259}}-compliant JSON value or document MAY be used as input.
+An instance of a schema is an input that is in the valid set of
+that schema.
+
+An input value has one of JSON's six primitive types, and a range of possible
 values depending on the type:
 
 null
@@ -534,12 +537,6 @@ Defining and referencing a plain name fragment identifier within an
 in the ["$anchor" keyword](#anchors) section.
 
 ## Other General Considerations
-
-### Range of JSON Values
-
-An instance may be any valid JSON value.
-JSON Schema imposes no restrictions on type: JSON Schema can describe any JSON
-value, including, for example, null.
 
 ### Requirements for handling extensions {#extending}
 
@@ -1683,7 +1680,7 @@ format attribute can generally only validate a given set of input types. If
 the type of the input is not in this set, validation for this
 format attribute and input SHOULD succeed.  All format attributes defined
 in this section apply to strings, but a format attribute can be specified
-to apply to any input type in the [instance data model](#instance).[^14]
+to apply to any input type in the [input data model](#input).[^14]
 
 The current URI for this vocabulary, known as the Format-Annotation vocabulary, is:
 
