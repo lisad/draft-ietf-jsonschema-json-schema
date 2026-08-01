@@ -188,15 +188,6 @@ In formal language theory, JSON Schema resembles a context-free language, as
 most keywords are context-free.  Thus, JSON instances can be validated quickly
 and simply, without I/O or querying data elsewhere in the same JSON instance.
 
-This document defines a core vocabulary of keywords that MUST be supported by any
-implementation.  Its keywords are each prefixed
-with a "$" character to emphasize their required nature.  This vocabulary
-is essential to the functioning of the "application/schema+json" media
-type, and is used to bootstrap the loading of other vocabularies.
-
-This document further defines a RECOMMENDED set of additional vocabularies
-for standard use.
-
 ### Vocabularies
 
 To facilitate re-use, keywords can be organized into vocabularies. A vocabulary
@@ -280,6 +271,12 @@ vocabularies.
 
 A *meta-schema* describes and constrains schemas which may be instances of the
 meta-schema.
+
+**Dialect**
+
+A *dialect* is a set of vocabularies used within a given schema resource,
+toether with the syntax constraints described by a meta-schema.
+The meta-schema's URI also identifies the dialect.
 
 **Root schema**
 
@@ -537,6 +534,20 @@ Defining and referencing a plain name fragment identifier within an
 in the ["$anchor" keyword](#anchors) section.
 
 ## Other General Considerations
+
+### Required and recommended vocabularies
+
+This document defines a core vocabulary of keywords that MUST be supported by any
+implementation.  Its keywords are each prefixed
+with a "$" character to emphasize their required nature.  This vocabulary
+is essential to the functioning of the "application/schema+json" media
+type, and is used to bootstrap the loading of other vocabularies.
+
+This document further defines a RECOMMENDED set of additional vocabularies
+for standard use.
+
+These vocabularies together compose the standard JSON Schema dialect,
+which serves as the default dialect as discussed in {{default-dialect}}.
 
 ### Requirements for handling extensions {#extending}
 
@@ -3565,7 +3576,7 @@ a meta-schema consisting only of the vocabulary's keywords.
 Meta-schema authoring is an advanced usage of JSON Schema, so the design of
 meta-schema features emphasizes flexibility over simplicity.
 
-## Default JSON Schema Dialect
+## Default JSON Schema Dialect {#default-dialect}
 
 The current URI for the default JSON Schema dialect meta-schema is
 <eref target="https://json-schema.org/draft/2020-12/schema"/>.
