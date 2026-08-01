@@ -5,9 +5,9 @@
 Network Working Group                                  L. Dusseault, Ed.
 Internet-Draft                                  Data Transfer Initiative
 Intended status: Standards Track                               A. Wright
-Expires: 24 January 2027                                                
+Expires: 2 February 2027                                                
                                                               H. Andrews
-                                                            23 July 2026
+                                                           1 August 2026
 
 
                               JSON Schema
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 January 2027.
+   This Internet-Draft will expire on 2 February 2027.
 
 Copyright Notice
 
@@ -78,14 +78,13 @@ Table of Contents
      3.1.  JSON Schema Documents
        3.1.1.  Trivial schema documents
        3.1.2.  Root Schema and Subschemas and Resources
-     3.2.  Instance
+     3.2.  Input
        3.2.1.  Input Equality
      3.3.  Keywords
      3.4.  Fragment Identifiers
      3.5.  Other General Considerations
-       3.5.1.  Range of JSON Values
-       3.5.2.  Requirements for handling extensions
-       3.5.3.  Validation
+       3.5.1.  Requirements for handling extensions
+       3.5.2.  Validation
    4.  Core Keywords
      4.1.  Environment
        4.1.1.  "$schema"
@@ -590,11 +589,14 @@ Table of Contents
    reference, they are processed in the same way, with the same
    available behaviors.
 
-3.2.  Instance
+3.2.  Input
 
-   An instance of a schema is a JSON value or document that is in the
-   valid set of a schema.  An instance has one of six primitive types,
-   and a range of possible values depending on the type:
+   Any [RFC8259]-compliant JSON value or document MAY be used as input.
+   An instance of a schema is an input that is in the valid set of that
+   schema.
+
+   An input value has one of JSON's six primitive types, and a range of
+   possible values depending on the type:
 
    null  A JSON "null" value
 
@@ -730,13 +732,7 @@ Table of Contents
 
 3.5.  Other General Considerations
 
-3.5.1.  Range of JSON Values
-
-   An instance may be any valid JSON value.  JSON Schema imposes no
-   restrictions on type: JSON Schema can describe any JSON value,
-   including, for example, null.
-
-3.5.2.  Requirements for handling extensions
+3.5.1.  Requirements for handling extensions
 
    Additional schema keywords and schema vocabularies MAY be defined by
    any entity.  Save for explicit agreement, schema authors SHALL NOT
@@ -751,7 +747,7 @@ Table of Contents
    mechanism for registering and implementing such handlers is
    implementation-dependent.
 
-3.5.3.  Validation
+3.5.2.  Validation
 
    JSON Schema validation applies the rules of a JSON Schema to
    determine if an input is in the valid set for that schema.  An
@@ -862,7 +858,7 @@ Table of Contents
    The value has no impact if the implementation understands the
    vocabulary.
 
-   Per Section 3.5.2, unrecognized keywords SHOULD be treated as
+   Per Section 3.5.1, unrecognized keywords SHOULD be treated as
    annotations.  This remains the case for keywords defined by
    unrecognized vocabularies.  It is not currently possible to
    distinguish between unrecognized keywords that are defined in
@@ -2103,7 +2099,7 @@ Table of Contents
    validation for this format attribute and input SHOULD succeed.  All
    format attributes defined in this section apply to strings, but a
    format attribute can be specified to apply to any input type in the
-   instance data model (Section 3.2).
+   input data model (Section 3.2).
    // Note that the "type" keyword in this specification defines an
    // "integer" type which is not part of the data model.  Therefore a
    // format attribute can be limited to numbers, but not specifically
