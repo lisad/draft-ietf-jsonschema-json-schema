@@ -270,7 +270,7 @@ JSON Schema works by defining keywords with specific behavior.  A *keyword* appe
 as a JSON *name* {{!RFC8259}}.  Not all JSON names in a schema are keywords, but
 all keywords have required behavior.
 
-Broadly speaking, keywords fall into one of five categories:
+Broadly speaking, keywords fall into one or more of five categories:
 
 identifiers
 : control schema identification through setting a URI
@@ -294,8 +294,6 @@ applicators
 reserved locations
 : do not interact with the result infoset, but reserve a place
   for a specific purpose to ensure interoperability
-
-Keywords may fall into multiple categories,
 
 Keywords which are properties within the same schema object are referred to as
 *adjacent keywords*.
@@ -663,7 +661,7 @@ that do not recognize the vocabulary SHOULD proceed with processing
 such schemas.  The value has no impact if the implementation
 understands the vocabulary.
 
-Keywords defined by unrecognized values are considered to be
+Keywords defined by unrecognized vocabularies are considered to be
 unrecognized, with behavior governed by {{unrecognized}}.
 It is not currently possible to distinguish
 between unrecognized keywords that are defined in vocabularies from
