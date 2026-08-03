@@ -2722,8 +2722,11 @@ Typically, applicator keywords are processed until a schema object with no
 applicators (and therefore no subschemas) is reached.  The appropriate
 location in the input is evaluated against the assertion and
 annotation keywords in the schema object.
-The interactions of those keyword results to produce the schema object
-results are governed by {{annot-assert}}, while the
+
+The validation result of a schema object containing keywords MUST
+be the logical AND of the validation results of its keywords.
+The interactions of keyword and schema results with annotations,
+errors, and keyword dependencies are defined by {{eval-status}}, while the
 relationship of subschema results to the results of the applicator
 keyword that applied them is described by {{applicators}}.
 
@@ -2747,17 +2750,6 @@ data structure of objects and arrays.  The largest such scope
 is an entire schema document.  The smallest scope is a single
 schema object with no subschemas.
 
-Keywords MAY be defined with a partial value, such as a URI-reference,
-which must be resolved against another value, such as another
-URI-reference or a full URI, which is found through the lexical
-structure of the structured document.  The "$id", "$ref", and
-"$dynamicRef" core keywords, and the "base" JSON Hyper-Schema
-keyword, are examples of this sort of behavior.
-
-Note that some keywords, such as "$schema", apply to the lexical
-scope of the entire schema resource, and therefore MUST only
-appear in a schema resource's root schema.
-
 Other keywords may take into account the dynamic scope that
 exists during the evaluation of a schema, typically together
 with an input document.
@@ -2776,23 +2768,90 @@ that reference that resolves information through the dynamic scope
 will consider the originating side of the reference to be their
 dynamic parent, rather than examining the local lexically enclosing parent.
 
-The concept of dynamic scope is primarily used with "$dynamicRef" and
-"$dynamicAnchor", and should be considered an advanced feature
-and used with caution when defining additional keywords.  It also appears
-when reporting errors and collected annotations, as it may be possible
-to revisit the same lexical scope repeatedly with different dynamic
-scopes.  In such cases, it is important to inform the user of the
-dynamic path that produced the error or annotation.
+The concept of dynamic scope should be considered an advanced feature
+and used with caution when defining extension keywords.
+
+### Successful unsuccessful, and ignored evaluations {#eval-status}
+
+Each dynamic scope represents an evaluation of an input location by
+a schema.  Keyword evaluations within the dynamic scope are
+sub-evaluations of the schema evaluation, and subschema evaluations
+within a dynamic subscope createdy by an applicator keyword are
+sub-evaluations of the applicator keyword evaluation.
+
+Evaluation includes validation, which either accepts or
+rejects the input, as well as management of annotations,
+error messages, and keyword dependency information.
+
+Evaluations are considered to have one of three statuses:
+successful, unsuccessful, or ignored.  This status depends on
+the evaluation's own validation outcome, as well as those of all
+of its parent evaluations.
+
+Each evaluation MUST initially be considered successful if it
+accepts the input, and unsuccessful if it rejects.  An initially
+successful keyword evaluation MAY produce an annotation and/or
+information supporting keyword dependencies, while
+an initially unsuccessful keyword MAY produce an error beyond
+its boolean validation outcome.
+
+An initially successful evaluation MUST be considered unsuccessful
+if any parent evaluation is unsuccessful, causing its
+annotations to be removed from non-"verbose" ({{verbose}})
+potential output.
+
+An initially unsuccessful evaluation MUST be considered ignored
+if any parent evaluation is successful, causing its
+errors to be removed from non-"verbose" potential output.
+
+Note that these requirements prevent unsuccessful evaluations
+from becoming successful, and prevent ignored evaluations from
+further changing status at all.
+
+Unless using an output format such as "verbose" ({{verbose}})
+that is intended to provide a full evaluation record, output
+MUST only include annotations from successful evaluations,
+and errors from unsuccessful evaluations.
+
+Information used to support keyword dependencies MUST only
+be used from evaluations considered to be successful at the time
+of the depending keyword's evaluation, regardless of output choice.
 
 ## Keyword Interactions
 
-Keyword behavior MAY be defined in terms of the annotation results
-of [subschemas](#root) and/or adjacent keywords
-(keywords within the same schema object) and their subschemas.
+Keywords MAY be defined with a partial value, such as a URI-reference,
+which must be resolved against another value, such as another
+URI-reference or a full URI, which is found through the lexical
+structure of the structured document.  The "$id", "$ref", and
+"$dynamicRef" core keywords, and the "base" JSON Hyper-Schema
+keyword, are examples of this sort of behavior.
+
+Note that some keywords, such as "$schema", apply to the lexical
+scope of the entire schema resource, and therefore MUST only
+appear in a schema resource's root schema.
+
+A keyword MAY depend on the value or outcome of other keywords
+within the same dynamic scopes or its successful subscopes.
+
+No constraints are placed on the mechanism of communication
+within implementations, however, annotations MAY be used for
+this purpose, and all dependencies within this specification
+define annotations necessary for this.
+
+Interactions within the same dynamic scope that depend only
+on adjacent keyword values SHOULD be determined statically.
+Other interactions, including all those involving dynamic
+subscopes, are expected to be handled as runtime communication.
+
+Note that dependencies involving either dynamic subscopes
+or evaluation of adjacent keywords impose an ordering
+on keyword evaluation.
 Such keywords MUST NOT result in a circular dependency.
 Keywords MAY modify their behavior based on the presence or absence
 of another keyword in the same
 [schema object](#schema-document).
+
+Keywords MUST NOT define interactions outside of these mechanisms.
 
 ## Default Behaviors
 
@@ -3069,35 +3128,6 @@ Note that there are other reasonable approaches that a different application
 might take.  For example, an application may consider the presence of
 two different values for "default" to be an error, regardless of their
 schema locations.
-
-#### Annotations and Assertions {#annot-assert}
-
-Schema objects that produce a false assertion result MUST NOT
-produce any annotation results, whether from their own keywords
-or from keywords in subschemas.
-
-Note that the overall schema results may still include annotations
-collected from other schema locations.  Given this schema:
-
-~~~ json
-{
-    "oneOf": [
-        {
-            "title": "Integer Value",
-            "type": "integer"
-        },
-        {
-            "title": "String Value",
-            "type": "string"
-        }
-    ]
-}
-~~~
-
-Against the input `"This is a string"`, the
-title annotation "Integer Value" is discarded because the type assertion
-in that schema object fails.  The title annotation "String Value"
-is kept, as the input passes the string type assertions.
 
 ## Reserved Locations
 
