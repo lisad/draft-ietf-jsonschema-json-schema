@@ -1223,10 +1223,13 @@ Source for this draft can be found at
                 <p id="section-toc.1-1.3.2.5.1"><a href="#section-3.5" class="auto internal xref">3.5</a>.  <a href="#name-other-general-consideration" class="internal xref">Other General Considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5.2.1">
-                    <p id="section-toc.1-1.3.2.5.2.1.1"><a href="#section-3.5.1" class="auto internal xref">3.5.1</a>.  <a href="#name-requirements-for-handling-e" class="internal xref">Requirements for handling extensions</a></p>
+                    <p id="section-toc.1-1.3.2.5.2.1.1"><a href="#section-3.5.1" class="auto internal xref">3.5.1</a>.  <a href="#name-required-and-recommended-vo" class="internal xref">Required and recommended vocabularies</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5.2.2">
-                    <p id="section-toc.1-1.3.2.5.2.2.1"><a href="#section-3.5.2" class="auto internal xref">3.5.2</a>.  <a href="#name-validation-2" class="internal xref">Validation</a></p>
+                    <p id="section-toc.1-1.3.2.5.2.2.1"><a href="#section-3.5.2" class="auto internal xref">3.5.2</a>.  <a href="#name-requirements-for-handling-e" class="internal xref">Requirements for handling extensions</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5.2.3">
+                    <p id="section-toc.1-1.3.2.5.2.3.1"><a href="#section-3.5.3" class="auto internal xref">3.5.3</a>.  <a href="#name-validation-2" class="internal xref">Validation</a></p>
 </li>
                 </ul>
 </li>
@@ -1952,13 +1955,6 @@ complex JSON data structures.<a href="#section-1.3.4-1" class="pilcrow">¶</a></
 <p id="section-1.3.4-2">In formal language theory, JSON Schema resembles a context-free language, as
 most keywords are context-free.  Thus, JSON instances can be validated quickly
 and simply, without I/O or querying data elsewhere in the same JSON instance.<a href="#section-1.3.4-2" class="pilcrow">¶</a></p>
-<p id="section-1.3.4-3">This document defines a core vocabulary of keywords that MUST be supported by any
-implementation.  Its keywords are each prefixed
-with a "$" character to emphasize their required nature.  This vocabulary
-is essential to the functioning of the "application/schema+json" media
-type, and is used to bootstrap the loading of other vocabularies.<a href="#section-1.3.4-3" class="pilcrow">¶</a></p>
-<p id="section-1.3.4-4">This document further defines a RECOMMENDED set of additional vocabularies
-for standard use.<a href="#section-1.3.4-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="vocabularies">
@@ -2035,22 +2031,26 @@ vocabularies.<a href="#section-2-18" class="pilcrow">¶</a></p>
 <p id="section-2-19"><strong>Meta-Schema</strong><a href="#section-2-19" class="pilcrow">¶</a></p>
 <p id="section-2-20">A <em>meta-schema</em> describes and constrains schemas which may be instances of the
 meta-schema.<a href="#section-2-20" class="pilcrow">¶</a></p>
-<p id="section-2-21"><strong>Root schema</strong><a href="#section-2-21" class="pilcrow">¶</a></p>
-<p id="section-2-22">The root schema is the top-level schema object that serves as the starting point
+<p id="section-2-21"><strong>Dialect</strong><a href="#section-2-21" class="pilcrow">¶</a></p>
+<p id="section-2-22">A <em>dialect</em> is a set of vocabularies used within a given schema resource,
+toether with the syntax constraints described by a meta-schema.
+The meta-schema's URI also identifies the dialect.<a href="#section-2-22" class="pilcrow">¶</a></p>
+<p id="section-2-23"><strong>Root schema</strong><a href="#section-2-23" class="pilcrow">¶</a></p>
+<p id="section-2-24">The root schema is the top-level schema object that serves as the starting point
 and container for all of a schema's rules and annotations.  It typically defines
-the Base URI for the entire document.<a href="#section-2-22" class="pilcrow">¶</a></p>
-<p id="section-2-23"><strong>Subschema</strong><a href="#section-2-23" class="pilcrow">¶</a></p>
-<p id="section-2-24">A subschema is a schema that happens to be located inside another schema.
+the Base URI for the entire document.<a href="#section-2-24" class="pilcrow">¶</a></p>
+<p id="section-2-25"><strong>Subschema</strong><a href="#section-2-25" class="pilcrow">¶</a></p>
+<p id="section-2-26">A subschema is a schema that happens to be located inside another schema.
 Structural keywords like 'items' and 'properties' use subschemas to describe
 structure inside arrays and objects. Aggregation keywords like 'anyOf' and
-'not' direct how to apply the subschemas they hold.<a href="#section-2-24" class="pilcrow">¶</a></p>
-<p id="section-2-25">A subschema can be directly inside its parent schema,
+'not' direct how to apply the subschemas they hold.<a href="#section-2-26" class="pilcrow">¶</a></p>
+<p id="section-2-27">A subschema can be directly inside its parent schema,
 can be elsewhere in the Schema Document (using a fragment reference), or
-in a separate document (using an absolute reference).<a href="#section-2-25" class="pilcrow">¶</a></p>
-<p id="section-2-26"><strong>Implementation</strong><a href="#section-2-26" class="pilcrow">¶</a></p>
-<p id="section-2-27">An implementation is software that implements this specification.  Some
+in a separate document (using an absolute reference).<a href="#section-2-27" class="pilcrow">¶</a></p>
+<p id="section-2-28"><strong>Implementation</strong><a href="#section-2-28" class="pilcrow">¶</a></p>
+<p id="section-2-29">An implementation is software that implements this specification.  Some
 implementations validate inputs, but some implementations generate
-documentation, data or code based on a schema.<a href="#section-2-27" class="pilcrow">¶</a></p>
+documentation, data or code based on a schema.<a href="#section-2-29" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="overall">
@@ -2342,42 +2342,58 @@ in the <span><a href="#anchors" class="internal xref">"$anchor" keyword</a> (<a 
         <h3 id="name-other-general-consideration">
 <a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-other-general-consideration" class="section-name selfRef">Other General Considerations</a>
         </h3>
-<div id="extending">
+<div id="required-and-recommended-vocabularies">
 <section id="section-3.5.1">
-          <h4 id="name-requirements-for-handling-e">
-<a href="#section-3.5.1" class="section-number selfRef">3.5.1. </a><a href="#name-requirements-for-handling-e" class="section-name selfRef">Requirements for handling extensions</a>
+          <h4 id="name-required-and-recommended-vo">
+<a href="#section-3.5.1" class="section-number selfRef">3.5.1. </a><a href="#name-required-and-recommended-vo" class="section-name selfRef">Required and recommended vocabularies</a>
           </h4>
-<p id="section-3.5.1-1">Additional schema keywords and schema vocabularies MAY be defined
+<p id="section-3.5.1-1">This document defines a core vocabulary of keywords that MUST be supported by any
+implementation.  Its keywords are each prefixed
+with a "$" character to emphasize their required nature.  This vocabulary
+is essential to the functioning of the "application/schema+json" media
+type, and is used to bootstrap the loading of other vocabularies.<a href="#section-3.5.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.5.1-2">This document further defines a RECOMMENDED set of additional vocabularies
+for standard use.<a href="#section-3.5.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.5.1-3">These vocabularies together compose the standard JSON Schema dialect,
+which serves as the default dialect as discussed in <a href="#default-dialect" class="auto internal xref">Section 14.4</a>.<a href="#section-3.5.1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="extending">
+<section id="section-3.5.2">
+          <h4 id="name-requirements-for-handling-e">
+<a href="#section-3.5.2" class="section-number selfRef">3.5.2. </a><a href="#name-requirements-for-handling-e" class="section-name selfRef">Requirements for handling extensions</a>
+          </h4>
+<p id="section-3.5.2-1">Additional schema keywords and schema vocabularies MAY be defined
 by any entity.  Save for explicit agreement, schema authors SHALL NOT
 expect these additional keywords and vocabularies to be supported by
 implementations that do not explicitly document such support.
 Implementations SHOULD treat keywords they do not support as annotations,
-where the value of the keyword is the value of the annotation.<a href="#section-3.5.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.5.1-2">Implementations MAY provide the ability to register or load handlers
+where the value of the keyword is the value of the annotation.<a href="#section-3.5.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.5.2-2">Implementations MAY provide the ability to register or load handlers
 for vocabularies that they do not support directly.  The exact mechanism
-for registering and implementing such handlers is implementation-dependent.<a href="#section-3.5.1-2" class="pilcrow">¶</a></p>
+for registering and implementing such handlers is implementation-dependent.<a href="#section-3.5.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="validation-1">
-<section id="section-3.5.2">
+<section id="section-3.5.3">
           <h4 id="name-validation-2">
-<a href="#section-3.5.2" class="section-number selfRef">3.5.2. </a><a href="#name-validation-2" class="section-name selfRef">Validation</a>
+<a href="#section-3.5.3" class="section-number selfRef">3.5.3. </a><a href="#name-validation-2" class="section-name selfRef">Validation</a>
           </h4>
-<p id="section-3.5.2-1">JSON Schema validation applies the rules of a JSON Schema to determine
+<p id="section-3.5.3-1">JSON Schema validation applies the rules of a JSON Schema to determine
 if an input is in the valid set for that schema.
 An instance location that satisfies all asserted constraints is then
 annotated with any keywords that contain non-assertion information,
-such as descriptive metadata and usage hints.<a href="#section-3.5.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.5.2-2">Each schema object is independently evaluated against each input location
+such as descriptive metadata and usage hints.<a href="#section-3.5.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.5.3-2">Each schema object is independently evaluated against each input location
 to which it applies.  This greatly simplifies implementation requirements
 by ensuring that implementations do not need to maintain state across
-the document-wide validation process.<a href="#section-3.5.2-2" class="pilcrow">¶</a></p>
-<p id="section-3.5.2-3">This specification defines a set of assertion keywords, as well as a small vocabulary
+the document-wide validation process.<a href="#section-3.5.3-2" class="pilcrow">¶</a></p>
+<p id="section-3.5.3-3">This specification defines a set of assertion keywords, as well as a small vocabulary
 of metadata keywords that can be used to annotate the JSON instance with
 useful information.  The <a href="#format-vocab" class="auto internal xref">Section 8</a> keyword is intended primarily
 as an annotation, but can optionally be used as an assertion.  The
 <a href="#content" class="auto internal xref">Section 9</a> keywords are annotations for working with documents
-embedded as JSON strings.<a href="#section-3.5.2-3" class="pilcrow">¶</a></p>
+embedded as JSON strings.<a href="#section-3.5.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2465,7 +2481,7 @@ this meta-schema with "$schema".  If the value is false, implementations
 that do not recognize the vocabulary SHOULD proceed with processing
 such schemas.  The value has no impact if the implementation
 understands the vocabulary.<a href="#section-4.1.2-4" class="pilcrow">¶</a></p>
-<p id="section-4.1.2-5">Per <a href="#extending" class="auto internal xref">Section 3.5.1</a>, unrecognized
+<p id="section-4.1.2-5">Per <a href="#extending" class="auto internal xref">Section 3.5.2</a>, unrecognized
 keywords SHOULD be treated as annotations.
 This remains the case for keywords defined
 by unrecognized vocabularies.  It is not currently possible to distinguish
@@ -6129,7 +6145,7 @@ a meta-schema consisting only of the vocabulary's keywords.<a href="#section-14.
 meta-schema features emphasizes flexibility over simplicity.<a href="#section-14.3-9" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="default-json-schema-dialect">
+<div id="default-dialect">
 <section id="section-14.4">
         <h3 id="name-default-json-schema-dialect">
 <a href="#section-14.4" class="section-number selfRef">14.4. </a><a href="#name-default-json-schema-dialect" class="section-name selfRef">Default JSON Schema Dialect</a>
