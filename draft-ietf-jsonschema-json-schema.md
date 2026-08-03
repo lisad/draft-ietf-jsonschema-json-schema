@@ -152,8 +152,6 @@ The smallest set is the empty set.
 A _validator_ (also known as an _acceptor_) is a process that tests if a particular input is described by the schema, by evaluating it against the requirements.
 An accepted input is called an _instance_ of the schema, and a rejected input is called a _violation_ of the schema.
 
-In all validator implementations, equivalent JSON values MUST return the same validation result and annotations. For example, selection between equivalent character escapes, or use of whitespace, does not affect the result. This also means that a validation keyword MUST NOT accept or reject based on third factors (those factors besides the schema and the input itself). A separate "outside verification" scheme that queries external data sources is possible, but outside the scope of this document.
-
 ### Annotation
 
 A JSON Schema may describe additional output to accompany an "accept" result,
@@ -577,6 +575,8 @@ Each schema object is independently evaluated against each input location
 to which it applies.  This greatly simplifies implementation requirements
 by ensuring that implementations do not need to maintain state across
 the document-wide validation process.
+
+In all validator implementations, equivalent JSON values MUST return the same validation result and annotations. For example, selection between equivalent character escapes, or use of whitespace, does not affect the result. This also means that a validation keyword MUST NOT accept or reject based on third factors (those factors besides the schema and the input itself). A separate "outside verification" scheme that queries external data sources is possible, but outside the scope of this document.
 
 This specification defines a set of assertion keywords, as well as a small vocabulary
 of metadata keywords that can be used to annotate the JSON instance with
