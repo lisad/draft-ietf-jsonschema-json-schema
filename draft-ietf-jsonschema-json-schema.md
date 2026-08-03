@@ -792,9 +792,9 @@ raise an error if such usage is detected.
 #### Example {#anchor-example}
 
 In this example, more than one property can hold an address object. The
-address object is defined somewhere else in the schema, and to avoid breaking
-references to the address object any time it is moved or the words "utils",
-"new", or "reusable" are renamed, the model is given an anchor and
+address object is defined under a nested "$defs" so that utility schemas can
+be gathered under "utils".  To ensure references continue working even if
+this nested "utils" arrangement is changed, the model is given an anchor and
 the anchor is used to refer to it.  The extra layers and names are not
 needed in a schema this short, but in a much larger schema they could
 help with maintainability and readability.

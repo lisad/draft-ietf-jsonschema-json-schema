@@ -6,16 +6,14 @@
   },
   "$defs": {
     "utils": {
-      "new": {
-        "reusable": {
-          "address": {
-            "$anchor": "address-model",
-            "type": "object",
-            "required": ["street", "city"],
-            "properties": {
-              "street": { "type": "string" },
-              "city": { "type": "string" }
-            }
+      "$defs": {
+        "address": {
+          "$anchor": "address-model",
+          "type": "object",
+          "required": ["street", "city"],
+          "properties": {
+            "street": { "type": "string" },
+            "city": { "type": "string" }
           }
         }
       }
