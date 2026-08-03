@@ -261,6 +261,38 @@ JSON Schema works by defining keywords with specific behavior.  A *keyword* appe
 as a JSON *name* {{!RFC8259}}.  Not all JSON names in a schema are keywords, but
 all keywords have required behavior.
 
+Broadly speaking, keywords fall into one or more of five categories:
+
+identifiers
+: control schema identification through setting a URI
+  for the schema and/or changing how the base URI is determined
+
+assertions
+: produce a boolean result info item indicating input acceptance
+  or rejection; produce errors upon rejection
+
+annotations
+: attach information intended for application use to an instance
+  via the result infoset
+
+applicators
+: apply one or more subschemas to a particular location
+  in the instance, and produce a boolean result info item
+  that combines or modifies those produced by the subschemas;
+  applicators producing an acceptance result suppress the
+  errors of any subschemas that produced a rejection
+
+reserved locations
+: do not interact with the result infoset, but reserve a place
+  for a specific purpose to ensure interoperability
+
+Keywords which are properties within the same schema object are referred to as
+*adjacent keywords*.
+
+Extension keywords, meaning those defined outside of this document,
+are free to define their own behaviors, within the constraints required
+by this specification.
+
 **Vocabulary**
 
 A *vocabulary* is a set of keywords that are defined to enable some
@@ -460,44 +492,14 @@ for a given schema, regardless of their original formatting.
 
 ## Keywords
 
-Object properties that are applied to the instance are called keywords,
-or schema keywords.  Broadly speaking, keywords fall into one
-of five categories:
+To ensure interoperability, all JSON Schema keywords, whether
+defined in this specification or elsewhere, MUST define
+their behavior in terms of the categories defined in {{terminology}}
+and described in detail under {{keyword-behaviors}}.
 
-identifiers
-: control schema identification through setting a URI
-  for the schema and/or changing how the base URI is determined
-
-assertions
-: produce a boolean result when applied to an instance
-
-annotations
-: attach information to an instance for application use
-
-applicators
-: apply one or more subschemas to a particular location
-  in the instance, and combine or modify their results
-
-reserved locations
-: do not directly affect results, but reserve a place
-  for a specific purpose to ensure interoperability
-
-Keywords may fall into multiple categories, although applicators
-SHOULD only produce assertion results based on their subschemas'
-results.  They should not define additional constraints independent
-of their subschemas.
-
-Keywords which are properties within the same schema object are referred to as adjacent keywords.
-
-Extension keywords, meaning those defined outside of this document,
-are free to define other behaviors as well.
-
-A JSON Schema MAY contain properties which are not schema keywords
-or are not recognized as schema keywords.
+A JSON Schema object MAY contain properties which are not
+recognized as known schema keywords.
 The behavior of such keywords is governed by {{unrecognized}}.
-
-Unknown keywords SHOULD be treated as annotations, where the value
-of the keyword is the value of the annotation.
 
 An empty schema is a JSON Schema with no properties, or only unknown
 properties.
@@ -555,8 +557,8 @@ Additional schema keywords and schema vocabularies MAY be defined
 by any entity.  Save for explicit agreement, schema authors SHALL NOT
 expect these additional keywords and vocabularies to be supported by
 implementations that do not explicitly document such support.
-Implementations SHOULD treat keywords they do not support as annotations,
-where the value of the keyword is the value of the annotation.
+Keywords that an implementation does not support are considered
+to be unrecognized; their behavior is governed by {{unrecognized}}.
 
 Implementations MAY provide the ability to register or load handlers
 for vocabularies that they do not support directly.  The exact mechanism
@@ -667,10 +669,9 @@ that do not recognize the vocabulary SHOULD proceed with processing
 such schemas.  The value has no impact if the implementation
 understands the vocabulary.
 
-Per {{extending}}, unrecognized
-keywords SHOULD be treated as annotations.
-This remains the case for keywords defined
-by unrecognized vocabularies.  It is not currently possible to distinguish
+Keywords defined by unrecognized vocabularies are considered to be
+unrecognized, with behavior governed by {{unrecognized}}.
+It is not currently possible to distinguish
 between unrecognized keywords that are defined in vocabularies from
 those that are not part of any vocabulary.
 
