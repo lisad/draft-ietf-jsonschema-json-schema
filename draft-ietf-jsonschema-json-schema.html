@@ -1613,6 +1613,11 @@ Source for this draft can be found at
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.1">
                 <p id="section-toc.1-1.12.2.1.1"><a href="#section-12.1" class="auto internal xref">12.1</a>.  <a href="#name-lexical-scope-and-dynamic-s" class="internal xref">Lexical Scope and Dynamic Scope</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.1.2.1">
+                    <p id="section-toc.1-1.12.2.1.2.1.1"><a href="#section-12.1.1" class="auto internal xref">12.1.1</a>.  <a href="#name-successful-unsuccessful-and" class="internal xref">Successful unsuccessful, and ignored evaluations</a></p>
+</li>
+                </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.2">
                 <p id="section-toc.1-1.12.2.2.1"><a href="#section-12.2" class="auto internal xref">12.2</a>.  <a href="#name-keyword-interactions" class="internal xref">Keyword Interactions</a></p>
@@ -5117,17 +5122,19 @@ keywords in the schema against the appropriate locations within the input.
 Typically, applicator keywords are processed until a schema object with no
 applicators (and therefore no subschemas) is reached.  The appropriate
 location in the input is evaluated against the assertion and
-annotation keywords in the schema object.
-The interactions of those keyword results to produce the schema object
-results are governed by <a href="#annot-assert" class="auto internal xref">Section 12.8.1.2</a>, while the
+annotation keywords in the schema object.<a href="#section-12-3" class="pilcrow">¶</a></p>
+<p id="section-12-4">The validation result of a schema object containing keywords MUST
+be the logical AND of the validation results of its keywords.
+The interactions of keyword and schema results with annotations,
+errors, and keyword dependencies are defined by <a href="#eval-status" class="auto internal xref">Section 12.1.1</a>, while the
 relationship of subschema results to the results of the applicator
-keyword that applied them is described by <a href="#applicators" class="auto internal xref">Section 12.6</a>.<a href="#section-12-3" class="pilcrow">¶</a></p>
-<p id="section-12-4">Evaluation of a parent schema object can complete once all of its
+keyword that applied them is described by <a href="#applicators" class="auto internal xref">Section 12.6</a>.<a href="#section-12-4" class="pilcrow">¶</a></p>
+<p id="section-12-5">Evaluation of a parent schema object can complete once all of its
 subschemas have been evaluated, although in some circumstances evaluation
 may be short-circuited due to assertion results.  When annotations are
 being collected, some assertion result short-circuiting is not possible
 due to the need to examine all subschemas for annotation collection, including
-those that cannot further change the assertion result.<a href="#section-12-4" class="pilcrow">¶</a></p>
+those that cannot further change the assertion result.<a href="#section-12-5" class="pilcrow">¶</a></p>
 <div id="scopes">
 <section id="section-12.1">
         <h3 id="name-lexical-scope-and-dynamic-s">
@@ -5141,38 +5148,66 @@ complex behavior.<a href="#section-12.1-1" class="pilcrow">¶</a></p>
 data structure of objects and arrays.  The largest such scope
 is an entire schema document.  The smallest scope is a single
 schema object with no subschemas.<a href="#section-12.1-2" class="pilcrow">¶</a></p>
-<p id="section-12.1-3">Keywords MAY be defined with a partial value, such as a URI-reference,
-which must be resolved against another value, such as another
-URI-reference or a full URI, which is found through the lexical
-structure of the structured document.  The "$id", "$ref", and
-"$dynamicRef" core keywords, and the "base" JSON Hyper-Schema
-keyword, are examples of this sort of behavior.<a href="#section-12.1-3" class="pilcrow">¶</a></p>
-<p id="section-12.1-4">Note that some keywords, such as "$schema", apply to the lexical
-scope of the entire schema resource, and therefore MUST only
-appear in a schema resource's root schema.<a href="#section-12.1-4" class="pilcrow">¶</a></p>
-<p id="section-12.1-5">Other keywords may take into account the dynamic scope that
+<p id="section-12.1-3">Other keywords may take into account the dynamic scope that
 exists during the evaluation of a schema, typically together
 with an input document.
 The outermost dynamic scope is the schema object at
 which processing begins, even if it is not a schema resource root.
 The path from this root schema to any particular keyword (that
 includes any "$ref" and "$dynamicRef" keywords that may have
-been resolved) is considered the keyword's "validation path."<a href="#section-12.1-5" class="pilcrow">¶</a></p>
-<p id="section-12.1-6">Lexical and dynamic scopes align until a reference keyword
+been resolved) is considered the keyword's "validation path."<a href="#section-12.1-3" class="pilcrow">¶</a></p>
+<p id="section-12.1-4">Lexical and dynamic scopes align until a reference keyword
 is encountered.  While following the reference keyword moves processing
 from one lexical scope into a different one, from the perspective
 of dynamic scope, following a reference is no different from descending
 into a subschema present as a value.  A keyword on the far side of
 that reference that resolves information through the dynamic scope
 will consider the originating side of the reference to be their
-dynamic parent, rather than examining the local lexically enclosing parent.<a href="#section-12.1-6" class="pilcrow">¶</a></p>
-<p id="section-12.1-7">The concept of dynamic scope is primarily used with "$dynamicRef" and
-"$dynamicAnchor", and should be considered an advanced feature
-and used with caution when defining additional keywords.  It also appears
-when reporting errors and collected annotations, as it may be possible
-to revisit the same lexical scope repeatedly with different dynamic
-scopes.  In such cases, it is important to inform the user of the
-dynamic path that produced the error or annotation.<a href="#section-12.1-7" class="pilcrow">¶</a></p>
+dynamic parent, rather than examining the local lexically enclosing parent.<a href="#section-12.1-4" class="pilcrow">¶</a></p>
+<p id="section-12.1-5">The concept of dynamic scope should be considered an advanced feature
+and used with caution when defining extension keywords.<a href="#section-12.1-5" class="pilcrow">¶</a></p>
+<div id="eval-status">
+<section id="section-12.1.1">
+          <h4 id="name-successful-unsuccessful-and">
+<a href="#section-12.1.1" class="section-number selfRef">12.1.1. </a><a href="#name-successful-unsuccessful-and" class="section-name selfRef">Successful unsuccessful, and ignored evaluations</a>
+          </h4>
+<p id="section-12.1.1-1">Each dynamic scope represents an evaluation of an input location by
+a schema.  Keyword evaluations within the dynamic scope are
+sub-evaluations of the schema evaluation, and subschema evaluations
+within a dynamic subscope createdy by an applicator keyword are
+sub-evaluations of the applicator keyword evaluation.<a href="#section-12.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-12.1.1-2">Evaluation includes validation, which either accepts or
+rejects the input, as well as management of annotations,
+error messages, and keyword dependency information.<a href="#section-12.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-12.1.1-3">Evaluations are considered to have one of three statuses:
+successful, unsuccessful, or ignored.  This status depends on
+the evaluation's own validation outcome, as well as those of all
+of its parent evaluations.<a href="#section-12.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-12.1.1-4">Each evaluation MUST initially be considered successful if it
+accepts the input, and unsuccessful if it rejects.  An initially
+successful keyword evaluation MAY produce an annotation and/or
+information supporting keyword dependencies, while
+an initially unsuccessful keyword MAY produce an error beyond
+its boolean validation outcome.<a href="#section-12.1.1-4" class="pilcrow">¶</a></p>
+<p id="section-12.1.1-5">An initially successful evaluation MUST be considered unsuccessful
+if any parent evaluation is unsuccessful, causing its
+annotations to be removed from non-"verbose" (<a href="#verbose" class="auto internal xref">Section 13.4.4</a>)
+potential output.<a href="#section-12.1.1-5" class="pilcrow">¶</a></p>
+<p id="section-12.1.1-6">An initially unsuccessful evaluation MUST be considered ignored
+if any parent evaluation is successful, causing its
+errors to be removed from non-"verbose" potential output.<a href="#section-12.1.1-6" class="pilcrow">¶</a></p>
+<p id="section-12.1.1-7">Note that these requirements prevent unsuccessful evaluations
+from becoming successful, and prevent ignored evaluations from
+further changing status at all.<a href="#section-12.1.1-7" class="pilcrow">¶</a></p>
+<p id="section-12.1.1-8">Unless using an output format such as "verbose" (<a href="#verbose" class="auto internal xref">Section 13.4.4</a>)
+that is intended to provide a full evaluation record, output
+MUST only include annotations from successful evaluations,
+and errors from unsuccessful evaluations.<a href="#section-12.1.1-8" class="pilcrow">¶</a></p>
+<p id="section-12.1.1-9">Information used to support keyword dependencies MUST only
+be used from evaluations considered to be successful at the time
+of the depending keyword's evaluation, regardless of output choice.<a href="#section-12.1.1-9" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 <div id="keyword-interactions">
@@ -5180,13 +5215,33 @@ dynamic path that produced the error or annotation.<a href="#section-12.1-7" cla
         <h3 id="name-keyword-interactions">
 <a href="#section-12.2" class="section-number selfRef">12.2. </a><a href="#name-keyword-interactions" class="section-name selfRef">Keyword Interactions</a>
         </h3>
-<p id="section-12.2-1">Keyword behavior MAY be defined in terms of the annotation results
-of <span><a href="#root" class="internal xref">subschemas</a> (<a href="#root" class="auto internal xref">Section 3.1.2</a>)</span> and/or adjacent keywords
-(keywords within the same schema object) and their subschemas.
+<p id="section-12.2-1">Keywords MAY be defined with a partial value, such as a URI-reference,
+which must be resolved against another value, such as another
+URI-reference or a full URI, which is found through the lexical
+structure of the structured document.  The "$id", "$ref", and
+"$dynamicRef" core keywords, and the "base" JSON Hyper-Schema
+keyword, are examples of this sort of behavior.<a href="#section-12.2-1" class="pilcrow">¶</a></p>
+<p id="section-12.2-2">Note that some keywords, such as "$schema", apply to the lexical
+scope of the entire schema resource, and therefore MUST only
+appear in a schema resource's root schema.<a href="#section-12.2-2" class="pilcrow">¶</a></p>
+<p id="section-12.2-3">A keyword MAY depend on the value or outcome of other keywords
+within the same dynamic scopes or its successful subscopes.<a href="#section-12.2-3" class="pilcrow">¶</a></p>
+<p id="section-12.2-4">No constraints are placed on the mechanism of communication
+within implementations, however, annotations MAY be used for
+this purpose, and all dependencies within this specification
+define annotations necessary for this.<a href="#section-12.2-4" class="pilcrow">¶</a></p>
+<p id="section-12.2-5">Interactions within the same dynamic scope that depend only
+on adjacent keyword values SHOULD be determined statically.
+Other interactions, including all those involving dynamic
+subscopes, are expected to be handled as runtime communication.<a href="#section-12.2-5" class="pilcrow">¶</a></p>
+<p id="section-12.2-6">Note that dependencies involving either dynamic subscopes
+or evaluation of adjacent keywords impose an ordering
+on keyword evaluation.
 Such keywords MUST NOT result in a circular dependency.
 Keywords MAY modify their behavior based on the presence or absence
 of another keyword in the same
-<span><a href="#schema-document" class="internal xref">schema object</a> (<a href="#schema-document" class="auto internal xref">Section 3.1</a>)</span>.<a href="#section-12.2-1" class="pilcrow">¶</a></p>
+<span><a href="#schema-document" class="internal xref">schema object</a> (<a href="#schema-document" class="auto internal xref">Section 3.1</a>)</span>.<a href="#section-12.2-6" class="pilcrow">¶</a></p>
+<p id="section-12.2-7">Keywords MUST NOT define interactions outside of these mechanisms.<a href="#section-12.2-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="default-behaviors">
@@ -5484,38 +5539,6 @@ defined description that explains how to interpret a null value.<a href="#sectio
 might take.  For example, an application may consider the presence of
 two different values for "default" to be an error, regardless of their
 schema locations.<a href="#section-12.8.1.1-9" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="annot-assert">
-<section id="section-12.8.1.2">
-            <h5 id="name-annotations-and-assertions">
-<a href="#section-12.8.1.2" class="section-number selfRef">12.8.1.2. </a><a href="#name-annotations-and-assertions" class="section-name selfRef">Annotations and Assertions</a>
-            </h5>
-<p id="section-12.8.1.2-1">Schema objects that produce a false assertion result MUST NOT
-produce any annotation results, whether from their own keywords
-or from keywords in subschemas.<a href="#section-12.8.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-12.8.1.2-2">Note that the overall schema results may still include annotations
-collected from other schema locations.  Given this schema:<a href="#section-12.8.1.2-2" class="pilcrow">¶</a></p>
-<div class="lang-json sourcecode" id="section-12.8.1.2-3">
-<pre>
-{
-    "oneOf": [
-        {
-            "title": "Integer Value",
-            "type": "integer"
-        },
-        {
-            "title": "String Value",
-            "type": "string"
-        }
-    ]
-}
-</pre><a href="#section-12.8.1.2-3" class="pilcrow">¶</a>
-</div>
-<p id="section-12.8.1.2-4">Against the input <code>"This is a string"</code>, the
-title annotation "Integer Value" is discarded because the type assertion
-in that schema object fails.  The title annotation "String Value"
-is kept, as the input passes the string type assertions.<a href="#section-12.8.1.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
