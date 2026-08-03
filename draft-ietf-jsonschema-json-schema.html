@@ -1912,7 +1912,6 @@ The largest possible set is that of all syntactically valid structured inputs.
 The smallest set is the empty set.<a href="#section-1.3.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.3.1-2">A <em>validator</em> (also known as an <em>acceptor</em>) is a process that tests if a particular input is described by the schema, by evaluating it against the requirements.
 An accepted input is called an <em>instance</em> of the schema, and a rejected input is called a <em>violation</em> of the schema.<a href="#section-1.3.1-2" class="pilcrow">¶</a></p>
-<p id="section-1.3.1-3">In all validator implementations, equivalent JSON values MUST return the same validation result and annotations. For example, selection between equivalent character escapes, or use of whitespace, does not affect the result. This also means that a validation keyword MUST NOT accept or reject based on third factors (those factors besides the schema and the input itself). A separate "outside verification" scheme that queries external data sources is possible, but outside the scope of this document.<a href="#section-1.3.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="annotation">
@@ -2391,12 +2390,13 @@ such as descriptive metadata and usage hints.<a href="#section-3.5.3-1" class="p
 to which it applies.  This greatly simplifies implementation requirements
 by ensuring that implementations do not need to maintain state across
 the document-wide validation process.<a href="#section-3.5.3-2" class="pilcrow">¶</a></p>
-<p id="section-3.5.3-3">This specification defines a set of assertion keywords, as well as a small vocabulary
+<p id="section-3.5.3-3">In all validator implementations, equivalent JSON values MUST return the same validation result and annotations. For example, selection between equivalent character escapes, or use of whitespace, does not affect the result. This also means that a validation keyword MUST NOT accept or reject based on third factors (those factors besides the schema and the input itself). A separate "outside verification" scheme that queries external data sources is possible, but outside the scope of this document.<a href="#section-3.5.3-3" class="pilcrow">¶</a></p>
+<p id="section-3.5.3-4">This specification defines a set of assertion keywords, as well as a small vocabulary
 of metadata keywords that can be used to annotate the JSON instance with
 useful information.  The <a href="#format-vocab" class="auto internal xref">Section 8</a> keyword is intended primarily
 as an annotation, but can optionally be used as an assertion.  The
 <a href="#content" class="auto internal xref">Section 9</a> keywords are annotations for working with documents
-embedded as JSON strings.<a href="#section-3.5.3-3" class="pilcrow">¶</a></p>
+embedded as JSON strings.<a href="#section-3.5.3-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
