@@ -5,9 +5,9 @@
 Network Working Group                                  L. Dusseault, Ed.
 Internet-Draft                                  Data Transfer Initiative
 Intended status: Standards Track                               A. Wright
-Expires: 2 February 2027                                                
+Expires: 4 February 2027                                                
                                                               H. Andrews
-                                                           1 August 2026
+                                                           3 August 2026
 
 
                               JSON Schema
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 February 2027.
+   This Internet-Draft will expire on 4 February 2027.
 
 Copyright Notice
 
@@ -1009,10 +1009,10 @@ Table of Contents
 4.1.4.1.  Example
 
    In this example, more than one property can hold an address object.
-   The address object is defined somewhere else in the schema, and to
-   avoid breaking references to the address object any time it is moved
-   or the words "utils", "new", or "reusable" are renamed, the model is
-   given an anchor and the anchor is used to refer to it.  The extra
+   The address object is defined under a nested "$defs" so that utility
+   schemas can be gathered under "utils".  To ensure references continue
+   working even if this nested "utils" arrangement is changed, the model
+   is given an anchor and the anchor is used to refer to it.  The extra
    layers and names are not needed in a schema this short, but in a much
    larger schema they could help with maintainability and readability.
 
@@ -1024,16 +1024,14 @@ Table of Contents
      },
      "$defs": {
        "utils": {
-         "new": {
-           "reusable": {
-             "address": {
-               "$anchor": "address-model",
-               "type": "object",
-               "required": ["street", "city"],
-               "properties": {
-                 "street": { "type": "string" },
-                 "city": { "type": "string" }
-               }
+         "$defs": {
+           "address": {
+             "$anchor": "address-model",
+             "type": "object",
+             "required": ["street", "city"],
+             "properties": {
+               "street": { "type": "string" },
+               "city": { "type": "string" }
              }
            }
          }
