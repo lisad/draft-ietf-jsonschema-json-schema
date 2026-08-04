@@ -128,8 +128,8 @@ the topic of the chapter.
 * Implementors will need to understand the requirements in sections 3 through 10 but also
 the requirements on loading and processing schemas ({{loading-and-processing}}),
 keyword behaviors ({{keyword-behaviors}}), and formatted output ({{output}}).
-Refer to the appendix on annotations ({{annotations-appendix}}) for additional
-guidance on approaches to implementing annotations.
+Refer to the appendix on keyword dependency implementation ({{impl-deps}}) for additional
+guidance on approaches to implementing keyword dependencies.
 
 * Authors of meta-schemas including extensions to JSON Schema will want to read
 the chapter on {{extensibility}} and {{vocabularies-appendix}}.
@@ -1392,7 +1392,7 @@ Omitting this keyword has the same assertion behavior as
 an empty schema.
 
 The `unevaluatedItems` keyword can be very similar to the `items` keyword in
-some examples, like the example in {{annotations-appendix}} where `prefixItems`
+some examples, like the example in {{impl-deps}} where `prefixItems`
 is used to define exactly three items in a list and further items are forbidden,
 and in that example `unevaluatedItems` could replace `items`.  Here's an example
 where `unevaluatedItems` is doing work that could not be done by `items`, constraining
@@ -3974,14 +3974,15 @@ which tell us how to resolve the dynamic reference, not any sort of
 correlation in JSON structure.
 
 
-# Using annotations in implementations {#annotations-appendix}
+# Implementing keyword dependencies {#impl-deps}
 
-Annotations gathered while evaluating some keywords can be used to
-simplify the logic of evaluating other dependent keywords.  Whether
-annotations are used in keyword evaluation or not, the implementor must make sure that
-results are identical.  Thus, this section is OPTIONAL.
+As noted in {{keyword-interactions}}, some keywords depend on the value
+or successful evaluation outcome of other keywords within the same
+schema evaluation or any of its successful sub-evaluations.  The
+specifics of this mechanism are left up to each implementation.
 
-As an example, the `properties` keyword produces annotations which can be used
+As an example, the `properties` keyword produces information about
+which properties were successfully evaluated, which is used
 in the implementation of `additionalProperties`, `required` and
 `unevaluatedProperties`.  With this schema:
 
@@ -3989,19 +3990,20 @@ in the implementation of `additionalProperties`, `required` and
 {::include ./examples/point.json}
 ~~~~~~~~~~
 
-The following table shows the annotation result of `properties` for
-three different inputs, and how `additionalProperties` and `required`
+The following table shows the information produced by `properties` for
+three different inputs, and how `additionalProperties`
 implementations could use that result.
 
-| Input | "properties" annotation | "additionalProperties" result | "required" result |
+| Input | "properties" property names | "additionalProperties" result |
 |---|---|---|---|
-| `{"X": 1, "Y": 2}` | `["X", "Y"]` | valid | valid |
-| `{"X": 1, "Y": 2, "radius": 5}` | `["X", "Y"]` | invalid (`"radius"` not in annotation) | valid |
-| `{"X": 1}` | `["X"]` | valid | invalid (`"Y"` absent) |
+| `{"X": 1, "Y": 2}` | "X", "Y" | valid |
+| `{"X": 1, "Y": 2, "radius": 5}` | "X", "Y" | invalid (`"radius"` not in set) |
 
-Similarly, the `prefixItems` keyword produces an annotation which is
-used by `items` and `unevaluatedItems`.  The annotation value is the
-largest index to which `prefixItems` applied a subschema.  Consider
+Similarly, the `prefixItems` keyword produces information which is
+used by `items` and `unevaluatedItems`.  The information is the indexes
+to which `prefixItems` applied as a subschema, which we'll show as
+a range (its exact representation is purely internal and therefore
+implementation-defined).  Consider
 this schema for a structured log entry with a timestamp, action, and
 username fields, and preventing additional fields:
 
@@ -4014,26 +4016,32 @@ annotation output from `prefixItems` evaluation. Then,
 `items` uses the `prefixItems` annotation to start where `prefixItems`
 left off, applying only to indices greater than the annotation value.
 
-| Input | "prefixItems" annotation | "items" result |
+| Input | "prefixItems" index ranges | "items" result |
 |---|---|---|
-| `["2026-06-24T10:00:00Z", "created", "alice"]` | `2` | valid (no elements beyond index 2) |
-  | `["2026-06-24T10:00:00Z", "created", "alice", "extra"]` | `2` | invalid (index 3 not evaluated by `prefixItems`) |
-| `["2026-06-24T10:00:00Z", "created"]` | `1` | valid (no elements beyond index 1) |
+| `["2026-06-24T10:00:00Z", "created", "alice"]` | 0–2 | valid (no elements beyond index 2) |
+| `["2026-06-24T10:00:00Z", "created", "alice", "extra"]` | 0–2 | invalid (index 3 not evaluated by `prefixItems`) |
+| `["2026-06-24T10:00:00Z", "created"]` | 0–1 | valid (no elements beyond index 1) |
 | `[]` | *(none)* | valid (no elements at all) |
 
-The following table summarizes which keywords produce annotations
-that can be used in the implementation of other keywords:
+The following table summarizes which, when successful, produce
+information on which other keywords depend:
 
-| Keyword | Annotation value | Used by |
+| Keyword | Information | Depended on by |
 |---|---|---|
-| `properties` | set of matched property names | `additionalProperties`, `unevaluatedProperties` |
-| `patternProperties` | set of matched property names | `additionalProperties`, `unevaluatedProperties` |
-| `additionalProperties` | set of validated property names | `unevaluatedProperties` |
-| `prefixItems` | largest index evaluated, or `true` | `items`, `unevaluatedItems` |
-| `items` | `true` if any elements evaluated | `unevaluatedItems` |
-| `contains` | array of evaluated indices, or `true` | `unevaluatedItems` |
-| `unevaluatedItems` | `true` if any elements evaluated | `unevaluatedItems` in parent schemas |
-| `unevaluatedProperties` | set of validated property names | `unevaluatedProperties` in parent schemas |
+| `properties` | set of validated property names | `additionalProperties`, `unevaluatedProperties` |
+| `patternProperties` | set of validated property names | `additionalProperties`, `unevaluatedProperties` |
+| `additionalProperties` | all properties have been validated | `unevaluatedProperties` |
+| `prefixItems` | validated index ranges | `items`, `unevaluatedItems` |
+| `items` | all indices have been validated | `unevaluatedItems` |
+| `contains` | validated index ranges | `unevaluatedItems` |
+| `minContains` | keyword value | `contains` |
+| `maxContains` | keyword value | `contains` |
+| `unevaluatedItems` | all indices have been validated | `unevaluatedItems` in parent schemas |
+| `unevaluatedProperties` | all properties have been validated | `unevaluatedProperties` in parent schemas |
+
+Note that certain keywords always validate all remaining properties
+or indices when successful, so there is no need for them to track
+individual locations.
 
 # Working with vocabularies {#vocabularies-appendix}
 
