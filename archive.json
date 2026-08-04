@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-08-02T00:41:38.559465+00:00",
+  "timestamp": "2026-08-04T00:38:58.521655+00:00",
   "repo": "lisad/draft-ietf-jsonschema-json-schema",
   "labels": [
     {
@@ -1622,21 +1622,21 @@
       "id": "PR_kwDOR8mbas74w7yc",
       "title": "All annotations are now simple value annotations, define schema evaluation to reframe complex things",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/35",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "handrews",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "* Defined existing input/instance location, schema location, and evaluation path concepts in **Terminology**\r\n* Defined the new concepts of a \"schema evaluation\" and \"sub-evaluation\"\r\n    * These are related to \"result infounits\" (an idea I was developing elsewhere), but...\r\n    * ...they do not require defining or maintaining any sort of data structure, conceptual or concrete\r\n* New section defining keyword interactions in terms of evaluations and sub-evaluations\r\n* Removed annotation wording from all applicators, as communication is generically defined\r\n* Defined annotation behaviors in terms of schema evaluation and sub-evaluation\r\n* Changed computed annotation example from hyper-schema to be an example of downstream processing expectations\r\n* Removed the annotations-for-applicators implementation appendix\r\n \r\nOverall, this simplifies a lot of things by defining a single mechanism (successful/unsuccessful schema evaluations and sub-evaluations) and referencing it in many places that explained similar processes repeatedly.  It also means that \"annotations\" have exactly one behavior.\r\n\r\nI'm not entirely sure if the evaluation path example in \"Terminology\" should move somewhere else, and I have no idea how clearly I'm explaining \"schema evaluation\" and \"sub-evaluation\", or if those are even the right names for those concepts.  Please feel free to suggest alternatives.  _[EDIT: Perhaps \"schema/keyword evaluation unit\" to match \"schema/keyword result infounit\"?  Although \"unit\" suggests a concrete thing, and \"schema [sub]evaluation\" correctly suggests a process... hmm...]_",
       "createdAt": "2026-07-30T22:58:13Z",
-      "updatedAt": "2026-08-01T19:55:00Z",
+      "updatedAt": "2026-08-02T17:31:57Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "fc5839779fd8dda17c3e8a83b8080bcbe18b57a4",
       "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
       "headRefName": "sva",
       "headRefOid": "12157a24061221cf996fb41c4d46ec274be4b188",
-      "closedAt": null,
+      "closedAt": "2026-08-02T17:31:57Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -1661,6 +1661,20 @@
           "body": "the most recent commit formalizes \"keyword evaluation\" along the same lines of \"schema evaluation\" and expands the example in \"Evaluations and sub-evaluations\".  Apologies for the force-pushes, I forgot some bits and they wouldn't have been interesting as individual commits anyway.",
           "createdAt": "2026-07-31T19:04:48Z",
           "updatedAt": "2026-07-31T21:36:13Z"
+        },
+        {
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@lisad after thinking on this a bit more, I'm going to put this into draft and rework it significantly, along the following lines (please comment if this seems to be going off the rails):\r\n\r\n* \"Terminology\" just needs to introduce the terms that would otherwise confuse readers.  It does not need to define them all thoroughly- this is why it's \"Terminology\" and not \"Definitions\", so:\r\n    * I'll trim **evaluation path**'s entry and move the examples elsewhere\r\n    * I'll drastically condense all the other evaluation stuff into a single  **Schema and keyword evaluations and sub-evaluations** entry _(or whatever else we call this- please suggest other things, I am **not** fond of this terminology)_ that explains that they are implementor-oriented and links elsewhere\r\n* I need to sort out the relationship between these new concepts and \"Dynamic Scope\", which is related by not identical.  Maybe some simplification or better/reduced terminology will come out of that, idk.  The \"evaluation\" stuff solved a lot of problems for me that \"dynamic scope\" never did, though.\r\n* I'll move the actual evaluation stuff down near \"Keyword Behaviors\" under a new section\r\n    * There is a distinction between how users think of keyword interactions (where lexical scope is close enough) and how implementors need to think about it (dynamic scope/evaluation)\r\n    * Some of what you seem to be saying isn't necessary I'm pretty sure is necessary _[EDIT: Somewhere later in the spec, not where it is now]_ to set the normative requirements on what communication is and is not allowed.  This used to be implicit, derived from the annotation mechanics, but the annotation mechanics themselves were poorly explained.\r\n* I'll think on a replacement appendix that preserves as much of what you had as I can.",
+          "createdAt": "2026-08-02T02:47:18Z",
+          "updatedAt": "2026-08-02T03:15:58Z"
+        },
+        {
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "body": "OK on even further thought, I'm going to split this PR up.  So I'll close this and open two new ones:\r\n\r\n1. A reworked version of the \"evaluation\" things, as I think that's fundamental to where we're going based on recent discussions, including a call where we agreed that defining things purely in terms of manipulating a (possibly purely conceptual) data structure is not ideal.  This time I will go through all of the lexical/dynamic scope stuff and see if that provides better, or at least more consistent terminology.\r\n2. After that is far enough along (possibly merged), I will change all annotations to SVAs, which involves moving the defined-in-terms-of-annotations communicaiton to the mechanism from the first PR.\r\n\r\nLet's get the other open PRs merged, as that will help with the bigger things.",
+          "createdAt": "2026-08-02T17:31:53Z",
+          "updatedAt": "2026-08-02T17:31:53Z"
         }
       ],
       "reviews": [
@@ -1719,6 +1733,126 @@
               "updatedAt": "2026-08-01T19:54:59Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABIEVqxw",
+          "commit": {
+            "abbreviatedOid": "12157a2"
+          },
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-02T01:15:49Z",
+          "updatedAt": "2026-08-02T01:15:50Z",
+          "comments": [
+            {
+              "originalPosition": 100,
+              "body": "I'd be thrilled to have something that requires less explanation.  The \"strict prefix evaluation path\" and \"same or prefix input location\" relationship rules are the key, as that's what lets us describe assertion / annotation / result info behavior without having to define a data structure.",
+              "createdAt": "2026-08-02T01:15:49Z",
+              "updatedAt": "2026-08-02T01:15:50Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABIEWFPg",
+          "commit": {
+            "abbreviatedOid": "12157a2"
+          },
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-02T01:17:17Z",
+          "updatedAt": "2026-08-02T01:17:17Z",
+          "comments": [
+            {
+              "originalPosition": 177,
+              "body": "It's included because people always complain that there aren't enough examples.  I guess I don't really understand examples, but that's hardly news.\r\n\r\nI do agree that it's in the wrong place, so I'd be happy to move it now since we're not on the verge of merging this anyway.",
+              "createdAt": "2026-08-02T01:17:17Z",
+              "updatedAt": "2026-08-02T01:17:18Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABIEWXHw",
+          "commit": {
+            "abbreviatedOid": "12157a2"
+          },
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-02T01:18:21Z",
+          "updatedAt": "2026-08-02T01:18:21Z",
+          "comments": [
+            {
+              "originalPosition": 245,
+              "body": "I'll see if I can slim it down.  If not, please feel free to use GitHub's suggestion feature- I do not feel possessive of this language.",
+              "createdAt": "2026-08-02T01:18:21Z",
+              "updatedAt": "2026-08-02T01:18:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABIEWmww",
+          "commit": {
+            "abbreviatedOid": "12157a2"
+          },
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-02T01:19:22Z",
+          "updatedAt": "2026-08-02T01:19:22Z",
+          "comments": [
+            {
+              "originalPosition": 353,
+              "body": "Yeah that's why I went ahead with this PR.  Whatever we do with the terminology (which I put-up as-is to start the conversation as I was getting bogged down), I think the benefit is clear.",
+              "createdAt": "2026-08-02T01:19:22Z",
+              "updatedAt": "2026-08-02T01:19:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABIEX0eg",
+          "commit": {
+            "abbreviatedOid": "12157a2"
+          },
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-02T01:24:37Z",
+          "updatedAt": "2026-08-02T01:24:37Z",
+          "comments": [
+            {
+              "originalPosition": 502,
+              "body": "> Annotations aren't going to follow SHOULD or MUST requirements, implementations or standards writers do. I don't mean to be pedantic about it, but this case is unclear.\r\n\r\nGoodness, ***PLEASE*** be pedantic about this.  If I had a nickel for every time I realized the RFC2119 language wasn't correct, was missing, or put the burden on the wrong party (an issue I raised just this past week with OpenAPI)... I'd have a lot of nickles!  Bring all the pedantry!\r\n\r\nDownstream code is absolutely out of scope, I'm trying to define that boundary.\r\n\r\n> It's okay if hyperschema does make requirements on compliant code without that requirement being required here. (TOO abstract! :)\r\n\r\n@lisad I can't tell if this means you want me to remove the mention of \"links\" entirely?  After we sort this out I want to do another clarifcation/condensing of pipeline-like annotation things we have (e.g. the `content*` annotations and some other things), which are all described differently right now.  So that could take the place of the Hyper-Schema example.",
+              "createdAt": "2026-08-02T01:24:37Z",
+              "updatedAt": "2026-08-02T01:24:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABIEY0dg",
+          "commit": {
+            "abbreviatedOid": "12157a2"
+          },
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-02T01:29:01Z",
+          "updatedAt": "2026-08-02T01:29:01Z",
+          "comments": [
+            {
+              "originalPosition": 638,
+              "body": "@lisad There are no longer specific requirements on what the communication looks like.  I got rid of all of that \"MUST produce the largest index successfully evaluated\" language, because there's no longer any need for it.  We just care about the outcome.\r\n\r\nSo I don't think the table makes sense anymore.  If we want to rework this as an \"Implementing applicator communication\" appendix we can (that would probably be helpful), but I think it would look rather different.\r\n\r\nI just couldn't figure out how to keep this as it focuses on the exact annotation values, which are no longer required at all.",
+              "createdAt": "2026-08-02T01:29:01Z",
+              "updatedAt": "2026-08-02T01:29:01Z"
+            }
+          ]
         }
       ]
     },
@@ -1727,24 +1861,26 @@
       "id": "PR_kwDOR8mbas75PSOA",
       "title": "Minor reorganization and streamlining of keyword front matter.",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/36",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "handrews",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This just tidies things up a bit and removes superfluous or confusing text:\r\n\r\n* Put all the terminology in the Terminology section.\r\n\r\n* As discussed on the mailing list (and in our call where we discussed instance-modifying keywords that potentially produce non-deterministic behavior), clarify that interoperability requires keywords to be within expected behaviors; while technically a new requirement due to the normative language, it's more of a statement of reality than anything an implementation has to do\r\n* Since we defer the behavior of unrecognized keywords to a later section, don't re-state the behavior right afterwards as that is confusing and can get out of sync.  Just link to the section.\r\n* Get rid of the applicator/assertion SHOULD as it is properly documented as a MUST NOT under Keyword Behaviors; this requirement is both out of place and superfluous as it is weaker.\r\n* Restrict the MAY regarding the presence of unknown keywords to schema objects, as there has never been anything anywhere about interpreting other locations as keywords.\r\n\r\nI left the bit about schemas containing only unknown keywords as being considered \"empty\" as we should probably be deliberate about how we change that.  And leaving that sentence alone ensures that this merges cleanly with #35 :-)",
       "createdAt": "2026-07-31T23:36:38Z",
-      "updatedAt": "2026-08-01T19:28:15Z",
+      "updatedAt": "2026-08-03T20:06:00Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "fc5839779fd8dda17c3e8a83b8080bcbe18b57a4",
       "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
       "headRefName": "keyword-frontmatter",
-      "headRefOid": "2b5707fc25c12df649b5144b6461f0154d6af9e8",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "89d584d51b16d18d995d5a90a4323953cb8636e6",
+      "closedAt": "2026-08-03T18:31:06Z",
+      "mergedAt": "2026-08-03T18:31:06Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "f3a739b6b5e18bdf8b8f01fb937c22acffbaa09f"
+      },
       "comments": [
         {
           "author": "handrews",
@@ -1752,6 +1888,13 @@
           "body": "I realized there were two more places where we duplicated the requirements for unrecognized/unknown keywords.  I think this gets all of them now.",
           "createdAt": "2026-07-31T23:44:10Z",
           "updatedAt": "2026-07-31T23:44:10Z"
+        },
+        {
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "body": "All should be fixed now!",
+          "createdAt": "2026-08-02T03:33:29Z",
+          "updatedAt": "2026-08-02T03:33:29Z"
         }
       ],
       "reviews": [
@@ -1780,6 +1923,59 @@
               "updatedAt": "2026-08-01T19:28:15Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABIEUGkg",
+          "commit": {
+            "abbreviatedOid": "2b5707f"
+          },
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-02T01:09:51Z",
+          "updatedAt": "2026-08-02T01:09:51Z",
+          "comments": [
+            {
+              "originalPosition": 112,
+              "body": "It was supposed to be \"vocabularies\" not \"values\"... I thought I had fixed it, maybe I forgot to commit that.  Thanks for catching!",
+              "createdAt": "2026-08-02T01:09:51Z",
+              "updatedAt": "2026-08-02T01:09:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABIEUeTw",
+          "commit": {
+            "abbreviatedOid": "2b5707f"
+          },
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-02T01:11:18Z",
+          "updatedAt": "2026-08-02T01:11:18Z",
+          "comments": [
+            {
+              "originalPosition": 29,
+              "body": "Looks like I spliced something when I moved it, I'll investigate and figure out what belongs where.  I think I didn't want this in \"terminology\" because talking about concrete keyword behaviors (e.g. MAY define behavior from multiple categories) belongs in the normative sections.",
+              "createdAt": "2026-08-02T01:11:18Z",
+              "updatedAt": "2026-08-02T01:11:18Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABIO2wMw",
+          "commit": {
+            "abbreviatedOid": "89d584d"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-08-03T18:30:59Z",
+          "updatedAt": "2026-08-03T18:30:59Z",
+          "comments": []
         }
       ]
     },
@@ -1795,7 +1991,7 @@
       "labels": [],
       "body": "Our front-matter was inconsistent on this, naming the overall section \"Instance\" while describing data constraints that apply to any input, and then calling a subsection \"Input Equality.\"  This names everything after \"Input\", and also folds in the inexplicably separate and near-trivial \"Range of JSON Values\" section, that probably once made sense placed elsewhere but no longer does.",
       "createdAt": "2026-08-01T00:38:02Z",
-      "updatedAt": "2026-08-01T16:29:14Z",
+      "updatedAt": "2026-08-03T20:06:00Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "fc5839779fd8dda17c3e8a83b8080bcbe18b57a4",
@@ -1808,7 +2004,22 @@
       "mergeCommit": {
         "oid": "9d1083a8c54c923d99743115afeb3e60845d3b1f"
       },
-      "comments": [],
+      "comments": [
+        {
+          "author": "karenetheridge",
+          "authorAssociation": "NONE",
+          "body": "So are we using \"input\" everywhere now instead of \"instance\"?  If so, then \"instanceLocation\" in the annotation/error output will need to change.",
+          "createdAt": "2026-08-02T20:11:58Z",
+          "updatedAt": "2026-08-02T20:11:58Z"
+        },
+        {
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@karenetheridge not everywhere, but yes, \"instance location\" -> \"input location\" is in the works and was in another PR that I took down to reconsider.  This PR was not the first instance->input change, note that one of the two headings was already using \"Input\", this just made them consistent.  We'll chase it through the rest of the spec as we go.",
+          "createdAt": "2026-08-02T20:24:59Z",
+          "updatedAt": "2026-08-02T20:24:59Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOR8mbas8AAAABIDHVNw",
@@ -1830,25 +2041,35 @@
       "id": "PR_kwDOR8mbas75QIl0",
       "title": "Move normative validation requirement to normative section",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/38",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "handrews",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "The normative requirements only start with section 3, and the moved paragraph is really not essential for introducing the concept of validation anyway.  Move it to the first normative section on validation.  The moved text is completely unchanged.",
       "createdAt": "2026-08-01T00:39:19Z",
-      "updatedAt": "2026-08-01T19:28:42Z",
+      "updatedAt": "2026-08-03T20:06:00Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "fc5839779fd8dda17c3e8a83b8080bcbe18b57a4",
       "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
       "headRefName": "validation-frontmatter",
       "headRefOid": "6c268e9cb2940664c12cea09e1ac88627805d1dc",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2026-08-03T20:03:52Z",
+      "mergedAt": "2026-08-03T20:03:52Z",
+      "mergedBy": "handrews",
+      "mergeCommit": {
+        "oid": "c5695e740963614316ad01f79e9c7dfae92a70cb"
+      },
+      "comments": [
+        {
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Since this was approved and is a literal move of a single paragraph (not even changing the formatting), I'm going to assume the lack of merge was an oversight and go ahead and merge this.  It's simpler than all of the other recently merged PRs and trivial to revert if we want to.",
+          "createdAt": "2026-08-03T20:03:46Z",
+          "updatedAt": "2026-08-03T20:03:46Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOR8mbas8AAAABIDi8uA",
@@ -1870,25 +2091,42 @@
       "id": "PR_kwDOR8mbas75bbwm",
       "title": "Move normative vocabulary language to normative section, define \"dialect\"",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/39",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "handrews",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Dialect should be defined in terminology, the MUST and RECOMMENDED langauge around vocabularies should be in a normative sction, and we should connect the set of defined vocabularies to the default dialect.\r\n\r\nThe moved paragraphs are unchanged.",
       "createdAt": "2026-08-01T17:05:52Z",
-      "updatedAt": "2026-08-01T19:24:47Z",
+      "updatedAt": "2026-08-03T20:06:00Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "9d1083a8c54c923d99743115afeb3e60845d3b1f",
       "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
       "headRefName": "vocab-dialect",
       "headRefOid": "5a9f038dbf92cf3327310078663b5f24837bc2c0",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2026-08-03T18:30:26Z",
+      "mergedAt": "2026-08-03T18:30:26Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "66338950759f148a6715a497ad6e488bfa200dff"
+      },
+      "comments": [
+        {
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@lisad \"Dialect\" is what these things are called.  It's been used for years and is used in various places in the spec.  The OpenAPI Specification has a section called [Specifying Schema Dialects](https://spec.openapis.org/oas/v3.2.0.html#specifying-schema-dialects) and a field called [`jsonSchemaDialect`](https://spec.openapis.org/oas/v3.2.0.html#oas-json-schema-dialect) (essentially serving as an OpenAPI document-wide `$schema`), and [defines its own dialect](https://spec.openapis.org/oas/v3.2.0.html#json-schema-keywords) with a [published metaschema used to identify it](https://spec.openapis.org/oas/3.2/dialect/2025-09-17.html), which has \"dialect\" in the URI.\r\n\r\nI had just assumed it was left out of terminology by accident as it is very well-established and widely-used terminology.",
+          "createdAt": "2026-08-02T01:08:05Z",
+          "updatedAt": "2026-08-02T01:08:44Z"
+        },
+        {
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Really, metaschemas are for dialects.  The fact that they've been used for versioning is an unfortunate side effect of JSON Schema's history.  Once JSON Schema is stabilized as an RFC, that versioning behavior will go away.",
+          "createdAt": "2026-08-02T01:13:26Z",
+          "updatedAt": "2026-08-02T01:13:26Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOR8mbas8AAAABIDiOvQ",
@@ -1901,6 +2139,103 @@
           "body": "Are we going to use the \"dialect\" term a lot ? ISTM we can do without it but I don't know where this might be headed. Rather than the header that uses \"Dialect\" and defining the term, what about saying \"Required keyword support\" and \"this standard\"?   i.e. \"The current URI for this standard's metaschema is ...\" \n\nI also am not sure it's 1 to 1  that the URI is for the \"default dialect\" - don't folks use the same URI whether they support the recommended vocabularies or not ? ",
           "createdAt": "2026-08-01T19:24:47Z",
           "updatedAt": "2026-08-01T19:24:47Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABIO2aqQ",
+          "commit": {
+            "abbreviatedOid": "5a9f038"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "thank you I better understand the arguments for defining and using dialect",
+          "createdAt": "2026-08-03T18:30:19Z",
+          "updatedAt": "2026-08-03T18:30:19Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 40,
+      "id": "PR_kwDOR8mbas75s5Bc",
+      "title": "Fix use of nesting under $defs",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/40",
+      "state": "MERGED",
+      "author": "handrews",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This example had undefined behavior per [\u00a711.4.2 \"References to Possible Non-Schemas\"](https://www.ietf.org/archive/id/draft-ietf-jsonschema-json-schema-02.html#name-references-to-possible-non-), and we really don't want to confuse people by introducing non-interoperable examples.  Change it to properly nest $defs so that all schemas in the example are interoperably recognizable.",
+      "createdAt": "2026-08-02T17:47:05Z",
+      "updatedAt": "2026-08-03T20:06:00Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "9d1083a8c54c923d99743115afeb3e60845d3b1f",
+      "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
+      "headRefName": "proper-defs",
+      "headRefOid": "03553e6a7e4ffd1b1e3f2fbb4f739d57805752f1",
+      "closedAt": "2026-08-03T18:17:48Z",
+      "mergedAt": "2026-08-03T18:17:48Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "b8f540173a291f211eb2a77a5a51842144969730"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOR8mbas8AAAABIOwnaA",
+          "commit": {
+            "abbreviatedOid": "03553e6"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-08-03T18:17:41Z",
+          "updatedAt": "2026-08-03T18:17:41Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 41,
+      "id": "PR_kwDOR8mbas75ypmv",
+      "title": "MUCH SIMPLER: Dynamic scope and evaluation success",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/41",
+      "state": "MERGED",
+      "author": "handrews",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This is a minimal change replacing the half of PR #37 that defined things in terms of the evaluation process.  The differences are:\r\n\r\n* No new additions to the Terminology section (dynamic [sub]scope and evaluation terminology already existed)\r\n* Evaluation status (successful/unsuccessful/ignored - better terminology still welcome) added in implementation section between existing scope and keyword interaction sections\r\n    * Successful: produces annotations and dependency communication\r\n    * Unsuccessful: produces errors, discards annotations and dependencies\r\n    * Ignored: discards everything\r\n* Re-framed keyword interactions go in existing keyword interactions section (idk how I missed this before)\r\n* No lengthy examples; I figure that when people complain about something being unclear I can add them back in\r\n* Does **not** actually take out the current annotation mechanism \u2014\u00a0if this is accepted I'll do that as a follow-on, but this keeps the change much more focused\r\n\r\n_Note that the paragraphs starting \"Keywords MAY be defined\" and \"Note that some keywords\" were moved **without any changes to their text at all.**_\r\n\r\nI do not think this actually changes anything observable.  It does consolidate some requirements and state them more clearly, but I believe they all already existed in some form, albeit sometimes not very clearly.\r\n\r\nThe evaluation status stuff is definitely a new mechanism, but it is functionally equivalent and (I think) clearer than either what we had before or PR #37.",
+      "createdAt": "2026-08-03T02:11:51Z",
+      "updatedAt": "2026-08-03T20:06:00Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "9d1083a8c54c923d99743115afeb3e60845d3b1f",
+      "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
+      "headRefName": "dyn-eval",
+      "headRefOid": "c7cc74aa78cf53e0c170352acffeb948c4aa37fa",
+      "closedAt": "2026-08-03T18:27:01Z",
+      "mergedAt": "2026-08-03T18:27:01Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "4b7c01b0a9dae82d89c234446fc7bbeebc2a4520"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOR8mbas8AAAABIO0vtQ",
+          "commit": {
+            "abbreviatedOid": "c7cc74a"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-08-03T18:26:52Z",
+          "updatedAt": "2026-08-03T18:26:52Z",
           "comments": []
         }
       ]
