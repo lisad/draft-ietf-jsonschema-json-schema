@@ -2936,19 +2936,9 @@ keyword.
 Applicator keywords also define how subschema or referenced schema
 boolean [assertion](#assertions)
 results are modified and/or combined to produce the boolean result
-of the applicator.  Applicators may apply any boolean logic operation
+of the applicator.  Applicators MAY apply any boolean logic operation
 to the assertion results of subschemas, but MUST NOT introduce new
 assertion conditions of their own.
-
-[Annotation](#annotations) results from subschemas
-are preserved in accordance with {{collect}}
-so that applications can decide how to interpret multiple values.
-Applicator keywords do not play a direct role in this preservation.
-
-Annotation results
-are preserved along with the instance location and the location of
-the schema keyword, so that applications can decide how to
-interpret multiple values.
 
 ### Referenced and Referencing Schemas
 
@@ -3051,6 +3041,10 @@ for failing schemas.
 Annotations are collected by keywords that explicitly define
 annotation-collecting behavior.  Note that boolean schemas cannot
 produce annotations as they do not make use of keywords.
+
+See {{eval-status}} for conditions under which annotations
+appear in output, and how they are managed throughout the
+evaluation process.
 
 A collected annotation MUST include the following information:
 
