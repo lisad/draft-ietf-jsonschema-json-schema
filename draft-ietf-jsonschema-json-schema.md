@@ -487,6 +487,12 @@ zeros) are insignificant.
 Two equal inputs are guaranteed to yield identical validation results
 for a given schema, regardless of their original formatting.
 
+### Immutability of input
+
+JSON Schema implementations MUST NOT modify the input during
+evaluation; implementations that do so, for example to fill
+in values from the "default" keyword ({{default}}), are not
+interoperable.
 
 ## Keywords
 
