@@ -1055,10 +1055,12 @@ possibly the briefest is
 
 This keyword's value MUST be a valid JSON Schema.
 
+Validation MUST always succeed against this keyword
+regardless of the validation outcome of it subschema.
+
 This validation outcome of this keyword's subschema
-has no direct effect on the overall validation
-result.  Rather, it controls which of the "then"
-or "else" keywords are evaluated.
+controls which of the "then" or "else" keywords are
+evaluated, but otherwise MUST be disregarded.
 
 Inputs that successfully validate against this
 keyword's subschema MUST also be valid against
@@ -1158,11 +1160,6 @@ does not constrain the length of the array.  If the array is longer
 than this keyword's value, this keyword validates only the
 prefix of matching length.
 
-This keyword produces an annotation value which is the largest
-index to which this keyword applied a subschema.  The value
-MAY be a boolean true if a subschema was applied to every
-index of the instance, such as is produced by the "items" keyword.
-
 Omitting this keyword has the same assertion behavior as
 an empty array.
 
@@ -1174,11 +1171,6 @@ This keyword applies its subschema to all input elements
 at indexes greater than the length of the "prefixItems" array
 in the same schema object.  If `prefixItems` is not present,
 "items" applies its subschema to all input array elements.
-
-If the "items" subschema is applied to any
-positions within the input array, it produces an
-annotation result of boolean true, indicating that all remaining array
-elements have been evaluated against this keyword's subschema.
 
 Omitting this keyword has the same assertion behavior as
 an empty schema.
@@ -1200,13 +1192,6 @@ The minimum and maximum numbers of occurrences are provided by the
 same schema object as "contains".  If "minContains" is absent, the
 minimum MUST be 1.  If "maxContains" is absent, the maximum MUST
 be unbounded.
-
-This keyword produces an annotation value which is an array of
-the indexes to which this keyword validates successfully when applying
-its subschema, in ascending order. The value MAY be a boolean "true" if
-the subschema validates successfully when applied to every index of the
-instance. The annotation MUST be present if the input array to which
-this keyword's schema applies is empty.
 
 The subschema MUST be applied to every array element even after the first
 match has been found, if annotations are being collected.
@@ -1230,9 +1215,6 @@ Validation succeeds if, for each name that appears in both
 the input and as a name within this keyword's value,
 the contents successfully validate against the
 corresponding schema.
-
-The annotation result of this keyword is the set of instance
-property names matched by this keyword.
 
 Omitting this keyword has the same assertion behavior as
 an empty object.
@@ -1258,9 +1240,6 @@ match regular expressions in "patternProperties".
 For all such properties, validation succeeds if the contents
 validate against the "additionalProperties" schema.
 
-The annotation result of this keyword is the set of input
-property names validated by this keyword's subschema.
-
 Omitting this keyword has the same assertion behavior as
 an empty schema.
 
@@ -1285,9 +1264,6 @@ regular expressions that appear as a property name in this keyword's value,
 the contents successfully validate against each
 schema that corresponds to a matching regular expression.
 Recall: Regular expressions are not explicitly anchored.
-
-The annotation result of this keyword is the set of instance
-property names matched by this keyword.
 
 Omitting this keyword has the same assertion behavior as
 an empty object.
@@ -1321,25 +1297,8 @@ roles for an incident response process, but no undefined roles.
 
 The purpose of these keywords is to enable schema authors to apply
 subschemas to array items or object properties that have not been
-successfully evaluated against any dynamic-scope subschema of any
-adjacent keywords.
-
-These input items or properties may have been unsuccessfully evaluated
-against one or more adjacent keyword subschemas, such as when an assertion
-in a branch of an "anyOf" fails.  Such failed evaluations are not considered
-to contribute to whether or not the item or property has been evaluated.
-Only successful evaluations are considered.
-
-If an item in an array or an object property is "successfully evaluated", it
-is logically considered to be valid in terms of the representation of the
-object or array that's expected. For example if a subschema represents a car,
-which requires between 2-4 wheels, and the value of "wheels" is 6, the input
-object is not "evaluated" to be a car, and the "wheels" property is considered
-"unevaluated (successfully as a known thing)", and does not retain any annotations.
-
-Recall that adjacent keywords are keywords within the same schema object,
-and that the dynamic-scope subschemas include reference targets as well as
-lexical subschemas.
+successfully evaluated within the current schema evaluation or any of its
+successful sub-evaluations (see {{eval-status}}).
 
 Meta-schemas that do not use "$vocabulary" SHOULD be considered to
 require this vocabulary as if its URI were present with a value of true.
@@ -1368,25 +1327,16 @@ vocabulary are notable exceptions:
 
 The value of "unevaluatedItems" MUST be a valid JSON Schema.
 
-The behavior of this keyword depends on adjacent keywords "prefixItems", "items", and "contains".
-If those keywords do not limit the application of "unevaluatedItems",
-the "unevaluatedItems" subschema MUST be applied to all locations in the array.
+The "unevaluatedItems" subschema MUST be applied only to those
+items that were *not* evaluated by "prefixItems", "items", or
+"contains" in the current schema evaluation or a successful
+sub-evaluation, or by "unevaluatedItems" in a successful
+sub-evaluation.
 
-Defined in terms of annotations, if the annotation output of "prefixItems",
-"items" or "contains"  is a boolean 'true', then "unevaluatedItems" MUST be ignored.
-Otherwise, the subschema
-MUST be applied to any index greater than the largest annotation
-value for "prefixItems" and "items", which does not appear in any annotation
-value for "contains".  Thus,
-"prefixItems", "items", "contains", and all in-place
-applicators MUST be evaluated before this keyword can be evaluated.
-Authors of extension keywords MUST NOT define an in-place applicator
-that would need to be evaluated after this keyword.
-
-If the "unevaluatedItems" subschema is applied to any
-positions within the input array, it produces an
-annotation result of boolean true, analogous to the
-behavior of "items".
+This means that "prefixItems", "items", "contains",
+and all in-place applicators MUST be evaluated before this keyword can
+be evaluated.  Authors of extension keywords MUST NOT define an in-place
+applicator that would need to be evaluated after this keyword.
 
 Omitting this keyword has the same assertion behavior as
 an empty schema.
@@ -1409,25 +1359,17 @@ would fail on `unevaluatedItems` because the string was not evaluated by the
 
 The value of "unevaluatedProperties" MUST be a valid JSON Schema.
 
-The behavior of this keyword depends on adjacent keywords "properties", "patternProperties",
-and "additionalProperties".
-
-Validation with "unevaluatedProperties" applies only to the child
-values of input names that do not appear in the "properties",
-"patternProperties", "additionalProperties", or
-"unevaluatedProperties" annotation results that apply to the instance
-location being validated.
-
-For all such properties, validation succeeds if the contents
-validate against the "unevaluatedProperties" schema.
+The "unevaluatedProperties" subschema MUST be applied only to those
+properties that were *not* evaluated by "properties",
+"patternProperties", or "additionalProperties"
+in the current schema evaluation or a successful
+sub-evaluation, or by "unevaluatedProperties" in a successful
+sub-evaluation.
 
 This means that "properties", "patternProperties", "additionalProperties",
 and all in-place applicators MUST be evaluated before this keyword can
 be evaluated.  Authors of extension keywords MUST NOT define an in-place
 applicator that would need to be evaluated after this keyword.
-
-The annotation result of this keyword is the set of instance
-property names validated by this keyword's subschema.
 
 Omitting this keyword has the same assertion behavior as
 an empty schema.
