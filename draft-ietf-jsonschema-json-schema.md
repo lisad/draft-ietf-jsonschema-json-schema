@@ -2183,7 +2183,8 @@ the associated schema.
 
 Because annotations can only appear in output if they are attached to
 a location that exists, this keyword's annotation behavior is only useful
-for determining whether the value provided matches the default.
+for use cases such as determining whether the value provided matches
+the default.
 
 This keyword is most commonly used by applications outside of the scope
 of this specification, such as generating documentation or web forms
@@ -2322,7 +2323,8 @@ RECOMMENDED that these values be valid against the associated schema.
 
 Because annotations can only appear in output if they are attached to
 a location that exists, this keyword's annotation behavior is only useful
-for determining whether the value provided matches one of the examples.
+for use cases such as determining whether the value provided matches one
+of the examples.
 
 This keyword is most commonly used by applications outside of the scope
 of this specification, such as generating documentation or web forms
