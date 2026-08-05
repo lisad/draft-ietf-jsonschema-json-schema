@@ -30,9 +30,9 @@ normative:
   ECMA262:
     author:
       org: European Computer Manufacturers Association
-    title: ECMAScript Language Specification 5.1 Edition
-    date: 2011-06
-    target: http://www.ecma-international.org/publications/files/ecma-st/ECMA-262.pdf
+    title: ECMAScript Language Specification 6th Edition
+    date: 2015-06
+    target: https://ecma-international.org/wp-content/uploads/ECMA-262_6th_edition_june_2015.pdf
     seriesinfo:
       ECMA: Standard ECMA-262
   LDP:
@@ -1284,7 +1284,7 @@ Validation succeeds if, for each input name that matches any
 regular expressions that appear as a property name in this keyword's value,
 the contents successfully validate against each
 schema that corresponds to a matching regular expression.
-Recall: Regular expressions are not explicitly anchored.
+Recall: Regular expressions are not implicitly anchored.
 
 The annotation result of this keyword is the set of instance
 property names matched by this keyword.
@@ -1980,7 +1980,7 @@ A regular expression, which SHOULD be valid according to the
 {{ECMA262}} regular expression dialect.
 
 Implementations that validate formats MUST accept at least the subset of
-ECMA-262 defined in [Regular Expressions](#regex)
+ECMA-262 defined in [Regular Expressions](#regex-interop)
 section of this specification, and SHOULD accept all valid ECMA-262 expressions.
 
 # A Vocabulary for the Contents of String-Encoded Data {#content}
