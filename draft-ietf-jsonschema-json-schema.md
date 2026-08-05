@@ -587,8 +587,8 @@ embedded as JSON strings.
 
 # Core Keywords {#core-keywords}
 
-Core keywords MUST be implemented by any processor indicating support
-for the "application/jsonschema+json" media type.
+Core keywords MUST be implemented by any implementation indicating support
+for the "application/schema+json" media type.
 
 The behavior of a false value for this vocabulary (and only this
 vocabulary) is undefined, as is the behavior when "$vocabulary"
