@@ -3313,11 +3313,9 @@ needs to be fulfilled.
 ~~~
 
 Because no errors or annotations are returned with this format, it is
-RECOMMENDED that implementations use short-circuiting logic to return
-failure or success as soon as the outcome can be determined.  For example,
-if an "anyOf" keyword contains five sub-schemas, and the second one
-passes, there is no need to check the other three.  The logic can simply
-return with success.
+RECOMMENDED that implementations supporting short-circuiting logic
+({{keyword-behaviors}}) use it to return
+failure or success as soon as the outcome can be determined.
 
 ### Basic
 
