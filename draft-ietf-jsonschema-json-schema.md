@@ -3981,29 +3981,61 @@ or successful evaluation outcome of other keywords within the same
 schema evaluation or any of its successful sub-evaluations.  The
 specifics of this mechanism are left up to each implementation.
 
-As an example, the `properties` keyword produces information about
-which properties were successfully evaluated, which is used
-in the implementation of `additionalProperties` and
-`unevaluatedProperties`.  With this schema:
+As an example, the value of the `properties` keyword includes a set of
+property names that is used by `additionalProperties`, and produces
+information about which properties were successfully evaluated,
+which is used in the implementation of `unevaluatedProperties`.
+
+With this schema:
 
 ~~~~~~~~~~
 {::include ./examples/point.json}
 ~~~~~~~~~~
 
+The value of `properties` includes the property names
+"X" and "Y", therefore regardless of the outcome of `properties`,
+the `additionalProperties` schema is never applied to those
+properties:
+
+| Input | "additionalProperties" applied to | valid |
+|---|---|---|
+| `{"X": 1, "Y": 2}` | *(none)* | `true` |
+| `{"X": 1, "Y": 2, "radius": 5}` | "radius" | `false` by `additionalProperties` |
+| `{"X": "hello", "Y": "world"}` | *(none)* | `false` by `type` in `properties` |
+
+Note that the `additionalProperties` subschema is never applied to
+"X" or "Y" even when they are rejected by `properties`.
+
+When using the point schema (without `additionalProperties`) via
+a reference, `unevaluatedProperties` is required to get the same
+validation outcomes, as shown in this schema:
+
+~~~~~~~~~~
+{::include ./examples/point-ref.json}
+~~~~~~~~~~
+
+Since `unevaluatedProperties` cannot "see" through the reference
+(which could include a complex arrangement of references and conditionals
+that would be non-trivial to analyze, unlike this example), it
+depends on runtime evaluation results of `properties` rather than its
+static value.
+
 The following table shows the information produced by `properties` for
 three different inputs, and how `additionalProperties`
-implementations could use that result.
+implementations could use that result.  Note that `unevaluatedProperties`
+ends up applying to both properties in the third row, while
+`additionalProperties` never applied to either of them.
 
-| Input | "properties" property names | "additionalProperties" result |
-|---|---|---|
-| `{"X": 1, "Y": 2}` | "X", "Y" | valid |
-| `{"X": 1, "Y": 2, "radius": 5}` | "X", "Y" | invalid (`"radius"` not in set) |
+| Input | successful "properties" evaluations | "unevaluatedProperties" applied to | valid |
+|---|---|---|---|
+| `{"X": 1, "Y": 2}` | "X", "Y" | *(none)* | `true` |
+| `{"X": 1, "Y": 2, "radius": 5}` | "X", "Y" | "radius" | `false` by `unevaluatedProperties` |
+| `{"X": "hello", "Y": "world"}` | *(none)* | "X", "Y" | `false` by both `unevaluatedProperties` and `type` in `properties` |
 
-Similarly, the `prefixItems` keyword produces information which is
-used by `items` and `unevaluatedItems`.  The information is the indexes
-to which `prefixItems` applied as a subschema, which we'll show as
-a range (its exact representation is purely internal and therefore
-implementation-defined).  Consider
+Similarly, the length of the `prefixItems` keyword's value is used
+by `items`, and it produces information which is used by `unevaluatedItems`.
+
+Consider
 this schema for a structured log entry with a timestamp, action, and
 username fields, and preventing additional fields:
 
@@ -4011,33 +4043,66 @@ username fields, and preventing additional fields:
 {::include ./examples/prefixItems.json}
 ~~~~~~~~~~
 
+The length of the `prefixItems` keyword is 3, so `items` is applied
+to items at index 3 or higher, as shown in table below:
+
+| Input | "items" applied to | valid |
+|---|---|---|
+| `["2026-06-24T10:00:00Z", "created", "alice"]` | *(none)* | `true` (no elements beyond index 2) |
+| `["2026-06-24T10:00:00Z", "created", "alice", "extra"]` | "extra" (at index 3) | `false` by `items` applied to index 3 |
+| `["2026-06-24T10:00:00Z", "created"]` | *(none)* | `true` (not all `prefixItem` items need be applied) |
+| `["2026-06-24T10:00:00Z", 42]` | *(none)* | `false` by `type` in `prefixItems` index 1 |
+| `[]` | *(none)* | `true` (no subschemas from either keyword applied) |
+
+As with our object properties example, using this schema (without `items`)
+via a reference requires using `unevaluatedItems` to get the same
+outcomes:
+
+~~~~~~~~~~
+{::include ./examples/prefixItems-ref.json}
+~~~~~~~~~~
+
 This schema, when applied to the inputs in the table below, produces
 information from the `prefixItems` evaluation. Then,
-`items` uses the `prefixItems` information to start where `prefixItems`
-left off, applying only to indices not covered by the `prefixItem` range.
+`unevaluatedItems` uses the `prefixItems` information to start where `prefixItems`
+left off, applying only to indices not covered by the `prefixItem` evaluation.
 
-| Input | "prefixItems" index ranges | "items" result |
+| Input | length of successful "prefixItems" evaluations | "unevaluatedItems" applied | valid |
+|---|---|---|---|
+| `["2026-06-24T10:00:00Z", "created", "alice"]` | 3 | *(none)* | `true` (no elements beyond index 2) |
+| `["2026-06-24T10:00:00Z", "created", "alice", "extra"]` | 3 | "extra" (at index 3) | `false` by `unevaluatedItems` applied to index 3 |
+| `["2026-06-24T10:00:00Z", "created"]` | 1 | *(none)* | `true` (no elements beyond index 1) |
+| `["2026-06-24T10:00:00Z", 42]` | 1 | 42 (at index 1)| `false` by both `unevaluatedItems` and `type` in `prefixItems` at index 1 |
+| `[]` | 0 | *(none)* | `true` (no subschemas from either keyword applied) |
+
+Note that in the fourth row, `unevaluatedItems` ends up applied to index 1,
+while `additionalItems` was not with the previous schema results table.
+
+The following table summarizes which keywords have static values
+on which adjacent keywords depend:
+
+| Keyword | Value Information | Depended on by |
 |---|---|---|
-| `["2026-06-24T10:00:00Z", "created", "alice"]` | 0–2 | valid (no elements beyond index 2) |
-| `["2026-06-24T10:00:00Z", "created", "alice", "extra"]` | 0–2 | invalid (index 3 not evaluated by `prefixItems`) |
-| `["2026-06-24T10:00:00Z", "created"]` | 0–1 | valid (no elements beyond index 1) |
-| `[]` | *(none)* | valid (no elements at all) |
+| `properties` | set of property names | `additionalProperties` |
+| `patternProperties` | set of property regular expressions | `additionalProperties` |
+| `prefixItems` | length of value | `items` |
+| `minContains` | minimum number of successful `contains` validations | `contains` |
+| `maxContains` | maximum number of successful `contains` validations | `contains` |
 
-The following table summarizes which, when successful, produce
+The following table summarizes which keywords, when successful, produce
 information on which other keywords depend:
 
 | Keyword | Information | Depended on by |
 |---|---|---|
-| `properties` | set of validated property names | `additionalProperties`, `unevaluatedProperties` |
-| `patternProperties` | set of validated property names | `additionalProperties`, `unevaluatedProperties` |
+| `properties` | set of validated property names | `unevaluatedProperties` |
+| `patternProperties` | set of validated property names | `unevaluatedProperties` |
 | `additionalProperties` | all properties have been validated | `unevaluatedProperties` |
-| `prefixItems` | validated index range | `items`, `unevaluatedItems` |
+| `unevaluatedProperties` | all properties have been validated | `unevaluatedProperties` in parent schemas |
+| `prefixItems` | validated prefix length | `unevaluatedItems` |
 | `items` | all indices have been validated | `unevaluatedItems` |
 | `contains` | validated indexes and/or index ranges | `unevaluatedItems` |
-| `minContains` | keyword value | `contains` |
-| `maxContains` | keyword value | `contains` |
 | `unevaluatedItems` | all indices have been validated | `unevaluatedItems` in parent schemas |
-| `unevaluatedProperties` | all properties have been validated | `unevaluatedProperties` in parent schemas |
+| `if` | subschema (not keyword) validation outcome | `then`, `else` |
 
 Note that certain keywords always validate all remaining properties
 or indices when successful, so there is no need for them to track

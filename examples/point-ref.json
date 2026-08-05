@@ -1,0 +1,14 @@
+{
+  "$ref": "#/$defs/point",
+  "unevaluatedProperties": false,
+  "$defs": {
+    "point": {
+      "type": "object",
+      "required": ["X", "Y"],
+      "properties": {
+        "X": { "type": "number" },
+        "Y": { "type": "number" }
+      }
+    }
+  }
+}
