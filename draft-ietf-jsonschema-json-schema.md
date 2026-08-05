@@ -4012,9 +4012,9 @@ username fields, and preventing additional fields:
 ~~~~~~~~~~
 
 This schema, when applied to the inputs in the table below, produces
-annotation output from `prefixItems` evaluation. Then,
-`items` uses the `prefixItems` annotation to start where `prefixItems`
-left off, applying only to indices greater than the annotation value.
+information from the `prefixItems` evaluation. Then,
+`items` uses the `prefixItems` information to start where `prefixItems`
+left off, applying only to indices not covered by the `prefixItem` range.
 
 | Input | "prefixItems" index ranges | "items" result |
 |---|---|---|
