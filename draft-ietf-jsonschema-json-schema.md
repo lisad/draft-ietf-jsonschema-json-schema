@@ -4021,7 +4021,7 @@ depends on runtime evaluation results of `properties` rather than its
 static value.
 
 The following table shows the information produced by `properties` for
-three different inputs, and how `additionalProperties`
+three different inputs, and how `unevaluatedProperties`
 implementations could use that result.  Note that `unevaluatedProperties`
 ends up applying to both properties in the third row, while
 `additionalProperties` never applied to either of them.
@@ -4050,7 +4050,7 @@ to items at index 3 or higher, as shown in table below:
 |---|---|---|
 | `["2026-06-24T10:00:00Z", "created", "alice"]` | *(none)* | `true` (no elements beyond index 2) |
 | `["2026-06-24T10:00:00Z", "created", "alice", "extra"]` | "extra" (at index 3) | `false` by `items` applied to index 3 |
-| `["2026-06-24T10:00:00Z", "created"]` | *(none)* | `true` (not all `prefixItem` items need be applied) |
+| `["2026-06-24T10:00:00Z", "created"]` | *(none)* | `true` (not all `prefixItems` items need be applied) |
 | `["2026-06-24T10:00:00Z", 42]` | *(none)* | `false` by `type` in `prefixItems` index 1 |
 | `[]` | *(none)* | `true` (no subschemas from either keyword applied) |
 
@@ -4065,7 +4065,7 @@ outcomes:
 This schema, when applied to the inputs in the table below, produces
 information from the `prefixItems` evaluation. Then,
 `unevaluatedItems` uses the `prefixItems` information to start where `prefixItems`
-left off, applying only to indices not covered by the `prefixItem` evaluation.
+left off, applying only to indices not covered by the `prefixItems` evaluation.
 
 | Input | length of successful "prefixItems" evaluations | "unevaluatedItems" applied | valid |
 |---|---|---|---|
@@ -4076,7 +4076,7 @@ left off, applying only to indices not covered by the `prefixItem` evaluation.
 | `[]` | 0 | *(none)* | `true` (no subschemas from either keyword applied) |
 
 Note that in the fourth row, `unevaluatedItems` ends up applied to index 1,
-while `additionalItems` was not with the previous schema results table.
+while `items` was not.
 
 The following table summarizes which keywords have static values
 on which adjacent keywords depend:
