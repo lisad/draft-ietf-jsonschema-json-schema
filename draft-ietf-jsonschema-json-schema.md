@@ -2175,13 +2175,19 @@ the purpose of the instance described by this schema.
 
 ## "default"
 
-There are no restrictions placed on the value of this keyword.  When
-multiple occurrences of this keyword are applicable to a single
-sub-instance, implementations SHOULD remove duplicates.
+There are no restrictions placed on the value of this keyword.
 
 This keyword can be used to supply a default JSON value associated with a
 particular schema. It is RECOMMENDED that a default value be valid against
 the associated schema.
+
+Because annotations can only appear in output if they are attached to
+a location that exists, this keyword's annotation behavior is only useful
+for determining whether the value provided matches the default.
+
+This keyword is most commonly used by applications outside of the scope
+of this specification, such as generating documentation or web forms
+from schemas.
 
 ## "deprecated"
 
@@ -2309,17 +2315,18 @@ write-only flags or find a custom data-oriented solution.
 
 The value of this keyword MUST be an array.
 There are no restrictions placed on the values within the array.
-When multiple occurrences of this keyword are applicable to a single
-sub-instance, implementations MUST provide a flat array of all
-values rather than an array of arrays.
 
 This keyword can be used to provide sample JSON values associated with a
 particular schema, for the purpose of illustrating usage.  It is
 RECOMMENDED that these values be valid against the associated schema.
 
-Implementations MAY use the value(s) of "default", if present, as
-an additional example.  If "examples" is absent, "default"
-MAY still be used in this manner.
+Because annotations can only appear in output if they are attached to
+a location that exists, this keyword's annotation behavior is only useful
+for determining whether the value provided matches one of the examples.
+
+This keyword is most commonly used by applications outside of the scope
+of this specification, such as generating documentation or web forms
+from schemas.
 
 
 # Loading and Processing Schemas {#loading-and-processing}
