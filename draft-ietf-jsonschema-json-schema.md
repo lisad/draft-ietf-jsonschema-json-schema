@@ -1002,9 +1002,8 @@ Each item of the array MUST be a valid JSON Schema.
 
 An input validates successfully against this keyword if it validates
 successfully against at least one schema defined by this keyword's value.
-Note that when annotations are being collected, all subschemas MUST
-be examined so that annotations are collected from each subschema
-that validates successfully.
+Note that all subschemas MUST be examined to ensure that keyword dependencies
+from each subschema are discovered.
 
 Examples of using anyOf:
 
@@ -1194,7 +1193,8 @@ minimum MUST be 1.  If "maxContains" is absent, the maximum MUST
 be unbounded.
 
 The subschema MUST be applied to every array element even after the first
-match has been found, if annotations are being collected.
+match has been found in order to satisfy keywords that depend on
+the set of indices to which "contains" applied it subschema.
 
 ~~~ json
 {::include ./examples/contains-assignees.json}
