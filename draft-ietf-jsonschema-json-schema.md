@@ -3983,7 +3983,7 @@ specifics of this mechanism are left up to each implementation.
 
 As an example, the `properties` keyword produces information about
 which properties were successfully evaluated, which is used
-in the implementation of `additionalProperties`, `required` and
+in the implementation of `additionalProperties` and
 `unevaluatedProperties`.  With this schema:
 
 ~~~~~~~~~~
@@ -3995,7 +3995,7 @@ three different inputs, and how `additionalProperties`
 implementations could use that result.
 
 | Input | "properties" property names | "additionalProperties" result |
-|---|---|---|---|
+|---|---|---|
 | `{"X": 1, "Y": 2}` | "X", "Y" | valid |
 | `{"X": 1, "Y": 2, "radius": 5}` | "X", "Y" | invalid (`"radius"` not in set) |
 
@@ -4031,9 +4031,9 @@ information on which other keywords depend:
 | `properties` | set of validated property names | `additionalProperties`, `unevaluatedProperties` |
 | `patternProperties` | set of validated property names | `additionalProperties`, `unevaluatedProperties` |
 | `additionalProperties` | all properties have been validated | `unevaluatedProperties` |
-| `prefixItems` | validated index ranges | `items`, `unevaluatedItems` |
+| `prefixItems` | validated index range | `items`, `unevaluatedItems` |
 | `items` | all indices have been validated | `unevaluatedItems` |
-| `contains` | validated index ranges | `unevaluatedItems` |
+| `contains` | validated indexes and/or index ranges | `unevaluatedItems` |
 | `minContains` | keyword value | `contains` |
 | `maxContains` | keyword value | `contains` |
 | `unevaluatedItems` | all indices have been validated | `unevaluatedItems` in parent schemas |
