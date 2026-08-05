@@ -161,6 +161,7 @@ instance. Annotations typically document the meaning of properties, declare
 relationships between data, or denote hyperlinks.  Several forms of output are
 defined, and the annotation process can be disabled as a performance or
 resource consumption optimization.
+A basic annotation exampe can be seen at {{title-example}}.
 
 Output annotations might only be "as true as" the input, and useful only for select inputs. For example, annotations may only meaningfully describe inputs with a particular "profile" link relation, or in some particular context. In any event, annotations never describe violations (rejected inputs).
 
@@ -2172,6 +2173,50 @@ Both of these keywords can be used to decorate a user interface with
 information about the data produced by this user interface. A title will
 preferably be short, whereas a description will provide explanation about
 the purpose of the instance described by this schema.
+
+### "title" and "description" example {#title-example}
+
+Consider the following schema, which has one "title" and two "description"
+keywords, one in a referenced schema and one beside the reference:
+
+~~~~~~~~~~
+{::include ./examples/description.json}
+~~~~~~~~~~
+
+Given the instance:
+
+~~~ json
+{
+  "editor": "someone"
+}
+~~~
+
+While the exact structure depends on the selected output format ({{output}}),
+the following information would be included (recall that the root
+JSON Pointer is an empty string):
+
+| keyword | input pointer | evaluation path | annotation value |
+| --- | --- | --- | --- |
+| "title" | "" | "" | "Change Record" |
+| "description" | "/editor" | "/properties/editor" | "The user who made the change." |
+| "description" | "/editor" | "/properties/editor/$ref" | "A username identifying an account." |
+{: title="Annotation information" }
+
+There is one "title" applied to the instance root from the
+evaluation root.  There are two "descriptions", and given
+the presence or absence of "$ref" in the evaluation path,
+we can tell that "A username identifying an account." comes
+from a re-usable schema, while "The user who made the change."
+comes from the schema where that re-usable schema is used.
+
+The consuming application is expected to use this information to
+decide whether or how to use each annotation, based on its knowledge
+of the schema's design conventions.  This specification does not define
+semantics for the different evaluation paths.
+
+Note that "$comment" ({{comment}}) does not appear in the output table
+as it is not an annotation; this is the main distinction between "$comment"
+and "description".
 
 ## "default"
 
