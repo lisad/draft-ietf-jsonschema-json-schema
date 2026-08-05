@@ -1238,7 +1238,7 @@ The behavior of this keyword depends on the presence of
 "properties" and "patternProperties" within the same schema object.
 Validation with "additionalProperties" applies only to the child
 values of input names that do not appear in "properties"
-match regular expressions in "patternProperties".
+or match regular expressions in "patternProperties".
 
 For all such properties, validation succeeds if the contents
 validate against the "additionalProperties" schema.
