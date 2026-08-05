@@ -2750,10 +2750,11 @@ keyword that applied them is described by {{applicators}}.
 
 Evaluation of a parent schema object can complete once all of its
 subschemas have been evaluated, although in some circumstances evaluation
-may be short-circuited due to assertion results.  When annotations are
-being collected, some assertion result short-circuiting is not possible
-due to the need to examine all subschemas for annotation collection, including
-those that cannot further change the assertion result.
+may be short-circuited due to assertion results.  Implementations MAY
+short-circuit evaluation if analysis of the schema at load time shows that
+no annotation collection or keyword dependency communication could be
+impacted, **and** if the runtime configuration does not request "verbose"
+output ({{verbose}}).
 
 
 ## Lexical Scope and Dynamic Scope {#scopes}
