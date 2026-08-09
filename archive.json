@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-08-06T00:33:45.834170+00:00",
+  "timestamp": "2026-08-09T01:44:57.938469+00:00",
   "repo": "lisad/draft-ietf-jsonschema-json-schema",
   "labels": [
     {
@@ -2397,7 +2397,7 @@
       "labels": [],
       "body": "_Note that this is technically a new requirement, although if we don't want to add this requirement, we need to add others to put boundaries on what sort of input changes are allowed._\r\n\r\nThis formalizes the previously-unstated requirement for inputs to be immutable.  Some implementations took advantage of the ambiguity to implement things such as default-filling, or modifying the input in place in a way that produced potentially non-deterministic outcomes.",
       "createdAt": "2026-08-05T00:03:28Z",
-      "updatedAt": "2026-08-05T21:34:18Z",
+      "updatedAt": "2026-08-08T20:49:44Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
@@ -2429,6 +2429,55 @@
           "body": "@awwright or, I guess to put it another way, what requirement wording (including RFC2119 terms) would be needed to ensure that an implementation that allows modification of the input during evaluation is non-compliant/non-interoperable?  Saying that something is \"not defined\" is too subtle for most readers.  It's seen as an invitation to fill in the ambiguity.  We know this from the history of bodies used with HTTP GET:\r\n\r\n-----\r\n\r\nRFC 2616 doesn't mention them at all in the section for GET, it just says the following under [Message Body](https://datatracker.ietf.org/doc/html/rfc2616#section-4.3):\r\n\r\n> if the request method\r\n   does not include defined semantics for an entity-body, then the\r\n   message-body SHOULD be ignored when handling the request\r\n\r\n-----\r\n\r\nRFC7231 added this to the [GET section](https://datatracker.ietf.org/doc/html/rfc7231#autoid-34):\r\n\r\n>    A payload within a GET request message has no defined semantics;\r\n   sending a payload body on a GET request might cause some existing\r\n   implementations to reject the request.\r\n\r\n-----\r\n\r\nAs that still was not sufficient, RFC9110 [expanded on this further](https://www.rfc-editor.org/rfc/rfc9110.html#section-9.3.1):\r\n\r\n> Although request message framing is independent of the method used, content received in a GET request has no generally defined semantics, cannot alter the meaning or target of the request, and might lead some implementations to reject the request and close the connection because of its potential as a request smuggling attack ([Section 11.2](https://www.rfc-editor.org/rfc/rfc9112#section-11.2) of [[HTTP/1.1](https://www.rfc-editor.org/rfc/rfc9110.html#HTTP11)]). A client SHOULD NOT generate content in a GET request unless it is made directly to an origin server that has previously indicated, in or out of band, that such a request has a purpose and will be adequately supported. An origin server SHOULD NOT rely on private agreements to receive content, since participants in HTTP communication are often unaware of intermediaries along the request chain.\r\n\r\n-----\r\n\r\nJSON Schema is unlikely to get as many chances to rework things, so let's make it clear up front.  I'm fine with it not being a MUST NOT as long as it is *extremely clear* that things like filling in defaults and keywords like \"transform\" are going to cause problems for people.\r\n\r\nI also have another motivation for this being a MUST NOT, which is that all of the things people do when violating this are solvable in other ways, and I want to guide them to those other ways rather than leaving an enticing ambiguity for them to fall into.",
           "createdAt": "2026-08-05T02:46:06Z",
           "updatedAt": "2026-08-05T02:46:06Z"
+        },
+        {
+          "author": "awwright",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Is the concern the fact that the implementation modifies the value passed in as an argument instead of returning it as a new value? Or is it that the the input, when modified in-place before all of the validation has completed, might cause unexpected results?",
+          "createdAt": "2026-08-06T15:58:45Z",
+          "updatedAt": "2026-08-06T15:58:45Z"
+        },
+        {
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@awwright \r\n\r\n> Or is it that the the input, when modified in-place before all of the validation has completed, might cause unexpected results?\r\n\r\nThis is the problem that we really need to prevent.  It's just a horrible footgun if that is left open as a possible standards-compliant feature.\r\n\r\n> Is the concern the fact that the implementation modifies the value passed in as an argument instead of returning it as a new value?\r\n\r\nThis is still a concern as it calls into question what the processing model actually is.  Three possibilities:\r\n\r\n* The input is unchanged, and some amount of output (at least a boolean) is returned separately\r\n* The input is unchanged, and some amount of separate output is returned, and optionally a modified input is returned\r\n* The input can be changed, and some amount of separate output is returned\r\n\r\nOther possibilities exist, but those seem to cover what I expect and the two possibilities you raised.\r\n\r\nI don't care if someone wants to implement someting on top of unchanged-input-plus-output that either returns a modified input or modifies the input in place, but I see that as being _outside of JSON Schema_.  It is the boundary between what is \"JSON Schema\" and what is \"stuff you can do after using JSON Schema\" that matters to me here, in addition to avoiding problematic footguns.",
+          "createdAt": "2026-08-06T17:12:52Z",
+          "updatedAt": "2026-08-06T17:12:52Z"
+        },
+        {
+          "author": "awwright",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> This is the problem that we really need to prevent. It's just a horrible footgun if that is left open as a possible standards-compliant feature.\r\n\r\nOk... IMO the existing language technically prohibits this, though a (descriptive) clarification is fine... I still think something a little lighter would be better, along the lines of \"Note that the implementation cannot change or fill in values before the result has been computed, as this has the potential to change the validation result.\"\r\n\r\nAlso I think there is a way to approach this kind of functionality that makes sense... In my idea of a \"missingProperties\" or \"defaultProperties\" keyword, the provided value is \"application equivalent\" to a missing value; including annotations (that is, the application will behave the same whether or not those annotations are produced).",
+          "createdAt": "2026-08-06T20:31:34Z",
+          "updatedAt": "2026-08-06T20:31:34Z"
+        },
+        {
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@awwright \r\n\r\n> Ok... IMO the existing language technically prohibits this\r\n\r\nCan you point to the exact existing language that does this?\r\n\r\n>  \"Note that the implementation cannot change or fill in values before the result has been computed, as this has the potential to change the validation result.\"\r\n\r\nThis does not answer my question of \"where is the line between JSON Schema and not-JSON Schema?\"  Is changing or filling in values part of JSON Schema, yes or no?\r\n* If yes, how does that fit in to the processing model?\r\n* If no, given an implementation that does these things, how is the implementation expected to distinguish JSON Schema vs non-JSON Schema behavior to users?\r\n\r\n> In my idea of a \"missingProperties\"\r\n\r\nI'd like to come back to that proposal, but it doesn't need instance mutability to work, it can easily be done as a post-processing step (e.g. \"not JSON Schema\").",
+          "createdAt": "2026-08-06T23:30:37Z",
+          "updatedAt": "2026-08-06T23:30:37Z"
+        },
+        {
+          "author": "awwright",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Can you point to the exact existing language that does this?\r\n\r\nOnly that that it's a logical consequence of the specification... That is, if there was a certain implementation that it like you're describing, you could write a test case it would fail, right?\r\n\r\n> Is changing or filling in values part of JSON Schema, yes or no?\r\n\r\nIt's not _standardized_, though I think it's a plausible feature.\r\n\r\n> If yes, how does that fit in to the processing model?\r\n> If no, given an implementation that does these things, how is the implementation expected to distinguish JSON Schema vs non-JSON Schema behavior to users?\r\n\r\nIdeally, such an implementation could deliver two results, one for the literal input (validation result and infoset), and one for the corrected, equivalent value (that corrected input, its validation result, and infoset). With various flags to only produce a subset of this if you like, or to modify the result in place, naturally.\r\n\r\nBut if there's an implementation that's modifying a subset of the input in place, and validating some part of the input before it's been corrected and some part after it's been corrected, in theory you can write a test that will fail, that would pass for my ideal implementation above.",
+          "createdAt": "2026-08-08T18:43:43Z",
+          "updatedAt": "2026-08-08T18:43:43Z"
+        },
+        {
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Only that that it's a logical consequence of the specification... That is, if there was a certain implementation that it like you're describing, you could write a test case it would fail, right?\r\n\r\nPoint me to the testable requirement that will fail and I will happily concede the point.  But if I, one of the people *most familiar with this specifciation on the entire planet*, cannot figure this out, then I don't think you can claim that it is self-evident.\r\n\r\n> Ideally, such an implementation could deliver two results\r\n\r\nThere needs to be an interoperably defined interface to \"JSON Schema\".   I don't mean that every aspect of it needs to be nailed down right down to the spelling of input parameters or something.  But the basics of \"input is a JSON value schema and  JSON value data plus some config operations that can change behavior within a well-defined scope, including what is returned in the JSON value output\" needs to be clear.\r\n\r\nOtherwise, someone using this \"delivers two results\" implementation will be quite surprised when someone else needs to use their schema and their implementation does *not* support delivering two results.\r\n\r\nIf we want to say that that is a configurable option, and therefore \"JSON Schema\" implementations need to support it or note it as an incompatibility, then we're back on reasonably solid ground.  But this \"well, a thing could do this or that\" does not give any sort of reassurance to users that the functionality they depend on will be interoperable.\r\n\r\nSo is delivering two results part of \"JSON Schema\" that needs to be interoperable or not?",
+          "createdAt": "2026-08-08T19:27:30Z",
+          "updatedAt": "2026-08-08T19:28:33Z"
+        },
+        {
+          "author": "awwright",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> But the basics of \"input is a JSON value schema and JSON value data plus some config operations that can change behavior within a well-defined scope, including what is returned in the JSON value output\" needs to be clear.\r\n> Otherwise, someone using this \"delivers two results\" implementation will be quite surprised when someone else needs to use their schema and their implementation does not support delivering two results.\r\n\r\nI would call these two entirely different classes of implementations... If you need a \"normalizing validator\" because you need a port number out of your server configuration file, naturally you're not going to be able to go to a traditional validator.\r\n\r\n> So is delivering two results part of \"JSON Schema\" that needs to be interoperable or not?\r\n\r\nThey would be interoperable in the sense that (if they're implementing exactly the same set of features) there will be a 1:1 mapping of output and output, i.e. given one implementation's output I can tell you exactly what the other implementation would provide as output.",
+          "createdAt": "2026-08-08T20:49:44Z",
+          "updatedAt": "2026-08-08T20:49:44Z"
         }
       ],
       "reviews": []
