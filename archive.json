@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-08-09T01:44:57.938469+00:00",
+  "timestamp": "2026-08-11T01:44:55.990925+00:00",
   "repo": "lisad/draft-ietf-jsonschema-json-schema",
   "labels": [
     {
@@ -2388,7 +2388,7 @@
     {
       "number": 47,
       "id": "PR_kwDOR8mbas760V5S",
-      "title": "Inputs MUST be considered immutable",
+      "title": "Inputs MUST(?) be considered immutable",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/47",
       "state": "OPEN",
       "author": "handrews",
@@ -2397,7 +2397,7 @@
       "labels": [],
       "body": "_Note that this is technically a new requirement, although if we don't want to add this requirement, we need to add others to put boundaries on what sort of input changes are allowed._\r\n\r\nThis formalizes the previously-unstated requirement for inputs to be immutable.  Some implementations took advantage of the ambiguity to implement things such as default-filling, or modifying the input in place in a way that produced potentially non-deterministic outcomes.",
       "createdAt": "2026-08-05T00:03:28Z",
-      "updatedAt": "2026-08-08T20:49:44Z",
+      "updatedAt": "2026-08-10T17:02:12Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
@@ -2478,6 +2478,20 @@
           "body": "> But the basics of \"input is a JSON value schema and JSON value data plus some config operations that can change behavior within a well-defined scope, including what is returned in the JSON value output\" needs to be clear.\r\n> Otherwise, someone using this \"delivers two results\" implementation will be quite surprised when someone else needs to use their schema and their implementation does not support delivering two results.\r\n\r\nI would call these two entirely different classes of implementations... If you need a \"normalizing validator\" because you need a port number out of your server configuration file, naturally you're not going to be able to go to a traditional validator.\r\n\r\n> So is delivering two results part of \"JSON Schema\" that needs to be interoperable or not?\r\n\r\nThey would be interoperable in the sense that (if they're implementing exactly the same set of features) there will be a 1:1 mapping of output and output, i.e. given one implementation's output I can tell you exactly what the other implementation would provide as output.",
           "createdAt": "2026-08-08T20:49:44Z",
           "updatedAt": "2026-08-08T20:49:44Z"
+        },
+        {
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I would call these two entirely different classes of implementations\r\n\r\nIf we're going to have different classes of implementations that do different things, we need to address that directly.  \"Implementing JSON Schema\" has to mean something, preferably something testable.  At minimum, we would need to define what the expected default interface and behavior are, and how one goes about layering on additional functionality without breaking the interoperable contract.\r\n\r\nI'm not hearing anything at all clear enough to be able to do that in this discussion.",
+          "createdAt": "2026-08-09T20:55:24Z",
+          "updatedAt": "2026-08-09T20:55:24Z"
+        },
+        {
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Note for anyone reading: Austin and I are continuing to sort out the difference in perspective offlist as it's wandered a bit far afield.  No conclusions yet, but I am still competely open to reworking this PR or tossing it and focusing on other ways to define what is and isn't \"JSON Schema\".\r\n\r\nThis PR will remain in draft until we have enough agreement to either move forward or close it, but it's really not urgent as none of the other open PRs really depend on it.",
+          "createdAt": "2026-08-10T16:53:16Z",
+          "updatedAt": "2026-08-10T16:53:16Z"
         }
       ],
       "reviews": []
@@ -2494,7 +2508,7 @@
       "labels": [],
       "body": "This is an attempt to clarify \"default\" and \"examples\" without changing their nature, in order to have a clear base from which to consider possible changes.\r\n\r\nThis change:\r\n\r\n* Clarifies that \"default\" and \"examples\" really aren't that useful in schema evaluation, and this is not an unexpected oversight.\r\n* Explains that the actual typical use is out-of-scope for the RFC.\r\n* Removes all language about handling multiple values, which was left over from a very old approach to annotations where JSON Schema implementations were expected to resolve such things.\r\n* Removes all normative language that attempted to impose requirements on downstream code; the remaining text defines the semantics sufficiently for downstream code to make its own decisions regarding use.\r\n\r\n@awwright IIRC you had other ideas for why someone might want a \"default\" that is not valid, although I've forgotten what those were.  I am unclear on why we said the same for \"examples\" other than symmetry.  We should either change or explain this (in a future PR).",
       "createdAt": "2026-08-05T00:50:39Z",
-      "updatedAt": "2026-08-05T03:07:51Z",
+      "updatedAt": "2026-08-10T15:45:02Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
@@ -2505,8 +2519,37 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
-      "reviews": []
+      "comments": [
+        {
+          "author": "awwright",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This is an improvement, though I think it would be even clearer if we adopted the term \"infoset\" to make this point.",
+          "createdAt": "2026-08-10T03:03:55Z",
+          "updatedAt": "2026-08-10T03:03:55Z"
+        },
+        {
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> though I think it would be even clearer if we adopted the term \"infoset\" to make this point.\r\n\r\n@awwright yeah, I agree, it just felt easier to make these changes (waving at this set of PRs broadly) first and then introduce/debate the new terminology.  We might even want to publish a draft-03 while working on the new terminology for draft-04.",
+          "createdAt": "2026-08-10T15:45:02Z",
+          "updatedAt": "2026-08-10T15:45:02Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOR8mbas8AAAABI6vK4A",
+          "commit": {
+            "abbreviatedOid": "69efc3b"
+          },
+          "author": "awwright",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-08-10T03:04:46Z",
+          "updatedAt": "2026-08-10T03:04:46Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 49,
@@ -2520,13 +2563,13 @@
       "labels": [],
       "body": "One could theoretically read the old text as implying \"sub-evaluation\" meant only one level.\r\n\r\nAlso fix a typo.",
       "createdAt": "2026-08-05T02:27:03Z",
-      "updatedAt": "2026-08-05T02:27:03Z",
+      "updatedAt": "2026-08-11T00:57:09Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
       "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
       "headRefName": "transitive",
-      "headRefOid": "e5f62e8149b512bb2165eb973fa5f6e6bbde186d",
+      "headRefOid": "cc4957d7408759da515cd9066fc1aa3e3b086e16",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -2598,7 +2641,7 @@
       "labels": [],
       "body": "AI caught a couple of things which I have verified and fixed: (no AI-performed or directly suggested edits!\r\n\r\n* \"explicitly\" where we meant \"implicitly\" like everywhere else\r\n* wrong fragment link (leftover from when both sections existed)\r\n* ECMA-262 citation date and URI had not been updated\r\n\r\nRegarding the last point, the section numbers in citations do not fit the linked version (5.1 edition, 2011).  They do work with the 6th edition (2015), so I updated to that rather than jumping further ahead (the section numbers change again later).\r\n\r\nThe 2011 edition also does not have the \"u\" flag which we mention, so I think there was a decision to go to the 6th edition and it's just the link that wasn't updated.",
       "createdAt": "2026-08-05T04:10:42Z",
-      "updatedAt": "2026-08-05T16:57:54Z",
+      "updatedAt": "2026-08-10T02:49:12Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
@@ -2610,7 +2653,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOR8mbas8AAAABI6r7ew",
+          "commit": {
+            "abbreviatedOid": "5589329"
+          },
+          "author": "awwright",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-08-10T02:49:12Z",
+          "updatedAt": "2026-08-10T02:49:12Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 53,
@@ -2650,7 +2707,7 @@
       "labels": [],
       "body": "This section has many problems, and is best replaced with new guidance on how we expect annotations to be consumed as we sort that out.  Problems include:\r\n\r\n* It attempts to impose normative requirements on downstream applications\r\n* \"Feature A\" and \"Feature B\" are rather abstract\r\n* It talks about \"default\" in a way that does not actually use it as an annotation\r\n* It assumes semantics about more generic/more specific things\r\n* It muddies things by speculating about alternatives\r\n\r\nThe example in PR #53 pretty much replaces the parts of this that are worth having, although obviously it's not as prominent.  I think we'll want a general \"how to use results/output\" section at some point, but we'll need to figure out what results/output look like first.",
       "createdAt": "2026-08-05T21:36:00Z",
-      "updatedAt": "2026-08-05T21:37:09Z",
+      "updatedAt": "2026-08-10T03:46:27Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
@@ -2662,7 +2719,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOR8mbas8AAAABI629Bw",
+          "commit": {
+            "abbreviatedOid": "71d956e"
+          },
+          "author": "awwright",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-08-10T03:46:27Z",
+          "updatedAt": "2026-08-10T03:46:27Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
