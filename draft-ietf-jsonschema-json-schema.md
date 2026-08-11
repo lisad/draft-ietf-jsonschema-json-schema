@@ -2783,7 +2783,7 @@ dynamic parent, rather than examining the local lexically enclosing parent.
 The concept of dynamic scope should be considered an advanced feature
 and used with caution when defining extension keywords.
 
-### Successful unsuccessful, and ignored evaluations {#eval-status}
+### Successful, unsuccessful, and ignored evaluations {#eval-status}
 
 Each dynamic scope represents an evaluation of an input location by
 a schema.  Keyword evaluations within the dynamic scope are
