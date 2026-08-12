@@ -453,7 +453,7 @@ Table of Contents
       acceptance or rejection; produce errors upon rejection
 
    annotations  attach information intended for application use to an
-      instance via the result infoset
+      instance via output
 
    applicators  apply one or more subschemas to a particular location in
       the instance, and produce a boolean result info item that combines
@@ -461,7 +461,7 @@ Table of Contents
       producing an acceptance result suppress the errors of any
       subschemas that produced a rejection
 
-   reserved locations  do not interact with the result infoset, but
+   reserved locations  do not interact with any results or output, but
       reserve a place for a specific purpose to ensure interoperability
 
    Keywords which are properties within the same schema object are
