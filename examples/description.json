@@ -1,0 +1,19 @@
+{
+  "title": "Change Record",
+  "type": "object",
+  "required": "editor",
+  "$comment": "A real record would have more properties",
+  "properties": {
+    "editor": {
+      "description": "The user who made the change.",
+      "$ref": "#/$defs/username"
+    }
+  },
+  "$defs": {
+    "username": {
+      "description": "A username identifying an account.",
+      "type": "string",
+      "minLength": 3
+    }
+  }
+}
