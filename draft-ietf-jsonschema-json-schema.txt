@@ -1656,7 +1656,7 @@ Table of Contents
    expressions that appear as a property name in this keyword's value,
    the contents successfully validate against each schema that
    corresponds to a matching regular expression.  Recall: Regular
-   expressions are not explicitly anchored.
+   expressions are not implicitly anchored.
 
    The annotation result of this keyword is the set of instance property
    names matched by this keyword.
@@ -2452,9 +2452,8 @@ Table of Contents
    [ECMA262] regular expression dialect.
 
    Implementations that validate formats MUST accept at least the subset
-   of ECMA-262 defined in Regular Expressions (Section 8.3.8.1) section
-   of this specification, and SHOULD accept all valid ECMA-262
-   expressions.
+   of ECMA-262 defined in Regular Expressions (Section 16.3) section of
+   this specification, and SHOULD accept all valid ECMA-262 expressions.
 
 9.  A Vocabulary for the Contents of String-Encoded Data
 
@@ -4290,10 +4289,9 @@ Table of Contents
 18.1.  Normative References
 
    [ECMA262]  European Computer Manufacturers Association, "ECMAScript
-              Language Specification 5.1 Edition", ECMA Standard ECMA-
-              262, June 2011, <http://www.ecma-
-              international.org/publications/files/ecma-st/ECMA-
-              262.pdf>.
+              Language Specification 6th Edition", ECMA Standard ECMA-
+              262, June 2015, <https://ecma-international.org/wp-
+              content/uploads/ECMA-262_6th_edition_june_2015.pdf>.
 
    [I-D.hha-relative-json-pointer]
               Luff, G., Andrews, H., and B. Hutton, "Relative JSON
