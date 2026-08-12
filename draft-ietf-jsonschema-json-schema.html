@@ -5341,17 +5341,9 @@ keyword.<a href="#section-12.6-2" class="pilcrow">¶</a></p>
 <p id="section-12.6-3">Applicator keywords also define how subschema or referenced schema
 boolean <span><a href="#assertions" class="internal xref">assertion</a> (<a href="#assertions" class="auto internal xref">Section 12.7</a>)</span>
 results are modified and/or combined to produce the boolean result
-of the applicator.  Applicators may apply any boolean logic operation
+of the applicator.  Applicators MAY apply any boolean logic operation
 to the assertion results of subschemas, but MUST NOT introduce new
 assertion conditions of their own.<a href="#section-12.6-3" class="pilcrow">¶</a></p>
-<p id="section-12.6-4"><span><a href="#annotations" class="internal xref">Annotation</a> (<a href="#annotations" class="auto internal xref">Section 12.8</a>)</span> results from subschemas
-are preserved in accordance with <a href="#collect" class="auto internal xref">Section 12.8.1</a>
-so that applications can decide how to interpret multiple values.
-Applicator keywords do not play a direct role in this preservation.<a href="#section-12.6-4" class="pilcrow">¶</a></p>
-<p id="section-12.6-5">Annotation results
-are preserved along with the instance location and the location of
-the schema keyword, so that applications can decide how to
-interpret multiple values.<a href="#section-12.6-5" class="pilcrow">¶</a></p>
 <div id="referenced-and-referencing-schemas">
 <section id="section-12.6.1">
           <h4 id="name-referenced-and-referencing-">
@@ -5462,25 +5454,28 @@ for failing schemas.<a href="#section-12.8-5" class="pilcrow">¶</a></p>
 <p id="section-12.8.1-1">Annotations are collected by keywords that explicitly define
 annotation-collecting behavior.  Note that boolean schemas cannot
 produce annotations as they do not make use of keywords.<a href="#section-12.8.1-1" class="pilcrow">¶</a></p>
-<p id="section-12.8.1-2">A collected annotation MUST include the following information:<a href="#section-12.8.1-2" class="pilcrow">¶</a></p>
+<p id="section-12.8.1-2">See <a href="#eval-status" class="auto internal xref">Section 12.1.1</a> for conditions under which annotations
+appear in output, and how they are managed throughout the
+evaluation process.<a href="#section-12.8.1-2" class="pilcrow">¶</a></p>
+<p id="section-12.8.1-3">A collected annotation MUST include the following information:<a href="#section-12.8.1-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-12.8.1-3.1">
-              <p id="section-12.8.1-3.1.1">The name of the keyword that produces the annotation<a href="#section-12.8.1-3.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-12.8.1-4.1">
+              <p id="section-12.8.1-4.1.1">The name of the keyword that produces the annotation<a href="#section-12.8.1-4.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-12.8.1-3.2">
-              <p id="section-12.8.1-3.2.1">The instance location to which it is attached, as a JSON Pointer<a href="#section-12.8.1-3.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-12.8.1-4.2">
+              <p id="section-12.8.1-4.2.1">The instance location to which it is attached, as a JSON Pointer<a href="#section-12.8.1-4.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-12.8.1-3.3">
-              <p id="section-12.8.1-3.3.1">The schema location path, indicating how reference keywords
-such as "$ref" were followed to reach the absolute schema location.<a href="#section-12.8.1-3.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-12.8.1-4.3">
+              <p id="section-12.8.1-4.3.1">The schema location path, indicating how reference keywords
+such as "$ref" were followed to reach the absolute schema location.<a href="#section-12.8.1-4.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-12.8.1-3.4">
-              <p id="section-12.8.1-3.4.1">The absolute schema location of the attaching keyword, as a URI.
+            <li class="normal" id="section-12.8.1-4.4">
+              <p id="section-12.8.1-4.4.1">The absolute schema location of the attaching keyword, as a URI.
 This MAY be omitted if it is the same as the schema location path
-from above.<a href="#section-12.8.1-3.4.1" class="pilcrow">¶</a></p>
+from above.<a href="#section-12.8.1-4.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-12.8.1-3.5">
-              <p id="section-12.8.1-3.5.1">The attached value(s)<a href="#section-12.8.1-3.5.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-12.8.1-4.5">
+              <p id="section-12.8.1-4.5.1">The attached value(s)<a href="#section-12.8.1-4.5.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <div id="distinguishing-among-multiple-values">
