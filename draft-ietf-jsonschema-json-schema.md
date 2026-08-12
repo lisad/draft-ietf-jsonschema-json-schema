@@ -487,13 +487,6 @@ zeros) are insignificant.
 Two equal inputs are guaranteed to yield identical validation results
 for a given schema, regardless of their original formatting.
 
-### Immutability of input
-
-JSON Schema implementations MUST NOT modify the input during
-evaluation; implementations that do so, for example to fill
-in values from the "default" keyword ({{default}}), are not
-interoperable.
-
 ## Keywords
 
 To ensure interoperability, all JSON Schema keywords, whether
@@ -580,7 +573,10 @@ such as descriptive metadata and usage hints.
 Each schema object is independently evaluated against each input location
 to which it applies.  This greatly simplifies implementation requirements
 by ensuring that implementations do not need to maintain state across
-the document-wide validation process.
+the document-wide validation process.  Keywords MUST NOT modify the input
+during evaluation.  Annotations MAY be used to indicate that modification
+is desired, however the exact mechanism of modification is deferred to
+applications or other specifications building on JSON Schema.
 
 In all validator implementations, equivalent JSON values MUST return the same validation result and annotations. For example, selection between equivalent character escapes, or use of whitespace, does not affect the result. This also means that a validation keyword MUST NOT accept or reject based on third factors (those factors besides the schema and the input itself). A separate "outside verification" scheme that queries external data sources is possible, but outside the scope of this document.
 
