@@ -164,9 +164,8 @@ resource consumption optimization.
 
 Output annotations might only be "as true as" the input, and useful only for select inputs. For example, annotations may only meaningfully describe inputs with a particular "profile" link relation, or in some particular context. In any event, annotations never describe violations (rejected inputs).
 
-The interface to access annotations may be highly configurable depending on the implementation, in such ways as limiting output to certain annotation keywords, aggregating values together, or other features to enhance performance. Annotation output may be bypassed entirely.
-
-Annotations may be presented as a set, or as a stream of events, however if the input is rejected during processing, this voids all annotations previously emitted from that input.
+As noted in {{val-ann}}, annotation collection and output can be highly
+configurable to support performance trade-offs and/or streaming output.
 
 ### Internet media types
 
@@ -563,7 +562,7 @@ for vocabularies that they do not support directly.  The exact mechanism
 for registering and implementing such handlers is implementation-dependent.
 
 
-### Validation
+### Validation and Annotation {#val-ann}
 
 JSON Schema validation applies the rules of a JSON Schema to determine
 if an input is in the valid set for that schema.
@@ -584,6 +583,13 @@ useful information.  The {{format-vocab}} keyword is intended primarily
 as an annotation, but can optionally be used as an assertion.  The
 {{content}} keywords are annotations for working with documents
 embedded as JSON strings.
+
+Implementations MAY allow configuring annotations
+in such ways as limiting output to certain annotation keywords, aggregating values together, or other features to enhance performance.
+Implementations MAY allow annotation output to be bypassed entirely.
+
+Annotations MAY be presented as a single data structure, or as a stream of events, however if the input is rejected during processing, this voids all annotations previously emitted from that input.
+See {{eval-status}} for detailed guidance on when previously emitted annotations MUST be discarded.
 
 # Core Keywords {#core-keywords}
 
@@ -2744,10 +2750,11 @@ keyword that applied them is described by {{applicators}}.
 
 Evaluation of a parent schema object can complete once all of its
 subschemas have been evaluated, although in some circumstances evaluation
-may be short-circuited due to assertion results.  When annotations are
-being collected, some assertion result short-circuiting is not possible
-due to the need to examine all subschemas for annotation collection, including
-those that cannot further change the assertion result.
+may be short-circuited due to assertion results.  Implementations MAY
+short-circuit evaluation if analysis of the schema at load time shows that
+no annotation collection or keyword dependency communication could be
+impacted, **and** if the runtime configuration does not request "verbose"
+output ({{verbose}}).
 
 
 ## Lexical Scope and Dynamic Scope {#scopes}
@@ -2846,9 +2853,7 @@ A keyword MAY depend on the value or outcome of other keywords
 within the same dynamic scopes or its successful subscopes.
 
 No constraints are placed on the mechanism of communication
-within implementations, however, annotations MAY be used for
-this purpose, and all dependencies within this specification
-define annotations necessary for this.
+within implementations.
 
 Interactions within the same dynamic scope that depend only
 on adjacent keyword values SHOULD be determined statically.
@@ -2879,19 +2884,6 @@ identical to that produced by a certain value, and keyword definitions
 SHOULD note such values where known.  However, even if the value which
 produces the default behavior would produce annotation results if
 present, the default behavior still MUST NOT result in annotations.
-
-Because annotation collection can add significant cost in terms of both
-computation and memory, implementations MAY opt out of this feature.
-Keywords that are specified in terms of collected annotations SHOULD
-describe reasonable alternate approaches when appropriate.
-This approach is demonstrated by the
-{{<<items}} and
-{{<<additionalProperties}} keywords in this
-document.
-
-Note that when no such alternate approach is possible for a keyword,
-implementations that do not support annotation collections will not
-be able to support those keywords or vocabularies that contain them.
 
 ## Handling unrecognized or unsupported keywords {#unrecognized}
 
@@ -3009,8 +3001,8 @@ then including "null" in "type" would not have any useful effect.
 
 JSON Schema can annotate an instance with information, whenever the instance
 validates against the schema object containing the annotation, and all of its
-parent schema objects.  The information can be a simple value, or can be
-calculated based on the instance contents.
+parent schema objects.  The annotation value produced by each annotation
+keyword MUST be the keyword's value.
 
 Annotations are attached to specific locations in an instance.
 Since many subschemas can be applied to any single
@@ -3022,12 +3014,6 @@ Unlike assertion results, annotation data can take a wide variety of forms,
 which are provided to applications to use as they see fit.  JSON Schema
 implementations are not expected to make use of the collected information
 on behalf of applications.
-
-Unless otherwise specified, the value of an annotation keyword
-is the keyword's value.  However, other behaviors are possible.
-For example, JSON Hyper-Schema's ({{?I-D.handrews-json-schema-hyperschema}})
-"links" keyword is a complex annotation that produces a value based
-in part on the instance data.
 
 While "short-circuit" evaluation is possible for assertions, collecting
 annotations requires examining all schemas that apply to an instance
@@ -3055,7 +3041,7 @@ A collected annotation MUST include the following information:
 * The absolute schema location of the attaching keyword, as a URI.
   This MAY be omitted if it is the same as the schema location path
   from above.
-* The attached value(s)
+* The attached value
 
 #### Distinguishing Among Multiple Values
 
@@ -3251,9 +3237,6 @@ The error or annotation that is produced by the validation.
 For errors, the specific wording for the message is not defined by this
 specification.  Implementations will need to provide this.
 
-For annotations, each keyword that produces an annotation specifies its
-format.  By default, it is the keyword's value.
-
 The JSON key for failed validations is "error"; for successful validations
 it is "annotation".
 
@@ -3324,11 +3307,9 @@ needs to be fulfilled.
 ~~~
 
 Because no errors or annotations are returned with this format, it is
-RECOMMENDED that implementations use short-circuiting logic to return
-failure or success as soon as the outcome can be determined.  For example,
-if an "anyOf" keyword contains five sub-schemas, and the second one
-passes, there is no need to check the other three.  The logic can simply
-return with success.
+RECOMMENDED that implementations supporting short-circuiting logic
+({{keyword-behaviors}}) use it to return
+failure or success as soon as the outcome can be determined.
 
 ### Basic
 
