@@ -270,7 +270,7 @@ assertions
 
 annotations
 : attach information intended for application use to an instance
-  via the result infoset
+  via output
 
 applicators
 : apply one or more subschemas to a particular location
@@ -280,7 +280,7 @@ applicators
   errors of any subschemas that produced a rejection
 
 reserved locations
-: do not interact with the result infoset, but reserve a place
+: do not interact with any results or output, but reserve a place
   for a specific purpose to ensure interoperability
 
 Keywords which are properties within the same schema object are referred to as
