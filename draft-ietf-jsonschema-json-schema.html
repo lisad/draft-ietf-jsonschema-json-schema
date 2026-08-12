@@ -1525,6 +1525,11 @@ Source for this draft can be found at
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
                 <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="auto internal xref">10.1</a>.  <a href="#name-title-and-description" class="internal xref">"title" and "description"</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.1">
+                    <p id="section-toc.1-1.10.2.1.2.1.1"><a href="#section-10.1.1" class="auto internal xref">10.1.1</a>.  <a href="#name-title-and-description-examp" class="internal xref">"title" and "description" example</a></p>
+</li>
+                </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2">
                 <p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2" class="auto internal xref">10.2</a>.  <a href="#name-default" class="internal xref">"default"</a></p>
@@ -1925,7 +1930,8 @@ particular annotation keyword in the schema to a particular value within the
 instance. Annotations typically document the meaning of properties, declare
 relationships between data, or denote hyperlinks.  Several forms of output are
 defined, and the annotation process can be disabled as a performance or
-resource consumption optimization.<a href="#section-1.3.2-1" class="pilcrow">¶</a></p>
+resource consumption optimization.
+A basic annotation exampe can be seen at <a href="#title-example" class="auto internal xref">Section 10.1.1</a>.<a href="#section-1.3.2-1" class="pilcrow">¶</a></p>
 <p id="section-1.3.2-2">Output annotations might only be "as true as" the input, and useful only for select inputs. For example, annotations may only meaningfully describe inputs with a particular "profile" link relation, or in some particular context. In any event, annotations never describe violations (rejected inputs).<a href="#section-1.3.2-2" class="pilcrow">¶</a></p>
 <p id="section-1.3.2-3">As noted in <a href="#val-ann" class="auto internal xref">Section 3.5.3</a>, annotation collection and output can be highly
 configurable to support performance trade-offs and/or streaming output.<a href="#section-1.3.2-3" class="pilcrow">¶</a></p>
@@ -4525,6 +4531,96 @@ require this vocabulary as if its URI were present with a value of true.<a href=
 information about the data produced by this user interface. A title will
 preferably be short, whereas a description will provide explanation about
 the purpose of the instance described by this schema.<a href="#section-10.1-2" class="pilcrow">¶</a></p>
+<div id="title-example">
+<section id="section-10.1.1">
+          <h4 id="name-title-and-description-examp">
+<a href="#section-10.1.1" class="section-number selfRef">10.1.1. </a><a href="#name-title-and-description-examp" class="section-name selfRef">"title" and "description" example</a>
+          </h4>
+<p id="section-10.1.1-1">Consider the following schema, which has one "title" and two "description"
+keywords, one in a referenced schema and one beside the reference:<a href="#section-10.1.1-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-10.1.1-2">
+<pre>
+{
+  "title": "Change Record",
+  "type": "object",
+  "required": "editor",
+  "$comment": "A real record would have more properties",
+  "properties": {
+    "editor": {
+      "description": "The user who made the change.",
+      "$ref": "#/$defs/username"
+    }
+  },
+  "$defs": {
+    "username": {
+      "description": "A username identifying an account.",
+      "type": "string",
+      "minLength": 3
+    }
+  }
+}
+</pre><a href="#section-10.1.1-2" class="pilcrow">¶</a>
+</div>
+<p id="section-10.1.1-3">Given the instance:<a href="#section-10.1.1-3" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-10.1.1-4">
+<pre>
+{
+  "editor": "someone"
+}
+</pre><a href="#section-10.1.1-4" class="pilcrow">¶</a>
+</div>
+<p id="section-10.1.1-5">While the exact structure depends on the selected output format (<a href="#output" class="auto internal xref">Section 13</a>),
+the following information would be included (recall that the root
+JSON Pointer is an empty string):<a href="#section-10.1.1-5" class="pilcrow">¶</a></p>
+<span id="name-annotation-information"></span><table class="center" id="table-1">
+            <caption>
+<a href="#table-1" class="selfRef">Table 1</a>:
+<a href="#name-annotation-information" class="selfRef">Annotation information</a>
+            </caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">keyword</th>
+                <th class="text-left" rowspan="1" colspan="1">input pointer</th>
+                <th class="text-left" rowspan="1" colspan="1">evaluation path</th>
+                <th class="text-left" rowspan="1" colspan="1">annotation value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">"title"</td>
+                <td class="text-left" rowspan="1" colspan="1">""</td>
+                <td class="text-left" rowspan="1" colspan="1">""</td>
+                <td class="text-left" rowspan="1" colspan="1">"Change Record"</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">"description"</td>
+                <td class="text-left" rowspan="1" colspan="1">"/editor"</td>
+                <td class="text-left" rowspan="1" colspan="1">"/properties/editor"</td>
+                <td class="text-left" rowspan="1" colspan="1">"The user who made the change."</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">"description"</td>
+                <td class="text-left" rowspan="1" colspan="1">"/editor"</td>
+                <td class="text-left" rowspan="1" colspan="1">"/properties/editor/$ref"</td>
+                <td class="text-left" rowspan="1" colspan="1">"A username identifying an account."</td>
+              </tr>
+            </tbody>
+          </table>
+<p id="section-10.1.1-7">There is one "title" applied to the instance root from the
+evaluation root.  There are two "descriptions", and given
+the presence or absence of "$ref" in the evaluation path,
+we can tell that "A username identifying an account." comes
+from a re-usable schema, while "The user who made the change."
+comes from the schema where that re-usable schema is used.<a href="#section-10.1.1-7" class="pilcrow">¶</a></p>
+<p id="section-10.1.1-8">The consuming application is expected to use this information to
+decide whether or how to use each annotation, based on its knowledge
+of the schema's design conventions.  This specification does not define
+semantics for the different evaluation paths.<a href="#section-10.1.1-8" class="pilcrow">¶</a></p>
+<p id="section-10.1.1-9">Note that "$comment" (<a href="#comment" class="auto internal xref">Section 4.3</a>) does not appear in the output table
+as it is not an annotation; this is the main distinction between "$comment"
+and "description".<a href="#section-10.1.1-9" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 <div id="default">
@@ -6827,8 +6923,8 @@ in the implementation of <code>additionalProperties</code>, <code>required</code
 <p id="appendix-D-4">The following table shows the annotation result of <code>properties</code> for
 three different inputs, and how <code>additionalProperties</code> and <code>required</code>
 implementations could use that result.<a href="#appendix-D-4" class="pilcrow">¶</a></p>
-<table class="center" id="table-1">
-        <caption><a href="#table-1" class="selfRef">Table 1</a></caption>
+<table class="center" id="table-2">
+        <caption><a href="#table-2" class="selfRef">Table 2</a></caption>
 <thead>
           <tr>
             <th class="text-left" rowspan="1" colspan="1">Input</th>
@@ -6891,8 +6987,8 @@ username fields, and preventing additional fields:<a href="#appendix-D-6" class=
 annotation output from <code>prefixItems</code> evaluation. Then,
 <code>items</code> uses the <code>prefixItems</code> annotation to start where <code>prefixItems</code>
 left off, applying only to indices greater than the annotation value.<a href="#appendix-D-8" class="pilcrow">¶</a></p>
-<table class="center" id="table-2">
-        <caption><a href="#table-2" class="selfRef">Table 2</a></caption>
+<table class="center" id="table-3">
+        <caption><a href="#table-3" class="selfRef">Table 3</a></caption>
 <thead>
           <tr>
             <th class="text-left" rowspan="1" colspan="1">Input</th>
@@ -6941,8 +7037,8 @@ left off, applying only to indices greater than the annotation value.<a href="#a
       </table>
 <p id="appendix-D-10">The following table summarizes which keywords produce annotations
 that can be used in the implementation of other keywords:<a href="#appendix-D-10" class="pilcrow">¶</a></p>
-<table class="center" id="table-3">
-        <caption><a href="#table-3" class="selfRef">Table 3</a></caption>
+<table class="center" id="table-4">
+        <caption><a href="#table-4" class="selfRef">Table 4</a></caption>
 <thead>
           <tr>
             <th class="text-left" rowspan="1" colspan="1">Keyword</th>

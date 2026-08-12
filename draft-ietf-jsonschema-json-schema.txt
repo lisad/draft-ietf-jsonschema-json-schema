@@ -171,6 +171,7 @@ Table of Contents
      9.6.  Example
    10. A Vocabulary for Basic Meta-Data Annotations
      10.1.  "title" and "description"
+       10.1.1.  "title" and "description" example
      10.2.  "default"
      10.3.  "deprecated"
      10.4.  "readOnly" and "writeOnly"
@@ -336,7 +337,8 @@ Table of Contents
    the meaning of properties, declare relationships between data, or
    denote hyperlinks.  Several forms of output are defined, and the
    annotation process can be disabled as a performance or resource
-   consumption optimization.
+   consumption optimization.  A basic annotation exampe can be seen at
+   Section 10.1.1.
 
    Output annotations might only be "as true as" the input, and useful
    only for select inputs.  For example, annotations may only
@@ -2655,6 +2657,74 @@ Table of Contents
    explanation about the purpose of the instance described by this
    schema.
 
+10.1.1.  "title" and "description" example
+
+   Consider the following schema, which has one "title" and two
+   "description" keywords, one in a referenced schema and one beside the
+   reference:
+
+   {
+     "title": "Change Record",
+     "type": "object",
+     "required": "editor",
+     "$comment": "A real record would have more properties",
+     "properties": {
+       "editor": {
+         "description": "The user who made the change.",
+         "$ref": "#/$defs/username"
+       }
+     },
+     "$defs": {
+       "username": {
+         "description": "A username identifying an account.",
+         "type": "string",
+         "minLength": 3
+       }
+     }
+   }
+
+   Given the instance:
+
+   {
+     "editor": "someone"
+   }
+
+   While the exact structure depends on the selected output format
+   (Section 13), the following information would be included (recall
+   that the root JSON Pointer is an empty string):
+
+     +===============+===========+===============+===================+
+     | keyword       | input     | evaluation    | annotation value  |
+     |               | pointer   | path          |                   |
+     +===============+===========+===============+===================+
+     | "title"       | ""        | ""            | "Change Record"   |
+     +---------------+-----------+---------------+-------------------+
+     | "description" | "/editor" | "/properties/ | "The user who     |
+     |               |           | editor"       | made the change." |
+     +---------------+-----------+---------------+-------------------+
+     | "description" | "/editor" | "/properties/ | "A username       |
+     |               |           | editor/$ref"  | identifying an    |
+     |               |           |               | account."         |
+     +---------------+-----------+---------------+-------------------+
+
+                      Table 1: Annotation information
+
+   There is one "title" applied to the instance root from the evaluation
+   root.  There are two "descriptions", and given the presence or
+   absence of "$ref" in the evaluation path, we can tell that "A
+   username identifying an account." comes from a re-usable schema,
+   while "The user who made the change." comes from the schema where
+   that re-usable schema is used.
+
+   The consuming application is expected to use this information to
+   decide whether or how to use each annotation, based on its knowledge
+   of the schema's design conventions.  This specification does not
+   define semantics for the different evaluation paths.
+
+   Note that "$comment" (Section 4.3) does not appear in the output
+   table as it is not an annotation; this is the main distinction
+   between "$comment" and "description".
+
 10.2.  "default"
 
    There are no restrictions placed on the value of this keyword.  When
@@ -4734,7 +4804,7 @@ Appendix D.  Using annotations in implementations
    |              |              |                        | absent)    |
    +--------------+--------------+------------------------+------------+
 
-                                  Table 1
+                                  Table 2
 
    Similarly, the prefixItems keyword produces an annotation which is
    used by items and unevaluatedItems.  The annotation value is the
@@ -4774,7 +4844,7 @@ Appendix D.  Using annotations in implementations
    |                              |               | at all)            |
    +------------------------------+---------------+--------------------+
 
-                                  Table 2
+                                  Table 3
 
    The following table summarizes which keywords produce annotations
    that can be used in the implementation of other keywords:
@@ -4811,7 +4881,7 @@ Appendix D.  Using annotations in implementations
    |                       | property names   | in parent schemas     |
    +-----------------------+------------------+-----------------------+
 
-                                 Table 3
+                                 Table 4
 
 Appendix E.  Working with vocabularies
 
