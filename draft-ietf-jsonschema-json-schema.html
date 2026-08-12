@@ -2389,7 +2389,10 @@ such as descriptive metadata and usage hints.<a href="#section-3.5.3-1" class="p
 <p id="section-3.5.3-2">Each schema object is independently evaluated against each input location
 to which it applies.  This greatly simplifies implementation requirements
 by ensuring that implementations do not need to maintain state across
-the document-wide validation process.<a href="#section-3.5.3-2" class="pilcrow">¶</a></p>
+the document-wide validation process.  Keywords MUST NOT modify the input
+during evaluation.  Annotations MAY be used to indicate that modification
+is desired, however the exact mechanism of modification is deferred to
+applications or other specifications building on JSON Schema.<a href="#section-3.5.3-2" class="pilcrow">¶</a></p>
 <p id="section-3.5.3-3">In all validator implementations, equivalent JSON values MUST return the same validation result and annotations. For example, selection between equivalent character escapes, or use of whitespace, does not affect the result. This also means that a validation keyword MUST NOT accept or reject based on third factors (those factors besides the schema and the input itself). A separate "outside verification" scheme that queries external data sources is possible, but outside the scope of this document.<a href="#section-3.5.3-3" class="pilcrow">¶</a></p>
 <p id="section-3.5.3-4">This specification defines a set of assertion keywords, as well as a small vocabulary
 of metadata keywords that can be used to annotate the JSON instance with

@@ -756,7 +756,11 @@ Table of Contents
    Each schema object is independently evaluated against each input
    location to which it applies.  This greatly simplifies implementation
    requirements by ensuring that implementations do not need to maintain
-   state across the document-wide validation process.
+   state across the document-wide validation process.  Keywords MUST NOT
+   modify the input during evaluation.  Annotations MAY be used to
+   indicate that modification is desired, however the exact mechanism of
+   modification is deferred to applications or other specifications
+   building on JSON Schema.
 
    In all validator implementations, equivalent JSON values MUST return
    the same validation result and annotations.  For example, selection
