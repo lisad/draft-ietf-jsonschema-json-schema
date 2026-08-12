@@ -5,9 +5,9 @@
 Network Working Group                                  L. Dusseault, Ed.
 Internet-Draft                                  Data Transfer Initiative
 Intended status: Standards Track                               A. Wright
-Expires: 4 February 2027                                                
+Expires: 13 February 2027                                               
                                                               H. Andrews
-                                                           3 August 2026
+                                                          12 August 2026
 
 
                               JSON Schema
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 February 2027.
+   This Internet-Draft will expire on 13 February 2027.
 
 Copyright Notice
 
@@ -3639,7 +3639,7 @@ Table of Contents
 
 12.9.  Reserved Locations
 
-   A fourth category of keywords simply reserve a location to hold re-
+   A final category of keywords simply reserve a location to hold re-
    usable components or data of interest to schema authors that is not
    suitable for re-use.  These keywords do not affect validation or
    annotation results.  Their purpose in the core vocabulary is to
