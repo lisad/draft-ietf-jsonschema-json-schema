@@ -3143,7 +3143,7 @@ schema locations.
 
 ## Reserved Locations
 
-A fourth category of keywords simply reserve a location to hold re-usable
+A final category of keywords simply reserve a location to hold re-usable
 components or data of interest to schema authors that is not suitable
 for re-use.  These keywords do not affect validation or annotation results.
 Their purpose in the core vocabulary is to ensure that locations are
