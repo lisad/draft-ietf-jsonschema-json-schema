@@ -1229,7 +1229,7 @@ Source for this draft can be found at
                     <p id="section-toc.1-1.3.2.5.2.2.1"><a href="#section-3.5.2" class="auto internal xref">3.5.2</a>.  <a href="#name-requirements-for-handling-e" class="internal xref">Requirements for handling extensions</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5.2.3">
-                    <p id="section-toc.1-1.3.2.5.2.3.1"><a href="#section-3.5.3" class="auto internal xref">3.5.3</a>.  <a href="#name-validation-2" class="internal xref">Validation</a></p>
+                    <p id="section-toc.1-1.3.2.5.2.3.1"><a href="#section-3.5.3" class="auto internal xref">3.5.3</a>.  <a href="#name-validation-and-annotation" class="internal xref">Validation and Annotation</a></p>
 </li>
                 </ul>
 </li>
@@ -1927,8 +1927,8 @@ relationships between data, or denote hyperlinks.  Several forms of output are
 defined, and the annotation process can be disabled as a performance or
 resource consumption optimization.<a href="#section-1.3.2-1" class="pilcrow">¶</a></p>
 <p id="section-1.3.2-2">Output annotations might only be "as true as" the input, and useful only for select inputs. For example, annotations may only meaningfully describe inputs with a particular "profile" link relation, or in some particular context. In any event, annotations never describe violations (rejected inputs).<a href="#section-1.3.2-2" class="pilcrow">¶</a></p>
-<p id="section-1.3.2-3">The interface to access annotations may be highly configurable depending on the implementation, in such ways as limiting output to certain annotation keywords, aggregating values together, or other features to enhance performance. Annotation output may be bypassed entirely.<a href="#section-1.3.2-3" class="pilcrow">¶</a></p>
-<p id="section-1.3.2-4">Annotations may be presented as a set, or as a stream of events, however if the input is rejected during processing, this voids all annotations previously emitted from that input.<a href="#section-1.3.2-4" class="pilcrow">¶</a></p>
+<p id="section-1.3.2-3">As noted in <a href="#val-ann" class="auto internal xref">Section 3.5.3</a>, annotation collection and output can be highly
+configurable to support performance trade-offs and/or streaming output.<a href="#section-1.3.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="internet-media-types">
@@ -2376,10 +2376,10 @@ for vocabularies that they do not support directly.  The exact mechanism
 for registering and implementing such handlers is implementation-dependent.<a href="#section-3.5.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="validation-1">
+<div id="val-ann">
 <section id="section-3.5.3">
-          <h4 id="name-validation-2">
-<a href="#section-3.5.3" class="section-number selfRef">3.5.3. </a><a href="#name-validation-2" class="section-name selfRef">Validation</a>
+          <h4 id="name-validation-and-annotation">
+<a href="#section-3.5.3" class="section-number selfRef">3.5.3. </a><a href="#name-validation-and-annotation" class="section-name selfRef">Validation and Annotation</a>
           </h4>
 <p id="section-3.5.3-1">JSON Schema validation applies the rules of a JSON Schema to determine
 if an input is in the valid set for that schema.
@@ -2397,6 +2397,11 @@ useful information.  The <a href="#format-vocab" class="auto internal xref">Sect
 as an annotation, but can optionally be used as an assertion.  The
 <a href="#content" class="auto internal xref">Section 9</a> keywords are annotations for working with documents
 embedded as JSON strings.<a href="#section-3.5.3-4" class="pilcrow">¶</a></p>
+<p id="section-3.5.3-5">Implementations MAY allow configuring annotations
+in such ways as limiting output to certain annotation keywords, aggregating values together, or other features to enhance performance.
+Implementations MAY allow annotation output to be bypassed entirely.<a href="#section-3.5.3-5" class="pilcrow">¶</a></p>
+<p id="section-3.5.3-6">Annotations MAY be presented as a single data structure, or as a stream of events, however if the input is rejected during processing, this voids all annotations previously emitted from that input.
+See <a href="#eval-status" class="auto internal xref">Section 12.1.1</a> for detailed guidance on when previously emitted annotations MUST be discarded.<a href="#section-3.5.3-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -5149,10 +5154,11 @@ relationship of subschema results to the results of the applicator
 keyword that applied them is described by <a href="#applicators" class="auto internal xref">Section 12.6</a>.<a href="#section-12-4" class="pilcrow">¶</a></p>
 <p id="section-12-5">Evaluation of a parent schema object can complete once all of its
 subschemas have been evaluated, although in some circumstances evaluation
-may be short-circuited due to assertion results.  When annotations are
-being collected, some assertion result short-circuiting is not possible
-due to the need to examine all subschemas for annotation collection, including
-those that cannot further change the assertion result.<a href="#section-12-5" class="pilcrow">¶</a></p>
+may be short-circuited due to assertion results.  Implementations MAY
+short-circuit evaluation if analysis of the schema at load time shows that
+no annotation collection or keyword dependency communication could be
+impacted, <strong>and</strong> if the runtime configuration does not request "verbose"
+output (<a href="#verbose" class="auto internal xref">Section 13.4.4</a>).<a href="#section-12-5" class="pilcrow">¶</a></p>
 <div id="scopes">
 <section id="section-12.1">
         <h3 id="name-lexical-scope-and-dynamic-s">
@@ -5245,9 +5251,7 @@ appear in a schema resource's root schema.<a href="#section-12.2-2" class="pilcr
 <p id="section-12.2-3">A keyword MAY depend on the value or outcome of other keywords
 within the same dynamic scopes or its successful subscopes.<a href="#section-12.2-3" class="pilcrow">¶</a></p>
 <p id="section-12.2-4">No constraints are placed on the mechanism of communication
-within implementations, however, annotations MAY be used for
-this purpose, and all dependencies within this specification
-define annotations necessary for this.<a href="#section-12.2-4" class="pilcrow">¶</a></p>
+within implementations.<a href="#section-12.2-4" class="pilcrow">¶</a></p>
 <p id="section-12.2-5">Interactions within the same dynamic scope that depend only
 on adjacent keyword values SHOULD be determined statically.
 Other interactions, including all those involving dynamic
@@ -5278,17 +5282,6 @@ identical to that produced by a certain value, and keyword definitions
 SHOULD note such values where known.  However, even if the value which
 produces the default behavior would produce annotation results if
 present, the default behavior still MUST NOT result in annotations.<a href="#section-12.3-2" class="pilcrow">¶</a></p>
-<p id="section-12.3-3">Because annotation collection can add significant cost in terms of both
-computation and memory, implementations MAY opt out of this feature.
-Keywords that are specified in terms of collected annotations SHOULD
-describe reasonable alternate approaches when appropriate.
-This approach is demonstrated by the
-<a href="#items" class="internal xref">"items"</a> and
-<a href="#additionalProperties" class="internal xref">"additionalProperties"</a> keywords in this
-document.<a href="#section-12.3-3" class="pilcrow">¶</a></p>
-<p id="section-12.3-4">Note that when no such alternate approach is possible for a keyword,
-implementations that do not support annotation collections will not
-be able to support those keywords or vocabularies that contain them.<a href="#section-12.3-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="unrecognized">
@@ -5424,8 +5417,8 @@ then including "null" in "type" would not have any useful effect.<a href="#secti
         </h3>
 <p id="section-12.8-1">JSON Schema can annotate an instance with information, whenever the instance
 validates against the schema object containing the annotation, and all of its
-parent schema objects.  The information can be a simple value, or can be
-calculated based on the instance contents.<a href="#section-12.8-1" class="pilcrow">¶</a></p>
+parent schema objects.  The annotation value produced by each annotation
+keyword MUST be the keyword's value.<a href="#section-12.8-1" class="pilcrow">¶</a></p>
 <p id="section-12.8-2">Annotations are attached to specific locations in an instance.
 Since many subschemas can be applied to any single
 location, applications may need to decide how to handle differing
@@ -5435,17 +5428,12 @@ the same schema keyword in different schema objects.<a href="#section-12.8-2" cl
 which are provided to applications to use as they see fit.  JSON Schema
 implementations are not expected to make use of the collected information
 on behalf of applications.<a href="#section-12.8-3" class="pilcrow">¶</a></p>
-<p id="section-12.8-4">Unless otherwise specified, the value of an annotation keyword
-is the keyword's value.  However, other behaviors are possible.
-For example, JSON Hyper-Schema's (<span>[<a href="#I-D.handrews-json-schema-hyperschema" class="cite xref">I-D.handrews-json-schema-hyperschema</a>]</span>)
-"links" keyword is a complex annotation that produces a value based
-in part on the instance data.<a href="#section-12.8-4" class="pilcrow">¶</a></p>
-<p id="section-12.8-5">While "short-circuit" evaluation is possible for assertions, collecting
+<p id="section-12.8-4">While "short-circuit" evaluation is possible for assertions, collecting
 annotations requires examining all schemas that apply to an instance
 location, even if they cannot change the overall assertion result.
 The only exception is that subschemas of a schema object that has
 failed validation MAY be skipped, as annotations are not retained
-for failing schemas.<a href="#section-12.8-5" class="pilcrow">¶</a></p>
+for failing schemas.<a href="#section-12.8-4" class="pilcrow">¶</a></p>
 <div id="collect">
 <section id="section-12.8.1">
           <h4 id="name-collecting-annotations">
@@ -5475,7 +5463,7 @@ This MAY be omitted if it is the same as the schema location path
 from above.<a href="#section-12.8.1-4.4.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-12.8.1-4.5">
-              <p id="section-12.8.1-4.5.1">The attached value(s)<a href="#section-12.8.1-4.5.1" class="pilcrow">¶</a></p>
+              <p id="section-12.8.1-4.5.1">The attached value<a href="#section-12.8.1-4.5.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <div id="distinguishing-among-multiple-values">
@@ -5713,10 +5701,8 @@ value MUST be expressed as a JSON Pointer.<a href="#section-13.3.3-1" class="pil
 <p id="section-13.3.4-1">The error or annotation that is produced by the validation.<a href="#section-13.3.4-1" class="pilcrow">¶</a></p>
 <p id="section-13.3.4-2">For errors, the specific wording for the message is not defined by this
 specification.  Implementations will need to provide this.<a href="#section-13.3.4-2" class="pilcrow">¶</a></p>
-<p id="section-13.3.4-3">For annotations, each keyword that produces an annotation specifies its
-format.  By default, it is the keyword's value.<a href="#section-13.3.4-3" class="pilcrow">¶</a></p>
-<p id="section-13.3.4-4">The JSON key for failed validations is "error"; for successful validations
-it is "annotation".<a href="#section-13.3.4-4" class="pilcrow">¶</a></p>
+<p id="section-13.3.4-3">The JSON key for failed validations is "error"; for successful validations
+it is "annotation".<a href="#section-13.3.4-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="nested-results">
@@ -5825,11 +5811,9 @@ needs to be fulfilled.<a href="#section-13.4.1-1" class="pilcrow">¶</a></p>
 </pre><a href="#section-13.4.1-2" class="pilcrow">¶</a>
 </div>
 <p id="section-13.4.1-3">Because no errors or annotations are returned with this format, it is
-RECOMMENDED that implementations use short-circuiting logic to return
-failure or success as soon as the outcome can be determined.  For example,
-if an "anyOf" keyword contains five sub-schemas, and the second one
-passes, there is no need to check the other three.  The logic can simply
-return with success.<a href="#section-13.4.1-3" class="pilcrow">¶</a></p>
+RECOMMENDED that implementations supporting short-circuiting logic
+(<a href="#keyword-behaviors" class="auto internal xref">Section 12</a>) use it to return
+failure or success as soon as the outcome can be determined.<a href="#section-13.4.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="basic">
