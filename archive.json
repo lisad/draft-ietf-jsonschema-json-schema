@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-08-11T01:44:55.990925+00:00",
+  "timestamp": "2026-08-13T01:58:50.655004+00:00",
   "repo": "lisad/draft-ietf-jsonschema-json-schema",
   "labels": [
     {
@@ -2252,7 +2252,7 @@
       "labels": [],
       "body": "_[**EDIT:** I ended up needing to revise this more substantially, see [the explanatory comment](https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/42#issuecomment-5194128895) below]_\r\n\r\nReplace the implementing-with-annotations appendix with a more generic version, in preparation for removing the annotations involved.\r\n\r\nThe interaction with `\"required\"` was removed entirely as `\"required\"` is not specified in terms of `\"properties\"` (it works independently as it can be used with `\"properties\"` being present).\r\n\r\nAdded `\"minContains\"` and `\"maxContains\"` to the static version of the final table, and `\"if\"` to the runtime version, since if this is about dependencies in general they count even though they did not previously use annotations (and can be used entirely statically).  I also tried to clarify that certain runtime keyword dependencies do not need to track exact properties/indices as they always consume all remaining locations.\r\n\r\nIn general, I moved away from literal JSON values as dependencies no longer specify the exact format.  \r\n\r\n~~I have other thoughts on cases that would benefit from examples here, but I wanted to keep this PR minimal so I stayed with the examples as-is, just changing the framing.~~ _[**EDIT:** I had to do most of these after all as discussed [below](https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/42#issuecomment-5194128895).]_",
       "createdAt": "2026-08-04T01:09:12Z",
-      "updatedAt": "2026-08-05T17:03:08Z",
+      "updatedAt": "2026-08-12T21:23:17Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
@@ -2279,59 +2279,144 @@
           "updatedAt": "2026-08-05T15:58:15Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOR8mbas8AAAABJVAQoA",
+          "commit": {
+            "abbreviatedOid": "3bc74b3"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-08-12T20:45:08Z",
+          "updatedAt": "2026-08-12T20:48:38Z",
+          "comments": [
+            {
+              "originalPosition": 58,
+              "body": "I don't really understand what '\"additionalProperties\" applied to' means",
+              "createdAt": "2026-08-12T20:45:08Z",
+              "updatedAt": "2026-08-12T20:48:38Z"
+            },
+            {
+              "originalPosition": 58,
+              "body": "is this \"input to evaluating additionalProperties\"  maybe?",
+              "createdAt": "2026-08-12T20:46:01Z",
+              "updatedAt": "2026-08-12T20:48:38Z"
+            },
+            {
+              "originalPosition": 58,
+              "body": "or \"output of properties annotation\" ? ",
+              "createdAt": "2026-08-12T20:47:58Z",
+              "updatedAt": "2026-08-12T20:48:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABJVQ8MA",
+          "commit": {
+            "abbreviatedOid": "3bc74b3"
+          },
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-12T21:23:17Z",
+          "updatedAt": "2026-08-12T21:23:17Z",
+          "comments": [
+            {
+              "originalPosition": 58,
+              "body": "@lisad It means \"these are the properties to which the additionalProperties subschema is applied\"  or, using \"evaluated\", \"these are the properties evaluated by the additionalProperties subschema\".",
+              "createdAt": "2026-08-12T21:23:17Z",
+              "updatedAt": "2026-08-12T21:23:17Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 43,
       "id": "PR_kwDOR8mbas76Syf4",
       "title": "Fix misnumbering of keyword categories.",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/43",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "handrews",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Using a number here was unfortunate, as we ended up with five categories.  Use \"final\" instead of \"fourth\" or \"fifth\".",
       "createdAt": "2026-08-04T01:12:10Z",
-      "updatedAt": "2026-08-04T01:12:10Z",
+      "updatedAt": "2026-08-12T20:49:28Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
       "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
       "headRefName": "loc",
       "headRefOid": "d39c09aa525549f15de2a58ff3373bb23343c2d3",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-08-12T20:49:28Z",
+      "mergedAt": "2026-08-12T20:49:28Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "64d820eadddd373a38be0ac64c564d6144496b00"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOR8mbas8AAAABJVCJEg",
+          "commit": {
+            "abbreviatedOid": "d39c09a"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-08-12T20:49:09Z",
+          "updatedAt": "2026-08-12T20:49:09Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 44,
       "id": "PR_kwDOR8mbas76r_w6",
       "title": "Applicators do not play a role in annotations",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/44",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "handrews",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This is a small follow-on to PR #41.\r\n\r\nPreviously the annotation management mechanism was vaguely defined, and sometimes discussed in terms of applicators propagating annotations.  The new evaluation success approach is more clear and consistent, and defined in a single obvious place within the RFC.\r\n\r\nThis takes the annotation management text out of the applicator behavior section entirely, and references the evaluation status section in a more appropriate place.",
       "createdAt": "2026-08-04T17:51:41Z",
-      "updatedAt": "2026-08-04T17:51:41Z",
+      "updatedAt": "2026-08-12T20:50:58Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
       "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
       "headRefName": "annot-applic-mgmt",
       "headRefOid": "8c944389c68e53ca2b7489a5576e012320badaa5",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-08-12T20:50:58Z",
+      "mergedAt": "2026-08-12T20:50:58Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "94ad03c4ecf1eaf54d1e207e8ca34d2693a2e174"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOR8mbas8AAAABJVDBQg",
+          "commit": {
+            "abbreviatedOid": "8c94438"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-08-12T20:50:40Z",
+          "updatedAt": "2026-08-12T20:50:40Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 45,
@@ -2345,7 +2430,7 @@
       "labels": [],
       "body": "We are no longer supporting \"computed\" annotations, and keyword dependencies are more clearly specified in terms of outcomes as of PR #41 \r\n\r\nNote that the actual change in annotation requirements will be posted momentarily as a separate PR, as it is more likely to require debate than this one.",
       "createdAt": "2026-08-04T22:14:09Z",
-      "updatedAt": "2026-08-05T17:06:10Z",
+      "updatedAt": "2026-08-12T21:51:06Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
@@ -2357,57 +2442,116 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOR8mbas8AAAABJVFL5w",
+          "commit": {
+            "abbreviatedOid": "183ce95"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-08-12T20:54:58Z",
+          "updatedAt": "2026-08-12T20:57:38Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "finding this sentence awkward but we can move forward anyway and I'll think about the next iteration",
+              "createdAt": "2026-08-12T20:54:58Z",
+              "updatedAt": "2026-08-12T20:57:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABJVcD9A",
+          "commit": {
+            "abbreviatedOid": "183ce95"
+          },
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-12T21:51:06Z",
+          "updatedAt": "2026-08-12T21:51:06Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "@lisad is it the \"controls which of the\" part or the \"but otherwise MUST be disregarded\" part?",
+              "createdAt": "2026-08-12T21:51:06Z",
+              "updatedAt": "2026-08-12T21:51:06Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 46,
       "id": "PR_kwDOR8mbas76zvgA",
       "title": "Annotations are only simple values, never computed",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/46",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "handrews",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This makes the actual requirements change at the heart of simplifying annotations before sorting out output.\r\n\r\nThe computed annotation requirements were entangled with the requirement opting out of annotations, which itself was a bit out-of-sync with the more general guidance on annotation configuration in the introduction.  Of course the introduction is non-normative, so that wasn't ideal either.\r\n\r\nI framed the guidance more clearly in terms of what implementors can and can't do and put it in the \"overall requirements\" normative section.  the \"Validation\" subsection already actually discussed both validation and annotation, so rename it to say what it actually is, and including the general annotation requirements there.\r\n\r\nThis version does not include any guidance about how to specify annotations for downstream usage, as that was an area of some debate and best handled as a future PR.",
       "createdAt": "2026-08-04T23:25:42Z",
-      "updatedAt": "2026-08-05T17:07:53Z",
+      "updatedAt": "2026-08-12T21:08:44Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
       "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
       "headRefName": "simple-value-only",
       "headRefOid": "3636652a9446eaed533d0b51321b2eea3424f7b8",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-08-12T21:08:44Z",
+      "mergedAt": "2026-08-12T21:08:44Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "fee5e83b14af1c53fa35822ef92b7df23c5183e4"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOR8mbas8AAAABJVLC5Q",
+          "commit": {
+            "abbreviatedOid": "3636652"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-08-12T21:08:36Z",
+          "updatedAt": "2026-08-12T21:08:36Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 47,
       "id": "PR_kwDOR8mbas760V5S",
-      "title": "Inputs MUST(?) be considered immutable",
+      "title": "Keywords MUST NOT modify the input",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/47",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "handrews",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "_Note that this is technically a new requirement, although if we don't want to add this requirement, we need to add others to put boundaries on what sort of input changes are allowed._\r\n\r\nThis formalizes the previously-unstated requirement for inputs to be immutable.  Some implementations took advantage of the ambiguity to implement things such as default-filling, or modifying the input in place in a way that produced potentially non-deterministic outcomes.",
       "createdAt": "2026-08-05T00:03:28Z",
-      "updatedAt": "2026-08-10T17:02:12Z",
+      "updatedAt": "2026-08-12T21:14:14Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
       "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
       "headRefName": "immutable",
-      "headRefOid": "ce136bda65b19bca5ac86d7e6dfacbd3fe6364a6",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "17c6109db83063d1e668ac4562bde4619cc70362",
+      "closedAt": "2026-08-12T21:14:13Z",
+      "mergedAt": "2026-08-12T21:14:13Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "12d4c49ff417261c55bccdebfde89576d769fe0a"
+      },
       "comments": [
         {
           "author": "awwright",
@@ -2492,9 +2636,30 @@
           "body": "Note for anyone reading: Austin and I are continuing to sort out the difference in perspective offlist as it's wandered a bit far afield.  No conclusions yet, but I am still competely open to reworking this PR or tossing it and focusing on other ways to define what is and isn't \"JSON Schema\".\r\n\r\nThis PR will remain in draft until we have enough agreement to either move forward or close it, but it's really not urgent as none of the other open PRs really depend on it.",
           "createdAt": "2026-08-10T16:53:16Z",
           "updatedAt": "2026-08-10T16:53:16Z"
+        },
+        {
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@awwright I'm not entirely sure this is what you had in mind, but it should at least be closer :-)",
+          "createdAt": "2026-08-12T18:33:20Z",
+          "updatedAt": "2026-08-12T18:33:20Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOR8mbas8AAAABJVNSsA",
+          "commit": {
+            "abbreviatedOid": "17c6109"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-08-12T21:14:07Z",
+          "updatedAt": "2026-08-12T21:14:07Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 48,
@@ -2563,7 +2728,7 @@
       "labels": [],
       "body": "One could theoretically read the old text as implying \"sub-evaluation\" meant only one level.\r\n\r\nAlso fix a typo.",
       "createdAt": "2026-08-05T02:27:03Z",
-      "updatedAt": "2026-08-11T00:57:09Z",
+      "updatedAt": "2026-08-12T21:29:43Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
@@ -2575,83 +2740,158 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOR8mbas8AAAABJVRsSA",
+          "commit": {
+            "abbreviatedOid": "cc4957d"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-12T21:24:51Z",
+          "updatedAt": "2026-08-12T21:24:59Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "This is pretty dense including the unchanged part.  I wonder if we can reword this in terms of requirements.",
+              "createdAt": "2026-08-12T21:24:51Z",
+              "updatedAt": "2026-08-12T21:24:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABJVTk7Q",
+          "commit": {
+            "abbreviatedOid": "cc4957d"
+          },
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-12T21:29:43Z",
+          "updatedAt": "2026-08-12T21:29:43Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "@lisad these are essentially terminology definitions, so I'm not sure what to require of what here.\n\nRequiring implementations to \"create\" scopes and subscopes seems odd and overly specific.  Really what this whole section is doing is establishing the terminology to let us write requirements.  I'd love to see better terminology with more concise explanations, but this is the best I've got right now.",
+              "createdAt": "2026-08-12T21:29:43Z",
+              "updatedAt": "2026-08-12T21:29:43Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 50,
       "id": "PR_kwDOR8mbas763XC7",
       "title": "Remove not-yet-agreed-upon terminology",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/50",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "handrews",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "It's not yet clear if we will settle on \"result infoset\" and I did not intend to introduce it yet.  Let's keep it out for now to avoid forgetting later if needed.",
       "createdAt": "2026-08-05T03:12:56Z",
-      "updatedAt": "2026-08-05T03:12:57Z",
+      "updatedAt": "2026-08-12T21:25:25Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
       "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
       "headRefName": "no-infoset",
       "headRefOid": "2bdb8f5a159fb5312d8993d4f475ab2c13147d16",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-08-12T21:25:25Z",
+      "mergedAt": "2026-08-12T21:25:25Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "49540434eb59e6e49c90efcd0346cde16f9cde50"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOR8mbas8AAAABJVR4mg",
+          "commit": {
+            "abbreviatedOid": "2bdb8f5"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-08-12T21:25:20Z",
+          "updatedAt": "2026-08-12T21:25:20Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 51,
       "id": "PR_kwDOR8mbas7632yg",
       "title": "Consistency: \"implementation\" and media type",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/51",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "handrews",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "We don't use \"processor\" anywhere else at all, use \"implementation\".\r\n\r\nWhile I think \"application/jsonschema+json\" would be an improvement, it is \"application/schema+json\" everywhere else and always has been.  Let's change it intentionally and consistently if we change it.",
       "createdAt": "2026-08-05T03:45:22Z",
-      "updatedAt": "2026-08-05T03:45:22Z",
+      "updatedAt": "2026-08-12T21:25:59Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
       "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
       "headRefName": "consistency",
       "headRefOid": "e11e9559589cb561fdfe52e0432fe331b083003b",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-08-12T21:25:59Z",
+      "mergedAt": "2026-08-12T21:25:59Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "6f6fcc8a71e1aeb7a246fd472296206499705dda"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOR8mbas8AAAABJVSISg",
+          "commit": {
+            "abbreviatedOid": "e11e955"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-08-12T21:25:53Z",
+          "updatedAt": "2026-08-12T21:25:53Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 52,
       "id": "PR_kwDOR8mbas764SjH",
       "title": "Fix regex-related bugs",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/52",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "handrews",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "AI caught a couple of things which I have verified and fixed: (no AI-performed or directly suggested edits!\r\n\r\n* \"explicitly\" where we meant \"implicitly\" like everywhere else\r\n* wrong fragment link (leftover from when both sections existed)\r\n* ECMA-262 citation date and URI had not been updated\r\n\r\nRegarding the last point, the section numbers in citations do not fit the linked version (5.1 edition, 2011).  They do work with the 6th edition (2015), so I updated to that rather than jumping further ahead (the section numbers change again later).\r\n\r\nThe 2011 edition also does not have the \"u\" flag which we mention, so I think there was a decision to go to the 6th edition and it's just the link that wasn't updated.",
       "createdAt": "2026-08-05T04:10:42Z",
-      "updatedAt": "2026-08-10T02:49:12Z",
+      "updatedAt": "2026-08-12T21:26:49Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
       "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
       "headRefName": "regex",
       "headRefOid": "55893298f7991e2bda12b95037be7cda089d8501",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-08-12T21:26:49Z",
+      "mergedAt": "2026-08-12T21:26:49Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "8753c1ccd5cfa259ad254c963527bd3e8f5100df"
+      },
       "comments": [],
       "reviews": [
         {
@@ -2666,6 +2906,19 @@
           "createdAt": "2026-08-10T02:49:12Z",
           "updatedAt": "2026-08-10T02:49:12Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABJVSdSw",
+          "commit": {
+            "abbreviatedOid": "5589329"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-08-12T21:26:43Z",
+          "updatedAt": "2026-08-12T21:26:43Z",
+          "comments": []
         }
       ]
     },
@@ -2674,50 +2927,68 @@
       "id": "PR_kwDOR8mbas77RToS",
       "title": "Example for title and description.",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/53",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "handrews",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This shows the most-frequenlty-raised (by far!) scenario regarding annotation use, which is title or description on either side of a reference.  It avoids output format specifics and just shows the most relevant information.\r\n\r\nIt also notes the difference in behavior between \"description\" and \"$comment\", as that is also often a point of confusion.\r\n\r\nFinally, link from the introduction as we have gotten feedback that there is no good starting point for annotations.  _NOTE: I'm not entirely sure whether linking this from the introduction is the right place, but I'm not sure we have another really obvious place to put it?_",
       "createdAt": "2026-08-05T20:24:04Z",
-      "updatedAt": "2026-08-05T20:24:04Z",
+      "updatedAt": "2026-08-12T21:33:39Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
       "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
       "headRefName": "title-desc-example",
       "headRefOid": "ad4459c211414632679c7441ddb425180c07334a",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-08-12T21:33:39Z",
+      "mergedAt": "2026-08-12T21:33:39Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "d3eabb1863459a1af3fcbc4647bdaeca5a7a2637"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOR8mbas8AAAABJVU-XQ",
+          "commit": {
+            "abbreviatedOid": "ad4459c"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-08-12T21:32:41Z",
+          "updatedAt": "2026-08-12T21:32:41Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 54,
       "id": "PR_kwDOR8mbas77S_Tj",
       "title": "Remove \"Distinguishing Among Multiple Values\"",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/54",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "handrews",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This section has many problems, and is best replaced with new guidance on how we expect annotations to be consumed as we sort that out.  Problems include:\r\n\r\n* It attempts to impose normative requirements on downstream applications\r\n* \"Feature A\" and \"Feature B\" are rather abstract\r\n* It talks about \"default\" in a way that does not actually use it as an annotation\r\n* It assumes semantics about more generic/more specific things\r\n* It muddies things by speculating about alternatives\r\n\r\nThe example in PR #53 pretty much replaces the parts of this that are worth having, although obviously it's not as prominent.  I think we'll want a general \"how to use results/output\" section at some point, but we'll need to figure out what results/output look like first.",
       "createdAt": "2026-08-05T21:36:00Z",
-      "updatedAt": "2026-08-10T03:46:27Z",
+      "updatedAt": "2026-08-12T21:35:24Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
       "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
       "headRefName": "no-dist",
       "headRefOid": "71d956ef0b9ff44b7adfddda618ea538aca179ae",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-08-12T21:35:24Z",
+      "mergedAt": "2026-08-12T21:35:24Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "32e3251538d183df621c1cd6e2eebe1a35ad5453"
+      },
       "comments": [],
       "reviews": [
         {
@@ -2731,6 +3002,19 @@
           "body": "",
           "createdAt": "2026-08-10T03:46:27Z",
           "updatedAt": "2026-08-10T03:46:27Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABJVV9hQ",
+          "commit": {
+            "abbreviatedOid": "71d956e"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-08-12T21:35:11Z",
+          "updatedAt": "2026-08-12T21:35:11Z",
           "comments": []
         }
       ]
