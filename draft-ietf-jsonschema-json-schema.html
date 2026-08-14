@@ -1623,7 +1623,7 @@ Source for this draft can be found at
                 <p id="section-toc.1-1.12.2.1.1"><a href="#section-12.1" class="auto internal xref">12.1</a>.  <a href="#name-lexical-scope-and-dynamic-s" class="internal xref">Lexical Scope and Dynamic Scope</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.1.2.1">
-                    <p id="section-toc.1-1.12.2.1.2.1.1"><a href="#section-12.1.1" class="auto internal xref">12.1.1</a>.  <a href="#name-successful-unsuccessful-and" class="internal xref">Successful unsuccessful, and ignored evaluations</a></p>
+                    <p id="section-toc.1-1.12.2.1.2.1.1"><a href="#section-12.1.1" class="auto internal xref">12.1.1</a>.  <a href="#name-successful-unsuccessful-and" class="internal xref">Successful, unsuccessful, and ignored evaluations</a></p>
 </li>
                 </ul>
 </li>
@@ -5298,13 +5298,16 @@ and used with caution when defining extension keywords.<a href="#section-12.1-5"
 <div id="eval-status">
 <section id="section-12.1.1">
           <h4 id="name-successful-unsuccessful-and">
-<a href="#section-12.1.1" class="section-number selfRef">12.1.1. </a><a href="#name-successful-unsuccessful-and" class="section-name selfRef">Successful unsuccessful, and ignored evaluations</a>
+<a href="#section-12.1.1" class="section-number selfRef">12.1.1. </a><a href="#name-successful-unsuccessful-and" class="section-name selfRef">Successful, unsuccessful, and ignored evaluations</a>
           </h4>
 <p id="section-12.1.1-1">Each dynamic scope represents an evaluation of an input location by
 a schema.  Keyword evaluations within the dynamic scope are
-sub-evaluations of the schema evaluation, and subschema evaluations
-within a dynamic subscope createdy by an applicator keyword are
-sub-evaluations of the applicator keyword evaluation.<a href="#section-12.1.1-1" class="pilcrow">¶</a></p>
+immediate sub-evaluations of the schema evaluation, and
+subschema evaluations within a dynamic subscope created by an
+applicator keyword are immediate sub-evaluations of the applicator
+keyword evaluation.  The sub-evaluation relationship is
+transitive regardless of whether a given evaluation is
+a keyword or schema evaluation.<a href="#section-12.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-12.1.1-2">Evaluation includes validation, which either accepts or
 rejects the input, as well as management of annotations,
 error messages, and keyword dependency information.<a href="#section-12.1.1-2" class="pilcrow">¶</a></p>

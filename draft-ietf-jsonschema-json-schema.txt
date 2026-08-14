@@ -197,7 +197,7 @@ Table of Contents
        11.5.2.  Usage Over HTTP
    12. Keyword Behaviors
      12.1.  Lexical Scope and Dynamic Scope
-       12.1.1.  Successful unsuccessful, and ignored evaluations
+       12.1.1.  Successful, unsuccessful, and ignored evaluations
      12.2.  Keyword Interactions
      12.3.  Default Behaviors
      12.4.  Handling unrecognized or unsupported keywords
@@ -3369,13 +3369,15 @@ Table of Contents
    The concept of dynamic scope should be considered an advanced feature
    and used with caution when defining extension keywords.
 
-12.1.1.  Successful unsuccessful, and ignored evaluations
+12.1.1.  Successful, unsuccessful, and ignored evaluations
 
    Each dynamic scope represents an evaluation of an input location by a
-   schema.  Keyword evaluations within the dynamic scope are sub-
-   evaluations of the schema evaluation, and subschema evaluations
-   within a dynamic subscope createdy by an applicator keyword are sub-
-   evaluations of the applicator keyword evaluation.
+   schema.  Keyword evaluations within the dynamic scope are immediate
+   sub-evaluations of the schema evaluation, and subschema evaluations
+   within a dynamic subscope created by an applicator keyword are
+   immediate sub-evaluations of the applicator keyword evaluation.  The
+   sub-evaluation relationship is transitive regardless of whether a
+   given evaluation is a keyword or schema evaluation.
 
    Evaluation includes validation, which either accepts or rejects the
    input, as well as management of annotations, error messages, and
