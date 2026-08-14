@@ -2846,13 +2846,16 @@ dynamic parent, rather than examining the local lexically enclosing parent.
 The concept of dynamic scope should be considered an advanced feature
 and used with caution when defining extension keywords.
 
-### Successful unsuccessful, and ignored evaluations {#eval-status}
+### Successful, unsuccessful, and ignored evaluations {#eval-status}
 
 Each dynamic scope represents an evaluation of an input location by
 a schema.  Keyword evaluations within the dynamic scope are
-sub-evaluations of the schema evaluation, and subschema evaluations
-within a dynamic subscope createdy by an applicator keyword are
-sub-evaluations of the applicator keyword evaluation.
+immediate sub-evaluations of the schema evaluation, and
+subschema evaluations within a dynamic subscope created by an
+applicator keyword are immediate sub-evaluations of the applicator
+keyword evaluation.  The sub-evaluation relationship is
+transitive regardless of whether a given evaluation is
+a keyword or schema evaluation.
 
 Evaluation includes validation, which either accepts or
 rejects the input, as well as management of annotations,
