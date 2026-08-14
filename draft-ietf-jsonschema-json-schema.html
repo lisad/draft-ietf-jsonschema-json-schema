@@ -1054,7 +1054,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Dusseault, et al.</td>
-<td class="center">Expires 13 February 2027</td>
+<td class="center">Expires 15 February 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1067,12 +1067,12 @@ svg {
 <dd class="internet-draft">draft-ietf-jsonschema-json-schema-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-08-12" class="published">12 August 2026</time>
+<time datetime="2026-08-14" class="published">14 August 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-02-13">13 February 2027</time></dd>
+<dd class="expires"><time datetime="2027-02-15">15 February 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1128,7 +1128,7 @@ Source for this draft can be found at
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 13 February 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 15 February 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -4628,12 +4628,17 @@ and "description".<a href="#section-10.1.1-9" class="pilcrow">¶</a></p>
         <h3 id="name-default">
 <a href="#section-10.2" class="section-number selfRef">10.2. </a><a href="#name-default" class="section-name selfRef">"default"</a>
         </h3>
-<p id="section-10.2-1">There are no restrictions placed on the value of this keyword.  When
-multiple occurrences of this keyword are applicable to a single
-sub-instance, implementations SHOULD remove duplicates.<a href="#section-10.2-1" class="pilcrow">¶</a></p>
+<p id="section-10.2-1">There are no restrictions placed on the value of this keyword.<a href="#section-10.2-1" class="pilcrow">¶</a></p>
 <p id="section-10.2-2">This keyword can be used to supply a default JSON value associated with a
 particular schema. It is RECOMMENDED that a default value be valid against
 the associated schema.<a href="#section-10.2-2" class="pilcrow">¶</a></p>
+<p id="section-10.2-3">Because annotations can only appear in output if they are attached to
+a location that exists, this keyword's annotation behavior is only useful
+for use cases such as determining whether the value provided matches
+the default.<a href="#section-10.2-3" class="pilcrow">¶</a></p>
+<p id="section-10.2-4">This keyword is most commonly used by applications outside of the scope
+of this specification, such as generating documentation or web forms
+from schemas.<a href="#section-10.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="deprecated">
@@ -4765,16 +4770,17 @@ write-only flags or find a custom data-oriented solution.<a href="#section-10.4.
 <a href="#section-10.5" class="section-number selfRef">10.5. </a><a href="#name-examples" class="section-name selfRef">"examples"</a>
         </h3>
 <p id="section-10.5-1">The value of this keyword MUST be an array.
-There are no restrictions placed on the values within the array.
-When multiple occurrences of this keyword are applicable to a single
-sub-instance, implementations MUST provide a flat array of all
-values rather than an array of arrays.<a href="#section-10.5-1" class="pilcrow">¶</a></p>
+There are no restrictions placed on the values within the array.<a href="#section-10.5-1" class="pilcrow">¶</a></p>
 <p id="section-10.5-2">This keyword can be used to provide sample JSON values associated with a
 particular schema, for the purpose of illustrating usage.  It is
 RECOMMENDED that these values be valid against the associated schema.<a href="#section-10.5-2" class="pilcrow">¶</a></p>
-<p id="section-10.5-3">Implementations MAY use the value(s) of "default", if present, as
-an additional example.  If "examples" is absent, "default"
-MAY still be used in this manner.<a href="#section-10.5-3" class="pilcrow">¶</a></p>
+<p id="section-10.5-3">Because annotations can only appear in output if they are attached to
+a location that exists, this keyword's annotation behavior is only useful
+for use cases such as determining whether the value provided matches one
+of the examples.<a href="#section-10.5-3" class="pilcrow">¶</a></p>
+<p id="section-10.5-4">This keyword is most commonly used by applications outside of the scope
+of this specification, such as generating documentation or web forms
+from schemas.<a href="#section-10.5-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
