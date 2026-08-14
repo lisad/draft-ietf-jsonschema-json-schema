@@ -1,0 +1,13 @@
+{
+  "$ref": "#/$defs/logLine",
+  "unevaluatedItems": false,
+  "$defs": {
+    "logLine": {
+      "prefixItems": [
+        { "type": "string", "format": "date-time" },
+        { "type": "string" },
+        { "type": "string" }
+      ]
+    }
+  }
+}
