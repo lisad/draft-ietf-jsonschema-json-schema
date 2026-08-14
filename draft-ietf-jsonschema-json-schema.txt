@@ -246,7 +246,7 @@ Table of Contents
      B.1.  Bundling schema resources into a single document
      B.2.  Reference removal is not always safe
    Appendix C.  Example of recursive schema extension
-   Appendix D.  Using annotations in implementations
+   Appendix D.  Implementing keyword dependencies
    Appendix E.  Working with vocabularies
      E.1.  Best practices for vocabulary and meta-schema authors
      E.2.  Example meta-schema with vocabulary declarations
@@ -299,9 +299,9 @@ Table of Contents
    *  Implementors will need to understand the requirements in sections
       3 through 10 but also the requirements on loading and processing
       schemas (Section 11), keyword behaviors (Section 12), and
-      formatted output (Section 13).  Refer to the appendix on
-      annotations (Appendix D) for additional guidance on approaches to
-      implementing annotations.
+      formatted output (Section 13).  Refer to the appendix on keyword
+      dependency implementation (Appendix D) for additional guidance on
+      approaches to implementing keyword dependencies.
 
    *  Authors of meta-schemas including extensions to JSON Schema will
       want to read the chapter on Section 14 and Appendix E.
@@ -4637,17 +4637,19 @@ Appendix C.  Example of recursive schema extension
    how to resolve the dynamic reference, not any sort of correlation in
    JSON structure.
 
-Appendix D.  Using annotations in implementations
+Appendix D.  Implementing keyword dependencies
 
-   Annotations gathered while evaluating some keywords can be used to
-   simplify the logic of evaluating other dependent keywords.  Whether
-   annotations are used in keyword evaluation or not, the implementor
-   must make sure that results are identical.  Thus, this section is
-   OPTIONAL.
+   As noted in Section 12.2, some keywords depend on the value or
+   successful evaluation outcome of other keywords within the same
+   schema evaluation or any of its successful sub-evaluations.  The
+   specifics of this mechanism are left up to each implementation.
 
-   As an example, the properties keyword produces annotations which can
-   be used in the implementation of additionalProperties, required and
-   unevaluatedProperties.  With this schema:
+   As an example, the value of the properties keyword includes a set of
+   property names that is used by additionalProperties, and produces
+   information about which properties were successfully evaluated, which
+   is used in the implementation of unevaluatedProperties.
+
+   With this schema:
 
    {
      "type": "object",
@@ -4659,34 +4661,86 @@ Appendix D.  Using annotations in implementations
      "additionalProperties": false
    }
 
-   The following table shows the annotation result of properties for
-   three different inputs, and how additionalProperties and required
-   implementations could use that result.
+   The value of properties includes the property names "X" and "Y",
+   therefore regardless of the outcome of properties, the
+   additionalProperties schema is never applied to those properties:
 
-   +==============+==============+========================+============+
-   | Input        | "properties" | "additionalProperties" | "required" |
-   |              | annotation   | result                 | result     |
-   +==============+==============+========================+============+
-   | {"X": 1,     | ["X", "Y"]   | valid                  | valid      |
-   | "Y": 2}      |              |                        |            |
-   +--------------+--------------+------------------------+------------+
-   | {"X": 1,     | ["X", "Y"]   | invalid ("radius" not  | valid      |
-   | "Y": 2,      |              | in annotation)         |            |
-   | "radius":    |              |                        |            |
-   | 5}           |              |                        |            |
-   +--------------+--------------+------------------------+------------+
-   | {"X": 1}     | ["X"]        | valid                  | invalid    |
-   |              |              |                        | ("Y"       |
-   |              |              |                        | absent)    |
-   +--------------+--------------+------------------------+------------+
+    +=================+========================+======================+
+    | Input           | "additionalProperties" | valid                |
+    |                 | applied to             |                      |
+    +=================+========================+======================+
+    | {"X": 1, "Y":   | _(none)_               | true                 |
+    | 2}              |                        |                      |
+    +-----------------+------------------------+----------------------+
+    | {"X": 1, "Y":   | "radius"               | false by             |
+    | 2, "radius": 5} |                        | additionalProperties |
+    +-----------------+------------------------+----------------------+
+    | {"X": "hello",  | _(none)_               | false by type in     |
+    | "Y": "world"}   |                        | properties           |
+    +-----------------+------------------------+----------------------+
 
                                   Table 2
 
-   Similarly, the prefixItems keyword produces an annotation which is
-   used by items and unevaluatedItems.  The annotation value is the
-   largest index to which prefixItems applied a subschema.  Consider
-   this schema for a structured log entry with a timestamp, action, and
-   username fields, and preventing additional fields:
+   Note that the additionalProperties subschema is never applied to "X"
+   or "Y" even when they are rejected by properties.
+
+   When using the point schema (without additionalProperties) via a
+   reference, unevaluatedProperties is required to get the same
+   validation outcomes, as shown in this schema:
+
+   {
+     "$ref": "#/$defs/point",
+     "unevaluatedProperties": false,
+     "$defs": {
+       "point": {
+         "type": "object",
+         "required": ["X", "Y"],
+         "properties": {
+           "X": { "type": "number" },
+           "Y": { "type": "number" }
+         }
+       }
+     }
+   }
+
+   Since unevaluatedProperties cannot "see" through the reference (which
+   could include a complex arrangement of references and conditionals
+   that would be non-trivial to analyze, unlike this example), it
+   depends on runtime evaluation results of properties rather than its
+   static value.
+
+   The following table shows the information produced by properties for
+   three different inputs, and how unevaluatedProperties implementations
+   could use that result.  Note that unevaluatedProperties ends up
+   applying to both properties in the third row, while
+   additionalProperties never applied to either of them.
+
+   +=========+============+=======================+=====================+
+   |Input    |successful  |"unevaluatedProperties"|valid                |
+   |         |"properties"|applied to             |                     |
+   |         |evaluations |                       |                     |
+   +=========+============+=======================+=====================+
+   |{"X": 1, |"X", "Y"    |_(none)_               |true                 |
+   |"Y": 2}  |            |                       |                     |
+   +---------+------------+-----------------------+---------------------+
+   |{"X": 1, |"X", "Y"    |"radius"               |false by             |
+   |"Y": 2,  |            |                       |unevaluatedProperties|
+   |"radius":|            |                       |                     |
+   |5}       |            |                       |                     |
+   +---------+------------+-----------------------+---------------------+
+   |{"X":    |_(none)_    |"X", "Y"               |false by both        |
+   |"hello", |            |                       |unevaluatedProperties|
+   |"Y":     |            |                       |and type in          |
+   |"world"} |            |                       |properties           |
+   +---------+------------+-----------------------+---------------------+
+
+                                  Table 3
+
+   Similarly, the length of the prefixItems keyword's value is used by
+   items, and it produces information which is used by unevaluatedItems.
+
+   Consider this schema for a structured log entry with a timestamp,
+   action, and username fields, and preventing additional fields:
 
    {
      "prefixItems": [
@@ -4697,67 +4751,165 @@ Appendix D.  Using annotations in implementations
      "items": false
    }
 
-   This schema, when applied to the inputs in the table below, produces
-   annotation output from prefixItems evaluation.  Then, items uses the
-   prefixItems annotation to start where prefixItems left off, applying
-   only to indices greater than the annotation value.
+   The length of the prefixItems keyword is 3, so items is applied to
+   items at index 3 or higher, as shown in table below:
 
-   +==============================+===============+====================+
-   | Input                        | "prefixItems" | "items" result     |
-   |                              | annotation    |                    |
-   +==============================+===============+====================+
-   | ["2026-06-24T10:00:00Z",     | 2             | valid (no elements |
-   | "created", "alice"]          |               | beyond index 2)    |
-   +------------------------------+---------------+--------------------+
-   | ["2026-06-24T10:00:00Z",     | 2             | invalid (index 3   |
-   | "created", "alice",          |               | not evaluated by   |
-   | "extra"]                     |               | prefixItems)       |
-   +------------------------------+---------------+--------------------+
-   | ["2026-06-24T10:00:00Z",     | 1             | valid (no elements |
-   | "created"]                   |               | beyond index 1)    |
-   +------------------------------+---------------+--------------------+
-   | []                           | _(none)_      | valid (no elements |
-   |                              |               | at all)            |
-   +------------------------------+---------------+--------------------+
-
-                                  Table 3
-
-   The following table summarizes which keywords produce annotations
-   that can be used in the implementation of other keywords:
-
-   +=======================+==================+=======================+
-   | Keyword               | Annotation value | Used by               |
-   +=======================+==================+=======================+
-   | properties            | set of matched   | additionalProperties, |
-   |                       | property names   | unevaluatedProperties |
-   +-----------------------+------------------+-----------------------+
-   | patternProperties     | set of matched   | additionalProperties, |
-   |                       | property names   | unevaluatedProperties |
-   +-----------------------+------------------+-----------------------+
-   | additionalProperties  | set of validated | unevaluatedProperties |
-   |                       | property names   |                       |
-   +-----------------------+------------------+-----------------------+
-   | prefixItems           | largest index    | items,                |
-   |                       | evaluated, or    | unevaluatedItems      |
-   |                       | true             |                       |
-   +-----------------------+------------------+-----------------------+
-   | items                 | true if any      | unevaluatedItems      |
-   |                       | elements         |                       |
-   |                       | evaluated        |                       |
-   +-----------------------+------------------+-----------------------+
-   | contains              | array of         | unevaluatedItems      |
-   |                       | evaluated        |                       |
-   |                       | indices, or true |                       |
-   +-----------------------+------------------+-----------------------+
-   | unevaluatedItems      | true if any      | unevaluatedItems in   |
-   |                       | elements         | parent schemas        |
-   |                       | evaluated        |                       |
-   +-----------------------+------------------+-----------------------+
-   | unevaluatedProperties | set of validated | unevaluatedProperties |
-   |                       | property names   | in parent schemas     |
-   +-----------------------+------------------+-----------------------+
+   +==============================+=============+=====================+
+   | Input                        | "items"     | valid               |
+   |                              | applied to  |                     |
+   +==============================+=============+=====================+
+   | ["2026-06-24T10:00:00Z",     | _(none)_    | true (no elements   |
+   | "created", "alice"]          |             | beyond index 2)     |
+   +------------------------------+-------------+---------------------+
+   | ["2026-06-24T10:00:00Z",     | "extra" (at | false by items      |
+   | "created", "alice", "extra"] | index 3)    | applied to index 3  |
+   +------------------------------+-------------+---------------------+
+   | ["2026-06-24T10:00:00Z",     | _(none)_    | true (not all       |
+   | "created"]                   |             | prefixItems items   |
+   |                              |             | need be applied)    |
+   +------------------------------+-------------+---------------------+
+   | ["2026-06-24T10:00:00Z", 42] | _(none)_    | false by type in    |
+   |                              |             | prefixItems index 1 |
+   +------------------------------+-------------+---------------------+
+   | []                           | _(none)_    | true (no subschemas |
+   |                              |             | from either keyword |
+   |                              |             | applied)            |
+   +------------------------------+-------------+---------------------+
 
                                  Table 4
+
+   As with our object properties example, using this schema (without
+   items) via a reference requires using unevaluatedItems to get the
+   same outcomes:
+
+   {
+     "$ref": "#/$defs/logLine",
+     "unevaluatedItems": false,
+     "$defs": {
+       "logLine": {
+         "prefixItems": [
+           { "type": "string", "format": "date-time" },
+           { "type": "string" },
+           { "type": "string" }
+         ]
+       }
+     }
+   }
+
+   This schema, when applied to the inputs in the table below, produces
+   information from the prefixItems evaluation.  Then, unevaluatedItems
+   uses the prefixItems information to start where prefixItems left off,
+   applying only to indices not covered by the prefixItems evaluation.
+
+   +========================+=============+==================+================+
+   |Input                   |length of    |"unevaluatedItems"|valid           |
+   |                        |successful   |applied           |                |
+   |                        |"prefixItems"|                  |                |
+   |                        |evaluations  |                  |                |
+   +========================+=============+==================+================+
+   |["2026-06-24T10:00:00Z",|3            |_(none)_          |true (no        |
+   |"created", "alice"]     |             |                  |elements beyond |
+   |                        |             |                  |index 2)        |
+   +------------------------+-------------+------------------+----------------+
+   |["2026-06-24T10:00:00Z",|3            |"extra" (at index |false by        |
+   |"created", "alice",     |             |3)                |unevaluatedItems|
+   |"extra"]                |             |                  |applied to index|
+   |                        |             |                  |3               |
+   +------------------------+-------------+------------------+----------------+
+   |["2026-06-24T10:00:00Z",|1            |_(none)_          |true (no        |
+   |"created"]              |             |                  |elements beyond |
+   |                        |             |                  |index 1)        |
+   +------------------------+-------------+------------------+----------------+
+   |["2026-06-24T10:00:00Z",|1            |42 (at index 1)   |false by both   |
+   |42]                     |             |                  |unevaluatedItems|
+   |                        |             |                  |and type in     |
+   |                        |             |                  |prefixItems at  |
+   |                        |             |                  |index 1         |
+   +------------------------+-------------+------------------+----------------+
+   |[]                      |0            |_(none)_          |true (no        |
+   |                        |             |                  |subschemas from |
+   |                        |             |                  |either keyword  |
+   |                        |             |                  |applied)        |
+   +------------------------+-------------+------------------+----------------+
+
+                                  Table 5
+
+   Note that in the fourth row, unevaluatedItems ends up applied to
+   index 1, while items was not.
+
+   The following table summarizes which keywords have static values on
+   which adjacent keywords depend:
+
+    +===================+=====================+======================+
+    | Keyword           | Value Information   | Depended on by       |
+    +===================+=====================+======================+
+    | properties        | set of property     | additionalProperties |
+    |                   | names               |                      |
+    +-------------------+---------------------+----------------------+
+    | patternProperties | set of property     | additionalProperties |
+    |                   | regular expressions |                      |
+    +-------------------+---------------------+----------------------+
+    | prefixItems       | length of value     | items                |
+    +-------------------+---------------------+----------------------+
+    | minContains       | minimum number of   | contains             |
+    |                   | successful contains |                      |
+    |                   | validations         |                      |
+    +-------------------+---------------------+----------------------+
+    | maxContains       | maximum number of   | contains             |
+    |                   | successful contains |                      |
+    |                   | validations         |                      |
+    +-------------------+---------------------+----------------------+
+
+                                 Table 6
+
+   The following table summarizes which keywords, when successful,
+   produce information on which other keywords depend:
+
+    +=======================+================+=======================+
+    | Keyword               | Information    | Depended on by        |
+    +=======================+================+=======================+
+    | properties            | set of         | unevaluatedProperties |
+    |                       | validated      |                       |
+    |                       | property names |                       |
+    +-----------------------+----------------+-----------------------+
+    | patternProperties     | set of         | unevaluatedProperties |
+    |                       | validated      |                       |
+    |                       | property names |                       |
+    +-----------------------+----------------+-----------------------+
+    | additionalProperties  | all properties | unevaluatedProperties |
+    |                       | have been      |                       |
+    |                       | validated      |                       |
+    +-----------------------+----------------+-----------------------+
+    | unevaluatedProperties | all properties | unevaluatedProperties |
+    |                       | have been      | in parent schemas     |
+    |                       | validated      |                       |
+    +-----------------------+----------------+-----------------------+
+    | prefixItems           | validated      | unevaluatedItems      |
+    |                       | prefix length  |                       |
+    +-----------------------+----------------+-----------------------+
+    | items                 | all indices    | unevaluatedItems      |
+    |                       | have been      |                       |
+    |                       | validated      |                       |
+    +-----------------------+----------------+-----------------------+
+    | contains              | validated      | unevaluatedItems      |
+    |                       | indexes and/or |                       |
+    |                       | index ranges   |                       |
+    +-----------------------+----------------+-----------------------+
+    | unevaluatedItems      | all indices    | unevaluatedItems in   |
+    |                       | have been      | parent schemas        |
+    |                       | validated      |                       |
+    +-----------------------+----------------+-----------------------+
+    | if                    | subschema (not | then, else            |
+    |                       | keyword)       |                       |
+    |                       | validation     |                       |
+    |                       | outcome        |                       |
+    +-----------------------+----------------+-----------------------+
+
+                                 Table 7
+
+   Note that certain keywords always validate all remaining properties
+   or indices when successful, so there is no need for them to track
+   individual locations.
 
 Appendix E.  Working with vocabularies
 

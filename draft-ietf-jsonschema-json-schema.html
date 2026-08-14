@@ -1796,7 +1796,7 @@ Source for this draft can be found at
             <p id="section-toc.1-1.21.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-example-of-recursive-schema" class="internal xref">Example of recursive schema extension</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.22">
-            <p id="section-toc.1-1.22.1"><a href="#appendix-D" class="auto internal xref">Appendix D</a>.  <a href="#name-using-annotations-in-implem" class="internal xref">Using annotations in implementations</a></p>
+            <p id="section-toc.1-1.22.1"><a href="#appendix-D" class="auto internal xref">Appendix D</a>.  <a href="#name-implementing-keyword-depend" class="internal xref">Implementing keyword dependencies</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.23">
             <p id="section-toc.1-1.23.1"><a href="#appendix-E" class="auto internal xref">Appendix E</a>.  <a href="#name-working-with-vocabularies" class="internal xref">Working with vocabularies</a></p>
@@ -1886,8 +1886,8 @@ the topic of the chapter.<a href="#section-1.2-2.1.1" class="pilcrow">¶</a></p>
             <p id="section-1.2-2.2.1">Implementors will need to understand the requirements in sections 3 through 10 but also
 the requirements on loading and processing schemas (<a href="#loading-and-processing" class="auto internal xref">Section 11</a>),
 keyword behaviors (<a href="#keyword-behaviors" class="auto internal xref">Section 12</a>), and formatted output (<a href="#output" class="auto internal xref">Section 13</a>).
-Refer to the appendix on annotations (<a href="#annotations-appendix" class="auto internal xref">Appendix D</a>) for additional
-guidance on approaches to implementing annotations.<a href="#section-1.2-2.2.1" class="pilcrow">¶</a></p>
+Refer to the appendix on keyword dependency implementation (<a href="#impl-deps" class="auto internal xref">Appendix D</a>) for additional
+guidance on approaches to implementing keyword dependencies.<a href="#section-1.2-2.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.2-2.3">
             <p id="section-1.2-2.3.1">Authors of meta-schemas including extensions to JSON Schema will want to read
@@ -3471,7 +3471,7 @@ applicator that would need to be evaluated after this keyword.<a href="#section-
 <p id="section-6.2-4">Omitting this keyword has the same assertion behavior as
 an empty schema.<a href="#section-6.2-4" class="pilcrow">¶</a></p>
 <p id="section-6.2-5">The <code>unevaluatedItems</code> keyword can be very similar to the <code>items</code> keyword in
-some examples, like the example in <a href="#annotations-appendix" class="auto internal xref">Appendix D</a> where <code>prefixItems</code>
+some examples, like the example in <a href="#impl-deps" class="auto internal xref">Appendix D</a> where <code>prefixItems</code>
 is used to define exactly three items in a list and further items are forbidden,
 and in that example <code>unevaluatedItems</code> could replace <code>items</code>.  Here's an example
 where <code>unevaluatedItems</code> is doing work that could not be done by <code>items</code>, constraining
@@ -6785,19 +6785,21 @@ which tell us how to resolve the dynamic reference, not any sort of
 correlation in JSON structure.<a href="#appendix-C-18" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="annotations-appendix">
+<div id="impl-deps">
 <section id="appendix-D">
-      <h2 id="name-using-annotations-in-implem">
-<a href="#appendix-D" class="section-number selfRef">Appendix D. </a><a href="#name-using-annotations-in-implem" class="section-name selfRef">Using annotations in implementations</a>
+      <h2 id="name-implementing-keyword-depend">
+<a href="#appendix-D" class="section-number selfRef">Appendix D. </a><a href="#name-implementing-keyword-depend" class="section-name selfRef">Implementing keyword dependencies</a>
       </h2>
-<p id="appendix-D-1">Annotations gathered while evaluating some keywords can be used to
-simplify the logic of evaluating other dependent keywords.  Whether
-annotations are used in keyword evaluation or not, the implementor must make sure that
-results are identical.  Thus, this section is OPTIONAL.<a href="#appendix-D-1" class="pilcrow">¶</a></p>
-<p id="appendix-D-2">As an example, the <code>properties</code> keyword produces annotations which can be used
-in the implementation of <code>additionalProperties</code>, <code>required</code> and
-<code>unevaluatedProperties</code>.  With this schema:<a href="#appendix-D-2" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-D-3">
+<p id="appendix-D-1">As noted in <a href="#keyword-interactions" class="auto internal xref">Section 12.2</a>, some keywords depend on the value
+or successful evaluation outcome of other keywords within the same
+schema evaluation or any of its successful sub-evaluations.  The
+specifics of this mechanism are left up to each implementation.<a href="#appendix-D-1" class="pilcrow">¶</a></p>
+<p id="appendix-D-2">As an example, the value of the <code>properties</code> keyword includes a set of
+property names that is used by <code>additionalProperties</code>, and produces
+information about which properties were successfully evaluated,
+which is used in the implementation of <code>unevaluatedProperties</code>.<a href="#appendix-D-2" class="pilcrow">¶</a></p>
+<p id="appendix-D-3">With this schema:<a href="#appendix-D-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-D-4">
 <pre>
 {
   "type": "object",
@@ -6808,19 +6810,19 @@ in the implementation of <code>additionalProperties</code>, <code>required</code
   },
   "additionalProperties": false
 }
-</pre><a href="#appendix-D-3" class="pilcrow">¶</a>
+</pre><a href="#appendix-D-4" class="pilcrow">¶</a>
 </div>
-<p id="appendix-D-4">The following table shows the annotation result of <code>properties</code> for
-three different inputs, and how <code>additionalProperties</code> and <code>required</code>
-implementations could use that result.<a href="#appendix-D-4" class="pilcrow">¶</a></p>
+<p id="appendix-D-5">The value of <code>properties</code> includes the property names
+"X" and "Y", therefore regardless of the outcome of <code>properties</code>,
+the <code>additionalProperties</code> schema is never applied to those
+properties:<a href="#appendix-D-5" class="pilcrow">¶</a></p>
 <table class="center" id="table-2">
         <caption><a href="#table-2" class="selfRef">Table 2</a></caption>
 <thead>
           <tr>
             <th class="text-left" rowspan="1" colspan="1">Input</th>
-            <th class="text-left" rowspan="1" colspan="1">"properties" annotation</th>
-            <th class="text-left" rowspan="1" colspan="1">"additionalProperties" result</th>
-            <th class="text-left" rowspan="1" colspan="1">"required" result</th>
+            <th class="text-left" rowspan="1" colspan="1">"additionalProperties" applied to</th>
+            <th class="text-left" rowspan="1" colspan="1">valid</th>
           </tr>
         </thead>
         <tbody>
@@ -6829,39 +6831,120 @@ implementations could use that result.<a href="#appendix-D-4" class="pilcrow">¶
               <code>{"X": 1, "Y": 2}</code>
 </td>
             <td class="text-left" rowspan="1" colspan="1">
-              <code>["X", "Y"]</code>
+              <em>(none)</em>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">valid</td>
-            <td class="text-left" rowspan="1" colspan="1">valid</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>true</code>
+</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
               <code>{"X": 1, "Y": 2, "radius": 5}</code>
 </td>
+            <td class="text-left" rowspan="1" colspan="1">"radius"</td>
             <td class="text-left" rowspan="1" colspan="1">
-              <code>["X", "Y"]</code>
+              <code>false</code> by <code>additionalProperties</code>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">invalid (<code>"radius"</code> not in annotation)</td>
-            <td class="text-left" rowspan="1" colspan="1">valid</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
-              <code>{"X": 1}</code>
+              <code>{"X": "hello", "Y": "world"}</code>
 </td>
             <td class="text-left" rowspan="1" colspan="1">
-              <code>["X"]</code>
+              <em>(none)</em>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">valid</td>
-            <td class="text-left" rowspan="1" colspan="1">invalid (<code>"Y"</code> absent)</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>false</code> by <code>type</code> in <code>properties</code>
+</td>
           </tr>
         </tbody>
       </table>
-<p id="appendix-D-6">Similarly, the <code>prefixItems</code> keyword produces an annotation which is
-used by <code>items</code> and <code>unevaluatedItems</code>.  The annotation value is the
-largest index to which <code>prefixItems</code> applied a subschema.  Consider
+<p id="appendix-D-7">Note that the <code>additionalProperties</code> subschema is never applied to
+"X" or "Y" even when they are rejected by <code>properties</code>.<a href="#appendix-D-7" class="pilcrow">¶</a></p>
+<p id="appendix-D-8">When using the point schema (without <code>additionalProperties</code>) via
+a reference, <code>unevaluatedProperties</code> is required to get the same
+validation outcomes, as shown in this schema:<a href="#appendix-D-8" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-D-9">
+<pre>
+{
+  "$ref": "#/$defs/point",
+  "unevaluatedProperties": false,
+  "$defs": {
+    "point": {
+      "type": "object",
+      "required": ["X", "Y"],
+      "properties": {
+        "X": { "type": "number" },
+        "Y": { "type": "number" }
+      }
+    }
+  }
+}
+</pre><a href="#appendix-D-9" class="pilcrow">¶</a>
+</div>
+<p id="appendix-D-10">Since <code>unevaluatedProperties</code> cannot "see" through the reference
+(which could include a complex arrangement of references and conditionals
+that would be non-trivial to analyze, unlike this example), it
+depends on runtime evaluation results of <code>properties</code> rather than its
+static value.<a href="#appendix-D-10" class="pilcrow">¶</a></p>
+<p id="appendix-D-11">The following table shows the information produced by <code>properties</code> for
+three different inputs, and how <code>unevaluatedProperties</code>
+implementations could use that result.  Note that <code>unevaluatedProperties</code>
+ends up applying to both properties in the third row, while
+<code>additionalProperties</code> never applied to either of them.<a href="#appendix-D-11" class="pilcrow">¶</a></p>
+<table class="center" id="table-3">
+        <caption><a href="#table-3" class="selfRef">Table 3</a></caption>
+<thead>
+          <tr>
+            <th class="text-left" rowspan="1" colspan="1">Input</th>
+            <th class="text-left" rowspan="1" colspan="1">successful "properties" evaluations</th>
+            <th class="text-left" rowspan="1" colspan="1">"unevaluatedProperties" applied to</th>
+            <th class="text-left" rowspan="1" colspan="1">valid</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>{"X": 1, "Y": 2}</code>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">"X", "Y"</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <em>(none)</em>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>true</code>
+</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>{"X": 1, "Y": 2, "radius": 5}</code>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">"X", "Y"</td>
+            <td class="text-left" rowspan="1" colspan="1">"radius"</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>false</code> by <code>unevaluatedProperties</code>
+</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>{"X": "hello", "Y": "world"}</code>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <em>(none)</em>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">"X", "Y"</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>false</code> by both <code>unevaluatedProperties</code> and <code>type</code> in <code>properties</code>
+</td>
+          </tr>
+        </tbody>
+      </table>
+<p id="appendix-D-13">Similarly, the length of the <code>prefixItems</code> keyword's value is used
+by <code>items</code>, and it produces information which is used by <code>unevaluatedItems</code>.<a href="#appendix-D-13" class="pilcrow">¶</a></p>
+<p id="appendix-D-14">Consider
 this schema for a structured log entry with a timestamp, action, and
-username fields, and preventing additional fields:<a href="#appendix-D-6" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-D-7">
+username fields, and preventing additional fields:<a href="#appendix-D-14" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-D-15">
 <pre>
 {
   "prefixItems": [
@@ -6871,19 +6954,17 @@ username fields, and preventing additional fields:<a href="#appendix-D-6" class=
   ],
   "items": false
 }
-</pre><a href="#appendix-D-7" class="pilcrow">¶</a>
+</pre><a href="#appendix-D-15" class="pilcrow">¶</a>
 </div>
-<p id="appendix-D-8">This schema, when applied to the inputs in the table below, produces
-annotation output from <code>prefixItems</code> evaluation. Then,
-<code>items</code> uses the <code>prefixItems</code> annotation to start where <code>prefixItems</code>
-left off, applying only to indices greater than the annotation value.<a href="#appendix-D-8" class="pilcrow">¶</a></p>
-<table class="center" id="table-3">
-        <caption><a href="#table-3" class="selfRef">Table 3</a></caption>
+<p id="appendix-D-16">The length of the <code>prefixItems</code> keyword is 3, so <code>items</code> is applied
+to items at index 3 or higher, as shown in table below:<a href="#appendix-D-16" class="pilcrow">¶</a></p>
+<table class="center" id="table-4">
+        <caption><a href="#table-4" class="selfRef">Table 4</a></caption>
 <thead>
           <tr>
             <th class="text-left" rowspan="1" colspan="1">Input</th>
-            <th class="text-left" rowspan="1" colspan="1">"prefixItems" annotation</th>
-            <th class="text-left" rowspan="1" colspan="1">"items" result</th>
+            <th class="text-left" rowspan="1" colspan="1">"items" applied to</th>
+            <th class="text-left" rowspan="1" colspan="1">valid</th>
           </tr>
         </thead>
         <tbody>
@@ -6892,27 +6973,38 @@ left off, applying only to indices greater than the annotation value.<a href="#a
               <code>["2026-06-24T10:00:00Z", "created", "alice"]</code>
 </td>
             <td class="text-left" rowspan="1" colspan="1">
-              <code>2</code>
+              <em>(none)</em>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">valid (no elements beyond index 2)</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>true</code> (no elements beyond index 2)</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
               <code>["2026-06-24T10:00:00Z", "created", "alice", "extra"]</code>
 </td>
+            <td class="text-left" rowspan="1" colspan="1">"extra" (at index 3)</td>
             <td class="text-left" rowspan="1" colspan="1">
-              <code>2</code>
-</td>
-            <td class="text-left" rowspan="1" colspan="1">invalid (index 3 not evaluated by <code>prefixItems</code>)</td>
+              <code>false</code> by <code>items</code> applied to index 3</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
               <code>["2026-06-24T10:00:00Z", "created"]</code>
 </td>
             <td class="text-left" rowspan="1" colspan="1">
-              <code>1</code>
+              <em>(none)</em>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">valid (no elements beyond index 1)</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>true</code> (not all <code>prefixItems</code> items need be applied)</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>["2026-06-24T10:00:00Z", 42]</code>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <em>(none)</em>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>false</code> by <code>type</code> in <code>prefixItems</code> index 1</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -6921,19 +7013,110 @@ left off, applying only to indices greater than the annotation value.<a href="#a
             <td class="text-left" rowspan="1" colspan="1">
               <em>(none)</em>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">valid (no elements at all)</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>true</code> (no subschemas from either keyword applied)</td>
           </tr>
         </tbody>
       </table>
-<p id="appendix-D-10">The following table summarizes which keywords produce annotations
-that can be used in the implementation of other keywords:<a href="#appendix-D-10" class="pilcrow">¶</a></p>
-<table class="center" id="table-4">
-        <caption><a href="#table-4" class="selfRef">Table 4</a></caption>
+<p id="appendix-D-18">As with our object properties example, using this schema (without <code>items</code>)
+via a reference requires using <code>unevaluatedItems</code> to get the same
+outcomes:<a href="#appendix-D-18" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-D-19">
+<pre>
+{
+  "$ref": "#/$defs/logLine",
+  "unevaluatedItems": false,
+  "$defs": {
+    "logLine": {
+      "prefixItems": [
+        { "type": "string", "format": "date-time" },
+        { "type": "string" },
+        { "type": "string" }
+      ]
+    }
+  }
+}
+</pre><a href="#appendix-D-19" class="pilcrow">¶</a>
+</div>
+<p id="appendix-D-20">This schema, when applied to the inputs in the table below, produces
+information from the <code>prefixItems</code> evaluation. Then,
+<code>unevaluatedItems</code> uses the <code>prefixItems</code> information to start where <code>prefixItems</code>
+left off, applying only to indices not covered by the <code>prefixItems</code> evaluation.<a href="#appendix-D-20" class="pilcrow">¶</a></p>
+<table class="center" id="table-5">
+        <caption><a href="#table-5" class="selfRef">Table 5</a></caption>
+<thead>
+          <tr>
+            <th class="text-left" rowspan="1" colspan="1">Input</th>
+            <th class="text-left" rowspan="1" colspan="1">length of successful "prefixItems" evaluations</th>
+            <th class="text-left" rowspan="1" colspan="1">"unevaluatedItems" applied</th>
+            <th class="text-left" rowspan="1" colspan="1">valid</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>["2026-06-24T10:00:00Z", "created", "alice"]</code>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">3</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <em>(none)</em>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>true</code> (no elements beyond index 2)</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>["2026-06-24T10:00:00Z", "created", "alice", "extra"]</code>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">3</td>
+            <td class="text-left" rowspan="1" colspan="1">"extra" (at index 3)</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>false</code> by <code>unevaluatedItems</code> applied to index 3</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>["2026-06-24T10:00:00Z", "created"]</code>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">1</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <em>(none)</em>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>true</code> (no elements beyond index 1)</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>["2026-06-24T10:00:00Z", 42]</code>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">1</td>
+            <td class="text-left" rowspan="1" colspan="1">42 (at index 1)</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>false</code> by both <code>unevaluatedItems</code> and <code>type</code> in <code>prefixItems</code> at index 1</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>[]</code>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">0</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <em>(none)</em>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>true</code> (no subschemas from either keyword applied)</td>
+          </tr>
+        </tbody>
+      </table>
+<p id="appendix-D-22">Note that in the fourth row, <code>unevaluatedItems</code> ends up applied to index 1,
+while <code>items</code> was not.<a href="#appendix-D-22" class="pilcrow">¶</a></p>
+<p id="appendix-D-23">The following table summarizes which keywords have static values
+on which adjacent keywords depend:<a href="#appendix-D-23" class="pilcrow">¶</a></p>
+<table class="center" id="table-6">
+        <caption><a href="#table-6" class="selfRef">Table 6</a></caption>
 <thead>
           <tr>
             <th class="text-left" rowspan="1" colspan="1">Keyword</th>
-            <th class="text-left" rowspan="1" colspan="1">Annotation value</th>
-            <th class="text-left" rowspan="1" colspan="1">Used by</th>
+            <th class="text-left" rowspan="1" colspan="1">Value Information</th>
+            <th class="text-left" rowspan="1" colspan="1">Depended on by</th>
           </tr>
         </thead>
         <tbody>
@@ -6941,23 +7124,64 @@ that can be used in the implementation of other keywords:<a href="#appendix-D-10
             <td class="text-left" rowspan="1" colspan="1">
               <code>properties</code>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">set of matched property names</td>
+            <td class="text-left" rowspan="1" colspan="1">set of property names</td>
             <td class="text-left" rowspan="1" colspan="1">
-              <code>additionalProperties</code>, <code>unevaluatedProperties</code>
+              <code>additionalProperties</code>
 </td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
               <code>patternProperties</code>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">set of matched property names</td>
+            <td class="text-left" rowspan="1" colspan="1">set of property regular expressions</td>
             <td class="text-left" rowspan="1" colspan="1">
-              <code>additionalProperties</code>, <code>unevaluatedProperties</code>
+              <code>additionalProperties</code>
 </td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
-              <code>additionalProperties</code>
+              <code>prefixItems</code>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">length of value</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>items</code>
+</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>minContains</code>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">minimum number of successful <code>contains</code> validations</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>contains</code>
+</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>maxContains</code>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">maximum number of successful <code>contains</code> validations</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>contains</code>
+</td>
+          </tr>
+        </tbody>
+      </table>
+<p id="appendix-D-25">The following table summarizes which keywords, when successful, produce
+information on which other keywords depend:<a href="#appendix-D-25" class="pilcrow">¶</a></p>
+<table class="center" id="table-7">
+        <caption><a href="#table-7" class="selfRef">Table 7</a></caption>
+<thead>
+          <tr>
+            <th class="text-left" rowspan="1" colspan="1">Keyword</th>
+            <th class="text-left" rowspan="1" colspan="1">Information</th>
+            <th class="text-left" rowspan="1" colspan="1">Depended on by</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>properties</code>
 </td>
             <td class="text-left" rowspan="1" colspan="1">set of validated property names</td>
             <td class="text-left" rowspan="1" colspan="1">
@@ -6966,20 +7190,44 @@ that can be used in the implementation of other keywords:<a href="#appendix-D-10
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
+              <code>patternProperties</code>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">set of validated property names</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>unevaluatedProperties</code>
+</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>additionalProperties</code>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">all properties have been validated</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>unevaluatedProperties</code>
+</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>unevaluatedProperties</code>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">all properties have been validated</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>unevaluatedProperties</code> in parent schemas</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
               <code>prefixItems</code>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">largest index evaluated, or <code>true</code>
-</td>
+            <td class="text-left" rowspan="1" colspan="1">validated prefix length</td>
             <td class="text-left" rowspan="1" colspan="1">
-              <code>items</code>, <code>unevaluatedItems</code>
+              <code>unevaluatedItems</code>
 </td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
               <code>items</code>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">
-              <code>true</code> if any elements evaluated</td>
+            <td class="text-left" rowspan="1" colspan="1">all indices have been validated</td>
             <td class="text-left" rowspan="1" colspan="1">
               <code>unevaluatedItems</code>
 </td>
@@ -6988,8 +7236,7 @@ that can be used in the implementation of other keywords:<a href="#appendix-D-10
             <td class="text-left" rowspan="1" colspan="1">
               <code>contains</code>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">array of evaluated indices, or <code>true</code>
-</td>
+            <td class="text-left" rowspan="1" colspan="1">validated indexes and/or index ranges</td>
             <td class="text-left" rowspan="1" colspan="1">
               <code>unevaluatedItems</code>
 </td>
@@ -6998,21 +7245,24 @@ that can be used in the implementation of other keywords:<a href="#appendix-D-10
             <td class="text-left" rowspan="1" colspan="1">
               <code>unevaluatedItems</code>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">
-              <code>true</code> if any elements evaluated</td>
+            <td class="text-left" rowspan="1" colspan="1">all indices have been validated</td>
             <td class="text-left" rowspan="1" colspan="1">
               <code>unevaluatedItems</code> in parent schemas</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
-              <code>unevaluatedProperties</code>
+              <code>if</code>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">set of validated property names</td>
+            <td class="text-left" rowspan="1" colspan="1">subschema (not keyword) validation outcome</td>
             <td class="text-left" rowspan="1" colspan="1">
-              <code>unevaluatedProperties</code> in parent schemas</td>
+              <code>then</code>, <code>else</code>
+</td>
           </tr>
         </tbody>
       </table>
+<p id="appendix-D-27">Note that certain keywords always validate all remaining properties
+or indices when successful, so there is no need for them to track
+individual locations.<a href="#appendix-D-27" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="vocabularies-appendix">
