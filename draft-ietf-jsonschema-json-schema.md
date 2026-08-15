@@ -118,8 +118,8 @@ of validation or other software, and authors of meta-schemas.
 * For schema authors, the chapter on terminology ({{terminology}}) might be the first
 read, followed by chapters about
 core keywords ({{core-keywords}}),
-subschema keywords ({{subschema-keywords}}) and
-structural keywords ({{structural-keywords}})
+subschema applicator keywords ({{subschema-keywords}}) and
+validation assertion  keywords ({{validation-keywords}})
 as these are the keywords most commonly used when authoring schemas. In addition,
 the formats used with the `format` keyword are defined in {{format-vocab}}.  Other
 sections up to and including {{metadata}} may be interesting depending on
@@ -594,7 +594,7 @@ Implementations MAY allow annotation output to be bypassed entirely.
 Annotations MAY be presented as a single data structure, or as a stream of events, however if the input is rejected during processing, this voids all annotations previously emitted from that input.
 See {{eval-status}} for detailed guidance on when previously emitted annotations MUST be discarded.
 
-# Core Keywords {#core-keywords}
+# Vocabulary for Core Keywords {#core-keywords}
 
 Core keywords MUST be implemented by any implementation indicating support
 for the "application/schema+json" media type.
@@ -644,7 +644,9 @@ media type "application/schema+json".
 The "$schema" keyword SHOULD be used in the document root schema object,
 and MAY be used in the root schema objects of embedded schema resources.
 It MUST NOT appear in non-resource root schema objects.  If absent from
-the document root schema, the resulting behavior is implementation-defined.
+the document root schema, the resulting behavior is implementation-defined,
+however, using this specification's default dialect ({{default-dialect}})
+is RECOMMENDED.
 
 Values for this property are defined elsewhere in this and other documents,
 and by other parties.
@@ -929,7 +931,7 @@ MUST NOT be collected as an annotation result.
 For an example using `$comment`, see {{defs-example}} above, where a comment
 explains to schema maintainers where a value limit comes from.
 
-# Subschema keywords {#subschema-keywords}
+# Vocabulary for Subschema Applicators {#subschema-keywords}
 
 This section defines keywords that
 are RECOMMENDED for use as the basis of other vocabularies.
@@ -1305,7 +1307,7 @@ roles for an incident response process, but no undefined roles.
 {::include ./examples/propertyNames.json}
 ~~~~~~~~~~
 
-# Keywords for Unevaluated Locations
+# Vocabulary for Unevaluated Locations
 
 The purpose of these keywords is to enable schema authors to apply
 subschemas to array items or object properties that have not been
@@ -1400,7 +1402,7 @@ The additional values could all be constrained to numbers using
   "unevaluatedProperties": { "type": "number" }
 ~~~
 
-# Keywords for Structural Validation {#structural-keywords}
+# Vocabulary for Validation Assertions {#validation-keywords}
 
 Validation keywords in a schema impose requirements for successful validation of an
 input.  These keywords are all assertions without any annotation behavior.
@@ -1631,7 +1633,7 @@ in the input object.
 
 Omitting this keyword has the same behavior as an empty object.
 
-# Vocabularies for Semantic Content With "format" {#format-vocab}
+# Vocabulary for Semantic Content With "format" {#format-vocab}
 
 ## Foreword
 
@@ -1937,7 +1939,7 @@ Implementations that validate formats MUST accept at least the subset of
 ECMA-262 defined in [Regular Expressions](#regex-interop)
 section of this specification, and SHOULD accept all valid ECMA-262 expressions.
 
-# A Vocabulary for the Contents of String-Encoded Data {#content}
+# Vocabulary for the Contents of String-Encoded Data {#content}
 
 ## Foreword
 
@@ -2100,7 +2102,7 @@ JSON data structures: first the header, and then the payload.  Since the
 JWT media type ensures that the JWT can be represented in a JSON string,
 there is no need for further encoding or decoding.
 
-# A Vocabulary for Basic Meta-Data Annotations {#metadata}
+# Vocabulary for Basic Meta-Data Annotations {#metadata}
 
 These general-purpose annotation keywords provide commonly used information
 for documentation and user interface display purposes.  They are not intended
@@ -2976,7 +2978,7 @@ targeted by the keyword, the input is considered to conform
 to the assertion.
 
 For example, the "maxLength" keyword from the validation vocabulary
-({{structural-keywords}}) will only restrict certain strings
+({{validation-keywords}}) will only restrict certain strings
 (that are too long) from being valid.  If the input is a number,
 boolean, null, array, or object, then it is valid against this assertion.
 
