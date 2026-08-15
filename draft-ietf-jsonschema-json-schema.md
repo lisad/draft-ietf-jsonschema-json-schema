@@ -305,7 +305,7 @@ meta-schema.
 **Dialect**
 
 A *dialect* is a set of vocabularies used within a given schema resource,
-toether with the syntax constraints described by a meta-schema.
+together with the syntax constraints described by a meta-schema.
 The meta-schema's URI also identifies the dialect.
 
 **Root schema**
@@ -1022,7 +1022,7 @@ such as attachments that can be a `note` or a `task` OR satisfy both schemas.
 
 * Requiring alternate fields in an object, when combined with the "required" keyword: a
 contact could require a `work_email` or require a `work_phone`, and putting
-both `require` keywords inside the `anyOf` keyword allows either to satisfy the schema.
+both `required` keywords inside the `anyOf` keyword allows either to satisfy the schema.
 
 ### "oneOf"
 
@@ -1764,7 +1764,7 @@ the following attributes:
 #### "date-time"
 
 A string input is valid against this attribute if it is
-a valid representation according to the "date-time' ABNF rule
+a valid representation according to the "date-time" ABNF rule
 (referenced above).
 
 #### "date"
@@ -2270,7 +2270,7 @@ but can be set to a new value.
 }
 ~~~
 
-With the instance following instance processed:
+When the above schema evaluates the following input:
 
 ~~~ json
 {
@@ -2594,7 +2594,7 @@ schema resource. It is RECOMMENDED that the URI identifier value of "$id" be an 
 When the Schema Resource referenced by a by-reference applicator is bundled, it is RECOMMENDED that
 the Schema Resource be located as a value of a "$defs" object at the containing schema's root.
 The key of the "$defs" for the now embedded Schema Resource MAY be the "$id" of the bundled schema
-or some other form of application defined unique identifer (such as a UUID). This key is not
+or some other form of application defined unique identifier (such as a UUID). This key is not
 intended to be referenced in JSON Schema, but may be used by an application to aid the
 bundling process.
 
@@ -2683,7 +2683,7 @@ Web linking ({{?RFC8288}}).
 
 It is RECOMMENDED that instances described by a schema provide a link to
 a downloadable JSON Schema using the link relation "describedby", as defined by
-Linked Data Protocol 1.0, ({{LDP}} Section 8.1.
+Linked Data Protocol 1.0, ({{LDP}}) Section 8.1.
 
 In HTTP, such links can be attached to any response using the
 Link header ({{!RFC8288}}). An example of such a header would be:
@@ -3071,7 +3071,7 @@ Keywords MAY be defined to use JSON Pointers or Relative JSON Pointers to examin
 parts of an input outside the current evaluation location.
 
 Keywords that allow adjusting the location using a Relative JSON Pointer SHOULD
-default to using the current location if a default is desireable.
+default to using the current location if a default is desirable.
 
 # Output Formatting {#output}
 
@@ -3223,7 +3223,7 @@ users to craft their own messages.
 
 ### Flag
 
-In the simplest case, merely the boolean result for the "valid" valid property
+In the simplest case, merely the boolean result for the "valid" property
 needs to be fulfilled.
 
 ~~~ json
@@ -4131,7 +4131,7 @@ This meta-schema describes only a single extension vocabulary.
   "properties": {
     "minDate": {
       "type": "string",
-      "pattern": "\d\d\d\d-\d\d-\d\d",
+      "pattern": "^\d\d\d\d-\d\d-\d\d$",
       "format": "date"
     }
   }
@@ -4295,7 +4295,7 @@ Compared to the "2020-12" version of JSON Schema, this draft makes the following
       other keywords can appear alongside of "$ref" in the same schema object.
 
 [^7]: The difference between the hyper-schema meta-schema in pre-2019
-      drafts and an this draft dramatically demonstrates the utility
+      drafts and in this draft dramatically demonstrates the utility
       of these keywords.
 
 
@@ -4375,6 +4375,6 @@ Compared to the "2020-12" version of JSON Schema, this draft makes the following
 [^21]: Multiple "canonical" URIs? We Acknowledge this is potentially confusing, and
        direct you to read the CREF located in the
        [JSON Pointer fragments and embedded schema resources](#embedded)
-       section for futher comments.
+       section for further comments.
 
 [^22]: This section to be removed before leaving Internet-Draft status.
