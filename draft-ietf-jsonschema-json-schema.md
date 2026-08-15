@@ -198,7 +198,7 @@ JSON Schema processing software.
 
 JSON Schema can be extended either by defining additional vocabularies,
 or less formally by defining additional keywords outside of any vocabulary.
-Unrecognized individual keywords simply have their values treated as annotations,
+Unrecognized individual keywords are handled in accordance with section {{unrecognized}},
 while the behavior with respect to an unrecognized vocabulary can be controlled
 when declaring which vocabularies are in use.
 
