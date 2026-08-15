@@ -1067,11 +1067,9 @@ possibly the briefest is
 This keyword's value MUST be a valid JSON Schema.
 
 Validation MUST always succeed against this keyword
-regardless of the validation outcome of it subschema.
-
-This validation outcome of this keyword's subschema
-controls which of the "then" or "else" keywords are
-evaluated, but otherwise MUST be disregarded.
+regardless of the validation outcome of its subschema.
+The subschema validation outcom controls which "then"/"else" keywords are
+evaluated. Beyond that, the subschema validation MUST be disregarded.
 
 Inputs that successfully validate against this
 keyword's subschema MUST also be valid against
@@ -2797,12 +2795,7 @@ and used with caution when defining extension keywords.
 
 Each dynamic scope represents an evaluation of an input location by
 a schema.  Keyword evaluations within the dynamic scope are
-immediate sub-evaluations of the schema evaluation, and
-subschema evaluations within a dynamic subscope created by an
-applicator keyword are immediate sub-evaluations of the applicator
-keyword evaluation.  The sub-evaluation relationship is
-transitive regardless of whether a given evaluation is
-a keyword or schema evaluation.
+sub-evaluations.  The sub-evaluation relationship is recursive.
 
 Evaluation includes validation, which either accepts or
 rejects the input, as well as management of annotations,
