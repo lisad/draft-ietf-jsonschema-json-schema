@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-08-13T01:58:50.655004+00:00",
+  "timestamp": "2026-08-16T01:17:43.890671+00:00",
   "repo": "lisad/draft-ietf-jsonschema-json-schema",
   "labels": [
     {
@@ -71,15 +71,15 @@
       "id": "I_kwDOR8mbas8AAAABCTbuQw",
       "title": "Use the term \u201cJSON text\u201d to describe JSON's top-level construct, consistent with RFC8259",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/issues/3",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "lisad",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "This would generally replace \"JSON Document\"\nSuggested by Tim Bray 5/12",
       "createdAt": "2026-05-14T21:51:18Z",
-      "updatedAt": "2026-05-18T22:32:46Z",
-      "closedAt": null,
+      "updatedAt": "2026-08-15T20:14:12Z",
+      "closedAt": "2026-08-15T20:14:12Z",
       "comments": [
         {
           "author": "karenetheridge",
@@ -101,6 +101,13 @@
           "body": "See proposal today to mailing list",
           "createdAt": "2026-05-18T22:32:46Z",
           "updatedAt": "2026-05-18T22:32:46Z"
+        },
+        {
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "body": "We solved this by settling on JSON value for pretty much everything, I think.  We can open a new issue if there is a new complaint.",
+          "createdAt": "2026-08-15T20:14:12Z",
+          "updatedAt": "2026-08-15T20:14:12Z"
         }
       ]
     },
@@ -116,7 +123,7 @@
       "labels": [],
       "body": "Tim bray: \n\"4.1.2, the example is sort of surprising; the previous discussion emphasizes the role of $-prefixed keywords, but there aren\u2019t any here.\"",
       "createdAt": "2026-05-14T21:52:28Z",
-      "updatedAt": "2026-05-14T22:11:14Z",
+      "updatedAt": "2026-08-15T20:13:43Z",
       "closedAt": null,
       "comments": [
         {
@@ -125,6 +132,13 @@
           "body": "Clarify? There are no examples at https://www.ietf.org/archive/id/draft-ietf-jsonschema-json-schema-00.html#section-4.1.2.",
           "createdAt": "2026-05-14T22:11:14Z",
           "updatedAt": "2026-05-14T22:11:14Z"
+        },
+        {
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think this is now [section 3.1.2](https://www.ietf.org/archive/id/draft-ietf-jsonschema-json-schema-02.html#name-root-schema-and-subschemas-) but I'm not sure where the $-prefixed discussion was?  Or maybe it refers to [section 4.1.4.1](https://www.ietf.org/archive/id/draft-ietf-jsonschema-json-schema-02.html#section-4.1.4.1)?",
+          "createdAt": "2026-08-15T20:13:43Z",
+          "updatedAt": "2026-08-15T20:13:43Z"
         }
       ]
     },
@@ -140,7 +154,7 @@
       "labels": [],
       "body": "Tim Bray: \"Since an object cannot have two properties with the same key,\u201d Yes it can, per 8259. Maybe json schemas should be I-JSON?\n",
       "createdAt": "2026-05-14T21:54:18Z",
-      "updatedAt": "2026-05-14T22:16:42Z",
+      "updatedAt": "2026-08-15T20:09:18Z",
       "closedAt": null,
       "comments": [
         {
@@ -149,6 +163,13 @@
           "body": "Yes, this was flagged as an oversight in the last draft.\n\nHowever, is I-JSON an adequate substitute given that it recommends avoiding top-level constructs that are neither objects nor arrays (https://datatracker.ietf.org/doc/html/rfc7493#section-4.1)?  A single boolean value is a valid JSON Schema and is not uncommon in practical use, especially when embedded in other documents such as OpenAPI.",
           "createdAt": "2026-05-14T22:16:12Z",
           "updatedAt": "2026-05-14T22:16:42Z"
+        },
+        {
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@karenetheridge I-JSON doesn't forbid non-objects and non-arrays, so i think we could cite it.  As noted in #23 we would be citing it more as \"I-JSON texts are guaranteed to be interoperable\" rather than \"everything MUST be an I-JSON text\".  Most things (as we have now settled after a good bit of debate) are JSON values rather than JSON texts; I-JSON is about interoperable JSON texts.",
+          "createdAt": "2026-08-15T20:09:18Z",
+          "updatedAt": "2026-08-15T20:09:18Z"
         }
       ]
     },
@@ -276,31 +297,46 @@
       "id": "I_kwDOR8mbas8AAAABFla_rw",
       "title": "Larger issues around annotations",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/issues/17",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "lisad",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "*This is a spot for me to gather some of the larger issues around annotations - rather than follow up to this issue, consider starting or continuing some discussion in the json mailing list.  Ideally pick one PART of this to discuss if you bring some of this to the JSON list... *\n\nFirst, annotations and output generally seem to be poorly understood.  See issue #16 for the plain issue of explaining better.    \"Annotations\" seems like a word which doesn't convey what they're for or can do.  \"Output\" even sounds weak.  If we keep annotations we should explain their utility better and provide examples.\n\nSecond, do they work the way the community wants them to work?  Greg Dennis was one of the authors yet proposes that the output should be reorganized: https://json-schema.org/blog/posts/fixing-json-schema-output.  and see also https://github.com/orgs/json-schema-org/discussions/63.\n\nThird, is this an interoperable feature?  We think so but it's hard to demonstrate the scale at which we think this is used.  (As a less abstract comparison, consider standardizing some enterprise software configuration file format, which could enable stable scripts interoperating with those files, but those scripts would not be apparent to the standards community as companies are unwilling to share their scripts.)  Members of the open-source JSON Schema community suspect that annotations are used in enterprise pipelines.  For example, an enterprise pipeline that first validates incoming documents (submissions such as applications, claims or survey responses) then sends on down the pipeline for further processing, could use an internal schema with annotations for that processing.  A standard output from the validation phase would allow the enterprise pipeline to be built in a componentized manner, and not reliant on just one JSON Schema library to produce the output of the validation phase and the input to the next phase.  \n\nFourth, can this be an extension rather than a feature of json schema standard?  Probably.  Just as today it's both an optional feature of the specification and an optional feature of libraries that do implement, annotations/output could be separated into another specifiation.  A library that implements \"JSON Schema RFCXXXXX\" would also be able to advertise to library users that it implemented \"JSON Schema annotations version YYY\" and document what option invoking the library would turn on that output format. ",
       "createdAt": "2026-06-15T23:41:01Z",
-      "updatedAt": "2026-06-15T23:41:01Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-08-15T19:58:59Z",
+      "closedAt": "2026-08-15T19:58:04Z",
+      "comments": [
+        {
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@lisad based on our call yesterday, I think we're in agreement that annotations are in fact used (e.g. Juan Cruz Valotti's JSON-LD integration project, OpenAPI's context-sensitive validation, etc.).\n\nI think we also discussed that splitting annotations out would be beyond the scope of the charter, in which case maybe this should be closed?  Or would we still want to consider publishing two documents under this charter (which I did not think was an option)?",
+          "createdAt": "2026-08-15T19:53:15Z",
+          "updatedAt": "2026-08-15T19:53:15Z"
+        },
+        {
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "body": "> Or would we still want to consider publishing two documents under this charter (which I did not think was an option)?\n\nI do believe this is still an option; how we split one document into several is usually treated as details rather than charter violation",
+          "createdAt": "2026-08-15T19:58:59Z",
+          "updatedAt": "2026-08-15T19:58:59Z"
+        }
+      ]
     },
     {
       "number": 21,
       "id": "I_kwDOR8mbas8AAAABGoTTJw",
       "title": "Fix beginning of text describing annotations",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/issues/21",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "lisad",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "The current wording : \n\n### Annotation\n\nA JSON Schema may describe additional output to accompany an \"accept\" result,\ncalled _annotations_. An annotation is a tuple that, at the minimum, relates a\nparticular annotation keyword in the schema to a particular value within the\ninstance. Annotations typically document the meaning of properties, declare\nrelationships between data, or denote hyperlinks.  Several forms of output are\ndefined, and the annotation process can be disabled as a performance or\nresource consumption optimization.\n\n\nThe misleading thing about this right at the beginning is that it sounds so optional.  Annotations are required even if the schema in question doesn't describe additional output - because annotations are built deeply in .  The output of \"properties\" is also annotations. ",
       "createdAt": "2026-06-25T01:49:13Z",
-      "updatedAt": "2026-06-25T20:24:25Z",
-      "closedAt": null,
+      "updatedAt": "2026-08-15T19:57:01Z",
+      "closedAt": "2026-08-15T19:57:01Z",
       "comments": [
         {
           "author": "karenetheridge",
@@ -315,6 +351,13 @@
           "body": "@karenetheridge if you have a proposal for what to drop, I'd love to hear it, assuming that you're describing what you think we should do (the words \"talked about\" are pretty neutral).  We're planning to make annotations a major topic for the upcoming meeting, see if we can start getting people in the same page.",
           "createdAt": "2026-06-25T20:24:25Z",
           "updatedAt": "2026-06-25T20:24:25Z"
+        },
+        {
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "body": "We've now remove the applicator-implementing annotations (and the ability to define them at all), so I think we can close this?  The lower-case \"may\" in the first sentence of that paragraphs refers only to the fact that not all schemas produce annotations (not to the idea that JSON Schema need not implement them).  Although I'm not at all attached to that wording if someone wants to change it.",
+          "createdAt": "2026-08-15T19:50:34Z",
+          "updatedAt": "2026-08-15T19:50:34Z"
         }
       ]
     },
@@ -330,9 +373,24 @@
       "labels": [],
       "body": "Post from Nico today:\nFor one draft-ietf-jsonschema-json-schema-00 does not reference RFC\n7493, so presumably it ought to say whether duplicate names in objects\nhave any meaning in this schema, or else normatively reference RFC 7493.\nIt's perfectly fine to say that they do not, that this JSON Schema does\nnot support that -- but it should be stated.",
       "createdAt": "2026-06-28T19:51:20Z",
-      "updatedAt": "2026-06-28T19:51:20Z",
+      "updatedAt": "2026-08-15T20:09:46Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think it might be good to cite I-JSON in the sense that schemas and inputs that conform to I-JSON are guaranteed(? what's the right language for this?) to be interoperable within JSON Schema.  It would also be a better way to handle the paragraph that starts \"Since an object cannot have two properties with the same key\"",
+          "createdAt": "2026-08-15T19:48:00Z",
+          "updatedAt": "2026-08-15T19:48:00Z"
+        },
+        {
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "body": "See also #5.",
+          "createdAt": "2026-08-15T20:09:46Z",
+          "updatedAt": "2026-08-15T20:09:46Z"
+        }
+      ]
     },
     {
       "number": 28,
@@ -377,16 +435,24 @@
       "id": "I_kwDOR8mbas8AAAABJoqzmQ",
       "title": "Settle \"evaluation\" vs \"validation\", and \"accepted\"/\"rejected\" vs \"valid\"/\"invalid\"",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/issues/30",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "handrews",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Personally, my preference is to use:\n\n* \"evaluation\" unless we are very specifically and intentionally excluding annotation handling; in particular if we use the \"result infoset\" concept, it is the result of an evaluation, which may or may not have accepted the input\n* \"accepted\"/\"rejected\" rather than \"valid\"/\"invalid\", *OR* some sort of clear guidance on when to use which b/c I am trying to write a PR and struggling with this",
       "createdAt": "2026-07-21T17:45:03Z",
-      "updatedAt": "2026-07-21T17:45:03Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-08-15T19:35:35Z",
+      "closedAt": "2026-08-15T19:35:35Z",
+      "comments": [
+        {
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think we're good on evaluation/validation, although there are no doubt still some minor inconsistencies.  I am less sure about accepted/rejected but don't feel we need an issue open to track it right now.",
+          "createdAt": "2026-08-15T19:35:35Z",
+          "updatedAt": "2026-08-15T19:35:35Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -2245,24 +2311,26 @@
       "id": "PR_kwDOR8mbas76Svz0",
       "title": "Minimal replacement of \"Using annotations\" appendix for non-annotation dependencies",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/42",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "handrews",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "_[**EDIT:** I ended up needing to revise this more substantially, see [the explanatory comment](https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/42#issuecomment-5194128895) below]_\r\n\r\nReplace the implementing-with-annotations appendix with a more generic version, in preparation for removing the annotations involved.\r\n\r\nThe interaction with `\"required\"` was removed entirely as `\"required\"` is not specified in terms of `\"properties\"` (it works independently as it can be used with `\"properties\"` being present).\r\n\r\nAdded `\"minContains\"` and `\"maxContains\"` to the static version of the final table, and `\"if\"` to the runtime version, since if this is about dependencies in general they count even though they did not previously use annotations (and can be used entirely statically).  I also tried to clarify that certain runtime keyword dependencies do not need to track exact properties/indices as they always consume all remaining locations.\r\n\r\nIn general, I moved away from literal JSON values as dependencies no longer specify the exact format.  \r\n\r\n~~I have other thoughts on cases that would benefit from examples here, but I wanted to keep this PR minimal so I stayed with the examples as-is, just changing the framing.~~ _[**EDIT:** I had to do most of these after all as discussed [below](https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/42#issuecomment-5194128895).]_",
       "createdAt": "2026-08-04T01:09:12Z",
-      "updatedAt": "2026-08-12T21:23:17Z",
+      "updatedAt": "2026-08-14T21:19:42Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
       "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
       "headRefName": "appendix",
       "headRefOid": "3bc74b3393fe97196d4544ecf530e2654f338f08",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-08-14T21:19:42Z",
+      "mergedAt": "2026-08-14T21:19:42Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "c7a64a0fc31ed0c9163e8598c6395606492c8f94"
+      },
       "comments": [
         {
           "author": "handrews",
@@ -2346,7 +2414,7 @@
       "labels": [],
       "body": "Using a number here was unfortunate, as we ended up with five categories.  Use \"final\" instead of \"fourth\" or \"fifth\".",
       "createdAt": "2026-08-04T01:12:10Z",
-      "updatedAt": "2026-08-12T20:49:28Z",
+      "updatedAt": "2026-08-13T20:43:50Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
@@ -2388,7 +2456,7 @@
       "labels": [],
       "body": "This is a small follow-on to PR #41.\r\n\r\nPreviously the annotation management mechanism was vaguely defined, and sometimes discussed in terms of applicators propagating annotations.  The new evaluation success approach is more clear and consistent, and defined in a single obvious place within the RFC.\r\n\r\nThis takes the annotation management text out of the applicator behavior section entirely, and references the evaluation status section in a more appropriate place.",
       "createdAt": "2026-08-04T17:51:41Z",
-      "updatedAt": "2026-08-12T20:50:58Z",
+      "updatedAt": "2026-08-13T20:43:50Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
@@ -2423,24 +2491,26 @@
       "id": "PR_kwDOR8mbas76yeHQ",
       "title": "Remove keyword dependency annotations",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/45",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "handrews",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "We are no longer supporting \"computed\" annotations, and keyword dependencies are more clearly specified in terms of outcomes as of PR #41 \r\n\r\nNote that the actual change in annotation requirements will be posted momentarily as a separate PR, as it is more likely to require debate than this one.",
       "createdAt": "2026-08-04T22:14:09Z",
-      "updatedAt": "2026-08-12T21:51:06Z",
+      "updatedAt": "2026-08-14T21:13:02Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
       "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
       "headRefName": "keyword-deps",
       "headRefOid": "183ce95581531ecf4c730308fa46ff7f0631113d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-08-14T21:13:01Z",
+      "mergedAt": "2026-08-14T21:13:01Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "3f2b72cd520e376502159941e8fb54b5441caf79"
+      },
       "comments": [],
       "reviews": [
         {
@@ -2482,6 +2552,26 @@
               "updatedAt": "2026-08-12T21:51:06Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABJn8nFw",
+          "commit": {
+            "abbreviatedOid": "183ce95"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-14T20:10:02Z",
+          "updatedAt": "2026-08-14T21:11:43Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "It's the unchanged part together with the new part: \"This validation outcome of this keyword's subschema\ncontrols which of the then or else keywords...  \"  .  Maybe we could say \"The subschema validation outcome controls which of the 'then' or 'else' keywords are evaluated.  Beyond that, the subschema validation is disregarded.\"\n",
+              "createdAt": "2026-08-14T20:10:02Z",
+              "updatedAt": "2026-08-14T21:11:43Z"
+            }
+          ]
         }
       ]
     },
@@ -2497,7 +2587,7 @@
       "labels": [],
       "body": "This makes the actual requirements change at the heart of simplifying annotations before sorting out output.\r\n\r\nThe computed annotation requirements were entangled with the requirement opting out of annotations, which itself was a bit out-of-sync with the more general guidance on annotation configuration in the introduction.  Of course the introduction is non-normative, so that wasn't ideal either.\r\n\r\nI framed the guidance more clearly in terms of what implementors can and can't do and put it in the \"overall requirements\" normative section.  the \"Validation\" subsection already actually discussed both validation and annotation, so rename it to say what it actually is, and including the general annotation requirements there.\r\n\r\nThis version does not include any guidance about how to specify annotations for downstream usage, as that was an area of some debate and best handled as a future PR.",
       "createdAt": "2026-08-04T23:25:42Z",
-      "updatedAt": "2026-08-12T21:08:44Z",
+      "updatedAt": "2026-08-13T20:43:51Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
@@ -2539,7 +2629,7 @@
       "labels": [],
       "body": "_Note that this is technically a new requirement, although if we don't want to add this requirement, we need to add others to put boundaries on what sort of input changes are allowed._\r\n\r\nThis formalizes the previously-unstated requirement for inputs to be immutable.  Some implementations took advantage of the ambiguity to implement things such as default-filling, or modifying the input in place in a way that produced potentially non-deterministic outcomes.",
       "createdAt": "2026-08-05T00:03:28Z",
-      "updatedAt": "2026-08-12T21:14:14Z",
+      "updatedAt": "2026-08-13T20:43:50Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
@@ -2666,24 +2756,26 @@
       "id": "PR_kwDOR8mbas761Drg",
       "title": "Clarify \"default\" and \"examples\" (without changing them... yet)",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/48",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "handrews",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This is an attempt to clarify \"default\" and \"examples\" without changing their nature, in order to have a clear base from which to consider possible changes.\r\n\r\nThis change:\r\n\r\n* Clarifies that \"default\" and \"examples\" really aren't that useful in schema evaluation, and this is not an unexpected oversight.\r\n* Explains that the actual typical use is out-of-scope for the RFC.\r\n* Removes all language about handling multiple values, which was left over from a very old approach to annotations where JSON Schema implementations were expected to resolve such things.\r\n* Removes all normative language that attempted to impose requirements on downstream code; the remaining text defines the semantics sufficiently for downstream code to make its own decisions regarding use.\r\n\r\n@awwright IIRC you had other ideas for why someone might want a \"default\" that is not valid, although I've forgotten what those were.  I am unclear on why we said the same for \"examples\" other than symmetry.  We should either change or explain this (in a future PR).",
       "createdAt": "2026-08-05T00:50:39Z",
-      "updatedAt": "2026-08-10T15:45:02Z",
+      "updatedAt": "2026-08-14T20:13:06Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
       "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
       "headRefName": "default-examples",
       "headRefOid": "69efc3bf7601d3f9015d35b0161735d5ee2f55b5",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-08-14T20:13:06Z",
+      "mergedAt": "2026-08-14T20:13:06Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "d7d55a2fecb376f7225be6375ce031a489051d52"
+      },
       "comments": [
         {
           "author": "awwright",
@@ -2713,6 +2805,19 @@
           "createdAt": "2026-08-10T03:04:46Z",
           "updatedAt": "2026-08-10T03:04:46Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABJn9shA",
+          "commit": {
+            "abbreviatedOid": "69efc3b"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-08-14T20:13:00Z",
+          "updatedAt": "2026-08-14T20:13:00Z",
+          "comments": []
         }
       ]
     },
@@ -2721,24 +2826,26 @@
       "id": "PR_kwDOR8mbas762mQo",
       "title": "Clarify sub-evaluation relationship is transitive",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/49",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "handrews",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "One could theoretically read the old text as implying \"sub-evaluation\" meant only one level.\r\n\r\nAlso fix a typo.",
       "createdAt": "2026-08-05T02:27:03Z",
-      "updatedAt": "2026-08-12T21:29:43Z",
+      "updatedAt": "2026-08-14T21:11:21Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
       "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
       "headRefName": "transitive",
       "headRefOid": "cc4957d7408759da515cd9066fc1aa3e3b086e16",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-08-14T21:11:21Z",
+      "mergedAt": "2026-08-14T21:11:21Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "468e998753e96f4e1baafdce14be6ea2be2fd34c"
+      },
       "comments": [],
       "reviews": [
         {
@@ -2780,6 +2887,26 @@
               "updatedAt": "2026-08-12T21:29:43Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABJn9Jaw",
+          "commit": {
+            "abbreviatedOid": "cc4957d"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-14T20:11:32Z",
+          "updatedAt": "2026-08-14T21:09:46Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "I see what you mean about terminology.  \"Sub-evaluations are transitive\" is direct.  \"Sub-evaluations are recursive\" is maybe even more accurate. ",
+              "createdAt": "2026-08-14T20:11:32Z",
+              "updatedAt": "2026-08-14T21:09:46Z"
+            }
+          ]
         }
       ]
     },
@@ -2795,7 +2922,7 @@
       "labels": [],
       "body": "It's not yet clear if we will settle on \"result infoset\" and I did not intend to introduce it yet.  Let's keep it out for now to avoid forgetting later if needed.",
       "createdAt": "2026-08-05T03:12:56Z",
-      "updatedAt": "2026-08-12T21:25:25Z",
+      "updatedAt": "2026-08-13T20:43:51Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
@@ -2837,7 +2964,7 @@
       "labels": [],
       "body": "We don't use \"processor\" anywhere else at all, use \"implementation\".\r\n\r\nWhile I think \"application/jsonschema+json\" would be an improvement, it is \"application/schema+json\" everywhere else and always has been.  Let's change it intentionally and consistently if we change it.",
       "createdAt": "2026-08-05T03:45:22Z",
-      "updatedAt": "2026-08-12T21:25:59Z",
+      "updatedAt": "2026-08-13T20:43:50Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
@@ -2879,7 +3006,7 @@
       "labels": [],
       "body": "AI caught a couple of things which I have verified and fixed: (no AI-performed or directly suggested edits!\r\n\r\n* \"explicitly\" where we meant \"implicitly\" like everywhere else\r\n* wrong fragment link (leftover from when both sections existed)\r\n* ECMA-262 citation date and URI had not been updated\r\n\r\nRegarding the last point, the section numbers in citations do not fit the linked version (5.1 edition, 2011).  They do work with the 6th edition (2015), so I updated to that rather than jumping further ahead (the section numbers change again later).\r\n\r\nThe 2011 edition also does not have the \"u\" flag which we mention, so I think there was a decision to go to the 6th edition and it's just the link that wasn't updated.",
       "createdAt": "2026-08-05T04:10:42Z",
-      "updatedAt": "2026-08-12T21:26:49Z",
+      "updatedAt": "2026-08-13T20:43:51Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
@@ -2934,7 +3061,7 @@
       "labels": [],
       "body": "This shows the most-frequenlty-raised (by far!) scenario regarding annotation use, which is title or description on either side of a reference.  It avoids output format specifics and just shows the most relevant information.\r\n\r\nIt also notes the difference in behavior between \"description\" and \"$comment\", as that is also often a point of confusion.\r\n\r\nFinally, link from the introduction as we have gotten feedback that there is no good starting point for annotations.  _NOTE: I'm not entirely sure whether linking this from the introduction is the right place, but I'm not sure we have another really obvious place to put it?_",
       "createdAt": "2026-08-05T20:24:04Z",
-      "updatedAt": "2026-08-12T21:33:39Z",
+      "updatedAt": "2026-08-13T20:43:51Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
@@ -2976,7 +3103,7 @@
       "labels": [],
       "body": "This section has many problems, and is best replaced with new guidance on how we expect annotations to be consumed as we sort that out.  Problems include:\r\n\r\n* It attempts to impose normative requirements on downstream applications\r\n* \"Feature A\" and \"Feature B\" are rather abstract\r\n* It talks about \"default\" in a way that does not actually use it as an annotation\r\n* It assumes semantics about more generic/more specific things\r\n* It muddies things by speculating about alternatives\r\n\r\nThe example in PR #53 pretty much replaces the parts of this that are worth having, although obviously it's not as prominent.  I think we'll want a general \"how to use results/output\" section at some point, but we'll need to figure out what results/output look like first.",
       "createdAt": "2026-08-05T21:36:00Z",
-      "updatedAt": "2026-08-12T21:35:24Z",
+      "updatedAt": "2026-08-13T20:43:51Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
@@ -3015,6 +3142,192 @@
           "body": "",
           "createdAt": "2026-08-12T21:35:11Z",
           "updatedAt": "2026-08-12T21:35:11Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 55,
+      "id": "PR_kwDOR8mbas7_XPoQ",
+      "title": "Two small simplifications",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/55",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-08-15T01:29:46Z",
+      "updatedAt": "2026-08-15T20:15:40Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "c7a64a0fc31ed0c9163e8598c6395606492c8f94",
+      "headRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "headRefName": "two-simplifications",
+      "headRefOid": "17951763264451b5cf5d43a2bee3ad4ed87e54b8",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOR8mbas8AAAABJp0qQw",
+          "commit": {
+            "abbreviatedOid": "1795176"
+          },
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-15T04:18:44Z",
+          "updatedAt": "2026-08-15T04:18:45Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "```suggestion\nevaluated. Beyond that, the subschema validation result MUST be disregarded.\n```\nJust saying \"validation\" makes it seem like everything about the validation, including whether to retain annotations, MUST be disregarded.  But as seen a few paragraphs down annotation management takes place as usual.",
+              "createdAt": "2026-08-15T04:18:45Z",
+              "updatedAt": "2026-08-15T04:18:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABJp0xKw",
+          "commit": {
+            "abbreviatedOid": "1795176"
+          },
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-15T04:19:23Z",
+          "updatedAt": "2026-08-15T04:19:23Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "Although actually now that I read it this way, I'm not sure it's better one way or the other.  Take or leave as you choose.",
+              "createdAt": "2026-08-15T04:19:23Z",
+              "updatedAt": "2026-08-15T04:19:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABJrkqmg",
+          "commit": {
+            "abbreviatedOid": "1795176"
+          },
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-08-15T20:15:40Z",
+          "updatedAt": "2026-08-15T20:15:40Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 56,
+      "id": "PR_kwDOR8mbas7_jb28",
+      "title": "Name vocab sections after vocabs",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/56",
+      "state": "OPEN",
+      "author": "handrews",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "As discussed on yesterday's call.\r\n\r\nThis incorporates the $vocabulary URI name into the section names.  I can't remember the capitalization rules for sections but most were title-case so I went with that, I assume we will do an editorial pass for such things later anyway.\r\n\r\nAlso clarified that there is a RECOMMENDED default behavior in the absence of \"$schema\", although formally the behavior is implementation-defined (implementations do a variety of different things here, including some that use earlier drafts as their default).",
+      "createdAt": "2026-08-15T19:34:43Z",
+      "updatedAt": "2026-08-15T19:34:43Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "c7a64a0fc31ed0c9163e8598c6395606492c8f94",
+      "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
+      "headRefName": "vocab-names",
+      "headRefOid": "efd778dbb50947232308c6d928748a3e213d7d1a",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 57,
+      "id": "PR_kwDOR8mbas7_jxkj",
+      "title": "Fix one more mention of unrecognized keywords.",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/57",
+      "state": "OPEN",
+      "author": "handrews",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Missed one in the last pass, but this now cites the normative section correctly.\r\n\r\nFixes #9.",
+      "createdAt": "2026-08-15T20:06:34Z",
+      "updatedAt": "2026-08-15T22:44:02Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "c7a64a0fc31ed0c9163e8598c6395606492c8f94",
+      "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
+      "headRefName": "unrec-again",
+      "headRefOid": "45ce98d6f3720459cb94b171cab1a8d890ccb1bf",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOR8mbas8AAAABJry3FA",
+          "commit": {
+            "abbreviatedOid": "45ce98d"
+          },
+          "author": "awwright",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-08-15T22:44:01Z",
+          "updatedAt": "2026-08-15T22:44:01Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 58,
+      "id": "PR_kwDOR8mbas7_j-Rv",
+      "title": "Fix various typos",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/58",
+      "state": "OPEN",
+      "author": "handrews",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Including a regular expression that needs to be anchored.",
+      "createdAt": "2026-08-15T20:24:11Z",
+      "updatedAt": "2026-08-15T22:08:00Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "c7a64a0fc31ed0c9163e8598c6395606492c8f94",
+      "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
+      "headRefName": "typos",
+      "headRefOid": "0359af247371068612a52e0799b0f2da6bbebc5e",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOR8mbas8AAAABJrvf-Q",
+          "commit": {
+            "abbreviatedOid": "0359af2"
+          },
+          "author": "awwright",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-08-15T22:08:00Z",
+          "updatedAt": "2026-08-15T22:08:00Z",
           "comments": []
         }
       ]
