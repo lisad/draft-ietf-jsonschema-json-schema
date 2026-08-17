@@ -487,7 +487,7 @@ Table of Contents
    *Dialect*
 
    A _dialect_ is a set of vocabularies used within a given schema
-   resource, toether with the syntax constraints described by a meta-
+   resource, together with the syntax constraints described by a meta-
    schema.  The meta-schema's URI also identifies the dialect.
 
    *Root schema*
@@ -1120,7 +1120,7 @@ Table of Contents
    For an example of $ref, see the example of $anchor above in
    Section 4.1.4.1.  For an example of $dynamicRef, see Appendix C.
    // The difference between the hyper-schema meta-schema in pre-2019
-   // drafts and an this draft dramatically demonstrates the utility of
+   // drafts and in this draft dramatically demonstrates the utility of
    // these keywords.
 
 4.2.2.  "$defs"
@@ -1318,8 +1318,8 @@ Table of Contents
 
    *  Requiring alternate fields in an object, when combined with the
       "required" keyword: a contact could require a work_email or
-      require a work_phone, and putting both require keywords inside the
-      anyOf keyword allows either to satisfy the schema.
+      require a work_phone, and putting both required keywords inside
+      the anyOf keyword allows either to satisfy the schema.
 
 5.2.3.  "oneOf"
 
@@ -2224,7 +2224,7 @@ Table of Contents
 8.3.1.1.  "date-time"
 
    A string input is valid against this attribute if it is a valid
-   representation according to the "date-time' ABNF rule (referenced
+   representation according to the "date-time" ABNF rule (referenced
    above).
 
 8.3.1.2.  "date"
@@ -2767,7 +2767,7 @@ Table of Contents
      }
    }
 
-   With the instance following instance processed:
+   When the above schema evaluates the following input:
 
    {
      "username": "xyz",
@@ -3102,7 +3102,7 @@ Table of Contents
    value of a "$defs" object at the containing schema's root.  The key
    of the "$defs" for the now embedded Schema Resource MAY be the "$id"
    of the bundled schema or some other form of application defined
-   unique identifer (such as a UUID).  This key is not intended to be
+   unique identifier (such as a UUID).  This key is not intended to be
    referenced in JSON Schema, but may be used by an application to aid
    the bundling process.
 
@@ -3210,7 +3210,7 @@ Table of Contents
 
    It is RECOMMENDED that instances described by a schema provide a link
    to a downloadable JSON Schema using the link relation "describedby",
-   as defined by Linked Data Protocol 1.0, ([LDP] Section 8.1.
+   as defined by Linked Data Protocol 1.0, ([LDP]) Section 8.1.
 
    In HTTP, such links can be attached to any response using the Link
    header ([RFC8288]).  An example of such a header would be:
@@ -3592,7 +3592,7 @@ Table of Contents
 
    Keywords that allow adjusting the location using a Relative JSON
    Pointer SHOULD default to using the current location if a default is
-   desireable.
+   desirable.
 
 13.  Output Formatting
 
@@ -3776,7 +3776,7 @@ Table of Contents
 
 13.4.1.  Flag
 
-   In the simplest case, merely the boolean result for the "valid" valid
+   In the simplest case, merely the boolean result for the "valid"
    property needs to be fulfilled.
 
    {
@@ -4488,7 +4488,7 @@ Appendix A.  Schema identification examples
    // Multiple "canonical" URIs?  We Acknowledge this is potentially
    // confusing, and direct you to read the CREF located in the JSON
    // Pointer fragments and embedded schema resources (Section 11.2.2)
-   // section for futher comments.
+   // section for further comments.
 
 Appendix B.  Manipulating schema documents and references
 
@@ -5033,7 +5033,7 @@ E.2.  Example meta-schema with vocabulary declarations
      "properties": {
        "minDate": {
          "type": "string",
-         "pattern": "\d\d\d\d-\d\d-\d\d",
+         "pattern": "^\d\d\d\d-\d\d-\d\d$",
          "format": "date"
        }
      }
