@@ -1068,8 +1068,8 @@ This keyword's value MUST be a valid JSON Schema.
 
 Validation MUST always succeed against this keyword
 regardless of the validation outcome of its subschema.
-The subschema validation outcom controls which "then"/"else" keywords are
-evaluated. Beyond that, the subschema validation MUST be disregarded.
+The subschema validation outcome controls which "then"/"else" keywords are
+evaluated, not the overall validation result.
 
 Inputs that successfully validate against this
 keyword's subschema MUST also be valid against
