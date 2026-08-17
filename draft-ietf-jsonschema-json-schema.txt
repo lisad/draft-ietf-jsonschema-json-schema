@@ -86,7 +86,7 @@ Table of Contents
        3.5.1.  Required and recommended vocabularies
        3.5.2.  Requirements for handling extensions
        3.5.3.  Validation and Annotation
-   4.  Core Keywords
+   4.  Vocabulary for Core Keywords
      4.1.  Environment
        4.1.1.  "$schema"
        4.1.2.  "$vocabulary"
@@ -97,7 +97,7 @@ Table of Contents
        4.2.2.  "$defs"
        4.2.3.  Example
      4.3.  "$comment"
-   5.  Subschema keywords
+   5.  Vocabulary for Subschema Applicators
      5.1.  Keyword Independence
      5.2.  Keywords for Applying Subschemas in Place
        5.2.1.  "allOf"
@@ -117,11 +117,11 @@ Table of Contents
        5.4.2.  "additionalProperties"
        5.4.3.  "patternProperties"
        5.4.4.  "propertyNames"
-   6.  Keywords for Unevaluated Locations
+   6.  Vocabulary for Unevaluated Locations
      6.1.  Keyword Independence
      6.2.  "unevaluatedItems"
      6.3.  "unevaluatedProperties"
-   7.  Keywords for Structural Validation
+   7.  Vocabulary for Validation Assertions
      7.1.  Validation Keywords for Any Instance Type
        7.1.1.  "type"
        7.1.2.  "enum"
@@ -147,7 +147,7 @@ Table of Contents
        7.5.2.  "minProperties"
        7.5.3.  "required"
        7.5.4.  "dependentRequired"
-   8.  Vocabularies for Semantic Content With "format"
+   8.  Vocabulary for Semantic Content With "format"
      8.1.  Foreword
      8.2.  Implementation Requirements
        8.2.1.  Format-Annotation Vocabulary
@@ -162,14 +162,14 @@ Table of Contents
        8.3.6.  Templates
        8.3.7.  JSON Pointers
        8.3.8.  Expressions
-   9.  A Vocabulary for the Contents of String-Encoded Data
+   9.  Vocabulary for the Contents of String-Encoded Data
      9.1.  Foreword
      9.2.  Implementation Requirements
      9.3.  "contentEncoding"
      9.4.  "contentMediaType"
      9.5.  "contentSchema"
      9.6.  Example
-   10. A Vocabulary for Basic Meta-Data Annotations
+   10. Vocabulary for Basic Meta-Data Annotations
      10.1.  "title" and "description"
        10.1.1.  "title" and "description" example
      10.2.  "default"
@@ -289,12 +289,12 @@ Table of Contents
 
    *  For schema authors, the chapter on terminology (Section 2) might
       be the first read, followed by chapters about core keywords
-      (Section 4), subschema keywords (Section 5) and structural
-      keywords (Section 7) as these are the keywords most commonly used
-      when authoring schemas.  In addition, the formats used with the
-      format keyword are defined in Section 8.  Other sections up to and
-      including Section 10 may be interesting depending on the topic of
-      the chapter.
+      (Section 4), subschema applicator keywords (Section 5) and
+      validation assertion keywords (Section 7) as these are the
+      keywords most commonly used when authoring schemas.  In addition,
+      the formats used with the format keyword are defined in Section 8.
+      Other sections up to and including Section 10 may be interesting
+      depending on the topic of the chapter.
 
    *  Implementors will need to understand the requirements in sections
       3 through 10 but also the requirements on loading and processing
@@ -791,7 +791,7 @@ Table of Contents
    Section 12.1.1 for detailed guidance on when previously emitted
    annotations MUST be discarded.
 
-4.  Core Keywords
+4.  Vocabulary for Core Keywords
 
    Core keywords MUST be implemented by any implementation indicating
    support for the "application/schema+json" media type.
@@ -841,7 +841,8 @@ Table of Contents
    object, and MAY be used in the root schema objects of embedded schema
    resources.  It MUST NOT appear in non-resource root schema objects.
    If absent from the document root schema, the resulting behavior is
-   implementation-defined.
+   implementation-defined, however, using this specification's default
+   dialect (Section 14.4) is RECOMMENDED.
 
    Values for this property are defined elsewhere in this and other
    documents, and by other parties.
@@ -1193,7 +1194,7 @@ Table of Contents
    comment explains to schema maintainers where a value limit comes
    from.
 
-5.  Subschema keywords
+5.  Vocabulary for Subschema Applicators
 
    This section defines keywords that are RECOMMENDED for use as the
    basis of other vocabularies.
@@ -1702,7 +1703,7 @@ Table of Contents
   }
 }
 
-6.  Keywords for Unevaluated Locations
+6.  Vocabulary for Unevaluated Locations
 
    The purpose of these keywords is to enable schema authors to apply
    subschemas to array items or object properties that have not been
@@ -1808,7 +1809,7 @@ Table of Contents
 
      "unevaluatedProperties": { "type": "number" }
 
-7.  Keywords for Structural Validation
+7.  Vocabulary for Validation Assertions
 
    Validation keywords in a schema impose requirements for successful
    validation of an input.  These keywords are all assertions without
@@ -2046,7 +2047,7 @@ Table of Contents
 
    Omitting this keyword has the same behavior as an empty object.
 
-8.  Vocabularies for Semantic Content With "format"
+8.  Vocabulary for Semantic Content With "format"
 
 8.1.  Foreword
 
@@ -2399,7 +2400,7 @@ Table of Contents
    of ECMA-262 defined in Regular Expressions (Section 16.3) section of
    this specification, and SHOULD accept all valid ECMA-262 expressions.
 
-9.  A Vocabulary for the Contents of String-Encoded Data
+9.  Vocabulary for the Contents of String-Encoded Data
 
 9.1.  Foreword
 
@@ -2567,7 +2568,7 @@ Table of Contents
    represented in a JSON string, there is no need for further encoding
    or decoding.
 
-10.  A Vocabulary for Basic Meta-Data Annotations
+10.  Vocabulary for Basic Meta-Data Annotations
 
    These general-purpose annotation keywords provide commonly used
    information for documentation and user interface display purposes.
