@@ -5,9 +5,9 @@
 Network Working Group                                  L. Dusseault, Ed.
 Internet-Draft                                  Data Transfer Initiative
 Intended status: Standards Track                               A. Wright
-Expires: 15 February 2027                                               
+Expires: 18 February 2027                                               
                                                               H. Andrews
-                                                          14 August 2026
+                                                          17 August 2026
 
 
                               JSON Schema
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 February 2027.
+   This Internet-Draft will expire on 18 February 2027.
 
 Copyright Notice
 
@@ -382,9 +382,9 @@ Table of Contents
 
    JSON Schema can be extended either by defining additional
    vocabularies, or less formally by defining additional keywords
-   outside of any vocabulary.  Unrecognized individual keywords simply
-   have their values treated as annotations, while the behavior with
-   respect to an unrecognized vocabulary can be controlled when
+   outside of any vocabulary.  Unrecognized individual keywords are
+   handled in accordance with section Section 12.4, while the behavior
+   with respect to an unrecognized vocabulary can be controlled when
    declaring which vocabularies are in use.
 
 2.  Terminology
