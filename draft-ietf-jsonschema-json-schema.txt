@@ -5,9 +5,9 @@
 Network Working Group                                  L. Dusseault, Ed.
 Internet-Draft                                  Data Transfer Initiative
 Intended status: Standards Track                               A. Wright
-Expires: 18 February 2027                                               
+Expires: 19 February 2027                                               
                                                               H. Andrews
-                                                          17 August 2026
+                                                          18 August 2026
 
 
                               JSON Schema
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 February 2027.
+   This Internet-Draft will expire on 19 February 2027.
 
 Copyright Notice
 
@@ -1362,11 +1362,9 @@ Table of Contents
    This keyword's value MUST be a valid JSON Schema.
 
    Validation MUST always succeed against this keyword regardless of the
-   validation outcome of it subschema.
-
-   This validation outcome of this keyword's subschema controls which of
-   the "then" or "else" keywords are evaluated, but otherwise MUST be
-   disregarded.
+   validation outcome of its subschema.  The subschema validation
+   outcome controls which "then"/"else" keywords are evaluated, not the
+   validation result of the "if" keyword.
 
    Inputs that successfully validate against this keyword's subschema
    MUST also be valid against the subschema value of the "then" keyword,
@@ -3315,12 +3313,8 @@ Table of Contents
 12.1.1.  Successful, unsuccessful, and ignored evaluations
 
    Each dynamic scope represents an evaluation of an input location by a
-   schema.  Keyword evaluations within the dynamic scope are immediate
-   sub-evaluations of the schema evaluation, and subschema evaluations
-   within a dynamic subscope created by an applicator keyword are
-   immediate sub-evaluations of the applicator keyword evaluation.  The
-   sub-evaluation relationship is transitive regardless of whether a
-   given evaluation is a keyword or schema evaluation.
+   schema.  Keyword evaluations within the dynamic scope are sub-
+   evaluations.  The sub-evaluation relationship is recursive.
 
    Evaluation includes validation, which either accepts or rejects the
    input, as well as management of annotations, error messages, and
