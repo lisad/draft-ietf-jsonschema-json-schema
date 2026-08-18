@@ -1448,19 +1448,27 @@ Elements in the array might be of any type, including null.
 The value of this keyword MAY be of any type, including null.
 
 Use of this keyword is functionally equivalent to an
-{{enum}} with a single value.
+enum ({{enum}}) with a single value.
 
 An input validates successfully against this keyword if its value is
 equal to the value of the keyword.
 
 ## Validation Keywords for Numeric Inputs (number and integer) {#numeric}
 
-### "multipleOf"
+### "multipleOf" {#multipleOf}
 
 The value of "multipleOf" MUST be a number, strictly greater than 0.
 
 A numeric input value is valid only if division by this keyword's value results in
 an integer.
+
+~~~ json
+{::include ./examples/quantity-multipleOf.json}
+~~~
+
+This product is only sold in six-packs, so "quantity" must be a
+multiple of 6; an order that does not specify "quantity" defaults
+to a single pack.
 
 ### "maximum"
 
@@ -1469,6 +1477,8 @@ for a numeric input value.
 
 If the input value is a number, then this keyword validates only if the input value is
 less than or exactly equal to "maximum".
+
+See the example for {{unevaluatedItems}} which includes the "maximum" keyword as well.
 
 ### "exclusiveMaximum"
 
@@ -1493,6 +1503,14 @@ limit for a numeric input value.
 
 If the input value is a number, then it is valid only if it has a value
 strictly greater than (not equal to) "exclusiveMinimum".
+
+~~~ json
+{::include ./examples/discount-exclusiveMinimum.json}
+~~~
+
+A discount of 0% is not a discount at all, so it is excluded by
+"exclusiveMinimum", while a discount of 100% is a valid (if extreme)
+value, so it is included by "maximum".
 
 ## Validation Keywords for Strings {#string}
 
@@ -1528,6 +1546,8 @@ A string input value is considered valid if the regular
 expression matches the input value successfully. Recall: regular
 expressions are not implicitly anchored.
 
+An example including "pattern" can be found in {{allof-if-example}}.
+
 ## Validation Keywords for Arrays
 
 ### "maxItems"
@@ -1555,6 +1575,13 @@ successfully. If it has boolean value true, the input array validates
 successfully if all of its elements are unique.
 
 Omitting this keyword has the same behavior as a value of false.
+
+~~~ json
+{::include ./examples/labels-uniqueItems.json}
+~~~
+
+In this example, an object may have at most five labels ("maxItems"), and the same
+label cannot be applied twice ("uniqueItems").
 
 
 ### "maxContains"
@@ -1594,7 +1621,15 @@ An object is valid against "maxProperties" if its
 number of properties is less than, or equal to, the value of this
 keyword.
 
-### "minProperties"
+~~~ json
+{::include ./examples/contact-maxProperties.json}
+~~~
+
+In this example, a contact record must have exactly one primary contact method.
+The value of "minProperties" rules out giving none, and "maxProperties" rules out
+giving more than one.
+
+### "minProperties" {#minProperties}
 
 The value of this keyword MUST be a non-negative integer.
 
@@ -1603,6 +1638,7 @@ number of properties is greater than, or equal to, the value of this
 keyword.
 
 Omitting this keyword has the same behavior as a value of 0.
+
 
 ### "required"
 
@@ -1630,6 +1666,13 @@ item in the corresponding array is also the name of a property
 in the input object.
 
 Omitting this keyword has the same behavior as an empty object.
+
+~~~ json
+{::include ./examples/meeting-dependentRequired.json}
+~~~
+
+In this example, a meeting invitation can have neither "startTime" nor "endTime",
+but it cannot give an "endTime" without also giving a "startTime".
 
 # Vocabulary for Semantic Content With "format" {#format-vocab}
 
@@ -2187,6 +2230,9 @@ the default.
 This keyword is most commonly used by applications outside of the scope
 of this specification, such as generating documentation or web forms
 from schemas.
+
+For an example of "default", see the "quantity" property in the
+"multipleOf" example above in {{multipleOf}}.
 
 ## "deprecated"
 

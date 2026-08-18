@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "properties": {
+    "email": { "type": "string", "format": "email" },
+    "phone": { "type": "string" },
+    "mailingAddress": { "type": "string" }
+  },
+  "minProperties": 1,
+  "maxProperties": 1
+}
