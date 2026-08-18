@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-08-16T01:17:43.890671+00:00",
+  "timestamp": "2026-08-18T01:12:49.803767+00:00",
   "repo": "lisad/draft-ietf-jsonschema-json-schema",
   "labels": [
     {
@@ -241,15 +241,15 @@
       "id": "I_kwDOR8mbas8AAAABCp0hEQ",
       "title": "Handle duplicate definitions of how to handle unrecognized keywords",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/issues/9",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "lisad",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Eliot's mail:\n---\nIn Section 2.1:\n\nUnrecognized individual keywords simply have their values treated as annotations [...]\n\nIn Section 13.4, it reads:\n\nImplementations SHOULD treat keywords they do not recognize, or that they recognize but do not support, as annotations, where the value of the keyword is the value of the annotation. Whether an implementation collects these annotations or not, they MUST otherwise ignore the keywords.\n\n---\nWorth looking at eventually, other rewritings may make this moot.  \n",
       "createdAt": "2026-05-18T22:34:21Z",
-      "updatedAt": "2026-05-18T22:34:21Z",
-      "closedAt": null,
+      "updatedAt": "2026-08-17T16:34:04Z",
+      "closedAt": "2026-08-17T16:34:04Z",
       "comments": []
     },
     {
@@ -2318,7 +2318,7 @@
       "labels": [],
       "body": "_[**EDIT:** I ended up needing to revise this more substantially, see [the explanatory comment](https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/42#issuecomment-5194128895) below]_\r\n\r\nReplace the implementing-with-annotations appendix with a more generic version, in preparation for removing the annotations involved.\r\n\r\nThe interaction with `\"required\"` was removed entirely as `\"required\"` is not specified in terms of `\"properties\"` (it works independently as it can be used with `\"properties\"` being present).\r\n\r\nAdded `\"minContains\"` and `\"maxContains\"` to the static version of the final table, and `\"if\"` to the runtime version, since if this is about dependencies in general they count even though they did not previously use annotations (and can be used entirely statically).  I also tried to clarify that certain runtime keyword dependencies do not need to track exact properties/indices as they always consume all remaining locations.\r\n\r\nIn general, I moved away from literal JSON values as dependencies no longer specify the exact format.  \r\n\r\n~~I have other thoughts on cases that would benefit from examples here, but I wanted to keep this PR minimal so I stayed with the examples as-is, just changing the framing.~~ _[**EDIT:** I had to do most of these after all as discussed [below](https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/42#issuecomment-5194128895).]_",
       "createdAt": "2026-08-04T01:09:12Z",
-      "updatedAt": "2026-08-14T21:19:42Z",
+      "updatedAt": "2026-08-17T18:38:09Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c5695e740963614316ad01f79e9c7dfae92a70cb",
@@ -3158,13 +3158,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-08-15T01:29:46Z",
-      "updatedAt": "2026-08-15T20:15:40Z",
+      "updatedAt": "2026-08-17T21:17:12Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c7a64a0fc31ed0c9163e8598c6395606492c8f94",
       "headRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "headRefName": "two-simplifications",
-      "headRefOid": "17951763264451b5cf5d43a2bee3ad4ed87e54b8",
+      "headRefOid": "e206115b77a84da99250b79802d377b45ffad037",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -3223,6 +3223,26 @@
           "createdAt": "2026-08-15T20:15:40Z",
           "updatedAt": "2026-08-15T20:15:40Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABJ1HHEQ",
+          "commit": {
+            "abbreviatedOid": "e206115"
+          },
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-17T21:17:12Z",
+          "updatedAt": "2026-08-17T21:17:12Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "One tiny further tweak, as we sometimes use \"overall\" to mean \"the entire evaluation of the entire input by the entire schema\":\n\n```suggestion\nThe subschema validation outcome controls which \"then\"/\"else\" keywords are\nevaluated, not the validation result of the \"if\" keyword.\n```",
+              "createdAt": "2026-08-17T21:17:12Z",
+              "updatedAt": "2026-08-17T21:17:12Z"
+            }
+          ]
         }
       ]
     },
@@ -3231,50 +3251,68 @@
       "id": "PR_kwDOR8mbas7_jb28",
       "title": "Name vocab sections after vocabs",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/56",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "handrews",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "As discussed on yesterday's call.\r\n\r\nThis incorporates the $vocabulary URI name into the section names.  I can't remember the capitalization rules for sections but most were title-case so I went with that, I assume we will do an editorial pass for such things later anyway.\r\n\r\nAlso clarified that there is a RECOMMENDED default behavior in the absence of \"$schema\", although formally the behavior is implementation-defined (implementations do a variety of different things here, including some that use earlier drafts as their default).",
       "createdAt": "2026-08-15T19:34:43Z",
-      "updatedAt": "2026-08-15T19:34:43Z",
+      "updatedAt": "2026-08-17T18:38:09Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c7a64a0fc31ed0c9163e8598c6395606492c8f94",
       "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
       "headRefName": "vocab-names",
       "headRefOid": "efd778dbb50947232308c6d928748a3e213d7d1a",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-08-17T16:35:16Z",
+      "mergedAt": "2026-08-17T16:35:16Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "cd5c00c61adaddbf762546af526947dd69200ba3"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOR8mbas8AAAABJzP7qA",
+          "commit": {
+            "abbreviatedOid": "efd778d"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-08-17T16:35:10Z",
+          "updatedAt": "2026-08-17T16:35:10Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 57,
       "id": "PR_kwDOR8mbas7_jxkj",
       "title": "Fix one more mention of unrecognized keywords.",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/57",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "handrews",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Missed one in the last pass, but this now cites the normative section correctly.\r\n\r\nFixes #9.",
       "createdAt": "2026-08-15T20:06:34Z",
-      "updatedAt": "2026-08-15T22:44:02Z",
+      "updatedAt": "2026-08-17T18:38:09Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c7a64a0fc31ed0c9163e8598c6395606492c8f94",
       "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
       "headRefName": "unrec-again",
       "headRefOid": "45ce98d6f3720459cb94b171cab1a8d890ccb1bf",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-08-17T16:34:03Z",
+      "mergedAt": "2026-08-17T16:34:03Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "c60e5574fb02162ebecc9106018aa3256a51d83c"
+      },
       "comments": [],
       "reviews": [
         {
@@ -3289,6 +3327,19 @@
           "createdAt": "2026-08-15T22:44:01Z",
           "updatedAt": "2026-08-15T22:44:01Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABJzPceA",
+          "commit": {
+            "abbreviatedOid": "45ce98d"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-08-17T16:33:58Z",
+          "updatedAt": "2026-08-17T16:33:58Z",
+          "comments": []
         }
       ]
     },
@@ -3297,24 +3348,26 @@
       "id": "PR_kwDOR8mbas7_j-Rv",
       "title": "Fix various typos",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/58",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "handrews",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Including a regular expression that needs to be anchored.",
       "createdAt": "2026-08-15T20:24:11Z",
-      "updatedAt": "2026-08-15T22:08:00Z",
+      "updatedAt": "2026-08-17T18:38:09Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "c7a64a0fc31ed0c9163e8598c6395606492c8f94",
       "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
       "headRefName": "typos",
       "headRefOid": "0359af247371068612a52e0799b0f2da6bbebc5e",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-08-17T16:34:25Z",
+      "mergedAt": "2026-08-17T16:34:25Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "7c88714e93a7090cde4652f88f7b98dab4b9ab5b"
+      },
       "comments": [],
       "reviews": [
         {
@@ -3329,8 +3382,47 @@
           "createdAt": "2026-08-15T22:08:00Z",
           "updatedAt": "2026-08-15T22:08:00Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABJzPTpg",
+          "commit": {
+            "abbreviatedOid": "0359af2"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-08-17T16:33:38Z",
+          "updatedAt": "2026-08-17T16:33:38Z",
+          "comments": []
         }
       ]
+    },
+    {
+      "number": 59,
+      "id": "PR_kwDOR8mbas8AAAABAD2-Hg",
+      "title": "Simplify evaluation status to relevance, settle on \"produce\" instead of \"collect\"",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/59",
+      "state": "OPEN",
+      "author": "handrews",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This replaces successful/unsuccessful/ignored evaluation status with a simpler concept of evaluation relevance:\r\n\r\nsuccessful+valid => relevant\r\nunsuccessful+invalid => relevant\r\nunsuccessful+valid => irrelevant\r\nignored => irrelevant\r\n\r\nNote that successful evaluations were never invalid.\r\n\r\nThe trade-off is that the \"unevaluated*\" keywords need to talk about validity+relevance instead of just \"successful\", but otherwise this simplifies a lot of things and unifies how annotations and errors are handled.  We care about both of them from relevant evaluations, and neither of them from irrelevant ones.\r\n\r\nThis also settles on \"produce\" for language around annotations, replacing what remained of the old \"collect\" language.  This also allows using the same language for annotations and errors, which are now both \"produced\", are initially relevant, and can become irrelevant under specific circumstances.",
+      "createdAt": "2026-08-17T20:28:05Z",
+      "updatedAt": "2026-08-17T20:28:05Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "cd5c00c61adaddbf762546af526947dd69200ba3",
+      "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
+      "headRefName": "relevance",
+      "headRefOid": "9be049d8c1d2ce7373d1e5ac14c6be3b045bcc84",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
