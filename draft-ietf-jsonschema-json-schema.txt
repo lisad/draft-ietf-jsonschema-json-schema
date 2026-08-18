@@ -1861,8 +1861,8 @@ Table of Contents
 
    The value of this keyword MAY be of any type, including null.
 
-   Use of this keyword is functionally equivalent to an Section 7.1.2
-   with a single value.
+   Use of this keyword is functionally equivalent to an enum
+   (Section 7.1.2) with a single value.
 
    An input validates successfully against this keyword if its value is
    equal to the value of the keyword.
@@ -1876,6 +1876,23 @@ Table of Contents
    A numeric input value is valid only if division by this keyword's
    value results in an integer.
 
+   {
+     "type": "object",
+     "properties": {
+       "productName": { "type": "string" },
+       "quantity": {
+         "type": "integer",
+         "multipleOf": 6,
+         "default": 6
+       }
+     },
+     "required": ["productName"]
+   }
+
+   This product is only sold in six-packs, so "quantity" must be a
+   multiple of 6; an order that does not specify "quantity" defaults to
+   a single pack.
+
 7.2.2.  "maximum"
 
    The value of "maximum" MUST be a number, representing an inclusive
@@ -1883,6 +1900,9 @@ Table of Contents
 
    If the input value is a number, then this keyword validates only if
    the input value is less than or exactly equal to "maximum".
+
+   See the example for Section 6.2 which includes the "maximum" keyword
+   as well.
 
 7.2.3.  "exclusiveMaximum"
 
@@ -1907,6 +1927,21 @@ Table of Contents
 
    If the input value is a number, then it is valid only if it has a
    value strictly greater than (not equal to) "exclusiveMinimum".
+
+   {
+     "type": "object",
+     "properties": {
+       "discountPercent": {
+         "type": "number",
+         "exclusiveMinimum": 0,
+         "maximum": 100
+       }
+     }
+   }
+
+   A discount of 0% is not a discount at all, so it is excluded by
+   "exclusiveMinimum", while a discount of 100% is a valid (if extreme)
+   value, so it is included by "maximum".
 
 7.3.  Validation Keywords for Strings
 
@@ -1942,6 +1977,8 @@ Table of Contents
    matches the input value successfully.  Recall: regular expressions
    are not implicitly anchored.
 
+   An example including "pattern" can be found in Section 5.2.5.1.
+
 7.4.  Validation Keywords for Arrays
 
 7.4.1.  "maxItems"
@@ -1969,6 +2006,23 @@ Table of Contents
    validates successfully if all of its elements are unique.
 
    Omitting this keyword has the same behavior as a value of false.
+
+   {
+     "type": "object",
+     "properties": {
+       "title": { "type": "string" },
+       "labels": {
+         "type": "array",
+         "items": { "type": "string" },
+         "maxItems": 5,
+         "uniqueItems": true
+       }
+     },
+     "required": ["title"]
+   }
+
+   In this example, an object may have at most five labels ("maxItems"),
+   and the same label cannot be applied twice ("uniqueItems").
 
 7.4.4.  "maxContains"
 
@@ -2009,6 +2063,21 @@ Table of Contents
    An object is valid against "maxProperties" if its number of
    properties is less than, or equal to, the value of this keyword.
 
+   {
+     "type": "object",
+     "properties": {
+       "email": { "type": "string", "format": "email" },
+       "phone": { "type": "string" },
+       "mailingAddress": { "type": "string" }
+     },
+     "minProperties": 1,
+     "maxProperties": 1
+   }
+
+   In this example, a contact record must have exactly one primary
+   contact method.  The value of "minProperties" rules out giving none,
+   and "maxProperties" rules out giving more than one.
+
 7.5.2.  "minProperties"
 
    The value of this keyword MUST be a non-negative integer.
@@ -2044,6 +2113,23 @@ Table of Contents
    object.
 
    Omitting this keyword has the same behavior as an empty object.
+
+   {
+     "type": "object",
+     "properties": {
+       "title": { "type": "string" },
+       "startTime": { "type": "string", "format": "date-time" },
+       "endTime": { "type": "string", "format": "date-time" }
+     },
+     "required": ["title"],
+     "dependentRequired": {
+       "endTime": ["startTime"]
+     }
+   }
+
+   In this example, a meeting invitation can have neither "startTime"
+   nor "endTime", but it cannot give an "endTime" without also giving a
+   "startTime".
 
 8.  Vocabulary for Semantic Content With "format"
 
@@ -2607,7 +2693,7 @@ Table of Contents
    {
      "title": "Change Record",
      "type": "object",
-     "required": "editor",
+     "required": ["editor"],
      "$comment": "A real record would have more properties",
      "properties": {
        "editor": {
@@ -2682,6 +2768,9 @@ Table of Contents
    This keyword is most commonly used by applications outside of the
    scope of this specification, such as generating documentation or web
    forms from schemas.
+
+   For an example of "default", see the "quantity" property in the
+   "multipleOf" example above in Section 7.2.1.
 
 10.3.  "deprecated"
 
