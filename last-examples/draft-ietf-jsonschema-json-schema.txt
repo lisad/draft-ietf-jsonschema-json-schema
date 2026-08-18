@@ -5,9 +5,9 @@
 Network Working Group                                  L. Dusseault, Ed.
 Internet-Draft                                  Data Transfer Initiative
 Intended status: Standards Track                               A. Wright
-Expires: 17 February 2027                                               
+Expires: 19 February 2027                                               
                                                               H. Andrews
-                                                          16 August 2026
+                                                          18 August 2026
 
 
                               JSON Schema
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 February 2027.
+   This Internet-Draft will expire on 19 February 2027.
 
 Copyright Notice
 
@@ -86,7 +86,7 @@ Table of Contents
        3.5.1.  Required and recommended vocabularies
        3.5.2.  Requirements for handling extensions
        3.5.3.  Validation and Annotation
-   4.  Core Keywords
+   4.  Vocabulary for Core Keywords
      4.1.  Environment
        4.1.1.  "$schema"
        4.1.2.  "$vocabulary"
@@ -97,7 +97,7 @@ Table of Contents
        4.2.2.  "$defs"
        4.2.3.  Example
      4.3.  "$comment"
-   5.  Subschema keywords
+   5.  Vocabulary for Subschema Applicators
      5.1.  Keyword Independence
      5.2.  Keywords for Applying Subschemas in Place
        5.2.1.  "allOf"
@@ -117,11 +117,11 @@ Table of Contents
        5.4.2.  "additionalProperties"
        5.4.3.  "patternProperties"
        5.4.4.  "propertyNames"
-   6.  Keywords for Unevaluated Locations
+   6.  Vocabulary for Unevaluated Locations
      6.1.  Keyword Independence
      6.2.  "unevaluatedItems"
      6.3.  "unevaluatedProperties"
-   7.  Keywords for Structural Validation
+   7.  Vocabulary for Validation Assertions
      7.1.  Validation Keywords for Any Instance Type
        7.1.1.  "type"
        7.1.2.  "enum"
@@ -147,7 +147,7 @@ Table of Contents
        7.5.2.  "minProperties"
        7.5.3.  "required"
        7.5.4.  "dependentRequired"
-   8.  Vocabularies for Semantic Content With "format"
+   8.  Vocabulary for Semantic Content With "format"
      8.1.  Foreword
      8.2.  Implementation Requirements
        8.2.1.  Format-Annotation Vocabulary
@@ -162,14 +162,14 @@ Table of Contents
        8.3.6.  Templates
        8.3.7.  JSON Pointers
        8.3.8.  Expressions
-   9.  A Vocabulary for the Contents of String-Encoded Data
+   9.  Vocabulary for the Contents of String-Encoded Data
      9.1.  Foreword
      9.2.  Implementation Requirements
      9.3.  "contentEncoding"
      9.4.  "contentMediaType"
      9.5.  "contentSchema"
      9.6.  Example
-   10. A Vocabulary for Basic Meta-Data Annotations
+   10. Vocabulary for Basic Meta-Data Annotations
      10.1.  "title" and "description"
        10.1.1.  "title" and "description" example
      10.2.  "default"
@@ -289,12 +289,12 @@ Table of Contents
 
    *  For schema authors, the chapter on terminology (Section 2) might
       be the first read, followed by chapters about core keywords
-      (Section 4), subschema keywords (Section 5) and structural
-      keywords (Section 7) as these are the keywords most commonly used
-      when authoring schemas.  In addition, the formats used with the
-      format keyword are defined in Section 8.  Other sections up to and
-      including Section 10 may be interesting depending on the topic of
-      the chapter.
+      (Section 4), subschema applicator keywords (Section 5) and
+      validation assertion keywords (Section 7) as these are the
+      keywords most commonly used when authoring schemas.  In addition,
+      the formats used with the format keyword are defined in Section 8.
+      Other sections up to and including Section 10 may be interesting
+      depending on the topic of the chapter.
 
    *  Implementors will need to understand the requirements in sections
       3 through 10 but also the requirements on loading and processing
@@ -382,9 +382,9 @@ Table of Contents
 
    JSON Schema can be extended either by defining additional
    vocabularies, or less formally by defining additional keywords
-   outside of any vocabulary.  Unrecognized individual keywords simply
-   have their values treated as annotations, while the behavior with
-   respect to an unrecognized vocabulary can be controlled when
+   outside of any vocabulary.  Unrecognized individual keywords are
+   handled in accordance with section Section 12.4, while the behavior
+   with respect to an unrecognized vocabulary can be controlled when
    declaring which vocabularies are in use.
 
 2.  Terminology
@@ -487,7 +487,7 @@ Table of Contents
    *Dialect*
 
    A _dialect_ is a set of vocabularies used within a given schema
-   resource, toether with the syntax constraints described by a meta-
+   resource, together with the syntax constraints described by a meta-
    schema.  The meta-schema's URI also identifies the dialect.
 
    *Root schema*
@@ -791,7 +791,7 @@ Table of Contents
    Section 12.1.1 for detailed guidance on when previously emitted
    annotations MUST be discarded.
 
-4.  Core Keywords
+4.  Vocabulary for Core Keywords
 
    Core keywords MUST be implemented by any implementation indicating
    support for the "application/schema+json" media type.
@@ -841,7 +841,8 @@ Table of Contents
    object, and MAY be used in the root schema objects of embedded schema
    resources.  It MUST NOT appear in non-resource root schema objects.
    If absent from the document root schema, the resulting behavior is
-   implementation-defined.
+   implementation-defined, however, using this specification's default
+   dialect (Section 14.4) is RECOMMENDED.
 
    Values for this property are defined elsewhere in this and other
    documents, and by other parties.
@@ -1120,7 +1121,7 @@ Table of Contents
    For an example of $ref, see the example of $anchor above in
    Section 4.1.4.1.  For an example of $dynamicRef, see Appendix C.
    // The difference between the hyper-schema meta-schema in pre-2019
-   // drafts and an this draft dramatically demonstrates the utility of
+   // drafts and in this draft dramatically demonstrates the utility of
    // these keywords.
 
 4.2.2.  "$defs"
@@ -1193,7 +1194,7 @@ Table of Contents
    comment explains to schema maintainers where a value limit comes
    from.
 
-5.  Subschema keywords
+5.  Vocabulary for Subschema Applicators
 
    This section defines keywords that are RECOMMENDED for use as the
    basis of other vocabularies.
@@ -1318,8 +1319,8 @@ Table of Contents
 
    *  Requiring alternate fields in an object, when combined with the
       "required" keyword: a contact could require a work_email or
-      require a work_phone, and putting both require keywords inside the
-      anyOf keyword allows either to satisfy the schema.
+      require a work_phone, and putting both required keywords inside
+      the anyOf keyword allows either to satisfy the schema.
 
 5.2.3.  "oneOf"
 
@@ -1700,7 +1701,7 @@ Table of Contents
   }
 }
 
-6.  Keywords for Unevaluated Locations
+6.  Vocabulary for Unevaluated Locations
 
    The purpose of these keywords is to enable schema authors to apply
    subschemas to array items or object properties that have not been
@@ -1806,7 +1807,7 @@ Table of Contents
 
      "unevaluatedProperties": { "type": "number" }
 
-7.  Keywords for Structural Validation
+7.  Vocabulary for Validation Assertions
 
    Validation keywords in a schema impose requirements for successful
    validation of an input.  These keywords are all assertions without
@@ -2130,7 +2131,7 @@ Table of Contents
    nor "endTime", but it cannot give an "endTime" without also giving a
    "startTime".
 
-8.  Vocabularies for Semantic Content With "format"
+8.  Vocabulary for Semantic Content With "format"
 
 8.1.  Foreword
 
@@ -2308,7 +2309,7 @@ Table of Contents
 8.3.1.1.  "date-time"
 
    A string input is valid against this attribute if it is a valid
-   representation according to the "date-time' ABNF rule (referenced
+   representation according to the "date-time" ABNF rule (referenced
    above).
 
 8.3.1.2.  "date"
@@ -2483,7 +2484,7 @@ Table of Contents
    of ECMA-262 defined in Regular Expressions (Section 16.3) section of
    this specification, and SHOULD accept all valid ECMA-262 expressions.
 
-9.  A Vocabulary for the Contents of String-Encoded Data
+9.  Vocabulary for the Contents of String-Encoded Data
 
 9.1.  Foreword
 
@@ -2651,7 +2652,7 @@ Table of Contents
    represented in a JSON string, there is no need for further encoding
    or decoding.
 
-10.  A Vocabulary for Basic Meta-Data Annotations
+10.  Vocabulary for Basic Meta-Data Annotations
 
    These general-purpose annotation keywords provide commonly used
    information for documentation and user interface display purposes.
@@ -2854,7 +2855,7 @@ Table of Contents
      }
    }
 
-   With the instance following instance processed:
+   When the above schema evaluates the following input:
 
    {
      "username": "xyz",
@@ -3189,7 +3190,7 @@ Table of Contents
    value of a "$defs" object at the containing schema's root.  The key
    of the "$defs" for the now embedded Schema Resource MAY be the "$id"
    of the bundled schema or some other form of application defined
-   unique identifer (such as a UUID).  This key is not intended to be
+   unique identifier (such as a UUID).  This key is not intended to be
    referenced in JSON Schema, but may be used by an application to aid
    the bundling process.
 
@@ -3297,7 +3298,7 @@ Table of Contents
 
    It is RECOMMENDED that instances described by a schema provide a link
    to a downloadable JSON Schema using the link relation "describedby",
-   as defined by Linked Data Protocol 1.0, ([LDP] Section 8.1.
+   as defined by Linked Data Protocol 1.0, ([LDP]) Section 8.1.
 
    In HTTP, such links can be attached to any response using the Link
    header ([RFC8288]).  An example of such a header would be:
@@ -3675,7 +3676,7 @@ Table of Contents
 
    Keywords that allow adjusting the location using a Relative JSON
    Pointer SHOULD default to using the current location if a default is
-   desireable.
+   desirable.
 
 13.  Output Formatting
 
@@ -3859,7 +3860,7 @@ Table of Contents
 
 13.4.1.  Flag
 
-   In the simplest case, merely the boolean result for the "valid" valid
+   In the simplest case, merely the boolean result for the "valid"
    property needs to be fulfilled.
 
    {
@@ -4571,7 +4572,7 @@ Appendix A.  Schema identification examples
    // Multiple "canonical" URIs?  We Acknowledge this is potentially
    // confusing, and direct you to read the CREF located in the JSON
    // Pointer fragments and embedded schema resources (Section 11.2.2)
-   // section for futher comments.
+   // section for further comments.
 
 Appendix B.  Manipulating schema documents and references
 
@@ -5116,7 +5117,7 @@ E.2.  Example meta-schema with vocabulary declarations
      "properties": {
        "minDate": {
          "type": "string",
-         "pattern": "\d\d\d\d-\d\d-\d\d",
+         "pattern": "^\d\d\d\d-\d\d-\d\d$",
          "format": "date"
        }
      }
