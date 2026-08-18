@@ -1069,7 +1069,7 @@ This keyword's value MUST be a valid JSON Schema.
 Validation MUST always succeed against this keyword
 regardless of the validation outcome of its subschema.
 The subschema validation outcome controls which "then"/"else" keywords are
-evaluated, not the overall validation result.
+evaluated, not the validation result of the "if" keyword.
 
 Inputs that successfully validate against this
 keyword's subschema MUST also be valid against
