@@ -3025,8 +3025,8 @@ possibly the briefest is<a href="#section-5.2.4-3" class="pilcrow">¶</a></p>
 <p id="section-5.2.5-1">This keyword's value MUST be a valid JSON Schema.<a href="#section-5.2.5-1" class="pilcrow">¶</a></p>
 <p id="section-5.2.5-2">Validation MUST always succeed against this keyword
 regardless of the validation outcome of its subschema.
-The subschema validation outcom controls which "then"/"else" keywords are
-evaluated. Beyond that, the subschema validation MUST be disregarded.<a href="#section-5.2.5-2" class="pilcrow">¶</a></p>
+The subschema validation outcome controls which "then"/"else" keywords are
+evaluated, not the validation result of the "if" keyword.<a href="#section-5.2.5-2" class="pilcrow">¶</a></p>
 <p id="section-5.2.5-3">Inputs that successfully validate against this
 keyword's subschema MUST also be valid against
 the subschema value of the "then" keyword, if
