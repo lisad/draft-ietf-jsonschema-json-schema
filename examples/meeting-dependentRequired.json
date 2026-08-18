@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "properties": {
+    "title": { "type": "string" },
+    "startTime": { "type": "string", "format": "date-time" },
+    "endTime": { "type": "string", "format": "date-time" }
+  },
+  "required": ["title"],
+  "dependentRequired": {
+    "endTime": ["startTime"]
+  }
+}

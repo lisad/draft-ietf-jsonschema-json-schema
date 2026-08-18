@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "properties": {
+    "productName": { "type": "string" },
+    "quantity": {
+      "type": "integer",
+      "multipleOf": 6,
+      "default": 6
+    }
+  },
+  "required": ["productName"]
+}

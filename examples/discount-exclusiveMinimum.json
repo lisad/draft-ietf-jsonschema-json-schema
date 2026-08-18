@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "properties": {
+    "discountPercent": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 100
+    }
+  }
+}
