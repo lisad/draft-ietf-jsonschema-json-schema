@@ -165,7 +165,7 @@ A basic annotation exampe can be seen at {{title-example}}.
 
 Output annotations might only be "as true as" the input, and useful only for select inputs. For example, annotations may only meaningfully describe inputs with a particular "profile" link relation, or in some particular context. In any event, annotations never describe violations (rejected inputs).
 
-As noted in {{val-ann}}, annotation collection and output can be highly
+As noted in {{val-ann}}, annotation production and output can be highly
 configurable to support performance trade-offs and/or streaming output.
 
 ### Internet media types
@@ -592,7 +592,7 @@ in such ways as limiting output to certain annotation keywords, aggregating valu
 Implementations MAY allow annotation output to be bypassed entirely.
 
 Annotations MAY be presented as a single data structure, or as a stream of events, however if the input is rejected during processing, this voids all annotations previously emitted from that input.
-See {{eval-status}} for detailed guidance on when previously emitted annotations MUST be discarded.
+See {{relevance}} for detailed guidance on when previously emitted annotations MUST be discarded.
 
 # Vocabulary for Core Keywords {#core-keywords}
 
@@ -926,7 +926,7 @@ schemas is a concern.
 
 Implementations MUST NOT take any other action based on the presence, absence,
 or contents of "$comment" properties.  In particular, the value of "$comment"
-MUST NOT be collected as an annotation result.
+MUST NOT be produced as an annotation result.
 
 For an example using `$comment`, see {{defs-example}} above, where a comment
 explains to schema maintainers where a value limit comes from.
@@ -1082,7 +1082,7 @@ the subschema value of the "else" keyword, if
 present.
 
 If {{annotations}}
-are being collected, they are collected from this
+are being produced, they are produced from this
 keyword's subschema in the usual way, including when
 the keyword is present without either "then" or "else".
 
@@ -1109,7 +1109,7 @@ This keyword has no effect when "if" is absent, or
 when the input fails to validate against its
 subschema.  Implementations MUST NOT evaluate
 the input against this keyword, for either validation
-or annotation collection purposes, in such cases.
+or annotation production purposes, in such cases.
 
 See the example above in {{allof-if-example}} for
 a constraint added in a `then`, conditionally upon the `if` statement,
@@ -1128,7 +1128,7 @@ This keyword has no effect when "if" is absent, or
 when the input successfully validates against its
 subschema.  Implementations MUST NOT evaluate
 the input against this keyword, for either validation
-or annotation collection purposes, in such cases.
+or annotation production purposes, in such cases.
 
 ~~~~~~~~~~
 {::include ./examples/if-then-else-example.json}
@@ -1204,7 +1204,7 @@ be unbounded.
 
 In general, the subschema MUST be applied to every array element
 even after enough matches to satisfy "minContains" and "maxContains"
-have been found in order to collect annotations and support
+have been found in order to produce annotations and support
 keyword dependencies, although see {{keyword-behaviors}} for
 conditions under which short-circuiting is possible.
 
@@ -1310,7 +1310,7 @@ roles for an incident response process, but no undefined roles.
 The purpose of these keywords is to enable schema authors to apply
 subschemas to array items or object properties that have not been
 successfully evaluated within the current schema evaluation or any of its
-successful sub-evaluations (see {{eval-status}}).
+relevant and valid sub-evaluations (see {{relevance}}).
 
 Meta-schemas that do not use "$vocabulary" SHOULD be considered to
 require this vocabulary as if its URI were present with a value of true.
@@ -1723,8 +1723,8 @@ The "format" keyword functions as defined by the vocabulary which is referenced.
 
 ### Format-Annotation Vocabulary
 
-The value of format MUST be collected as an annotation, if the implementation
-supports annotation collection. This enables application-level validation when
+The value of format MUST be produced as an annotation, if the implementation
+supports annotation production. This enables application-level validation when
 schema validation is unavailable or inadequate.
 
 Implementations MAY still treat "format" as an assertion in addition to an
@@ -1751,8 +1751,8 @@ validation support MUST refuse to process the schema.
 
 An implementation that supports the Format-Assertion vocabulary:
 
-* MUST still collect "format" as an annotation if the implementation
-  supports annotation collection;
+* MUST still produce "format" as an annotation if the implementation
+  supports annotation production;
 * MUST evaluate "format" as an assertion;
 * MUST implement syntactic validation for all format attributes defined
   in this specification, and for any additional format attributes that
@@ -1781,7 +1781,7 @@ and will not be appropriate for all implementations.
 
 Implementations MAY support custom format attributes. Save for agreement between
 parties, schema authors SHALL NOT expect a peer implementation to support such
-custom format attributes. An implementation MUST NOT fail to collect unknown formats
+custom format attributes. An implementation MUST NOT fail to produce unknown formats
 as annotations.  When the Format-Assertion vocabulary is specified, implementations
 MUST fail upon encountering unknown formats.
 
@@ -2791,7 +2791,7 @@ annotation keywords in the schema object.
 The validation result of a schema object containing keywords MUST
 be the logical AND of the validation results of its keywords.
 The interactions of keyword and schema results with annotations,
-errors, and keyword dependencies are defined by {{eval-status}}, while the
+errors, and keyword dependencies are defined by {{relevance}}, while the
 relationship of subschema results to the results of the applicator
 keyword that applied them is described by {{applicators}}.
 
@@ -2799,7 +2799,7 @@ Evaluation of a parent schema object can complete once all of its
 subschemas have been evaluated, although in some circumstances evaluation
 may be short-circuited due to assertion results.  Implementations MAY
 short-circuit evaluation if analysis of the schema at load time shows that
-no annotation collection or keyword dependency communication could be
+no annotation production or keyword dependency communication could be
 impacted, **and** if the runtime configuration does not request "verbose"
 output ({{verbose}}).
 
@@ -2823,7 +2823,14 @@ The outermost dynamic scope is the schema object at
 which processing begins, even if it is not a schema resource root.
 The path from this root schema to any particular keyword (that
 includes any "$ref" and "$dynamicRef" keywords that may have
-been resolved) is considered the keyword's "validation path."
+been resolved) is considered the keyword's "evaluation path."
+
+A dynamic scope consists of a schema evaluation (at a particular
+evaluation path), which for non-empty schema objects contains one
+or more immediate keyword sub-evaluations.  A dynamic scope's subscopes
+are the result of applicator keyword subschema evaluations, which
+are considered sub-evaluations of the applicator keyword evaluation.
+The sub-evaluation and parent evaluation relationships are transitive.
 
 Lexical and dynamic scopes align until a reference keyword
 is encountered.  While following the reference keyword moves processing
@@ -2837,49 +2844,40 @@ dynamic parent, rather than examining the local lexically enclosing parent.
 The concept of dynamic scope should be considered an advanced feature
 and used with caution when defining extension keywords.
 
-### Successful, unsuccessful, and ignored evaluations {#eval-status}
+## Keyword output relevance {#relevance}
 
-Each dynamic scope represents an evaluation of an input location by
-a schema.  Keyword evaluations within the dynamic scope are
-sub-evaluations.  The sub-evaluation relationship is recursive.
+In addition to accepting or rejecting the instance as the validation result,
+each keyword evaluation can produce output in the form of an annotation
+(on acceptance) or an error (on rejection), as well as information that is
+used to implement keyword dependencies.
 
-Evaluation includes validation, which either accepts or
-rejects the input, as well as management of annotations,
-error messages, and keyword dependency information.
+Whether this produced output appears in actual streamed or finalized output,
+and whether dependency information is usable by a depending keyword,
+is determined by the producing keyword evaluation's relevance, and in
+the case of output, the output configuration.
 
-Evaluations are considered to have one of three statuses:
-successful, unsuccessful, or ignored.  This status depends on
-the evaluation's own validation outcome, as well as those of all
-of its parent evaluations.
+Relevance is a function of a keyword's validation result as it compares
+to the validation results of its parent evaluations:
 
-Each evaluation MUST initially be considered successful if it
-accepts the input, and unsuccessful if it rejects.  An initially
-successful keyword evaluation MAY produce an annotation and/or
-information supporting keyword dependencies, while
-an initially unsuccessful keyword MAY produce an error beyond
-its boolean validation outcome.
+* All keyword evaluations are initially considered to be relevant
+* A schema object evaluation that rejects the input MUST cause all
+  keyword sub-evaluations that accepted the input to become irrelevant
+* A keyword that accepts the input MUST cause all keyword sub-evaluations
+  that rejected the input to become irrelevant
+* A schema object that accepts the input MUST NOT impact relevance
+* A keyword object that rejects the input has no necessary effect on
+  relevance, but will cause its parent schema evaluation to reject,
+  triggering the appropriate relevancy transitions
+* Once a keyword evaluation becomes irrelevant, it MUST NOT ever
+  subsequently be deemed relevant.
 
-An initially successful evaluation MUST be considered unsuccessful
-if any parent evaluation is unsuccessful, causing its
-annotations to be removed from non-"verbose" ({{verbose}})
-potential output.
+Annotations and errors MUST only be included in output if the output
+configuration includes them; note that only "verbose" ({{verbose}})
+output formats include irrelevant output.
 
-An initially unsuccessful evaluation MUST be considered ignored
-if any parent evaluation is successful, causing its
-errors to be removed from non-"verbose" potential output.
-
-Note that these requirements prevent unsuccessful evaluations
-from becoming successful, and prevent ignored evaluations from
-further changing status at all.
-
-Unless using an output format such as "verbose" ({{verbose}})
-that is intended to provide a full evaluation record, output
-MUST only include annotations from successful evaluations,
-and errors from unsuccessful evaluations.
-
-Information used to support keyword dependencies MUST only
-be used from evaluations considered to be successful at the time
-of the depending keyword's evaluation, regardless of output choice.
+Dependency information MUST only be used from evaluations considered
+to be relevant at the time of the depending keyword's evaluation,
+regardless of output choice.
 
 ## Keyword Interactions
 
@@ -2935,7 +2933,7 @@ present, the default behavior still MUST NOT result in annotations.
 Implementations SHOULD treat keywords they do not recognize, or that
 they recognize but do not support, as annotations, where the value of
 the keyword is the value of the annotation.  Whether an implementation
-collects these annotations or not, they MUST otherwise ignore the keywords.
+produces these annotations or not, they MUST otherwise ignore the keywords.
 
 ## Identifiers
 
@@ -3057,27 +3055,27 @@ the same schema keyword in different schema objects.
 
 Unlike assertion results, annotation data can take a wide variety of forms,
 which are provided to applications to use as they see fit.  JSON Schema
-implementations are not expected to make use of the collected information
+implementations are not expected to make use of the produced annotations
 on behalf of applications.
 
-While "short-circuit" evaluation is possible for assertions, collecting
+While "short-circuit" evaluation is possible for assertions, producing
 annotations requires examining all schemas that apply to an instance
 location, even if they cannot change the overall assertion result.
 The only exception is that subschemas of a schema object that has
 failed validation MAY be skipped, as annotations are not retained
 for failing schemas.
 
-### Collecting Annotations {#collect}
+### Producing Annotations
 
-Annotations are collected by keywords that explicitly define
-annotation-collecting behavior.  Note that boolean schemas cannot
+Annotations are produced by keywords that explicitly define
+annotation-producing behavior.  Note that boolean schemas cannot
 produce annotations as they do not make use of keywords.
 
-See {{eval-status}} for conditions under which annotations
+See {{relevance}} for conditions under which annotations
 appear in output, and how they are managed throughout the
 evaluation process.
 
-A collected annotation MUST include the following information:
+A produced annotation MUST include the following information:
 
 * The name of the keyword that produces the annotation
 * The instance location to which it is attached, as a JSON Pointer
@@ -3159,7 +3157,7 @@ Implementations MAY elect to provide additional information.
 
 ### Keyword Relative Location
 
-The relative location of the validating keyword that follows the validation
+The relative location of the validating keyword that follows the evaluation
 path.  The value MUST be expressed as a JSON Pointer, and it MUST include
 any by-reference applicators such as "$ref" or "$dynamicRef".
 
@@ -3228,6 +3226,11 @@ additional information about the result is required, the output MUST also contai
   validation
 * "annotations" - the collection of errors or annotations produced by a
   successful validation
+
+Unless otherwise specified or required for the overall output structure,
+output units for irrelevant keyword evaluations ({{relevance}})
+SHOULD be omitted, and annotations and errors from such evaluations
+MUST be omitted.
 
 For these examples, the following schema and input will be used.
 
@@ -3387,11 +3390,11 @@ that of the schema.  This structure has applications in form generation and
 validation where the error's location is important.
 
 The primary difference between this and the "Detailed" structure is that
-all results are returned.  This includes sub-schema validation results that
-would otherwise be removed (e.g. annotations for failed validations,
-successful validations inside a `not` keyword, etc.).  Because of this, it
+all results are returned, including information from irrelevant ({{relevance}})
+keyword evaluations.  Because of this, it
 is RECOMMENDED that each node also carry a `valid` property to indicate the
-validation result for that node.
+validation result for that node, which can also be used to determine which
+output units are relevant and which are only included because of the verbosity.
 
 Because this output structure can be quite large, a smaller example is given
 here for brevity.  The URI of the full output structure of the example above is:
@@ -3575,7 +3578,7 @@ be deployed on public Internet servers. Implementations should take care that
 the parsing and validating against schemas does not consume excessive system
 resources. Implementations MUST NOT fall into an infinite loop.
 
-A malicious party could cause an implementation to repeatedly collect a copy
+A malicious party could cause an implementation to repeatedly produce a copy
 of a very large value as an annotation.  Implementations SHOULD guard against
 excessive consumption of system resources in such a scenario.
 
