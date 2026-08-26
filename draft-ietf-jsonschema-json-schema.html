@@ -1054,7 +1054,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Dusseault, et al.</td>
-<td class="center">Expires 22 February 2027</td>
+<td class="center">Expires 27 February 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1067,12 +1067,12 @@ svg {
 <dd class="internet-draft">draft-ietf-jsonschema-json-schema-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-08-21" class="published">21 August 2026</time>
+<time datetime="2026-08-26" class="published">26 August 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-02-22">22 February 2027</time></dd>
+<dd class="expires"><time datetime="2027-02-27">27 February 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1128,7 +1128,7 @@ Source for this draft can be found at
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 22 February 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 27 February 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1817,13 +1817,16 @@ Source for this draft can be found at
             <p id="section-toc.1-1.26.1"><a href="#appendix-H" class="auto internal xref">Appendix H</a>.  <a href="#name-change-log" class="internal xref">Change Log</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.26.2.1">
-                <p id="section-toc.1-1.26.2.1.1"><a href="#appendix-H.1" class="auto internal xref">H.1</a>.  <a href="#name-draft-ietf-jsonschema-json-" class="internal xref">draft-ietf-jsonschema-json-schema-02</a></p>
+                <p id="section-toc.1-1.26.2.1.1"><a href="#appendix-H.1" class="auto internal xref">H.1</a>.  <a href="#name-draft-ietf-jsonschema-json-" class="internal xref">draft-ietf-jsonschema-json-schema-03</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.26.2.2">
-                <p id="section-toc.1-1.26.2.2.1"><a href="#appendix-H.2" class="auto internal xref">H.2</a>.  <a href="#name-draft-ietf-jsonschema-json-s" class="internal xref">draft-ietf-jsonschema-json-schema-01</a></p>
+                <p id="section-toc.1-1.26.2.2.1"><a href="#appendix-H.2" class="auto internal xref">H.2</a>.  <a href="#name-draft-ietf-jsonschema-json-s" class="internal xref">draft-ietf-jsonschema-json-schema-02</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.26.2.3">
-                <p id="section-toc.1-1.26.2.3.1"><a href="#appendix-H.3" class="auto internal xref">H.3</a>.  <a href="#name-draft-ietf-jsonschema-json-sc" class="internal xref">draft-ietf-jsonschema-json-schema-00</a></p>
+                <p id="section-toc.1-1.26.2.3.1"><a href="#appendix-H.3" class="auto internal xref">H.3</a>.  <a href="#name-draft-ietf-jsonschema-json-sc" class="internal xref">draft-ietf-jsonschema-json-schema-01</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.26.2.4">
+                <p id="section-toc.1-1.26.2.4.1"><a href="#appendix-H.4" class="auto internal xref">H.4</a>.  <a href="#name-draft-ietf-jsonschema-json-sch" class="internal xref">draft-ietf-jsonschema-json-schema-00</a></p>
 </li>
             </ul>
 </li>
@@ -1859,6 +1862,8 @@ starting point for a WG and a wide consensus process.<a href="#section-1-3" clas
 <p id="section-1.1-1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
 interpreted as described in <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span>.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-2">For brevity, the converse of logical statements is assumed, except for values described as undefined; that is,
+"only &lt;X&gt; is accepted" shall imply "&lt;not X&gt; is rejected".<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="audiences">
@@ -2016,7 +2021,7 @@ of that schema.<a href="#section-2-10" class="pilcrow">¶</a></p>
 <p id="section-2-11"><strong>Schema</strong><a href="#section-2-11" class="pilcrow">¶</a></p>
 <p id="section-2-12">A JSON Schema document, or simply a <em>schema</em>, is used to describe
 and constrain JSON values.  Used in validation, the schema defines the valid
-set, or all possible instances that validate successfully.
+set, or all possible inputs that validate successfully.
 A JSON Schema is also a JSON value and may also be an instance of some meta-schema.<a href="#section-2-12" class="pilcrow">¶</a></p>
 <p id="section-2-13"><strong>Schema Resource</strong><a href="#section-2-13" class="pilcrow">¶</a></p>
 <p id="section-2-14">A JSON <em>Schema resource</em> is a schema uniquely identified by a URI, in
@@ -2134,12 +2139,12 @@ subschema application vocabulary defined in this document).<a href="#section-3.1
 <span class="break"></span><dl class="dlParallel" id="section-3.1.1-2">
             <dt id="section-3.1.1-2.1">true</dt>
             <dd style="margin-left: 1.5em" id="section-3.1.1-2.2">
-              <p id="section-3.1.1-2.2.1">Always passes validation, as if the empty schema {}<a href="#section-3.1.1-2.2.1" class="pilcrow">¶</a></p>
+              <p id="section-3.1.1-2.2.1">Always accepts, equivalent to the empty schema {}<a href="#section-3.1.1-2.2.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
 <dt id="section-3.1.1-2.3">false</dt>
             <dd style="margin-left: 1.5em" id="section-3.1.1-2.4">
-              <p id="section-3.1.1-2.4.1">Always fails validation, as if the schema { "not": {} }<a href="#section-3.1.1-2.4.1" class="pilcrow">¶</a></p>
+              <p id="section-3.1.1-2.4.1">Always rejects, equivalent to the schema { "not": {} }<a href="#section-3.1.1-2.4.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 </dl>
@@ -2252,7 +2257,7 @@ type system.  This should not be confused with the core types
 defined here.  As an example, "integer" is a reasonable type for a
 vocabulary to define as a value for a keyword, but the data model
 makes no distinction between integers and other numbers.<a href="#section-3.2-6" class="pilcrow">¶</a></p>
-<div id="input-equality">
+<div id="equal">
 <section id="section-3.2.1">
           <h4 id="name-input-equality">
 <a href="#section-3.2.1" class="section-number selfRef">3.2.1. </a><a href="#name-input-equality" class="section-name selfRef">Input Equality</a>
@@ -2452,7 +2457,7 @@ as the identifier of a resource which is itself a JSON Schema, which describes t
 set of valid schemas written for this particular dialect.<a href="#section-4.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-4.1.1-2">The value of this keyword MUST be a full <code>URI</code>
 (<span>[<a href="#RFC3986" class="cite xref">RFC3986</a>], <a href="https://rfc-editor.org/rfc/rfc3986#section-3" class="relref">Section 3</a></span>) and this URI MUST be normalized.
-The current schema MUST be valid against the meta-schema identified by this URI.<a href="#section-4.1.1-2" class="pilcrow">¶</a></p>
+The current schema MUST be an instance of the meta-schema identified by this URI.<a href="#section-4.1.1-2" class="pilcrow">¶</a></p>
 <p id="section-4.1.1-3">If this URI identifies a retrievable resource, that resource SHOULD be of
 media type "application/schema+json".<a href="#section-4.1.1-3" class="pilcrow">¶</a></p>
 <p id="section-4.1.1-4">The "$schema" keyword SHOULD be used in the document root schema object,
@@ -2896,8 +2901,7 @@ entirely ignored.<a href="#section-5.2-4" class="pilcrow">¶</a></p>
           </h4>
 <p id="section-5.2.1-1">This keyword's value MUST be a non-empty array.
 Each item of the array MUST be a valid JSON Schema.<a href="#section-5.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.2.1-2">An input validates successfully against this keyword if it validates
-successfully against all schemas defined by this keyword's value.<a href="#section-5.2.1-2" class="pilcrow">¶</a></p>
+<p id="section-5.2.1-2">This keyword accepts only if every subschema in its value accepts the input.<a href="#section-5.2.1-2" class="pilcrow">¶</a></p>
 <p id="section-5.2.1-3">The <code>allOf</code> keyword is useful for combining multiple conditionals
 in a schema.  See the example for <code>if</code> below in <a href="#allof-if-example" class="auto internal xref">Section 5.2.5.1</a>.<a href="#section-5.2.1-3" class="pilcrow">¶</a></p>
 <div id="allof-multiple-inheritance-example">
@@ -2955,21 +2959,20 @@ and a collection.<a href="#section-5.2.1.1-1" class="pilcrow">¶</a></p>
           </h4>
 <p id="section-5.2.2-1">This keyword's value MUST be a non-empty array.
 Each item of the array MUST be a valid JSON Schema.<a href="#section-5.2.2-1" class="pilcrow">¶</a></p>
-<p id="section-5.2.2-2">An input validates successfully against this keyword if it validates
-successfully against at least one schema defined by this keyword's value.
-Note that in general all subschemas MUST be examined to ensure that
+<p id="section-5.2.2-2">This keyword accepts only if at least one schema in its value accepts the input.<a href="#section-5.2.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.2.2-3">Note that in general all subschemas MUST be examined to ensure that
 keyword dependencies from each subschema are discovered, although
-see <a href="#keyword-behaviors" class="auto internal xref">Section 12</a> for possible short-circuiting conditions.<a href="#section-5.2.2-2" class="pilcrow">¶</a></p>
-<p id="section-5.2.2-3">Examples of using anyOf:<a href="#section-5.2.2-3" class="pilcrow">¶</a></p>
+see <a href="#keyword-behaviors" class="auto internal xref">Section 12</a> for possible short-circuiting conditions.<a href="#section-5.2.2-3" class="pilcrow">¶</a></p>
+<p id="section-5.2.2-4">Examples of using anyOf:<a href="#section-5.2.2-4" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-5.2.2-4.1">
-              <p id="section-5.2.2-4.1.1">Defining objects that can satisfy one or more schemas,
-such as attachments that can be a <code>note</code> or a <code>task</code> OR satisfy both schemas.<a href="#section-5.2.2-4.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.2.2-5.1">
+              <p id="section-5.2.2-5.1.1">Defining objects that can satisfy one or more schemas,
+such as attachments that can be a <code>note</code> or a <code>task</code> OR satisfy both schemas.<a href="#section-5.2.2-5.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-5.2.2-4.2">
-              <p id="section-5.2.2-4.2.1">Requiring alternate fields in an object, when combined with the "required" keyword: a
+            <li class="normal" id="section-5.2.2-5.2">
+              <p id="section-5.2.2-5.2.1">Requiring alternate fields in an object, when combined with the "required" keyword: a
 contact could require a <code>work_email</code> or require a <code>work_phone</code>, and putting
-both <code>required</code> keywords inside the <code>anyOf</code> keyword allows either to satisfy the schema.<a href="#section-5.2.2-4.2.1" class="pilcrow">¶</a></p>
+both <code>required</code> keywords inside the <code>anyOf</code> keyword allows either to satisfy the schema.<a href="#section-5.2.2-5.2.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
@@ -2981,8 +2984,7 @@ both <code>required</code> keywords inside the <code>anyOf</code> keyword allows
           </h4>
 <p id="section-5.2.3-1">This keyword's value MUST be a non-empty array.
 Each item of the array MUST be a valid JSON Schema.<a href="#section-5.2.3-1" class="pilcrow">¶</a></p>
-<p id="section-5.2.3-2">An input validates successfully against this keyword if it validates
-successfully against exactly one schema defined by this keyword's value.<a href="#section-5.2.3-2" class="pilcrow">¶</a></p>
+<p id="section-5.2.3-2">This keyword accepts only if exactly one schema in its value accepts the input.<a href="#section-5.2.3-2" class="pilcrow">¶</a></p>
 <p id="section-5.2.3-3">Similar to anyOf and allOf, oneOf can be used in combination with object
 definitions to allow only one object definition to be satisfied.  Compare
 to the example for "anyOf": using "oneOf" with an attachment envelope
@@ -2996,8 +2998,7 @@ not both.  A task might have a duration or a due date but not both.<a href="#sec
 <a href="#section-5.2.4" class="section-number selfRef">5.2.4. </a><a href="#name-not" class="section-name selfRef">"not"</a>
           </h4>
 <p id="section-5.2.4-1">This keyword's value MUST be a valid JSON Schema.<a href="#section-5.2.4-1" class="pilcrow">¶</a></p>
-<p id="section-5.2.4-2">An input is valid against this keyword if it fails to validate
-successfully against the schema defined by this keyword.<a href="#section-5.2.4-2" class="pilcrow">¶</a></p>
+<p id="section-5.2.4-2">This keyword accepts the input only if its subschema rejects the input.<a href="#section-5.2.4-2" class="pilcrow">¶</a></p>
 <p id="section-5.2.4-3">For example, a product schema could require the property
 <code>expiration_date</code> if the <code>validity</code> property does
 NOT have a value equal to <code>forever</code>.  Or, if
@@ -3021,22 +3022,11 @@ possibly the briefest is<a href="#section-5.2.4-3" class="pilcrow">¶</a></p>
 <a href="#section-5.2.5" class="section-number selfRef">5.2.5. </a><a href="#name-if" class="section-name selfRef">"if"</a>
           </h4>
 <p id="section-5.2.5-1">This keyword's value MUST be a valid JSON Schema.<a href="#section-5.2.5-1" class="pilcrow">¶</a></p>
-<p id="section-5.2.5-2">Validation MUST always succeed against this keyword
-regardless of the validation outcome of its subschema.
-The subschema validation outcome controls which "then"/"else" keywords are
-evaluated, not the validation result of the "if" keyword.<a href="#section-5.2.5-2" class="pilcrow">¶</a></p>
-<p id="section-5.2.5-3">Inputs that successfully validate against this
-keyword's subschema MUST also be valid against
-the subschema value of the "then" keyword, if
-present.<a href="#section-5.2.5-3" class="pilcrow">¶</a></p>
-<p id="section-5.2.5-4">Inputs that fail to validate against this
-keyword's subschema MUST also be valid against
-the subschema value of the "else" keyword, if
-present.<a href="#section-5.2.5-4" class="pilcrow">¶</a></p>
-<p id="section-5.2.5-5">If <a href="#annotations" class="auto internal xref">Section 12.9</a>
-are being produced, they are produced from this
-keyword's subschema in the usual way, including when
-the keyword is present without either "then" or "else".<a href="#section-5.2.5-5" class="pilcrow">¶</a></p>
+<p id="section-5.2.5-2">This keyword always accepts the input.
+However, it affects whether "then" or "else" is evaluated,
+depending on whether its subschema accepts or rejects the input.<a href="#section-5.2.5-2" class="pilcrow">¶</a></p>
+<p id="section-5.2.5-3">As applicable, annotations are produced from its subschema in the usual way
+(when the subschema accepts), and regardless of whether "then" or "else" is present.<a href="#section-5.2.5-3" class="pilcrow">¶</a></p>
 <div id="allof-if-example">
 <section id="section-5.2.5.1">
             <h5 id="name-example-4">
@@ -3087,13 +3077,12 @@ conditionally restrict a "postal-code" value on the "country" value.<a href="#se
 <a href="#section-5.2.6" class="section-number selfRef">5.2.6. </a><a href="#name-then" class="section-name selfRef">"then"</a>
           </h4>
 <p id="section-5.2.6-1">This keyword's value MUST be a valid JSON Schema.<a href="#section-5.2.6-1" class="pilcrow">¶</a></p>
-<p id="section-5.2.6-2">When "if" is present, and the input successfully
-validates against its subschema, then validation
-succeeds against this keyword if the input also
-successfully validates against this keyword's subschema.<a href="#section-5.2.6-2" class="pilcrow">¶</a></p>
+<p id="section-5.2.6-2">When an adjacent "if" is present and its subschema accepts the input,
+this keyword's result is the result of the "then" subschema evaluating the same input.
+Otherwise this keyword is ignored.<a href="#section-5.2.6-2" class="pilcrow">¶</a></p>
 <p id="section-5.2.6-3">This keyword has no effect when "if" is absent, or
-when the input fails to validate against its
-subschema.  Implementations MUST NOT evaluate
+when its subschema rejects the input.
+Implementations MUST NOT evaluate
 the input against this keyword, for either validation
 or annotation production purposes, in such cases.<a href="#section-5.2.6-3" class="pilcrow">¶</a></p>
 <p id="section-5.2.6-4">See the example above in <a href="#allof-if-example" class="auto internal xref">Section 5.2.5.1</a> for
@@ -3107,12 +3096,11 @@ and below for an example using if/then/else.<a href="#section-5.2.6-4" class="pi
 <a href="#section-5.2.7" class="section-number selfRef">5.2.7. </a><a href="#name-else" class="section-name selfRef">"else"</a>
           </h4>
 <p id="section-5.2.7-1">This keyword's value MUST be a valid JSON Schema.<a href="#section-5.2.7-1" class="pilcrow">¶</a></p>
-<p id="section-5.2.7-2">When "if" is present, and the input fails to
-validate against its subschema, then validation
-succeeds against this keyword if the input
-successfully validates against this keyword's subschema.<a href="#section-5.2.7-2" class="pilcrow">¶</a></p>
+<p id="section-5.2.7-2">When an adjacent "if" is present and its subschema rejects the input,
+this keyword's result is the result of the "else" subschema evaluating the same input.
+Otherwise this keyword is ignored.<a href="#section-5.2.7-2" class="pilcrow">¶</a></p>
 <p id="section-5.2.7-3">This keyword has no effect when "if" is absent, or
-when the input successfully validates against its
+when the input is accepted by its
 subschema.  Implementations MUST NOT evaluate
 the input against this keyword, for either validation
 or annotation production purposes, in such cases.<a href="#section-5.2.7-3" class="pilcrow">¶</a></p>
@@ -3136,12 +3124,12 @@ or annotation production purposes, in such cases.<a href="#section-5.2.7-3" clas
           <h4 id="name-dependentschemas">
 <a href="#section-5.2.8" class="section-number selfRef">5.2.8. </a><a href="#name-dependentschemas" class="section-name selfRef">"dependentSchemas"</a>
           </h4>
-<p id="section-5.2.8-1">This keyword specifies subschemas that are evaluated if the input
+<p id="section-5.2.8-1">This keyword specifies subschemas that are evaluated whenever the input
 is an object and contains a certain property.<a href="#section-5.2.8-1" class="pilcrow">¶</a></p>
 <p id="section-5.2.8-2">This keyword's value MUST be an object.
 Each value in the object MUST be a valid JSON Schema.<a href="#section-5.2.8-2" class="pilcrow">¶</a></p>
 <p id="section-5.2.8-3">If the object key is a property in the instance, the entire
-instance must validate against the subschema.  Its use is
+input must be accepted by the subschema.  Its use is
 dependent on the presence of the property.<a href="#section-5.2.8-3" class="pilcrow">¶</a></p>
 <p id="section-5.2.8-4">Omitting this keyword has the same behavior as an empty object.<a href="#section-5.2.8-4" class="pilcrow">¶</a></p>
 <div id="example-of-requiring-rejection-reason-if-rejection-date-is-set">
@@ -3190,11 +3178,11 @@ subschema(s) to array items, and combining their results.<a href="#section-5.3-1
 <a href="#section-5.3.1" class="section-number selfRef">5.3.1. </a><a href="#name-prefixitems" class="section-name selfRef">"prefixItems"</a>
           </h4>
 <p id="section-5.3.1-1">The value of "prefixItems" MUST be a non-empty array of valid JSON Schemas.<a href="#section-5.3.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.3.1-2">Validation succeeds if each element of the input validates
-against the schema at the same position, if any.  This keyword
+<p id="section-5.3.1-2">This keyword accepts an array input only if every subschema accepts
+the input item at the same array index, if any.  This keyword
 does not constrain the length of the array.  If the array is longer
-than this keyword's value, this keyword validates only the
-prefix of matching length.<a href="#section-5.3.1-2" class="pilcrow">¶</a></p>
+than this keyword's value, this keyword only validates items in the input
+up to the size of the keyword value.<a href="#section-5.3.1-2" class="pilcrow">¶</a></p>
 <p id="section-5.3.1-3">Omitting this keyword has the same assertion behavior as
 an empty array.<a href="#section-5.3.1-3" class="pilcrow">¶</a></p>
 </section>
@@ -3205,12 +3193,11 @@ an empty array.<a href="#section-5.3.1-3" class="pilcrow">¶</a></p>
 <a href="#section-5.3.2" class="section-number selfRef">5.3.2. </a><a href="#name-items" class="section-name selfRef">"items"</a>
           </h4>
 <p id="section-5.3.2-1">The value of "items" MUST be a valid JSON Schema.<a href="#section-5.3.2-1" class="pilcrow">¶</a></p>
-<p id="section-5.3.2-2">This keyword applies its subschema to all input elements
-at indexes greater than the length of the "prefixItems" array
-in the same schema object.  If <code>prefixItems</code> is not present,
-"items" applies its subschema to all input array elements.<a href="#section-5.3.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.3.2-2">This keyword accepts the input only if its subschema accepts every item
+at an index not covered by the adjacent prefixItems
+(or every item, if prefixItems is absent).<a href="#section-5.3.2-2" class="pilcrow">¶</a></p>
 <p id="section-5.3.2-3">Omitting this keyword has the same assertion behavior as
-an empty schema.<a href="#section-5.3.2-3" class="pilcrow">¶</a></p>
+the empty schema.<a href="#section-5.3.2-3" class="pilcrow">¶</a></p>
 <p id="section-5.3.2-4">Examples of <code>items</code> can be found in other examples in this specification.
 One of the clearest is in <a href="#output-structure" class="auto internal xref">Section 13.4</a>, where the <code>items</code> keyword
 requires the input to be a list of points objects.<a href="#section-5.3.2-4" class="pilcrow">¶</a></p>
@@ -3222,13 +3209,13 @@ requires the input to be a list of points objects.<a href="#section-5.3.2-4" cla
 <a href="#section-5.3.3" class="section-number selfRef">5.3.3. </a><a href="#name-contains" class="section-name selfRef">"contains"</a>
           </h4>
 <p id="section-5.3.3-1">The value of this keyword MUST be a valid JSON Schema.<a href="#section-5.3.3-1" class="pilcrow">¶</a></p>
-<p id="section-5.3.3-2">An array input is valid against "contains" if the number of elements
-that are valid against its subschema is within the inclusive range of
+<p id="section-5.3.3-2">This keyword accepts an array input only if the number of elements
+accepted by its subschema is within the inclusive range of
 the minimum and (if any) maximum number of occurrences.<a href="#section-5.3.3-2" class="pilcrow">¶</a></p>
 <p id="section-5.3.3-3">The minimum and maximum numbers of occurrences are provided by the
 "minContains" and "maxContains" keywords, respectively, within the
 same schema object as "contains".  If "minContains" is absent, the
-minimum MUST be 1.  If "maxContains" is absent, the maximum MUST
+minimum SHALL be 1.  If "maxContains" is absent, the maximum SHALL
 be unbounded.<a href="#section-5.3.3-3" class="pilcrow">¶</a></p>
 <p id="section-5.3.3-4">In general, the subschema MUST be applied to every array element
 even after enough matches to satisfy "minContains" and "maxContains"
@@ -3281,10 +3268,9 @@ properties and combining their results.<a href="#section-5.4-1" class="pilcrow">
           </h4>
 <p id="section-5.4.1-1">The value of "properties" MUST be an object.
 Each value of this object MUST be a valid JSON Schema.<a href="#section-5.4.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.4.1-2">Validation succeeds if, for each name that appears in both
+<p id="section-5.4.1-2">This keyword accepts only if, for every name that appears in both
 the input and as a name within this keyword's value,
-the contents successfully validate against the
-corresponding schema.<a href="#section-5.4.1-2" class="pilcrow">¶</a></p>
+the subschema accepts the corresponding input property value.<a href="#section-5.4.1-2" class="pilcrow">¶</a></p>
 <p id="section-5.4.1-3">Omitting this keyword has the same assertion behavior as
 an empty object.<a href="#section-5.4.1-3" class="pilcrow">¶</a></p>
 <p id="section-5.4.1-4">In this example, the properties of a simple contact record are defined,
@@ -3321,8 +3307,8 @@ with two properties required.<a href="#section-5.4.1-4" class="pilcrow">¶</a></
 Validation with "additionalProperties" applies only to the child
 values of input names that do not appear in "properties"
 or match regular expressions in "patternProperties".<a href="#section-5.4.2-2" class="pilcrow">¶</a></p>
-<p id="section-5.4.2-3">For all such properties, validation succeeds if the contents
-validate against the "additionalProperties" schema.<a href="#section-5.4.2-3" class="pilcrow">¶</a></p>
+<p id="section-5.4.2-3">This keyword accepts only if the keyword's subschema accepts
+all such properties.<a href="#section-5.4.2-3" class="pilcrow">¶</a></p>
 <p id="section-5.4.2-4">Omitting this keyword has the same assertion behavior as
 an empty schema.<a href="#section-5.4.2-4" class="pilcrow">¶</a></p>
 <p id="section-5.4.2-5">One of the most frequent examples of using "additionalProperties" is to
@@ -3343,10 +3329,9 @@ constrained to the format of a phone number by "additionalProperties".<a href="#
 of this object SHOULD be a valid regular expression, according to the
 ECMA-262 regular expression dialect. Each property value of this object
 MUST be a valid JSON Schema.<a href="#section-5.4.3-1" class="pilcrow">¶</a></p>
-<p id="section-5.4.3-2">Validation succeeds if, for each input name that matches any
-regular expressions that appear as a property name in this keyword's value,
-the contents successfully validate against each
-schema that corresponds to a matching regular expression.
+<p id="section-5.4.3-2">This keyword accepts only if, for each input name that matches any
+of those regular expressions, the corresponding property value
+is accepted by each matching subschema.
 Recall: Regular expressions are not implicitly anchored.<a href="#section-5.4.3-2" class="pilcrow">¶</a></p>
 <p id="section-5.4.3-3">Omitting this keyword has the same assertion behavior as
 an empty object.<a href="#section-5.4.3-3" class="pilcrow">¶</a></p>
@@ -3379,8 +3364,8 @@ A field like "office_phone" is constrained to the format given.<a href="#section
 <a href="#section-5.4.4" class="section-number selfRef">5.4.4. </a><a href="#name-propertynames" class="section-name selfRef">"propertyNames"</a>
           </h4>
 <p id="section-5.4.4-1">The value of "propertyNames" MUST be a valid JSON Schema.<a href="#section-5.4.4-1" class="pilcrow">¶</a></p>
-<p id="section-5.4.4-2">If the input is an object, this keyword validates if every property name in
-the input validates against the provided schema.
+<p id="section-5.4.4-2">If the input is an object, this keyword accepts only if every property name in
+the input is accepted by the keyword's subschema.
 Note the property name that the schema is testing will always be a string.<a href="#section-5.4.4-2" class="pilcrow">¶</a></p>
 <p id="section-5.4.4-3">Omitting this keyword has the same behavior as an empty schema.<a href="#section-5.4.4-3" class="pilcrow">¶</a></p>
 <p id="section-5.4.4-4">In this example, the "participants" field can have zero or one of each of the
@@ -3563,9 +3548,9 @@ an array, elements of the array MUST be strings and MUST be unique.<a href="#sec
 <p id="section-7.1.1-2">String values MUST be one of the six primitive types
 ("null", "boolean", "object", "array", "number", or "string"),
 or "integer" which matches any number with a zero fractional part.<a href="#section-7.1.1-2" class="pilcrow">¶</a></p>
-<p id="section-7.1.1-3">If the value of "type" is a string, then an input validates successfully if
+<p id="section-7.1.1-3">If the value of "type" is a string, this keyword accepts exactly when
 its type matches the type represented by the value of the string.<a href="#section-7.1.1-3" class="pilcrow">¶</a></p>
-<p id="section-7.1.1-4">If the value of "type" is an array, then an input validates successfully if
+<p id="section-7.1.1-4">If the value of "type" is an array, this keyword accepts exactly when
 its type matches any of the types indicated by the strings in the array.<a href="#section-7.1.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -3576,8 +3561,8 @@ its type matches any of the types indicated by the strings in the array.<a href=
           </h4>
 <p id="section-7.1.2-1">The value of this keyword MUST be an array. This array SHOULD have at
 least one element. Elements in the array SHOULD be unique.<a href="#section-7.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-7.1.2-2">An input validates successfully against this keyword if its value is
-equal to one of the elements in this keyword's array value.<a href="#section-7.1.2-2" class="pilcrow">¶</a></p>
+<p id="section-7.1.2-2">This keyword accepts exactly when the input is
+<span><a href="#equal" class="internal xref">equal to</a> (<a href="#equal" class="auto internal xref">Section 3.2.1</a>)</span> one of the elements in this keyword's array value.<a href="#section-7.1.2-2" class="pilcrow">¶</a></p>
 <p id="section-7.1.2-3">Elements in the array might be of any type, including null.<a href="#section-7.1.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -3589,8 +3574,8 @@ equal to one of the elements in this keyword's array value.<a href="#section-7.1
 <p id="section-7.1.3-1">The value of this keyword MAY be of any type, including null.<a href="#section-7.1.3-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.3-2">Use of this keyword is functionally equivalent to an
 enum (<a href="#enum" class="auto internal xref">Section 7.1.2</a>) with a single value.<a href="#section-7.1.3-2" class="pilcrow">¶</a></p>
-<p id="section-7.1.3-3">An input validates successfully against this keyword if its value is
-equal to the value of the keyword.<a href="#section-7.1.3-3" class="pilcrow">¶</a></p>
+<p id="section-7.1.3-3">This keyword accepts exactly when the input is
+<span><a href="#equal" class="internal xref">equal to</a> (<a href="#equal" class="auto internal xref">Section 3.2.1</a>)</span> the value of the keyword.<a href="#section-7.1.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -3606,8 +3591,7 @@ equal to the value of the keyword.<a href="#section-7.1.3-3" class="pilcrow">¶<
 <a href="#section-7.2.1" class="section-number selfRef">7.2.1. </a><a href="#name-multipleof" class="section-name selfRef">"multipleOf"</a>
           </h4>
 <p id="section-7.2.1-1">The value of "multipleOf" MUST be a number, strictly greater than 0.<a href="#section-7.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-7.2.1-2">A numeric input value is valid only if division by this keyword's value results in
-an integer.<a href="#section-7.2.1-2" class="pilcrow">¶</a></p>
+<p id="section-7.2.1-2">With a numeric input value, this keyword accepts the input only if division by this keyword's value yields an integer.<a href="#section-7.2.1-2" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-7.2.1-3">
 <pre>
 {
@@ -3636,7 +3620,7 @@ to a single pack.<a href="#section-7.2.1-4" class="pilcrow">¶</a></p>
           </h4>
 <p id="section-7.2.2-1">The value of "maximum" MUST be a number, representing an inclusive upper limit
 for a numeric input value.<a href="#section-7.2.2-1" class="pilcrow">¶</a></p>
-<p id="section-7.2.2-2">If the input value is a number, then this keyword validates only if the input value is
+<p id="section-7.2.2-2">If the input value is a number, then this keyword only accepts inputs
 less than or exactly equal to "maximum".<a href="#section-7.2.2-2" class="pilcrow">¶</a></p>
 <p id="section-7.2.2-3">See the example for <a href="#unevaluatedItems" class="auto internal xref">Section 6.2</a> which includes the "maximum" keyword as well.<a href="#section-7.2.2-3" class="pilcrow">¶</a></p>
 </section>
@@ -3648,7 +3632,7 @@ less than or exactly equal to "maximum".<a href="#section-7.2.2-2" class="pilcro
           </h4>
 <p id="section-7.2.3-1">The value of "exclusiveMaximum" MUST be a number, representing an exclusive upper
 limit for a numeric input value.<a href="#section-7.2.3-1" class="pilcrow">¶</a></p>
-<p id="section-7.2.3-2">If the input value is a number, then it is valid only if it has a value
+<p id="section-7.2.3-2">If the input value is a number, then this keyword only accepts inputs
 strictly less than (not equal to) "exclusiveMaximum".<a href="#section-7.2.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -3659,7 +3643,7 @@ strictly less than (not equal to) "exclusiveMaximum".<a href="#section-7.2.3-2" 
           </h4>
 <p id="section-7.2.4-1">The value of "minimum" MUST be a number, representing an inclusive lower limit
 for a numeric input value.<a href="#section-7.2.4-1" class="pilcrow">¶</a></p>
-<p id="section-7.2.4-2">If the input value is a number, then it is valid only if it has a value that is
+<p id="section-7.2.4-2">If the input value is a number, then then this keyword only accepts inputs
 greater than or exactly equal to "minimum".<a href="#section-7.2.4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -3670,7 +3654,7 @@ greater than or exactly equal to "minimum".<a href="#section-7.2.4-2" class="pil
           </h4>
 <p id="section-7.2.5-1">The value of "exclusiveMinimum" MUST be a number, representing an exclusive lower
 limit for a numeric input value.<a href="#section-7.2.5-1" class="pilcrow">¶</a></p>
-<p id="section-7.2.5-2">If the input value is a number, then it is valid only if it has a value
+<p id="section-7.2.5-2">If the input value is a number, then this keyword only accepts inputs
 strictly greater than (not equal to) "exclusiveMinimum".<a href="#section-7.2.5-2" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-7.2.5-3">
 <pre>
@@ -3704,7 +3688,7 @@ value, so it is included by "maximum".<a href="#section-7.2.5-4" class="pilcrow"
 <a href="#section-7.3.1" class="section-number selfRef">7.3.1. </a><a href="#name-maxlength" class="section-name selfRef">"maxLength"</a>
           </h4>
 <p id="section-7.3.1-1">The value of this keyword MUST be a non-negative integer.<a href="#section-7.3.1-1" class="pilcrow">¶</a></p>
-<p id="section-7.3.1-2">A string input value is valid against this keyword if its
+<p id="section-7.3.1-2">This keyword accepts a string input value only if its
 length is less than, or equal to, the value of this keyword.<a href="#section-7.3.1-2" class="pilcrow">¶</a></p>
 <p id="section-7.3.1-3">The length of a string input value is defined as the number of its
 characters as defined by <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>.<a href="#section-7.3.1-3" class="pilcrow">¶</a></p>
@@ -3716,7 +3700,7 @@ characters as defined by <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>
 <a href="#section-7.3.2" class="section-number selfRef">7.3.2. </a><a href="#name-minlength" class="section-name selfRef">"minLength"</a>
           </h4>
 <p id="section-7.3.2-1">The value of this keyword MUST be a non-negative integer.<a href="#section-7.3.2-1" class="pilcrow">¶</a></p>
-<p id="section-7.3.2-2">A string input value is valid against this keyword if its
+<p id="section-7.3.2-2">This keyword accepts a string input value only if its
 length is greater than, or equal to, the value of this keyword.<a href="#section-7.3.2-2" class="pilcrow">¶</a></p>
 <p id="section-7.3.2-3">The length of a string input value is defined as the number of its
 characters as defined by <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>.<a href="#section-7.3.2-3" class="pilcrow">¶</a></p>
@@ -3731,8 +3715,8 @@ characters as defined by <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>
 <p id="section-7.3.3-1">The value of this keyword MUST be a string. This string SHOULD be a
 valid regular expression, according to the ECMA-262 regular expression
 dialect.<a href="#section-7.3.3-1" class="pilcrow">¶</a></p>
-<p id="section-7.3.3-2">A string input value is considered valid if the regular
-expression matches the input value successfully. Recall: regular
+<p id="section-7.3.3-2">This keyword accepts a string input value only if the regular
+expression matches the value. Recall: regular
 expressions are not implicitly anchored.<a href="#section-7.3.3-2" class="pilcrow">¶</a></p>
 <p id="section-7.3.3-3">An example including "pattern" can be found in <a href="#allof-if-example" class="auto internal xref">Section 5.2.5.1</a>.<a href="#section-7.3.3-3" class="pilcrow">¶</a></p>
 </section>
@@ -3750,7 +3734,7 @@ expressions are not implicitly anchored.<a href="#section-7.3.3-2" class="pilcro
 <a href="#section-7.4.1" class="section-number selfRef">7.4.1. </a><a href="#name-maxitems" class="section-name selfRef">"maxItems"</a>
           </h4>
 <p id="section-7.4.1-1">The value of this keyword MUST be a non-negative integer.<a href="#section-7.4.1-1" class="pilcrow">¶</a></p>
-<p id="section-7.4.1-2">An array input value is valid against "maxItems" if its size is
+<p id="section-7.4.1-2">This keyword accepts an array input value only if its size is
 less than, or equal to, the value of this keyword.<a href="#section-7.4.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -3760,7 +3744,7 @@ less than, or equal to, the value of this keyword.<a href="#section-7.4.1-2" cla
 <a href="#section-7.4.2" class="section-number selfRef">7.4.2. </a><a href="#name-minitems" class="section-name selfRef">"minItems"</a>
           </h4>
 <p id="section-7.4.2-1">The value of this keyword MUST be a non-negative integer.<a href="#section-7.4.2-1" class="pilcrow">¶</a></p>
-<p id="section-7.4.2-2">An array input value is valid against "minItems" if its size is
+<p id="section-7.4.2-2">This keyword accepts an array input value only if its size is
 greater than, or equal to, the value of this keyword.<a href="#section-7.4.2-2" class="pilcrow">¶</a></p>
 <p id="section-7.4.2-3">Omitting this keyword has the same behavior as a value of 0.<a href="#section-7.4.2-3" class="pilcrow">¶</a></p>
 </section>
@@ -3771,9 +3755,8 @@ greater than, or equal to, the value of this keyword.<a href="#section-7.4.2-2" 
 <a href="#section-7.4.3" class="section-number selfRef">7.4.3. </a><a href="#name-uniqueitems" class="section-name selfRef">"uniqueItems"</a>
           </h4>
 <p id="section-7.4.3-1">The value of this keyword MUST be a boolean.<a href="#section-7.4.3-1" class="pilcrow">¶</a></p>
-<p id="section-7.4.3-2">If this keyword has boolean value false, the input array validates
-successfully. If it has boolean value true, the input array validates
-successfully if all of its elements are unique.<a href="#section-7.4.3-2" class="pilcrow">¶</a></p>
+<p id="section-7.4.3-2">If this keyword has boolean value false, this keyword is ignored (vacuously accepts).
+If it has boolean value true, this keyword accepts only array inputs where no two elements are equal (<a href="#equal" class="auto internal xref">Section 3.2.1</a>).<a href="#section-7.4.3-2" class="pilcrow">¶</a></p>
 <p id="section-7.4.3-3">Omitting this keyword has the same behavior as a value of false.<a href="#section-7.4.3-3" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-7.4.3-4">
 <pre>
@@ -3802,7 +3785,7 @@ label cannot be applied twice ("uniqueItems").<a href="#section-7.4.3-5" class="
 <a href="#section-7.4.4" class="section-number selfRef">7.4.4. </a><a href="#name-maxcontains" class="section-name selfRef">"maxContains"</a>
           </h4>
 <p id="section-7.4.4-1">The value of this keyword MUST be a non-negative integer.<a href="#section-7.4.4-1" class="pilcrow">¶</a></p>
-<p id="section-7.4.4-2">Validation MUST always succeed against this keyword; its validation
+<p id="section-7.4.4-2">This keyword SHALL be ignored by itself (it implicitly succeeds); its validation
 effect is to modify the behavior of "contains" by setting the maximum
 number of array elements permitted to match the "contains" schema.<a href="#section-7.4.4-2" class="pilcrow">¶</a></p>
 <p id="section-7.4.4-3">As an example of <code>maxContains</code> and how it modifies <code>contains</code>, the example
@@ -3816,7 +3799,7 @@ assignee of type 'owner', though other types of assignees are unlimited.<a href=
 <a href="#section-7.4.5" class="section-number selfRef">7.4.5. </a><a href="#name-mincontains" class="section-name selfRef">"minContains"</a>
           </h4>
 <p id="section-7.4.5-1">The value of this keyword MUST be a non-negative integer.<a href="#section-7.4.5-1" class="pilcrow">¶</a></p>
-<p id="section-7.4.5-2">Validation MUST always succeed against this keyword; its validation
+<p id="section-7.4.5-2">This keyword SHALL be ignored by itself (it implicitly succeeds); its validation
 effect is to modify the behavior of "contains" by modifying the minimum
 number of array elements required to match the "contains" schema.<a href="#section-7.4.5-2" class="pilcrow">¶</a></p>
 <p id="section-7.4.5-3">Omitting this keyword has the same behavior as a value of 1.<a href="#section-7.4.5-3" class="pilcrow">¶</a></p>
@@ -3839,7 +3822,7 @@ exactly one owner AND at least one reviewer (hint: using <code>allOf</code> is o
 <a href="#section-7.5.1" class="section-number selfRef">7.5.1. </a><a href="#name-maxproperties" class="section-name selfRef">"maxProperties"</a>
           </h4>
 <p id="section-7.5.1-1">The value of this keyword MUST be a non-negative integer.<a href="#section-7.5.1-1" class="pilcrow">¶</a></p>
-<p id="section-7.5.1-2">An object is valid against "maxProperties" if its
+<p id="section-7.5.1-2">This keyword accepts an object input only if its
 number of properties is less than, or equal to, the value of this
 keyword.<a href="#section-7.5.1-2" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-7.5.1-3">
@@ -3867,7 +3850,7 @@ giving more than one.<a href="#section-7.5.1-4" class="pilcrow">¶</a></p>
 <a href="#section-7.5.2" class="section-number selfRef">7.5.2. </a><a href="#name-minproperties" class="section-name selfRef">"minProperties"</a>
           </h4>
 <p id="section-7.5.2-1">The value of this keyword MUST be a non-negative integer.<a href="#section-7.5.2-1" class="pilcrow">¶</a></p>
-<p id="section-7.5.2-2">An object is valid against "minProperties" if its
+<p id="section-7.5.2-2">This keyword accepts an object input only if its
 number of properties is greater than, or equal to, the value of this
 keyword.<a href="#section-7.5.2-2" class="pilcrow">¶</a></p>
 <p id="section-7.5.2-3">Omitting this keyword has the same behavior as a value of 0.<a href="#section-7.5.2-3" class="pilcrow">¶</a></p>
@@ -3880,7 +3863,7 @@ keyword.<a href="#section-7.5.2-2" class="pilcrow">¶</a></p>
           </h4>
 <p id="section-7.5.3-1">The value of this keyword MUST be an array.
 Elements of this array, if any, MUST be strings, and MUST be unique.<a href="#section-7.5.3-1" class="pilcrow">¶</a></p>
-<p id="section-7.5.3-2">An object is valid against this keyword if every item in the array is
+<p id="section-7.5.3-2">This keyword accepts an object input only if every item in the array is
 the name of a property in the object.<a href="#section-7.5.3-2" class="pilcrow">¶</a></p>
 <p id="section-7.5.3-3">Omitting this keyword has the same behavior as an empty array.<a href="#section-7.5.3-3" class="pilcrow">¶</a></p>
 </section>
@@ -3896,7 +3879,7 @@ if any, MUST be strings, and MUST be unique.<a href="#section-7.5.4-1" class="pi
 <p id="section-7.5.4-2">This keyword specifies properties that are required if a specific
 other property is present.  Their requirement is dependent on the
 presence of the other property.<a href="#section-7.5.4-2" class="pilcrow">¶</a></p>
-<p id="section-7.5.4-3">Validation succeeds if, for each name that appears in both
+<p id="section-7.5.4-3">This keyword accepts if, for each name that appears in both
 the input object and as a name within this keyword's value, every
 item in the corresponding array is also the name of a property
 in the input object.<a href="#section-7.5.4-3" class="pilcrow">¶</a></p>
@@ -4098,7 +4081,7 @@ the following attributes:<a href="#section-8.3.1-3" class="pilcrow">¶</a></p>
             <h5 id="name-date-time">
 <a href="#section-8.3.1.1" class="section-number selfRef">8.3.1.1. </a><a href="#name-date-time" class="section-name selfRef">"date-time"</a>
             </h5>
-<p id="section-8.3.1.1-1">A string input is valid against this attribute if it is
+<p id="section-8.3.1.1-1">A string input is accepted by this attribute if it is
 a valid representation according to the "date-time" ABNF rule
 (referenced above).<a href="#section-8.3.1.1-1" class="pilcrow">¶</a></p>
 </section>
@@ -4108,7 +4091,7 @@ a valid representation according to the "date-time" ABNF rule
             <h5 id="name-date">
 <a href="#section-8.3.1.2" class="section-number selfRef">8.3.1.2. </a><a href="#name-date" class="section-name selfRef">"date"</a>
             </h5>
-<p id="section-8.3.1.2-1">A string input is valid against this attribute if it is
+<p id="section-8.3.1.2-1">A string input is accepted by this attribute if it is
 a valid representation according to the "full-date" ABNF rule
 (referenced above).<a href="#section-8.3.1.2-1" class="pilcrow">¶</a></p>
 </section>
@@ -4118,7 +4101,7 @@ a valid representation according to the "full-date" ABNF rule
             <h5 id="name-time">
 <a href="#section-8.3.1.3" class="section-number selfRef">8.3.1.3. </a><a href="#name-time" class="section-name selfRef">"time"</a>
             </h5>
-<p id="section-8.3.1.3-1">A string input is valid against this attribute if it is
+<p id="section-8.3.1.3-1">A string input is accepted by this attribute if it is
 a valid representation according to the "full-time" ABNF rule
 (referenced above).<a href="#section-8.3.1.3-1" class="pilcrow">¶</a></p>
 </section>
@@ -4128,7 +4111,7 @@ a valid representation according to the "full-time" ABNF rule
             <h5 id="name-duration">
 <a href="#section-8.3.1.4" class="section-number selfRef">8.3.1.4. </a><a href="#name-duration" class="section-name selfRef">"duration"</a>
             </h5>
-<p id="section-8.3.1.4-1">A string input is valid against this attribute if it is
+<p id="section-8.3.1.4-1">A string input is accepted by this attribute if it is
 a valid representation according to the "duration" ABNF rule
 (referenced above).<a href="#section-8.3.1.4-1" class="pilcrow">¶</a></p>
 </section>
@@ -4160,7 +4143,7 @@ according to the rules of that format.<span class="cref" id="_18">There is not c
 <a href="#section-8.3.2" class="section-number selfRef">8.3.2. </a><a href="#name-email-addresses" class="section-name selfRef">Email Addresses</a>
           </h4>
 <p id="section-8.3.2-1">These attributes apply to string inputs.<a href="#section-8.3.2-1" class="pilcrow">¶</a></p>
-<p id="section-8.3.2-2">A string input is valid against these attributes if it is a valid
+<p id="section-8.3.2-2">A string input is accepted by these attributes if it is a valid
 Internet email address as follows:<a href="#section-8.3.2-2" class="pilcrow">¶</a></p>
 <div id="email">
 <section id="section-8.3.2.1">
@@ -4178,8 +4161,8 @@ Internet email address as follows:<a href="#section-8.3.2-2" class="pilcrow">¶<
             </h5>
 <p id="section-8.3.2.2-1">As defined by the extended "Mailbox" ABNF rule in
 <span>[<a href="#RFC6531" class="cite xref">RFC6531</a>], <a href="https://rfc-editor.org/rfc/rfc6531#section-3.3" class="relref">Section 3.3</a></span>.<a href="#section-8.3.2.2-1" class="pilcrow">¶</a></p>
-<p id="section-8.3.2.2-2">Note that all strings valid against the "email" attribute are also
-valid against the "idn-email" attribute.<a href="#section-8.3.2.2-2" class="pilcrow">¶</a></p>
+<p id="section-8.3.2.2-2">Note that all strings accepted by the "email" attribute are also
+accepted by the "idn-email" attribute.<a href="#section-8.3.2.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -4190,7 +4173,7 @@ valid against the "idn-email" attribute.<a href="#section-8.3.2.2-2" class="pilc
 <a href="#section-8.3.3" class="section-number selfRef">8.3.3. </a><a href="#name-hostnames" class="section-name selfRef">Hostnames</a>
           </h4>
 <p id="section-8.3.3-1">These attributes apply to string inputs.<a href="#section-8.3.3-1" class="pilcrow">¶</a></p>
-<p id="section-8.3.3-2">A string input is valid against these attributes if it is a valid
+<p id="section-8.3.3-2">A string input is accepted by these attributes if it is a valid
 representation for an Internet hostname as follows:<a href="#section-8.3.3-2" class="pilcrow">¶</a></p>
 <div id="hostname">
 <section id="section-8.3.3.1">
@@ -4210,8 +4193,8 @@ specified in <span>[<a href="#RFC5891" class="cite xref">RFC5891</a>], <a href="
 <p id="section-8.3.3.2-1">As defined by either RFC 1123 as for hostname, or an
 internationalized hostname as defined by
 <span>[<a href="#RFC5890" class="cite xref">RFC5890</a>], <a href="https://rfc-editor.org/rfc/rfc5890#section-2.3.2.3" class="relref">Section 2.3.2.3</a></span>.<a href="#section-8.3.3.2-1" class="pilcrow">¶</a></p>
-<p id="section-8.3.3.2-2">Note that all strings valid against the "hostname" attribute are also
-valid against the "idn-hostname" attribute.<a href="#section-8.3.3.2-2" class="pilcrow">¶</a></p>
+<p id="section-8.3.3.2-2">Note that all strings accepted by the "hostname" attribute are also
+accepted by the "idn-hostname" attribute.<a href="#section-8.3.3.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -4222,7 +4205,7 @@ valid against the "idn-hostname" attribute.<a href="#section-8.3.3.2-2" class="p
 <a href="#section-8.3.4" class="section-number selfRef">8.3.4. </a><a href="#name-ip-addresses" class="section-name selfRef">IP Addresses</a>
           </h4>
 <p id="section-8.3.4-1">These attributes apply to string inputs.<a href="#section-8.3.4-1" class="pilcrow">¶</a></p>
-<p id="section-8.3.4-2">A string input is valid against these attributes if it is a valid
+<p id="section-8.3.4-2">A string input is accepted by these attributes if it is a valid
 representation of an IP address as follows:<a href="#section-8.3.4-2" class="pilcrow">¶</a></p>
 <div id="ipv4">
 <section id="section-8.3.4.1">
@@ -4256,7 +4239,7 @@ syntax as defined in
             <h5 id="name-uri">
 <a href="#section-8.3.5.1" class="section-number selfRef">8.3.5.1. </a><a href="#name-uri" class="section-name selfRef">"uri"</a>
             </h5>
-<p id="section-8.3.5.1-1">A string input is valid against this attribute if it is
+<p id="section-8.3.5.1-1">A string input is accepted by this attribute if it is
 a valid URI, according to <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>], <a href="https://rfc-editor.org/rfc/rfc3986#section-3" class="relref">Section 3</a></span>.<a href="#section-8.3.5.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -4265,7 +4248,7 @@ a valid URI, according to <span>[<a href="#RFC3986" class="cite xref">RFC3986</a
             <h5 id="name-uri-reference">
 <a href="#section-8.3.5.2" class="section-number selfRef">8.3.5.2. </a><a href="#name-uri-reference" class="section-name selfRef">"uri-reference"</a>
             </h5>
-<p id="section-8.3.5.2-1">A string input is valid against this attribute if it is a valid URI
+<p id="section-8.3.5.2-1">A string input is accepted by this attribute if it is a valid URI
 Reference (either a URI or a relative-reference),
 according to <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>], <a href="https://rfc-editor.org/rfc/rfc3986#section-4" class="relref">Section 4</a></span>.<a href="#section-8.3.5.2-1" class="pilcrow">¶</a></p>
 </section>
@@ -4275,7 +4258,7 @@ according to <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>], <a href="
             <h5 id="name-iri">
 <a href="#section-8.3.5.3" class="section-number selfRef">8.3.5.3. </a><a href="#name-iri" class="section-name selfRef">"iri"</a>
             </h5>
-<p id="section-8.3.5.3-1">A string input is valid against this attribute if it is
+<p id="section-8.3.5.3-1">A string input is accepted by this attribute if it is
 a valid IRI, according to <span>[<a href="#RFC3987" class="cite xref">RFC3987</a>], <a href="https://rfc-editor.org/rfc/rfc3987#section-2.2" class="relref">Section 2.2</a></span>.<a href="#section-8.3.5.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -4284,7 +4267,7 @@ a valid IRI, according to <span>[<a href="#RFC3987" class="cite xref">RFC3987</a
             <h5 id="name-iri-reference">
 <a href="#section-8.3.5.4" class="section-number selfRef">8.3.5.4. </a><a href="#name-iri-reference" class="section-name selfRef">"iri-reference"</a>
             </h5>
-<p id="section-8.3.5.4-1">A string input is valid against this attribute if it is a valid IRI
+<p id="section-8.3.5.4-1">A string input is accepted by this attribute if it is a valid IRI
 Reference (either an IRI or a relative-reference),
 according to <span>[<a href="#RFC3987" class="cite xref">RFC3987</a>], <a href="https://rfc-editor.org/rfc/rfc3987#section-2.2" class="relref">Section 2.2</a></span>.<a href="#section-8.3.5.4-1" class="pilcrow">¶</a></p>
 </section>
@@ -4294,7 +4277,7 @@ according to <span>[<a href="#RFC3987" class="cite xref">RFC3987</a>], <a href="
             <h5 id="name-uuid">
 <a href="#section-8.3.5.5" class="section-number selfRef">8.3.5.5. </a><a href="#name-uuid" class="section-name selfRef">"uuid"</a>
             </h5>
-<p id="section-8.3.5.5-1">A string input is valid against this attribute if it is a valid
+<p id="section-8.3.5.5-1">A string input is accepted by this attribute if it is a valid
 string representation of a UUID, according to <span>[<a href="#RFC4122" class="cite xref">RFC4122</a>]</span>.<a href="#section-8.3.5.5-1" class="pilcrow">¶</a></p>
 <p id="section-8.3.5.5-2">Note that all valid URIs are valid IRIs, and all valid URI References are
 also valid IRI References.<a href="#section-8.3.5.5-2" class="pilcrow">¶</a></p>
@@ -4317,7 +4300,7 @@ URN namespace.<a href="#section-8.3.5.5-3" class="pilcrow">¶</a></p>
 <a href="#section-8.3.6.1" class="section-number selfRef">8.3.6.1. </a><a href="#name-uri-template" class="section-name selfRef">"uri-template"</a>
             </h5>
 <p id="section-8.3.6.1-1">This attribute applies to string inputs.<a href="#section-8.3.6.1-1" class="pilcrow">¶</a></p>
-<p id="section-8.3.6.1-2">A string input is valid against this attribute if it is a valid URI Template
+<p id="section-8.3.6.1-2">A string input is accepted by this attribute if it is a valid URI Template
 (of any level), according to <span>[<a href="#RFC6570" class="cite xref">RFC6570</a>]</span>.<a href="#section-8.3.6.1-2" class="pilcrow">¶</a></p>
 <p id="section-8.3.6.1-3">Note that URI Templates may be used for IRIs; there is no separate
 IRI Template specification.<a href="#section-8.3.6.1-3" class="pilcrow">¶</a></p>
@@ -4338,7 +4321,7 @@ IRI Template specification.<a href="#section-8.3.6.1-3" class="pilcrow">¶</a></
             <h5 id="name-json-pointer">
 <a href="#section-8.3.7.1" class="section-number selfRef">8.3.7.1. </a><a href="#name-json-pointer" class="section-name selfRef">"json-pointer"</a>
             </h5>
-<p id="section-8.3.7.1-1">A string input is valid against this attribute if it
+<p id="section-8.3.7.1-1">A string input is accepted by this attribute if it
 is a valid JSON string representation of a JSON Pointer,
 according to <span>[<a href="#RFC6901" class="cite xref">RFC6901</a>], <a href="https://rfc-editor.org/rfc/rfc6901#section-5" class="relref">Section 5</a></span>.<a href="#section-8.3.7.1-1" class="pilcrow">¶</a></p>
 </section>
@@ -4348,7 +4331,7 @@ according to <span>[<a href="#RFC6901" class="cite xref">RFC6901</a>], <a href="
             <h5 id="name-relative-json-pointer">
 <a href="#section-8.3.7.2" class="section-number selfRef">8.3.7.2. </a><a href="#name-relative-json-pointer" class="section-name selfRef">"relative-json-pointer"</a>
             </h5>
-<p id="section-8.3.7.2-1">A string input is valid against this attribute if it is a valid
+<p id="section-8.3.7.2-1">A string input is accepted by this attribute if it is a valid
 <span>[<a href="#I-D.hha-relative-json-pointer" class="cite xref">I-D.hha-relative-json-pointer</a>]</span>.<a href="#section-8.3.7.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -4678,7 +4661,7 @@ and "description".<a href="#section-10.1.1-9" class="pilcrow">¶</a></p>
         </h3>
 <p id="section-10.2-1">There are no restrictions placed on the value of this keyword.<a href="#section-10.2-1" class="pilcrow">¶</a></p>
 <p id="section-10.2-2">This keyword can be used to supply a default JSON value associated with a
-particular schema. It is RECOMMENDED that a default value be valid against
+particular schema. It is RECOMMENDED that a default value be an instance of
 the associated schema.<a href="#section-10.2-2" class="pilcrow">¶</a></p>
 <p id="section-10.2-3">Because annotations can only appear in output if they are attached to
 a location that exists, this keyword's annotation behavior is only useful
@@ -4823,7 +4806,7 @@ write-only flags or find a custom data-oriented solution.<a href="#section-10.4.
 There are no restrictions placed on the values within the array.<a href="#section-10.5-1" class="pilcrow">¶</a></p>
 <p id="section-10.5-2">This keyword can be used to provide sample JSON values associated with a
 particular schema, for the purpose of illustrating usage.  It is
-RECOMMENDED that these values be valid against the associated schema.<a href="#section-10.5-2" class="pilcrow">¶</a></p>
+RECOMMENDED that these values be instances of the associated schema.<a href="#section-10.5-2" class="pilcrow">¶</a></p>
 <p id="section-10.5-3">Because annotations can only appear in output if they are attached to
 a location that exists, this keyword's annotation behavior is only useful
 for use cases such as determining whether the value provided matches one
@@ -5552,7 +5535,7 @@ to the assertion.<a href="#section-12.8.1-1" class="pilcrow">¶</a></p>
 <p id="section-12.8.1-2">For example, the "maxLength" keyword from the validation vocabulary
 (<a href="#validation-keywords" class="auto internal xref">Section 7</a>) will only restrict certain strings
 (that are too long) from being valid.  If the input is a number,
-boolean, null, array, or object, then it is valid against this assertion.<a href="#section-12.8.1-2" class="pilcrow">¶</a></p>
+boolean, null, array, or object, then it is accepted by this assertion.<a href="#section-12.8.1-2" class="pilcrow">¶</a></p>
 <p id="section-12.8.1-3">This behavior allows keywords to be used more easily with inputs
 that can be of multiple primitive types.  The validation
 vocabulary also includes a "type" keyword which can independently
@@ -7605,65 +7588,91 @@ and Karen Etheridge.<a href="#appendix-G-2" class="pilcrow">¶</a></p>
       <h2 id="name-change-log">
 <a href="#appendix-H" class="section-number selfRef">Appendix H. </a><a href="#name-change-log" class="section-name selfRef">Change Log</a>
       </h2>
-<p id="appendix-H-1"><span class="cref" id="_22">This section to be removed before leaving Internet-Draft status.</span><a href="#appendix-H-1" class="pilcrow">¶</a></p>
-<div id="draft-ietf-jsonschema-json-schema-02">
+<p id="appendix-H-1">This section to be removed before leaving Internet-Draft status.<a href="#appendix-H-1" class="pilcrow">¶</a></p>
+<div id="draft-ietf-jsonschema-json-schema-03">
 <section id="appendix-H.1">
         <h3 id="name-draft-ietf-jsonschema-json-">
-<a href="#appendix-H.1" class="section-number selfRef">H.1. </a><a href="#name-draft-ietf-jsonschema-json-" class="section-name selfRef">draft-ietf-jsonschema-json-schema-02</a>
+<a href="#appendix-H.1" class="section-number selfRef">H.1. </a><a href="#name-draft-ietf-jsonschema-json-" class="section-name selfRef">draft-ietf-jsonschema-json-schema-03</a>
         </h3>
 <ul class="normal">
 <li class="normal" id="appendix-H.1-1.1">
-            <p id="appendix-H.1-1.1.1">Add a section near the front of the document explaining what sections
-are written for distinct readers<a href="#appendix-H.1-1.1.1" class="pilcrow">¶</a></p>
+            <p id="appendix-H.1-1.1.1">Define and use "JSON text" and "JSON value" better.<a href="#appendix-H.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-H.1-1.2">
-            <p id="appendix-H.1-1.2.1">Add examples for keywords up to the end of section 6 (up to "unevaluatedProperties")<a href="#appendix-H.1-1.2.1" class="pilcrow">¶</a></p>
+            <p id="appendix-H.1-1.2.1">Add examples for the rest of keywords unless they're very similar to an
+existing example.<a href="#appendix-H.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-H.1-1.3">
-            <p id="appendix-H.1-1.3.1">Move annotation implementation suggestions out of the normative core
+            <p id="appendix-H.1-1.3.1">Simplify the annotation model while keeping it functionally the same.  Moved
+implementation advice regarding annotations to a more clearly optional appendix.<a href="#appendix-H.1-1.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-H.1-1.4">
+            <p id="appendix-H.1-1.4.1">Make vocabulary sections more obvious &amp; consistently named.<a href="#appendix-H.1-1.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-H.1-1.5">
+            <p id="appendix-H.1-1.5.1">Simplify language around how a keyword should "validate" or "accept" input.<a href="#appendix-H.1-1.5.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="draft-ietf-jsonschema-json-schema-02">
+<section id="appendix-H.2">
+        <h3 id="name-draft-ietf-jsonschema-json-s">
+<a href="#appendix-H.2" class="section-number selfRef">H.2. </a><a href="#name-draft-ietf-jsonschema-json-s" class="section-name selfRef">draft-ietf-jsonschema-json-schema-02</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="appendix-H.2-1.1">
+            <p id="appendix-H.2-1.1.1">Add a section near the front of the document explaining what sections
+are written for distinct readers<a href="#appendix-H.2-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-H.2-1.2">
+            <p id="appendix-H.2-1.2.1">Add examples for keywords up to the end of section 6 (up to "unevaluatedProperties")<a href="#appendix-H.2-1.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-H.2-1.3">
+            <p id="appendix-H.2-1.3.1">Move annotation implementation suggestions out of the normative core
 text and into an informative appendix, simplifying the main text for
-readers who are not implementing<a href="#appendix-H.1-1.3.1" class="pilcrow">¶</a></p>
+readers who are not implementing<a href="#appendix-H.2-1.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="draft-ietf-jsonschema-json-schema-01">
-<section id="appendix-H.2">
-        <h3 id="name-draft-ietf-jsonschema-json-s">
-<a href="#appendix-H.2" class="section-number selfRef">H.2. </a><a href="#name-draft-ietf-jsonschema-json-s" class="section-name selfRef">draft-ietf-jsonschema-json-schema-01</a>
+<section id="appendix-H.3">
+        <h3 id="name-draft-ietf-jsonschema-json-sc">
+<a href="#appendix-H.3" class="section-number selfRef">H.3. </a><a href="#name-draft-ietf-jsonschema-json-sc" class="section-name selfRef">draft-ietf-jsonschema-json-schema-01</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-H.2-1.1">
-            <p id="appendix-H.2-1.1.1">Clarify terminology by using JSON Text when talking about serialized JSON, and
-structured document when talking about what a schema operates on.<a href="#appendix-H.2-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-H.3-1.1">
+            <p id="appendix-H.3-1.1.1">Clarify terminology by using JSON Text when talking about serialized JSON, and
+structured document when talking about what a schema operates on.<a href="#appendix-H.3-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-H.2-1.2">
-            <p id="appendix-H.2-1.2.1">Add examples for $anchor, $ref, $defs, $comment, allOf, if and then<a href="#appendix-H.2-1.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-H.3-1.2">
+            <p id="appendix-H.3-1.2.1">Add examples for $anchor, $ref, $defs, $comment, allOf, if and then<a href="#appendix-H.3-1.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="draft-ietf-jsonschema-json-schema-00">
-<section id="appendix-H.3">
-        <h3 id="name-draft-ietf-jsonschema-json-sc">
-<a href="#appendix-H.3" class="section-number selfRef">H.3. </a><a href="#name-draft-ietf-jsonschema-json-sc" class="section-name selfRef">draft-ietf-jsonschema-json-schema-00</a>
+<section id="appendix-H.4">
+        <h3 id="name-draft-ietf-jsonschema-json-sch">
+<a href="#appendix-H.4" class="section-number selfRef">H.4. </a><a href="#name-draft-ietf-jsonschema-json-sch" class="section-name selfRef">draft-ietf-jsonschema-json-schema-00</a>
         </h3>
-<p id="appendix-H.3-1">Compared to the "2020-12" version of JSON Schema, this draft makes the following changes.<a href="#appendix-H.3-1" class="pilcrow">¶</a></p>
+<p id="appendix-H.4-1">Compared to the "2020-12" version of JSON Schema, this draft makes the following changes.<a href="#appendix-H.4-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="appendix-H.3-2.1">
-            <p id="appendix-H.3-2.1.1">Consolidate the 2020-12 core and validation documents<a href="#appendix-H.3-2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-H.4-2.1">
+            <p id="appendix-H.4-2.1.1">Consolidate the 2020-12 core and validation documents<a href="#appendix-H.4-2.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-H.3-2.2">
-            <p id="appendix-H.3-2.2.1">Delevel headers for a more readable Table of Contents<a href="#appendix-H.3-2.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-H.4-2.2">
+            <p id="appendix-H.4-2.2.1">Delevel headers for a more readable Table of Contents<a href="#appendix-H.4-2.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-H.3-2.3">
-            <p id="appendix-H.3-2.3.1">Shift terminology to a terminology section<a href="#appendix-H.3-2.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-H.4-2.3">
+            <p id="appendix-H.4-2.3.1">Shift terminology to a terminology section<a href="#appendix-H.4-2.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-H.3-2.4">
-            <p id="appendix-H.3-2.4.1">Reorder conceptually: intro, keywords, processing and output, extensibility.<a href="#appendix-H.3-2.4.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-H.4-2.4">
+            <p id="appendix-H.4-2.4.1">Reorder conceptually: intro, keywords, processing and output, extensibility.<a href="#appendix-H.4-2.4.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-H.3-2.5">
-            <p id="appendix-H.3-2.5.1">Define input and instance as different things.<a href="#appendix-H.3-2.5.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-H.4-2.5">
+            <p id="appendix-H.4-2.5.1">Define input and instance as different things.<a href="#appendix-H.4-2.5.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>

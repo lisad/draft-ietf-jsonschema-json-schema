@@ -5,9 +5,9 @@
 Network Working Group                                  L. Dusseault, Ed.
 Internet-Draft                                  Data Transfer Initiative
 Intended status: Standards Track                               A. Wright
-Expires: 22 February 2027                                               
+Expires: 27 February 2027                                               
                                                               H. Andrews
-                                                          21 August 2026
+                                                          26 August 2026
 
 
                               JSON Schema
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 February 2027.
+   This Internet-Draft will expire on 27 February 2027.
 
 Copyright Notice
 
@@ -253,9 +253,10 @@ Table of Contents
    Appendix F.  References and generative use cases
    Appendix G.  Acknowledgments
    Appendix H.  Change Log
-     H.1.  draft-ietf-jsonschema-json-schema-02
-     H.2.  draft-ietf-jsonschema-json-schema-01
-     H.3.  draft-ietf-jsonschema-json-schema-00
+     H.1.  draft-ietf-jsonschema-json-schema-03
+     H.2.  draft-ietf-jsonschema-json-schema-02
+     H.3.  draft-ietf-jsonschema-json-schema-01
+     H.4.  draft-ietf-jsonschema-json-schema-00
    Authors' Addresses
 
 1.  Introduction
@@ -280,6 +281,10 @@ Table of Contents
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
    document are to be interpreted as described in [RFC2119].
+
+   For brevity, the converse of logical statements is assumed, except
+   for values described as undefined; that is, "only <X> is accepted"
+   shall imply "<not X> is rejected".
 
 1.2.  Audiences
 
@@ -429,9 +434,9 @@ Table of Contents
 
    A JSON Schema document, or simply a _schema_, is used to describe and
    constrain JSON values.  Used in validation, the schema defines the
-   valid set, or all possible instances that validate successfully.  A
-   JSON Schema is also a JSON value and may also be an instance of some
-   meta-schema.
+   valid set, or all possible inputs that validate successfully.  A JSON
+   Schema is also a JSON value and may also be an instance of some meta-
+   schema.
 
    *Schema Resource*
 
@@ -547,9 +552,9 @@ Table of Contents
    to the following schema objects (where "not" is part of the subschema
    application vocabulary defined in this document).
 
-   true  Always passes validation, as if the empty schema {}
+   true  Always accepts, equivalent to the empty schema {}
 
-   false  Always fails validation, as if the schema { "not": {} }
+   false  Always rejects, equivalent to the schema { "not": {} }
 
    While the empty schema object is unambiguous, there are many possible
    equivalents to the "false" schema.  Using the boolean values ensures
@@ -831,8 +836,8 @@ Table of Contents
    particular dialect.
 
    The value of this keyword MUST be a full URI ([RFC3986], Section 3)
-   and this URI MUST be normalized.  The current schema MUST be valid
-   against the meta-schema identified by this URI.
+   and this URI MUST be normalized.  The current schema MUST be an
+   instance of the meta-schema identified by this URI.
 
    If this URI identifies a retrievable resource, that resource SHOULD
    be of media type "application/schema+json".
@@ -1256,8 +1261,8 @@ Table of Contents
    This keyword's value MUST be a non-empty array.  Each item of the
    array MUST be a valid JSON Schema.
 
-   An input validates successfully against this keyword if it validates
-   successfully against all schemas defined by this keyword's value.
+   This keyword accepts only if every subschema in its value accepts the
+   input.
 
    The allOf keyword is useful for combining multiple conditionals in a
    schema.  See the example for if below in Section 5.2.5.1.
@@ -1306,11 +1311,12 @@ Table of Contents
    This keyword's value MUST be a non-empty array.  Each item of the
    array MUST be a valid JSON Schema.
 
-   An input validates successfully against this keyword if it validates
-   successfully against at least one schema defined by this keyword's
-   value.  Note that in general all subschemas MUST be examined to
-   ensure that keyword dependencies from each subschema are discovered,
-   although see Section 12 for possible short-circuiting conditions.
+   This keyword accepts only if at least one schema in its value accepts
+   the input.
+
+   Note that in general all subschemas MUST be examined to ensure that
+   keyword dependencies from each subschema are discovered, although see
+   Section 12 for possible short-circuiting conditions.
 
    Examples of using anyOf:
 
@@ -1327,9 +1333,8 @@ Table of Contents
    This keyword's value MUST be a non-empty array.  Each item of the
    array MUST be a valid JSON Schema.
 
-   An input validates successfully against this keyword if it validates
-   successfully against exactly one schema defined by this keyword's
-   value.
+   This keyword accepts only if exactly one schema in its value accepts
+   the input.
 
    Similar to anyOf and allOf, oneOf can be used in combination with
    object definitions to allow only one object definition to be
@@ -1342,8 +1347,8 @@ Table of Contents
 
    This keyword's value MUST be a valid JSON Schema.
 
-   An input is valid against this keyword if it fails to validate
-   successfully against the schema defined by this keyword.
+   This keyword accepts the input only if its subschema rejects the
+   input.
 
    For example, a product schema could require the property
    expiration_date if the validity property does NOT have a value equal
@@ -1361,22 +1366,13 @@ Table of Contents
 
    This keyword's value MUST be a valid JSON Schema.
 
-   Validation MUST always succeed against this keyword regardless of the
-   validation outcome of its subschema.  The subschema validation
-   outcome controls which "then"/"else" keywords are evaluated, not the
-   validation result of the "if" keyword.
+   This keyword always accepts the input.  However, it affects whether
+   "then" or "else" is evaluated, depending on whether its subschema
+   accepts or rejects the input.
 
-   Inputs that successfully validate against this keyword's subschema
-   MUST also be valid against the subschema value of the "then" keyword,
-   if present.
-
-   Inputs that fail to validate against this keyword's subschema MUST
-   also be valid against the subschema value of the "else" keyword, if
-   present.
-
-   If Section 12.9 are being produced, they are produced from this
-   keyword's subschema in the usual way, including when the keyword is
-   present without either "then" or "else".
+   As applicable, annotations are produced from its subschema in the
+   usual way (when the subschema accepts), and regardless of whether
+   "then" or "else" is present.
 
 5.2.5.1.  Example
 
@@ -1417,14 +1413,14 @@ Table of Contents
 
    This keyword's value MUST be a valid JSON Schema.
 
-   When "if" is present, and the input successfully validates against
-   its subschema, then validation succeeds against this keyword if the
-   input also successfully validates against this keyword's subschema.
+   When an adjacent "if" is present and its subschema accepts the input,
+   this keyword's result is the result of the "then" subschema
+   evaluating the same input.  Otherwise this keyword is ignored.
 
-   This keyword has no effect when "if" is absent, or when the input
-   fails to validate against its subschema.  Implementations MUST NOT
-   evaluate the input against this keyword, for either validation or
-   annotation production purposes, in such cases.
+   This keyword has no effect when "if" is absent, or when its subschema
+   rejects the input.  Implementations MUST NOT evaluate the input
+   against this keyword, for either validation or annotation production
+   purposes, in such cases.
 
    See the example above in Section 5.2.5.1 for a constraint added in a
    then, conditionally upon the if statement, and below for an example
@@ -1434,14 +1430,14 @@ Table of Contents
 
    This keyword's value MUST be a valid JSON Schema.
 
-   When "if" is present, and the input fails to validate against its
-   subschema, then validation succeeds against this keyword if the input
-   successfully validates against this keyword's subschema.
+   When an adjacent "if" is present and its subschema rejects the input,
+   this keyword's result is the result of the "else" subschema
+   evaluating the same input.  Otherwise this keyword is ignored.
 
-   This keyword has no effect when "if" is absent, or when the input
-   successfully validates against its subschema.  Implementations MUST
-   NOT evaluate the input against this keyword, for either validation or
-   annotation production purposes, in such cases.
+   This keyword has no effect when "if" is absent, or when the input is
+   accepted by its subschema.  Implementations MUST NOT evaluate the
+   input against this keyword, for either validation or annotation
+   production purposes, in such cases.
 
    {
      "if": {
@@ -1455,14 +1451,14 @@ Table of Contents
 
 5.2.8.  "dependentSchemas"
 
-   This keyword specifies subschemas that are evaluated if the input is
-   an object and contains a certain property.
+   This keyword specifies subschemas that are evaluated whenever the
+   input is an object and contains a certain property.
 
    This keyword's value MUST be an object.  Each value in the object
    MUST be a valid JSON Schema.
 
-   If the object key is a property in the instance, the entire instance
-   must validate against the subschema.  Its use is dependent on the
+   If the object key is a property in the instance, the entire input
+   must be accepted by the subschema.  Its use is dependent on the
    presence of the property.
 
    Omitting this keyword has the same behavior as an empty object.
@@ -1498,11 +1494,11 @@ Table of Contents
    The value of "prefixItems" MUST be a non-empty array of valid JSON
    Schemas.
 
-   Validation succeeds if each element of the input validates against
-   the schema at the same position, if any.  This keyword does not
-   constrain the length of the array.  If the array is longer than this
-   keyword's value, this keyword validates only the prefix of matching
-   length.
+   This keyword accepts an array input only if every subschema accepts
+   the input item at the same array index, if any.  This keyword does
+   not constrain the length of the array.  If the array is longer than
+   this keyword's value, this keyword only validates items in the input
+   up to the size of the keyword value.
 
    Omitting this keyword has the same assertion behavior as an empty
    array.
@@ -1511,12 +1507,11 @@ Table of Contents
 
    The value of "items" MUST be a valid JSON Schema.
 
-   This keyword applies its subschema to all input elements at indexes
-   greater than the length of the "prefixItems" array in the same schema
-   object.  If prefixItems is not present, "items" applies its subschema
-   to all input array elements.
+   This keyword accepts the input only if its subschema accepts every
+   item at an index not covered by the adjacent prefixItems (or every
+   item, if prefixItems is absent).
 
-   Omitting this keyword has the same assertion behavior as an empty
+   Omitting this keyword has the same assertion behavior as the empty
    schema.
 
    Examples of items can be found in other examples in this
@@ -1527,14 +1522,14 @@ Table of Contents
 
    The value of this keyword MUST be a valid JSON Schema.
 
-   An array input is valid against "contains" if the number of elements
-   that are valid against its subschema is within the inclusive range of
-   the minimum and (if any) maximum number of occurrences.
+   This keyword accepts an array input only if the number of elements
+   accepted by its subschema is within the inclusive range of the
+   minimum and (if any) maximum number of occurrences.
 
    The minimum and maximum numbers of occurrences are provided by the
    "minContains" and "maxContains" keywords, respectively, within the
    same schema object as "contains".  If "minContains" is absent, the
-   minimum MUST be 1.  If "maxContains" is absent, the maximum MUST be
+   minimum SHALL be 1.  If "maxContains" is absent, the maximum SHALL be
    unbounded.
 
    In general, the subschema MUST be applied to every array element even
@@ -1577,9 +1572,9 @@ Table of Contents
    The value of "properties" MUST be an object.  Each value of this
    object MUST be a valid JSON Schema.
 
-   Validation succeeds if, for each name that appears in both the input
-   and as a name within this keyword's value, the contents successfully
-   validate against the corresponding schema.
+   This keyword accepts only if, for every name that appears in both the
+   input and as a name within this keyword's value, the subschema
+   accepts the corresponding input property value.
 
    Omitting this keyword has the same assertion behavior as an empty
    object.
@@ -1613,8 +1608,8 @@ Table of Contents
    names that do not appear in "properties" or match regular expressions
    in "patternProperties".
 
-   For all such properties, validation succeeds if the contents validate
-   against the "additionalProperties" schema.
+   This keyword accepts only if the keyword's subschema accepts all such
+   properties.
 
    Omitting this keyword has the same assertion behavior as an empty
    schema.
@@ -1636,11 +1631,10 @@ Table of Contents
    to the ECMA-262 regular expression dialect.  Each property value of
    this object MUST be a valid JSON Schema.
 
-   Validation succeeds if, for each input name that matches any regular
-   expressions that appear as a property name in this keyword's value,
-   the contents successfully validate against each schema that
-   corresponds to a matching regular expression.  Recall: Regular
-   expressions are not implicitly anchored.
+   This keyword accepts only if, for each input name that matches any of
+   those regular expressions, the corresponding property value is
+   accepted by each matching subschema.  Recall: Regular expressions are
+   not implicitly anchored.
 
    Omitting this keyword has the same assertion behavior as an empty
    object.
@@ -1669,9 +1663,10 @@ Table of Contents
 
    The value of "propertyNames" MUST be a valid JSON Schema.
 
-   If the input is an object, this keyword validates if every property
-   name in the input validates against the provided schema.  Note the
-   property name that the schema is testing will always be a string.
+   If the input is an object, this keyword accepts only if every
+   property name in the input is accepted by the keyword's subschema.
+   Note the property name that the schema is testing will always be a
+   string.
 
    Omitting this keyword has the same behavior as an empty schema.
 
@@ -1839,21 +1834,20 @@ Table of Contents
    "boolean", "object", "array", "number", or "string"), or "integer"
    which matches any number with a zero fractional part.
 
-   If the value of "type" is a string, then an input validates
-   successfully if its type matches the type represented by the value of
-   the string.
+   If the value of "type" is a string, this keyword accepts exactly when
+   its type matches the type represented by the value of the string.
 
-   If the value of "type" is an array, then an input validates
-   successfully if its type matches any of the types indicated by the
-   strings in the array.
+   If the value of "type" is an array, this keyword accepts exactly when
+   its type matches any of the types indicated by the strings in the
+   array.
 
 7.1.2.  "enum"
 
    The value of this keyword MUST be an array.  This array SHOULD have
    at least one element.  Elements in the array SHOULD be unique.
 
-   An input validates successfully against this keyword if its value is
-   equal to one of the elements in this keyword's array value.
+   This keyword accepts exactly when the input is equal to
+   (Section 3.2.1) one of the elements in this keyword's array value.
 
    Elements in the array might be of any type, including null.
 
@@ -1864,8 +1858,8 @@ Table of Contents
    Use of this keyword is functionally equivalent to an enum
    (Section 7.1.2) with a single value.
 
-   An input validates successfully against this keyword if its value is
-   equal to the value of the keyword.
+   This keyword accepts exactly when the input is equal to
+   (Section 3.2.1) the value of the keyword.
 
 7.2.  Validation Keywords for Numeric Inputs (number and integer)
 
@@ -1873,8 +1867,8 @@ Table of Contents
 
    The value of "multipleOf" MUST be a number, strictly greater than 0.
 
-   A numeric input value is valid only if division by this keyword's
-   value results in an integer.
+   With a numeric input value, this keyword accepts the input only if
+   division by this keyword's value yields an integer.
 
    {
      "type": "object",
@@ -1898,8 +1892,8 @@ Table of Contents
    The value of "maximum" MUST be a number, representing an inclusive
    upper limit for a numeric input value.
 
-   If the input value is a number, then this keyword validates only if
-   the input value is less than or exactly equal to "maximum".
+   If the input value is a number, then this keyword only accepts inputs
+   less than or exactly equal to "maximum".
 
    See the example for Section 6.2 which includes the "maximum" keyword
    as well.
@@ -1909,24 +1903,24 @@ Table of Contents
    The value of "exclusiveMaximum" MUST be a number, representing an
    exclusive upper limit for a numeric input value.
 
-   If the input value is a number, then it is valid only if it has a
-   value strictly less than (not equal to) "exclusiveMaximum".
+   If the input value is a number, then this keyword only accepts inputs
+   strictly less than (not equal to) "exclusiveMaximum".
 
 7.2.4.  "minimum"
 
    The value of "minimum" MUST be a number, representing an inclusive
    lower limit for a numeric input value.
 
-   If the input value is a number, then it is valid only if it has a
-   value that is greater than or exactly equal to "minimum".
+   If the input value is a number, then then this keyword only accepts
+   inputs greater than or exactly equal to "minimum".
 
 7.2.5.  "exclusiveMinimum"
 
    The value of "exclusiveMinimum" MUST be a number, representing an
    exclusive lower limit for a numeric input value.
 
-   If the input value is a number, then it is valid only if it has a
-   value strictly greater than (not equal to) "exclusiveMinimum".
+   If the input value is a number, then this keyword only accepts inputs
+   strictly greater than (not equal to) "exclusiveMinimum".
 
    {
      "type": "object",
@@ -1949,8 +1943,8 @@ Table of Contents
 
    The value of this keyword MUST be a non-negative integer.
 
-   A string input value is valid against this keyword if its length is
-   less than, or equal to, the value of this keyword.
+   This keyword accepts a string input value only if its length is less
+   than, or equal to, the value of this keyword.
 
    The length of a string input value is defined as the number of its
    characters as defined by [RFC8259].
@@ -1959,7 +1953,7 @@ Table of Contents
 
    The value of this keyword MUST be a non-negative integer.
 
-   A string input value is valid against this keyword if its length is
+   This keyword accepts a string input value only if its length is
    greater than, or equal to, the value of this keyword.
 
    The length of a string input value is defined as the number of its
@@ -1973,9 +1967,9 @@ Table of Contents
    valid regular expression, according to the ECMA-262 regular
    expression dialect.
 
-   A string input value is considered valid if the regular expression
-   matches the input value successfully.  Recall: regular expressions
-   are not implicitly anchored.
+   This keyword accepts a string input value only if the regular
+   expression matches the value.  Recall: regular expressions are not
+   implicitly anchored.
 
    An example including "pattern" can be found in Section 5.2.5.1.
 
@@ -1985,15 +1979,15 @@ Table of Contents
 
    The value of this keyword MUST be a non-negative integer.
 
-   An array input value is valid against "maxItems" if its size is less
+   This keyword accepts an array input value only if its size is less
    than, or equal to, the value of this keyword.
 
 7.4.2.  "minItems"
 
    The value of this keyword MUST be a non-negative integer.
 
-   An array input value is valid against "minItems" if its size is
-   greater than, or equal to, the value of this keyword.
+   This keyword accepts an array input value only if its size is greater
+   than, or equal to, the value of this keyword.
 
    Omitting this keyword has the same behavior as a value of 0.
 
@@ -2001,9 +1995,10 @@ Table of Contents
 
    The value of this keyword MUST be a boolean.
 
-   If this keyword has boolean value false, the input array validates
-   successfully.  If it has boolean value true, the input array
-   validates successfully if all of its elements are unique.
+   If this keyword has boolean value false, this keyword is ignored
+   (vacuously accepts).  If it has boolean value true, this keyword
+   accepts only array inputs where no two elements are equal
+   (Section 3.2.1).
 
    Omitting this keyword has the same behavior as a value of false.
 
@@ -2028,9 +2023,10 @@ Table of Contents
 
    The value of this keyword MUST be a non-negative integer.
 
-   Validation MUST always succeed against this keyword; its validation
-   effect is to modify the behavior of "contains" by setting the maximum
-   number of array elements permitted to match the "contains" schema.
+   This keyword SHALL be ignored by itself (it implicitly succeeds); its
+   validation effect is to modify the behavior of "contains" by setting
+   the maximum number of array elements permitted to match the
+   "contains" schema.
 
    As an example of maxContains and how it modifies contains, the
    example in Section 5.3.3 constrains the assignees list to contain
@@ -2041,10 +2037,10 @@ Table of Contents
 
    The value of this keyword MUST be a non-negative integer.
 
-   Validation MUST always succeed against this keyword; its validation
-   effect is to modify the behavior of "contains" by modifying the
-   minimum number of array elements required to match the "contains"
-   schema.
+   This keyword SHALL be ignored by itself (it implicitly succeeds); its
+   validation effect is to modify the behavior of "contains" by
+   modifying the minimum number of array elements required to match the
+   "contains" schema.
 
    Omitting this keyword has the same behavior as a value of 1.
 
@@ -2060,8 +2056,8 @@ Table of Contents
 
    The value of this keyword MUST be a non-negative integer.
 
-   An object is valid against "maxProperties" if its number of
-   properties is less than, or equal to, the value of this keyword.
+   This keyword accepts an object input only if its number of properties
+   is less than, or equal to, the value of this keyword.
 
    {
      "type": "object",
@@ -2082,8 +2078,8 @@ Table of Contents
 
    The value of this keyword MUST be a non-negative integer.
 
-   An object is valid against "minProperties" if its number of
-   properties is greater than, or equal to, the value of this keyword.
+   This keyword accepts an object input only if its number of properties
+   is greater than, or equal to, the value of this keyword.
 
    Omitting this keyword has the same behavior as a value of 0.
 
@@ -2092,8 +2088,8 @@ Table of Contents
    The value of this keyword MUST be an array.  Elements of this array,
    if any, MUST be strings, and MUST be unique.
 
-   An object is valid against this keyword if every item in the array is
-   the name of a property in the object.
+   This keyword accepts an object input only if every item in the array
+   is the name of a property in the object.
 
    Omitting this keyword has the same behavior as an empty array.
 
@@ -2107,7 +2103,7 @@ Table of Contents
    other property is present.  Their requirement is dependent on the
    presence of the other property.
 
-   Validation succeeds if, for each name that appears in both the input
+   This keyword accepts if, for each name that appears in both the input
    object and as a name within this keyword's value, every item in the
    corresponding array is also the name of a property in the input
    object.
@@ -2308,25 +2304,25 @@ Table of Contents
 
 8.3.1.1.  "date-time"
 
-   A string input is valid against this attribute if it is a valid
+   A string input is accepted by this attribute if it is a valid
    representation according to the "date-time" ABNF rule (referenced
    above).
 
 8.3.1.2.  "date"
 
-   A string input is valid against this attribute if it is a valid
+   A string input is accepted by this attribute if it is a valid
    representation according to the "full-date" ABNF rule (referenced
    above).
 
 8.3.1.3.  "time"
 
-   A string input is valid against this attribute if it is a valid
+   A string input is accepted by this attribute if it is a valid
    representation according to the "full-time" ABNF rule (referenced
    above).
 
 8.3.1.4.  "duration"
 
-   A string input is valid against this attribute if it is a valid
+   A string input is accepted by this attribute if it is a valid
    representation according to the "duration" ABNF rule (referenced
    above).
 
@@ -2350,7 +2346,7 @@ Table of Contents
 
    These attributes apply to string inputs.
 
-   A string input is valid against these attributes if it is a valid
+   A string input is accepted by these attributes if it is a valid
    Internet email address as follows:
 
 8.3.2.1.  "email"
@@ -2362,14 +2358,14 @@ Table of Contents
    As defined by the extended "Mailbox" ABNF rule in [RFC6531],
    Section 3.3.
 
-   Note that all strings valid against the "email" attribute are also
-   valid against the "idn-email" attribute.
+   Note that all strings accepted by the "email" attribute are also
+   accepted by the "idn-email" attribute.
 
 8.3.3.  Hostnames
 
    These attributes apply to string inputs.
 
-   A string input is valid against these attributes if it is a valid
+   A string input is accepted by these attributes if it is a valid
    representation for an Internet hostname as follows:
 
 8.3.3.1.  "hostname"
@@ -2382,14 +2378,14 @@ Table of Contents
    As defined by either RFC 1123 as for hostname, or an
    internationalized hostname as defined by [RFC5890], Section 2.3.2.3.
 
-   Note that all strings valid against the "hostname" attribute are also
-   valid against the "idn-hostname" attribute.
+   Note that all strings accepted by the "hostname" attribute are also
+   accepted by the "idn-hostname" attribute.
 
 8.3.4.  IP Addresses
 
    These attributes apply to string inputs.
 
-   A string input is valid against these attributes if it is a valid
+   A string input is accepted by these attributes if it is a valid
    representation of an IP address as follows:
 
 8.3.4.1.  "ipv4"
@@ -2407,30 +2403,30 @@ Table of Contents
 
 8.3.5.1.  "uri"
 
-   A string input is valid against this attribute if it is a valid URI,
+   A string input is accepted by this attribute if it is a valid URI,
    according to [RFC3986], Section 3.
 
 8.3.5.2.  "uri-reference"
 
-   A string input is valid against this attribute if it is a valid URI
+   A string input is accepted by this attribute if it is a valid URI
    Reference (either a URI or a relative-reference), according to
    [RFC3986], Section 4.
 
 8.3.5.3.  "iri"
 
-   A string input is valid against this attribute if it is a valid IRI,
+   A string input is accepted by this attribute if it is a valid IRI,
    according to [RFC3987], Section 2.2.
 
 8.3.5.4.  "iri-reference"
 
-   A string input is valid against this attribute if it is a valid IRI
+   A string input is accepted by this attribute if it is a valid IRI
    Reference (either an IRI or a relative-reference), according to
    [RFC3987], Section 2.2.
 
 8.3.5.5.  "uuid"
 
-   A string input is valid against this attribute if it is a valid
-   string representation of a UUID, according to [RFC4122].
+   A string input is accepted by this attribute if it is a valid string
+   representation of a UUID, according to [RFC4122].
 
    Note that all valid URIs are valid IRIs, and all valid URI References
    are also valid IRI References.
@@ -2447,7 +2443,7 @@ Table of Contents
 
    This attribute applies to string inputs.
 
-   A string input is valid against this attribute if it is a valid URI
+   A string input is accepted by this attribute if it is a valid URI
    Template (of any level), according to [RFC6570].
 
    Note that URI Templates may be used for IRIs; there is no separate
@@ -2462,13 +2458,13 @@ Table of Contents
 
 8.3.7.1.  "json-pointer"
 
-   A string input is valid against this attribute if it is a valid JSON
+   A string input is accepted by this attribute if it is a valid JSON
    string representation of a JSON Pointer, according to [RFC6901],
    Section 5.
 
 8.3.7.2.  "relative-json-pointer"
 
-   A string input is valid against this attribute if it is a valid
+   A string input is accepted by this attribute if it is a valid
    [I-D.hha-relative-json-pointer].
 
 8.3.8.  Expressions
@@ -2758,7 +2754,7 @@ Table of Contents
 
    This keyword can be used to supply a default JSON value associated
    with a particular schema.  It is RECOMMENDED that a default value be
-   valid against the associated schema.
+   an instance of the associated schema.
 
    Because annotations can only appear in output if they are attached to
    a location that exists, this keyword's annotation behavior is only
@@ -2896,7 +2892,7 @@ Table of Contents
 
    This keyword can be used to provide sample JSON values associated
    with a particular schema, for the purpose of illustrating usage.  It
-   is RECOMMENDED that these values be valid against the associated
+   is RECOMMENDED that these values be instances of the associated
    schema.
 
    Because annotations can only appear in output if they are attached to
@@ -3585,7 +3581,7 @@ Table of Contents
    For example, the "maxLength" keyword from the validation vocabulary
    (Section 7) will only restrict certain strings (that are too long)
    from being valid.  If the input is a number, boolean, null, array, or
-   object, then it is valid against this assertion.
+   object, then it is accepted by this assertion.
 
    This behavior allows keywords to be used more easily with inputs that
    can be of multiple primitive types.  The validation vocabulary also
@@ -5222,10 +5218,25 @@ Appendix G.  Acknowledgments
 
 Appendix H.  Change Log
 
+   This section to be removed before leaving Internet-Draft status.
 
-   // This section to be removed before leaving Internet-Draft status.
+H.1.  draft-ietf-jsonschema-json-schema-03
 
-H.1.  draft-ietf-jsonschema-json-schema-02
+   *  Define and use "JSON text" and "JSON value" better.
+
+   *  Add examples for the rest of keywords unless they're very similar
+      to an existing example.
+
+   *  Simplify the annotation model while keeping it functionally the
+      same.  Moved implementation advice regarding annotations to a more
+      clearly optional appendix.
+
+   *  Make vocabulary sections more obvious & consistently named.
+
+   *  Simplify language around how a keyword should "validate" or
+      "accept" input.
+
+H.2.  draft-ietf-jsonschema-json-schema-02
 
    *  Add a section near the front of the document explaining what
       sections are written for distinct readers
@@ -5237,7 +5248,7 @@ H.1.  draft-ietf-jsonschema-json-schema-02
       core text and into an informative appendix, simplifying the main
       text for readers who are not implementing
 
-H.2.  draft-ietf-jsonschema-json-schema-01
+H.3.  draft-ietf-jsonschema-json-schema-01
 
    *  Clarify terminology by using JSON Text when talking about
       serialized JSON, and structured document when talking about what a
@@ -5246,7 +5257,7 @@ H.2.  draft-ietf-jsonschema-json-schema-01
    *  Add examples for $anchor, $ref, $defs, $comment, allOf, if and
       then
 
-H.3.  draft-ietf-jsonschema-json-schema-00
+H.4.  draft-ietf-jsonschema-json-schema-00
 
    Compared to the "2020-12" version of JSON Schema, this draft makes
    the following changes.
