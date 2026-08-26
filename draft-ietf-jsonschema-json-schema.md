@@ -4261,7 +4261,17 @@ and Karen Etheridge.
 
 # Change Log
 
-[^22]
+This section to be removed before leaving Internet-Draft status.
+
+## draft-ietf-jsonschema-json-schema-03
+
+* Define and use "JSON text" and "JSON value" better.
+* Add examples for the rest of keywords unless they're very similar to an
+  existing example.
+* Simplify the annotation model while keeping it functionally the same.  Moved
+  implementation advice regarding annotations to a more clearly optional appendix.
+* Make vocabulary sections more obvious & consistently named.
+* Simplify language around how a keyword should "validate" or "accept" input.
 
 ## draft-ietf-jsonschema-json-schema-02
 
@@ -4399,5 +4409,3 @@ Compared to the "2020-12" version of JSON Schema, this draft makes the following
        direct you to read the CREF located in the
        [JSON Pointer fragments and embedded schema resources](#embedded)
        section for further comments.
-
-[^22]: This section to be removed before leaving Internet-Draft status.
