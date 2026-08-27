@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-08-23T01:19:28.134406+00:00",
+  "timestamp": "2026-08-27T07:51:45.853190+00:00",
   "repo": "lisad/draft-ietf-jsonschema-json-schema",
   "labels": [
     {
@@ -116,15 +116,15 @@
       "id": "I_kwDOR8mbas8AAAABCTcNIA",
       "title": "Contextualize example in 4.1.2; the previous discussion emphasizes the role of $-prefixed keywords, but there aren\u2019t any here.",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/issues/4",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "lisad",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Tim bray: \n\"4.1.2, the example is sort of surprising; the previous discussion emphasizes the role of $-prefixed keywords, but there aren\u2019t any here.\"",
       "createdAt": "2026-05-14T21:52:28Z",
-      "updatedAt": "2026-08-15T20:13:43Z",
-      "closedAt": null,
+      "updatedAt": "2026-08-26T16:43:20Z",
+      "closedAt": "2026-08-26T16:43:20Z",
       "comments": [
         {
           "author": "karenetheridge",
@@ -139,6 +139,13 @@
           "body": "I think this is now [section 3.1.2](https://www.ietf.org/archive/id/draft-ietf-jsonschema-json-schema-02.html#name-root-schema-and-subschemas-) but I'm not sure where the $-prefixed discussion was?  Or maybe it refers to [section 4.1.4.1](https://www.ietf.org/archive/id/draft-ietf-jsonschema-json-schema-02.html#section-4.1.4.1)?",
           "createdAt": "2026-08-15T20:13:43Z",
           "updatedAt": "2026-08-15T20:13:43Z"
+        },
+        {
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "body": "I believe this is done; examples have really been revamped and the discussion no longer says the same thing.",
+          "createdAt": "2026-08-26T16:43:20Z",
+          "updatedAt": "2026-08-26T16:43:20Z"
         }
       ]
     },
@@ -281,16 +288,24 @@
       "id": "I_kwDOR8mbas8AAAABFkW5BA",
       "title": "Explain annotations better",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/issues/16",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "lisad",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "\nThe initial work on annotations/outputs was motivated by a recognition that downstream tools needed to work with the output of a validation library. \n\nAJV was an example of a tool with useful output, but people were reluctant to rely on exactly the output of that specific library.  \n\nAcknowledge that there is a performance cost, but implementations can be run in different modes - \"yes give me output\" or \"skip the output and just validate fast\"\n\n(credit to ben hutton for explaining this in a community meeting)",
       "createdAt": "2026-06-15T20:24:27Z",
-      "updatedAt": "2026-06-15T20:24:27Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-08-26T16:41:20Z",
+      "closedAt": "2026-08-26T16:41:19Z",
+      "comments": [
+        {
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "body": "We have certainly taken a stab at explaining annotations better and i do think it's much better. Closing this issue because any further work will arise from mailing list discussion and likely be more narrowly scoped.",
+          "createdAt": "2026-08-26T16:41:19Z",
+          "updatedAt": "2026-08-26T16:41:19Z"
+        }
+      ]
     },
     {
       "number": 17,
@@ -3532,24 +3547,26 @@
       "id": "PR_kwDOR8mbas8AAAABAdT9EQ",
       "title": "Replace \"validates successfully\" with \"accepts\"",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/61",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "awwright",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This replaces language similar to \"validates successfully\", \"valid against\", etc with the terms \"accepts\" and \"rejects\" which sounds more natural in most cases.\r\n\r\nThis also makes a few related changes, namely a paragraph clarifying that \"X accepts\" implies \"not-X rejects\", and adding a link to the equals algorithm, for the keywords that make use of it.",
       "createdAt": "2026-08-20T18:49:46Z",
-      "updatedAt": "2026-08-22T01:01:53Z",
+      "updatedAt": "2026-08-26T15:03:10Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "8c081ed9aa1f7b18fac6cd97717a52b344eb1181",
       "headRepository": "awwright/draft-ietf-jsonschema-json-schema",
       "headRefName": "aww-accepts",
       "headRefOid": "a19451b5f05fb06fb4a7e75c74394759e92bfbc4",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-08-26T15:03:10Z",
+      "mergedAt": "2026-08-26T15:03:10Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "41c8bda1ff0f5c0041dc78755e76c9476313db52"
+      },
       "comments": [
         {
           "author": "awwright",
@@ -3660,6 +3677,34 @@
           ]
         }
       ]
+    },
+    {
+      "number": 62,
+      "id": "PR_kwDOR8mbas8AAAABBGn0rw",
+      "title": "Adds a change log section for -03",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/62",
+      "state": "MERGED",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-08-26T16:43:31Z",
+      "updatedAt": "2026-08-26T16:45:48Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "41c8bda1ff0f5c0041dc78755e76c9476313db52",
+      "headRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "headRefName": "add-03-changelog",
+      "headRefOid": "363e6695158ef7bc53889effa0cfcee5e18b5b08",
+      "closedAt": "2026-08-26T16:45:48Z",
+      "mergedAt": "2026-08-26T16:45:48Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "5bd8d7ca491334939b1c47c6302f63b0d6cdd1d5"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
