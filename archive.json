@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-08-27T07:51:45.853190+00:00",
+  "timestamp": "2026-09-06T03:16:33.955466+00:00",
   "repo": "lisad/draft-ietf-jsonschema-json-schema",
   "labels": [
     {
@@ -475,6 +475,22 @@
           "updatedAt": "2026-08-15T19:35:35Z"
         }
       ]
+    },
+    {
+      "number": 63,
+      "id": "I_kwDOR8mbas8AAAABP5VLsg",
+      "title": "Appendix D table 5 row 4 has an error",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/issues/63",
+      "state": "OPEN",
+      "author": "handrews",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This row:\n\nInput | length of successful \"prefixItems\" evaluations | \"unevaluatedItems\" applied | valid\n-- | -- | -- | --\n[\"2026-06-24T10:00:00Z\", 42] | 1 | 42 (at index 1) | false\u00a0by both\u00a0unevaluatedItems\u00a0and\u00a0type\u00a0in\u00a0prefixItems\u00a0at index 1\n\nimplies that `prefixItems` should communicate that one item was successfully evaluated (=accepted).  however, because the 2nd item was rejected, the whole `prefixItems` keyword rejects, and does not produce dependency information at all.  We should fix this and double-check the rest of the tables.",
+      "createdAt": "2026-09-05T23:51:51Z",
+      "updatedAt": "2026-09-05T23:51:51Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
