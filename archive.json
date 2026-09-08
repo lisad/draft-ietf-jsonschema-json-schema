@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-09-06T03:16:33.955466+00:00",
+  "timestamp": "2026-09-08T03:22:33.342319+00:00",
   "repo": "lisad/draft-ietf-jsonschema-json-schema",
   "labels": [
     {
@@ -491,6 +491,30 @@
       "updatedAt": "2026-09-05T23:51:51Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 64,
+      "id": "I_kwDOR8mbas8AAAABQIi2bg",
+      "title": "Are annotations type-specific like assertions?",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/issues/64",
+      "state": "OPEN",
+      "author": "handrews",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Can annotation production be scoped to a particular underlying JSON types like assertions are?  e.g. `minLength` only really applies to JSON strings, and trivially accepts otherwise, so should an annotion like `transform` from the ajv-keywords example only be produced if the underlying input is a JSON string?  This type check could alternatively be done downstream.\n\nClosely releated is the same question for `format` values, which are likewise type-scoped.  Should the `format` annotation only be produced if the input type is the one relevant to that specific format?",
+      "createdAt": "2026-09-07T17:46:24Z",
+      "updatedAt": "2026-09-07T17:48:53Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Allowing the type-scoping for annotations is philosophically consistent and reduces the work of consuming the output (no need to re-check type, which could get expensive in very large input where you would have to keep looking up the speciifc input values).  So I lean towards that but I'm not 100% certain.  The text is currently ambiguous, I think.",
+          "createdAt": "2026-09-07T17:48:53Z",
+          "updatedAt": "2026-09-07T17:48:53Z"
+        }
+      ]
     }
   ],
   "pulls": [
