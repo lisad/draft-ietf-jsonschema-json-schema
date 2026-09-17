@@ -253,9 +253,10 @@ Table of Contents
    Appendix F.  References and generative use cases
    Appendix G.  Acknowledgments
    Appendix H.  Change Log
-     H.1.  draft-ietf-jsonschema-json-schema-02
-     H.2.  draft-ietf-jsonschema-json-schema-01
-     H.3.  draft-ietf-jsonschema-json-schema-00
+     H.1.  draft-ietf-jsonschema-json-schema-03
+     H.2.  draft-ietf-jsonschema-json-schema-02
+     H.3.  draft-ietf-jsonschema-json-schema-01
+     H.4.  draft-ietf-jsonschema-json-schema-00
    Authors' Addresses
 
 1.  Introduction
@@ -5153,7 +5154,25 @@ Appendix G.  Acknowledgments
 
 Appendix H.  Change Log
 
-H.1.  draft-ietf-jsonschema-json-schema-02
+   This section to be removed before leaving Internet-Draft status.
+
+H.1.  draft-ietf-jsonschema-json-schema-03
+
+   *  Define and use "JSON text" and "JSON value" better.
+
+   *  Add examples for the rest of keywords unless they're very similar
+      to an existing example.
+
+   *  Simplify the annotation model while keeping it functionally the
+      same.  Moved implementation advice regarding annotations to a more
+      clearly optional appendix.
+
+   *  Make vocabulary sections more obvious & consistently named.
+
+   *  Simplify language around how a keyword should "validate" or
+      "accept" input.
+
+H.2.  draft-ietf-jsonschema-json-schema-02
 
    *  Add a section near the front of the document explaining what
       sections are written for distinct readers
@@ -5165,7 +5184,7 @@ H.1.  draft-ietf-jsonschema-json-schema-02
       core text and into an informative appendix, simplifying the main
       text for readers who are not implementing
 
-H.2.  draft-ietf-jsonschema-json-schema-01
+H.3.  draft-ietf-jsonschema-json-schema-01
 
    *  Clarify terminology by using JSON Text when talking about
       serialized JSON, and structured document when talking about what a
@@ -5174,7 +5193,7 @@ H.2.  draft-ietf-jsonschema-json-schema-01
    *  Add examples for $anchor, $ref, $defs, $comment, allOf, if and
       then
 
-H.3.  draft-ietf-jsonschema-json-schema-00
+H.4.  draft-ietf-jsonschema-json-schema-00
 
    Compared to the "2020-12" version of JSON Schema, this draft makes
    the following changes.
