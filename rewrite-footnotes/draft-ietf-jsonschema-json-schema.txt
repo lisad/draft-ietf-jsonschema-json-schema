@@ -1102,9 +1102,7 @@ Table of Contents
    resolution is needed.
 
    For an example of $ref, see the example of $anchor above in
-   Section 4.1.4.1.  For an example of $dynamicRef, see Appendix C.  A
-   practical example can also be found in the JSON Hyper-Schema meta-
-   schema [HYPERSCHEMA-METASCHEMA].
+   Section 4.1.4.1.  For an example of $dynamicRef, see Appendix C.
 
 4.2.2.  "$defs"
 
@@ -2122,6 +2120,14 @@ Table of Contents
    format attributes defined in this section apply to strings, but a
    format attribute can be specified to apply to any input type in the
    input data model (Section 3.2).
+   // Note that the "type" keyword in this specification defines an
+   // "integer" type which is not part of the data model.  Therefore a
+   // format attribute can be limited to numbers, but not specifically
+   // to integers.  However, a numeric format can be used alongside the
+   // "type" keyword with a value of "integer", or could be explicitly
+   // defined to always pass if the number is not an integer, which
+   // produces essentially the same behavior as only applying to
+   // integers.
 
    The current URI for this vocabulary, known as the Format-Annotation
    vocabulary, is:
@@ -2171,6 +2177,11 @@ Table of Contents
    enable and disable such evaluation and MUST be disabled by default.
    Implementations SHOULD document their level of support for such
    validation.
+   // Specifying the Format-Annotation vocabulary and enabling
+   // validation in an implementation should not be viewed as being
+   // equivalent to specifying the Format-Assertion vocabulary since
+   // implementations are not required to provide full validation
+   // support when the Format-Assertion vocabulary is not specified.
 
    When the implementation is configured for assertion behavior, it:
 
@@ -2179,13 +2190,6 @@ Table of Contents
 
    *  MAY choose to implement validation of any or all format attributes
       as a no-op by always producing a validation result of true;
-
-   This matches the current reality of implementations, which provide
-   widely varying levels of validation, including no validation at all,
-   for some or all format attributes.  It is also designed to encourage
-   relying only on the annotation behavior and performing semantic
-   validation in the application, which is the recommended best
-   practice.
 
 8.2.2.  Format-Assertion Vocabulary
 
@@ -2202,24 +2206,28 @@ Table of Contents
 
    *  MUST evaluate "format" as an assertion;
 
-   *  MUST implement _some_ syntactic validation for all format
-      attributes defined in this specification, and for any additional
-      format attributes that it recognizes
+   *  MUST implement syntactic validation for all format attributes
+      defined in this specification, and for any additional format
+      attributes that it recognizes, such that there exist possible
+      input values of the correct type that will fail validation.
 
-   The requirement for "some" validation of format attributes is
+   The requirement for minimal validation of format attributes is
    intentionally vague and permissive, due to the complexity involved in
-   many of the attributes.  For example, email addresses should
-   technically not have '..' (two dots in a row) but naive email address
-   utilities may miss this.  Perfect validation may be prohibitively
-   complicated; consider URL values with the data schema that are
-   technically invalid if the payload, once decoded, doesn't fully match
-   the media type.
-
-   Implementations SHOULD NOT go beyond syntactic checking.  The user of
-   a validator would not expect it to send an email, attempt to connect
-   to a URL, or otherwise check the existence of an entity identified by
-   a format instance, and doing that kind of checking could introduce
-   security and privacy risks.
+   many of the attributes.  Note in particular that the requirement is
+   limited to syntactic checking; it is not to be expected that an
+   implementation would send an email, attempt to connect to a URL, or
+   otherwise check the existence of an entity identified by a format
+   instance.
+   // The expectation is that for simple formats such as date-time,
+   // syntactic validation will be thorough.  For a complex format such
+   // as email addresses, which are the amalgamation of various
+   // standards and numerous adjustments over time, with obscure and/or
+   // obsolete rules that may or may not be restricted by other
+   // applications making use of the value, a minimal validation is
+   // sufficient.  For example, an input string that does not contain an
+   // "@" is clearly not a valid email address, and an "email" or
+   // "hostname" containing characters outside of 7-bit ASCII is
+   // likewise clearly invalid.
 
    It is RECOMMENDED that implementations use a common parsing library
    for each format, or a well-known regular expression.  Implementations
@@ -2294,6 +2302,12 @@ Table of Contents
    Implementations SHOULD NOT define extension attributes with any name
    matching an RFC 3339 format unless it validates according to the
    rules of that format.
+   // There is not currently consensus on the need for supporting all
+   // RFC 3339 formats, so this approach of reserving the namespace will
+   // encourage experimentation without committing to the entire set.
+   // Either the format implementation requirements will become more
+   // flexible in general, or these will likely either be promoted to
+   // fully specified attributes or dropped.
 
 8.3.2.  Email Addresses
 
@@ -3202,7 +3216,7 @@ Table of Contents
    for which the value is known not to be a schema, results in undefined
    behavior in order to avoid burdening implementations with the need to
    detect such targets.  See Section 15 for the security implications of
-   interpreting such targets as schemas anyway.
+   blindly interpreting targets as schemas.
 
    Note that single-level custom keywords with identical syntax and
    semantics to "$defs" do not allow for any intervening "$id" keywords,
@@ -4377,10 +4391,6 @@ Table of Contents
               <http://www.w3.org/TR/2009/REC-xml-names-20091208/>.
 
 18.2.  Informative References
-
-   [HYPERSCHEMA-METASCHEMA]
-              "Hyper-Schema Meta-Schema", December 2020,
-              <https://json-schema.org/draft/2020-12/hyper-schema>.
 
    [I-D.handrews-json-schema-hyperschema]
               Andrews, H. and A. Wright, "JSON Hyper-Schema: A
