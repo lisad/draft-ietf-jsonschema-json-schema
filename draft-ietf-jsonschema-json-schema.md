@@ -3511,7 +3511,7 @@ processing JavaScript or ECMAScript encoded within a JSON string.
 
 Interpreting a reference target as a schema when it is not known to be one
 (see {{non-schemas}}) is analogous to fetching a schema over HTTP but receiving
-a response with a Content-Type other than application/schema+json.  An
+a response with a Content-Type other than application/json-schema+json.  An
 implementation can certainly try to interpret it as a schema, but the origin
 server offered no guarantee that it actually is any such thing.  Therefore,
 interpreting it as such has security implications and may produce
@@ -3572,9 +3572,29 @@ the pattern "es" matches "expression".
 
 # IANA Considerations
 
-## application/schema+json
+## application/json-schema+json
 
 The proposed MIME media type for JSON Schema is defined as follows:
+
+* Type name: application
+* Subtype name: json-schema+json
+* Required parameters: N/A
+* Encoding considerations: Encoding considerations are
+  identical to those specified for the "application/json"
+  media type.  See JSON ({{!RFC8259}}).
+* Security considerations: See {{security}} above.
+* Interoperability considerations: See {{language}},
+  {{integers}}, and
+  {{regex-interop}} above.
+* Fragment identifier considerations: See {{fragments}}.
+
+## application/schema+json
+
+This MIME media type is registered for clarity and interoperability.
+It is frequently used already, but it could also describe something
+other than "JSON Schema" that is a schema language in JSON, so
+application/json-schema+json is preferred.
+
 
 * Type name: application
 * Subtype name: schema+json
