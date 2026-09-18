@@ -5,9 +5,9 @@
 Network Working Group                                  L. Dusseault, Ed.
 Internet-Draft                                  Data Transfer Initiative
 Intended status: Standards Track                               A. Wright
-Expires: 21 March 2027                                                  
+Expires: 22 March 2027                                                  
                                                               H. Andrews
-                                                       17 September 2026
+                                                       18 September 2026
 
 
                               JSON Schema
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 March 2027.
+   This Internet-Draft will expire on 22 March 2027.
 
 Copyright Notice
 
@@ -1331,11 +1331,11 @@ Table of Contents
    absent but not appear at the same time, this can be expressed in many
    ways but possibly the briefest is
 
-     {
-       "not": {
-         "required": ["approved_date", "rejected_date"]
-       }
+   {
+     "not": {
+       "required": ["approved_date", "rejected_date"]
      }
+   }
 
 5.2.5.  "if"
 
@@ -3096,13 +3096,10 @@ Table of Contents
    object containing the "$ref" in the second (non-embedded)
    arrangement.
 
-   An implementation MAY choose not to support addressing schema
-   resource contents by URIs using a base other than the resource's
-   canonical URI, plus a JSON Pointer fragment relative to that base.
-   Were we to require otherwise, implementations would have to keep
-   track of a stack of possible base URIs.  Therefore, schema authors
-   SHOULD NOT rely on such URIs, as using them may reduce
-   interoperability.
+   Schema authors SHOULD NOT rely on URIs that use a base other than the
+   resource's canonical URI.  Implementations may not support them, and
+   non-canonical URIs can also be more fragile in the face of
+   refactoring.
 
    Further examples of such non-canonical URI construction, as well as
    the appropriate canonical URI-based fragments to use instead, are
@@ -5031,32 +5028,32 @@ E.2.  Example meta-schema with vocabulary declarations
 
    This meta-schema combines several vocabularies for general use.
 
-   {
-     "$schema": "https://json-schema.org/draft/2020-12/schema",
-     "$id": "https://example.com/meta/general-use-example",
-     "$dynamicAnchor": "meta",
-     "$vocabulary": {
-       "https://json-schema.org/draft/2020-12/vocab/core": true,
-       "https://json-schema.org/draft/2020-12/vocab/applicator": true,
-       "https://json-schema.org/draft/2020-12/vocab/validation": true,
-       "https://example.com/vocab/example-vocab": true
-     },
-     "allOf": [
-       {"$ref": "https://json-schema.org/draft/2020-12/meta/core"},
-       {"$ref": "https://json-schema.org/draft/2020-12/meta/applicator"},
-       {"$ref": "https://json-schema.org/draft/2020-12/meta/validation"},
-       {"$ref": "https://example.com/meta/example-vocab"}
-     ],
-     "patternProperties": {
-       "^unevaluated": false
-     },
-     "properties": {
-       "localKeyword": {
-         "$comment": "Not in vocabulary, but validated if used",
-         "type": "string"
-       }
-     }
-   }
+  {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.com/meta/general-use-example",
+    "$dynamicAnchor": "meta",
+    "$vocabulary": {
+      "https://json-schema.org/draft/2020-12/vocab/core": true,
+      "https://json-schema.org/draft/2020-12/vocab/applicator": true,
+      "https://json-schema.org/draft/2020-12/vocab/validation": true,
+      "https://example.com/vocab/example-vocab": true
+    },
+    "allOf": [
+      {"$ref": "https://json-schema.org/draft/2020-12/meta/core"},
+      {"$ref": "https://json-schema.org/draft/2020-12/meta/applicator"},
+      {"$ref": "https://json-schema.org/draft/2020-12/meta/validation"},
+      {"$ref": "https://example.com/meta/example-vocab"}
+    ],
+    "patternProperties": {
+      "^unevaluated": false
+    },
+    "properties": {
+      "localKeyword": {
+        "$comment": "Not in vocabulary, but validated if used",
+        "type": "string"
+      }
+    }
+  }
 
    This meta-schema describes only a single extension vocabulary.
 
@@ -5071,7 +5068,7 @@ E.2.  Example meta-schema with vocabulary declarations
      "properties": {
        "minDate": {
          "type": "string",
-         "pattern": "^\d\d\d\d-\d\d-\d\d$",
+         "pattern": "^\\d\\d\\d\\d-\\d\\d-\\d\\d$",
          "format": "date"
        }
      }
