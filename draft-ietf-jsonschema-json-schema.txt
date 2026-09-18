@@ -5,9 +5,9 @@
 Network Working Group                                  L. Dusseault, Ed.
 Internet-Draft                                  Data Transfer Initiative
 Intended status: Standards Track                               A. Wright
-Expires: 27 February 2027                                               
+Expires: 22 March 2027                                                  
                                                               H. Andrews
-                                                          26 August 2026
+                                                       18 September 2026
 
 
                               JSON Schema
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 February 2027.
+   This Internet-Draft will expire on 22 March 2027.
 
 Copyright Notice
 
@@ -1356,11 +1356,11 @@ Table of Contents
    absent but not appear at the same time, this can be expressed in many
    ways but possibly the briefest is
 
-     {
-       "not": {
-         "required": ["approved_date", "rejected_date"]
-       }
+   {
+     "not": {
+       "required": ["approved_date", "rejected_date"]
      }
+   }
 
 5.2.5.  "if"
 
@@ -5085,32 +5085,32 @@ E.2.  Example meta-schema with vocabulary declarations
 
    This meta-schema combines several vocabularies for general use.
 
-   {
-     "$schema": "https://json-schema.org/draft/2020-12/schema",
-     "$id": "https://example.com/meta/general-use-example",
-     "$dynamicAnchor": "meta",
-     "$vocabulary": {
-       "https://json-schema.org/draft/2020-12/vocab/core": true,
-       "https://json-schema.org/draft/2020-12/vocab/applicator": true,
-       "https://json-schema.org/draft/2020-12/vocab/validation": true,
-       "https://example.com/vocab/example-vocab": true
-     },
-     "allOf": [
-       {"$ref": "https://json-schema.org/draft/2020-12/meta/core"},
-       {"$ref": "https://json-schema.org/draft/2020-12/meta/applicator"},
-       {"$ref": "https://json-schema.org/draft/2020-12/meta/validation"},
-       {"$ref": "https://example.com/meta/example-vocab"}
-     ],
-     "patternProperties": {
-       "^unevaluated": false
-     },
-     "properties": {
-       "localKeyword": {
-         "$comment": "Not in vocabulary, but validated if used",
-         "type": "string"
-       }
-     }
-   }
+  {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.com/meta/general-use-example",
+    "$dynamicAnchor": "meta",
+    "$vocabulary": {
+      "https://json-schema.org/draft/2020-12/vocab/core": true,
+      "https://json-schema.org/draft/2020-12/vocab/applicator": true,
+      "https://json-schema.org/draft/2020-12/vocab/validation": true,
+      "https://example.com/vocab/example-vocab": true
+    },
+    "allOf": [
+      {"$ref": "https://json-schema.org/draft/2020-12/meta/core"},
+      {"$ref": "https://json-schema.org/draft/2020-12/meta/applicator"},
+      {"$ref": "https://json-schema.org/draft/2020-12/meta/validation"},
+      {"$ref": "https://example.com/meta/example-vocab"}
+    ],
+    "patternProperties": {
+      "^unevaluated": false
+    },
+    "properties": {
+      "localKeyword": {
+        "$comment": "Not in vocabulary, but validated if used",
+        "type": "string"
+      }
+    }
+  }
 
    This meta-schema describes only a single extension vocabulary.
 
@@ -5125,7 +5125,7 @@ E.2.  Example meta-schema with vocabulary declarations
      "properties": {
        "minDate": {
          "type": "string",
-         "pattern": "^\d\d\d\d-\d\d-\d\d$",
+         "pattern": "^\\d\\d\\d\\d-\\d\\d-\\d\\d$",
          "format": "date"
        }
      }
