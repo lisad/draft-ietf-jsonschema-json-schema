@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-09-08T03:22:33.342319+00:00",
+  "timestamp": "2026-09-20T03:44:38.818121+00:00",
   "repo": "lisad/draft-ietf-jsonschema-json-schema",
   "labels": [
     {
@@ -513,6 +513,30 @@
           "body": "Allowing the type-scoping for annotations is philosophically consistent and reduces the work of consuming the output (no need to re-check type, which could get expensive in very large input where you would have to keep looking up the speciifc input values).  So I lean towards that but I'm not 100% certain.  The text is currently ambiguous, I think.",
           "createdAt": "2026-09-07T17:48:53Z",
           "updatedAt": "2026-09-07T17:48:53Z"
+        }
+      ]
+    },
+    {
+      "number": 67,
+      "id": "I_kwDOR8mbas8AAAABSCtf2A",
+      "title": "To what extent is $vocabulary an ordinary keyword",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/issues/67",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Paraphrasing Henry out of context: \n\nCurrently,$vocabulary is this weird thing with all of this contorted language about detecting meta-schemas and statically examining them to bootstrap things. This is why it's \"non-inherited\": Statically following all of the possibilities to find referenced vocabularies added way too much new implementation burden. Instead, we said \"It has to be in this exact place.\"\n\nAt the time, this may have seemed a desirable feature as semantics (vocabulary) and syntax (metaschemas aside from $vocabulary) were intentionally somewhat independent. But it made them too independent. Incorporating a meta-schema without its vocabularies makes no sense. Constructing a dialect is painful, because each vocabulary has its own meta-schema (with its own $vocabulary), and then when you allOf those vocabulary meta-schemas together, you have to repeat all of the $vocabulary definitions. The semantics of getting the repeated meta-schema block wrong are technically well-defined but not user-friendly.\n\nHowever, in truth $vocabulary functions as a perfectly normal annotation. Its semantics are that if it annotates a schema resource root, then it defines the vocabulary for that schema resource. Since we do not have any way to change vocabularies within a resource (embedding another resource is different as it is still a separate resource), annotating any other part of a schema has no effect. Annotating a non-schema also has no effect.\n\nOnce you do this, you can create a dialect by using allOf to import each vocabulary meta-schema, and you get the vocabularies as well. The tradeoff is that it becomes more possible to have some sort of vocabulary collision, but we need to finish specifying that anyway.\n\nSo if we are having $vocabulary at all, it would be much better to make it behave like a normal keyword...",
+      "createdAt": "2026-09-18T22:56:50Z",
+      "updatedAt": "2026-09-19T01:27:46Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Since I didn't quite state it clearly before, this would technically be a breaking change.  But there would not be any practical behavioral impact on the standard meta-schemas or any others that follow their pattern of incorporating all vocabularies from `allOf`-ed meta-schemas into their own `$vocabulary`.",
+          "createdAt": "2026-09-19T01:27:46Z",
+          "updatedAt": "2026-09-19T01:27:46Z"
         }
       ]
     }
@@ -3743,6 +3767,421 @@
       "mergeCommit": {
         "oid": "5bd8d7ca491334939b1c47c6302f63b0d6cdd1d5"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 65,
+      "id": "PR_kwDOR8mbas8AAAABD-wSHQ",
+      "title": "Moves footnotes to inline text or removes them as appropriate",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/65",
+      "state": "MERGED",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "About half moved inline (some simplified) and half removed.",
+      "createdAt": "2026-09-17T19:14:14Z",
+      "updatedAt": "2026-09-18T23:13:04Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "21d22ea60891f6518ee7b7f79b80346ab32c2ca5",
+      "headRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "headRefName": "rewrite-footnotes",
+      "headRefOid": "a89fc5327d73c651ef3bed495a7f8460da584fb2",
+      "closedAt": "2026-09-18T23:13:04Z",
+      "mergedAt": "2026-09-18T23:13:04Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "514462d990ff375e30e323bce2f486d5a1ccdf60"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOR8mbas8AAAABOFoVEw",
+          "commit": {
+            "abbreviatedOid": "1eb6361"
+          },
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "I have numerous comments :-)\n\nIn particular, I would strongly prefer to deal with everything related to `format` all at once later.  It's a very complex topic.",
+          "createdAt": "2026-09-17T19:19:17Z",
+          "updatedAt": "2026-09-17T19:43:23Z",
+          "comments": [
+            {
+              "originalPosition": 42,
+              "body": "Actually it's because I couldn't figure out how to make it work in code otherwise, but I have a solution now so I'd rather change this.  That's why it's a CREF and not specification text.",
+              "createdAt": "2026-09-17T19:19:18Z",
+              "updatedAt": "2026-09-17T19:43:23Z"
+            },
+            {
+              "originalPosition": 75,
+              "body": "JSON Hyper-Schema is pretty dead, and we've removed all other references to it AFAIK.  That's why this was a CREF, it didn't seem like the right example even though it's technically true.",
+              "createdAt": "2026-09-17T19:20:37Z",
+              "updatedAt": "2026-09-17T19:43:23Z"
+            },
+            {
+              "originalPosition": 106,
+              "body": "I would rather not put this text in the specification.  It's sufficiently judgemental to make me cringe (I wrote it), and it's intended as a commentary to future specification authors as to the state of discussion in this area.\n\nIt's properly a CREF (they're not footnotes, they're the exact same thing as `<cref></cref>` in XML RFC souces.  I don't understand the hostility to CREFs a this stage in the process, but if we're dead set on removing them, please remove this paragraph entirely.  I'm not comfortable with it in the spec proper.",
+              "createdAt": "2026-09-17T19:23:01Z",
+              "updatedAt": "2026-09-17T19:43:23Z"
+            },
+            {
+              "originalPosition": 115,
+              "body": "This is incorrect _(although understandable given the rest of the section)_. The entire purpose of the format-assertion vocabulary is to mandate full interoperable syntax validation.  Otherwise just take the whole vocabulary out, because this change makes it non-interoperable and we already have a non-interoperable format vocabulary.",
+              "createdAt": "2026-09-17T19:24:24Z",
+              "updatedAt": "2026-09-17T19:43:23Z"
+            },
+            {
+              "originalPosition": 129,
+              "body": "This didn't mean minimal syntax checking as the other format vocabulary already allows that _(although again, the confusion is very understandable given the wording further down)_.  It was about one long-time JSON Schema contributor's insistence that validating email meant verifying that an actual human would read a message sent to it.  As noted a few lines down.\n\nSee my comment on the original CREF/footnote text below for evidence.",
+              "createdAt": "2026-09-17T19:26:21Z",
+              "updatedAt": "2026-09-17T19:43:23Z"
+            },
+            {
+              "originalPosition": 166,
+              "body": "\"stack of possible base URIs\" will be confusing to many readers, and is not clearly defined.  It was OK for CREF text.  We need to either have a clear statement here or just delete this entirely.\n\nThe reason for this CREF is that there was an intractible divide between people who thought that this (the stack) was easy and everyone should do it, and those who thought keeping track of only one at a time was not just sufficient but preferable.  So it was left as implementation-defined.",
+              "createdAt": "2026-09-17T19:28:35Z",
+              "updatedAt": "2026-09-17T19:43:23Z"
+            },
+            {
+              "originalPosition": 196,
+              "body": "Possible alternate wording, feel free to take or leave.\n\n```suggestion\nto detect such targets.  See {{security}} for the security implications\nof blindly interpreting targets as schemas.\n```",
+              "createdAt": "2026-09-17T19:30:03Z",
+              "updatedAt": "2026-09-17T19:43:23Z"
+            },
+            {
+              "originalPosition": 207,
+              "body": "This is why this field needs renaming.  That's what the CREF is about.",
+              "createdAt": "2026-09-17T19:30:35Z",
+              "updatedAt": "2026-09-17T19:43:23Z"
+            },
+            {
+              "originalPosition": 250,
+              "body": "FWIW this is common as many other specifications embed JSON Schema.",
+              "createdAt": "2026-09-17T19:31:47Z",
+              "updatedAt": "2026-09-17T19:43:23Z"
+            },
+            {
+              "originalPosition": 311,
+              "body": "Did this get cut entirely?  It shouldn't, it ended up being a huge point of confusion and debate with OpenAPI and needed this to resolve it.",
+              "createdAt": "2026-09-17T19:37:13Z",
+              "updatedAt": "2026-09-17T19:43:23Z"
+            },
+            {
+              "originalPosition": 317,
+              "body": "Once you parse the double-negative, it's clear that this is saying that Format-Assertion MUST provide full (syntax) validation.  Format-Annotation with validation only does best-effort validation, which is why that configuration is _not_ equivalent to Format-Assertion.  The JSON Schema Org was moving towards only having Format-Assertion last I checked (basically, dropping the dual vocabularies and always requiring format syntax validation).",
+              "createdAt": "2026-09-17T19:39:14Z",
+              "updatedAt": "2026-09-17T19:43:23Z"
+            },
+            {
+              "originalPosition": 332,
+              "body": "I think something got mixed up with the CREFs/footnotes here as this is talking about minimal validation in the Format-Assertion vocabulary, when two footnotes up we're making the opposite point?  I think?\n\nThis is why I keep saying that `format` is a huge can of worms and we should deal with it after more foundational things are sorted.",
+              "createdAt": "2026-09-17T19:41:49Z",
+              "updatedAt": "2026-09-17T19:43:23Z"
+            },
+            {
+              "originalPosition": 344,
+              "body": "This is hinting at the sort of validation->annotation->re-validation pipeline discussed, including in that example for the `transform` extension keyword.",
+              "createdAt": "2026-09-17T19:42:36Z",
+              "updatedAt": "2026-09-17T19:43:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABOGUSqg",
+          "commit": {
+            "abbreviatedOid": "1eb6361"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-17T20:30:52Z",
+          "updatedAt": "2026-09-17T20:30:53Z",
+          "comments": [
+            {
+              "originalPosition": 42,
+              "body": "Rather change the parenthetical or rather change the requirement? ",
+              "createdAt": "2026-09-17T20:30:52Z",
+              "updatedAt": "2026-09-17T20:30:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABOGUllA",
+          "commit": {
+            "abbreviatedOid": "1eb6361"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-17T20:31:26Z",
+          "updatedAt": "2026-09-17T20:31:26Z",
+          "comments": [
+            {
+              "originalPosition": 106,
+              "body": "happy to",
+              "createdAt": "2026-09-17T20:31:26Z",
+              "updatedAt": "2026-09-17T20:31:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABOGbbfw",
+          "commit": {
+            "abbreviatedOid": "1eb6361"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-17T20:43:26Z",
+          "updatedAt": "2026-09-17T20:43:27Z",
+          "comments": [
+            {
+              "originalPosition": 344,
+              "body": "restored until we deal with format comprehensively",
+              "createdAt": "2026-09-17T20:43:26Z",
+              "updatedAt": "2026-09-17T20:43:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABOGbhwA",
+          "commit": {
+            "abbreviatedOid": "1eb6361"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-17T20:43:36Z",
+          "updatedAt": "2026-09-17T20:43:36Z",
+          "comments": [
+            {
+              "originalPosition": 332,
+              "body": "restored until we deal with format comprehensively",
+              "createdAt": "2026-09-17T20:43:36Z",
+              "updatedAt": "2026-09-17T20:43:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABOGblPA",
+          "commit": {
+            "abbreviatedOid": "1eb6361"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-17T20:43:42Z",
+          "updatedAt": "2026-09-17T20:43:42Z",
+          "comments": [
+            {
+              "originalPosition": 317,
+              "body": "restored until we deal with format comprehensively",
+              "createdAt": "2026-09-17T20:43:42Z",
+              "updatedAt": "2026-09-17T20:43:42Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABOGbq3g",
+          "commit": {
+            "abbreviatedOid": "1eb6361"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-17T20:43:49Z",
+          "updatedAt": "2026-09-17T20:43:50Z",
+          "comments": [
+            {
+              "originalPosition": 311,
+              "body": "restored until we deal with format comprehensively",
+              "createdAt": "2026-09-17T20:43:49Z",
+              "updatedAt": "2026-09-17T20:43:50Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABOGcdSw",
+          "commit": {
+            "abbreviatedOid": "1eb6361"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-17T20:45:07Z",
+          "updatedAt": "2026-09-17T20:45:07Z",
+          "comments": [
+            {
+              "originalPosition": 250,
+              "body": "Yes, but I'm not sure what the footnote is clarifying for people?  I'm happy to add something back in for this one I just don't know what",
+              "createdAt": "2026-09-17T20:45:07Z",
+              "updatedAt": "2026-09-17T20:45:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABOGdOeg",
+          "commit": {
+            "abbreviatedOid": "1eb6361"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-17T20:46:23Z",
+          "updatedAt": "2026-09-17T20:46:24Z",
+          "comments": [
+            {
+              "originalPosition": 75,
+              "body": "removed",
+              "createdAt": "2026-09-17T20:46:23Z",
+              "updatedAt": "2026-09-17T20:46:24Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABORj1Pg",
+          "commit": {
+            "abbreviatedOid": "1eb6361"
+          },
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-18T21:47:14Z",
+          "updatedAt": "2026-09-18T21:47:14Z",
+          "comments": [
+            {
+              "originalPosition": 250,
+              "body": "It's a \"TODO\" questioning whether we need to provide some rules for that case.  I think (and have been acting w.r.t. OpenAPI) that it falls under RFC3986 \u00a75.1.2, base URI from encapsulating entity, meaning that a JSON Schema object without an `$id` that is embedded in a document of another format simply inherits the base URI of that document, which is calcuated in accordance with its own rules.\r\n\r\nTechnically, since we already cite RFC3986 \u00a75.1, we're already saying this.  The TODO was me not knowing whether we should be explicit about it, or if I was misinterpreting it somehow.  If what I just said seems correct enough an you don't think we need a note, we can drop the TODO here.",
+              "createdAt": "2026-09-18T21:47:14Z",
+              "updatedAt": "2026-09-18T21:47:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABORqVXg",
+          "commit": {
+            "abbreviatedOid": "1eb6361"
+          },
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-18T21:58:20Z",
+          "updatedAt": "2026-09-18T21:58:21Z",
+          "comments": [
+            {
+              "originalPosition": 42,
+              "body": "The requirement, but this depends on how the annotation / output / pipeline tihng resolves and on what we want to do about vocabularies in general.  I'll attempt a TL;DR:\r\n\r\n-----\r\n\r\nCurrently,`$vocabulary` is this weird thing with all of this contorted language about detecting meta-schemas and statically examining them to bootstrap things.  This is why it's \"non-inherited\": Statically following all of the possibilities to find referenced vocabularies added way too much new implementation burden.  Instead, we said \"It has to be in this exact place.\"\r\n\r\nAt the time, I thought this was fine.  Possibly even a desirable feature as semantics (vocabulary) and syntax (metaschemas aside from `$vocabulary`) were intentionally somewhat independent.  But it made them too independent.  Incorporating a meta-schema without its vocabularies makes no sense.  Constructing a dialect is painful, because each vocabulary has its own meta-schema (with its own `$vocabulary`), and then when you `allOf` those vocabulary meta-schemas together, you have to _repeat_ all of the `$vocabulary` definitions.  The semantics of getting the repeated meta-schema block wrong are technically well-defined but not user-friendly.\r\n\r\n-----\r\n\r\nHowever, in truth `$vocabulary` functions as a perfectly normal annotation.  Its semantics are that if it annotates a schema resource root, then it defines the vocabulary for that schema resource.  Since we do not have any way to change vocabularies _within_ a resource (embedding another resource is different as it is still a separate resource), annotating any other part of a schema has no effect.  Annotating a non-schema also has no effect.\r\n\r\nOnce you do this, you can create a dialect by using `allOf` to import each vocabulary meta-schema, and you get the vocabularies as well.  The tradeoff is that it becomes more possible to have some sort of vocabulary collision, but we need to finish specifying that anyway.  It was not intended to have undefined behavior forever.\r\n\r\nSo if we are having `$vocabulary` at all, it would be much better to make it behave like a normal keyword, which is what it should have done in the first place.  The problem was that I/we added so many things at once in 2019-09, including annotation collection/production and vocabularies, that I didn't see how all of them could better fit together until later.",
+              "createdAt": "2026-09-18T21:58:20Z",
+              "updatedAt": "2026-09-18T21:58:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABOR7Pig",
+          "commit": {
+            "abbreviatedOid": "1eb6361"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-18T22:52:16Z",
+          "updatedAt": "2026-09-18T22:52:17Z",
+          "comments": [
+            {
+              "originalPosition": 42,
+              "body": "This makes a lot of sense but I think we should tackle it separately.  I'll make an issue & we can discuss amongst ourselves, on the list, or one then the other.",
+              "createdAt": "2026-09-18T22:52:16Z",
+              "updatedAt": "2026-09-18T22:52:17Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOR8mbas8AAAABOR7doA",
+          "commit": {
+            "abbreviatedOid": "1eb6361"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-18T22:52:53Z",
+          "updatedAt": "2026-09-18T22:52:53Z",
+          "comments": [
+            {
+              "originalPosition": 250,
+              "body": "I don't *think* we need a note but we can always add one in if we decide what to say.",
+              "createdAt": "2026-09-18T22:52:53Z",
+              "updatedAt": "2026-09-18T22:52:53Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 66,
+      "id": "PR_kwDOR8mbas8AAAABD-_WjA",
+      "title": "Moves examples out into separate files for routine CI/CD validation",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/66",
+      "state": "MERGED",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-09-17T19:43:59Z",
+      "updatedAt": "2026-09-18T23:02:12Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "5bd8d7ca491334939b1c47c6302f63b0d6cdd1d5",
+      "headRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "headRefName": "move-examples-out",
+      "headRefOid": "d6a763b00cd23a839b1faa710401698684d4a3eb",
+      "closedAt": "2026-09-18T23:02:12Z",
+      "mergedAt": "2026-09-18T23:02:12Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "21d22ea60891f6518ee7b7f79b80346ab32c2ca5"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 68,
+      "id": "PR_kwDOR8mbas8AAAABEKSuTg",
+      "title": "Adds a registration for json-schema+json as a more clear MIME type",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/68",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-09-18T23:19:08Z",
+      "updatedAt": "2026-09-18T23:19:08Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "514462d990ff375e30e323bce2f486d5a1ccdf60",
+      "headRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "headRefName": "clearer-mime-type",
+      "headRefOid": "ac569d8b4cc9ab2c76f3b505f36667c84b03bbde",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
