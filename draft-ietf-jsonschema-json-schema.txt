@@ -5,9 +5,9 @@
 Network Working Group                                  L. Dusseault, Ed.
 Internet-Draft                                  Data Transfer Initiative
 Intended status: Standards Track                               A. Wright
-Expires: 22 March 2027                                                  
+Expires: 26 March 2027                                                  
                                                               H. Andrews
-                                                       18 September 2026
+                                                       22 September 2026
 
 
                               JSON Schema
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 March 2027.
+   This Internet-Draft will expire on 26 March 2027.
 
 Copyright Notice
 
@@ -236,8 +236,9 @@ Table of Contents
      16.2.  Mathematical Integers
      16.3.  Regular Expressions
    17. IANA Considerations
-     17.1.  application/schema+json
-     17.2.  application/schema-instance+json
+     17.1.  application/json-schema+json
+     17.2.  application/schema+json
+     17.3.  application/schema-instance+json
    18. References
      18.1.  Normative References
      18.2.  Informative References
@@ -4161,7 +4162,7 @@ Table of Contents
    Interpreting a reference target as a schema when it is not known to
    be one (see Section 11.4.2) is analogous to fetching a schema over
    HTTP but receiving a response with a Content-Type other than
-   application/schema+json.  An implementation can certainly try to
+   application/json-schema+json.  An implementation can certainly try to
    interpret it as a schema, but the origin server offered no guarantee
    that it actually is any such thing.  Therefore, interpreting it as
    such has security implications and may produce unpredictable results.
@@ -4226,9 +4227,38 @@ Table of Contents
 
 17.  IANA Considerations
 
-17.1.  application/schema+json
+17.1.  application/json-schema+json
 
    The proposed MIME media type for JSON Schema is defined as follows:
+
+   *  Type name: application
+
+   *  Subtype name: json-schema+json
+
+   *  Required parameters: N/A
+
+   *  Encoding considerations: Encoding considerations are identical to
+      those specified for the "application/json" media type.  See JSON
+      ([RFC8259]).
+
+   *  Security considerations: See Section 15 above.
+
+   *  Interoperability considerations: See Section 16.1, Section 16.2,
+      and Section 16.3 above.
+
+   *  Fragment identifier considerations: See Section 3.4.
+
+   *  Deprecated alias names for this type: application/schema+json
+
+   *  Intended usage: COMMON
+
+17.2.  application/schema+json
+
+   This MIME media type is registered for clarity and interoperability.
+   It is frequently used already, but it could also describe something
+   other than "JSON Schema" that is a schema language in JSON, so it is
+   registered as OBSOLETE in favor of application/json-schema+json
+   ([RFC6838]).
 
    *  Type name: application
 
@@ -4247,7 +4277,9 @@ Table of Contents
 
    *  Fragment identifier considerations: See Section 3.4.
 
-17.2.  application/schema-instance+json
+   *  Intended usage: OBSOLETE
+
+17.3.  application/schema-instance+json
 
    The proposed MIME media type for JSON Schema Instances that require a
    JSON Schema-specific media type is defined as follows:
@@ -4362,6 +4394,11 @@ Table of Contents
               and D. Orchard, "URI Template", RFC 6570,
               DOI 10.17487/RFC6570, March 2012,
               <https://www.rfc-editor.org/rfc/rfc6570>.
+
+   [RFC6838]  Freed, N., Klensin, J., and T. Hansen, "Media Type
+              Specifications and Registration Procedures", BCP 13,
+              RFC 6838, DOI 10.17487/RFC6838, January 2013,
+              <https://www.rfc-editor.org/rfc/rfc6838>.
 
    [RFC6839]  Hansen, T. and A. Melnikov, "Additional Media Type
               Structured Syntax Suffixes", RFC 6839,
