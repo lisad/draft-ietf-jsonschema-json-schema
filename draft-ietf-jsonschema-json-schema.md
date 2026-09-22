@@ -3587,14 +3587,16 @@ The proposed MIME media type for JSON Schema is defined as follows:
   {{integers}}, and
   {{regex-interop}} above.
 * Fragment identifier considerations: See {{fragments}}.
+* Deprecated alias names for this type: application/schema+json
+* Intended usage: COMMON
 
 ## application/schema+json
 
 This MIME media type is registered for clarity and interoperability.
 It is frequently used already, but it could also describe something
-other than "JSON Schema" that is a schema language in JSON, so
-application/json-schema+json is preferred.
-
+other than "JSON Schema" that is a schema language in JSON, so it is
+registered as OBSOLETE in favor of application/json-schema+json
+({{!RFC6838}}).
 
 * Type name: application
 * Subtype name: schema+json
@@ -3607,6 +3609,7 @@ application/json-schema+json is preferred.
   {{integers}}, and
   {{regex-interop}} above.
 * Fragment identifier considerations: See {{fragments}}.
+* Intended usage: OBSOLETE
 
 ## application/schema-instance+json
 
