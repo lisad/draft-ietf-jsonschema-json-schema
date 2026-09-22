@@ -5,9 +5,9 @@
 Network Working Group                                  L. Dusseault, Ed.
 Internet-Draft                                  Data Transfer Initiative
 Intended status: Standards Track                               A. Wright
-Expires: 22 March 2027                                                  
+Expires: 26 March 2027                                                  
                                                               H. Andrews
-                                                       18 September 2026
+                                                       22 September 2026
 
 
                               JSON Schema
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 March 2027.
+   This Internet-Draft will expire on 26 March 2027.
 
 Copyright Notice
 
@@ -4248,12 +4248,17 @@ Table of Contents
 
    *  Fragment identifier considerations: See Section 3.4.
 
+   *  Deprecated alias names for this type: application/schema+json
+
+   *  Intended usage: COMMON
+
 17.2.  application/schema+json
 
    This MIME media type is registered for clarity and interoperability.
    It is frequently used already, but it could also describe something
-   other than "JSON Schema" that is a schema language in JSON, so
-   application/json-schema+json is preferred.
+   other than "JSON Schema" that is a schema language in JSON, so it is
+   registered as OBSOLETE in favor of application/json-schema+json
+   ([RFC6838]).
 
    *  Type name: application
 
@@ -4271,6 +4276,8 @@ Table of Contents
       and Section 16.3 above.
 
    *  Fragment identifier considerations: See Section 3.4.
+
+   *  Intended usage: OBSOLETE
 
 17.3.  application/schema-instance+json
 
@@ -4387,6 +4394,11 @@ Table of Contents
               and D. Orchard, "URI Template", RFC 6570,
               DOI 10.17487/RFC6570, March 2012,
               <https://www.rfc-editor.org/rfc/rfc6570>.
+
+   [RFC6838]  Freed, N., Klensin, J., and T. Hansen, "Media Type
+              Specifications and Registration Procedures", BCP 13,
+              RFC 6838, DOI 10.17487/RFC6838, January 2013,
+              <https://www.rfc-editor.org/rfc/rfc6838>.
 
    [RFC6839]  Hansen, T. and A. Melnikov, "Additional Media Type
               Structured Syntax Suffixes", RFC 6839,
