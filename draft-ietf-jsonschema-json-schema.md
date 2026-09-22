@@ -807,11 +807,6 @@ a letter (\[A-Za-z\]) or underscore ("\_"), followed by any number of letters,
 digits (\[0-9\]), hyphens ("-"), underscores ("\_"), and periods (".").
 This matches the US-ASCII part of XML's NCName production, per {{XMLNS}}.
 
-The effect of specifying the same fragment name multiple times within
-the same resource, using any combination of "$anchor" and/or
-"$dynamicAnchor", is undefined.  Implementations MAY
-raise an error if such usage is detected.
-
 #### Example {#anchor-example}
 
 In this example, more than one property can hold an address object. The
@@ -2590,6 +2585,14 @@ example, if two schemas "#alice" and "#bob" both have an "allOf" property
 that refers to the other, a naive implementation might get stuck in an infinite
 recursive loop trying to validate the input.  Schemas SHOULD NOT make
 use of infinite recursive nesting like this; the behavior is undefined.
+
+### Duplicate resources and anchors
+
+The effect of specifying the same fragment name multiple times within
+the same resource, using any combination of "$anchor" and/or
+"$dynamicAnchor", or of specifying the same URI for multiple resources
+within the same document, is undefined.  Implementations MAY
+raise an error if such usage is detected.
 
 ### References to Possible Non-Schemas {#non-schemas}
 
