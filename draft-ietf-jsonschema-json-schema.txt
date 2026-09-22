@@ -191,7 +191,8 @@ Table of Contents
        11.3.3.  Validating
      11.4.  Caveats
        11.4.1.  Guarding Against Infinite Recursion
-       11.4.2.  References to Possible Non-Schemas
+       11.4.2.  Duplicate resources and anchors
+       11.4.3.  References to Possible Non-Schemas
      11.5.  RESTful / Hypermedia Schema References
        11.5.1.  Linking to a Schema
        11.5.2.  Usage Over HTTP
@@ -1012,11 +1013,6 @@ Table of Contents
    of letters, digits ([0-9]), hyphens ("-"), underscores ("_"), and
    periods (".").  This matches the US-ASCII part of XML's NCName
    production, per [XMLNS].
-
-   The effect of specifying the same fragment name multiple times within
-   the same resource, using any combination of "$anchor" and/or
-   "$dynamicAnchor", is undefined.  Implementations MAY raise an error
-   if such usage is detected.
 
 4.1.4.1.  Example
 
@@ -3197,7 +3193,15 @@ Table of Contents
    Schemas SHOULD NOT make use of infinite recursive nesting like this;
    the behavior is undefined.
 
-11.4.2.  References to Possible Non-Schemas
+11.4.2.  Duplicate resources and anchors
+
+   The effect of specifying the same fragment name multiple times within
+   the same resource, using any combination of "$anchor" and/or
+   "$dynamicAnchor", or of specifying the same URI for multiple
+   resources within the same document, is undefined.  Implementations
+   MAY raise an error if such usage is detected.
+
+11.4.3.  References to Possible Non-Schemas
 
    Subschema objects (or booleans) are recognized by their use with
    known applicator keywords or with location-reserving keywords such as
@@ -3605,7 +3609,7 @@ Table of Contents
    be redefined by extension keywords.
 
    While these keywords do not directly affect results, as explained in
-   Section 11.4.2 unrecognized extension keywords that reserve locations
+   Section 11.4.3 unrecognized extension keywords that reserve locations
    for re-usable schemas may have undesirable interactions with
    references in certain circumstances.
 
@@ -4160,7 +4164,7 @@ Table of Contents
    processing JavaScript or ECMAScript encoded within a JSON string.
 
    Interpreting a reference target as a schema when it is not known to
-   be one (see Section 11.4.2) is analogous to fetching a schema over
+   be one (see Section 11.4.3) is analogous to fetching a schema over
    HTTP but receiving a response with a Content-Type other than
    application/json-schema+json.  An implementation can certainly try to
    interpret it as a schema, but the origin server offered no guarantee

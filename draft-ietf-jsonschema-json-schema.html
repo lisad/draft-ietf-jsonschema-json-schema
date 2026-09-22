@@ -1599,7 +1599,10 @@ Source for this draft can be found at
                     <p id="section-toc.1-1.11.2.4.2.1.1"><a href="#section-11.4.1" class="auto internal xref">11.4.1</a>.  <a href="#name-guarding-against-infinite-r" class="internal xref">Guarding Against Infinite Recursion</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.4.2.2">
-                    <p id="section-toc.1-1.11.2.4.2.2.1"><a href="#section-11.4.2" class="auto internal xref">11.4.2</a>.  <a href="#name-references-to-possible-non-" class="internal xref">References to Possible Non-Schemas</a></p>
+                    <p id="section-toc.1-1.11.2.4.2.2.1"><a href="#section-11.4.2" class="auto internal xref">11.4.2</a>.  <a href="#name-duplicate-resources-and-anc" class="internal xref">Duplicate resources and anchors</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.4.2.3">
+                    <p id="section-toc.1-1.11.2.4.2.3.1"><a href="#section-11.4.3" class="auto internal xref">11.4.3</a>.  <a href="#name-references-to-possible-non-" class="internal xref">References to Possible Non-Schemas</a></p>
 </li>
                 </ul>
 </li>
@@ -2644,10 +2647,6 @@ need for "$dynamicAnchor".<a href="#section-4.1.4-5" class="pilcrow">¶</a></p>
 a letter ([A-Za-z]) or underscore ("_"), followed by any number of letters,
 digits ([0-9]), hyphens ("-"), underscores ("_"), and periods (".").
 This matches the US-ASCII part of XML's NCName production, per <span>[<a href="#XMLNS" class="cite xref">XMLNS</a>]</span>.<a href="#section-4.1.4-6" class="pilcrow">¶</a></p>
-<p id="section-4.1.4-7">The effect of specifying the same fragment name multiple times within
-the same resource, using any combination of "$anchor" and/or
-"$dynamicAnchor", is undefined.  Implementations MAY
-raise an error if such usage is detected.<a href="#section-4.1.4-7" class="pilcrow">¶</a></p>
 <div id="anchor-example">
 <section id="section-4.1.4.1">
             <h5 id="name-example">
@@ -5131,18 +5130,30 @@ recursive loop trying to validate the input.  Schemas SHOULD NOT make
 use of infinite recursive nesting like this; the behavior is undefined.<a href="#section-11.4.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="non-schemas">
+<div id="duplicate-resources-and-anchors">
 <section id="section-11.4.2">
-          <h4 id="name-references-to-possible-non-">
-<a href="#section-11.4.2" class="section-number selfRef">11.4.2. </a><a href="#name-references-to-possible-non-" class="section-name selfRef">References to Possible Non-Schemas</a>
+          <h4 id="name-duplicate-resources-and-anc">
+<a href="#section-11.4.2" class="section-number selfRef">11.4.2. </a><a href="#name-duplicate-resources-and-anc" class="section-name selfRef">Duplicate resources and anchors</a>
           </h4>
-<p id="section-11.4.2-1">Subschema objects (or booleans) are recognized by their use with known
+<p id="section-11.4.2-1">The effect of specifying the same fragment name multiple times within
+the same resource, using any combination of "$anchor" and/or
+"$dynamicAnchor", or of specifying the same URI for multiple resources
+within the same document, is undefined.  Implementations MAY
+raise an error if such usage is detected.<a href="#section-11.4.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="non-schemas">
+<section id="section-11.4.3">
+          <h4 id="name-references-to-possible-non-">
+<a href="#section-11.4.3" class="section-number selfRef">11.4.3. </a><a href="#name-references-to-possible-non-" class="section-name selfRef">References to Possible Non-Schemas</a>
+          </h4>
+<p id="section-11.4.3-1">Subschema objects (or booleans) are recognized by their use with known
 applicator keywords or with location-reserving keywords such as
 <span><a href="#defs" class="internal xref">"$defs"</a> (<a href="#defs" class="auto internal xref">Section 4.2.2</a>)</span> that take one or more subschemas
 as a value.  These keywords may be "$defs" and the standard applicators
 from this document, or extension keywords from a known vocabulary, or
-implementation-specific custom keywords.<a href="#section-11.4.2-1" class="pilcrow">¶</a></p>
-<p id="section-11.4.2-2">Multi-level structures of unknown keywords are capable of introducing
+implementation-specific custom keywords.<a href="#section-11.4.3-1" class="pilcrow">¶</a></p>
+<p id="section-11.4.3-2">Multi-level structures of unknown keywords are capable of introducing
 nested subschemas, which would be subject to the processing rules for
 "$id".  Therefore, having a reference target in such an unrecognized
 structure cannot be reliably implemented, and the resulting behavior
@@ -5150,12 +5161,12 @@ is undefined.  Similarly, a reference target under a known keyword,
 for which the value is known not to be a schema, results in undefined
 behavior in order to avoid burdening implementations with the need
 to detect such targets.  See <a href="#security" class="auto internal xref">Section 15</a> for the security implications
-of blindly interpreting targets as schemas.<a href="#section-11.4.2-2" class="pilcrow">¶</a></p>
-<p id="section-11.4.2-3">Note that single-level custom keywords with identical syntax and
+of blindly interpreting targets as schemas.<a href="#section-11.4.3-2" class="pilcrow">¶</a></p>
+<p id="section-11.4.3-3">Note that single-level custom keywords with identical syntax and
 semantics to "$defs" do not allow for any intervening "$id" keywords,
 and therefore will behave correctly under implementations that attempt
 to use any reference target as a schema.  However, this behavior is
-implementation-specific and MUST NOT be relied upon for interoperability.<a href="#section-11.4.2-3" class="pilcrow">¶</a></p>
+implementation-specific and MUST NOT be relied upon for interoperability.<a href="#section-11.4.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -5592,7 +5603,7 @@ Their purpose in the core vocabulary is to ensure that locations are
 available for certain purposes and will not be redefined by extension
 keywords.<a href="#section-12.10-1" class="pilcrow">¶</a></p>
 <p id="section-12.10-2">While these keywords do not directly affect results, as explained in
-<a href="#non-schemas" class="auto internal xref">Section 11.4.2</a> unrecognized
+<a href="#non-schemas" class="auto internal xref">Section 11.4.3</a> unrecognized
 extension keywords that reserve locations for re-usable schemas may have
 undesirable interactions with references in certain circumstances.<a href="#section-12.10-2" class="pilcrow">¶</a></p>
 </section>
@@ -6224,7 +6235,7 @@ of that media type or encoding.  For example, the security considerations
 Scripting Media Types (<span>[<a href="#RFC4329" class="cite xref">RFC4329</a>]</span>) apply when
 processing JavaScript or ECMAScript encoded within a JSON string.<a href="#section-15-10" class="pilcrow">¶</a></p>
 <p id="section-15-11">Interpreting a reference target as a schema when it is not known to be one
-(see <a href="#non-schemas" class="auto internal xref">Section 11.4.2</a>) is analogous to fetching a schema over HTTP but receiving
+(see <a href="#non-schemas" class="auto internal xref">Section 11.4.3</a>) is analogous to fetching a schema over HTTP but receiving
 a response with a Content-Type other than application/json-schema+json.  An
 implementation can certainly try to interpret it as a schema, but the origin
 server offered no guarantee that it actually is any such thing.  Therefore,
