@@ -1175,7 +1175,7 @@ be unbounded.
 
 In general, the subschema MUST be applied to every array element
 even after enough matches to satisfy "minContains" and "maxContains"
-have been found in order to produce annotations and support
+have been found, in order to support
 keyword dependencies, although see {{keyword-behaviors}} for
 conditions under which short-circuiting is possible.
 
