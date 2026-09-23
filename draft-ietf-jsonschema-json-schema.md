@@ -4104,6 +4104,26 @@ sub-fields, rather than an instance of a distinct class.
 This style of usage requires the annotation to be in the same object
 as the reference, which must be recognizable as a reference.
 
+# Important changes from JSON Schema 2020-12 {#changes-from-2020-12}
+
+This appendix is non-normative.  It summarizes changes from "2020-12"
+that can affect implementations.
+
+* Applicators are no longer required to produce annotations.
+* Keywords with behavior defined in terms of annotations are
+  now defined in terms of behavior, allowing choice of implementation
+  mechanism.
+* An annotation's value is always the keyword's value ({{annotations}}).
+  Computed annotation values are no longer permitted.
+* Relevance ({{relevance}}) governs both output and dependency
+  information, replacing the 2020-12 rules for discarding annotations
+  from failed subschemas.
+* Keywords are not permitted to modify the input during evaluation
+  ({{val-ann}}).  Modifications need to be in a separate step.
+* "application/json-schema+json" is the media type for JSON Schema.
+  "application/schema+json" is registered as an obsolete alias
+  ({{iana-considerations}}).
+
 # Acknowledgments
 
 This draft is based on great amounts of superb work by creators
