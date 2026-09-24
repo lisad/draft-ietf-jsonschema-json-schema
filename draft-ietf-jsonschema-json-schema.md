@@ -135,7 +135,7 @@ Refer to the appendix on keyword dependency implementation ({{impl-deps}}) for a
 guidance on approaches to implementing keyword dependencies.
 
 * Authors of meta-schemas including extensions to JSON Schema will want to read
-the chapter on {{extensibility}} and {{vocabularies-appendix}}.
+the chapter on {{meta-schemas}} and {{vocabularies-appendix}}.
 
 ## Functionality
 
@@ -189,9 +189,10 @@ In formal language theory, JSON Schema resembles a context-free language, as
 most keywords are context-free.  Thus, JSON instances can be validated quickly
 and simply, without I/O or querying data elsewhere in the same JSON instance.
 
-### Vocabularies
+### Vocabularies {#intro-vocabularies}
 
-To facilitate re-use, keywords can be organized into vocabularies. A vocabulary
+To facilitate extensibility and re-use, keywords can be organized into
+vocabularies. A vocabulary
 consists of a list of keywords, together with their syntax and semantics.
 A dialect is defined as a set of vocabularies and their required support
 identified in a meta-schema.  Vocabularies, dialects and meta-schemas are not
@@ -460,6 +461,7 @@ defined here.  As an example, "integer" is a reasonable type for a
 vocabulary to define as a value for a keyword, but the data model
 makes no distinction between integers and other numbers.
 
+
 ### Input Equality {#equal}
 
 Two JSON inputs are said to be equal if and only if they are of the same type
@@ -484,6 +486,24 @@ and mere formatting differences (indentation, placement of commas, trailing
 zeros) are insignificant.
 Two equal inputs are guaranteed to yield identical validation results
 for a given schema, regardless of their original formatting.
+
+### Non-JSON Inputs
+
+It is possible to use JSON Schema with a superset of the JSON Schema data model,
+where an input may be outside any of the six JSON data types.
+With such an input, most validation keywords will not be useful,
+as they will always pass or always fail.  Annotations are unaffected.
+
+A specification building on JSON Schema could define support for a
+superset of the JSON data model.
+A schema using that specification might require the same superset.
+For example, a schema directly using CBOR byte string values in "enum",
+would not be a JSON document.
+
+Input equality ({{equal}}) is defined only for values in the JSON data model.
+A specification that extends the data model needs to define equality
+for the values it adds; otherwise the behavior of "const" and "enum" for
+those values is undefined.
 
 ## Keywords
 
@@ -651,86 +671,10 @@ and by other parties.
 
 ### "$vocabulary" {#vocabulary-keyword}
 
-The "$vocabulary" keyword is used in meta-schemas to identify the
-vocabularies available for use in schemas described by that meta-schema.
-It is also used to indicate whether each vocabulary is required or optional,
-in the sense that an implementation MUST understand the required vocabularies
-in order to successfully process the schema. Together, this information forms
-a dialect. Any vocabulary that is understood by the implementation MUST be
-processed in a manner consistent with the semantic definitions contained
-within the vocabulary.
-
-The value of this keyword MUST be an object.  The property names in the
-object MUST be absolute URIs and each URI MUST be normalized.
-Each URI that appears as a property name identifies a specific set of
-keywords and their semantics.
-
-A vocabulary URI is an identifier.  It MAY be a URL, but if so the nature of the
-retrievable resource is undefined.  Vocabulary authors
-MAY use the URL of the vocabulary specification, in a human-readable
-media type such as text/html or text/plain, as the vocabulary URI
-
-The values of the object properties MUST be booleans.
-If the value is true, then implementations that do not recognize
-the vocabulary MUST refuse to process any schemas that declare
-this meta-schema with "$schema".  If the value is false, implementations
-that do not recognize the vocabulary SHOULD proceed with processing
-such schemas.  The value has no impact if the implementation
-understands the vocabulary.
-
-Keywords defined by unrecognized vocabularies are considered to be
-unrecognized, with behavior governed by {{unrecognized}}.
-It is not currently possible to distinguish
-between unrecognized keywords that are defined in vocabularies from
-those that are not part of any vocabulary.
-
-The "$vocabulary" keyword SHOULD be used in the root schema of any schema
-resource intended for use as a meta-schema.  It MUST NOT appear in subschemas.
-
-The "$vocabulary" keyword MUST be ignored in schema resources that
-are not being processed as a meta-schema.  This allows validating
-a meta-schema M against its own meta-schema M' without requiring
-the implementation to understand the vocabularies declared by M.
-
-#### Default vocabularies
-
-If "$vocabulary" is absent, an implementation MAY determine
-behavior based on the meta-schema if it is recognized from the
-URI value of the referring schema's "$schema" keyword.
-This is how behavior (such as Hyper-Schema usage) has been
-recognized prior to the existence of vocabularies.
-
-If the meta-schema, as referenced by the schema, is not recognized,
-or is missing, then the behavior is implementation-defined.
-If the implementation
-proceeds with processing the schema, it MUST assume the use of the
-core vocabulary.  If the implementation is built for a specific purpose,
-then it SHOULD assume the use of all of the most relevant vocabularies
-for that purpose.
-
-For example, an implementation that is a validator
-SHOULD assume the use of all vocabularies in this
-specification.
-
-#### Non-inheritability of vocabularies
-
-Note that the processing restrictions on "$vocabulary" mean that
-meta-schemas that reference other meta-schemas using "$ref" or
-similar keywords do not automatically inherit the vocabulary
-declarations of those other meta-schemas (so that implementations can
-find all vocabulary requirement information in one place).
-All such declarations
-must be repeated in the root of each schema document intended
-for use as a meta-schema.  This is demonstrated in
-[the example meta-schema](#example-meta-schema).
-
-#### Updates to Meta-Schema and Vocabulary URIs
-
-Updated vocabulary and meta-schema URIs MAY be published between
-specification drafts in order to correct errors.  Implementations
-SHOULD consider URIs dated after this specification draft and
-before the next to indicate the same syntax and semantics
-as those listed here.
+The "$vocabulary" keyword is used in meta-schemas.  It is part of the core
+syntax because it bootstraps extended functionality,
+but its details are explained in {{vocabularies}}
+and syntax in {{vocabulary-keyword-extended}}.
 
 ### "$id" {#id-keyword}
 
@@ -3361,64 +3305,11 @@ by implementations.  Its URI is:
 [https://json-schema.org/draft/2020-12/output/schema](https://json-schema.org/draft/2020-12/output/schema).
 
 
-# Extensibility
-
-## Non-JSON Inputs
-
-It is possible to use JSON Schema with a superset of the JSON Schema data model,
-where an input may be outside any of the six JSON data types.
-
-In this case, annotations still apply; but most validation keywords will not be useful,
-as they will always pass or always fail.
-
-A custom vocabulary may define support for a superset of the core data model.
-The schema itself may only be expressible in this superset;
-for example, to make use of the "const" keyword.
-
-
-## Schema Vocabularies
-
-A schema vocabulary, or simply a vocabulary, is a set of keywords,
-their syntax, and their semantics.  A vocabulary is generally organized
-around a particular purpose.  Different uses of JSON Schema, such
-as validation, hypermedia, or user interface generation, will
-involve different sets of vocabularies.
-
-Vocabularies are the primary unit of re-use in JSON Schema, as schema
-authors can indicate what vocabularies are required or optional in
-order to process the schema.  Since vocabularies are identified by URIs
-in the meta-schema, generic implementations can load extensions to support
-previously unknown vocabularies.  While keywords can be supported outside
-of any vocabulary, there is no analogous mechanism to indicate individual
-keyword usage.
-
-A schema vocabulary can be defined by anything from an informal description
-to a standards proposal, depending on the audience and interoperability
-expectations.  In particular, in order to facilitate vocabulary use within
-non-public organizations, a vocabulary specification need not be published
-outside of its scope of use.
-
-## Meta-Schemas
+# Meta-schemas and Vocabularies {#meta-schemas}
 
 A schema that itself describes a schema is called a meta-schema.
-Meta-schemas are used to validate JSON Schemas and specify which vocabularies
-they are using.
-
-Meta-schemas
-that use the ["$vocabulary" keyword](#vocabulary-keyword)
-to declare the vocabularies in use MUST explicitly list the Core vocabulary,
-which MUST have a value of true indicating that it is required.
-
-Meta-schemas that do not use "$vocabulary" MUST be considered to
-require the Core vocabulary as if its URI were present with a value of true.
-
-
-Typically, a meta-schema will specify a set of vocabularies, and validate
-schemas that conform to the syntax of those vocabularies.  However, meta-schemas
-and vocabularies are separate in order to allow meta-schemas to validate
-schema conformance more strictly or more loosely than the vocabularies'
-specifications call for.  Meta-schemas may also describe and validate
-additional keywords that are not part of a formal vocabulary.
+Meta-schemas are used to validate JSON Schemas.
+Meta-schemas are critical for extensibility.
 
 Meta-schemas and vocabularies together are used to inform an implementation
 how to interpret a schema.  Every schema has a meta-schema, which can be declared
@@ -3438,30 +3329,128 @@ The meta-schema serves two purposes:
       it is possible to describe an incompatible syntax, such a meta-schema
       would be unlikely to be useful.
 
-Meta-schemas are separate from vocabularies to allow for
-vocabularies to be combined in different ways, and for meta-schema authors
-to impose additional constraints such as forbidding certain keywords, or
+Meta-schema authors, beyond choosing vocabularies,
+can impose additional constraints such as forbidding certain keywords, or
 performing unusually strict syntactical validation, as might be done
-during a development and testing cycle.  Each vocabulary typically identifies
-a meta-schema consisting only of the vocabulary's keywords.
+during a development and testing cycle.
 
 Meta-schema authoring is an advanced usage of JSON Schema, so the design of
 meta-schema features emphasizes flexibility over simplicity.
 
+## Schema Vocabularies {#vocabularies}
+
+A schema vocabulary, or simply a vocabulary, is a set of keywords,
+their syntax, and their semantics.  A vocabulary is generally organized
+around a particular purpose.  Different uses of JSON Schema, such
+as validation, hypermedia, or user interface generation, will
+involve different sets of vocabularies.  Each vocabulary typically identifies
+a meta-schema consisting only of the vocabulary's keywords.
+
+Since vocabularies are identified by URIs in the meta-schema, generic
+implementations can load extensions to support previously unknown
+vocabularies.  A vocabulary URI is an identifier.  It MAY be a URL, but if
+so the nature of the retrievable resource is undefined.  Vocabulary authors
+MAY use the URL of the vocabulary specification, in a human-readable media
+type such as text/html or text/plain, as the vocabulary URI.
+
+A schema vocabulary can be defined by anything from an informal description
+to a standards proposal, depending on the audience and interoperability
+expectations.  In particular, in order to facilitate vocabulary use within
+non-public organizations, a vocabulary specification need not be published
+outside of its scope of use.
+
+Keywords defined by unrecognized vocabularies are considered to be
+unrecognized, with behavior governed by {{unrecognized}}.
+It is not currently possible to distinguish
+between unrecognized keywords that are defined in vocabularies from
+those that are not part of any vocabulary.
+
+### The `$vocabulary` keyword {#vocabulary-keyword-extended}
+
+In a meta-schema, the $vocabulary keyword identifies the
+vocabularies available for use in schemas described by that meta-schema.
+It is also used to indicate whether each vocabulary is required or optional;
+an implementation MUST understand the required vocabularies
+in order to successfully process the schema. Together, this information forms
+a dialect. Any vocabulary that is understood by the implementation MUST be
+processed in a manner consistent with the semantic definitions contained
+within the vocabulary.
+
+Meta-schemas that do not use "$vocabulary" MUST be considered to require the
+Core vocabulary as if its URI were present with a value of true. Meta-schemas
+that do use this keyword MUST explicitly list the Core vocabulary, which MUST
+have a value of true indicating that it is required.
+
+The value of this keyword MUST be an object.  The property names in the
+object MUST be absolute URIs and each URI MUST be normalized.
+Each URI that appears as a property name identifies a specific set of
+keywords and their semantics.
+
+The values of the object properties MUST be booleans.
+If the value is true, then implementations that do not recognize
+the vocabulary MUST refuse to process any schemas that declare
+this meta-schema with "$schema".  If the value is false, implementations
+that do not recognize the vocabulary SHOULD proceed with processing
+such schemas.  The value has no impact if the implementation
+understands the vocabulary.
+
+The "$vocabulary" keyword SHOULD be used in the root schema of any schema
+resource intended for use as a meta-schema.  It MUST NOT appear in subschemas.
+
+The "$vocabulary" keyword MUST be ignored in schema resources that
+are not being processed as a meta-schema.  This allows validating
+a meta-schema M against its own meta-schema M' without requiring
+the implementation to understand the vocabularies declared by M.
+
+### Default vocabularies
+
+If "$vocabulary" is absent, an implementation MAY determine
+behavior based on the meta-schema if it is recognized from the
+URI value of the referring schema's "$schema" keyword.
+This is how behavior (such as Hyper-Schema usage) has been
+recognized prior to the existence of vocabularies.
+
+If the meta-schema, as referenced by the schema, is not recognized,
+or is missing, then the behavior is implementation-defined.
+If the implementation is built for a specific purpose,
+then it SHOULD assume the use of all of the most relevant vocabularies
+for that purpose.
+
+For example, an implementation that is a validator
+SHOULD assume the use of all vocabularies in this
+specification.
+
+### Non-inheritability of vocabularies
+
+Note that the processing restrictions on "$vocabulary" mean that
+meta-schemas that reference other meta-schemas using "$ref" or
+similar keywords do not automatically inherit the vocabulary
+declarations of those other meta-schemas (so that implementations can
+find all vocabulary requirement information in one place).
+All such declarations
+must be repeated in the root of each schema document intended
+for use as a meta-schema.  This is demonstrated in
+[the example meta-schema](#example-meta-schema).
+
+### Updates to Meta-Schema and Vocabulary URIs
+
+Updated vocabulary and meta-schema URIs MAY be published between
+specification drafts in order to correct errors.  Implementations
+SHOULD consider URIs dated after this specification draft and
+before the next to indicate the same syntax and semantics
+as those listed here.
+
+
 ## Default JSON Schema Dialect {#default-dialect}
 
-The current URI for the default JSON Schema dialect meta-schema is
-<eref target="https://json-schema.org/draft/2020-12/schema"/>.
-For schema author convenience, this meta-schema describes a dialect
-consisting of all vocabularies
-defined in this specification,
-as well as two former keywords which are reserved for a transitional period.
-Individual vocabulary and vocabulary meta-schema URIs are given for
-each section below.  Certain vocabularies are optional to support, which
-is explained in detail in the relevant sections.
-
-Updated vocabulary and meta-schema URIs may be published between
-specification drafts in order to correct errors.
+The current URI for the default JSON Schema dialect meta-schema is <eref
+target="https://json-schema.org/draft/2020-12/schema"/>. For schema author
+convenience, this meta-schema describes a dialect consisting of all
+vocabularies defined in this specification, as well as two former keywords
+which are reserved for a transitional period. Individual vocabulary and
+vocabulary meta-schema URIs are given for each section in this specification.
+Certain vocabularies are optional to support, which is explained in detail in
+the relevant sections.
 
 
 # Security Considerations {#security}
