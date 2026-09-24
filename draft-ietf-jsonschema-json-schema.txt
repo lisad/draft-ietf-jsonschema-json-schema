@@ -5,9 +5,9 @@
 Network Working Group                                  L. Dusseault, Ed.
 Internet-Draft                                  Data Transfer Initiative
 Intended status: Standards Track                               A. Wright
-Expires: 26 March 2027                                                  
+Expires: 28 March 2027                                                  
                                                               H. Andrews
-                                                       22 September 2026
+                                                       24 September 2026
 
 
                               JSON Schema
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 March 2027.
+   This Internet-Draft will expire on 28 March 2027.
 
 Copyright Notice
 
@@ -1506,9 +1506,8 @@ Table of Contents
 
    In general, the subschema MUST be applied to every array element even
    after enough matches to satisfy "minContains" and "maxContains" have
-   been found in order to produce annotations and support keyword
-   dependencies, although see Section 12 for conditions under which
-   short-circuiting is possible.
+   been found, in order to support keyword dependencies, although see
+   Section 12 for conditions under which short-circuiting is possible.
 
    {
      "type": "object",
