@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-09-20T03:44:38.818121+00:00",
+  "timestamp": "2026-09-24T03:28:53.585562+00:00",
   "repo": "lisad/draft-ietf-jsonschema-json-schema",
   "labels": [
     {
@@ -539,6 +539,22 @@
           "updatedAt": "2026-09-19T01:27:46Z"
         }
       ]
+    },
+    {
+      "number": 70,
+      "id": "I_kwDOR8mbas8AAAABSpjbiQ",
+      "title": "Meta-schema URI advice: This requires parsing dated URIs, and is it actually done?",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/issues/70",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "\n#### Updates to Meta-Schema and Vocabulary URIs\n\nUpdated vocabulary and meta-schema URIs MAY be published between\nspecification drafts in order to correct errors.  Implementations\nSHOULD consider URIs dated after this specification draft and\nbefore the next to indicate the same syntax and semantics\nas those listed here.\n",
+      "createdAt": "2026-09-22T23:21:02Z",
+      "updatedAt": "2026-09-22T23:21:02Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -4164,20 +4180,164 @@
       "id": "PR_kwDOR8mbas8AAAABEKSuTg",
       "title": "Adds a registration for json-schema+json as a more clear MIME type",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/68",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "lisad",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-09-18T23:19:08Z",
-      "updatedAt": "2026-09-18T23:19:08Z",
+      "updatedAt": "2026-09-22T22:08:42Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "514462d990ff375e30e323bce2f486d5a1ccdf60",
       "headRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "headRefName": "clearer-mime-type",
-      "headRefOid": "ac569d8b4cc9ab2c76f3b505f36667c84b03bbde",
+      "headRefOid": "545ad3b43126a7eb85cd23c6835bab0c8a721adf",
+      "closedAt": "2026-09-22T22:08:41Z",
+      "mergedAt": "2026-09-22T22:08:41Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "4df33526f04e5a3ddf68214e7519a6493642e4f6"
+      },
+      "comments": [
+        {
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "body": "> Is there a way to register a media type as immediately deprecated? If so we should do that for application/schema+json\r\n\r\nGood idea, doing that.",
+          "createdAt": "2026-09-22T22:06:11Z",
+          "updatedAt": "2026-09-22T22:06:11Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOR8mbas8AAAABOt_0EA",
+          "commit": {
+            "abbreviatedOid": "ac569d8"
+          },
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Is there a way to register a media type as immediately deprecated?  If so we should do that for application/schema+json",
+          "createdAt": "2026-09-22T19:28:47Z",
+          "updatedAt": "2026-09-22T19:28:47Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 69,
+      "id": "PR_kwDOR8mbas8AAAABEoJpMA",
+      "title": "Clarify and expand duplicate URI caveat",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/69",
+      "state": "MERGED",
+      "author": "handrews",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This now covers duplicate $ids in the same document as well as duplicate anchors in the same resource.  It is silent on duplicate URIs across multiple documents; we could add that or just assume that it's clear enough that the behavior would be analogous. I decided to make the minimal change for now.\r\n\r\nAlso move this paragraph to the Caveats section as it deserves to be highlighted more clearly.",
+      "createdAt": "2026-09-22T18:34:31Z",
+      "updatedAt": "2026-09-22T22:09:08Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "514462d990ff375e30e323bce2f486d5a1ccdf60",
+      "headRepository": "handrews/draft-ietf-jsonschema-json-schema",
+      "headRefName": "dups",
+      "headRefOid": "4e0b71f2819084b3ced91273e3ca9bb7d07d3d29",
+      "closedAt": "2026-09-22T22:09:07Z",
+      "mergedAt": "2026-09-22T22:09:07Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "3c4bf23fc0434d7c5d9e30ab3f4c92f1fc763031"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOR8mbas8AAAABOvROyw",
+          "commit": {
+            "abbreviatedOid": "4e0b71f"
+          },
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-09-22T21:35:00Z",
+          "updatedAt": "2026-09-22T21:35:00Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 71,
+      "id": "PR_kwDOR8mbas8AAAABErNAkQ",
+      "title": "Moves detailed discussion of vocabularies into meta-schema and vocabularies section",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/71",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "The goal of this change is to reduce front-loading of complex stuff that most JSON Schema users won't need.  It also allows us to reduce some duplication of text.\r\n\r\nWhile doing this I found that describing meta-schemas before vocabularies (and dialects) made more sense in their dedicated chapter, and that the non-JSON data model stuff didn't really fit in that chapter, so since it's short, moved that into a data model section.  could still move it somewhere else.",
+      "createdAt": "2026-09-23T01:37:01Z",
+      "updatedAt": "2026-09-23T01:45:39Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "3c4bf23fc0434d7c5d9e30ab3f4c92f1fc763031",
+      "headRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "headRefName": "explain-vocab-later",
+      "headRefOid": "31bcb1236d84c73fb19e9a3e0767ecf692fd950c",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 72,
+      "id": "PR_kwDOR8mbas8AAAABE1io1g",
+      "title": "Found a stray annotation note in 'contains' to clean up after other changes",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/72",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-09-23T22:57:34Z",
+      "updatedAt": "2026-09-23T22:57:40Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "3c4bf23fc0434d7c5d9e30ab3f4c92f1fc763031",
+      "headRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "headRefName": "cleanup-annotation-leftovers",
+      "headRefOid": "b5d7428005e8b2483e09138395bc69eec2e48cb9",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 73,
+      "id": "PR_kwDOR8mbas8AAAABE1jB8g",
+      "title": "Adds an appendix that will survive RFC publication, summary of changes for implementors",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/73",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "good suggestion by Harsh P. ",
+      "createdAt": "2026-09-23T22:58:37Z",
+      "updatedAt": "2026-09-23T22:58:37Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "3c4bf23fc0434d7c5d9e30ab3f4c92f1fc763031",
+      "headRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "headRefName": "changes-from-2020-12",
+      "headRefOid": "824f04d889283e5cefd2b6d363eabf28d95c62f1",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
