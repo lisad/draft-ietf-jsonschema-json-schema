@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-09-24T03:28:53.585562+00:00",
+  "timestamp": "2026-09-27T04:01:40.398928+00:00",
   "repo": "lisad/draft-ietf-jsonschema-json-schema",
   "labels": [
     {
@@ -4298,26 +4298,42 @@
       "id": "PR_kwDOR8mbas8AAAABE1io1g",
       "title": "Found a stray annotation note in 'contains' to clean up after other changes",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/72",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "lisad",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-09-23T22:57:34Z",
-      "updatedAt": "2026-09-23T22:57:40Z",
+      "updatedAt": "2026-09-24T22:46:21Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "3c4bf23fc0434d7c5d9e30ab3f4c92f1fc763031",
       "headRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "headRefName": "cleanup-annotation-leftovers",
       "headRefOid": "b5d7428005e8b2483e09138395bc69eec2e48cb9",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-09-24T22:46:21Z",
+      "mergedAt": "2026-09-24T22:46:21Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "1c625dab5339e6b4ffa92e3e8214e72aca5fdf88"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOR8mbas8AAAABPEQn4A",
+          "commit": {
+            "abbreviatedOid": "b5d7428"
+          },
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-09-24T14:49:28Z",
+          "updatedAt": "2026-09-24T14:49:28Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 73,
