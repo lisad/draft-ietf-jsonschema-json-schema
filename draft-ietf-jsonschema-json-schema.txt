@@ -5,9 +5,9 @@
 Network Working Group                                  L. Dusseault, Ed.
 Internet-Draft                                  Data Transfer Initiative
 Intended status: Standards Track                               A. Wright
-Expires: 28 March 2027                                                  
+Expires: 1 April 2027                                                   
                                                               H. Andrews
-                                                       24 September 2026
+                                                       28 September 2026
 
 
                               JSON Schema
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 March 2027.
+   This Internet-Draft will expire on 1 April 2027.
 
 Copyright Notice
 
@@ -253,12 +253,13 @@ Table of Contents
      E.1.  Best practices for vocabulary and meta-schema authors
      E.2.  Example meta-schema with vocabulary declarations
    Appendix F.  References and generative use cases
-   Appendix G.  Acknowledgments
-   Appendix H.  Change Log
-     H.1.  draft-ietf-jsonschema-json-schema-03
-     H.2.  draft-ietf-jsonschema-json-schema-02
-     H.3.  draft-ietf-jsonschema-json-schema-01
-     H.4.  draft-ietf-jsonschema-json-schema-00
+   Appendix G.  Important changes from JSON Schema 2020-12
+   Appendix H.  Acknowledgments
+   Appendix I.  Change Log
+     I.1.  draft-ietf-jsonschema-json-schema-03
+     I.2.  draft-ietf-jsonschema-json-schema-02
+     I.3.  draft-ietf-jsonschema-json-schema-01
+     I.4.  draft-ietf-jsonschema-json-schema-00
    Authors' Addresses
 
 1.  Introduction
@@ -4314,7 +4315,7 @@ Table of Contents
               content/uploads/ECMA-262_6th_edition_june_2015.pdf>.
 
    [I-D.hha-relative-json-pointer]
-              Luff, G., Andrews, H., and B. Hutton, "Relative JSON
+              Luff, G., Andrews, H. H., and B. Hutton, "Relative JSON
               Pointers", Work in Progress, Internet-Draft, draft-hha-
               relative-json-pointer-00, 19 June 2023,
               <https://datatracker.ietf.org/doc/html/draft-hha-relative-
@@ -4430,7 +4431,7 @@ Table of Contents
 18.2.  Informative References
 
    [I-D.handrews-json-schema-hyperschema]
-              Andrews, H. and A. Wright, "JSON Hyper-Schema: A
+              Andrews, H. H. and A. Wright, "JSON Hyper-Schema: A
               Vocabulary for Hypermedia Annotation of JSON", Work in
               Progress, Internet-Draft, draft-handrews-json-schema-
               hyperschema-02, 17 September 2019,
@@ -5188,7 +5189,33 @@ Appendix F.  References and generative use cases
    This style of usage requires the annotation to be in the same object
    as the reference, which must be recognizable as a reference.
 
-Appendix G.  Acknowledgments
+Appendix G.  Important changes from JSON Schema 2020-12
+
+   This appendix is non-normative.  It summarizes changes from "2020-12"
+   that can affect implementations.
+
+   *  Applicators are no longer required to produce annotations.
+
+   *  Keywords with behavior defined in terms of annotations are now
+      defined in terms of behavior, allowing choice of implementation
+      mechanism.
+
+   *  An annotation's value is always the keyword's value
+      (Section 12.9).  Computed annotation values are no longer
+      permitted.
+
+   *  Relevance (Section 12.2) governs both output and dependency
+      information, replacing the 2020-12 rules for discarding
+      annotations from failed subschemas.
+
+   *  Keywords are not permitted to modify the input during evaluation
+      (Section 3.5.3).  Modifications need to be in a separate step.
+
+   *  "application/json-schema+json" is the media type for JSON Schema.
+      "application/schema+json" is registered as an obsolete alias
+      (Section 17).
+
+Appendix H.  Acknowledgments
 
    This draft is based on great amounts of superb work by creators and
    contributors to JSON Schema.  The authors of the 2020-12 spec include
@@ -5199,11 +5226,11 @@ Appendix G.  Acknowledgments
    Brad Bowman, Gowry Sankar, Donald Pipowitch, Dave Finlay, Denis
    Laxalde, Phil Sturgeon, Shawn Silverman, and Karen Etheridge.
 
-Appendix H.  Change Log
+Appendix I.  Change Log
 
    This section to be removed before leaving Internet-Draft status.
 
-H.1.  draft-ietf-jsonschema-json-schema-03
+I.1.  draft-ietf-jsonschema-json-schema-03
 
    *  Define and use "JSON text" and "JSON value" better.
 
@@ -5219,7 +5246,7 @@ H.1.  draft-ietf-jsonschema-json-schema-03
    *  Simplify language around how a keyword should "validate" or
       "accept" input.
 
-H.2.  draft-ietf-jsonschema-json-schema-02
+I.2.  draft-ietf-jsonschema-json-schema-02
 
    *  Add a section near the front of the document explaining what
       sections are written for distinct readers
@@ -5231,7 +5258,7 @@ H.2.  draft-ietf-jsonschema-json-schema-02
       core text and into an informative appendix, simplifying the main
       text for readers who are not implementing
 
-H.3.  draft-ietf-jsonschema-json-schema-01
+I.3.  draft-ietf-jsonschema-json-schema-01
 
    *  Clarify terminology by using JSON Text when talking about
       serialized JSON, and structured document when talking about what a
@@ -5240,7 +5267,7 @@ H.3.  draft-ietf-jsonschema-json-schema-01
    *  Add examples for $anchor, $ref, $defs, $comment, allOf, if and
       then
 
-H.4.  draft-ietf-jsonschema-json-schema-00
+I.4.  draft-ietf-jsonschema-json-schema-00
 
    Compared to the "2020-12" version of JSON Schema, this draft makes
    the following changes.
