@@ -1211,6 +1211,9 @@ Source for this draft can be found at
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.1">
                     <p id="section-toc.1-1.3.2.2.2.1.1"><a href="#section-3.2.1" class="auto internal xref">3.2.1</a>.  <a href="#name-input-equality" class="internal xref">Input Equality</a></p>
 </li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.2">
+                    <p id="section-toc.1-1.3.2.2.2.2.1"><a href="#section-3.2.2" class="auto internal xref">3.2.2</a>.  <a href="#name-non-json-inputs" class="internal xref">Non-JSON Inputs</a></p>
+</li>
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
@@ -1724,19 +1727,27 @@ Source for this draft can be found at
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
-            <p id="section-toc.1-1.14.1"><a href="#section-14" class="auto internal xref">14</a>. <a href="#name-extensibility" class="internal xref">Extensibility</a></p>
+            <p id="section-toc.1-1.14.1"><a href="#section-14" class="auto internal xref">14</a>. <a href="#name-meta-schemas-and-vocabulari" class="internal xref">Meta-schemas and Vocabularies</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14.2.1">
-                <p id="section-toc.1-1.14.2.1.1"><a href="#section-14.1" class="auto internal xref">14.1</a>.  <a href="#name-non-json-inputs" class="internal xref">Non-JSON Inputs</a></p>
+                <p id="section-toc.1-1.14.2.1.1"><a href="#section-14.1" class="auto internal xref">14.1</a>.  <a href="#name-schema-vocabularies" class="internal xref">Schema Vocabularies</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14.2.1.2.1">
+                    <p id="section-toc.1-1.14.2.1.2.1.1"><a href="#section-14.1.1" class="auto internal xref">14.1.1</a>.  <a href="#name-the-vocabulary-keyword" class="internal xref">The <code>$vocabulary</code> keyword</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14.2.1.2.2">
+                    <p id="section-toc.1-1.14.2.1.2.2.1"><a href="#section-14.1.2" class="auto internal xref">14.1.2</a>.  <a href="#name-default-vocabularies" class="internal xref">Default vocabularies</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14.2.1.2.3">
+                    <p id="section-toc.1-1.14.2.1.2.3.1"><a href="#section-14.1.3" class="auto internal xref">14.1.3</a>.  <a href="#name-non-inheritability-of-vocab" class="internal xref">Non-inheritability of vocabularies</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14.2.1.2.4">
+                    <p id="section-toc.1-1.14.2.1.2.4.1"><a href="#section-14.1.4" class="auto internal xref">14.1.4</a>.  <a href="#name-updates-to-meta-schema-and-" class="internal xref">Updates to Meta-Schema and Vocabulary URIs</a></p>
+</li>
+                </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14.2.2">
-                <p id="section-toc.1-1.14.2.2.1"><a href="#section-14.2" class="auto internal xref">14.2</a>.  <a href="#name-schema-vocabularies" class="internal xref">Schema Vocabularies</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14.2.3">
-                <p id="section-toc.1-1.14.2.3.1"><a href="#section-14.3" class="auto internal xref">14.3</a>.  <a href="#name-meta-schemas" class="internal xref">Meta-Schemas</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14.2.4">
-                <p id="section-toc.1-1.14.2.4.1"><a href="#section-14.4" class="auto internal xref">14.4</a>.  <a href="#name-default-json-schema-dialect" class="internal xref">Default JSON Schema Dialect</a></p>
+                <p id="section-toc.1-1.14.2.2.1"><a href="#section-14.2" class="auto internal xref">14.2</a>.  <a href="#name-default-json-schema-dialect" class="internal xref">Default JSON Schema Dialect</a></p>
 </li>
             </ul>
 </li>
@@ -1903,7 +1914,7 @@ guidance on approaches to implementing keyword dependencies.<a href="#section-1.
 </li>
           <li class="normal" id="section-1.2-2.3">
             <p id="section-1.2-2.3.1">Authors of meta-schemas including extensions to JSON Schema will want to read
-the chapter on <a href="#extensibility" class="auto internal xref">Section 14</a> and <a href="#vocabularies-appendix" class="auto internal xref">Appendix E</a>.<a href="#section-1.2-2.3.1" class="pilcrow">¶</a></p>
+the chapter on <a href="#meta-schemas" class="auto internal xref">Section 14</a> and <a href="#vocabularies-appendix" class="auto internal xref">Appendix E</a>.<a href="#section-1.2-2.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -1974,12 +1985,13 @@ most keywords are context-free.  Thus, JSON instances can be validated quickly
 and simply, without I/O or querying data elsewhere in the same JSON instance.<a href="#section-1.3.4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="vocabularies">
+<div id="intro-vocabularies">
 <section id="section-1.3.5">
           <h4 id="name-vocabularies">
 <a href="#section-1.3.5" class="section-number selfRef">1.3.5. </a><a href="#name-vocabularies" class="section-name selfRef">Vocabularies</a>
           </h4>
-<p id="section-1.3.5-1">To facilitate re-use, keywords can be organized into vocabularies. A vocabulary
+<p id="section-1.3.5-1">To facilitate extensibility and re-use, keywords can be organized into
+vocabularies. A vocabulary
 consists of a list of keywords, together with their syntax and semantics.
 A dialect is defined as a set of vocabularies and their required support
 identified in a meta-schema.  Vocabularies, dialects and meta-schemas are not
@@ -2129,7 +2141,7 @@ When a schema is an object, it can be seen to be a schema from the '$schema'
 keyword in the object.  See below for special treatment of the boolean schemas.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 <p id="section-3.1-3">Schemas are used to validate inputs that may be <span><a href="#input" class="internal xref">instances</a> (<a href="#input" class="auto internal xref">Section 3.2</a>)</span> of the schema,
 but each schema can itself
-be interpreted as an instance (see <a href="#meta-schemas" class="auto internal xref">Section 14.3</a> for when and
+be interpreted as an instance (see <a href="#meta-schemas" class="auto internal xref">Section 14</a> for when and
 how this happens).<a href="#section-3.1-3" class="pilcrow">¶</a></p>
 <p id="section-3.1-4">Schema documents SHOULD always be given the media type "application/schema+json",
 even when playing the role of an instance.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
@@ -2250,7 +2262,7 @@ values depending on the type:<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.2-4">Whitespace and formatting concerns, including different lexical
 representations of numbers that are equal within the data model, are
 outside the scope of JSON Schema.  JSON Schema
-<a href="#vocabularies" class="auto internal xref">Section 1.3.5</a> that wish
+<a href="#vocabularies" class="auto internal xref">Section 14.1</a> that wish
 to work with such differences in lexical representations SHOULD define
 keywords to precisely interpret formatted strings within the data model
 rather than relying on having the original JSON representation Unicode
@@ -2304,6 +2316,26 @@ and mere formatting differences (indentation, placement of commas, trailing
 zeros) are insignificant.
 Two equal inputs are guaranteed to yield identical validation results
 for a given schema, regardless of their original formatting.<a href="#section-3.2.1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="non-json-inputs">
+<section id="section-3.2.2">
+          <h4 id="name-non-json-inputs">
+<a href="#section-3.2.2" class="section-number selfRef">3.2.2. </a><a href="#name-non-json-inputs" class="section-name selfRef">Non-JSON Inputs</a>
+          </h4>
+<p id="section-3.2.2-1">It is possible to use JSON Schema with a superset of the JSON Schema data model,
+where an input may be outside any of the six JSON data types.
+With such an input, most validation keywords will not be useful,
+as they will always pass or always fail.  Annotations are unaffected.<a href="#section-3.2.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2.2-2">A specification building on JSON Schema could define support for a
+superset of the JSON data model.
+A schema using that specification might require the same superset.
+For example, a schema directly using CBOR byte string values in "enum",
+would not be a JSON document.<a href="#section-3.2.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.2.2-3">Input equality (<a href="#equal" class="auto internal xref">Section 3.2.1</a>) is defined only for values in the JSON data model.
+A specification that extends the data model needs to define equality
+for the values it adds; otherwise the behavior of "const" and "enum" for
+those values is undefined.<a href="#section-3.2.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2372,7 +2404,7 @@ type, and is used to bootstrap the loading of other vocabularies.<a href="#secti
 <p id="section-3.5.1-2">This document further defines a RECOMMENDED set of additional vocabularies
 for standard use.<a href="#section-3.5.1-2" class="pilcrow">¶</a></p>
 <p id="section-3.5.1-3">These vocabularies together compose the standard JSON Schema dialect,
-which serves as the default dialect as discussed in <a href="#default-dialect" class="auto internal xref">Section 14.4</a>.<a href="#section-3.5.1-3" class="pilcrow">¶</a></p>
+which serves as the default dialect as discussed in <a href="#default-dialect" class="auto internal xref">Section 14.2</a>.<a href="#section-3.5.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="extending">
@@ -2470,7 +2502,7 @@ media type "application/schema+json".<a href="#section-4.1.1-3" class="pilcrow">
 and MAY be used in the root schema objects of embedded schema resources.
 It MUST NOT appear in non-resource root schema objects.  If absent from
 the document root schema, the resulting behavior is implementation-defined,
-however, using this specification's default dialect (<a href="#default-dialect" class="auto internal xref">Section 14.4</a>)
+however, using this specification's default dialect (<a href="#default-dialect" class="auto internal xref">Section 14.2</a>)
 is RECOMMENDED.<a href="#section-4.1.1-4" class="pilcrow">¶</a></p>
 <p id="section-4.1.1-5">Values for this property are defined elsewhere in this and other documents,
 and by other parties.<a href="#section-4.1.1-5" class="pilcrow">¶</a></p>
@@ -2481,90 +2513,10 @@ and by other parties.<a href="#section-4.1.1-5" class="pilcrow">¶</a></p>
           <h4 id="name-vocabulary">
 <a href="#section-4.1.2" class="section-number selfRef">4.1.2. </a><a href="#name-vocabulary" class="section-name selfRef">"$vocabulary"</a>
           </h4>
-<p id="section-4.1.2-1">The "$vocabulary" keyword is used in meta-schemas to identify the
-vocabularies available for use in schemas described by that meta-schema.
-It is also used to indicate whether each vocabulary is required or optional,
-in the sense that an implementation MUST understand the required vocabularies
-in order to successfully process the schema. Together, this information forms
-a dialect. Any vocabulary that is understood by the implementation MUST be
-processed in a manner consistent with the semantic definitions contained
-within the vocabulary.<a href="#section-4.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-4.1.2-2">The value of this keyword MUST be an object.  The property names in the
-object MUST be absolute URIs and each URI MUST be normalized.
-Each URI that appears as a property name identifies a specific set of
-keywords and their semantics.<a href="#section-4.1.2-2" class="pilcrow">¶</a></p>
-<p id="section-4.1.2-3">A vocabulary URI is an identifier.  It MAY be a URL, but if so the nature of the
-retrievable resource is undefined.  Vocabulary authors
-MAY use the URL of the vocabulary specification, in a human-readable
-media type such as text/html or text/plain, as the vocabulary URI<a href="#section-4.1.2-3" class="pilcrow">¶</a></p>
-<p id="section-4.1.2-4">The values of the object properties MUST be booleans.
-If the value is true, then implementations that do not recognize
-the vocabulary MUST refuse to process any schemas that declare
-this meta-schema with "$schema".  If the value is false, implementations
-that do not recognize the vocabulary SHOULD proceed with processing
-such schemas.  The value has no impact if the implementation
-understands the vocabulary.<a href="#section-4.1.2-4" class="pilcrow">¶</a></p>
-<p id="section-4.1.2-5">Keywords defined by unrecognized vocabularies are considered to be
-unrecognized, with behavior governed by <a href="#unrecognized" class="auto internal xref">Section 12.5</a>.
-It is not currently possible to distinguish
-between unrecognized keywords that are defined in vocabularies from
-those that are not part of any vocabulary.<a href="#section-4.1.2-5" class="pilcrow">¶</a></p>
-<p id="section-4.1.2-6">The "$vocabulary" keyword SHOULD be used in the root schema of any schema
-resource intended for use as a meta-schema.  It MUST NOT appear in subschemas.<a href="#section-4.1.2-6" class="pilcrow">¶</a></p>
-<p id="section-4.1.2-7">The "$vocabulary" keyword MUST be ignored in schema resources that
-are not being processed as a meta-schema.  This allows validating
-a meta-schema M against its own meta-schema M' without requiring
-the implementation to understand the vocabularies declared by M.<a href="#section-4.1.2-7" class="pilcrow">¶</a></p>
-<div id="default-vocabularies">
-<section id="section-4.1.2.1">
-            <h5 id="name-default-vocabularies">
-<a href="#section-4.1.2.1" class="section-number selfRef">4.1.2.1. </a><a href="#name-default-vocabularies" class="section-name selfRef">Default vocabularies</a>
-            </h5>
-<p id="section-4.1.2.1-1">If "$vocabulary" is absent, an implementation MAY determine
-behavior based on the meta-schema if it is recognized from the
-URI value of the referring schema's "$schema" keyword.
-This is how behavior (such as Hyper-Schema usage) has been
-recognized prior to the existence of vocabularies.<a href="#section-4.1.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1.2.1-2">If the meta-schema, as referenced by the schema, is not recognized,
-or is missing, then the behavior is implementation-defined.
-If the implementation
-proceeds with processing the schema, it MUST assume the use of the
-core vocabulary.  If the implementation is built for a specific purpose,
-then it SHOULD assume the use of all of the most relevant vocabularies
-for that purpose.<a href="#section-4.1.2.1-2" class="pilcrow">¶</a></p>
-<p id="section-4.1.2.1-3">For example, an implementation that is a validator
-SHOULD assume the use of all vocabularies in this
-specification.<a href="#section-4.1.2.1-3" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="non-inheritability-of-vocabularies">
-<section id="section-4.1.2.2">
-            <h5 id="name-non-inheritability-of-vocab">
-<a href="#section-4.1.2.2" class="section-number selfRef">4.1.2.2. </a><a href="#name-non-inheritability-of-vocab" class="section-name selfRef">Non-inheritability of vocabularies</a>
-            </h5>
-<p id="section-4.1.2.2-1">Note that the processing restrictions on "$vocabulary" mean that
-meta-schemas that reference other meta-schemas using "$ref" or
-similar keywords do not automatically inherit the vocabulary
-declarations of those other meta-schemas (so that implementations can
-find all vocabulary requirement information in one place).
-All such declarations
-must be repeated in the root of each schema document intended
-for use as a meta-schema.  This is demonstrated in
-<span><a href="#example-meta-schema" class="internal xref">the example meta-schema</a> (<a href="#example-meta-schema" class="auto internal xref">Appendix E.2</a>)</span>.<a href="#section-4.1.2.2-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="updates-to-meta-schema-and-vocabulary-uris">
-<section id="section-4.1.2.3">
-            <h5 id="name-updates-to-meta-schema-and-">
-<a href="#section-4.1.2.3" class="section-number selfRef">4.1.2.3. </a><a href="#name-updates-to-meta-schema-and-" class="section-name selfRef">Updates to Meta-Schema and Vocabulary URIs</a>
-            </h5>
-<p id="section-4.1.2.3-1">Updated vocabulary and meta-schema URIs MAY be published between
-specification drafts in order to correct errors.  Implementations
-SHOULD consider URIs dated after this specification draft and
-before the next to indicate the same syntax and semantics
-as those listed here.<a href="#section-4.1.2.3-1" class="pilcrow">¶</a></p>
-</section>
-</div>
+<p id="section-4.1.2-1">The "$vocabulary" keyword is used in meta-schemas.  It is part of the core
+syntax because it bootstraps extended functionality,
+but its details are explained in <a href="#vocabularies" class="auto internal xref">Section 14.1</a>
+and syntax in <a href="#vocabulary-keyword-extended" class="auto internal xref">Section 14.1.1</a>.<a href="#section-4.1.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="id-keyword">
@@ -6074,124 +6026,174 @@ by implementations.  Its URI is:
 </div>
 </section>
 </div>
-<div id="extensibility">
-<section id="section-14">
-      <h2 id="name-extensibility">
-<a href="#section-14" class="section-number selfRef">14. </a><a href="#name-extensibility" class="section-name selfRef">Extensibility</a>
-      </h2>
-<div id="non-json-inputs">
-<section id="section-14.1">
-        <h3 id="name-non-json-inputs">
-<a href="#section-14.1" class="section-number selfRef">14.1. </a><a href="#name-non-json-inputs" class="section-name selfRef">Non-JSON Inputs</a>
-        </h3>
-<p id="section-14.1-1">It is possible to use JSON Schema with a superset of the JSON Schema data model,
-where an input may be outside any of the six JSON data types.<a href="#section-14.1-1" class="pilcrow">¶</a></p>
-<p id="section-14.1-2">In this case, annotations still apply; but most validation keywords will not be useful,
-as they will always pass or always fail.<a href="#section-14.1-2" class="pilcrow">¶</a></p>
-<p id="section-14.1-3">A custom vocabulary may define support for a superset of the core data model.
-The schema itself may only be expressible in this superset;
-for example, to make use of the "const" keyword.<a href="#section-14.1-3" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="schema-vocabularies">
-<section id="section-14.2">
-        <h3 id="name-schema-vocabularies">
-<a href="#section-14.2" class="section-number selfRef">14.2. </a><a href="#name-schema-vocabularies" class="section-name selfRef">Schema Vocabularies</a>
-        </h3>
-<p id="section-14.2-1">A schema vocabulary, or simply a vocabulary, is a set of keywords,
-their syntax, and their semantics.  A vocabulary is generally organized
-around a particular purpose.  Different uses of JSON Schema, such
-as validation, hypermedia, or user interface generation, will
-involve different sets of vocabularies.<a href="#section-14.2-1" class="pilcrow">¶</a></p>
-<p id="section-14.2-2">Vocabularies are the primary unit of re-use in JSON Schema, as schema
-authors can indicate what vocabularies are required or optional in
-order to process the schema.  Since vocabularies are identified by URIs
-in the meta-schema, generic implementations can load extensions to support
-previously unknown vocabularies.  While keywords can be supported outside
-of any vocabulary, there is no analogous mechanism to indicate individual
-keyword usage.<a href="#section-14.2-2" class="pilcrow">¶</a></p>
-<p id="section-14.2-3">A schema vocabulary can be defined by anything from an informal description
-to a standards proposal, depending on the audience and interoperability
-expectations.  In particular, in order to facilitate vocabulary use within
-non-public organizations, a vocabulary specification need not be published
-outside of its scope of use.<a href="#section-14.2-3" class="pilcrow">¶</a></p>
-</section>
-</div>
 <div id="meta-schemas">
-<section id="section-14.3">
-        <h3 id="name-meta-schemas">
-<a href="#section-14.3" class="section-number selfRef">14.3. </a><a href="#name-meta-schemas" class="section-name selfRef">Meta-Schemas</a>
-        </h3>
-<p id="section-14.3-1">A schema that itself describes a schema is called a meta-schema.
-Meta-schemas are used to validate JSON Schemas and specify which vocabularies
-they are using.<a href="#section-14.3-1" class="pilcrow">¶</a></p>
-<p id="section-14.3-2">Meta-schemas
-that use the <span><a href="#vocabulary-keyword" class="internal xref">"$vocabulary" keyword</a> (<a href="#vocabulary-keyword" class="auto internal xref">Section 4.1.2</a>)</span>
-to declare the vocabularies in use MUST explicitly list the Core vocabulary,
-which MUST have a value of true indicating that it is required.<a href="#section-14.3-2" class="pilcrow">¶</a></p>
-<p id="section-14.3-3">Meta-schemas that do not use "$vocabulary" MUST be considered to
-require the Core vocabulary as if its URI were present with a value of true.<a href="#section-14.3-3" class="pilcrow">¶</a></p>
-<p id="section-14.3-4">Typically, a meta-schema will specify a set of vocabularies, and validate
-schemas that conform to the syntax of those vocabularies.  However, meta-schemas
-and vocabularies are separate in order to allow meta-schemas to validate
-schema conformance more strictly or more loosely than the vocabularies'
-specifications call for.  Meta-schemas may also describe and validate
-additional keywords that are not part of a formal vocabulary.<a href="#section-14.3-4" class="pilcrow">¶</a></p>
-<p id="section-14.3-5">Meta-schemas and vocabularies together are used to inform an implementation
+<section id="section-14">
+      <h2 id="name-meta-schemas-and-vocabulari">
+<a href="#section-14" class="section-number selfRef">14. </a><a href="#name-meta-schemas-and-vocabulari" class="section-name selfRef">Meta-schemas and Vocabularies</a>
+      </h2>
+<p id="section-14-1">A schema that itself describes a schema is called a meta-schema.
+Meta-schemas are used to validate JSON Schemas.
+Meta-schemas are critical for extensibility.<a href="#section-14-1" class="pilcrow">¶</a></p>
+<p id="section-14-2">Meta-schemas and vocabularies together are used to inform an implementation
 how to interpret a schema.  Every schema has a meta-schema, which can be declared
-using the "$schema" keyword.<a href="#section-14.3-5" class="pilcrow">¶</a></p>
-<p id="section-14.3-6">The meta-schema serves two purposes:<a href="#section-14.3-6" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-14.3-7">
-<li id="section-14.3-7.1">
-            <p id="section-14.3-7.1.1">Declaring the vocabularies in use<a href="#section-14.3-7.1.1" class="pilcrow">¶</a></p>
+using the "$schema" keyword.<a href="#section-14-2" class="pilcrow">¶</a></p>
+<p id="section-14-3">The meta-schema serves two purposes:<a href="#section-14-3" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-14-4">
+<li id="section-14-4.1">
+          <p id="section-14-4.1.1">Declaring the vocabularies in use<a href="#section-14-4.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-14.3-7.1.2.1">
-                <p id="section-14.3-7.1.2.1.1">The "$vocabulary" keyword, when it appears in a meta-schema, declares
+<li class="normal" id="section-14-4.1.2.1">
+              <p id="section-14-4.1.2.1.1">The "$vocabulary" keyword, when it appears in a meta-schema, declares
 which vocabularies are available to be used in schemas that refer
 to that meta-schema.  Vocabularies define keyword semantics,
-as well as their general syntax.<a href="#section-14.3-7.1.2.1.1" class="pilcrow">¶</a></p>
+as well as their general syntax.<a href="#section-14-4.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
-            </ul>
+          </ul>
 </li>
-          <li id="section-14.3-7.2">
-            <p id="section-14.3-7.2.1">Describing valid schema syntax<a href="#section-14.3-7.2.1" class="pilcrow">¶</a></p>
+        <li id="section-14-4.2">
+          <p id="section-14-4.2.1">Describing valid schema syntax<a href="#section-14-4.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-14.3-7.2.2.1">
-                <p id="section-14.3-7.2.2.1.1">A schema MUST successfully validate against its meta-schema, which
+<li class="normal" id="section-14-4.2.2.1">
+              <p id="section-14-4.2.2.1.1">A schema MUST successfully validate against its meta-schema, which
 constrains the syntax of the available keywords.  The syntax described
 is expected to be compatible with the vocabularies declared; while
 it is possible to describe an incompatible syntax, such a meta-schema
-would be unlikely to be useful.<a href="#section-14.3-7.2.2.1.1" class="pilcrow">¶</a></p>
+would be unlikely to be useful.<a href="#section-14-4.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
-            </ul>
+          </ul>
 </li>
-        </ol>
-<p id="section-14.3-8">Meta-schemas are separate from vocabularies to allow for
-vocabularies to be combined in different ways, and for meta-schema authors
-to impose additional constraints such as forbidding certain keywords, or
+      </ol>
+<p id="section-14-5">Meta-schema authors, beyond choosing vocabularies,
+can impose additional constraints such as forbidding certain keywords, or
 performing unusually strict syntactical validation, as might be done
-during a development and testing cycle.  Each vocabulary typically identifies
-a meta-schema consisting only of the vocabulary's keywords.<a href="#section-14.3-8" class="pilcrow">¶</a></p>
-<p id="section-14.3-9">Meta-schema authoring is an advanced usage of JSON Schema, so the design of
-meta-schema features emphasizes flexibility over simplicity.<a href="#section-14.3-9" class="pilcrow">¶</a></p>
+during a development and testing cycle.<a href="#section-14-5" class="pilcrow">¶</a></p>
+<p id="section-14-6">Meta-schema authoring is an advanced usage of JSON Schema, so the design of
+meta-schema features emphasizes flexibility over simplicity.<a href="#section-14-6" class="pilcrow">¶</a></p>
+<div id="vocabularies">
+<section id="section-14.1">
+        <h3 id="name-schema-vocabularies">
+<a href="#section-14.1" class="section-number selfRef">14.1. </a><a href="#name-schema-vocabularies" class="section-name selfRef">Schema Vocabularies</a>
+        </h3>
+<p id="section-14.1-1">A schema vocabulary, or simply a vocabulary, is a set of keywords,
+their syntax, and their semantics.  A vocabulary is generally organized
+around a particular purpose.  Different uses of JSON Schema, such
+as validation, hypermedia, or user interface generation, will
+involve different sets of vocabularies.  Each vocabulary typically identifies
+a meta-schema consisting only of the vocabulary's keywords.<a href="#section-14.1-1" class="pilcrow">¶</a></p>
+<p id="section-14.1-2">Since vocabularies are identified by URIs in the meta-schema, generic
+implementations can load extensions to support previously unknown
+vocabularies.  A vocabulary URI is an identifier.  It MAY be a URL, but if
+so the nature of the retrievable resource is undefined.  Vocabulary authors
+MAY use the URL of the vocabulary specification, in a human-readable media
+type such as text/html or text/plain, as the vocabulary URI.<a href="#section-14.1-2" class="pilcrow">¶</a></p>
+<p id="section-14.1-3">A schema vocabulary can be defined by anything from an informal description
+to a standards proposal, depending on the audience and interoperability
+expectations.  In particular, in order to facilitate vocabulary use within
+non-public organizations, a vocabulary specification need not be published
+outside of its scope of use.<a href="#section-14.1-3" class="pilcrow">¶</a></p>
+<p id="section-14.1-4">Keywords defined by unrecognized vocabularies are considered to be
+unrecognized, with behavior governed by <a href="#unrecognized" class="auto internal xref">Section 12.5</a>.
+It is not currently possible to distinguish
+between unrecognized keywords that are defined in vocabularies from
+those that are not part of any vocabulary.<a href="#section-14.1-4" class="pilcrow">¶</a></p>
+<div id="vocabulary-keyword-extended">
+<section id="section-14.1.1">
+          <h4 id="name-the-vocabulary-keyword">
+<a href="#section-14.1.1" class="section-number selfRef">14.1.1. </a><a href="#name-the-vocabulary-keyword" class="section-name selfRef">The <code>$vocabulary</code> keyword</a>
+          </h4>
+<p id="section-14.1.1-1">In a meta-schema, the $vocabulary keyword identifies the
+vocabularies available for use in schemas described by that meta-schema.
+It is also used to indicate whether each vocabulary is required or optional;
+an implementation MUST understand the required vocabularies
+in order to successfully process the schema. Together, this information forms
+a dialect. Any vocabulary that is understood by the implementation MUST be
+processed in a manner consistent with the semantic definitions contained
+within the vocabulary.<a href="#section-14.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-14.1.1-2">Meta-schemas that do not use "$vocabulary" MUST be considered to require the
+Core vocabulary as if its URI were present with a value of true. Meta-schemas
+that do use this keyword MUST explicitly list the Core vocabulary, which MUST
+have a value of true indicating that it is required.<a href="#section-14.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-14.1.1-3">The value of this keyword MUST be an object.  The property names in the
+object MUST be absolute URIs and each URI MUST be normalized.
+Each URI that appears as a property name identifies a specific set of
+keywords and their semantics.<a href="#section-14.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-14.1.1-4">The values of the object properties MUST be booleans.
+If the value is true, then implementations that do not recognize
+the vocabulary MUST refuse to process any schemas that declare
+this meta-schema with "$schema".  If the value is false, implementations
+that do not recognize the vocabulary SHOULD proceed with processing
+such schemas.  The value has no impact if the implementation
+understands the vocabulary.<a href="#section-14.1.1-4" class="pilcrow">¶</a></p>
+<p id="section-14.1.1-5">The "$vocabulary" keyword SHOULD be used in the root schema of any schema
+resource intended for use as a meta-schema.  It MUST NOT appear in subschemas.<a href="#section-14.1.1-5" class="pilcrow">¶</a></p>
+<p id="section-14.1.1-6">The "$vocabulary" keyword MUST be ignored in schema resources that
+are not being processed as a meta-schema.  This allows validating
+a meta-schema M against its own meta-schema M' without requiring
+the implementation to understand the vocabularies declared by M.<a href="#section-14.1.1-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="default-vocabularies">
+<section id="section-14.1.2">
+          <h4 id="name-default-vocabularies">
+<a href="#section-14.1.2" class="section-number selfRef">14.1.2. </a><a href="#name-default-vocabularies" class="section-name selfRef">Default vocabularies</a>
+          </h4>
+<p id="section-14.1.2-1">If "$vocabulary" is absent, an implementation MAY determine
+behavior based on the meta-schema if it is recognized from the
+URI value of the referring schema's "$schema" keyword.
+This is how behavior (such as Hyper-Schema usage) has been
+recognized prior to the existence of vocabularies.<a href="#section-14.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-14.1.2-2">If the meta-schema, as referenced by the schema, is not recognized,
+or is missing, then the behavior is implementation-defined.
+If the implementation is built for a specific purpose,
+then it SHOULD assume the use of all of the most relevant vocabularies
+for that purpose.<a href="#section-14.1.2-2" class="pilcrow">¶</a></p>
+<p id="section-14.1.2-3">For example, an implementation that is a validator
+SHOULD assume the use of all vocabularies in this
+specification.<a href="#section-14.1.2-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="non-inheritability-of-vocabularies">
+<section id="section-14.1.3">
+          <h4 id="name-non-inheritability-of-vocab">
+<a href="#section-14.1.3" class="section-number selfRef">14.1.3. </a><a href="#name-non-inheritability-of-vocab" class="section-name selfRef">Non-inheritability of vocabularies</a>
+          </h4>
+<p id="section-14.1.3-1">Note that the processing restrictions on "$vocabulary" mean that
+meta-schemas that reference other meta-schemas using "$ref" or
+similar keywords do not automatically inherit the vocabulary
+declarations of those other meta-schemas (so that implementations can
+find all vocabulary requirement information in one place).
+All such declarations
+must be repeated in the root of each schema document intended
+for use as a meta-schema.  This is demonstrated in
+<span><a href="#example-meta-schema" class="internal xref">the example meta-schema</a> (<a href="#example-meta-schema" class="auto internal xref">Appendix E.2</a>)</span>.<a href="#section-14.1.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="updates-to-meta-schema-and-vocabulary-uris">
+<section id="section-14.1.4">
+          <h4 id="name-updates-to-meta-schema-and-">
+<a href="#section-14.1.4" class="section-number selfRef">14.1.4. </a><a href="#name-updates-to-meta-schema-and-" class="section-name selfRef">Updates to Meta-Schema and Vocabulary URIs</a>
+          </h4>
+<p id="section-14.1.4-1">Updated vocabulary and meta-schema URIs MAY be published between
+specification drafts in order to correct errors.  Implementations
+SHOULD consider URIs dated after this specification draft and
+before the next to indicate the same syntax and semantics
+as those listed here.<a href="#section-14.1.4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 <div id="default-dialect">
-<section id="section-14.4">
+<section id="section-14.2">
         <h3 id="name-default-json-schema-dialect">
-<a href="#section-14.4" class="section-number selfRef">14.4. </a><a href="#name-default-json-schema-dialect" class="section-name selfRef">Default JSON Schema Dialect</a>
+<a href="#section-14.2" class="section-number selfRef">14.2. </a><a href="#name-default-json-schema-dialect" class="section-name selfRef">Default JSON Schema Dialect</a>
         </h3>
-<p id="section-14.4-1">The current URI for the default JSON Schema dialect meta-schema is
-<span><a href="https://json-schema.org/draft/2020-12/schema">https://json-schema.org/draft/2020-12/schema</a></span>.
-For schema author convenience, this meta-schema describes a dialect
-consisting of all vocabularies
-defined in this specification,
-as well as two former keywords which are reserved for a transitional period.
-Individual vocabulary and vocabulary meta-schema URIs are given for
-each section below.  Certain vocabularies are optional to support, which
-is explained in detail in the relevant sections.<a href="#section-14.4-1" class="pilcrow">¶</a></p>
-<p id="section-14.4-2">Updated vocabulary and meta-schema URIs may be published between
-specification drafts in order to correct errors.<a href="#section-14.4-2" class="pilcrow">¶</a></p>
+<p id="section-14.2-1">The current URI for the default JSON Schema dialect meta-schema is <span><a href="https://json-schema.org/draft/2020-12/schema">https://json-schema.org/draft/2020-12/schema</a></span>. For schema author
+convenience, this meta-schema describes a dialect consisting of all
+vocabularies defined in this specification, as well as two former keywords
+which are reserved for a transitional period. Individual vocabulary and
+vocabulary meta-schema URIs are given for each section in this specification.
+Certain vocabularies are optional to support, which is explained in detail in
+the relevant sections.<a href="#section-14.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
