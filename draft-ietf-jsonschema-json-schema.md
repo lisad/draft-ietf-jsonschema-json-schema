@@ -600,10 +600,7 @@ In all validator implementations, equivalent JSON values MUST return the same va
 
 This specification defines a set of assertion keywords, as well as a small vocabulary
 of metadata keywords that can be used to annotate the JSON instance with
-useful information.  The {{format-vocab}} keyword is intended primarily
-as an annotation, but can optionally be used as an assertion.  The
-{{content}} keywords are annotations for working with documents
-embedded as JSON strings.
+useful information.
 
 Implementations MAY allow configuring annotations
 in such ways as limiting output to certain annotation keywords, aggregating values together, or other features to enhance performance.
@@ -1585,15 +1582,31 @@ Omitting this keyword has the same behavior as an empty object.
 In this example, a meeting invitation can have neither "startTime" nor "endTime",
 but it cannot give an "endTime" without also giving a "startTime".
 
-# Vocabulary for Semantic Content With "format" {#format-vocab}
+# Vocabulary for Syntax Checking With "format" {#format-vocab}
 
 ## Foreword
 
 Structural validation alone may be insufficient to allow an application to correctly
-utilize certain values. The "format" annotation keyword is defined to allow schema
-authors to convey semantic information for a fixed subset of values which are
-accurately described by authoritative resources, be they RFCs or other external
-specifications.
+utilize certain values. The "format" keyword is defined to allow schema
+authors to indicate that a value is expected to follow a syntax defined
+by an authoritative resource, such as an RFC or other external specification.
+
+Format validation relies on what's in the schema and the input, not about
+facts in the world.
+For example, "email" indicates that a string is expected to be written as an
+email address; it does not say whether that address exists, what it is used for, or
+whether mail sent to it would be delivered.  Likewise, "date" indicates that
+a string is written as a full date, not whether that date is a birth date,
+a deadline, or a date in the past.
+
+Some schema authors will wish to go beyond the syntax validation offered by
+`format` attributes.  Several choices can help with this and can be combined:
+  * Do additional processing after JSON Schema validation
+  * Use "title" and "description" for soft guidance
+  * Use `pattern` possibly alongside `format` to add regular expression constraints
+  * Add a new format option to the IANA registry (TBD)
+  * Define keywords in a custom vocabulary to add new constraints, especially
+  constraints that go beyond syntactic
 
 The value of this keyword is called a format attribute. It MUST be a string. A
 format attribute can generally only validate a given set of input types. If
@@ -1628,7 +1641,40 @@ Specifying both the Format-Annotation and the Format-Assertion vocabularies is f
 equivalent to specifying only the Format-Assertion vocabulary since its requirements
 are a superset of the Format-Annotation vocabulary.
 
-## Implementation Requirements
+## Overview of Defined Formats {#format-overview}
+
+This section is non-normative.  It summarizes the format attributes defined
+in this specification.  The normative definitions are in {{defined-formats}}.
+All of these format attributes apply to strings.
+
+| Format | Accepts a string written as | Example | Details |
+|---|---|---|---|
+| `date-time` | A date and time with a time zone offset | `2026-09-30T14:30:00Z` | {{format-dates}} |
+| `date` | A full calendar date | `2026-09-30` | {{format-dates}} |
+| `time` | A time of day with a time zone offset | `14:30:00+02:00` | {{format-dates}} |
+| `duration` | An ISO 8601 duration | `P3DT4H` | {{format-dates}} |
+| `email` | An email address (ASCII only) | `user@example.com` | {{format-email}} |
+| `idn-email` | An email address, allowing non-ASCII characters | `user@example.com` | {{format-email}} |
+| `hostname` | An Internet host name (ASCII only) | `www.example.com` | {{format-hostnames}} |
+| `idn-hostname` | A host name, allowing non-ASCII characters | `www.example.com` | {{format-hostnames}} |
+| `ipv4` | An IPv4 address in dotted-quad form | `192.0.2.1` | {{format-ip}} |
+| `ipv6` | An IPv6 address | `2001:db8::1` | {{format-ip}} |
+| `uri` | An absolute URI | `https://example.com/a?b=c` | {{format-uris}} |
+| `uri-reference` | A URI or a relative reference | `../a#b` | {{format-uris}} |
+| `iri` | An absolute IRI, allowing non-ASCII characters | `https://example.com/a` | {{format-uris}} |
+| `iri-reference` | An IRI or a relative reference | `../a#b` | {{format-uris}} |
+| `uuid` | A UUID, without a `urn:uuid:` prefix | `f81d4fae-7dec-11d0-a765-00a0c91e6bf6` | {{format-uris}} |
+| `uri-template` | A URI Template | `https://example.com/users/{id}` | {{format-templates}} |
+| `json-pointer` | A JSON Pointer | `/items/0/name` | {{format-pointers}} |
+| `relative-json-pointer` | A Relative JSON Pointer | `1/name` | {{format-pointers}} |
+| `regex` | A regular expression in the ECMA-262 dialect | `^[a-z]+$` | {{format-expressions}} |
+{: title="Format attributes defined by this specification"}
+
+Because "format" is an annotation by default, many implementations will
+not reject a string that does not match its format attribute.  See
+{{format-implementation}} for when "format" is evaluated as an assertion.
+
+## Implementation Requirements {#format-implementation}
 
 The "format" keyword functions as defined by the vocabulary which is referenced.
 
@@ -1640,7 +1686,7 @@ schema validation is unavailable or inadequate.
 
 Implementations MAY still treat "format" as an assertion in addition to an
 annotation and attempt to validate the value's conformance to the specified
-semantics. The implementation MUST provide options to enable and disable such
+syntax. The implementation MUST provide options to enable and disable such
 evaluation and MUST be disabled by default. Implementations SHOULD document
 their level of support for such validation.[^15]
 
@@ -1699,9 +1745,9 @@ Due to this limitation, and the historically uneven implementation of this keywo
 it is RECOMMENDED to define additional keywords in a custom vocabulary rather than
 additional format attributes if interoperability is desired.
 
-## Defined Formats
+## Defined Formats {#defined-formats}
 
-### Dates, Times, and Duration
+### Dates, Times, and Duration {#format-dates}
 
 These attributes apply to string inputs.
 
@@ -1747,7 +1793,7 @@ Implementations SHOULD NOT define extension attributes
 with any name matching an RFC 3339 format unless it validates
 according to the rules of that format.[^18]
 
-### Email Addresses
+### Email Addresses {#format-email}
 
 These attributes apply to string inputs.
 
@@ -1767,7 +1813,7 @@ As defined by the extended "Mailbox" ABNF rule in
 Note that all strings accepted by the "email" attribute are also
 accepted by the "idn-email" attribute.
 
-### Hostnames
+### Hostnames {#format-hostnames}
 
 These attributes apply to string inputs.
 
@@ -1789,7 +1835,7 @@ internationalized hostname as defined by
 Note that all strings accepted by the "hostname" attribute are also
 accepted by the "idn-hostname" attribute.
 
-### IP Addresses
+### IP Addresses {#format-ip}
 
 These attributes apply to string inputs.
 
@@ -1807,7 +1853,7 @@ syntax as defined in
 An IPv6 address as defined in
 {{!RFC4291, Section 2.2}}.
 
-### Resource Identifiers
+### Resource Identifiers {#format-uris}
 
 These attributes apply to string inputs.
 
@@ -1846,7 +1892,7 @@ is "f81d4fae-7dec-11d0-a765-00a0c91e6bf6".  For UUIDs as URNs, use the "uri" for
 with a "pattern" regular expression of "^urn:uuid:" to indicate the URI scheme and
 URN namespace.
 
-### Templates
+### Templates {#format-templates}
 
 #### "uri-template"
 
@@ -1858,7 +1904,7 @@ A string input is accepted by this attribute if it is a valid URI Template
 Note that URI Templates may be used for IRIs; there is no separate
 IRI Template specification.
 
-### JSON Pointers
+### JSON Pointers {#format-pointers}
 
 These attributes apply to string inputs.
 
@@ -1876,7 +1922,7 @@ according to {{!RFC6901, Section 5}}.
 A string input is accepted by this attribute if it is a valid
 {{!I-D.hha-relative-json-pointer}}.
 
-### Expressions
+### Expressions {#format-expressions}
 
 #### "regex"
 
