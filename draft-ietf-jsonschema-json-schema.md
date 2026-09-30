@@ -1600,7 +1600,7 @@ a string is written as a full date, not whether that date is a birth date,
 a deadline, or a date in the past.
 
 Some schema authors will wish to go beyond the syntax validation offered by
-`format` attributes.  Several choices can help with this and can be combined:
+`format` attributes.  Several choices can help achieve this and can be combined:
   * Do additional processing after JSON Schema validation
   * Use "title" and "description" for soft guidance
   * Use `pattern` possibly alongside `format` to add regular expression constraints
@@ -1615,31 +1615,17 @@ format attribute and input SHOULD succeed.  All format attributes defined
 in this section apply to strings, but a format attribute can be specified
 to apply to any input type in the [input data model](#input).[^14]
 
-The current URI for this vocabulary, known as the Format-Annotation vocabulary, is:
+The format keyword is part of two vocabularies, both required.  The 
+format-assertion vocabulary requires implementations to check formats
+as required in this specification, and the format-annotation vocabulary 
+requires implementations to create annotations for `format` if annotations
+are enabled.  Special-purpose meta-schemas may require one or neither of 
+these, whereas the official JSON Schema meta-schema requires both.
 
-&lt;https://json-schema.org/draft/2020-12/vocab/format-annotation&gt;.
+Format-assertion: `https://json-schema.org/draft/2020-12/vocab/format-assertion`
 
-The current URI for the corresponding meta-schema is:
+Format-annotation: `https://json-schema.org/draft/2020-12/vocab/format-annotation`
 
-[https://json-schema.org/draft/2020-12/meta/format-annotation](https://json-schema.org/draft/2020-12/meta/format-annotation).
-
-Implementing support for this vocabulary is REQUIRED.
-
-In addition to the Format-Annotation vocabulary, a secondary vocabulary is available
-for custom meta-schemas that defines "format" as an assertion. The URI for the
-Format-Assertion vocabulary, is:
-
-&lt;https://json-schema.org/draft/2020-12/vocab/format-assertion&gt;.
-
-The current URI for the corresponding meta-schema is:
-
-[https://json-schema.org/draft/2020-12/meta/format-assertion](https://json-schema.org/draft/2020-12/meta/format-assertion).
-
-Implementing support for the Format-Assertion vocabulary is OPTIONAL.
-
-Specifying both the Format-Annotation and the Format-Assertion vocabularies is functionally
-equivalent to specifying only the Format-Assertion vocabulary since its requirements
-are a superset of the Format-Annotation vocabulary.
 
 ## Overview of Defined Formats {#format-overview}
 
@@ -1670,25 +1656,12 @@ All of these format attributes apply to strings.
 | `regex` | A regular expression in the ECMA-262 dialect | `^[a-z]+$` | {{format-expressions}} |
 {: title="Format attributes defined by this specification"}
 
-Because "format" is an annotation by default, many implementations will
-not reject a string that does not match its format attribute.  See
-{{format-implementation}} for when "format" is evaluated as an assertion.
 
 ## Implementation Requirements {#format-implementation}
 
-The "format" keyword functions as defined by the vocabulary which is referenced.
 
 ### Format-Annotation Vocabulary
 
-The value of format MUST be produced as an annotation, if the implementation
-supports annotation production. This enables application-level validation when
-schema validation is unavailable or inadequate.
-
-Implementations MAY still treat "format" as an assertion in addition to an
-annotation and attempt to validate the value's conformance to the specified
-syntax. The implementation MUST provide options to enable and disable such
-evaluation and MUST be disabled by default. Implementations SHOULD document
-their level of support for such validation.[^15]
 
 When the implementation is configured for assertion behavior, it:
 
@@ -4227,13 +4200,7 @@ Compared to the "2020-12" version of JSON Schema, this draft makes the following
        format can be used alongside the "type" keyword with a value of "integer",
        or could be explicitly defined to always pass if the number is not an integer,
        which produces essentially the same behavior as only applying to integers.
-
-[^15]: Specifying the Format-Annotation vocabulary and enabling validation in an
-       implementation should not be viewed as being equivalent to specifying
-       the Format-Assertion vocabulary since implementations are not required to
-       provide full validation support when the Format-Assertion vocabulary
-       is not specified.
-
+       
 [^17]: The expectation is that for simple formats such as date-time, syntactic
        validation will be thorough.  For a complex format such as email addresses,
        which are the amalgamation of various standards and numerous adjustments
