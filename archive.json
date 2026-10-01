@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-09-29T04:35:44.495452+00:00",
+  "timestamp": "2026-10-01T04:31:14.290991+00:00",
   "repo": "lisad/draft-ietf-jsonschema-json-schema",
   "labels": [
     {
@@ -4362,6 +4362,32 @@
       "mergeCommit": {
         "oid": "05becfc738af7617443aa9163875e97c74a9e733"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 74,
+      "id": "PR_kwDOR8mbas8AAAABF_HzHA",
+      "title": "Beginning of format work, reframing and restructuring format info before diving into details",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/74",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "With this organization,\r\n\r\n * Schema authors can probably just read the table near the top of the format section, currently 8.2\r\n * Validator implementors can read all of section 8\r\n * Extension authors can read the new section probably?  If it doesn't end up very long can reconsider\r\n\r\nThis also reframes format as an expected feature, which I believe schema authors do expect.  More work will be required to close the loop on that.",
+      "createdAt": "2026-09-30T22:25:55Z",
+      "updatedAt": "2026-09-30T22:26:25Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "b5a29d2287d3183661bbf97e55bf5036c3e488fc",
+      "headRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "headRefName": "format-work",
+      "headRefOid": "14120843f58fca2945652612f8ec74dfe7de18da",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
