@@ -1050,11 +1050,11 @@ svg {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">JSON Schema</td>
-<td class="right">September 2026</td>
+<td class="right">October 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Dusseault, et al.</td>
-<td class="center">Expires 3 April 2027</td>
+<td class="center">Expires 5 April 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1067,12 +1067,12 @@ svg {
 <dd class="internet-draft">draft-ietf-jsonschema-json-schema-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-09-30" class="published">30 September 2026</time>
+<time datetime="2026-10-02" class="published">2 October 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-04-03">3 April 2027</time></dd>
+<dd class="expires"><time datetime="2027-04-05">5 April 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1128,7 +1128,7 @@ Source for this draft can be found at
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 3 April 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 5 April 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1483,9 +1483,6 @@ Source for this draft can be found at
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.4.2.4">
                     <p id="section-toc.1-1.8.2.4.2.4.1"><a href="#section-8.4.4" class="auto internal xref">8.4.4</a>.  <a href="#name-duration" class="internal xref">"duration"</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.4.2.5">
-                    <p id="section-toc.1-1.8.2.4.2.5.1"><a href="#section-8.4.5" class="auto internal xref">8.4.5</a>.  <a href="#name-additional-rfc3339-formats" class="internal xref">Additional RFC3339 Formats</a></p>
 </li>
                 </ul>
 </li>
@@ -4032,7 +4029,7 @@ All of these format attributes apply to strings.<a href="#section-8.2-1" class="
             <tr>
               <td class="text-left" rowspan="1" colspan="1">
                 <code>duration</code> (<a href="#format-duration" class="auto internal xref">Section 8.4.4</a>)</td>
-              <td class="text-left" rowspan="1" colspan="1">An ISO 8601 duration</td>
+              <td class="text-left" rowspan="1" colspan="1">An RFC 3339 duration</td>
               <td class="text-left" rowspan="1" colspan="1">
                 <code>P3DT4H</code>
 </td>
@@ -4219,11 +4216,20 @@ includes this vocabulary in its "$vocabulary" keyword with a value of false.
         </h3>
 <p id="section-8.4-1">These attributes apply to string inputs.<a href="#section-8.4-1" class="pilcrow">¶</a></p>
 <p id="section-8.4-2">Date and time format names are derived from
-<span>[<a href="#RFC3339" class="cite xref">RFC3339</a>], <a href="https://rfc-editor.org/rfc/rfc3339#section-5.6" class="relref">Section 5.6</a></span>.
-The duration format is from the ISO 8601 ABNF as given
-in Appendix A of RFC 3339.<a href="#section-8.4-2" class="pilcrow">¶</a></p>
-<p id="section-8.4-3">Implementations supporting formats SHOULD implement support for
-the following attributes:<a href="#section-8.4-3" class="pilcrow">¶</a></p>
+<span>[<a href="#RFC3339" class="cite xref">RFC3339</a>], <a href="https://rfc-editor.org/rfc/rfc3339#section-5.6" class="relref">Section 5.6</a></span>.  The duration format is given
+in <span>[<a href="#RFC3339" class="cite xref">RFC3339</a>], <a href="https://rfc-editor.org/rfc/rfc3339#appendix-A" class="relref">Appendix A</a></span>.<a href="#section-8.4-2" class="pilcrow">¶</a></p>
+<p id="section-8.4-3">In addition to the ABNF, RFC 3339 makes requirements that make sure
+that dates and times can actually occur (<span>[<a href="#RFC3339" class="cite xref">RFC3339</a>], <a href="https://rfc-editor.org/rfc/rfc3339#section-5.7" class="relref">Section 5.7</a></span>).  This means that dates like
+"2026-02-30T10:00:00Z" are considered invalid, which is common practice
+already with JSON Schema.  However, it does not insist on a perfect
+job in detecting really-occurrign times and dates.  Leap seconds, for example,
+make some values syntactically correct but are rather hard to
+identify as times that can or cannot really happen.  Validation implementations should
+implement the additional constraints in RFC 3339 as well as the ABNF.<a href="#section-8.4-3" class="pilcrow">¶</a></p>
+<p id="section-8.4-4">Software libraries for using dates, times and durations sometimes accept values
+that are syntactically incorrect according to RFC 3339 rules,
+for example values that do follow ISO 8601 <span>[<a href="#ISO8601" class="cite xref">ISO8601</a>]</span> but not RFC 3339's profile.  Validation
+implementations SHOULD reject these.<a href="#section-8.4-4" class="pilcrow">¶</a></p>
 <div id="format-date-time">
 <section id="section-8.4.1">
           <h4 id="name-date-time">
@@ -4232,6 +4238,23 @@ the following attributes:<a href="#section-8.4-3" class="pilcrow">¶</a></p>
 <p id="section-8.4.1-1">A string input is accepted by this attribute if it is
 a valid representation according to the "date-time" ABNF rule
 (referenced above).<a href="#section-8.4.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.4.1-2">Some notes:<a href="#section-8.4.1-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-8.4.1-3.1">
+              <p id="section-8.4.1-3.1.1"><span>[<a href="#RFC3339" class="cite xref">RFC3339</a>], <a href="https://rfc-editor.org/rfc/rfc3339#section-5.6" class="relref">Section 5.6</a></span> mentions space as a possible separator,
+but the ABNF requires a 'T'/'t' to separate date and time.  The
+ABNF is what implementations should follow.<a href="#section-8.4.1-3.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.4.1-3.2">
+              <p id="section-8.4.1-3.2.1">Lowercase letters 't' and 'z' are legitimate.<a href="#section-8.4.1-3.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.4.1-3.3">
+              <p id="section-8.4.1-3.3.1">A timezone offset is strictly required.<a href="#section-8.4.1-3.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.4.1-3.4">
+              <p id="section-8.4.1-3.4.1">Years are strictly four digits even though other standards accept more.<a href="#section-8.4.1-3.4.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
 </section>
 </div>
 <div id="format-date">
@@ -4262,20 +4285,32 @@ a valid representation according to the "full-time" ABNF rule
 <p id="section-8.4.4-1">A string input is accepted by this attribute if it is
 a valid representation according to the "duration" ABNF rule
 (referenced above).<a href="#section-8.4.4-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="additional-rfc3339-formats">
-<section id="section-8.4.5">
-          <h4 id="name-additional-rfc3339-formats">
-<a href="#section-8.4.5" class="section-number selfRef">8.4.5. </a><a href="#name-additional-rfc3339-formats" class="section-name selfRef">Additional RFC3339 Formats</a>
-          </h4>
-<p id="section-8.4.5-1">Implementations MAY support additional attributes using the other
-format names defined anywhere in that RFC.  If "full-date" or "full-time"
-are implemented, the corresponding short form ("date" or "time"
-respectively) MUST be implemented, and MUST behave identically.
-Implementations SHOULD NOT define extension attributes
-with any name matching an RFC 3339 format unless it validates
-according to the rules of that format.<a href="#section-8.4.5-1" class="pilcrow">¶</a></p>
+<p id="section-8.4.4-2">Some notes about RFC 3339 durations that may help consistency:<a href="#section-8.4.4-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-8.4.4-3.1">
+              <p id="section-8.4.4-3.1.1">ISO 8601 defines additional formats like "P0003-06-04T12:30:05"
+but these are not valid in RFC 3339.<a href="#section-8.4.4-3.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.4.4-3.2">
+              <p id="section-8.4.4-3.2.1">Negative durations are not allowed.<a href="#section-8.4.4-3.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.4.4-3.3">
+              <p id="section-8.4.4-3.3.1">Fractional elements ("PT1.5S") are not allowed.<a href="#section-8.4.4-3.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.4.4-3.4">
+              <p id="section-8.4.4-3.4.1">Time elements MUST come after a 'T' to avoid confusing "M" for
+"minute" with "M" for "month".<a href="#section-8.4.4-3.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.4.4-3.5">
+              <p id="section-8.4.4-3.5.1">Duration elements can be skipped in only some cases. A
+"zero minutes" duration element can be skipped if the duration
+is "thirty seconds"  ("PT30S") but it cannot be skipped if the
+duration is an hour and thirty seconds ("PT1H0M30S").<a href="#section-8.4.4-3.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.4.4-3.6">
+              <p id="section-8.4.4-3.6.1">Week units cannot be combined with year/month units.<a href="#section-8.4.4-3.6.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
 </section>
 </div>
 </section>
@@ -6816,6 +6851,10 @@ media type.  See JSON (<span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]<
 <dt id="I-D.handrews-json-schema-hyperschema">[I-D.handrews-json-schema-hyperschema]</dt>
         <dd>
 <span class="refAuthor">Andrews, H. H.</span> and <span class="refAuthor">A. Wright</span>, <span class="refTitle">"JSON Hyper-Schema: A Vocabulary for Hypermedia Annotation of JSON"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-handrews-json-schema-hyperschema-02</span>, <time datetime="2019-09-17" class="refDate">17 September 2019</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-handrews-json-schema-hyperschema-02">https://datatracker.ietf.org/doc/html/draft-handrews-json-schema-hyperschema-02</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="ISO8601">[ISO8601]</dt>
+        <dd>
+<span class="refAuthor">International Organization for Standardization</span>, <span class="refTitle">"Date and time - Representations for information interchange - Part 1: Basic rules"</span>, <span class="seriesInfo">ISO 8601-1:2019</span>, <time datetime="2019-02" class="refDate">February 2019</time>, <span>&lt;<a href="https://www.iso.org/standard/70907.html">https://www.iso.org/standard/70907.html</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC4329">[RFC4329]</dt>
         <dd>
