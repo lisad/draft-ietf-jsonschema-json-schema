@@ -74,6 +74,16 @@ normative:
     seriesinfo:
       W3C Recommendation: REC-xml-names-20091208
 
+informative:
+  ISO8601:
+    author:
+      org: International Organization for Standardization
+    title: "Date and time - Representations for information interchange - Part 1: Basic rules"
+    date: 2019-02
+    target: https://www.iso.org/standard/70907.html
+    seriesinfo:
+      ISO: 8601-1:2019
+
 --- abstract
 
 JSON Schema defines the media type "application/schema+json", a JSON-based format
@@ -1638,7 +1648,7 @@ All of these format attributes apply to strings.
 | `date-time` ({{format-date-time}}) | A date and time with a time zone offset | `2026-09-30T14:30:00Z` |
 | `date` ({{format-date}}) | A full calendar date | `2026-09-30` |
 | `time` ({{format-time}}) | A time of day with a time zone offset | `14:30:00+02:00` |
-| `duration` ({{format-duration}}) | An ISO 8601 duration | `P3DT4H` |
+| `duration` ({{format-duration}}) | An RFC 3339 duration | `P3DT4H` |
 | `email` ({{format-email}}) | An email address (ASCII only) | `user@example.com` |
 | `idn-email` ({{format-idn-email}}) | An email address, allowing non-ASCII characters | `user@example.com` |
 | `hostname` ({{format-hostname}}) | An Internet host name (ASCII only) | `www.example.com` |
@@ -1698,18 +1708,37 @@ includes this vocabulary in its "$vocabulary" keyword with a value of false.
 These attributes apply to string inputs.
 
 Date and time format names are derived from
-{{!RFC3339, Section 5.6}}.
-The duration format is from the ISO 8601 ABNF as given
-in Appendix A of RFC 3339.
+{{!RFC3339, Section 5.6}}.  The duration format is given
+in {{RFC3339, Appendix A}}.
 
-Implementations supporting formats SHOULD implement support for
-the following attributes:
+In addition to the ABNF, RFC 3339 makes requirements that make sure
+that dates and times can actually occur ({{RFC3339, Section 5.7}}).  This means that dates like
+"2026-02-30T10:00:00Z" are considered invalid, which is common practice
+already with JSON Schema.  However, it does not insist on a perfect
+job in detecting really-occurrign times and dates.  Leap seconds, for example,
+make some values syntactically correct but are rather hard to
+identify as times that can or cannot really happen.  Validation implementations should
+implement the additional constraints in RFC 3339 as well as the ABNF.
+
+Software libraries for using dates, times and durations sometimes accept values
+that are syntactically incorrect according to RFC 3339 rules,
+for example values that do follow ISO 8601 {{ISO8601}} but not RFC 3339's profile.  Validation
+implementations SHOULD reject these.
 
 ### "date-time" {#format-date-time}
 
 A string input is accepted by this attribute if it is
 a valid representation according to the "date-time" ABNF rule
 (referenced above).
+
+Some notes:
+
+* {{RFC3339, Section 5.6}} mentions space as a possible separator,
+  but the ABNF requires a 'T'/'t' to separate date and time.  The
+  ABNF is what implementations should follow.
+* Lowercase letters 't' and 'z' are legitimate.
+* A timezone offset is strictly required.
+* Years are strictly four digits even though other standards accept more.
 
 ### "date" {#format-date}
 
@@ -1729,15 +1758,24 @@ A string input is accepted by this attribute if it is
 a valid representation according to the "duration" ABNF rule
 (referenced above).
 
-### Additional RFC3339 Formats
+Some notes about RFC 3339 durations that may help consistency:
 
-Implementations MAY support additional attributes using the other
-format names defined anywhere in that RFC.  If "full-date" or "full-time"
-are implemented, the corresponding short form ("date" or "time"
-respectively) MUST be implemented, and MUST behave identically.
-Implementations SHOULD NOT define extension attributes
-with any name matching an RFC 3339 format unless it validates
-according to the rules of that format.
+ * ISO 8601 defines additional formats like "P0003-06-04T12:30:05"
+   but these are not valid in RFC 3339.
+
+ * Negative durations are not allowed.
+
+ * Fractional elements ("PT1.5S") are not allowed.
+
+ * Time elements MUST come after a 'T' to avoid confusing "M" for
+   "minute" with "M" for "month".
+
+ * Duration elements can be skipped in only some cases. A
+   "zero minutes" duration element can be skipped if the duration
+   is "thirty seconds"  ("PT30S") but it cannot be skipped if the
+   duration is an hour and thirty seconds ("PT1H0M30S").
+
+ * Week units cannot be combined with year/month units.
 
 ## Email Addresses {#format-email-addresses}
 
