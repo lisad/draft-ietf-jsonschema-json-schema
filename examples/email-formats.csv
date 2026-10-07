@@ -1,0 +1,46 @@
+address,status,description
+user@example.com,valid,simple address
+first.last@example.com,valid,dot in local part
+user+tag@example.com,valid,plus in local part
+x@example.com,valid,single-character local part
+USER@EXAMPLE.COM,valid,uppercase
+1234@example.com,valid,digits in local part
+!#$%&'*+-/=?^_`{|}~@example.com,valid,every atext special character
+user@sub.example.co.uk,valid,multi-label domain
+user@example-host.com,valid,hyphen inside a domain label
+user@localhost,valid,single-label domain is allowed by the Domain rule
+"""john.doe""@example.com",valid,quoted-string local part
+"""john doe""@example.com",valid,quoted-string local part with a space (qtextSMTP includes %d32)
+"""john\""doe""@example.com",valid,quoted-pair inside a quoted-string
+"""""@example.com",valid,empty quoted-string
+user@[192.0.2.1],valid,IPv4 address literal
+user@[IPv6:2001:db8::1],valid,IPv6 address literal
+,invalid,empty string
+plainaddress,invalid,no @
+@example.com,invalid,empty local part
+user@,invalid,empty domain
+user@@example.com,invalid,two @ signs
+user@example@example.com,invalid,@ in domain
+.user@example.com,invalid,leading dot in local part
+user.@example.com,invalid,trailing dot in local part
+user..name@example.com,invalid,consecutive dots in local part
+user name@example.com,invalid,unquoted space in local part
+ user@example.com,invalid,leading whitespace
+user@example.com ,invalid,trailing whitespace
+"""unterminated@example.com",invalid,unterminated quoted-string
+"""a""b@example.com",invalid,characters after a quoted-string
+"""a\	b""@example.com",invalid,backslash followed by a tab inside a quoted-string (quoted-pairSMTP allows only %d32-126 after the backslash)
+user@.example.com,invalid,leading dot in domain
+user@example..com,invalid,consecutive dots in domain
+user@example.com.,invalid,trailing dot in domain
+user@exa mple.com,invalid,space in domain
+user@-example.com,special,"invalid because a domain label starts with a hyphen, but the regex does not check hostname rules"
+user@example-.com,special,"invalid because a domain label ends with a hyphen, but the regex does not check hostname rules"
+user@exa_mple.com,special,"invalid because of the underscore in the domain, but the regex does not check hostname rules"
+user@example!com,special,"invalid because of punctuation in the domain, but the regex does not check hostname rules"
+user@[999.0.0.1],special,"invalid because an IPv4 octet is out of range, but the regex does not check address literals"
+user@[not-an-ip],special,"invalid because the literal is not an IP address or tagged literal, but the regex does not check address literals"
+user@[],special,"invalid because the address literal is empty, but the regex does not check address literals"
+josé@example.com,invalid,non-ASCII local part (use idn-email)
+user@exämple.com,invalid,non-ASCII domain (use idn-email)
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@example.com,special,"invalid because the local part is longer than 64 octets (RFC 5321 Section 4.5.3.1.1), but the regex does not check lengths"

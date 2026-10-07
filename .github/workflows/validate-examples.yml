@@ -4,6 +4,10 @@ on:
   pull_request:
     paths:
       - 'examples/**'
+      - 'email-format.regex'
+      - 'validate-email-regex.py'
+      - 'validate-examples.py'
+      - 'requirements.txt'
 
 jobs:
   validate-json:
@@ -22,3 +26,25 @@ jobs:
             fi
           done
           exit $failed
+
+  validate-schemas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Validate example schemas against the 2020-12 meta-schema
+        run: python validate-examples.py
+
+  test-email-regex:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test email regex against example addresses
+        run: python validate-email-regex.py

@@ -1787,7 +1787,19 @@ Internet email address as follows:
 ### "email" {#format-email}
 
 As defined by the "Mailbox" ABNF rule in
-{{!RFC5321, Section 4.1.2}}.
+{{!RFC5321, Section 4.1.2}}.  Along with its ABNF definitions, RFC 5321 has additional limitations
+on email addresses in {{!RFC5321, Section 4.5.3}} which MUST be enforced.
+Hostnames in email addresses MUST be syntactically valid hostnames.
+
+A reasonable *starting point* for validation (once line returns are removed) is
+this regex, which is NOT a complete implementation without further address checking
+(it doesn't check domain-label or IP address rules), and length checking.
+Length checking is not required by RFC 5321, but is reasonable considering that
+many email implementations don't accept overly long addresses or local parts.
+
+~~~
+{::include ./email-format.regex}
+~~~
 
 ### "idn-email" {#format-idn-email}
 
