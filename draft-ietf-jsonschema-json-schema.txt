@@ -5,9 +5,9 @@
 Network Working Group                                  L. Dusseault, Ed.
 Internet-Draft                                  Data Transfer Initiative
 Intended status: Standards Track                               A. Wright
-Expires: 1 April 2027                                                   
+Expires: 10 April 2027                                                  
                                                               H. Andrews
-                                                       28 September 2026
+                                                          7 October 2026
 
 
                               JSON Schema
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 April 2027.
+   This Internet-Draft will expire on 10 April 2027.
 
 Copyright Notice
 
@@ -148,21 +148,39 @@ Table of Contents
        7.5.2.  "minProperties"
        7.5.3.  "required"
        7.5.4.  "dependentRequired"
-   8.  Vocabulary for Semantic Content With "format"
+   8.  Vocabulary for Syntax Checking With "format"
      8.1.  Foreword
-     8.2.  Implementation Requirements
-       8.2.1.  Format-Annotation Vocabulary
-       8.2.2.  Format-Assertion Vocabulary
-       8.2.3.  Custom format attributes
-     8.3.  Defined Formats
-       8.3.1.  Dates, Times, and Duration
-       8.3.2.  Email Addresses
-       8.3.3.  Hostnames
-       8.3.4.  IP Addresses
-       8.3.5.  Resource Identifiers
-       8.3.6.  Templates
-       8.3.7.  JSON Pointers
-       8.3.8.  Expressions
+     8.2.  Overview of Defined Formats
+     8.3.  General Format Implementation Requirements
+       8.3.1.  Format-Annotation Vocabulary
+       8.3.2.  Format-Assertion Vocabulary
+     8.4.  Dates, Times, and Duration
+       8.4.1.  "date-time"
+       8.4.2.  "date"
+       8.4.3.  "time"
+       8.4.4.  "duration"
+     8.5.  Email Addresses
+       8.5.1.  "email"
+       8.5.2.  "idn-email"
+     8.6.  Hostnames
+       8.6.1.  "hostname"
+       8.6.2.  "idn-hostname"
+     8.7.  IP Addresses
+       8.7.1.  "ipv4"
+       8.7.2.  "ipv6"
+     8.8.  Resource Identifiers
+       8.8.1.  "uri"
+       8.8.2.  "uri-reference"
+       8.8.3.  "iri"
+       8.8.4.  "iri-reference"
+       8.8.5.  "uuid"
+     8.9.  Templates
+       8.9.1.  "uri-template"
+     8.10. JSON Pointers
+       8.10.1.  "json-pointer"
+       8.10.2.  "relative-json-pointer"
+     8.11. Expressions
+       8.11.1.  "regex"
    9.  Vocabulary for the Contents of String-Encoded Data
      9.1.  Foreword
      9.2.  Implementation Requirements
@@ -227,25 +245,28 @@ Table of Contents
        13.4.3.  Detailed
        13.4.4.  Verbose
        13.4.5.  Output validation schemas
-   14. Meta-schemas and Vocabularies
-     14.1.  Schema Vocabularies
-       14.1.1.  The $vocabulary keyword
-       14.1.2.  Default vocabularies
-       14.1.3.  Non-inheritability of vocabularies
-       14.1.4.  Updates to Meta-Schema and Vocabulary URIs
-     14.2.  Default JSON Schema Dialect
-   15. Security Considerations
-   16. Interoperability Considerations
-     16.1.  Programming Language Independence
-     16.2.  Mathematical Integers
-     16.3.  Regular Expressions
-   17. IANA Considerations
-     17.1.  application/json-schema+json
-     17.2.  application/schema+json
-     17.3.  application/schema-instance+json
-   18. References
-     18.1.  Normative References
-     18.2.  Informative References
+   14. Extending format
+     14.1.  Custom format attributes
+     14.2.  Non-string values
+   15. Meta-schemas and Vocabularies
+     15.1.  Schema Vocabularies
+       15.1.1.  The $vocabulary keyword
+       15.1.2.  Default vocabularies
+       15.1.3.  Non-inheritability of vocabularies
+       15.1.4.  Updates to Meta-Schema and Vocabulary URIs
+     15.2.  Default JSON Schema Dialect
+   16. Security Considerations
+   17. Interoperability Considerations
+     17.1.  Programming Language Independence
+     17.2.  Mathematical Integers
+     17.3.  Regular Expressions
+   18. IANA Considerations
+     18.1.  application/json-schema+json
+     18.2.  application/schema+json
+     18.3.  application/schema-instance+json
+   19. References
+     19.1.  Normative References
+     19.2.  Informative References
    Appendix A.  Schema identification examples
    Appendix B.  Manipulating schema documents and references
      B.1.  Bundling schema resources into a single document
@@ -315,7 +336,7 @@ Table of Contents
       approaches to implementing keyword dependencies.
 
    *  Authors of meta-schemas including extensions to JSON Schema will
-      want to read the chapter on Section 14 and Appendix E.
+      want to read the chapter on Section 15 and Appendix E.
 
 1.3.  Functionality
 
@@ -542,7 +563,7 @@ Table of Contents
 
    Schemas are used to validate inputs that may be instances
    (Section 3.2) of the schema, but each schema can itself be
-   interpreted as an instance (see Section 14 for when and how this
+   interpreted as an instance (see Section 15 for when and how this
    happens).
 
    Schema documents SHOULD always be given the media type "application/
@@ -633,7 +654,7 @@ Table of Contents
 
    Whitespace and formatting concerns, including different lexical
    representations of numbers that are equal within the data model, are
-   outside the scope of JSON Schema.  JSON Schema Section 14.1 that wish
+   outside the scope of JSON Schema.  JSON Schema Section 15.1 that wish
    to work with such differences in lexical representations SHOULD
    define keywords to precisely interpret formatted strings within the
    data model rather than relying on having the original JSON
@@ -757,7 +778,7 @@ Table of Contents
    vocabularies for standard use.
 
    These vocabularies together compose the standard JSON Schema dialect,
-   which serves as the default dialect as discussed in Section 14.2.
+   which serves as the default dialect as discussed in Section 15.2.
 
 3.5.2.  Requirements for handling extensions
 
@@ -801,10 +822,7 @@ Table of Contents
 
    This specification defines a set of assertion keywords, as well as a
    small vocabulary of metadata keywords that can be used to annotate
-   the JSON instance with useful information.  The Section 8 keyword is
-   intended primarily as an annotation, but can optionally be used as an
-   assertion.  The Section 9 keywords are annotations for working with
-   documents embedded as JSON strings.
+   the JSON instance with useful information.
 
    Implementations MAY allow configuring annotations in such ways as
    limiting output to certain annotation keywords, aggregating values
@@ -868,7 +886,7 @@ Table of Contents
    resources.  It MUST NOT appear in non-resource root schema objects.
    If absent from the document root schema, the resulting behavior is
    implementation-defined, however, using this specification's default
-   dialect (Section 14.2) is RECOMMENDED.
+   dialect (Section 15.2) is RECOMMENDED.
 
    Values for this property are defined elsewhere in this and other
    documents, and by other parties.
@@ -877,7 +895,7 @@ Table of Contents
 
    The "$vocabulary" keyword is used in meta-schemas.  It is part of the
    core syntax because it bootstraps extended functionality, but its
-   details are explained in Section 14.1 and syntax in Section 14.1.1.
+   details are explained in Section 15.1 and syntax in Section 15.1.1.
 
 4.1.3.  "$id"
 
@@ -2045,16 +2063,39 @@ Table of Contents
    nor "endTime", but it cannot give an "endTime" without also giving a
    "startTime".
 
-8.  Vocabulary for Semantic Content With "format"
+8.  Vocabulary for Syntax Checking With "format"
 
 8.1.  Foreword
 
    Structural validation alone may be insufficient to allow an
    application to correctly utilize certain values.  The "format"
-   annotation keyword is defined to allow schema authors to convey
-   semantic information for a fixed subset of values which are
-   accurately described by authoritative resources, be they RFCs or
-   other external specifications.
+   keyword is defined to allow schema authors to indicate that a value
+   is expected to follow a syntax defined by an authoritative resource,
+   such as an RFC or other external specification.
+
+   Format validation relies on what's in the schema and the input, not
+   on facts in the world.  For example, "email" indicates that a string
+   is expected to be written as an email address; it does not say
+   whether that address exists, what it is used for, or whether mail
+   sent to it would be delivered.  Likewise, "date" indicates that a
+   string is written as a full date, not whether that date is a birth
+   date, a deadline, or a date in the past.
+
+   Some schema authors will wish to go beyond the syntax validation
+   offered by format attributes.  Several choices can help achieve this
+   and can be combined:
+
+   *  Do additional processing after JSON Schema validation
+
+   *  Use "title" and "description" for soft guidance
+
+   *  Use pattern possibly alongside format to add regular expression
+      constraints
+
+   *  Add a new format option to the IANA registry (TBD)
+
+   *  Define keywords in a custom vocabulary to add new constraints,
+      especially constraints that go beyond syntactic
 
    The value of this keyword is called a format attribute.  It MUST be a
    string.  A format attribute can generally only validate a given set
@@ -2063,84 +2104,116 @@ Table of Contents
    format attributes defined in this section apply to strings, but a
    format attribute can be specified to apply to any input type in the
    input data model (Section 3.2).
-   // Note that the "type" keyword in this specification defines an
-   // "integer" type which is not part of the data model.  Therefore a
-   // format attribute can be limited to numbers, but not specifically
-   // to integers.  However, a numeric format can be used alongside the
-   // "type" keyword with a value of "integer", or could be explicitly
-   // defined to always pass if the number is not an integer, which
-   // produces essentially the same behavior as only applying to
-   // integers.
 
-   The current URI for this vocabulary, known as the Format-Annotation
-   vocabulary, is:
+   The format keyword is part of two vocabularies, both required.  The
+   format-assertion vocabulary requires implementations to check formats
+   as required in this specification, and the format-annotation
+   vocabulary requires implementations to create annotations for format
+   if annotations are enabled.  Special-purpose meta-schemas may require
+   one or neither of these, whereas the official JSON Schema meta-schema
+   requires both.
 
-   <https://json-schema.org/draft/2020-12/vocab/format-annotation>.
+   Format-assertion: https://json-schema.org/draft/2020-12/vocab/format-
+   assertion
 
-   The current URI for the corresponding meta-schema is:
+   Format-annotation: https://json-schema.org/draft/2020-12/vocab/
+   format-annotation
 
-   https://json-schema.org/draft/2020-12/meta/format-annotation
-   (https://json-schema.org/draft/2020-12/meta/format-annotation).
+8.2.  Overview of Defined Formats
 
-   Implementing support for this vocabulary is REQUIRED.
+   This section is non-normative.  It summarizes the format attributes
+   defined in this specification.  Each row links to the section with
+   the normative definition.  All of these format attributes apply to
+   strings.
 
-   In addition to the Format-Annotation vocabulary, a secondary
-   vocabulary is available for custom meta-schemas that defines "format"
-   as an assertion.  The URI for the Format-Assertion vocabulary, is:
+   +==================+======================+========================+
+   | Format           | Accepts a string     | Example                |
+   |                  | written as           |                        |
+   +==================+======================+========================+
+   | date-time        | A date and time with | 2026-09-30T14:30:00Z   |
+   | (Section 8.4.1)  | a time zone offset   |                        |
+   +------------------+----------------------+------------------------+
+   | date             | A full calendar date | 2026-09-30             |
+   | (Section 8.4.2)  |                      |                        |
+   +------------------+----------------------+------------------------+
+   | time             | A time of day with a | 14:30:00+02:00         |
+   | (Section 8.4.3)  | time zone offset     |                        |
+   +------------------+----------------------+------------------------+
+   | duration         | An RFC 3339 duration | P3DT4H                 |
+   | (Section 8.4.4)  |                      |                        |
+   +------------------+----------------------+------------------------+
+   | email            | An email address     | user@example.com       |
+   | (Section 8.5.1)  | (ASCII only)         |                        |
+   +------------------+----------------------+------------------------+
+   | idn-email        | An email address,    | user@example.com       |
+   | (Section 8.5.2)  | allowing non-ASCII   |                        |
+   |                  | characters           |                        |
+   +------------------+----------------------+------------------------+
+   | hostname         | An Internet host     | www.example.com        |
+   | (Section 8.6.1)  | name (ASCII only)    |                        |
+   +------------------+----------------------+------------------------+
+   | idn-hostname     | A host name,         | www.example.com        |
+   | (Section 8.6.2)  | allowing non-ASCII   |                        |
+   |                  | characters           |                        |
+   +------------------+----------------------+------------------------+
+   | ipv4             | An IPv4 address in   | 192.0.2.1              |
+   | (Section 8.7.1)  | dotted-quad form     |                        |
+   +------------------+----------------------+------------------------+
+   | ipv6             | An IPv6 address      | 2001:db8::1            |
+   | (Section 8.7.2)  |                      |                        |
+   +------------------+----------------------+------------------------+
+   | uri              | An absolute URI      | https://example.com/   |
+   | (Section 8.8.1)  |                      | a?b=c                  |
+   +------------------+----------------------+------------------------+
+   | uri-reference    | A URI or a relative  | ../a#b                 |
+   | (Section 8.8.2)  | reference            |                        |
+   +------------------+----------------------+------------------------+
+   | iri              | An absolute IRI,     | https://example.com/a  |
+   | (Section 8.8.3)  | allowing non-ASCII   |                        |
+   |                  | characters           |                        |
+   +------------------+----------------------+------------------------+
+   | iri-reference    | An IRI or a relative | ../a#b                 |
+   | (Section 8.8.4)  | reference            |                        |
+   +------------------+----------------------+------------------------+
+   | uuid             | A UUID, without a    | f81d4fae-7dec-         |
+   | (Section 8.8.5)  | urn:uuid: prefix     | 11d0-a765-00a0c91e6bf6 |
+   +------------------+----------------------+------------------------+
+   | uri-template     | A URI Template       | https://example.com/   |
+   | (Section 8.9.1)  |                      | users/{id}             |
+   +------------------+----------------------+------------------------+
+   | json-pointer     | A JSON Pointer       | /items/0/name          |
+   | (Section 8.10.1) |                      |                        |
+   +------------------+----------------------+------------------------+
+   | relative-json-   | A Relative JSON      | 1/name                 |
+   | pointer          | Pointer              |                        |
+   | (Section 8.10.2) |                      |                        |
+   +------------------+----------------------+------------------------+
+   | regex            | A regular expression | ^[a-z]+$               |
+   | (Section 8.11.1) | in the ECMA-262      |                        |
+   |                  | dialect              |                        |
+   +------------------+----------------------+------------------------+
 
-   <https://json-schema.org/draft/2020-12/vocab/format-assertion>.
+         Table 1: Format attributes defined by this specification
 
-   The current URI for the corresponding meta-schema is:
+8.3.  General Format Implementation Requirements
 
-   https://json-schema.org/draft/2020-12/meta/format-assertion
-   (https://json-schema.org/draft/2020-12/meta/format-assertion).
+   It is RECOMMENDED that implementations use a common parsing library
+   for each format, or a well-known regular expression.
 
-   Implementing support for the Format-Assertion vocabulary is OPTIONAL.
+8.3.1.  Format-Annotation Vocabulary
 
-   Specifying both the Format-Annotation and the Format-Assertion
-   vocabularies is functionally equivalent to specifying only the
-   Format-Assertion vocabulary since its requirements are a superset of
-   the Format-Annotation vocabulary.
+   When the implementation is configured to produce annotations and the
+   format-annotation vocabulary is 'true' in the meta-schema, it MUST
+   treat the format keyword as an annotation, which means that a process
+   consuming annotation output can see what formats should apply to
+   which values.
 
-8.2.  Implementation Requirements
+8.3.2.  Format-Assertion Vocabulary
 
-   The "format" keyword functions as defined by the vocabulary which is
-   referenced.
-
-8.2.1.  Format-Annotation Vocabulary
-
-   The value of format MUST be produced as an annotation, if the
-   implementation supports annotation production.  This enables
-   application-level validation when schema validation is unavailable or
-   inadequate.
-
-   Implementations MAY still treat "format" as an assertion in addition
-   to an annotation and attempt to validate the value's conformance to
-   the specified semantics.  The implementation MUST provide options to
-   enable and disable such evaluation and MUST be disabled by default.
-   Implementations SHOULD document their level of support for such
-   validation.
-   // Specifying the Format-Annotation vocabulary and enabling
-   // validation in an implementation should not be viewed as being
-   // equivalent to specifying the Format-Assertion vocabulary since
-   // implementations are not required to provide full validation
-   // support when the Format-Assertion vocabulary is not specified.
-
-   When the implementation is configured for assertion behavior, it:
-
-   *  SHOULD provide an implementation-specific best effort validation
-      for each format attribute defined below;
-
-   *  MAY choose to implement validation of any or all format attributes
-      as a no-op by always producing a validation result of true;
-
-8.2.2.  Format-Assertion Vocabulary
-
-   When the Format-Assertion vocabulary is declared with a value of
-   true, implementations MUST provide full validation support for all of
-   the formats defined by this specification.  Implementations that
-   cannot provide full validation support MUST refuse to process the
-   schema.
+   When the Format-Assertion vocabulary is 'true' in the meta-schema,
+   implementations MUST provide full validation support for all of the
+   formats defined by this specification.  Implementations that cannot
+   provide full validation support MUST refuse to process the schema.
 
    An implementation that supports the Format-Assertion vocabulary:
 
@@ -2154,116 +2227,100 @@ Table of Contents
       attributes that it recognizes, such that there exist possible
       input values of the correct type that will fail validation.
 
-   The requirement for minimal validation of format attributes is
-   intentionally vague and permissive, due to the complexity involved in
-   many of the attributes.  Note in particular that the requirement is
-   limited to syntactic checking; it is not to be expected that an
-   implementation would send an email, attempt to connect to a URL, or
-   otherwise check the existence of an entity identified by a format
-   instance.
-   // The expectation is that for simple formats such as date-time,
-   // syntactic validation will be thorough.  For a complex format such
-   // as email addresses, which are the amalgamation of various
-   // standards and numerous adjustments over time, with obscure and/or
-   // obsolete rules that may or may not be restricted by other
-   // applications making use of the value, a minimal validation is
-   // sufficient.  For example, an input string that does not contain an
-   // "@" is clearly not a valid email address, and an "email" or
-   // "hostname" containing characters outside of 7-bit ASCII is
-   // likewise clearly invalid.
-
-   It is RECOMMENDED that implementations use a common parsing library
-   for each format, or a well-known regular expression.  Implementations
-   SHOULD clearly document how and to what degree each format attribute
-   is validated.
-
    The standard core and validation meta-schema includes this vocabulary
-   in its "$vocabulary" keyword with a value of false, since by default
-   implementations are not required to support this keyword as an
-   assertion.  Supporting the format vocabulary with a value of true is
-   understood to greatly increase code size and in some cases execution
-   time, and will not be appropriate for all implementations.
+   in its "$vocabulary" keyword with a value of false.  (TODO: this
+   should be changed to 'true')
 
-8.2.3.  Custom format attributes
-
-   Implementations MAY support custom format attributes.  Save for
-   agreement between parties, schema authors SHALL NOT expect a peer
-   implementation to support such custom format attributes.  An
-   implementation MUST NOT fail to produce unknown formats as
-   annotations.  When the Format-Assertion vocabulary is specified,
-   implementations MUST fail upon encountering unknown formats.
-
-   Vocabularies do not support specifically declaring different value
-   sets for keywords.  Due to this limitation, and the historically
-   uneven implementation of this keyword, it is RECOMMENDED to define
-   additional keywords in a custom vocabulary rather than additional
-   format attributes if interoperability is desired.
-
-8.3.  Defined Formats
-
-8.3.1.  Dates, Times, and Duration
+8.4.  Dates, Times, and Duration
 
    These attributes apply to string inputs.
 
    Date and time format names are derived from [RFC3339], Section 5.6.
-   The duration format is from the ISO 8601 ABNF as given in Appendix A
-   of RFC 3339.
+   The duration format is given in [RFC3339], Appendix A.
 
-   Implementations supporting formats SHOULD implement support for the
-   following attributes:
+   In addition to the ABNF, RFC 3339 makes requirements that make sure
+   that dates and times can actually occur ([RFC3339], Section 5.7).
+   This means that dates like "2026-02-30T10:00:00Z" are considered
+   invalid, which is common practice already with JSON Schema.  However,
+   it does not insist on a perfect job in detecting really-occurrign
+   times and dates.  Leap seconds, for example, make some values
+   syntactically correct but are rather hard to identify as times that
+   can or cannot really happen.  Validation implementations should
+   implement the additional constraints in RFC 3339 as well as the ABNF.
 
-8.3.1.1.  "date-time"
+   Software libraries for using dates, times and durations sometimes
+   accept values that are syntactically incorrect according to RFC 3339
+   rules, for example values that do follow ISO 8601 [ISO8601] but not
+   RFC 3339's profile.  Validation implementations SHOULD reject these.
+
+8.4.1.  "date-time"
 
    A string input is accepted by this attribute if it is a valid
    representation according to the "date-time" ABNF rule (referenced
    above).
 
-8.3.1.2.  "date"
+   Some notes:
+
+   *  [RFC3339], Section 5.6 mentions space as a possible separator, but
+      the ABNF requires a 'T'/'t' to separate date and time.  The ABNF
+      is what implementations should follow.
+
+   *  Lowercase letters 't' and 'z' are legitimate.
+
+   *  A timezone offset is strictly required.
+
+   *  Years are strictly four digits even though other standards accept
+      more.
+
+8.4.2.  "date"
 
    A string input is accepted by this attribute if it is a valid
    representation according to the "full-date" ABNF rule (referenced
    above).
 
-8.3.1.3.  "time"
+8.4.3.  "time"
 
    A string input is accepted by this attribute if it is a valid
    representation according to the "full-time" ABNF rule (referenced
    above).
 
-8.3.1.4.  "duration"
+8.4.4.  "duration"
 
    A string input is accepted by this attribute if it is a valid
    representation according to the "duration" ABNF rule (referenced
    above).
 
-8.3.1.5.  Additional RFC3339 Formats
+   Some notes about RFC 3339 durations that may help consistency:
 
-   Implementations MAY support additional attributes using the other
-   format names defined anywhere in that RFC.  If "full-date" or "full-
-   time" are implemented, the corresponding short form ("date" or "time"
-   respectively) MUST be implemented, and MUST behave identically.
-   Implementations SHOULD NOT define extension attributes with any name
-   matching an RFC 3339 format unless it validates according to the
-   rules of that format.
-   // There is not currently consensus on the need for supporting all
-   // RFC 3339 formats, so this approach of reserving the namespace will
-   // encourage experimentation without committing to the entire set.
-   // Either the format implementation requirements will become more
-   // flexible in general, or these will likely either be promoted to
-   // fully specified attributes or dropped.
+   *  ISO 8601 defines additional formats like "P0003-06-04T12:30:05"
+      but these are not valid in RFC 3339.
 
-8.3.2.  Email Addresses
+   *  Negative durations are not allowed.
+
+   *  Fractional elements ("PT1.5S") are not allowed.
+
+   *  Time elements MUST come after a 'T' to avoid confusing "M" for
+      "minute" with "M" for "month".
+
+   *  Duration elements can be skipped in only some cases.  A "zero
+      minutes" duration element can be skipped if the duration is
+      "thirty seconds" ("PT30S") but it cannot be skipped if the
+      duration is an hour and thirty seconds ("PT1H0M30S").
+
+   *  Week units cannot be combined with year/month units.
+
+8.5.  Email Addresses
 
    These attributes apply to string inputs.
 
    A string input is accepted by these attributes if it is a valid
    Internet email address as follows:
 
-8.3.2.1.  "email"
+8.5.1.  "email"
 
    As defined by the "Mailbox" ABNF rule in [RFC5321], Section 4.1.2.
 
-8.3.2.2.  "idn-email"
+8.5.2.  "idn-email"
 
    As defined by the extended "Mailbox" ABNF rule in [RFC6531],
    Section 3.3.
@@ -2271,19 +2328,19 @@ Table of Contents
    Note that all strings accepted by the "email" attribute are also
    accepted by the "idn-email" attribute.
 
-8.3.3.  Hostnames
+8.6.  Hostnames
 
    These attributes apply to string inputs.
 
    A string input is accepted by these attributes if it is a valid
    representation for an Internet hostname as follows:
 
-8.3.3.1.  "hostname"
+8.6.1.  "hostname"
 
    As defined by [RFC1123], Section 2.1, including host names produced
    using the Punycode algorithm specified in [RFC5891], Section 4.4.
 
-8.3.3.2.  "idn-hostname"
+8.6.2.  "idn-hostname"
 
    As defined by either RFC 1123 as for hostname, or an
    internationalized hostname as defined by [RFC5890], Section 2.3.2.3.
@@ -2291,49 +2348,49 @@ Table of Contents
    Note that all strings accepted by the "hostname" attribute are also
    accepted by the "idn-hostname" attribute.
 
-8.3.4.  IP Addresses
+8.7.  IP Addresses
 
    These attributes apply to string inputs.
 
    A string input is accepted by these attributes if it is a valid
    representation of an IP address as follows:
 
-8.3.4.1.  "ipv4"
+8.7.1.  "ipv4"
 
    An IPv4 address according to the "dotted-quad" ABNF syntax as defined
    in [RFC2673], Section 3.2.
 
-8.3.4.2.  "ipv6"
+8.7.2.  "ipv6"
 
    An IPv6 address as defined in [RFC4291], Section 2.2.
 
-8.3.5.  Resource Identifiers
+8.8.  Resource Identifiers
 
    These attributes apply to string inputs.
 
-8.3.5.1.  "uri"
+8.8.1.  "uri"
 
    A string input is accepted by this attribute if it is a valid URI,
    according to [RFC3986], Section 3.
 
-8.3.5.2.  "uri-reference"
+8.8.2.  "uri-reference"
 
    A string input is accepted by this attribute if it is a valid URI
    Reference (either a URI or a relative-reference), according to
    [RFC3986], Section 4.
 
-8.3.5.3.  "iri"
+8.8.3.  "iri"
 
    A string input is accepted by this attribute if it is a valid IRI,
    according to [RFC3987], Section 2.2.
 
-8.3.5.4.  "iri-reference"
+8.8.4.  "iri-reference"
 
    A string input is accepted by this attribute if it is a valid IRI
    Reference (either an IRI or a relative-reference), according to
    [RFC3987], Section 2.2.
 
-8.3.5.5.  "uuid"
+8.8.5.  "uuid"
 
    A string input is accepted by this attribute if it is a valid string
    representation of a UUID, according to [RFC4122].
@@ -2347,9 +2404,9 @@ Table of Contents
    expression of "^urn:uuid:" to indicate the URI scheme and URN
    namespace.
 
-8.3.6.  Templates
+8.9.  Templates
 
-8.3.6.1.  "uri-template"
+8.9.1.  "uri-template"
 
    This attribute applies to string inputs.
 
@@ -2359,27 +2416,27 @@ Table of Contents
    Note that URI Templates may be used for IRIs; there is no separate
    IRI Template specification.
 
-8.3.7.  JSON Pointers
+8.10.  JSON Pointers
 
    These attributes apply to string inputs.
 
    To allow for both regular and relative JSON Pointers, use "anyOf" or
    "oneOf" to indicate support for either format.
 
-8.3.7.1.  "json-pointer"
+8.10.1.  "json-pointer"
 
    A string input is accepted by this attribute if it is a valid JSON
    string representation of a JSON Pointer, according to [RFC6901],
    Section 5.
 
-8.3.7.2.  "relative-json-pointer"
+8.10.2.  "relative-json-pointer"
 
    A string input is accepted by this attribute if it is a valid
    [I-D.hha-relative-json-pointer].
 
-8.3.8.  Expressions
+8.11.  Expressions
 
-8.3.8.1.  "regex"
+8.11.1.  "regex"
 
    This attribute applies to string inputs.
 
@@ -2387,7 +2444,7 @@ Table of Contents
    [ECMA262] regular expression dialect.
 
    Implementations that validate formats MUST accept at least the subset
-   of ECMA-262 defined in Regular Expressions (Section 16.3) section of
+   of ECMA-262 defined in Regular Expressions (Section 17.3) section of
    this specification, and SHOULD accept all valid ECMA-262 expressions.
 
 9.  Vocabulary for the Contents of String-Encoded Data
@@ -2438,7 +2495,7 @@ Table of Contents
    input against the original schema, followed by using the annotations
    to decode, parse, and/or validate each string-encoded document.
 
-   See also the Security Considerations (Section 15) sections for
+   See also the Security Considerations (Section 16) sections for
    possible vulnerabilities introduced by automatically processing
    inputs according to these keywords.
 
@@ -2635,7 +2692,7 @@ Table of Contents
      |               |           |               | account."         |
      +---------------+-----------+---------------+-------------------+
 
-                      Table 1: Annotation information
+                      Table 2: Annotation information
 
    There is one "title" applied to the instance root from the evaluation
    root.  There are two "descriptions", and given the presence or
@@ -3163,7 +3220,7 @@ Table of Contents
    is undefined.  Similarly, a reference target under a known keyword,
    for which the value is known not to be a schema, results in undefined
    behavior in order to avoid burdening implementations with the need to
-   detect such targets.  See Section 15 for the security implications of
+   detect such targets.  See Section 16 for the security implications of
    blindly interpreting targets as schemas.
 
    Note that single-level custom keywords with identical syntax and
@@ -3949,7 +4006,33 @@ Table of Contents
    draft/2020-12/output/schema (https://json-schema.org/draft/2020-
    12/output/schema).
 
-14.  Meta-schemas and Vocabularies
+14.  Extending format
+
+   The format keyword Section 8 may be extended by defining new
+   attributes in an IANA registry.  (TBD)
+
+14.1.  Custom format attributes
+
+   Save for agreement between parties, schema authors SHALL NOT expect a
+   peer implementation to support custom format attributes.  An
+   implementation MUST NOT fail to produce unknown formats as
+   annotations if the format-annotation vocabulary is required.  When
+   the Format-Assertion vocabulary is specified, implementations MUST
+   fail upon encountering unknown formats.
+
+   Vocabularies do not support specifically declaring different value
+   sets for keywords.  Due to this limitation, and the historically
+   uneven implementation of this keyword, it is RECOMMENDED to define
+   additional keywords in a custom vocabulary rather than additional
+   format attributes if interoperability is desired.
+
+14.2.  Non-string values
+
+   Format attributes in this specification are defined for string
+   values.  New format attributes could conceivably be defined for use
+   with numeric values.
+
+15.  Meta-schemas and Vocabularies
 
    A schema that itself describes a schema is called a meta-schema.
    Meta-schemas are used to validate JSON Schemas.  Meta-schemas are
@@ -3986,7 +4069,7 @@ Table of Contents
    design of meta-schema features emphasizes flexibility over
    simplicity.
 
-14.1.  Schema Vocabularies
+15.1.  Schema Vocabularies
 
    A schema vocabulary, or simply a vocabulary, is a set of keywords,
    their syntax, and their semantics.  A vocabulary is generally
@@ -4016,7 +4099,7 @@ Table of Contents
    are defined in vocabularies from those that are not part of any
    vocabulary.
 
-14.1.1.  The $vocabulary keyword
+15.1.1.  The $vocabulary keyword
 
    In a meta-schema, the $vocabulary keyword identifies the vocabularies
    available for use in schemas described by that meta-schema.  It is
@@ -4055,7 +4138,7 @@ Table of Contents
    meta-schema M against its own meta-schema M' without requiring the
    implementation to understand the vocabularies declared by M.
 
-14.1.2.  Default vocabularies
+15.1.2.  Default vocabularies
 
    If "$vocabulary" is absent, an implementation MAY determine behavior
    based on the meta-schema if it is recognized from the URI value of
@@ -4071,7 +4154,7 @@ Table of Contents
    For example, an implementation that is a validator SHOULD assume the
    use of all vocabularies in this specification.
 
-14.1.3.  Non-inheritability of vocabularies
+15.1.3.  Non-inheritability of vocabularies
 
    Note that the processing restrictions on "$vocabulary" mean that
    meta-schemas that reference other meta-schemas using "$ref" or
@@ -4082,7 +4165,7 @@ Table of Contents
    intended for use as a meta-schema.  This is demonstrated in the
    example meta-schema (Appendix E.2).
 
-14.1.4.  Updates to Meta-Schema and Vocabulary URIs
+15.1.4.  Updates to Meta-Schema and Vocabulary URIs
 
    Updated vocabulary and meta-schema URIs MAY be published between
    specification drafts in order to correct errors.  Implementations
@@ -4090,7 +4173,7 @@ Table of Contents
    the next to indicate the same syntax and semantics as those listed
    here.
 
-14.2.  Default JSON Schema Dialect
+15.2.  Default JSON Schema Dialect
 
    The current URI for the default JSON Schema dialect meta-schema is
    https://json-schema.org/draft/2020-12/schema.  For schema author
@@ -4101,7 +4184,7 @@ Table of Contents
    in this specification.  Certain vocabularies are optional to support,
    which is explained in detail in the relevant sections.
 
-15.  Security Considerations
+16.  Security Considerations
 
    Both schemas and instances are JSON values.  As such, all security
    considerations defined in [RFC8259] apply.
@@ -4161,16 +4244,16 @@ Table of Contents
    that it actually is any such thing.  Therefore, interpreting it as
    such has security implications and may produce unpredictable results.
 
-16.  Interoperability Considerations
+17.  Interoperability Considerations
 
-16.1.  Programming Language Independence
+17.1.  Programming Language Independence
 
    JSON Schema is programming language agnostic, and supports the full
    range of values described in the data model.  Be aware, however, that
    some languages and JSON parsers may not be able to represent in
    memory the full range of values describable by JSON.
 
-16.2.  Mathematical Integers
+17.2.  Mathematical Integers
 
    Some programming languages and parsers use different internal
    representations for floating point numbers than they do for integers.
@@ -4178,7 +4261,7 @@ Table of Contents
    For consistency, integer JSON numbers SHOULD NOT be encoded with a
    fractional part.
 
-16.3.  Regular Expressions
+17.3.  Regular Expressions
 
    Keywords MAY use regular expressions to express constraints, or
    constrain the input value to be a regular expression.  These regular
@@ -4219,9 +4302,9 @@ Table of Contents
    anchored, neither at the beginning nor at the end.  This means, for
    instance, the pattern "es" matches "expression".
 
-17.  IANA Considerations
+18.  IANA Considerations
 
-17.1.  application/json-schema+json
+18.1.  application/json-schema+json
 
    The proposed MIME media type for JSON Schema is defined as follows:
 
@@ -4235,10 +4318,10 @@ Table of Contents
       those specified for the "application/json" media type.  See JSON
       ([RFC8259]).
 
-   *  Security considerations: See Section 15 above.
+   *  Security considerations: See Section 16 above.
 
-   *  Interoperability considerations: See Section 16.1, Section 16.2,
-      and Section 16.3 above.
+   *  Interoperability considerations: See Section 17.1, Section 17.2,
+      and Section 17.3 above.
 
    *  Fragment identifier considerations: See Section 3.4.
 
@@ -4246,7 +4329,7 @@ Table of Contents
 
    *  Intended usage: COMMON
 
-17.2.  application/schema+json
+18.2.  application/schema+json
 
    This MIME media type is registered for clarity and interoperability.
    It is frequently used already, but it could also describe something
@@ -4264,16 +4347,16 @@ Table of Contents
       those specified for the "application/json" media type.  See JSON
       ([RFC8259]).
 
-   *  Security considerations: See Section 15 above.
+   *  Security considerations: See Section 16 above.
 
-   *  Interoperability considerations: See Section 16.1, Section 16.2,
-      and Section 16.3 above.
+   *  Interoperability considerations: See Section 17.1, Section 17.2,
+      and Section 17.3 above.
 
    *  Fragment identifier considerations: See Section 3.4.
 
    *  Intended usage: OBSOLETE
 
-17.3.  application/schema-instance+json
+18.3.  application/schema-instance+json
 
    The proposed MIME media type for JSON Schema Instances that require a
    JSON Schema-specific media type is defined as follows:
@@ -4288,16 +4371,16 @@ Table of Contents
       those specified for the "application/json" media type.  See JSON
       ([RFC8259]).
 
-   *  Security considerations: See Section 15 above.
+   *  Security considerations: See Section 16 above.
 
-   *  Interoperability considerations: See Section 16.1, Section 16.2,
-      and Section 16.3 above.
+   *  Interoperability considerations: See Section 17.1, Section 17.2,
+      and Section 17.3 above.
 
    *  Fragment identifier considerations: See Section 3.4.
 
-18.  References
+19.  References
 
-18.1.  Normative References
+19.1.  Normative References
 
    [ECMA262]  European Computer Manufacturers Association, "ECMAScript
               Language Specification 6th Edition", ECMA Standard ECMA-
@@ -4418,7 +4501,7 @@ Table of Contents
               Recommendation REC-xml-names-20091208, 8 December 2009,
               <http://www.w3.org/TR/2009/REC-xml-names-20091208/>.
 
-18.2.  Informative References
+19.2.  Informative References
 
    [I-D.handrews-json-schema-hyperschema]
               Andrews, H. H. and A. Wright, "JSON Hyper-Schema: A
@@ -4427,6 +4510,11 @@ Table of Contents
               hyperschema-02, 17 September 2019,
               <https://datatracker.ietf.org/doc/html/draft-handrews-
               json-schema-hyperschema-02>.
+
+   [ISO8601]  International Organization for Standardization, "Date and
+              time - Representations for information interchange - Part
+              1: Basic rules", ISO 8601-1:2019, February 2019,
+              <https://www.iso.org/standard/70907.html>.
 
    [RFC4329]  Hoehrmann, B., "Scripting Media Types", RFC 4329,
               DOI 10.17487/RFC4329, April 2006,
@@ -4745,7 +4833,7 @@ Appendix D.  Implementing keyword dependencies
     | "Y": "world"}   |                        | properties           |
     +-----------------+------------------------+----------------------+
 
-                                  Table 2
+                                  Table 3
 
    Note that the additionalProperties subschema is never applied to "X"
    or "Y" even when they are rejected by properties.
@@ -4800,7 +4888,7 @@ Appendix D.  Implementing keyword dependencies
    |"world"} |            |                       |properties           |
    +---------+------------+-----------------------+---------------------+
 
-                                  Table 3
+                                  Table 4
 
    Similarly, the length of the prefixItems keyword's value is used by
    items, and it produces information which is used by unevaluatedItems.
@@ -4842,7 +4930,7 @@ Appendix D.  Implementing keyword dependencies
    |                              |             | applied)            |
    +------------------------------+-------------+---------------------+
 
-                                 Table 4
+                                 Table 5
 
    As with our object properties example, using this schema (without
    items) via a reference requires using unevaluatedItems to get the
@@ -4898,7 +4986,7 @@ Appendix D.  Implementing keyword dependencies
    |                        |             |                  |applied)        |
    +------------------------+-------------+------------------+----------------+
 
-                                  Table 5
+                                  Table 6
 
    Note that in the fourth row, unevaluatedItems ends up applied to
    index 1, while items was not.
@@ -4926,7 +5014,7 @@ Appendix D.  Implementing keyword dependencies
     |                   | validations         |                      |
     +-------------------+---------------------+----------------------+
 
-                                 Table 6
+                                 Table 7
 
    The following table summarizes which keywords, when successful,
    produce information on which other keywords depend:
@@ -4971,7 +5059,7 @@ Appendix D.  Implementing keyword dependencies
     |                       | outcome        |                       |
     +-----------------------+----------------+-----------------------+
 
-                                 Table 7
+                                 Table 8
 
    Note that certain keywords always validate all remaining properties
    or indices when successful, so there is no need for them to track
@@ -5203,7 +5291,10 @@ Appendix G.  Important changes from JSON Schema 2020-12
 
    *  "application/json-schema+json" is the media type for JSON Schema.
       "application/schema+json" is registered as an obsolete alias
-      (Section 17).
+      (Section 18).
+
+   *  Format checking returns to being a requirement, meeting authors'
+      expectations.
 
 Appendix H.  Acknowledgments
 

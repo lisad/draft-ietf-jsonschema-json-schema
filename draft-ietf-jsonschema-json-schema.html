@@ -23,18 +23,18 @@ for "application/json" documents.
 <meta content="draft-ietf-jsonschema-json-schema-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.34.1
-    Python 3.14.7
-    ConfigArgParse 1.7.7
+    Python 3.14.8
+    ConfigArgParse 1.8.0
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.1.1
     natsort 8.4.0
-    platformdirs 4.11.10
+    platformdirs 4.12.2
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.8.4
+    wcwidth 0.9.1
 -->
 <link href="draft-ietf-jsonschema-json-schema.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1050,11 +1050,11 @@ svg {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">JSON Schema</td>
-<td class="right">September 2026</td>
+<td class="right">October 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Dusseault, et al.</td>
-<td class="center">Expires 1 April 2027</td>
+<td class="center">Expires 10 April 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1067,12 +1067,12 @@ svg {
 <dd class="internet-draft">draft-ietf-jsonschema-json-schema-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-09-28" class="published">28 September 2026</time>
+<time datetime="2026-10-07" class="published">7 October 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-04-01">1 April 2027</time></dd>
+<dd class="expires"><time datetime="2027-04-10">10 April 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1128,7 +1128,7 @@ Source for this draft can be found at
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 1 April 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 10 April 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1450,51 +1450,119 @@ Source for this draft can be found at
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-vocabulary-for-semantic-con" class="internal xref">Vocabulary for Semantic Content With "format"</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-vocabulary-for-syntax-check" class="internal xref">Vocabulary for Syntax Checking With "format"</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
                 <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-foreword" class="internal xref">Foreword</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
-                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-implementation-requirements" class="internal xref">Implementation Requirements</a></p>
+                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-overview-of-defined-formats" class="internal xref">Overview of Defined Formats</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.3">
+                <p id="section-toc.1-1.8.2.3.1"><a href="#section-8.3" class="auto internal xref">8.3</a>.  <a href="#name-general-format-implementati" class="internal xref">General Format Implementation Requirements</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2.2.1">
-                    <p id="section-toc.1-1.8.2.2.2.1.1"><a href="#section-8.2.1" class="auto internal xref">8.2.1</a>.  <a href="#name-format-annotation-vocabular" class="internal xref">Format-Annotation Vocabulary</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.3.2.1">
+                    <p id="section-toc.1-1.8.2.3.2.1.1"><a href="#section-8.3.1" class="auto internal xref">8.3.1</a>.  <a href="#name-format-annotation-vocabular" class="internal xref">Format-Annotation Vocabulary</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2.2.2">
-                    <p id="section-toc.1-1.8.2.2.2.2.1"><a href="#section-8.2.2" class="auto internal xref">8.2.2</a>.  <a href="#name-format-assertion-vocabulary" class="internal xref">Format-Assertion Vocabulary</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2.2.3">
-                    <p id="section-toc.1-1.8.2.2.2.3.1"><a href="#section-8.2.3" class="auto internal xref">8.2.3</a>.  <a href="#name-custom-format-attributes" class="internal xref">Custom format attributes</a></p>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.3.2.2">
+                    <p id="section-toc.1-1.8.2.3.2.2.1"><a href="#section-8.3.2" class="auto internal xref">8.3.2</a>.  <a href="#name-format-assertion-vocabulary" class="internal xref">Format-Assertion Vocabulary</a></p>
 </li>
                 </ul>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.3">
-                <p id="section-toc.1-1.8.2.3.1"><a href="#section-8.3" class="auto internal xref">8.3</a>.  <a href="#name-defined-formats" class="internal xref">Defined Formats</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.4">
+                <p id="section-toc.1-1.8.2.4.1"><a href="#section-8.4" class="auto internal xref">8.4</a>.  <a href="#name-dates-times-and-duration" class="internal xref">Dates, Times, and Duration</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.3.2.1">
-                    <p id="section-toc.1-1.8.2.3.2.1.1"><a href="#section-8.3.1" class="auto internal xref">8.3.1</a>.  <a href="#name-dates-times-and-duration" class="internal xref">Dates, Times, and Duration</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.4.2.1">
+                    <p id="section-toc.1-1.8.2.4.2.1.1"><a href="#section-8.4.1" class="auto internal xref">8.4.1</a>.  <a href="#name-date-time" class="internal xref">"date-time"</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.3.2.2">
-                    <p id="section-toc.1-1.8.2.3.2.2.1"><a href="#section-8.3.2" class="auto internal xref">8.3.2</a>.  <a href="#name-email-addresses" class="internal xref">Email Addresses</a></p>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.4.2.2">
+                    <p id="section-toc.1-1.8.2.4.2.2.1"><a href="#section-8.4.2" class="auto internal xref">8.4.2</a>.  <a href="#name-date" class="internal xref">"date"</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.3.2.3">
-                    <p id="section-toc.1-1.8.2.3.2.3.1"><a href="#section-8.3.3" class="auto internal xref">8.3.3</a>.  <a href="#name-hostnames" class="internal xref">Hostnames</a></p>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.4.2.3">
+                    <p id="section-toc.1-1.8.2.4.2.3.1"><a href="#section-8.4.3" class="auto internal xref">8.4.3</a>.  <a href="#name-time" class="internal xref">"time"</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.3.2.4">
-                    <p id="section-toc.1-1.8.2.3.2.4.1"><a href="#section-8.3.4" class="auto internal xref">8.3.4</a>.  <a href="#name-ip-addresses" class="internal xref">IP Addresses</a></p>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.4.2.4">
+                    <p id="section-toc.1-1.8.2.4.2.4.1"><a href="#section-8.4.4" class="auto internal xref">8.4.4</a>.  <a href="#name-duration" class="internal xref">"duration"</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.3.2.5">
-                    <p id="section-toc.1-1.8.2.3.2.5.1"><a href="#section-8.3.5" class="auto internal xref">8.3.5</a>.  <a href="#name-resource-identifiers" class="internal xref">Resource Identifiers</a></p>
+                </ul>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.3.2.6">
-                    <p id="section-toc.1-1.8.2.3.2.6.1"><a href="#section-8.3.6" class="auto internal xref">8.3.6</a>.  <a href="#name-templates" class="internal xref">Templates</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.5">
+                <p id="section-toc.1-1.8.2.5.1"><a href="#section-8.5" class="auto internal xref">8.5</a>.  <a href="#name-email-addresses" class="internal xref">Email Addresses</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.5.2.1">
+                    <p id="section-toc.1-1.8.2.5.2.1.1"><a href="#section-8.5.1" class="auto internal xref">8.5.1</a>.  <a href="#name-email" class="internal xref">"email"</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.3.2.7">
-                    <p id="section-toc.1-1.8.2.3.2.7.1"><a href="#section-8.3.7" class="auto internal xref">8.3.7</a>.  <a href="#name-json-pointers" class="internal xref">JSON Pointers</a></p>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.5.2.2">
+                    <p id="section-toc.1-1.8.2.5.2.2.1"><a href="#section-8.5.2" class="auto internal xref">8.5.2</a>.  <a href="#name-idn-email" class="internal xref">"idn-email"</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.3.2.8">
-                    <p id="section-toc.1-1.8.2.3.2.8.1"><a href="#section-8.3.8" class="auto internal xref">8.3.8</a>.  <a href="#name-expressions" class="internal xref">Expressions</a></p>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.6">
+                <p id="section-toc.1-1.8.2.6.1"><a href="#section-8.6" class="auto internal xref">8.6</a>.  <a href="#name-hostnames" class="internal xref">Hostnames</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.6.2.1">
+                    <p id="section-toc.1-1.8.2.6.2.1.1"><a href="#section-8.6.1" class="auto internal xref">8.6.1</a>.  <a href="#name-hostname" class="internal xref">"hostname"</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.6.2.2">
+                    <p id="section-toc.1-1.8.2.6.2.2.1"><a href="#section-8.6.2" class="auto internal xref">8.6.2</a>.  <a href="#name-idn-hostname" class="internal xref">"idn-hostname"</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.7">
+                <p id="section-toc.1-1.8.2.7.1"><a href="#section-8.7" class="auto internal xref">8.7</a>.  <a href="#name-ip-addresses" class="internal xref">IP Addresses</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.7.2.1">
+                    <p id="section-toc.1-1.8.2.7.2.1.1"><a href="#section-8.7.1" class="auto internal xref">8.7.1</a>.  <a href="#name-ipv4" class="internal xref">"ipv4"</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.7.2.2">
+                    <p id="section-toc.1-1.8.2.7.2.2.1"><a href="#section-8.7.2" class="auto internal xref">8.7.2</a>.  <a href="#name-ipv6" class="internal xref">"ipv6"</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.8">
+                <p id="section-toc.1-1.8.2.8.1"><a href="#section-8.8" class="auto internal xref">8.8</a>.  <a href="#name-resource-identifiers" class="internal xref">Resource Identifiers</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.8.2.1">
+                    <p id="section-toc.1-1.8.2.8.2.1.1"><a href="#section-8.8.1" class="auto internal xref">8.8.1</a>.  <a href="#name-uri" class="internal xref">"uri"</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.8.2.2">
+                    <p id="section-toc.1-1.8.2.8.2.2.1"><a href="#section-8.8.2" class="auto internal xref">8.8.2</a>.  <a href="#name-uri-reference" class="internal xref">"uri-reference"</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.8.2.3">
+                    <p id="section-toc.1-1.8.2.8.2.3.1"><a href="#section-8.8.3" class="auto internal xref">8.8.3</a>.  <a href="#name-iri" class="internal xref">"iri"</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.8.2.4">
+                    <p id="section-toc.1-1.8.2.8.2.4.1"><a href="#section-8.8.4" class="auto internal xref">8.8.4</a>.  <a href="#name-iri-reference" class="internal xref">"iri-reference"</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.8.2.5">
+                    <p id="section-toc.1-1.8.2.8.2.5.1"><a href="#section-8.8.5" class="auto internal xref">8.8.5</a>.  <a href="#name-uuid" class="internal xref">"uuid"</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.9">
+                <p id="section-toc.1-1.8.2.9.1"><a href="#section-8.9" class="auto internal xref">8.9</a>.  <a href="#name-templates" class="internal xref">Templates</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.9.2.1">
+                    <p id="section-toc.1-1.8.2.9.2.1.1"><a href="#section-8.9.1" class="auto internal xref">8.9.1</a>.  <a href="#name-uri-template" class="internal xref">"uri-template"</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.10">
+                <p id="section-toc.1-1.8.2.10.1"><a href="#section-8.10" class="auto internal xref">8.10</a>. <a href="#name-json-pointers" class="internal xref">JSON Pointers</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.10.2.1">
+                    <p id="section-toc.1-1.8.2.10.2.1.1"><a href="#section-8.10.1" class="auto internal xref">8.10.1</a>.  <a href="#name-json-pointer" class="internal xref">"json-pointer"</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.10.2.2">
+                    <p id="section-toc.1-1.8.2.10.2.2.1"><a href="#section-8.10.2" class="auto internal xref">8.10.2</a>.  <a href="#name-relative-json-pointer" class="internal xref">"relative-json-pointer"</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.11">
+                <p id="section-toc.1-1.8.2.11.1"><a href="#section-8.11" class="auto internal xref">8.11</a>. <a href="#name-expressions" class="internal xref">Expressions</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.11.2.1">
+                    <p id="section-toc.1-1.8.2.11.2.1.1"><a href="#section-8.11.1" class="auto internal xref">8.11.1</a>.  <a href="#name-regex" class="internal xref">"regex"</a></p>
 </li>
                 </ul>
 </li>
@@ -1507,7 +1575,7 @@ Source for this draft can be found at
                 <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-foreword-2" class="internal xref">Foreword</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
-                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-implementation-requirements-2" class="internal xref">Implementation Requirements</a></p>
+                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-implementation-requirements" class="internal xref">Implementation Requirements</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.3">
                 <p id="section-toc.1-1.9.2.3.1"><a href="#section-9.3" class="auto internal xref">9.3</a>.  <a href="#name-contentencoding" class="internal xref">"contentEncoding"</a></p>
@@ -1727,131 +1795,142 @@ Source for this draft can be found at
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
-            <p id="section-toc.1-1.14.1"><a href="#section-14" class="auto internal xref">14</a>. <a href="#name-meta-schemas-and-vocabulari" class="internal xref">Meta-schemas and Vocabularies</a></p>
+            <p id="section-toc.1-1.14.1"><a href="#section-14" class="auto internal xref">14</a>. <a href="#name-extending-format" class="internal xref">Extending <code>format</code></a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14.2.1">
-                <p id="section-toc.1-1.14.2.1.1"><a href="#section-14.1" class="auto internal xref">14.1</a>.  <a href="#name-schema-vocabularies" class="internal xref">Schema Vocabularies</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14.2.1.2.1">
-                    <p id="section-toc.1-1.14.2.1.2.1.1"><a href="#section-14.1.1" class="auto internal xref">14.1.1</a>.  <a href="#name-the-vocabulary-keyword" class="internal xref">The <code>$vocabulary</code> keyword</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14.2.1.2.2">
-                    <p id="section-toc.1-1.14.2.1.2.2.1"><a href="#section-14.1.2" class="auto internal xref">14.1.2</a>.  <a href="#name-default-vocabularies" class="internal xref">Default vocabularies</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14.2.1.2.3">
-                    <p id="section-toc.1-1.14.2.1.2.3.1"><a href="#section-14.1.3" class="auto internal xref">14.1.3</a>.  <a href="#name-non-inheritability-of-vocab" class="internal xref">Non-inheritability of vocabularies</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14.2.1.2.4">
-                    <p id="section-toc.1-1.14.2.1.2.4.1"><a href="#section-14.1.4" class="auto internal xref">14.1.4</a>.  <a href="#name-updates-to-meta-schema-and-" class="internal xref">Updates to Meta-Schema and Vocabulary URIs</a></p>
-</li>
-                </ul>
+                <p id="section-toc.1-1.14.2.1.1"><a href="#section-14.1" class="auto internal xref">14.1</a>.  <a href="#name-custom-format-attributes" class="internal xref">Custom format attributes</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14.2.2">
-                <p id="section-toc.1-1.14.2.2.1"><a href="#section-14.2" class="auto internal xref">14.2</a>.  <a href="#name-default-json-schema-dialect" class="internal xref">Default JSON Schema Dialect</a></p>
+                <p id="section-toc.1-1.14.2.2.1"><a href="#section-14.2" class="auto internal xref">14.2</a>.  <a href="#name-non-string-values" class="internal xref">Non-string values</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15">
-            <p id="section-toc.1-1.15.1"><a href="#section-15" class="auto internal xref">15</a>. <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16">
-            <p id="section-toc.1-1.16.1"><a href="#section-16" class="auto internal xref">16</a>. <a href="#name-interoperability-considerat" class="internal xref">Interoperability Considerations</a></p>
+            <p id="section-toc.1-1.15.1"><a href="#section-15" class="auto internal xref">15</a>. <a href="#name-meta-schemas-and-vocabulari" class="internal xref">Meta-schemas and Vocabularies</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16.2.1">
-                <p id="section-toc.1-1.16.2.1.1"><a href="#section-16.1" class="auto internal xref">16.1</a>.  <a href="#name-programming-language-indepe" class="internal xref">Programming Language Independence</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15.2.1">
+                <p id="section-toc.1-1.15.2.1.1"><a href="#section-15.1" class="auto internal xref">15.1</a>.  <a href="#name-schema-vocabularies" class="internal xref">Schema Vocabularies</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15.2.1.2.1">
+                    <p id="section-toc.1-1.15.2.1.2.1.1"><a href="#section-15.1.1" class="auto internal xref">15.1.1</a>.  <a href="#name-the-vocabulary-keyword" class="internal xref">The <code>$vocabulary</code> keyword</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16.2.2">
-                <p id="section-toc.1-1.16.2.2.1"><a href="#section-16.2" class="auto internal xref">16.2</a>.  <a href="#name-mathematical-integers" class="internal xref">Mathematical Integers</a></p>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15.2.1.2.2">
+                    <p id="section-toc.1-1.15.2.1.2.2.1"><a href="#section-15.1.2" class="auto internal xref">15.1.2</a>.  <a href="#name-default-vocabularies" class="internal xref">Default vocabularies</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16.2.3">
-                <p id="section-toc.1-1.16.2.3.1"><a href="#section-16.3" class="auto internal xref">16.3</a>.  <a href="#name-regular-expressions" class="internal xref">Regular Expressions</a></p>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15.2.1.2.3">
+                    <p id="section-toc.1-1.15.2.1.2.3.1"><a href="#section-15.1.3" class="auto internal xref">15.1.3</a>.  <a href="#name-non-inheritability-of-vocab" class="internal xref">Non-inheritability of vocabularies</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15.2.1.2.4">
+                    <p id="section-toc.1-1.15.2.1.2.4.1"><a href="#section-15.1.4" class="auto internal xref">15.1.4</a>.  <a href="#name-updates-to-meta-schema-and-" class="internal xref">Updates to Meta-Schema and Vocabulary URIs</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15.2.2">
+                <p id="section-toc.1-1.15.2.2.1"><a href="#section-15.2" class="auto internal xref">15.2</a>.  <a href="#name-default-json-schema-dialect" class="internal xref">Default JSON Schema Dialect</a></p>
 </li>
             </ul>
 </li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16">
+            <p id="section-toc.1-1.16.1"><a href="#section-16" class="auto internal xref">16</a>. <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+</li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.17">
-            <p id="section-toc.1-1.17.1"><a href="#section-17" class="auto internal xref">17</a>. <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+            <p id="section-toc.1-1.17.1"><a href="#section-17" class="auto internal xref">17</a>. <a href="#name-interoperability-considerat" class="internal xref">Interoperability Considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.17.2.1">
-                <p id="section-toc.1-1.17.2.1.1"><a href="#section-17.1" class="auto internal xref">17.1</a>.  <a href="#name-application-json-schemajson" class="internal xref">application/json-schema+json</a></p>
+                <p id="section-toc.1-1.17.2.1.1"><a href="#section-17.1" class="auto internal xref">17.1</a>.  <a href="#name-programming-language-indepe" class="internal xref">Programming Language Independence</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.17.2.2">
-                <p id="section-toc.1-1.17.2.2.1"><a href="#section-17.2" class="auto internal xref">17.2</a>.  <a href="#name-application-schemajson" class="internal xref">application/schema+json</a></p>
+                <p id="section-toc.1-1.17.2.2.1"><a href="#section-17.2" class="auto internal xref">17.2</a>.  <a href="#name-mathematical-integers" class="internal xref">Mathematical Integers</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.17.2.3">
-                <p id="section-toc.1-1.17.2.3.1"><a href="#section-17.3" class="auto internal xref">17.3</a>.  <a href="#name-application-schema-instance" class="internal xref">application/schema-instance+json</a></p>
+                <p id="section-toc.1-1.17.2.3.1"><a href="#section-17.3" class="auto internal xref">17.3</a>.  <a href="#name-regular-expressions" class="internal xref">Regular Expressions</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.18">
-            <p id="section-toc.1-1.18.1"><a href="#section-18" class="auto internal xref">18</a>. <a href="#name-references" class="internal xref">References</a></p>
+            <p id="section-toc.1-1.18.1"><a href="#section-18" class="auto internal xref">18</a>. <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.18.2.1">
-                <p id="section-toc.1-1.18.2.1.1"><a href="#section-18.1" class="auto internal xref">18.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+                <p id="section-toc.1-1.18.2.1.1"><a href="#section-18.1" class="auto internal xref">18.1</a>.  <a href="#name-application-json-schemajson" class="internal xref">application/json-schema+json</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.18.2.2">
-                <p id="section-toc.1-1.18.2.2.1"><a href="#section-18.2" class="auto internal xref">18.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+                <p id="section-toc.1-1.18.2.2.1"><a href="#section-18.2" class="auto internal xref">18.2</a>.  <a href="#name-application-schemajson" class="internal xref">application/schema+json</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.18.2.3">
+                <p id="section-toc.1-1.18.2.3.1"><a href="#section-18.3" class="auto internal xref">18.3</a>.  <a href="#name-application-schema-instance" class="internal xref">application/schema-instance+json</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.19">
-            <p id="section-toc.1-1.19.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-schema-identification-examp" class="internal xref">Schema identification examples</a></p>
+            <p id="section-toc.1-1.19.1"><a href="#section-19" class="auto internal xref">19</a>. <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.19.2.1">
+                <p id="section-toc.1-1.19.2.1.1"><a href="#section-19.1" class="auto internal xref">19.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.19.2.2">
+                <p id="section-toc.1-1.19.2.2.1"><a href="#section-19.2" class="auto internal xref">19.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.20">
-            <p id="section-toc.1-1.20.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-manipulating-schema-documen" class="internal xref">Manipulating schema documents and references</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.20.2.1">
-                <p id="section-toc.1-1.20.2.1.1"><a href="#appendix-B.1" class="auto internal xref">B.1</a>.  <a href="#name-bundling-schema-resources-i" class="internal xref">Bundling schema resources into a single document</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.20.2.2">
-                <p id="section-toc.1-1.20.2.2.1"><a href="#appendix-B.2" class="auto internal xref">B.2</a>.  <a href="#name-reference-removal-is-not-al" class="internal xref">Reference removal is not always safe</a></p>
-</li>
-            </ul>
+            <p id="section-toc.1-1.20.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-schema-identification-examp" class="internal xref">Schema identification examples</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.21">
-            <p id="section-toc.1-1.21.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-example-of-recursive-schema" class="internal xref">Example of recursive schema extension</a></p>
+            <p id="section-toc.1-1.21.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-manipulating-schema-documen" class="internal xref">Manipulating schema documents and references</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.21.2.1">
+                <p id="section-toc.1-1.21.2.1.1"><a href="#appendix-B.1" class="auto internal xref">B.1</a>.  <a href="#name-bundling-schema-resources-i" class="internal xref">Bundling schema resources into a single document</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.21.2.2">
+                <p id="section-toc.1-1.21.2.2.1"><a href="#appendix-B.2" class="auto internal xref">B.2</a>.  <a href="#name-reference-removal-is-not-al" class="internal xref">Reference removal is not always safe</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.22">
-            <p id="section-toc.1-1.22.1"><a href="#appendix-D" class="auto internal xref">Appendix D</a>.  <a href="#name-implementing-keyword-depend" class="internal xref">Implementing keyword dependencies</a></p>
+            <p id="section-toc.1-1.22.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-example-of-recursive-schema" class="internal xref">Example of recursive schema extension</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.23">
-            <p id="section-toc.1-1.23.1"><a href="#appendix-E" class="auto internal xref">Appendix E</a>.  <a href="#name-working-with-vocabularies" class="internal xref">Working with vocabularies</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.23.2.1">
-                <p id="section-toc.1-1.23.2.1.1"><a href="#appendix-E.1" class="auto internal xref">E.1</a>.  <a href="#name-best-practices-for-vocabula" class="internal xref">Best practices for vocabulary and meta-schema authors</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.23.2.2">
-                <p id="section-toc.1-1.23.2.2.1"><a href="#appendix-E.2" class="auto internal xref">E.2</a>.  <a href="#name-example-meta-schema-with-vo" class="internal xref">Example meta-schema with vocabulary declarations</a></p>
-</li>
-            </ul>
+            <p id="section-toc.1-1.23.1"><a href="#appendix-D" class="auto internal xref">Appendix D</a>.  <a href="#name-implementing-keyword-depend" class="internal xref">Implementing keyword dependencies</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.24">
-            <p id="section-toc.1-1.24.1"><a href="#appendix-F" class="auto internal xref">Appendix F</a>.  <a href="#name-references-and-generative-u" class="internal xref">References and generative use cases</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.25">
-            <p id="section-toc.1-1.25.1"><a href="#appendix-G" class="auto internal xref">Appendix G</a>.  <a href="#name-important-changes-from-json" class="internal xref">Important changes from JSON Schema 2020-12</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.26">
-            <p id="section-toc.1-1.26.1"><a href="#appendix-H" class="auto internal xref">Appendix H</a>.  <a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.27">
-            <p id="section-toc.1-1.27.1"><a href="#appendix-I" class="auto internal xref">Appendix I</a>.  <a href="#name-change-log" class="internal xref">Change Log</a></p>
+            <p id="section-toc.1-1.24.1"><a href="#appendix-E" class="auto internal xref">Appendix E</a>.  <a href="#name-working-with-vocabularies" class="internal xref">Working with vocabularies</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.27.2.1">
-                <p id="section-toc.1-1.27.2.1.1"><a href="#appendix-I.1" class="auto internal xref">I.1</a>.  <a href="#name-draft-ietf-jsonschema-json-" class="internal xref">draft-ietf-jsonschema-json-schema-03</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.24.2.1">
+                <p id="section-toc.1-1.24.2.1.1"><a href="#appendix-E.1" class="auto internal xref">E.1</a>.  <a href="#name-best-practices-for-vocabula" class="internal xref">Best practices for vocabulary and meta-schema authors</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.27.2.2">
-                <p id="section-toc.1-1.27.2.2.1"><a href="#appendix-I.2" class="auto internal xref">I.2</a>.  <a href="#name-draft-ietf-jsonschema-json-s" class="internal xref">draft-ietf-jsonschema-json-schema-02</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.27.2.3">
-                <p id="section-toc.1-1.27.2.3.1"><a href="#appendix-I.3" class="auto internal xref">I.3</a>.  <a href="#name-draft-ietf-jsonschema-json-sc" class="internal xref">draft-ietf-jsonschema-json-schema-01</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.27.2.4">
-                <p id="section-toc.1-1.27.2.4.1"><a href="#appendix-I.4" class="auto internal xref">I.4</a>.  <a href="#name-draft-ietf-jsonschema-json-sch" class="internal xref">draft-ietf-jsonschema-json-schema-00</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.24.2.2">
+                <p id="section-toc.1-1.24.2.2.1"><a href="#appendix-E.2" class="auto internal xref">E.2</a>.  <a href="#name-example-meta-schema-with-vo" class="internal xref">Example meta-schema with vocabulary declarations</a></p>
 </li>
             </ul>
 </li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.25">
+            <p id="section-toc.1-1.25.1"><a href="#appendix-F" class="auto internal xref">Appendix F</a>.  <a href="#name-references-and-generative-u" class="internal xref">References and generative use cases</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.26">
+            <p id="section-toc.1-1.26.1"><a href="#appendix-G" class="auto internal xref">Appendix G</a>.  <a href="#name-important-changes-from-json" class="internal xref">Important changes from JSON Schema 2020-12</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.27">
+            <p id="section-toc.1-1.27.1"><a href="#appendix-H" class="auto internal xref">Appendix H</a>.  <a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.28">
-            <p id="section-toc.1-1.28.1"><a href="#appendix-J" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.28.1"><a href="#appendix-I" class="auto internal xref">Appendix I</a>.  <a href="#name-change-log" class="internal xref">Change Log</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.28.2.1">
+                <p id="section-toc.1-1.28.2.1.1"><a href="#appendix-I.1" class="auto internal xref">I.1</a>.  <a href="#name-draft-ietf-jsonschema-json-" class="internal xref">draft-ietf-jsonschema-json-schema-03</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.28.2.2">
+                <p id="section-toc.1-1.28.2.2.1"><a href="#appendix-I.2" class="auto internal xref">I.2</a>.  <a href="#name-draft-ietf-jsonschema-json-s" class="internal xref">draft-ietf-jsonschema-json-schema-02</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.28.2.3">
+                <p id="section-toc.1-1.28.2.3.1"><a href="#appendix-I.3" class="auto internal xref">I.3</a>.  <a href="#name-draft-ietf-jsonschema-json-sc" class="internal xref">draft-ietf-jsonschema-json-schema-01</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.28.2.4">
+                <p id="section-toc.1-1.28.2.4.1"><a href="#appendix-I.4" class="auto internal xref">I.4</a>.  <a href="#name-draft-ietf-jsonschema-json-sch" class="internal xref">draft-ietf-jsonschema-json-schema-00</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.29">
+            <p id="section-toc.1-1.29.1"><a href="#appendix-J" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1914,7 +1993,7 @@ guidance on approaches to implementing keyword dependencies.<a href="#section-1.
 </li>
           <li class="normal" id="section-1.2-2.3">
             <p id="section-1.2-2.3.1">Authors of meta-schemas including extensions to JSON Schema will want to read
-the chapter on <a href="#meta-schemas" class="auto internal xref">Section 14</a> and <a href="#vocabularies-appendix" class="auto internal xref">Appendix E</a>.<a href="#section-1.2-2.3.1" class="pilcrow">¶</a></p>
+the chapter on <a href="#meta-schemas" class="auto internal xref">Section 15</a> and <a href="#vocabularies-appendix" class="auto internal xref">Appendix E</a>.<a href="#section-1.2-2.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -2141,7 +2220,7 @@ When a schema is an object, it can be seen to be a schema from the '$schema'
 keyword in the object.  See below for special treatment of the boolean schemas.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 <p id="section-3.1-3">Schemas are used to validate inputs that may be <span><a href="#input" class="internal xref">instances</a> (<a href="#input" class="auto internal xref">Section 3.2</a>)</span> of the schema,
 but each schema can itself
-be interpreted as an instance (see <a href="#meta-schemas" class="auto internal xref">Section 14</a> for when and
+be interpreted as an instance (see <a href="#meta-schemas" class="auto internal xref">Section 15</a> for when and
 how this happens).<a href="#section-3.1-3" class="pilcrow">¶</a></p>
 <p id="section-3.1-4">Schema documents SHOULD always be given the media type "application/schema+json",
 even when playing the role of an instance.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
@@ -2262,7 +2341,7 @@ values depending on the type:<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.2-4">Whitespace and formatting concerns, including different lexical
 representations of numbers that are equal within the data model, are
 outside the scope of JSON Schema.  JSON Schema
-<a href="#vocabularies" class="auto internal xref">Section 14.1</a> that wish
+<a href="#vocabularies" class="auto internal xref">Section 15.1</a> that wish
 to work with such differences in lexical representations SHOULD define
 keywords to precisely interpret formatted strings within the data model
 rather than relying on having the original JSON representation Unicode
@@ -2404,7 +2483,7 @@ type, and is used to bootstrap the loading of other vocabularies.<a href="#secti
 <p id="section-3.5.1-2">This document further defines a RECOMMENDED set of additional vocabularies
 for standard use.<a href="#section-3.5.1-2" class="pilcrow">¶</a></p>
 <p id="section-3.5.1-3">These vocabularies together compose the standard JSON Schema dialect,
-which serves as the default dialect as discussed in <a href="#default-dialect" class="auto internal xref">Section 14.2</a>.<a href="#section-3.5.1-3" class="pilcrow">¶</a></p>
+which serves as the default dialect as discussed in <a href="#default-dialect" class="auto internal xref">Section 15.2</a>.<a href="#section-3.5.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="extending">
@@ -2443,10 +2522,7 @@ applications or other specifications building on JSON Schema.<a href="#section-3
 <p id="section-3.5.3-3">In all validator implementations, equivalent JSON values MUST return the same validation result and annotations. For example, selection between equivalent character escapes, or use of whitespace, does not affect the result. This also means that a validation keyword MUST NOT accept or reject based on third factors (those factors besides the schema and the input itself). A separate "outside verification" scheme that queries external data sources is possible, but outside the scope of this document.<a href="#section-3.5.3-3" class="pilcrow">¶</a></p>
 <p id="section-3.5.3-4">This specification defines a set of assertion keywords, as well as a small vocabulary
 of metadata keywords that can be used to annotate the JSON instance with
-useful information.  The <a href="#format-vocab" class="auto internal xref">Section 8</a> keyword is intended primarily
-as an annotation, but can optionally be used as an assertion.  The
-<a href="#content" class="auto internal xref">Section 9</a> keywords are annotations for working with documents
-embedded as JSON strings.<a href="#section-3.5.3-4" class="pilcrow">¶</a></p>
+useful information.<a href="#section-3.5.3-4" class="pilcrow">¶</a></p>
 <p id="section-3.5.3-5">Implementations MAY allow configuring annotations
 in such ways as limiting output to certain annotation keywords, aggregating values together, or other features to enhance performance.
 Implementations MAY allow annotation output to be bypassed entirely.<a href="#section-3.5.3-5" class="pilcrow">¶</a></p>
@@ -2502,7 +2578,7 @@ media type "application/schema+json".<a href="#section-4.1.1-3" class="pilcrow">
 and MAY be used in the root schema objects of embedded schema resources.
 It MUST NOT appear in non-resource root schema objects.  If absent from
 the document root schema, the resulting behavior is implementation-defined,
-however, using this specification's default dialect (<a href="#default-dialect" class="auto internal xref">Section 14.2</a>)
+however, using this specification's default dialect (<a href="#default-dialect" class="auto internal xref">Section 15.2</a>)
 is RECOMMENDED.<a href="#section-4.1.1-4" class="pilcrow">¶</a></p>
 <p id="section-4.1.1-5">Values for this property are defined elsewhere in this and other documents,
 and by other parties.<a href="#section-4.1.1-5" class="pilcrow">¶</a></p>
@@ -2515,8 +2591,8 @@ and by other parties.<a href="#section-4.1.1-5" class="pilcrow">¶</a></p>
           </h4>
 <p id="section-4.1.2-1">The "$vocabulary" keyword is used in meta-schemas.  It is part of the core
 syntax because it bootstraps extended functionality,
-but its details are explained in <a href="#vocabularies" class="auto internal xref">Section 14.1</a>
-and syntax in <a href="#vocabulary-keyword-extended" class="auto internal xref">Section 14.1.1</a>.<a href="#section-4.1.2-1" class="pilcrow">¶</a></p>
+but its details are explained in <a href="#vocabularies" class="auto internal xref">Section 15.1</a>
+and syntax in <a href="#vocabulary-keyword-extended" class="auto internal xref">Section 15.1.1</a>.<a href="#section-4.1.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="id-keyword">
@@ -3850,8 +3926,8 @@ but it cannot give an "endTime" without also giving a "startTime".<a href="#sect
 </div>
 <div id="format-vocab">
 <section id="section-8">
-      <h2 id="name-vocabulary-for-semantic-con">
-<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-vocabulary-for-semantic-con" class="section-name selfRef">Vocabulary for Semantic Content With "format"</a>
+      <h2 id="name-vocabulary-for-syntax-check">
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-vocabulary-for-syntax-check" class="section-name selfRef">Vocabulary for Syntax Checking With "format"</a>
       </h2>
 <div id="foreword">
 <section id="section-8.1">
@@ -3859,437 +3935,602 @@ but it cannot give an "endTime" without also giving a "startTime".<a href="#sect
 <a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-foreword" class="section-name selfRef">Foreword</a>
         </h3>
 <p id="section-8.1-1">Structural validation alone may be insufficient to allow an application to correctly
-utilize certain values. The "format" annotation keyword is defined to allow schema
-authors to convey semantic information for a fixed subset of values which are
-accurately described by authoritative resources, be they RFCs or other external
-specifications.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
-<p id="section-8.1-2">The value of this keyword is called a format attribute. It MUST be a string. A
+utilize certain values. The "format" keyword is defined to allow schema
+authors to indicate that a value is expected to follow a syntax defined
+by an authoritative resource, such as an RFC or other external specification.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.1-2">Format validation relies on what's in the schema and the input, not on
+facts in the world.
+For example, "email" indicates that a string is expected to be written as an
+email address; it does not say whether that address exists, what it is used for, or
+whether mail sent to it would be delivered.  Likewise, "date" indicates that
+a string is written as a full date, not whether that date is a birth date,
+a deadline, or a date in the past.<a href="#section-8.1-2" class="pilcrow">¶</a></p>
+<p id="section-8.1-3">Some schema authors will wish to go beyond the syntax validation offered by
+<code>format</code> attributes.  Several choices can help achieve this and can be combined:<a href="#section-8.1-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-8.1-4.1">
+            <p id="section-8.1-4.1.1">Do additional processing after JSON Schema validation<a href="#section-8.1-4.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.1-4.2">
+            <p id="section-8.1-4.2.1">Use "title" and "description" for soft guidance<a href="#section-8.1-4.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.1-4.3">
+            <p id="section-8.1-4.3.1">Use <code>pattern</code> possibly alongside <code>format</code> to add regular expression constraints<a href="#section-8.1-4.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.1-4.4">
+            <p id="section-8.1-4.4.1">Add a new format option to the IANA registry (TBD)<a href="#section-8.1-4.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.1-4.5">
+            <p id="section-8.1-4.5.1">Define keywords in a custom vocabulary to add new constraints, especially
+  constraints that go beyond syntactic<a href="#section-8.1-4.5.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-8.1-5">The value of this keyword is called a format attribute. It MUST be a string. A
 format attribute can generally only validate a given set of input types. If
 the type of the input is not in this set, validation for this
 format attribute and input SHOULD succeed.  All format attributes defined
 in this section apply to strings, but a format attribute can be specified
-to apply to any input type in the <span><a href="#input" class="internal xref">input data model</a> (<a href="#input" class="auto internal xref">Section 3.2</a>)</span>.<span class="cref" id="_14">Note that the "type" keyword in this specification defines an "integer" type
-   which is not part of the data model. Therefore a format attribute can be
-   limited to numbers, but not specifically to integers. However, a numeric
-   format can be used alongside the "type" keyword with a value of "integer",
-   or could be explicitly defined to always pass if the number is not an integer,
-   which produces essentially the same behavior as only applying to integers.</span><a href="#section-8.1-2" class="pilcrow">¶</a></p>
-<p id="section-8.1-3">The current URI for this vocabulary, known as the Format-Annotation vocabulary, is:<a href="#section-8.1-3" class="pilcrow">¶</a></p>
-<p id="section-8.1-4">&lt;https://json-schema.org/draft/2020-12/vocab/format-annotation&gt;.<a href="#section-8.1-4" class="pilcrow">¶</a></p>
-<p id="section-8.1-5">The current URI for the corresponding meta-schema is:<a href="#section-8.1-5" class="pilcrow">¶</a></p>
-<p id="section-8.1-6"><a href="https://json-schema.org/draft/2020-12/meta/format-annotation">https://json-schema.org/draft/2020-12/meta/format-annotation</a>.<a href="#section-8.1-6" class="pilcrow">¶</a></p>
-<p id="section-8.1-7">Implementing support for this vocabulary is REQUIRED.<a href="#section-8.1-7" class="pilcrow">¶</a></p>
-<p id="section-8.1-8">In addition to the Format-Annotation vocabulary, a secondary vocabulary is available
-for custom meta-schemas that defines "format" as an assertion. The URI for the
-Format-Assertion vocabulary, is:<a href="#section-8.1-8" class="pilcrow">¶</a></p>
-<p id="section-8.1-9">&lt;https://json-schema.org/draft/2020-12/vocab/format-assertion&gt;.<a href="#section-8.1-9" class="pilcrow">¶</a></p>
-<p id="section-8.1-10">The current URI for the corresponding meta-schema is:<a href="#section-8.1-10" class="pilcrow">¶</a></p>
-<p id="section-8.1-11"><a href="https://json-schema.org/draft/2020-12/meta/format-assertion">https://json-schema.org/draft/2020-12/meta/format-assertion</a>.<a href="#section-8.1-11" class="pilcrow">¶</a></p>
-<p id="section-8.1-12">Implementing support for the Format-Assertion vocabulary is OPTIONAL.<a href="#section-8.1-12" class="pilcrow">¶</a></p>
-<p id="section-8.1-13">Specifying both the Format-Annotation and the Format-Assertion vocabularies is functionally
-equivalent to specifying only the Format-Assertion vocabulary since its requirements
-are a superset of the Format-Annotation vocabulary.<a href="#section-8.1-13" class="pilcrow">¶</a></p>
+to apply to any input type in the <span><a href="#input" class="internal xref">input data model</a> (<a href="#input" class="auto internal xref">Section 3.2</a>)</span>.<a href="#section-8.1-5" class="pilcrow">¶</a></p>
+<p id="section-8.1-6">The format keyword is part of two vocabularies, both required.  The
+format-assertion vocabulary requires implementations to check formats
+as required in this specification, and the format-annotation vocabulary
+requires implementations to create annotations for <code>format</code> if annotations
+are enabled.  Special-purpose meta-schemas may require one or neither of
+these, whereas the official JSON Schema meta-schema requires both.<a href="#section-8.1-6" class="pilcrow">¶</a></p>
+<p id="section-8.1-7">Format-assertion: <code>https://json-schema.org/draft/2020-12/vocab/format-assertion</code><a href="#section-8.1-7" class="pilcrow">¶</a></p>
+<p id="section-8.1-8">Format-annotation: <code>https://json-schema.org/draft/2020-12/vocab/format-annotation</code><a href="#section-8.1-8" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="implementation-requirements">
+<div id="format-overview">
 <section id="section-8.2">
-        <h3 id="name-implementation-requirements">
-<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-implementation-requirements" class="section-name selfRef">Implementation Requirements</a>
+        <h3 id="name-overview-of-defined-formats">
+<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-overview-of-defined-formats" class="section-name selfRef">Overview of Defined Formats</a>
         </h3>
-<p id="section-8.2-1">The "format" keyword functions as defined by the vocabulary which is referenced.<a href="#section-8.2-1" class="pilcrow">¶</a></p>
+<p id="section-8.2-1">This section is non-normative.  It summarizes the format attributes defined
+in this specification.  Each row links to the section with the normative definition.
+All of these format attributes apply to strings.<a href="#section-8.2-1" class="pilcrow">¶</a></p>
+<span id="name-format-attributes-defined-b"></span><table class="center" id="table-1">
+          <caption>
+<a href="#table-1" class="selfRef">Table 1</a>:
+<a href="#name-format-attributes-defined-b" class="selfRef">Format attributes defined by this specification</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">Format</th>
+              <th class="text-left" rowspan="1" colspan="1">Accepts a string written as</th>
+              <th class="text-left" rowspan="1" colspan="1">Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>date-time</code> (<a href="#format-date-time" class="auto internal xref">Section 8.4.1</a>)</td>
+              <td class="text-left" rowspan="1" colspan="1">A date and time with a time zone offset</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>2026-09-30T14:30:00Z</code>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>date</code> (<a href="#format-date" class="auto internal xref">Section 8.4.2</a>)</td>
+              <td class="text-left" rowspan="1" colspan="1">A full calendar date</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>2026-09-30</code>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>time</code> (<a href="#format-time" class="auto internal xref">Section 8.4.3</a>)</td>
+              <td class="text-left" rowspan="1" colspan="1">A time of day with a time zone offset</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>14:30:00+02:00</code>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>duration</code> (<a href="#format-duration" class="auto internal xref">Section 8.4.4</a>)</td>
+              <td class="text-left" rowspan="1" colspan="1">An RFC 3339 duration</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>P3DT4H</code>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>email</code> (<a href="#format-email" class="auto internal xref">Section 8.5.1</a>)</td>
+              <td class="text-left" rowspan="1" colspan="1">An email address (ASCII only)</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>user@example.com</code>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>idn-email</code> (<a href="#format-idn-email" class="auto internal xref">Section 8.5.2</a>)</td>
+              <td class="text-left" rowspan="1" colspan="1">An email address, allowing non-ASCII characters</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>user@example.com</code>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>hostname</code> (<a href="#format-hostname" class="auto internal xref">Section 8.6.1</a>)</td>
+              <td class="text-left" rowspan="1" colspan="1">An Internet host name (ASCII only)</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>www.example.com</code>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>idn-hostname</code> (<a href="#format-idn-hostname" class="auto internal xref">Section 8.6.2</a>)</td>
+              <td class="text-left" rowspan="1" colspan="1">A host name, allowing non-ASCII characters</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>www.example.com</code>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>ipv4</code> (<a href="#format-ipv4" class="auto internal xref">Section 8.7.1</a>)</td>
+              <td class="text-left" rowspan="1" colspan="1">An IPv4 address in dotted-quad form</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>192.0.2.1</code>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>ipv6</code> (<a href="#format-ipv6" class="auto internal xref">Section 8.7.2</a>)</td>
+              <td class="text-left" rowspan="1" colspan="1">An IPv6 address</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>2001:db8::1</code>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>uri</code> (<a href="#format-uri" class="auto internal xref">Section 8.8.1</a>)</td>
+              <td class="text-left" rowspan="1" colspan="1">An absolute URI</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>https://example.com/a?b=c</code>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>uri-reference</code> (<a href="#format-uri-reference" class="auto internal xref">Section 8.8.2</a>)</td>
+              <td class="text-left" rowspan="1" colspan="1">A URI or a relative reference</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>../a#b</code>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>iri</code> (<a href="#format-iri" class="auto internal xref">Section 8.8.3</a>)</td>
+              <td class="text-left" rowspan="1" colspan="1">An absolute IRI, allowing non-ASCII characters</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>https://example.com/a</code>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>iri-reference</code> (<a href="#format-iri-reference" class="auto internal xref">Section 8.8.4</a>)</td>
+              <td class="text-left" rowspan="1" colspan="1">An IRI or a relative reference</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>../a#b</code>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>uuid</code> (<a href="#format-uuid" class="auto internal xref">Section 8.8.5</a>)</td>
+              <td class="text-left" rowspan="1" colspan="1">A UUID, without a <code>urn:uuid:</code> prefix</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>f81d4fae-7dec-11d0-a765-00a0c91e6bf6</code>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>uri-template</code> (<a href="#format-uri-template" class="auto internal xref">Section 8.9.1</a>)</td>
+              <td class="text-left" rowspan="1" colspan="1">A URI Template</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>https://example.com/users/{id}</code>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>json-pointer</code> (<a href="#format-json-pointer" class="auto internal xref">Section 8.10.1</a>)</td>
+              <td class="text-left" rowspan="1" colspan="1">A JSON Pointer</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>/items/0/name</code>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>relative-json-pointer</code> (<a href="#format-relative-json-pointer" class="auto internal xref">Section 8.10.2</a>)</td>
+              <td class="text-left" rowspan="1" colspan="1">A Relative JSON Pointer</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>1/name</code>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>regex</code> (<a href="#format-regex" class="auto internal xref">Section 8.11.1</a>)</td>
+              <td class="text-left" rowspan="1" colspan="1">A regular expression in the ECMA-262 dialect</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <code>^[a-z]+$</code>
+</td>
+            </tr>
+          </tbody>
+        </table>
+</section>
+</div>
+<div id="format-implementation">
+<section id="section-8.3">
+        <h3 id="name-general-format-implementati">
+<a href="#section-8.3" class="section-number selfRef">8.3. </a><a href="#name-general-format-implementati" class="section-name selfRef">General Format Implementation Requirements</a>
+        </h3>
+<p id="section-8.3-1">It is RECOMMENDED that implementations use a common parsing library for each format,
+or a well-known regular expression.<a href="#section-8.3-1" class="pilcrow">¶</a></p>
 <div id="format-annotation-vocabulary">
-<section id="section-8.2.1">
+<section id="section-8.3.1">
           <h4 id="name-format-annotation-vocabular">
-<a href="#section-8.2.1" class="section-number selfRef">8.2.1. </a><a href="#name-format-annotation-vocabular" class="section-name selfRef">Format-Annotation Vocabulary</a>
+<a href="#section-8.3.1" class="section-number selfRef">8.3.1. </a><a href="#name-format-annotation-vocabular" class="section-name selfRef">Format-Annotation Vocabulary</a>
           </h4>
-<p id="section-8.2.1-1">The value of format MUST be produced as an annotation, if the implementation
-supports annotation production. This enables application-level validation when
-schema validation is unavailable or inadequate.<a href="#section-8.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-8.2.1-2">Implementations MAY still treat "format" as an assertion in addition to an
-annotation and attempt to validate the value's conformance to the specified
-semantics. The implementation MUST provide options to enable and disable such
-evaluation and MUST be disabled by default. Implementations SHOULD document
-their level of support for such validation.<span class="cref" id="_15">Specifying the Format-Annotation vocabulary and enabling validation in an
-   implementation should not be viewed as being equivalent to specifying
-   the Format-Assertion vocabulary since implementations are not required to
-   provide full validation support when the Format-Assertion vocabulary
-   is not specified.</span><a href="#section-8.2.1-2" class="pilcrow">¶</a></p>
-<p id="section-8.2.1-3">When the implementation is configured for assertion behavior, it:<a href="#section-8.2.1-3" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-8.2.1-4.1">
-              <p id="section-8.2.1-4.1.1">SHOULD provide an implementation-specific best effort validation
-for each format attribute defined below;<a href="#section-8.2.1-4.1.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-8.2.1-4.2">
-              <p id="section-8.2.1-4.2.1">MAY choose to implement validation of any or all format attributes
-as a no-op by always producing a validation result of true;<a href="#section-8.2.1-4.2.1" class="pilcrow">¶</a></p>
-</li>
-          </ul>
+<p id="section-8.3.1-1">When the implementation is configured to produce annotations
+and the format-annotation vocabulary is 'true' in the meta-schema, it
+MUST treat the <code>format</code> keyword as an annotation, which means that
+a process consuming annotation output can see what formats
+should apply to which values.<a href="#section-8.3.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="format-assertion-vocabulary">
-<section id="section-8.2.2">
+<section id="section-8.3.2">
           <h4 id="name-format-assertion-vocabulary">
-<a href="#section-8.2.2" class="section-number selfRef">8.2.2. </a><a href="#name-format-assertion-vocabulary" class="section-name selfRef">Format-Assertion Vocabulary</a>
+<a href="#section-8.3.2" class="section-number selfRef">8.3.2. </a><a href="#name-format-assertion-vocabulary" class="section-name selfRef">Format-Assertion Vocabulary</a>
           </h4>
-<p id="section-8.2.2-1">When the Format-Assertion vocabulary is declared with a value of true,
+<p id="section-8.3.2-1">When the Format-Assertion vocabulary is 'true' in the meta-schema,
 implementations MUST provide full validation support for all of the formats
 defined by this specification. Implementations that cannot provide full
-validation support MUST refuse to process the schema.<a href="#section-8.2.2-1" class="pilcrow">¶</a></p>
-<p id="section-8.2.2-2">An implementation that supports the Format-Assertion vocabulary:<a href="#section-8.2.2-2" class="pilcrow">¶</a></p>
+validation support MUST refuse to process the schema.<a href="#section-8.3.2-1" class="pilcrow">¶</a></p>
+<p id="section-8.3.2-2">An implementation that supports the Format-Assertion vocabulary:<a href="#section-8.3.2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-8.2.2-3.1">
-              <p id="section-8.2.2-3.1.1">MUST still produce "format" as an annotation if the implementation
-supports annotation production;<a href="#section-8.2.2-3.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-8.3.2-3.1">
+              <p id="section-8.3.2-3.1.1">MUST still produce "format" as an annotation if the implementation
+supports annotation production;<a href="#section-8.3.2-3.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-8.2.2-3.2">
-              <p id="section-8.2.2-3.2.1">MUST evaluate "format" as an assertion;<a href="#section-8.2.2-3.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-8.3.2-3.2">
+              <p id="section-8.3.2-3.2.1">MUST evaluate "format" as an assertion;<a href="#section-8.3.2-3.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-8.2.2-3.3">
-              <p id="section-8.2.2-3.3.1">MUST implement syntactic validation for all format attributes defined
+            <li class="normal" id="section-8.3.2-3.3">
+              <p id="section-8.3.2-3.3.1">MUST implement syntactic validation for all format attributes defined
 in this specification, and for any additional format attributes that
 it recognizes, such that there exist possible input values
-of the correct type that will fail validation.<a href="#section-8.2.2-3.3.1" class="pilcrow">¶</a></p>
+of the correct type that will fail validation.<a href="#section-8.3.2-3.3.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-8.2.2-4">The requirement for minimal validation of format attributes is intentionally
-vague and permissive, due to the complexity involved in many of the attributes.
-Note in particular that the requirement is limited to syntactic checking; it is
-not to be expected that an implementation would send an email, attempt to connect
-to a URL, or otherwise check the existence of an entity identified by a format
-instance.<span class="cref" id="_17">The expectation is that for simple formats such as date-time, syntactic
-   validation will be thorough.  For a complex format such as email addresses,
-   which are the amalgamation of various standards and numerous adjustments
-   over time, with obscure and/or obsolete rules that may or may not be
-   restricted by other applications making use of the value, a minimal validation
-   is sufficient.  For example, an input string that does not contain
-   an "@" is clearly not a valid email address, and an "email" or "hostname"
-   containing characters outside of 7-bit ASCII is likewise clearly invalid.</span><a href="#section-8.2.2-4" class="pilcrow">¶</a></p>
-<p id="section-8.2.2-5">It is RECOMMENDED that implementations use a common parsing library for each format,
-or a well-known regular expression.  Implementations SHOULD clearly document
-how and to what degree each format attribute is validated.<a href="#section-8.2.2-5" class="pilcrow">¶</a></p>
-<p id="section-8.2.2-6">The standard core and validation meta-schema
-includes this vocabulary in its "$vocabulary" keyword with a value of false,
-since by default implementations are not required to support this keyword
-as an assertion.  Supporting the format vocabulary with a value of true is
-understood to greatly increase code size and in some cases execution time,
-and will not be appropriate for all implementations.<a href="#section-8.2.2-6" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="custom-format-attributes">
-<section id="section-8.2.3">
-          <h4 id="name-custom-format-attributes">
-<a href="#section-8.2.3" class="section-number selfRef">8.2.3. </a><a href="#name-custom-format-attributes" class="section-name selfRef">Custom format attributes</a>
-          </h4>
-<p id="section-8.2.3-1">Implementations MAY support custom format attributes. Save for agreement between
-parties, schema authors SHALL NOT expect a peer implementation to support such
-custom format attributes. An implementation MUST NOT fail to produce unknown formats
-as annotations.  When the Format-Assertion vocabulary is specified, implementations
-MUST fail upon encountering unknown formats.<a href="#section-8.2.3-1" class="pilcrow">¶</a></p>
-<p id="section-8.2.3-2">Vocabularies do not support specifically declaring different value sets for keywords.
-Due to this limitation, and the historically uneven implementation of this keyword,
-it is RECOMMENDED to define additional keywords in a custom vocabulary rather than
-additional format attributes if interoperability is desired.<a href="#section-8.2.3-2" class="pilcrow">¶</a></p>
+<p id="section-8.3.2-4">The standard core and validation meta-schema
+includes this vocabulary in its "$vocabulary" keyword with a value of false.
+(TODO: this should be changed to 'true')<a href="#section-8.3.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
-<div id="defined-formats">
-<section id="section-8.3">
-        <h3 id="name-defined-formats">
-<a href="#section-8.3" class="section-number selfRef">8.3. </a><a href="#name-defined-formats" class="section-name selfRef">Defined Formats</a>
+<div id="format-dates">
+<section id="section-8.4">
+        <h3 id="name-dates-times-and-duration">
+<a href="#section-8.4" class="section-number selfRef">8.4. </a><a href="#name-dates-times-and-duration" class="section-name selfRef">Dates, Times, and Duration</a>
         </h3>
-<div id="dates-times-and-duration">
-<section id="section-8.3.1">
-          <h4 id="name-dates-times-and-duration">
-<a href="#section-8.3.1" class="section-number selfRef">8.3.1. </a><a href="#name-dates-times-and-duration" class="section-name selfRef">Dates, Times, and Duration</a>
+<p id="section-8.4-1">These attributes apply to string inputs.<a href="#section-8.4-1" class="pilcrow">¶</a></p>
+<p id="section-8.4-2">Date and time format names are derived from
+<span>[<a href="#RFC3339" class="cite xref">RFC3339</a>], <a href="https://rfc-editor.org/rfc/rfc3339#section-5.6" class="relref">Section 5.6</a></span>.  The duration format is given
+in <span>[<a href="#RFC3339" class="cite xref">RFC3339</a>], <a href="https://rfc-editor.org/rfc/rfc3339#appendix-A" class="relref">Appendix A</a></span>.<a href="#section-8.4-2" class="pilcrow">¶</a></p>
+<p id="section-8.4-3">In addition to the ABNF, RFC 3339 makes requirements that make sure
+that dates and times can actually occur (<span>[<a href="#RFC3339" class="cite xref">RFC3339</a>], <a href="https://rfc-editor.org/rfc/rfc3339#section-5.7" class="relref">Section 5.7</a></span>).  This means that dates like
+"2026-02-30T10:00:00Z" are considered invalid, which is common practice
+already with JSON Schema.  However, it does not insist on a perfect
+job in detecting really-occurrign times and dates.  Leap seconds, for example,
+make some values syntactically correct but are rather hard to
+identify as times that can or cannot really happen.  Validation implementations should
+implement the additional constraints in RFC 3339 as well as the ABNF.<a href="#section-8.4-3" class="pilcrow">¶</a></p>
+<p id="section-8.4-4">Software libraries for using dates, times and durations sometimes accept values
+that are syntactically incorrect according to RFC 3339 rules,
+for example values that do follow ISO 8601 <span>[<a href="#ISO8601" class="cite xref">ISO8601</a>]</span> but not RFC 3339's profile.  Validation
+implementations SHOULD reject these.<a href="#section-8.4-4" class="pilcrow">¶</a></p>
+<div id="format-date-time">
+<section id="section-8.4.1">
+          <h4 id="name-date-time">
+<a href="#section-8.4.1" class="section-number selfRef">8.4.1. </a><a href="#name-date-time" class="section-name selfRef">"date-time"</a>
           </h4>
-<p id="section-8.3.1-1">These attributes apply to string inputs.<a href="#section-8.3.1-1" class="pilcrow">¶</a></p>
-<p id="section-8.3.1-2">Date and time format names are derived from
-<span>[<a href="#RFC3339" class="cite xref">RFC3339</a>], <a href="https://rfc-editor.org/rfc/rfc3339#section-5.6" class="relref">Section 5.6</a></span>.
-The duration format is from the ISO 8601 ABNF as given
-in Appendix A of RFC 3339.<a href="#section-8.3.1-2" class="pilcrow">¶</a></p>
-<p id="section-8.3.1-3">Implementations supporting formats SHOULD implement support for
-the following attributes:<a href="#section-8.3.1-3" class="pilcrow">¶</a></p>
-<div id="date-time">
-<section id="section-8.3.1.1">
-            <h5 id="name-date-time">
-<a href="#section-8.3.1.1" class="section-number selfRef">8.3.1.1. </a><a href="#name-date-time" class="section-name selfRef">"date-time"</a>
-            </h5>
-<p id="section-8.3.1.1-1">A string input is accepted by this attribute if it is
+<p id="section-8.4.1-1">A string input is accepted by this attribute if it is
 a valid representation according to the "date-time" ABNF rule
-(referenced above).<a href="#section-8.3.1.1-1" class="pilcrow">¶</a></p>
+(referenced above).<a href="#section-8.4.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.4.1-2">Some notes:<a href="#section-8.4.1-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-8.4.1-3.1">
+              <p id="section-8.4.1-3.1.1"><span>[<a href="#RFC3339" class="cite xref">RFC3339</a>], <a href="https://rfc-editor.org/rfc/rfc3339#section-5.6" class="relref">Section 5.6</a></span> mentions space as a possible separator,
+but the ABNF requires a 'T'/'t' to separate date and time.  The
+ABNF is what implementations should follow.<a href="#section-8.4.1-3.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.4.1-3.2">
+              <p id="section-8.4.1-3.2.1">Lowercase letters 't' and 'z' are legitimate.<a href="#section-8.4.1-3.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.4.1-3.3">
+              <p id="section-8.4.1-3.3.1">A timezone offset is strictly required.<a href="#section-8.4.1-3.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.4.1-3.4">
+              <p id="section-8.4.1-3.4.1">Years are strictly four digits even though other standards accept more.<a href="#section-8.4.1-3.4.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
 </section>
 </div>
-<div id="date">
-<section id="section-8.3.1.2">
-            <h5 id="name-date">
-<a href="#section-8.3.1.2" class="section-number selfRef">8.3.1.2. </a><a href="#name-date" class="section-name selfRef">"date"</a>
-            </h5>
-<p id="section-8.3.1.2-1">A string input is accepted by this attribute if it is
+<div id="format-date">
+<section id="section-8.4.2">
+          <h4 id="name-date">
+<a href="#section-8.4.2" class="section-number selfRef">8.4.2. </a><a href="#name-date" class="section-name selfRef">"date"</a>
+          </h4>
+<p id="section-8.4.2-1">A string input is accepted by this attribute if it is
 a valid representation according to the "full-date" ABNF rule
-(referenced above).<a href="#section-8.3.1.2-1" class="pilcrow">¶</a></p>
+(referenced above).<a href="#section-8.4.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="time">
-<section id="section-8.3.1.3">
-            <h5 id="name-time">
-<a href="#section-8.3.1.3" class="section-number selfRef">8.3.1.3. </a><a href="#name-time" class="section-name selfRef">"time"</a>
-            </h5>
-<p id="section-8.3.1.3-1">A string input is accepted by this attribute if it is
+<div id="format-time">
+<section id="section-8.4.3">
+          <h4 id="name-time">
+<a href="#section-8.4.3" class="section-number selfRef">8.4.3. </a><a href="#name-time" class="section-name selfRef">"time"</a>
+          </h4>
+<p id="section-8.4.3-1">A string input is accepted by this attribute if it is
 a valid representation according to the "full-time" ABNF rule
-(referenced above).<a href="#section-8.3.1.3-1" class="pilcrow">¶</a></p>
+(referenced above).<a href="#section-8.4.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="duration">
-<section id="section-8.3.1.4">
-            <h5 id="name-duration">
-<a href="#section-8.3.1.4" class="section-number selfRef">8.3.1.4. </a><a href="#name-duration" class="section-name selfRef">"duration"</a>
-            </h5>
-<p id="section-8.3.1.4-1">A string input is accepted by this attribute if it is
+<div id="format-duration">
+<section id="section-8.4.4">
+          <h4 id="name-duration">
+<a href="#section-8.4.4" class="section-number selfRef">8.4.4. </a><a href="#name-duration" class="section-name selfRef">"duration"</a>
+          </h4>
+<p id="section-8.4.4-1">A string input is accepted by this attribute if it is
 a valid representation according to the "duration" ABNF rule
-(referenced above).<a href="#section-8.3.1.4-1" class="pilcrow">¶</a></p>
+(referenced above).<a href="#section-8.4.4-1" class="pilcrow">¶</a></p>
+<p id="section-8.4.4-2">Some notes about RFC 3339 durations that may help consistency:<a href="#section-8.4.4-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-8.4.4-3.1">
+              <p id="section-8.4.4-3.1.1">ISO 8601 defines additional formats like "P0003-06-04T12:30:05"
+but these are not valid in RFC 3339.<a href="#section-8.4.4-3.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.4.4-3.2">
+              <p id="section-8.4.4-3.2.1">Negative durations are not allowed.<a href="#section-8.4.4-3.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.4.4-3.3">
+              <p id="section-8.4.4-3.3.1">Fractional elements ("PT1.5S") are not allowed.<a href="#section-8.4.4-3.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.4.4-3.4">
+              <p id="section-8.4.4-3.4.1">Time elements MUST come after a 'T' to avoid confusing "M" for
+"minute" with "M" for "month".<a href="#section-8.4.4-3.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.4.4-3.5">
+              <p id="section-8.4.4-3.5.1">Duration elements can be skipped in only some cases. A
+"zero minutes" duration element can be skipped if the duration
+is "thirty seconds"  ("PT30S") but it cannot be skipped if the
+duration is an hour and thirty seconds ("PT1H0M30S").<a href="#section-8.4.4-3.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.4.4-3.6">
+              <p id="section-8.4.4-3.6.1">Week units cannot be combined with year/month units.<a href="#section-8.4.4-3.6.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
 </section>
 </div>
-<div id="additional-rfc3339-formats">
-<section id="section-8.3.1.5">
-            <h5 id="name-additional-rfc3339-formats">
-<a href="#section-8.3.1.5" class="section-number selfRef">8.3.1.5. </a><a href="#name-additional-rfc3339-formats" class="section-name selfRef">Additional RFC3339 Formats</a>
-            </h5>
-<p id="section-8.3.1.5-1">Implementations MAY support additional attributes using the other
-format names defined anywhere in that RFC.  If "full-date" or "full-time"
-are implemented, the corresponding short form ("date" or "time"
-respectively) MUST be implemented, and MUST behave identically.
-Implementations SHOULD NOT define extension attributes
-with any name matching an RFC 3339 format unless it validates
-according to the rules of that format.<span class="cref" id="_18">There is not currently consensus on the need for supporting
-   all RFC 3339 formats, so this approach of reserving the
-   namespace will encourage experimentation without committing
-   to the entire set.  Either the format implementation requirements
-   will become more flexible in general, or these will likely
-   either be promoted to fully specified attributes or dropped.</span><a href="#section-8.3.1.5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-</section>
-</div>
-<div id="email-addresses">
-<section id="section-8.3.2">
-          <h4 id="name-email-addresses">
-<a href="#section-8.3.2" class="section-number selfRef">8.3.2. </a><a href="#name-email-addresses" class="section-name selfRef">Email Addresses</a>
+<div id="format-email-addresses">
+<section id="section-8.5">
+        <h3 id="name-email-addresses">
+<a href="#section-8.5" class="section-number selfRef">8.5. </a><a href="#name-email-addresses" class="section-name selfRef">Email Addresses</a>
+        </h3>
+<p id="section-8.5-1">These attributes apply to string inputs.<a href="#section-8.5-1" class="pilcrow">¶</a></p>
+<p id="section-8.5-2">A string input is accepted by these attributes if it is a valid
+Internet email address as follows:<a href="#section-8.5-2" class="pilcrow">¶</a></p>
+<div id="format-email">
+<section id="section-8.5.1">
+          <h4 id="name-email">
+<a href="#section-8.5.1" class="section-number selfRef">8.5.1. </a><a href="#name-email" class="section-name selfRef">"email"</a>
           </h4>
-<p id="section-8.3.2-1">These attributes apply to string inputs.<a href="#section-8.3.2-1" class="pilcrow">¶</a></p>
-<p id="section-8.3.2-2">A string input is accepted by these attributes if it is a valid
-Internet email address as follows:<a href="#section-8.3.2-2" class="pilcrow">¶</a></p>
-<div id="email">
-<section id="section-8.3.2.1">
-            <h5 id="name-email">
-<a href="#section-8.3.2.1" class="section-number selfRef">8.3.2.1. </a><a href="#name-email" class="section-name selfRef">"email"</a>
-            </h5>
-<p id="section-8.3.2.1-1">As defined by the "Mailbox" ABNF rule in
-<span>[<a href="#RFC5321" class="cite xref">RFC5321</a>], <a href="https://rfc-editor.org/rfc/rfc5321#section-4.1.2" class="relref">Section 4.1.2</a></span>.<a href="#section-8.3.2.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.5.1-1">As defined by the "Mailbox" ABNF rule in
+<span>[<a href="#RFC5321" class="cite xref">RFC5321</a>], <a href="https://rfc-editor.org/rfc/rfc5321#section-4.1.2" class="relref">Section 4.1.2</a></span>.<a href="#section-8.5.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="idn-email">
-<section id="section-8.3.2.2">
-            <h5 id="name-idn-email">
-<a href="#section-8.3.2.2" class="section-number selfRef">8.3.2.2. </a><a href="#name-idn-email" class="section-name selfRef">"idn-email"</a>
-            </h5>
-<p id="section-8.3.2.2-1">As defined by the extended "Mailbox" ABNF rule in
-<span>[<a href="#RFC6531" class="cite xref">RFC6531</a>], <a href="https://rfc-editor.org/rfc/rfc6531#section-3.3" class="relref">Section 3.3</a></span>.<a href="#section-8.3.2.2-1" class="pilcrow">¶</a></p>
-<p id="section-8.3.2.2-2">Note that all strings accepted by the "email" attribute are also
-accepted by the "idn-email" attribute.<a href="#section-8.3.2.2-2" class="pilcrow">¶</a></p>
-</section>
-</div>
-</section>
-</div>
-<div id="hostnames">
-<section id="section-8.3.3">
-          <h4 id="name-hostnames">
-<a href="#section-8.3.3" class="section-number selfRef">8.3.3. </a><a href="#name-hostnames" class="section-name selfRef">Hostnames</a>
+<div id="format-idn-email">
+<section id="section-8.5.2">
+          <h4 id="name-idn-email">
+<a href="#section-8.5.2" class="section-number selfRef">8.5.2. </a><a href="#name-idn-email" class="section-name selfRef">"idn-email"</a>
           </h4>
-<p id="section-8.3.3-1">These attributes apply to string inputs.<a href="#section-8.3.3-1" class="pilcrow">¶</a></p>
-<p id="section-8.3.3-2">A string input is accepted by these attributes if it is a valid
-representation for an Internet hostname as follows:<a href="#section-8.3.3-2" class="pilcrow">¶</a></p>
-<div id="hostname">
-<section id="section-8.3.3.1">
-            <h5 id="name-hostname">
-<a href="#section-8.3.3.1" class="section-number selfRef">8.3.3.1. </a><a href="#name-hostname" class="section-name selfRef">"hostname"</a>
-            </h5>
-<p id="section-8.3.3.1-1">As defined by <span>[<a href="#RFC1123" class="cite xref">RFC1123</a>], <a href="https://rfc-editor.org/rfc/rfc1123#section-2.1" class="relref">Section 2.1</a></span>,
+<p id="section-8.5.2-1">As defined by the extended "Mailbox" ABNF rule in
+<span>[<a href="#RFC6531" class="cite xref">RFC6531</a>], <a href="https://rfc-editor.org/rfc/rfc6531#section-3.3" class="relref">Section 3.3</a></span>.<a href="#section-8.5.2-1" class="pilcrow">¶</a></p>
+<p id="section-8.5.2-2">Note that all strings accepted by the "email" attribute are also
+accepted by the "idn-email" attribute.<a href="#section-8.5.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="format-hostnames">
+<section id="section-8.6">
+        <h3 id="name-hostnames">
+<a href="#section-8.6" class="section-number selfRef">8.6. </a><a href="#name-hostnames" class="section-name selfRef">Hostnames</a>
+        </h3>
+<p id="section-8.6-1">These attributes apply to string inputs.<a href="#section-8.6-1" class="pilcrow">¶</a></p>
+<p id="section-8.6-2">A string input is accepted by these attributes if it is a valid
+representation for an Internet hostname as follows:<a href="#section-8.6-2" class="pilcrow">¶</a></p>
+<div id="format-hostname">
+<section id="section-8.6.1">
+          <h4 id="name-hostname">
+<a href="#section-8.6.1" class="section-number selfRef">8.6.1. </a><a href="#name-hostname" class="section-name selfRef">"hostname"</a>
+          </h4>
+<p id="section-8.6.1-1">As defined by <span>[<a href="#RFC1123" class="cite xref">RFC1123</a>], <a href="https://rfc-editor.org/rfc/rfc1123#section-2.1" class="relref">Section 2.1</a></span>,
 including host names produced using the Punycode algorithm
-specified in <span>[<a href="#RFC5891" class="cite xref">RFC5891</a>], <a href="https://rfc-editor.org/rfc/rfc5891#section-4.4" class="relref">Section 4.4</a></span>.<a href="#section-8.3.3.1-1" class="pilcrow">¶</a></p>
+specified in <span>[<a href="#RFC5891" class="cite xref">RFC5891</a>], <a href="https://rfc-editor.org/rfc/rfc5891#section-4.4" class="relref">Section 4.4</a></span>.<a href="#section-8.6.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="idn-hostname">
-<section id="section-8.3.3.2">
-            <h5 id="name-idn-hostname">
-<a href="#section-8.3.3.2" class="section-number selfRef">8.3.3.2. </a><a href="#name-idn-hostname" class="section-name selfRef">"idn-hostname"</a>
-            </h5>
-<p id="section-8.3.3.2-1">As defined by either RFC 1123 as for hostname, or an
+<div id="format-idn-hostname">
+<section id="section-8.6.2">
+          <h4 id="name-idn-hostname">
+<a href="#section-8.6.2" class="section-number selfRef">8.6.2. </a><a href="#name-idn-hostname" class="section-name selfRef">"idn-hostname"</a>
+          </h4>
+<p id="section-8.6.2-1">As defined by either RFC 1123 as for hostname, or an
 internationalized hostname as defined by
-<span>[<a href="#RFC5890" class="cite xref">RFC5890</a>], <a href="https://rfc-editor.org/rfc/rfc5890#section-2.3.2.3" class="relref">Section 2.3.2.3</a></span>.<a href="#section-8.3.3.2-1" class="pilcrow">¶</a></p>
-<p id="section-8.3.3.2-2">Note that all strings accepted by the "hostname" attribute are also
-accepted by the "idn-hostname" attribute.<a href="#section-8.3.3.2-2" class="pilcrow">¶</a></p>
+<span>[<a href="#RFC5890" class="cite xref">RFC5890</a>], <a href="https://rfc-editor.org/rfc/rfc5890#section-2.3.2.3" class="relref">Section 2.3.2.3</a></span>.<a href="#section-8.6.2-1" class="pilcrow">¶</a></p>
+<p id="section-8.6.2-2">Note that all strings accepted by the "hostname" attribute are also
+accepted by the "idn-hostname" attribute.<a href="#section-8.6.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
-<div id="ip-addresses">
-<section id="section-8.3.4">
-          <h4 id="name-ip-addresses">
-<a href="#section-8.3.4" class="section-number selfRef">8.3.4. </a><a href="#name-ip-addresses" class="section-name selfRef">IP Addresses</a>
+<div id="format-ip">
+<section id="section-8.7">
+        <h3 id="name-ip-addresses">
+<a href="#section-8.7" class="section-number selfRef">8.7. </a><a href="#name-ip-addresses" class="section-name selfRef">IP Addresses</a>
+        </h3>
+<p id="section-8.7-1">These attributes apply to string inputs.<a href="#section-8.7-1" class="pilcrow">¶</a></p>
+<p id="section-8.7-2">A string input is accepted by these attributes if it is a valid
+representation of an IP address as follows:<a href="#section-8.7-2" class="pilcrow">¶</a></p>
+<div id="format-ipv4">
+<section id="section-8.7.1">
+          <h4 id="name-ipv4">
+<a href="#section-8.7.1" class="section-number selfRef">8.7.1. </a><a href="#name-ipv4" class="section-name selfRef">"ipv4"</a>
           </h4>
-<p id="section-8.3.4-1">These attributes apply to string inputs.<a href="#section-8.3.4-1" class="pilcrow">¶</a></p>
-<p id="section-8.3.4-2">A string input is accepted by these attributes if it is a valid
-representation of an IP address as follows:<a href="#section-8.3.4-2" class="pilcrow">¶</a></p>
-<div id="ipv4">
-<section id="section-8.3.4.1">
-            <h5 id="name-ipv4">
-<a href="#section-8.3.4.1" class="section-number selfRef">8.3.4.1. </a><a href="#name-ipv4" class="section-name selfRef">"ipv4"</a>
-            </h5>
-<p id="section-8.3.4.1-1">An IPv4 address according to the "dotted-quad" ABNF
+<p id="section-8.7.1-1">An IPv4 address according to the "dotted-quad" ABNF
 syntax as defined in
-<span>[<a href="#RFC2673" class="cite xref">RFC2673</a>], <a href="https://rfc-editor.org/rfc/rfc2673#section-3.2" class="relref">Section 3.2</a></span>.<a href="#section-8.3.4.1-1" class="pilcrow">¶</a></p>
+<span>[<a href="#RFC2673" class="cite xref">RFC2673</a>], <a href="https://rfc-editor.org/rfc/rfc2673#section-3.2" class="relref">Section 3.2</a></span>.<a href="#section-8.7.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="ipv6">
-<section id="section-8.3.4.2">
-            <h5 id="name-ipv6">
-<a href="#section-8.3.4.2" class="section-number selfRef">8.3.4.2. </a><a href="#name-ipv6" class="section-name selfRef">"ipv6"</a>
-            </h5>
-<p id="section-8.3.4.2-1">An IPv6 address as defined in
-<span>[<a href="#RFC4291" class="cite xref">RFC4291</a>], <a href="https://rfc-editor.org/rfc/rfc4291#section-2.2" class="relref">Section 2.2</a></span>.<a href="#section-8.3.4.2-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-</section>
-</div>
-<div id="resource-identifiers">
-<section id="section-8.3.5">
-          <h4 id="name-resource-identifiers">
-<a href="#section-8.3.5" class="section-number selfRef">8.3.5. </a><a href="#name-resource-identifiers" class="section-name selfRef">Resource Identifiers</a>
+<div id="format-ipv6">
+<section id="section-8.7.2">
+          <h4 id="name-ipv6">
+<a href="#section-8.7.2" class="section-number selfRef">8.7.2. </a><a href="#name-ipv6" class="section-name selfRef">"ipv6"</a>
           </h4>
-<p id="section-8.3.5-1">These attributes apply to string inputs.<a href="#section-8.3.5-1" class="pilcrow">¶</a></p>
-<div id="uri">
-<section id="section-8.3.5.1">
-            <h5 id="name-uri">
-<a href="#section-8.3.5.1" class="section-number selfRef">8.3.5.1. </a><a href="#name-uri" class="section-name selfRef">"uri"</a>
-            </h5>
-<p id="section-8.3.5.1-1">A string input is accepted by this attribute if it is
-a valid URI, according to <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>], <a href="https://rfc-editor.org/rfc/rfc3986#section-3" class="relref">Section 3</a></span>.<a href="#section-8.3.5.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.7.2-1">An IPv6 address as defined in
+<span>[<a href="#RFC4291" class="cite xref">RFC4291</a>], <a href="https://rfc-editor.org/rfc/rfc4291#section-2.2" class="relref">Section 2.2</a></span>.<a href="#section-8.7.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="uri-reference">
-<section id="section-8.3.5.2">
-            <h5 id="name-uri-reference">
-<a href="#section-8.3.5.2" class="section-number selfRef">8.3.5.2. </a><a href="#name-uri-reference" class="section-name selfRef">"uri-reference"</a>
-            </h5>
-<p id="section-8.3.5.2-1">A string input is accepted by this attribute if it is a valid URI
+</section>
+</div>
+<div id="format-uris">
+<section id="section-8.8">
+        <h3 id="name-resource-identifiers">
+<a href="#section-8.8" class="section-number selfRef">8.8. </a><a href="#name-resource-identifiers" class="section-name selfRef">Resource Identifiers</a>
+        </h3>
+<p id="section-8.8-1">These attributes apply to string inputs.<a href="#section-8.8-1" class="pilcrow">¶</a></p>
+<div id="format-uri">
+<section id="section-8.8.1">
+          <h4 id="name-uri">
+<a href="#section-8.8.1" class="section-number selfRef">8.8.1. </a><a href="#name-uri" class="section-name selfRef">"uri"</a>
+          </h4>
+<p id="section-8.8.1-1">A string input is accepted by this attribute if it is
+a valid URI, according to <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>], <a href="https://rfc-editor.org/rfc/rfc3986#section-3" class="relref">Section 3</a></span>.<a href="#section-8.8.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="format-uri-reference">
+<section id="section-8.8.2">
+          <h4 id="name-uri-reference">
+<a href="#section-8.8.2" class="section-number selfRef">8.8.2. </a><a href="#name-uri-reference" class="section-name selfRef">"uri-reference"</a>
+          </h4>
+<p id="section-8.8.2-1">A string input is accepted by this attribute if it is a valid URI
 Reference (either a URI or a relative-reference),
-according to <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>], <a href="https://rfc-editor.org/rfc/rfc3986#section-4" class="relref">Section 4</a></span>.<a href="#section-8.3.5.2-1" class="pilcrow">¶</a></p>
+according to <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>], <a href="https://rfc-editor.org/rfc/rfc3986#section-4" class="relref">Section 4</a></span>.<a href="#section-8.8.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="iri">
-<section id="section-8.3.5.3">
-            <h5 id="name-iri">
-<a href="#section-8.3.5.3" class="section-number selfRef">8.3.5.3. </a><a href="#name-iri" class="section-name selfRef">"iri"</a>
-            </h5>
-<p id="section-8.3.5.3-1">A string input is accepted by this attribute if it is
-a valid IRI, according to <span>[<a href="#RFC3987" class="cite xref">RFC3987</a>], <a href="https://rfc-editor.org/rfc/rfc3987#section-2.2" class="relref">Section 2.2</a></span>.<a href="#section-8.3.5.3-1" class="pilcrow">¶</a></p>
+<div id="format-iri">
+<section id="section-8.8.3">
+          <h4 id="name-iri">
+<a href="#section-8.8.3" class="section-number selfRef">8.8.3. </a><a href="#name-iri" class="section-name selfRef">"iri"</a>
+          </h4>
+<p id="section-8.8.3-1">A string input is accepted by this attribute if it is
+a valid IRI, according to <span>[<a href="#RFC3987" class="cite xref">RFC3987</a>], <a href="https://rfc-editor.org/rfc/rfc3987#section-2.2" class="relref">Section 2.2</a></span>.<a href="#section-8.8.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="iri-reference">
-<section id="section-8.3.5.4">
-            <h5 id="name-iri-reference">
-<a href="#section-8.3.5.4" class="section-number selfRef">8.3.5.4. </a><a href="#name-iri-reference" class="section-name selfRef">"iri-reference"</a>
-            </h5>
-<p id="section-8.3.5.4-1">A string input is accepted by this attribute if it is a valid IRI
+<div id="format-iri-reference">
+<section id="section-8.8.4">
+          <h4 id="name-iri-reference">
+<a href="#section-8.8.4" class="section-number selfRef">8.8.4. </a><a href="#name-iri-reference" class="section-name selfRef">"iri-reference"</a>
+          </h4>
+<p id="section-8.8.4-1">A string input is accepted by this attribute if it is a valid IRI
 Reference (either an IRI or a relative-reference),
-according to <span>[<a href="#RFC3987" class="cite xref">RFC3987</a>], <a href="https://rfc-editor.org/rfc/rfc3987#section-2.2" class="relref">Section 2.2</a></span>.<a href="#section-8.3.5.4-1" class="pilcrow">¶</a></p>
+according to <span>[<a href="#RFC3987" class="cite xref">RFC3987</a>], <a href="https://rfc-editor.org/rfc/rfc3987#section-2.2" class="relref">Section 2.2</a></span>.<a href="#section-8.8.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="uuid">
-<section id="section-8.3.5.5">
-            <h5 id="name-uuid">
-<a href="#section-8.3.5.5" class="section-number selfRef">8.3.5.5. </a><a href="#name-uuid" class="section-name selfRef">"uuid"</a>
-            </h5>
-<p id="section-8.3.5.5-1">A string input is accepted by this attribute if it is a valid
-string representation of a UUID, according to <span>[<a href="#RFC4122" class="cite xref">RFC4122</a>]</span>.<a href="#section-8.3.5.5-1" class="pilcrow">¶</a></p>
-<p id="section-8.3.5.5-2">Note that all valid URIs are valid IRIs, and all valid URI References are
-also valid IRI References.<a href="#section-8.3.5.5-2" class="pilcrow">¶</a></p>
-<p id="section-8.3.5.5-3">Note also that the "uuid" format is for plain UUIDs, not UUIDs in URNs.  An example
+<div id="format-uuid">
+<section id="section-8.8.5">
+          <h4 id="name-uuid">
+<a href="#section-8.8.5" class="section-number selfRef">8.8.5. </a><a href="#name-uuid" class="section-name selfRef">"uuid"</a>
+          </h4>
+<p id="section-8.8.5-1">A string input is accepted by this attribute if it is a valid
+string representation of a UUID, according to <span>[<a href="#RFC4122" class="cite xref">RFC4122</a>]</span>.<a href="#section-8.8.5-1" class="pilcrow">¶</a></p>
+<p id="section-8.8.5-2">Note that all valid URIs are valid IRIs, and all valid URI References are
+also valid IRI References.<a href="#section-8.8.5-2" class="pilcrow">¶</a></p>
+<p id="section-8.8.5-3">Note also that the "uuid" format is for plain UUIDs, not UUIDs in URNs.  An example
 is "f81d4fae-7dec-11d0-a765-00a0c91e6bf6".  For UUIDs as URNs, use the "uri" format,
 with a "pattern" regular expression of "^urn:uuid:" to indicate the URI scheme and
-URN namespace.<a href="#section-8.3.5.5-3" class="pilcrow">¶</a></p>
+URN namespace.<a href="#section-8.8.5-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
-<div id="templates">
-<section id="section-8.3.6">
-          <h4 id="name-templates">
-<a href="#section-8.3.6" class="section-number selfRef">8.3.6. </a><a href="#name-templates" class="section-name selfRef">Templates</a>
+<div id="format-templates">
+<section id="section-8.9">
+        <h3 id="name-templates">
+<a href="#section-8.9" class="section-number selfRef">8.9. </a><a href="#name-templates" class="section-name selfRef">Templates</a>
+        </h3>
+<div id="format-uri-template">
+<section id="section-8.9.1">
+          <h4 id="name-uri-template">
+<a href="#section-8.9.1" class="section-number selfRef">8.9.1. </a><a href="#name-uri-template" class="section-name selfRef">"uri-template"</a>
           </h4>
-<div id="uri-template">
-<section id="section-8.3.6.1">
-            <h5 id="name-uri-template">
-<a href="#section-8.3.6.1" class="section-number selfRef">8.3.6.1. </a><a href="#name-uri-template" class="section-name selfRef">"uri-template"</a>
-            </h5>
-<p id="section-8.3.6.1-1">This attribute applies to string inputs.<a href="#section-8.3.6.1-1" class="pilcrow">¶</a></p>
-<p id="section-8.3.6.1-2">A string input is accepted by this attribute if it is a valid URI Template
-(of any level), according to <span>[<a href="#RFC6570" class="cite xref">RFC6570</a>]</span>.<a href="#section-8.3.6.1-2" class="pilcrow">¶</a></p>
-<p id="section-8.3.6.1-3">Note that URI Templates may be used for IRIs; there is no separate
-IRI Template specification.<a href="#section-8.3.6.1-3" class="pilcrow">¶</a></p>
+<p id="section-8.9.1-1">This attribute applies to string inputs.<a href="#section-8.9.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.9.1-2">A string input is accepted by this attribute if it is a valid URI Template
+(of any level), according to <span>[<a href="#RFC6570" class="cite xref">RFC6570</a>]</span>.<a href="#section-8.9.1-2" class="pilcrow">¶</a></p>
+<p id="section-8.9.1-3">Note that URI Templates may be used for IRIs; there is no separate
+IRI Template specification.<a href="#section-8.9.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
-<div id="json-pointers">
-<section id="section-8.3.7">
-          <h4 id="name-json-pointers">
-<a href="#section-8.3.7" class="section-number selfRef">8.3.7. </a><a href="#name-json-pointers" class="section-name selfRef">JSON Pointers</a>
+<div id="format-pointers">
+<section id="section-8.10">
+        <h3 id="name-json-pointers">
+<a href="#section-8.10" class="section-number selfRef">8.10. </a><a href="#name-json-pointers" class="section-name selfRef">JSON Pointers</a>
+        </h3>
+<p id="section-8.10-1">These attributes apply to string inputs.<a href="#section-8.10-1" class="pilcrow">¶</a></p>
+<p id="section-8.10-2">To allow for both regular and relative JSON Pointers, use "anyOf" or
+"oneOf" to indicate support for either format.<a href="#section-8.10-2" class="pilcrow">¶</a></p>
+<div id="format-json-pointer">
+<section id="section-8.10.1">
+          <h4 id="name-json-pointer">
+<a href="#section-8.10.1" class="section-number selfRef">8.10.1. </a><a href="#name-json-pointer" class="section-name selfRef">"json-pointer"</a>
           </h4>
-<p id="section-8.3.7-1">These attributes apply to string inputs.<a href="#section-8.3.7-1" class="pilcrow">¶</a></p>
-<p id="section-8.3.7-2">To allow for both regular and relative JSON Pointers, use "anyOf" or
-"oneOf" to indicate support for either format.<a href="#section-8.3.7-2" class="pilcrow">¶</a></p>
-<div id="json-pointer">
-<section id="section-8.3.7.1">
-            <h5 id="name-json-pointer">
-<a href="#section-8.3.7.1" class="section-number selfRef">8.3.7.1. </a><a href="#name-json-pointer" class="section-name selfRef">"json-pointer"</a>
-            </h5>
-<p id="section-8.3.7.1-1">A string input is accepted by this attribute if it
+<p id="section-8.10.1-1">A string input is accepted by this attribute if it
 is a valid JSON string representation of a JSON Pointer,
-according to <span>[<a href="#RFC6901" class="cite xref">RFC6901</a>], <a href="https://rfc-editor.org/rfc/rfc6901#section-5" class="relref">Section 5</a></span>.<a href="#section-8.3.7.1-1" class="pilcrow">¶</a></p>
+according to <span>[<a href="#RFC6901" class="cite xref">RFC6901</a>], <a href="https://rfc-editor.org/rfc/rfc6901#section-5" class="relref">Section 5</a></span>.<a href="#section-8.10.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="relative-json-pointer">
-<section id="section-8.3.7.2">
-            <h5 id="name-relative-json-pointer">
-<a href="#section-8.3.7.2" class="section-number selfRef">8.3.7.2. </a><a href="#name-relative-json-pointer" class="section-name selfRef">"relative-json-pointer"</a>
-            </h5>
-<p id="section-8.3.7.2-1">A string input is accepted by this attribute if it is a valid
-<span>[<a href="#I-D.hha-relative-json-pointer" class="cite xref">I-D.hha-relative-json-pointer</a>]</span>.<a href="#section-8.3.7.2-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-</section>
-</div>
-<div id="expressions">
-<section id="section-8.3.8">
-          <h4 id="name-expressions">
-<a href="#section-8.3.8" class="section-number selfRef">8.3.8. </a><a href="#name-expressions" class="section-name selfRef">Expressions</a>
+<div id="format-relative-json-pointer">
+<section id="section-8.10.2">
+          <h4 id="name-relative-json-pointer">
+<a href="#section-8.10.2" class="section-number selfRef">8.10.2. </a><a href="#name-relative-json-pointer" class="section-name selfRef">"relative-json-pointer"</a>
           </h4>
-<div id="regex">
-<section id="section-8.3.8.1">
-            <h5 id="name-regex">
-<a href="#section-8.3.8.1" class="section-number selfRef">8.3.8.1. </a><a href="#name-regex" class="section-name selfRef">"regex"</a>
-            </h5>
-<p id="section-8.3.8.1-1">This attribute applies to string inputs.<a href="#section-8.3.8.1-1" class="pilcrow">¶</a></p>
-<p id="section-8.3.8.1-2">A regular expression, which SHOULD be valid according to the
-<span>[<a href="#ECMA262" class="cite xref">ECMA262</a>]</span> regular expression dialect.<a href="#section-8.3.8.1-2" class="pilcrow">¶</a></p>
-<p id="section-8.3.8.1-3">Implementations that validate formats MUST accept at least the subset of
-ECMA-262 defined in <span><a href="#regex-interop" class="internal xref">Regular Expressions</a> (<a href="#regex-interop" class="auto internal xref">Section 16.3</a>)</span>
-section of this specification, and SHOULD accept all valid ECMA-262 expressions.<a href="#section-8.3.8.1-3" class="pilcrow">¶</a></p>
+<p id="section-8.10.2-1">A string input is accepted by this attribute if it is a valid
+<span>[<a href="#I-D.hha-relative-json-pointer" class="cite xref">I-D.hha-relative-json-pointer</a>]</span>.<a href="#section-8.10.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
+</section>
+</div>
+<div id="format-expressions">
+<section id="section-8.11">
+        <h3 id="name-expressions">
+<a href="#section-8.11" class="section-number selfRef">8.11. </a><a href="#name-expressions" class="section-name selfRef">Expressions</a>
+        </h3>
+<div id="format-regex">
+<section id="section-8.11.1">
+          <h4 id="name-regex">
+<a href="#section-8.11.1" class="section-number selfRef">8.11.1. </a><a href="#name-regex" class="section-name selfRef">"regex"</a>
+          </h4>
+<p id="section-8.11.1-1">This attribute applies to string inputs.<a href="#section-8.11.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.11.1-2">A regular expression, which SHOULD be valid according to the
+<span>[<a href="#ECMA262" class="cite xref">ECMA262</a>]</span> regular expression dialect.<a href="#section-8.11.1-2" class="pilcrow">¶</a></p>
+<p id="section-8.11.1-3">Implementations that validate formats MUST accept at least the subset of
+ECMA-262 defined in <span><a href="#regex-interop" class="internal xref">Regular Expressions</a> (<a href="#regex-interop" class="auto internal xref">Section 17.3</a>)</span>
+section of this specification, and SHOULD accept all valid ECMA-262 expressions.<a href="#section-8.11.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -4321,10 +4562,10 @@ require this vocabulary as if its URI were present with a value of true.<a href=
 <p id="section-9.1-7"><a href="https://json-schema.org/draft/2020-12/meta/content">https://json-schema.org/draft/2020-12/meta/content</a>.<a href="#section-9.1-7" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="implementation-requirements-1">
+<div id="implementation-requirements">
 <section id="section-9.2">
-        <h3 id="name-implementation-requirements-2">
-<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-implementation-requirements-2" class="section-name selfRef">Implementation Requirements</a>
+        <h3 id="name-implementation-requirements">
+<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-implementation-requirements" class="section-name selfRef">Implementation Requirements</a>
         </h3>
 <p id="section-9.2-1">Due to security and performance concerns, as well as the open-ended nature of
 possible content types, implementations MUST NOT automatically decode, parse,
@@ -4340,7 +4581,7 @@ string-encoded document separately from the enclosing document.  This
 process SHOULD be equivalent to fully evaluating the input against
 the original schema, followed by using the annotations to decode, parse,
 and/or validate each string-encoded document.<a href="#section-9.2-3" class="pilcrow">¶</a></p>
-<p id="section-9.2-4">See also the <span><a href="#security" class="internal xref">Security Considerations</a> (<a href="#security" class="auto internal xref">Section 15</a>)</span>
+<p id="section-9.2-4">See also the <span><a href="#security" class="internal xref">Security Considerations</a> (<a href="#security" class="auto internal xref">Section 16</a>)</span>
 sections for possible vulnerabilities introduced by automatically
 processing inputs according to these keywords.<a href="#section-9.2-4" class="pilcrow">¶</a></p>
 </section>
@@ -4535,9 +4776,9 @@ keywords, one in a referenced schema and one beside the reference:<a href="#sect
 <p id="section-10.1.1-5">While the exact structure depends on the selected output format (<a href="#output" class="auto internal xref">Section 13</a>),
 the following information would be included (recall that the root
 JSON Pointer is an empty string):<a href="#section-10.1.1-5" class="pilcrow">¶</a></p>
-<span id="name-annotation-information"></span><table class="center" id="table-1">
+<span id="name-annotation-information"></span><table class="center" id="table-2">
             <caption>
-<a href="#table-1" class="selfRef">Table 1</a>:
+<a href="#table-2" class="selfRef">Table 2</a>:
 <a href="#name-annotation-information" class="selfRef">Annotation information</a>
             </caption>
 <thead>
@@ -5115,7 +5356,7 @@ structure cannot be reliably implemented, and the resulting behavior
 is undefined.  Similarly, a reference target under a known keyword,
 for which the value is known not to be a schema, results in undefined
 behavior in order to avoid burdening implementations with the need
-to detect such targets.  See <a href="#security" class="auto internal xref">Section 15</a> for the security implications
+to detect such targets.  See <a href="#security" class="auto internal xref">Section 16</a> for the security implications
 of blindly interpreting targets as schemas.<a href="#section-11.4.3-2" class="pilcrow">¶</a></p>
 <p id="section-11.4.3-3">Note that single-level custom keywords with identical syntax and
 semantics to "$defs" do not allow for any intervening "$id" keywords,
@@ -6026,138 +6267,172 @@ by implementations.  Its URI is:
 </div>
 </section>
 </div>
-<div id="meta-schemas">
+<div id="extending-format">
 <section id="section-14">
-      <h2 id="name-meta-schemas-and-vocabulari">
-<a href="#section-14" class="section-number selfRef">14. </a><a href="#name-meta-schemas-and-vocabulari" class="section-name selfRef">Meta-schemas and Vocabularies</a>
+      <h2 id="name-extending-format">
+<a href="#section-14" class="section-number selfRef">14. </a><a href="#name-extending-format" class="section-name selfRef">Extending <code>format</code></a>
       </h2>
-<p id="section-14-1">A schema that itself describes a schema is called a meta-schema.
+<p id="section-14-1">The format keyword <a href="#format-vocab" class="auto internal xref">Section 8</a> may be extended by defining new attributes in an IANA registry. (TBD)<a href="#section-14-1" class="pilcrow">¶</a></p>
+<div id="custom-format-attributes">
+<section id="section-14.1">
+        <h3 id="name-custom-format-attributes">
+<a href="#section-14.1" class="section-number selfRef">14.1. </a><a href="#name-custom-format-attributes" class="section-name selfRef">Custom format attributes</a>
+        </h3>
+<p id="section-14.1-1">Save for agreement between
+parties, schema authors SHALL NOT expect a peer implementation to support
+custom format attributes. An implementation MUST NOT fail to produce unknown formats
+as annotations if the format-annotation vocabulary is required.
+When the Format-Assertion vocabulary is specified, implementations
+MUST fail upon encountering unknown formats.<a href="#section-14.1-1" class="pilcrow">¶</a></p>
+<p id="section-14.1-2">Vocabularies do not support specifically declaring different value sets for keywords.
+Due to this limitation, and the historically uneven implementation of this keyword,
+it is RECOMMENDED to define additional keywords in a custom vocabulary rather than
+additional format attributes if interoperability is desired.<a href="#section-14.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="non-string-values">
+<section id="section-14.2">
+        <h3 id="name-non-string-values">
+<a href="#section-14.2" class="section-number selfRef">14.2. </a><a href="#name-non-string-values" class="section-name selfRef">Non-string values</a>
+        </h3>
+<p id="section-14.2-1">Format attributes in this specification are defined for string values.  New
+format attributes could conceivably be defined for use with numeric values.<a href="#section-14.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="meta-schemas">
+<section id="section-15">
+      <h2 id="name-meta-schemas-and-vocabulari">
+<a href="#section-15" class="section-number selfRef">15. </a><a href="#name-meta-schemas-and-vocabulari" class="section-name selfRef">Meta-schemas and Vocabularies</a>
+      </h2>
+<p id="section-15-1">A schema that itself describes a schema is called a meta-schema.
 Meta-schemas are used to validate JSON Schemas.
-Meta-schemas are critical for extensibility.<a href="#section-14-1" class="pilcrow">¶</a></p>
-<p id="section-14-2">Meta-schemas and vocabularies together are used to inform an implementation
+Meta-schemas are critical for extensibility.<a href="#section-15-1" class="pilcrow">¶</a></p>
+<p id="section-15-2">Meta-schemas and vocabularies together are used to inform an implementation
 how to interpret a schema.  Every schema has a meta-schema, which can be declared
-using the "$schema" keyword.<a href="#section-14-2" class="pilcrow">¶</a></p>
-<p id="section-14-3">The meta-schema serves two purposes:<a href="#section-14-3" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-14-4">
-<li id="section-14-4.1">
-          <p id="section-14-4.1.1">Declaring the vocabularies in use<a href="#section-14-4.1.1" class="pilcrow">¶</a></p>
+using the "$schema" keyword.<a href="#section-15-2" class="pilcrow">¶</a></p>
+<p id="section-15-3">The meta-schema serves two purposes:<a href="#section-15-3" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-15-4">
+<li id="section-15-4.1">
+          <p id="section-15-4.1.1">Declaring the vocabularies in use<a href="#section-15-4.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-14-4.1.2.1">
-              <p id="section-14-4.1.2.1.1">The "$vocabulary" keyword, when it appears in a meta-schema, declares
+<li class="normal" id="section-15-4.1.2.1">
+              <p id="section-15-4.1.2.1.1">The "$vocabulary" keyword, when it appears in a meta-schema, declares
 which vocabularies are available to be used in schemas that refer
 to that meta-schema.  Vocabularies define keyword semantics,
-as well as their general syntax.<a href="#section-14-4.1.2.1.1" class="pilcrow">¶</a></p>
+as well as their general syntax.<a href="#section-15-4.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </li>
-        <li id="section-14-4.2">
-          <p id="section-14-4.2.1">Describing valid schema syntax<a href="#section-14-4.2.1" class="pilcrow">¶</a></p>
+        <li id="section-15-4.2">
+          <p id="section-15-4.2.1">Describing valid schema syntax<a href="#section-15-4.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-14-4.2.2.1">
-              <p id="section-14-4.2.2.1.1">A schema MUST successfully validate against its meta-schema, which
+<li class="normal" id="section-15-4.2.2.1">
+              <p id="section-15-4.2.2.1.1">A schema MUST successfully validate against its meta-schema, which
 constrains the syntax of the available keywords.  The syntax described
 is expected to be compatible with the vocabularies declared; while
 it is possible to describe an incompatible syntax, such a meta-schema
-would be unlikely to be useful.<a href="#section-14-4.2.2.1.1" class="pilcrow">¶</a></p>
+would be unlikely to be useful.<a href="#section-15-4.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </li>
       </ol>
-<p id="section-14-5">Meta-schema authors, beyond choosing vocabularies,
+<p id="section-15-5">Meta-schema authors, beyond choosing vocabularies,
 can impose additional constraints such as forbidding certain keywords, or
 performing unusually strict syntactical validation, as might be done
-during a development and testing cycle.<a href="#section-14-5" class="pilcrow">¶</a></p>
-<p id="section-14-6">Meta-schema authoring is an advanced usage of JSON Schema, so the design of
-meta-schema features emphasizes flexibility over simplicity.<a href="#section-14-6" class="pilcrow">¶</a></p>
+during a development and testing cycle.<a href="#section-15-5" class="pilcrow">¶</a></p>
+<p id="section-15-6">Meta-schema authoring is an advanced usage of JSON Schema, so the design of
+meta-schema features emphasizes flexibility over simplicity.<a href="#section-15-6" class="pilcrow">¶</a></p>
 <div id="vocabularies">
-<section id="section-14.1">
+<section id="section-15.1">
         <h3 id="name-schema-vocabularies">
-<a href="#section-14.1" class="section-number selfRef">14.1. </a><a href="#name-schema-vocabularies" class="section-name selfRef">Schema Vocabularies</a>
+<a href="#section-15.1" class="section-number selfRef">15.1. </a><a href="#name-schema-vocabularies" class="section-name selfRef">Schema Vocabularies</a>
         </h3>
-<p id="section-14.1-1">A schema vocabulary, or simply a vocabulary, is a set of keywords,
+<p id="section-15.1-1">A schema vocabulary, or simply a vocabulary, is a set of keywords,
 their syntax, and their semantics.  A vocabulary is generally organized
 around a particular purpose.  Different uses of JSON Schema, such
 as validation, hypermedia, or user interface generation, will
 involve different sets of vocabularies.  Each vocabulary typically identifies
-a meta-schema consisting only of the vocabulary's keywords.<a href="#section-14.1-1" class="pilcrow">¶</a></p>
-<p id="section-14.1-2">Since vocabularies are identified by URIs in the meta-schema, generic
+a meta-schema consisting only of the vocabulary's keywords.<a href="#section-15.1-1" class="pilcrow">¶</a></p>
+<p id="section-15.1-2">Since vocabularies are identified by URIs in the meta-schema, generic
 implementations can load extensions to support previously unknown
 vocabularies.  A vocabulary URI is an identifier.  It MAY be a URL, but if
 so the nature of the retrievable resource is undefined.  Vocabulary authors
 MAY use the URL of the vocabulary specification, in a human-readable media
-type such as text/html or text/plain, as the vocabulary URI.<a href="#section-14.1-2" class="pilcrow">¶</a></p>
-<p id="section-14.1-3">A schema vocabulary can be defined by anything from an informal description
+type such as text/html or text/plain, as the vocabulary URI.<a href="#section-15.1-2" class="pilcrow">¶</a></p>
+<p id="section-15.1-3">A schema vocabulary can be defined by anything from an informal description
 to a standards proposal, depending on the audience and interoperability
 expectations.  In particular, in order to facilitate vocabulary use within
 non-public organizations, a vocabulary specification need not be published
-outside of its scope of use.<a href="#section-14.1-3" class="pilcrow">¶</a></p>
-<p id="section-14.1-4">Keywords defined by unrecognized vocabularies are considered to be
+outside of its scope of use.<a href="#section-15.1-3" class="pilcrow">¶</a></p>
+<p id="section-15.1-4">Keywords defined by unrecognized vocabularies are considered to be
 unrecognized, with behavior governed by <a href="#unrecognized" class="auto internal xref">Section 12.5</a>.
 It is not currently possible to distinguish
 between unrecognized keywords that are defined in vocabularies from
-those that are not part of any vocabulary.<a href="#section-14.1-4" class="pilcrow">¶</a></p>
+those that are not part of any vocabulary.<a href="#section-15.1-4" class="pilcrow">¶</a></p>
 <div id="vocabulary-keyword-extended">
-<section id="section-14.1.1">
+<section id="section-15.1.1">
           <h4 id="name-the-vocabulary-keyword">
-<a href="#section-14.1.1" class="section-number selfRef">14.1.1. </a><a href="#name-the-vocabulary-keyword" class="section-name selfRef">The <code>$vocabulary</code> keyword</a>
+<a href="#section-15.1.1" class="section-number selfRef">15.1.1. </a><a href="#name-the-vocabulary-keyword" class="section-name selfRef">The <code>$vocabulary</code> keyword</a>
           </h4>
-<p id="section-14.1.1-1">In a meta-schema, the $vocabulary keyword identifies the
+<p id="section-15.1.1-1">In a meta-schema, the $vocabulary keyword identifies the
 vocabularies available for use in schemas described by that meta-schema.
 It is also used to indicate whether each vocabulary is required or optional;
 an implementation MUST understand the required vocabularies
 in order to successfully process the schema. Together, this information forms
 a dialect. Any vocabulary that is understood by the implementation MUST be
 processed in a manner consistent with the semantic definitions contained
-within the vocabulary.<a href="#section-14.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-14.1.1-2">Meta-schemas that do not use "$vocabulary" MUST be considered to require the
+within the vocabulary.<a href="#section-15.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-15.1.1-2">Meta-schemas that do not use "$vocabulary" MUST be considered to require the
 Core vocabulary as if its URI were present with a value of true. Meta-schemas
 that do use this keyword MUST explicitly list the Core vocabulary, which MUST
-have a value of true indicating that it is required.<a href="#section-14.1.1-2" class="pilcrow">¶</a></p>
-<p id="section-14.1.1-3">The value of this keyword MUST be an object.  The property names in the
+have a value of true indicating that it is required.<a href="#section-15.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-15.1.1-3">The value of this keyword MUST be an object.  The property names in the
 object MUST be absolute URIs and each URI MUST be normalized.
 Each URI that appears as a property name identifies a specific set of
-keywords and their semantics.<a href="#section-14.1.1-3" class="pilcrow">¶</a></p>
-<p id="section-14.1.1-4">The values of the object properties MUST be booleans.
+keywords and their semantics.<a href="#section-15.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-15.1.1-4">The values of the object properties MUST be booleans.
 If the value is true, then implementations that do not recognize
 the vocabulary MUST refuse to process any schemas that declare
 this meta-schema with "$schema".  If the value is false, implementations
 that do not recognize the vocabulary SHOULD proceed with processing
 such schemas.  The value has no impact if the implementation
-understands the vocabulary.<a href="#section-14.1.1-4" class="pilcrow">¶</a></p>
-<p id="section-14.1.1-5">The "$vocabulary" keyword SHOULD be used in the root schema of any schema
-resource intended for use as a meta-schema.  It MUST NOT appear in subschemas.<a href="#section-14.1.1-5" class="pilcrow">¶</a></p>
-<p id="section-14.1.1-6">The "$vocabulary" keyword MUST be ignored in schema resources that
+understands the vocabulary.<a href="#section-15.1.1-4" class="pilcrow">¶</a></p>
+<p id="section-15.1.1-5">The "$vocabulary" keyword SHOULD be used in the root schema of any schema
+resource intended for use as a meta-schema.  It MUST NOT appear in subschemas.<a href="#section-15.1.1-5" class="pilcrow">¶</a></p>
+<p id="section-15.1.1-6">The "$vocabulary" keyword MUST be ignored in schema resources that
 are not being processed as a meta-schema.  This allows validating
 a meta-schema M against its own meta-schema M' without requiring
-the implementation to understand the vocabularies declared by M.<a href="#section-14.1.1-6" class="pilcrow">¶</a></p>
+the implementation to understand the vocabularies declared by M.<a href="#section-15.1.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="default-vocabularies">
-<section id="section-14.1.2">
+<section id="section-15.1.2">
           <h4 id="name-default-vocabularies">
-<a href="#section-14.1.2" class="section-number selfRef">14.1.2. </a><a href="#name-default-vocabularies" class="section-name selfRef">Default vocabularies</a>
+<a href="#section-15.1.2" class="section-number selfRef">15.1.2. </a><a href="#name-default-vocabularies" class="section-name selfRef">Default vocabularies</a>
           </h4>
-<p id="section-14.1.2-1">If "$vocabulary" is absent, an implementation MAY determine
+<p id="section-15.1.2-1">If "$vocabulary" is absent, an implementation MAY determine
 behavior based on the meta-schema if it is recognized from the
 URI value of the referring schema's "$schema" keyword.
 This is how behavior (such as Hyper-Schema usage) has been
-recognized prior to the existence of vocabularies.<a href="#section-14.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-14.1.2-2">If the meta-schema, as referenced by the schema, is not recognized,
+recognized prior to the existence of vocabularies.<a href="#section-15.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-15.1.2-2">If the meta-schema, as referenced by the schema, is not recognized,
 or is missing, then the behavior is implementation-defined.
 If the implementation is built for a specific purpose,
 then it SHOULD assume the use of all of the most relevant vocabularies
-for that purpose.<a href="#section-14.1.2-2" class="pilcrow">¶</a></p>
-<p id="section-14.1.2-3">For example, an implementation that is a validator
+for that purpose.<a href="#section-15.1.2-2" class="pilcrow">¶</a></p>
+<p id="section-15.1.2-3">For example, an implementation that is a validator
 SHOULD assume the use of all vocabularies in this
-specification.<a href="#section-14.1.2-3" class="pilcrow">¶</a></p>
+specification.<a href="#section-15.1.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="non-inheritability-of-vocabularies">
-<section id="section-14.1.3">
+<section id="section-15.1.3">
           <h4 id="name-non-inheritability-of-vocab">
-<a href="#section-14.1.3" class="section-number selfRef">14.1.3. </a><a href="#name-non-inheritability-of-vocab" class="section-name selfRef">Non-inheritability of vocabularies</a>
+<a href="#section-15.1.3" class="section-number selfRef">15.1.3. </a><a href="#name-non-inheritability-of-vocab" class="section-name selfRef">Non-inheritability of vocabularies</a>
           </h4>
-<p id="section-14.1.3-1">Note that the processing restrictions on "$vocabulary" mean that
+<p id="section-15.1.3-1">Note that the processing restrictions on "$vocabulary" mean that
 meta-schemas that reference other meta-schemas using "$ref" or
 similar keywords do not automatically inherit the vocabulary
 declarations of those other meta-schemas (so that implementations can
@@ -6165,288 +6440,288 @@ find all vocabulary requirement information in one place).
 All such declarations
 must be repeated in the root of each schema document intended
 for use as a meta-schema.  This is demonstrated in
-<span><a href="#example-meta-schema" class="internal xref">the example meta-schema</a> (<a href="#example-meta-schema" class="auto internal xref">Appendix E.2</a>)</span>.<a href="#section-14.1.3-1" class="pilcrow">¶</a></p>
+<span><a href="#example-meta-schema" class="internal xref">the example meta-schema</a> (<a href="#example-meta-schema" class="auto internal xref">Appendix E.2</a>)</span>.<a href="#section-15.1.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="updates-to-meta-schema-and-vocabulary-uris">
-<section id="section-14.1.4">
+<section id="section-15.1.4">
           <h4 id="name-updates-to-meta-schema-and-">
-<a href="#section-14.1.4" class="section-number selfRef">14.1.4. </a><a href="#name-updates-to-meta-schema-and-" class="section-name selfRef">Updates to Meta-Schema and Vocabulary URIs</a>
+<a href="#section-15.1.4" class="section-number selfRef">15.1.4. </a><a href="#name-updates-to-meta-schema-and-" class="section-name selfRef">Updates to Meta-Schema and Vocabulary URIs</a>
           </h4>
-<p id="section-14.1.4-1">Updated vocabulary and meta-schema URIs MAY be published between
+<p id="section-15.1.4-1">Updated vocabulary and meta-schema URIs MAY be published between
 specification drafts in order to correct errors.  Implementations
 SHOULD consider URIs dated after this specification draft and
 before the next to indicate the same syntax and semantics
-as those listed here.<a href="#section-14.1.4-1" class="pilcrow">¶</a></p>
+as those listed here.<a href="#section-15.1.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
 <div id="default-dialect">
-<section id="section-14.2">
+<section id="section-15.2">
         <h3 id="name-default-json-schema-dialect">
-<a href="#section-14.2" class="section-number selfRef">14.2. </a><a href="#name-default-json-schema-dialect" class="section-name selfRef">Default JSON Schema Dialect</a>
+<a href="#section-15.2" class="section-number selfRef">15.2. </a><a href="#name-default-json-schema-dialect" class="section-name selfRef">Default JSON Schema Dialect</a>
         </h3>
-<p id="section-14.2-1">The current URI for the default JSON Schema dialect meta-schema is <span><a href="https://json-schema.org/draft/2020-12/schema">https://json-schema.org/draft/2020-12/schema</a></span>. For schema author
+<p id="section-15.2-1">The current URI for the default JSON Schema dialect meta-schema is <span><a href="https://json-schema.org/draft/2020-12/schema">https://json-schema.org/draft/2020-12/schema</a></span>. For schema author
 convenience, this meta-schema describes a dialect consisting of all
 vocabularies defined in this specification, as well as two former keywords
 which are reserved for a transitional period. Individual vocabulary and
 vocabulary meta-schema URIs are given for each section in this specification.
 Certain vocabularies are optional to support, which is explained in detail in
-the relevant sections.<a href="#section-14.2-1" class="pilcrow">¶</a></p>
+the relevant sections.<a href="#section-15.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
 <div id="security">
-<section id="section-15">
+<section id="section-16">
       <h2 id="name-security-considerations">
-<a href="#section-15" class="section-number selfRef">15. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+<a href="#section-16" class="section-number selfRef">16. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-15-1">Both schemas and instances are JSON values. As such, all security considerations
-defined in <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span> apply.<a href="#section-15-1" class="pilcrow">¶</a></p>
-<p id="section-15-2">Instances and schemas are both frequently written by untrusted third parties, to
+<p id="section-16-1">Both schemas and instances are JSON values. As such, all security considerations
+defined in <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span> apply.<a href="#section-16-1" class="pilcrow">¶</a></p>
+<p id="section-16-2">Instances and schemas are both frequently written by untrusted third parties, to
 be deployed on public Internet servers. Implementations should take care that
 the parsing and validating against schemas does not consume excessive system
-resources. Implementations MUST NOT fall into an infinite loop.<a href="#section-15-2" class="pilcrow">¶</a></p>
-<p id="section-15-3">A malicious party could cause an implementation to repeatedly produce a copy
+resources. Implementations MUST NOT fall into an infinite loop.<a href="#section-16-2" class="pilcrow">¶</a></p>
+<p id="section-16-3">A malicious party could cause an implementation to repeatedly produce a copy
 of a very large value as an annotation.  Implementations SHOULD guard against
-excessive consumption of system resources in such a scenario.<a href="#section-15-3" class="pilcrow">¶</a></p>
-<p id="section-15-4">Servers MUST ensure that malicious parties cannot change the functionality of
-existing schemas by uploading a schema with a pre-existing or very similar "$id".<a href="#section-15-4" class="pilcrow">¶</a></p>
-<p id="section-15-5">Individual JSON Schema vocabularies are liable to also have their own security
-considerations. Consult the respective specifications for more information.<a href="#section-15-5" class="pilcrow">¶</a></p>
-<p id="section-15-6">Schema authors should take care with "$comment" contents, as a malicious
+excessive consumption of system resources in such a scenario.<a href="#section-16-3" class="pilcrow">¶</a></p>
+<p id="section-16-4">Servers MUST ensure that malicious parties cannot change the functionality of
+existing schemas by uploading a schema with a pre-existing or very similar "$id".<a href="#section-16-4" class="pilcrow">¶</a></p>
+<p id="section-16-5">Individual JSON Schema vocabularies are liable to also have their own security
+considerations. Consult the respective specifications for more information.<a href="#section-16-5" class="pilcrow">¶</a></p>
+<p id="section-16-6">Schema authors should take care with "$comment" contents, as a malicious
 implementation can display them to end-users in violation of a spec, or
-fail to strip them if such behavior is expected.<a href="#section-15-6" class="pilcrow">¶</a></p>
-<p id="section-15-7">A malicious schema author could place executable code or other dangerous
+fail to strip them if such behavior is expected.<a href="#section-16-6" class="pilcrow">¶</a></p>
+<p id="section-16-7">A malicious schema author could place executable code or other dangerous
 material within a "$comment".  Implementations MUST NOT parse or otherwise
-take action based on "$comment" contents.<a href="#section-15-7" class="pilcrow">¶</a></p>
-<p id="section-15-8">JSON Schema validation allows the use of Regular Expressions, which have numerous
+take action based on "$comment" contents.<a href="#section-16-7" class="pilcrow">¶</a></p>
+<p id="section-16-8">JSON Schema validation allows the use of Regular Expressions, which have numerous
 different (often incompatible) implementations.
 Some implementations allow the embedding of arbitrary code, which is outside the
 scope of JSON Schema and MUST NOT be permitted.
 Regular expressions can often also be crafted to be extremely expensive to compute
 (with so-called "catastrophic backtracking"), resulting in a denial-of-service
-attack.<a href="#section-15-8" class="pilcrow">¶</a></p>
-<p id="section-15-9">Implementations that support validating or otherwise evaluating input
+attack.<a href="#section-16-8" class="pilcrow">¶</a></p>
+<p id="section-16-9">Implementations that support validating or otherwise evaluating input
 string data based on "contentEncoding" and/or "contentMediaType" are at
 risk of evaluating data in an unsafe way based on misleading information.
 Applications can mitigate this risk by only performing such processing
 when a relationship between the schema and input is established
-(e.g., they share the same authority).<a href="#section-15-9" class="pilcrow">¶</a></p>
-<p id="section-15-10">Processing a media type or encoding is subject to the security considerations
+(e.g., they share the same authority).<a href="#section-16-9" class="pilcrow">¶</a></p>
+<p id="section-16-10">Processing a media type or encoding is subject to the security considerations
 of that media type or encoding.  For example, the security considerations
 Scripting Media Types (<span>[<a href="#RFC4329" class="cite xref">RFC4329</a>]</span>) apply when
-processing JavaScript or ECMAScript encoded within a JSON string.<a href="#section-15-10" class="pilcrow">¶</a></p>
-<p id="section-15-11">Interpreting a reference target as a schema when it is not known to be one
+processing JavaScript or ECMAScript encoded within a JSON string.<a href="#section-16-10" class="pilcrow">¶</a></p>
+<p id="section-16-11">Interpreting a reference target as a schema when it is not known to be one
 (see <a href="#non-schemas" class="auto internal xref">Section 11.4.3</a>) is analogous to fetching a schema over HTTP but receiving
 a response with a Content-Type other than application/json-schema+json.  An
 implementation can certainly try to interpret it as a schema, but the origin
 server offered no guarantee that it actually is any such thing.  Therefore,
 interpreting it as such has security implications and may produce
-unpredictable results.<a href="#section-15-11" class="pilcrow">¶</a></p>
+unpredictable results.<a href="#section-16-11" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="interoperability-considerations">
-<section id="section-16">
+<section id="section-17">
       <h2 id="name-interoperability-considerat">
-<a href="#section-16" class="section-number selfRef">16. </a><a href="#name-interoperability-considerat" class="section-name selfRef">Interoperability Considerations</a>
+<a href="#section-17" class="section-number selfRef">17. </a><a href="#name-interoperability-considerat" class="section-name selfRef">Interoperability Considerations</a>
       </h2>
 <div id="language">
-<section id="section-16.1">
+<section id="section-17.1">
         <h3 id="name-programming-language-indepe">
-<a href="#section-16.1" class="section-number selfRef">16.1. </a><a href="#name-programming-language-indepe" class="section-name selfRef">Programming Language Independence</a>
+<a href="#section-17.1" class="section-number selfRef">17.1. </a><a href="#name-programming-language-indepe" class="section-name selfRef">Programming Language Independence</a>
         </h3>
-<p id="section-16.1-1">JSON Schema is programming language agnostic, and supports the full range of
+<p id="section-17.1-1">JSON Schema is programming language agnostic, and supports the full range of
 values described in the data model.
 Be aware, however, that some languages and JSON parsers may not be able to
-represent in memory the full range of values describable by JSON.<a href="#section-16.1-1" class="pilcrow">¶</a></p>
+represent in memory the full range of values describable by JSON.<a href="#section-17.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="integers">
-<section id="section-16.2">
+<section id="section-17.2">
         <h3 id="name-mathematical-integers">
-<a href="#section-16.2" class="section-number selfRef">16.2. </a><a href="#name-mathematical-integers" class="section-name selfRef">Mathematical Integers</a>
+<a href="#section-17.2" class="section-number selfRef">17.2. </a><a href="#name-mathematical-integers" class="section-name selfRef">Mathematical Integers</a>
         </h3>
-<p id="section-16.2-1">Some programming languages and parsers use different internal representations
-for floating point numbers than they do for integers.<a href="#section-16.2-1" class="pilcrow">¶</a></p>
-<p id="section-16.2-2">For consistency, integer JSON numbers SHOULD NOT be encoded with a fractional
-part.<a href="#section-16.2-2" class="pilcrow">¶</a></p>
+<p id="section-17.2-1">Some programming languages and parsers use different internal representations
+for floating point numbers than they do for integers.<a href="#section-17.2-1" class="pilcrow">¶</a></p>
+<p id="section-17.2-2">For consistency, integer JSON numbers SHOULD NOT be encoded with a fractional
+part.<a href="#section-17.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="regex-interop">
-<section id="section-16.3">
+<section id="section-17.3">
         <h3 id="name-regular-expressions">
-<a href="#section-16.3" class="section-number selfRef">16.3. </a><a href="#name-regular-expressions" class="section-name selfRef">Regular Expressions</a>
+<a href="#section-17.3" class="section-number selfRef">17.3. </a><a href="#name-regular-expressions" class="section-name selfRef">Regular Expressions</a>
         </h3>
-<p id="section-16.3-1">Keywords MAY use regular expressions to express constraints, or constrain
+<p id="section-17.3-1">Keywords MAY use regular expressions to express constraints, or constrain
 the input value to be a regular expression.
 These regular expressions SHOULD be valid according to the regular expression
-dialect described in <span>[<a href="#ECMA262" class="cite xref">ECMA262</a>]</span>, Section 21.2.1.<a href="#section-16.3-1" class="pilcrow">¶</a></p>
-<p id="section-16.3-2">Unless otherwise specified by a keyword, regular expressions MUST NOT be
+dialect described in <span>[<a href="#ECMA262" class="cite xref">ECMA262</a>]</span>, Section 21.2.1.<a href="#section-17.3-1" class="pilcrow">¶</a></p>
+<p id="section-17.3-2">Unless otherwise specified by a keyword, regular expressions MUST NOT be
 considered to be implicitly anchored at either end.  All regular expression
-keywords in this specification are un-anchored.<a href="#section-16.3-2" class="pilcrow">¶</a></p>
-<p id="section-16.3-3">Regular expressions SHOULD be built with the "u" flag (or equivalent) to provide
+keywords in this specification are un-anchored.<a href="#section-17.3-2" class="pilcrow">¶</a></p>
+<p id="section-17.3-3">Regular expressions SHOULD be built with the "u" flag (or equivalent) to provide
 Unicode support, or processed in such a way which provides Unicode support as
-defined by ECMA-262.<a href="#section-16.3-3" class="pilcrow">¶</a></p>
-<p id="section-16.3-4">Furthermore, given the high disparity in regular expression constructs support,
+defined by ECMA-262.<a href="#section-17.3-3" class="pilcrow">¶</a></p>
+<p id="section-17.3-4">Furthermore, given the high disparity in regular expression constructs support,
 schema authors SHOULD limit themselves to the following regular expression
-tokens:<a href="#section-16.3-4" class="pilcrow">¶</a></p>
+tokens:<a href="#section-17.3-4" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-16.3-5.1">
-            <p id="section-16.3-5.1.1">individual Unicode characters, as defined by the
-JSON specification (<span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>);<a href="#section-16.3-5.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-17.3-5.1">
+            <p id="section-17.3-5.1.1">individual Unicode characters, as defined by the
+JSON specification (<span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>);<a href="#section-17.3-5.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-16.3-5.2">
-            <p id="section-16.3-5.2.1">simple character classes ([abc]), range character classes ([a-z]);<a href="#section-16.3-5.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-17.3-5.2">
+            <p id="section-17.3-5.2.1">simple character classes ([abc]), range character classes ([a-z]);<a href="#section-17.3-5.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-16.3-5.3">
-            <p id="section-16.3-5.3.1">complemented character classes ([^abc], [^a-z]);<a href="#section-16.3-5.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-17.3-5.3">
+            <p id="section-17.3-5.3.1">complemented character classes ([^abc], [^a-z]);<a href="#section-17.3-5.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-16.3-5.4">
-            <p id="section-16.3-5.4.1">simple quantifiers: "+" (one or more), "*" (zero or more), "?" (zero or
-one), and their lazy versions ("+?", "*?", "??");<a href="#section-16.3-5.4.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-17.3-5.4">
+            <p id="section-17.3-5.4.1">simple quantifiers: "+" (one or more), "*" (zero or more), "?" (zero or
+one), and their lazy versions ("+?", "*?", "??");<a href="#section-17.3-5.4.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-16.3-5.5">
-            <p id="section-16.3-5.5.1">range quantifiers: "{x}" (exactly x occurrences), "{x,y}" (at least x, at
+          <li class="normal" id="section-17.3-5.5">
+            <p id="section-17.3-5.5.1">range quantifiers: "{x}" (exactly x occurrences), "{x,y}" (at least x, at
 most y, occurrences), {x,} (x occurrences or more), and their lazy
-versions;<a href="#section-16.3-5.5.1" class="pilcrow">¶</a></p>
+versions;<a href="#section-17.3-5.5.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-16.3-5.6">
-            <p id="section-16.3-5.6.1">the beginning-of-input ("^") and end-of-input ("$") anchors;<a href="#section-16.3-5.6.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-17.3-5.6">
+            <p id="section-17.3-5.6.1">the beginning-of-input ("^") and end-of-input ("$") anchors;<a href="#section-17.3-5.6.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-16.3-5.7">
-            <p id="section-16.3-5.7.1">simple grouping ("(...)") and alternation ("|").<a href="#section-16.3-5.7.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-17.3-5.7">
+            <p id="section-17.3-5.7.1">simple grouping ("(...)") and alternation ("|").<a href="#section-17.3-5.7.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-16.3-6">Finally, implementations MUST NOT take regular expressions to be
+<p id="section-17.3-6">Finally, implementations MUST NOT take regular expressions to be
 anchored, neither at the beginning nor at the end. This means, for instance,
-the pattern "es" matches "expression".<a href="#section-16.3-6" class="pilcrow">¶</a></p>
+the pattern "es" matches "expression".<a href="#section-17.3-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
 <div id="iana-considerations">
-<section id="section-17">
+<section id="section-18">
       <h2 id="name-iana-considerations">
-<a href="#section-17" class="section-number selfRef">17. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+<a href="#section-18" class="section-number selfRef">18. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
 <div id="applicationjson-schemajson">
-<section id="section-17.1">
+<section id="section-18.1">
         <h3 id="name-application-json-schemajson">
-<a href="#section-17.1" class="section-number selfRef">17.1. </a><a href="#name-application-json-schemajson" class="section-name selfRef">application/json-schema+json</a>
+<a href="#section-18.1" class="section-number selfRef">18.1. </a><a href="#name-application-json-schemajson" class="section-name selfRef">application/json-schema+json</a>
         </h3>
-<p id="section-17.1-1">The proposed MIME media type for JSON Schema is defined as follows:<a href="#section-17.1-1" class="pilcrow">¶</a></p>
+<p id="section-18.1-1">The proposed MIME media type for JSON Schema is defined as follows:<a href="#section-18.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-17.1-2.1">
-            <p id="section-17.1-2.1.1">Type name: application<a href="#section-17.1-2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-18.1-2.1">
+            <p id="section-18.1-2.1.1">Type name: application<a href="#section-18.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-17.1-2.2">
-            <p id="section-17.1-2.2.1">Subtype name: json-schema+json<a href="#section-17.1-2.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-18.1-2.2">
+            <p id="section-18.1-2.2.1">Subtype name: json-schema+json<a href="#section-18.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-17.1-2.3">
-            <p id="section-17.1-2.3.1">Required parameters: N/A<a href="#section-17.1-2.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-18.1-2.3">
+            <p id="section-18.1-2.3.1">Required parameters: N/A<a href="#section-18.1-2.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-17.1-2.4">
-            <p id="section-17.1-2.4.1">Encoding considerations: Encoding considerations are
+          <li class="normal" id="section-18.1-2.4">
+            <p id="section-18.1-2.4.1">Encoding considerations: Encoding considerations are
 identical to those specified for the "application/json"
-media type.  See JSON (<span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>).<a href="#section-17.1-2.4.1" class="pilcrow">¶</a></p>
+media type.  See JSON (<span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>).<a href="#section-18.1-2.4.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-17.1-2.5">
-            <p id="section-17.1-2.5.1">Security considerations: See <a href="#security" class="auto internal xref">Section 15</a> above.<a href="#section-17.1-2.5.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-18.1-2.5">
+            <p id="section-18.1-2.5.1">Security considerations: See <a href="#security" class="auto internal xref">Section 16</a> above.<a href="#section-18.1-2.5.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-17.1-2.6">
-            <p id="section-17.1-2.6.1">Interoperability considerations: See <a href="#language" class="auto internal xref">Section 16.1</a>,
-<a href="#integers" class="auto internal xref">Section 16.2</a>, and
-<a href="#regex-interop" class="auto internal xref">Section 16.3</a> above.<a href="#section-17.1-2.6.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-18.1-2.6">
+            <p id="section-18.1-2.6.1">Interoperability considerations: See <a href="#language" class="auto internal xref">Section 17.1</a>,
+<a href="#integers" class="auto internal xref">Section 17.2</a>, and
+<a href="#regex-interop" class="auto internal xref">Section 17.3</a> above.<a href="#section-18.1-2.6.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-17.1-2.7">
-            <p id="section-17.1-2.7.1">Fragment identifier considerations: See <a href="#fragments" class="auto internal xref">Section 3.4</a>.<a href="#section-17.1-2.7.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-18.1-2.7">
+            <p id="section-18.1-2.7.1">Fragment identifier considerations: See <a href="#fragments" class="auto internal xref">Section 3.4</a>.<a href="#section-18.1-2.7.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-17.1-2.8">
-            <p id="section-17.1-2.8.1">Deprecated alias names for this type: application/schema+json<a href="#section-17.1-2.8.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-18.1-2.8">
+            <p id="section-18.1-2.8.1">Deprecated alias names for this type: application/schema+json<a href="#section-18.1-2.8.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-17.1-2.9">
-            <p id="section-17.1-2.9.1">Intended usage: COMMON<a href="#section-17.1-2.9.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-18.1-2.9">
+            <p id="section-18.1-2.9.1">Intended usage: COMMON<a href="#section-18.1-2.9.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="applicationschemajson">
-<section id="section-17.2">
+<section id="section-18.2">
         <h3 id="name-application-schemajson">
-<a href="#section-17.2" class="section-number selfRef">17.2. </a><a href="#name-application-schemajson" class="section-name selfRef">application/schema+json</a>
+<a href="#section-18.2" class="section-number selfRef">18.2. </a><a href="#name-application-schemajson" class="section-name selfRef">application/schema+json</a>
         </h3>
-<p id="section-17.2-1">This MIME media type is registered for clarity and interoperability.
+<p id="section-18.2-1">This MIME media type is registered for clarity and interoperability.
 It is frequently used already, but it could also describe something
 other than "JSON Schema" that is a schema language in JSON, so it is
 registered as OBSOLETE in favor of application/json-schema+json
-(<span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>).<a href="#section-17.2-1" class="pilcrow">¶</a></p>
+(<span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>).<a href="#section-18.2-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-17.2-2.1">
-            <p id="section-17.2-2.1.1">Type name: application<a href="#section-17.2-2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-18.2-2.1">
+            <p id="section-18.2-2.1.1">Type name: application<a href="#section-18.2-2.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-17.2-2.2">
-            <p id="section-17.2-2.2.1">Subtype name: schema+json<a href="#section-17.2-2.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-18.2-2.2">
+            <p id="section-18.2-2.2.1">Subtype name: schema+json<a href="#section-18.2-2.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-17.2-2.3">
-            <p id="section-17.2-2.3.1">Required parameters: N/A<a href="#section-17.2-2.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-18.2-2.3">
+            <p id="section-18.2-2.3.1">Required parameters: N/A<a href="#section-18.2-2.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-17.2-2.4">
-            <p id="section-17.2-2.4.1">Encoding considerations: Encoding considerations are
+          <li class="normal" id="section-18.2-2.4">
+            <p id="section-18.2-2.4.1">Encoding considerations: Encoding considerations are
 identical to those specified for the "application/json"
-media type.  See JSON (<span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>).<a href="#section-17.2-2.4.1" class="pilcrow">¶</a></p>
+media type.  See JSON (<span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>).<a href="#section-18.2-2.4.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-17.2-2.5">
-            <p id="section-17.2-2.5.1">Security considerations: See <a href="#security" class="auto internal xref">Section 15</a> above.<a href="#section-17.2-2.5.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-18.2-2.5">
+            <p id="section-18.2-2.5.1">Security considerations: See <a href="#security" class="auto internal xref">Section 16</a> above.<a href="#section-18.2-2.5.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-17.2-2.6">
-            <p id="section-17.2-2.6.1">Interoperability considerations: See <a href="#language" class="auto internal xref">Section 16.1</a>,
-<a href="#integers" class="auto internal xref">Section 16.2</a>, and
-<a href="#regex-interop" class="auto internal xref">Section 16.3</a> above.<a href="#section-17.2-2.6.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-18.2-2.6">
+            <p id="section-18.2-2.6.1">Interoperability considerations: See <a href="#language" class="auto internal xref">Section 17.1</a>,
+<a href="#integers" class="auto internal xref">Section 17.2</a>, and
+<a href="#regex-interop" class="auto internal xref">Section 17.3</a> above.<a href="#section-18.2-2.6.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-17.2-2.7">
-            <p id="section-17.2-2.7.1">Fragment identifier considerations: See <a href="#fragments" class="auto internal xref">Section 3.4</a>.<a href="#section-17.2-2.7.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-18.2-2.7">
+            <p id="section-18.2-2.7.1">Fragment identifier considerations: See <a href="#fragments" class="auto internal xref">Section 3.4</a>.<a href="#section-18.2-2.7.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-17.2-2.8">
-            <p id="section-17.2-2.8.1">Intended usage: OBSOLETE<a href="#section-17.2-2.8.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-18.2-2.8">
+            <p id="section-18.2-2.8.1">Intended usage: OBSOLETE<a href="#section-18.2-2.8.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="applicationschema-instancejson">
-<section id="section-17.3">
+<section id="section-18.3">
         <h3 id="name-application-schema-instance">
-<a href="#section-17.3" class="section-number selfRef">17.3. </a><a href="#name-application-schema-instance" class="section-name selfRef">application/schema-instance+json</a>
+<a href="#section-18.3" class="section-number selfRef">18.3. </a><a href="#name-application-schema-instance" class="section-name selfRef">application/schema-instance+json</a>
         </h3>
-<p id="section-17.3-1">The proposed MIME media type for JSON Schema Instances that require
-a JSON Schema-specific media type is defined as follows:<a href="#section-17.3-1" class="pilcrow">¶</a></p>
+<p id="section-18.3-1">The proposed MIME media type for JSON Schema Instances that require
+a JSON Schema-specific media type is defined as follows:<a href="#section-18.3-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-17.3-2.1">
-            <p id="section-17.3-2.1.1">Type name: application<a href="#section-17.3-2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-18.3-2.1">
+            <p id="section-18.3-2.1.1">Type name: application<a href="#section-18.3-2.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-17.3-2.2">
-            <p id="section-17.3-2.2.1">Subtype name: schema-instance+json<a href="#section-17.3-2.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-18.3-2.2">
+            <p id="section-18.3-2.2.1">Subtype name: schema-instance+json<a href="#section-18.3-2.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-17.3-2.3">
-            <p id="section-17.3-2.3.1">Required parameters: N/A<a href="#section-17.3-2.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-18.3-2.3">
+            <p id="section-18.3-2.3.1">Required parameters: N/A<a href="#section-18.3-2.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-17.3-2.4">
-            <p id="section-17.3-2.4.1">Encoding considerations: Encoding considerations are
+          <li class="normal" id="section-18.3-2.4">
+            <p id="section-18.3-2.4.1">Encoding considerations: Encoding considerations are
 identical to those specified for the "application/json"
-media type.  See JSON (<span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>).<a href="#section-17.3-2.4.1" class="pilcrow">¶</a></p>
+media type.  See JSON (<span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>).<a href="#section-18.3-2.4.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-17.3-2.5">
-            <p id="section-17.3-2.5.1">Security considerations: See <a href="#security" class="auto internal xref">Section 15</a> above.<a href="#section-17.3-2.5.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-18.3-2.5">
+            <p id="section-18.3-2.5.1">Security considerations: See <a href="#security" class="auto internal xref">Section 16</a> above.<a href="#section-18.3-2.5.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-17.3-2.6">
-            <p id="section-17.3-2.6.1">Interoperability considerations: See <a href="#language" class="auto internal xref">Section 16.1</a>,
-<a href="#integers" class="auto internal xref">Section 16.2</a>, and
-<a href="#regex-interop" class="auto internal xref">Section 16.3</a> above.<a href="#section-17.3-2.6.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-18.3-2.6">
+            <p id="section-18.3-2.6.1">Interoperability considerations: See <a href="#language" class="auto internal xref">Section 17.1</a>,
+<a href="#integers" class="auto internal xref">Section 17.2</a>, and
+<a href="#regex-interop" class="auto internal xref">Section 17.3</a> above.<a href="#section-18.3-2.6.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-17.3-2.7">
-            <p id="section-17.3-2.7.1">Fragment identifier considerations: See <a href="#fragments" class="auto internal xref">Section 3.4</a>.<a href="#section-17.3-2.7.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-18.3-2.7">
+            <p id="section-18.3-2.7.1">Fragment identifier considerations: See <a href="#fragments" class="auto internal xref">Section 3.4</a>.<a href="#section-18.3-2.7.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -6454,14 +6729,14 @@ media type.  See JSON (<span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]<
 </section>
 </div>
 <div id="sec-combined-references">
-<section id="section-18">
+<section id="section-19">
       <h2 id="name-references">
-<a href="#section-18" class="section-number selfRef">18. </a><a href="#name-references" class="section-name selfRef">References</a>
+<a href="#section-19" class="section-number selfRef">19. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
 <div id="sec-normative-references">
-<section id="section-18.1">
+<section id="section-19.1">
         <h3 id="name-normative-references">
-<a href="#section-18.1" class="section-number selfRef">18.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+<a href="#section-19.1" class="section-number selfRef">19.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
 <dt id="ECMA262">[ECMA262]</dt>
@@ -6568,14 +6843,18 @@ media type.  See JSON (<span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]<
 </section>
 </div>
 <div id="sec-informative-references">
-<section id="section-18.2">
+<section id="section-19.2">
         <h3 id="name-informative-references">
-<a href="#section-18.2" class="section-number selfRef">18.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+<a href="#section-19.2" class="section-number selfRef">19.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
 <dt id="I-D.handrews-json-schema-hyperschema">[I-D.handrews-json-schema-hyperschema]</dt>
         <dd>
 <span class="refAuthor">Andrews, H. H.</span> and <span class="refAuthor">A. Wright</span>, <span class="refTitle">"JSON Hyper-Schema: A Vocabulary for Hypermedia Annotation of JSON"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-handrews-json-schema-hyperschema-02</span>, <time datetime="2019-09-17" class="refDate">17 September 2019</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-handrews-json-schema-hyperschema-02">https://datatracker.ietf.org/doc/html/draft-handrews-json-schema-hyperschema-02</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="ISO8601">[ISO8601]</dt>
+        <dd>
+<span class="refAuthor">International Organization for Standardization</span>, <span class="refTitle">"Date and time - Representations for information interchange - Part 1: Basic rules"</span>, <span class="seriesInfo">ISO 8601-1:2019</span>, <time datetime="2019-02" class="refDate">February 2019</time>, <span>&lt;<a href="https://www.iso.org/standard/70907.html">https://www.iso.org/standard/70907.html</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC4329">[RFC4329]</dt>
         <dd>
@@ -6935,8 +7214,8 @@ which is used in the implementation of <code>unevaluatedProperties</code>.<a hre
 "X" and "Y", therefore regardless of the outcome of <code>properties</code>,
 the <code>additionalProperties</code> schema is never applied to those
 properties:<a href="#appendix-D-5" class="pilcrow">¶</a></p>
-<table class="center" id="table-2">
-        <caption><a href="#table-2" class="selfRef">Table 2</a></caption>
+<table class="center" id="table-3">
+        <caption><a href="#table-3" class="selfRef">Table 3</a></caption>
 <thead>
           <tr>
             <th class="text-left" rowspan="1" colspan="1">Input</th>
@@ -7011,8 +7290,8 @@ three different inputs, and how <code>unevaluatedProperties</code>
 implementations could use that result.  Note that <code>unevaluatedProperties</code>
 ends up applying to both properties in the third row, while
 <code>additionalProperties</code> never applied to either of them.<a href="#appendix-D-11" class="pilcrow">¶</a></p>
-<table class="center" id="table-3">
-        <caption><a href="#table-3" class="selfRef">Table 3</a></caption>
+<table class="center" id="table-4">
+        <caption><a href="#table-4" class="selfRef">Table 4</a></caption>
 <thead>
           <tr>
             <th class="text-left" rowspan="1" colspan="1">Input</th>
@@ -7077,8 +7356,8 @@ username fields, and preventing additional fields:<a href="#appendix-D-14" class
 </div>
 <p id="appendix-D-16">The length of the <code>prefixItems</code> keyword is 3, so <code>items</code> is applied
 to items at index 3 or higher, as shown in table below:<a href="#appendix-D-16" class="pilcrow">¶</a></p>
-<table class="center" id="table-4">
-        <caption><a href="#table-4" class="selfRef">Table 4</a></caption>
+<table class="center" id="table-5">
+        <caption><a href="#table-5" class="selfRef">Table 5</a></caption>
 <thead>
           <tr>
             <th class="text-left" rowspan="1" colspan="1">Input</th>
@@ -7161,8 +7440,8 @@ outcomes:<a href="#appendix-D-18" class="pilcrow">¶</a></p>
 information from the <code>prefixItems</code> evaluation. Then,
 <code>unevaluatedItems</code> uses the <code>prefixItems</code> information to start where <code>prefixItems</code>
 left off, applying only to indices not covered by the <code>prefixItems</code> evaluation.<a href="#appendix-D-20" class="pilcrow">¶</a></p>
-<table class="center" id="table-5">
-        <caption><a href="#table-5" class="selfRef">Table 5</a></caption>
+<table class="center" id="table-6">
+        <caption><a href="#table-6" class="selfRef">Table 6</a></caption>
 <thead>
           <tr>
             <th class="text-left" rowspan="1" colspan="1">Input</th>
@@ -7229,8 +7508,8 @@ left off, applying only to indices not covered by the <code>prefixItems</code> e
 while <code>items</code> was not.<a href="#appendix-D-22" class="pilcrow">¶</a></p>
 <p id="appendix-D-23">The following table summarizes which keywords have static values
 on which adjacent keywords depend:<a href="#appendix-D-23" class="pilcrow">¶</a></p>
-<table class="center" id="table-6">
-        <caption><a href="#table-6" class="selfRef">Table 6</a></caption>
+<table class="center" id="table-7">
+        <caption><a href="#table-7" class="selfRef">Table 7</a></caption>
 <thead>
           <tr>
             <th class="text-left" rowspan="1" colspan="1">Keyword</th>
@@ -7288,8 +7567,8 @@ on which adjacent keywords depend:<a href="#appendix-D-23" class="pilcrow">¶</a
       </table>
 <p id="appendix-D-25">The following table summarizes which keywords, when successful, produce
 information on which other keywords depend:<a href="#appendix-D-25" class="pilcrow">¶</a></p>
-<table class="center" id="table-7">
-        <caption><a href="#table-7" class="selfRef">Table 7</a></caption>
+<table class="center" id="table-8">
+        <caption><a href="#table-8" class="selfRef">Table 8</a></caption>
 <thead>
           <tr>
             <th class="text-left" rowspan="1" colspan="1">Keyword</th>
@@ -7619,7 +7898,11 @@ from failed subschemas.<a href="#appendix-G-2.4.1" class="pilcrow">¶</a></p>
         <li class="normal" id="appendix-G-2.6">
           <p id="appendix-G-2.6.1">"application/json-schema+json" is the media type for JSON Schema.
 "application/schema+json" is registered as an obsolete alias
-(<a href="#iana-considerations" class="auto internal xref">Section 17</a>).<a href="#appendix-G-2.6.1" class="pilcrow">¶</a></p>
+(<a href="#iana-considerations" class="auto internal xref">Section 18</a>).<a href="#appendix-G-2.6.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-G-2.7">
+          <p id="appendix-G-2.7.1">Format checking returns to being a requirement, meeting authors'
+expectations.<a href="#appendix-G-2.7.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 </section>
