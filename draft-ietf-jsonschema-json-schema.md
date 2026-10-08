@@ -30,9 +30,9 @@ normative:
   ECMA262:
     author:
       org: European Computer Manufacturers Association
-    title: ECMAScript Language Specification 6th Edition
-    date: 2015-06
-    target: https://ecma-international.org/wp-content/uploads/ECMA-262_6th_edition_june_2015.pdf
+    title: ECMAScript 2026 Language Specification, 17th Edition
+    date: 2026-06
+    target: https://262.ecma-international.org/17.0/
     seriesinfo:
       ECMA: Standard ECMA-262
   LDP:
@@ -1655,9 +1655,9 @@ All of these format attributes apply to strings.
 | `idn-hostname` ({{format-idn-hostname}}) | A host name, allowing non-ASCII characters | `www.example.com` |
 | `ipv4` ({{format-ipv4}}) | An IPv4 address in dotted-quad form | `192.0.2.1` |
 | `ipv6` ({{format-ipv6}}) | An IPv6 address | `2001:db8::1` |
-| `uri` ({{format-uri}}) | An absolute URI | `https://example.com/a?b=c` |
+| `uri` ({{format-uri}}) | A full URI | `https://example.com/a?b=c` |
 | `uri-reference` ({{format-uri-reference}}) | A URI or a relative reference | `../a#b` |
-| `iri` ({{format-iri}}) | An absolute IRI, allowing non-ASCII characters | `https://example.com/a` |
+| `iri` ({{format-iri}}) | A full IRI, allowing non-ASCII characters | `https://example.com/a` |
 | `iri-reference` ({{format-iri-reference}}) | An IRI or a relative reference | `../a#b` |
 | `uuid` ({{format-uuid}}) | A UUID, without a `urn:uuid:` prefix | `f81d4fae-7dec-11d0-a765-00a0c91e6bf6` |
 | `uri-template` ({{format-uri-template}}) | A URI Template | `https://example.com/users/{id}` |
@@ -1789,7 +1789,7 @@ Internet email address as follows:
 As defined by the "Mailbox" ABNF rule in
 {{!RFC5321, Section 4.1.2}}.  Along with its ABNF definitions, RFC 5321 has additional limitations
 on email addresses in {{!RFC5321, Section 4.5.3}} which MUST be enforced.
-Hostnames in email addresses MUST be syntactically valid hostnames.
+When the domain is not an address literal, it MUST be a syntactically valid hostname.
 
 A reasonable *starting point* for validation (once line returns are removed) is
 this regex, which is NOT a complete implementation without further address checking
@@ -1811,22 +1811,32 @@ accepted by the "idn-email" attribute.
 
 ## Hostnames {#format-hostnames}
 
-These attributes apply to string inputs.
+These attributes apply to string inputs.  Hostname validation is done without
+performing an input mapping step which may change many invalid names to valid ones.
+Because browsers frequently do a mapping step, many domain names that a user
+might type in (e.g. with capital characters or full-width characters) are invalid as typed
+in yet the browser will attempt to resolve.  These format attributes are intended
+to accept a narrower set of hostnames.
 
-A string input is accepted by these attributes if it is a valid
-representation for an Internet hostname as follows:
 
 ### "hostname" {#format-hostname}
 
-As defined by {{!RFC1123, Section 2.1}},
-including host names produced using the Punycode algorithm
-specified in {{!RFC5891, Section 4.4}}.
+Each label follows the preferred name syntax of {{!RFC1034, Section 3.5}}
+(letters, digits, and interior hyphens, at most 63 characters),
+as relaxed by {{!RFC1123, Section 2.1}} to allow a leading digit.  The whole host name is at most
+253 characters.  This includes host names produced using the Punycode algorithm
+specified in {{!RFC5891, Section 4.4}}.  Hostnames with "xn--"
+do not need to decode to a valid IDN hostname (for example,
+xn--ls8h.example or xn--zz.example).
 
 ### "idn-hostname" {#format-idn-hostname}
 
 As defined by either RFC 1123 as for hostname, or an
 internationalized hostname as defined by
-{{!RFC5890, Section 2.3.2.3}}.
+{{!RFC5890, Section 2.3.2.3}}.  The other IDNA2008 documents define
+what makes each label valid: the protocol rules in {{!RFC5891}},
+the permitted code points in {{!RFC5892}}, and the rules for
+right-to-left scripts in {{!RFC5893}}.
 
 Note that all strings accepted by the "hostname" attribute are also
 accepted by the "idn-hostname" attribute.
@@ -1852,6 +1862,21 @@ An IPv6 address as defined in
 ## Resource Identifiers {#format-uris}
 
 These attributes apply to string inputs.
+Note that all valid URIs are valid IRIs, and all valid URI References are also valid IRI References.
+
+Only general URI format checking is expected for the URI/IRI constraints.
+Implementations SHOULD NOT add checks for specific schemes such as http or email URIs,
+as this would lead to inconsistent validation results between
+implementations.
+
+If per-format URI checking is desired, a schema author could
+possibly combine the "uri" format constraint with a `pattern` regex constraint.  Specification
+authors can define additional format options in the IANA registry.
+
+Implementors using libraries are cautioned to check if the libraries fix up URIs along with validating them.
+For example a library that quietly replaces space with "%20" or treats backslashes as
+slashes would miss invalid URIs.  Other URI libraries check the rules of specific schemes
+which goes beyond the requirements here.
 
 ### "uri" {#format-uri}
 
@@ -1878,15 +1903,32 @@ according to {{!RFC3987, Section 2.2}}.
 ### "uuid" {#format-uuid}
 
 A string input is accepted by this attribute if it is a valid
-string representation of a UUID, according to {{!RFC4122}}.
+string representation of a UUID, according to {{!RFC9562, Section 4}}.
 
-Note that all valid URIs are valid IRIs, and all valid URI References are
-also valid IRI References.
+Note that the "uuid" format is for plain UUIDs, not UUIDs in URNs.  An example
+is "f81d4fae-7dec-11d0-a765-00a0c91e6bf6".  For UUIDs as URNs, use the "uri" format
+with a "pattern", as shown in {{format-uri-schemes}}.
 
-Note also that the "uuid" format is for plain UUIDs, not UUIDs in URNs.  An example
-is "f81d4fae-7dec-11d0-a765-00a0c91e6bf6".  For UUIDs as URNs, use the "uri" format,
-with a "pattern" regular expression of "^urn:uuid:" to indicate the URI scheme and
-URN namespace.
+### Checking Scheme-Specific Syntax {#format-uri-schemes}
+
+This section is non-normative.
+
+The "uri", "uri-reference", "iri" and "iri-reference" attributes check only
+the generic syntax of resource identifiers.  Schema authors who need the
+rules of a particular URI scheme can add them with "pattern" alongside
+"format".
+
+For example, {{RFC9562, Section 4}} defines a URN form for UUIDs, such
+as "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6".  The following schema
+constrains URIs to that form:
+
+~~~~~~~~~~
+{::include ./examples/urn-uuid.json}
+~~~~~~~~~~
+
+The "format" keyword checks that the string is a URI, and "pattern" adds
+the rules of the "urn:uuid" namespace: the prefix, followed by a UUID in
+the hex-and-dash form.
 
 ## Templates {#format-templates}
 
@@ -1924,12 +1966,13 @@ A string input is accepted by this attribute if it is a valid
 
 This attribute applies to string inputs.
 
-A regular expression, which SHOULD be valid according to the
-{{ECMA262}} regular expression dialect.
-
-Implementations that validate formats MUST accept at least the subset of
-ECMA-262 defined in [Regular Expressions](#regex-interop)
-section of this specification, and SHOULD accept all valid ECMA-262 expressions.
+A string input is accepted by this attribute if it is a valid
+regular expression.  It is RECOMMENDED that implementations determine
+validity using the "Pattern" grammar of {{ECMA262}}, Section 22.2.1
+in Unicode mode (as with the "u" flag), including its early error
+rules in {{ECMA262}}, Section 22.2.1.1.  Implementations that validate
+formats MUST accept at least the subset of ECMA-262 defined in
+{{regex-interop}}.
 
 # Vocabulary for the Contents of String-Encoded Data {#content}
 
@@ -3595,7 +3638,7 @@ part.
 Keywords MAY use regular expressions to express constraints, or constrain
 the input value to be a regular expression.
 These regular expressions SHOULD be valid according to the regular expression
-dialect described in {{ECMA262}}, Section 21.2.1.
+dialect described in {{ECMA262}}, Section 22.2.1.
 
 Unless otherwise specified by a keyword, regular expressions MUST NOT be
 considered to be implicitly anchored at either end.  All regular expression
