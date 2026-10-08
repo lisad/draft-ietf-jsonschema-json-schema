@@ -1,0 +1,57 @@
+value,format,valid,comment
+https://example.com/a?b=c#d,uri,yes,full URI with query and fragment
+urn:uuid:f81d4f ae-7dec-11d0-a765-00a0c91e6bf6,uri,yes,URN
+mailto:anne@example.com,uri,yes,mailto URI
+file:///etc/hosts,uri,yes,empty authority
+mailto:,uri,yes,scheme-specific rules are not checked; generic syntax allows an empty path
+https:no-slashes,uri,yes,scheme-specific rules are not checked; generic syntax does not require //
+HTTP://EXAMPLE.COM/,uri,yes,scheme and host are case-insensitive
+http://example.com:99999/,uri,yes,port is any string of digits; no range check
+http://example.com:/,uri,yes,empty port is allowed
+http://under_score.com/,uri,yes,hosts as names in URI ('reg-name') do not follow full DNS host rules
+http://anne:wentworth@example.com/,uri,yes,userinfo is allowed by the generic syntax
+http://192.0.2.1/,uri,yes,IPv4 host
+http://[2001:db8::1]:8080/,uri,yes,"IPv6 host in brackets, with port"
+https://example.com/a%20b,uri,yes,percent-encoded space
+example.com/path,uri,no,no scheme; valid as uri-reference
+//example.com,uri,no,network-path reference has no scheme; valid as uri-reference
+/path,uri,no,absolute-path reference has no scheme; valid as uri-reference
+,uri,no,empty string; valid as uri-reference
+1http://example.com/,uri,no,scheme must start with a letter
+ht tp://example.com/,uri,no,space in scheme
+https://example.com/a b,uri,no,unencoded space (some libraries silently encode it as %20)
+ https://example.com/,uri,no,leading space 
+https://example.com/%zz,uri,no,% not followed by two hex digits
+https://example.com/%,uri,no,% at end of string
+https:\\example.com\a,uri,no,backslashes are not allowed 
+http://exa mple.com/,uri,no,space in host
+http://[::1/,uri,no,unclosed IPv6 bracket
+http://::1/,uri,no,IPv6 host without brackets
+https://example.com/{id},uri,no,braces are not allowed; use uri-template for templates
+https://example.com/a|b,uri,no,| is not allowed
+https://example.com/<a>,uri,no,< and > are not allowed
+https://example.com/a#b#c,uri,no,# is not allowed inside a fragment
+https://example.com/musée,uri,no,non-ASCII character; valid as iri
+,uri-reference,yes,empty string is a same-document reference
+../a#b,uri-reference,yes,relative path with fragment
+//example.com/path,uri-reference,yes,network-path reference
+#fragment,uri-reference,yes,fragment only
+?query,uri-reference,yes,query only
+example.com/path,uri-reference,yes,"relative path, even though it looks like a host name"
+a:b,uri-reference,yes,parses as a URI with scheme a
+./1a:b,uri-reference,yes,./ allows a colon in the first path segment
+1a:b,uri-reference,no,not a URI (scheme starts with a digit) and not a relative reference (colon in first segment)
+a b,uri-reference,no,unencoded space
+%zz,uri-reference,no,% not followed by two hex digits
+https://example.com/musée,iri,yes,non-ASCII character in path
+https://赤毛のアン.jp/,iri,yes,non-ASCII host
+https://example.com/a?b=c#d,iri,yes,every valid URI is a valid IRI
+https://example.com/?q=,iri,yes,private-use character U+E000 is allowed in the query
+https://example.com/,iri,no,private-use character U+E000 is not allowed in the path
+https://example.com/musée orsay,iri,no,unencoded space
+https://example.com/%zz,iri,no,% not followed by two hex digits
+musée,iri,no,no scheme; valid as iri-reference
+musée,iri-reference,yes,relative reference with non-ASCII character
+,iri-reference,yes,empty string is a same-document reference
+../musée#cézanne,iri-reference,yes,relative path with non-ASCII fragment
+musée d'orsay,iri-reference,no,unencoded space

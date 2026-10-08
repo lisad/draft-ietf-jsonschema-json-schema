@@ -27,3 +27,8 @@ Check all the included examples as valid JSON and against the 2020-12 meta schem
 build HTML output:
 
 % make
+
+## For implementors
+
+The examples in this specification's tests may be useful for implementors, especially the lists
+of valid and invalid URIs and email addresses.

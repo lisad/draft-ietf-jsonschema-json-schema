@@ -6,6 +6,7 @@ on:
       - 'examples/**'
       - 'email-format.regex'
       - 'validate-email-regex.py'
+      - 'validate-uri-formats.py'
       - 'validate-examples.py'
       - 'requirements.txt'
 
@@ -48,3 +49,15 @@ jobs:
           python-version: '3.11'
       - name: Test email regex against example addresses
         run: python validate-email-regex.py
+
+  test-uri-formats:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Check URI and IRI cases against the RFC grammars
+        run: python validate-uri-formats.py

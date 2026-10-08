@@ -1657,7 +1657,7 @@ All of these format attributes apply to strings.
 | `ipv6` ({{format-ipv6}}) | An IPv6 address | `2001:db8::1` |
 | `uri` ({{format-uri}}) | A full URI | `https://example.com/a?b=c` |
 | `uri-reference` ({{format-uri-reference}}) | A URI or a relative reference | `../a#b` |
-| `iri` ({{format-iri}}) | An absolute IRI, allowing non-ASCII characters | `https://example.com/a` |
+| `iri` ({{format-iri}}) | A full IRI, allowing non-ASCII characters | `https://example.com/a` |
 | `iri-reference` ({{format-iri-reference}}) | An IRI or a relative reference | `../a#b` |
 | `uuid` ({{format-uuid}}) | A UUID, without a `urn:uuid:` prefix | `f81d4fae-7dec-11d0-a765-00a0c91e6bf6` |
 | `uri-template` ({{format-uri-template}}) | A URI Template | `https://example.com/users/{id}` |
@@ -1852,19 +1852,21 @@ An IPv6 address as defined in
 ## Resource Identifiers {#format-uris}
 
 These attributes apply to string inputs.
+Note that all valid URIs are valid IRIs, and all valid URI References are also valid IRI References.
 
 Only general URI format checking is expected for the URI/IRI constraints.
-Implementations SHOULD NOT add checks for specific formats such as http or email URIs,
+Implementations SHOULD NOT add checks for specific schemes such as http or email URIs,
 as this would lead to inconsistent validation results between
 implementations.
 
 If per-format URI checking is desired, a schema author could
-possibly add a regex to the 'uri' format constraint.  Specification
+possibly combine the "uri" format constraint with a `pattern` regex constraint.  Specification
 authors can define additional format options in the IANA registry.
 
-Implementors are cautioned to check if URI libraries fix up URIs along with validating them.
+Implementors using libraries are cautioned to check if the libraries fix up URIs along with validating them.
 For example a library that quietly replaces space with "%20" or treats backslashes as
-slashes would miss invalid URIs.
+slashes would miss invalid URIs.  Other URI libraries check the rules of specific schemes
+which goes beyond the requirements here.
 
 ### "uri" {#format-uri}
 
@@ -1893,10 +1895,7 @@ according to {{!RFC3987, Section 2.2}}.
 A string input is accepted by this attribute if it is a valid
 string representation of a UUID, according to {{!RFC9562, Section 4}}.
 
-Note that all valid URIs are valid IRIs, and all valid URI References are
-also valid IRI References.
-
-Note also that the "uuid" format is for plain UUIDs, not UUIDs in URNs.  An example
+Note that the "uuid" format is for plain UUIDs, not UUIDs in URNs.  An example
 is "f81d4fae-7dec-11d0-a765-00a0c91e6bf6".  For UUIDs as URNs, use the "uri" format
 with a "pattern", as shown in {{format-uri-schemes}}.
 
