@@ -1,6 +1,6 @@
 value,format,valid,comment
 https://example.com/a?b=c#d,uri,yes,full URI with query and fragment
-urn:uuid:f81d4f ae-7dec-11d0-a765-00a0c91e6bf6,uri,yes,URN
+urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6,uri,yes,URN
 mailto:anne@example.com,uri,yes,mailto URI
 file:///etc/hosts,uri,yes,empty authority
 mailto:,uri,yes,scheme-specific rules are not checked; generic syntax allows an empty path
