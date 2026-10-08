@@ -1655,7 +1655,7 @@ All of these format attributes apply to strings.
 | `idn-hostname` ({{format-idn-hostname}}) | A host name, allowing non-ASCII characters | `www.example.com` |
 | `ipv4` ({{format-ipv4}}) | An IPv4 address in dotted-quad form | `192.0.2.1` |
 | `ipv6` ({{format-ipv6}}) | An IPv6 address | `2001:db8::1` |
-| `uri` ({{format-uri}}) | An absolute URI | `https://example.com/a?b=c` |
+| `uri` ({{format-uri}}) | A full URI | `https://example.com/a?b=c` |
 | `uri-reference` ({{format-uri-reference}}) | A URI or a relative reference | `../a#b` |
 | `iri` ({{format-iri}}) | An absolute IRI, allowing non-ASCII characters | `https://example.com/a` |
 | `iri-reference` ({{format-iri-reference}}) | An IRI or a relative reference | `../a#b` |
@@ -1853,6 +1853,19 @@ An IPv6 address as defined in
 
 These attributes apply to string inputs.
 
+Only general URI format checking is expected for the URI/IRI constraints.
+Implementations SHOULD NOT add checks for specific formats such as http or email URIs,
+as this would lead to inconsistent validation results between
+implementations.
+
+If per-format URI checking is desired, a schema author could
+possibly add a regex to the 'uri' format constraint.  Specification
+authors can define additional format options in the IANA registry.
+
+Implementors are cautioned to check if URI libraries fix up URIs along with validating them.
+For example a library that quietly replaces space with "%20" or treats backslashes as
+slashes would miss invalid URIs.
+
 ### "uri" {#format-uri}
 
 A string input is accepted by this attribute if it is
@@ -1878,15 +1891,35 @@ according to {{!RFC3987, Section 2.2}}.
 ### "uuid" {#format-uuid}
 
 A string input is accepted by this attribute if it is a valid
-string representation of a UUID, according to {{!RFC4122}}.
+string representation of a UUID, according to {{!RFC9562, Section 4}}.
 
 Note that all valid URIs are valid IRIs, and all valid URI References are
 also valid IRI References.
 
 Note also that the "uuid" format is for plain UUIDs, not UUIDs in URNs.  An example
-is "f81d4fae-7dec-11d0-a765-00a0c91e6bf6".  For UUIDs as URNs, use the "uri" format,
-with a "pattern" regular expression of "^urn:uuid:" to indicate the URI scheme and
-URN namespace.
+is "f81d4fae-7dec-11d0-a765-00a0c91e6bf6".  For UUIDs as URNs, use the "uri" format
+with a "pattern", as shown in {{format-uri-schemes}}.
+
+### Checking Scheme-Specific Syntax {#format-uri-schemes}
+
+This section is non-normative.
+
+The "uri", "uri-reference", "iri" and "iri-reference" attributes check only
+the generic syntax of resource identifiers.  Schema authors who need the
+rules of a particular URI scheme can add them with "pattern" alongside
+"format".
+
+For example, {{RFC9562, Section 4}} defines a URN form for UUIDs, such
+as "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6".  The following schema
+constrains URIs to that form:
+
+~~~~~~~~~~
+{::include ./examples/urn-uuid.json}
+~~~~~~~~~~
+
+The "format" keyword checks that the string is a URI, and "pattern" adds
+the rules of the "urn:uuid" namespace: the prefix, followed by a UUID in
+the hex-and-dash form.
 
 ## Templates {#format-templates}
 
