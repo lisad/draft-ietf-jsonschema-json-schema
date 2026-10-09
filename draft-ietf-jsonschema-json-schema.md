@@ -1615,7 +1615,7 @@ Some schema authors will wish to go beyond the syntax validation offered by
   * Do additional processing after JSON Schema validation
   * Use "title" and "description" for soft guidance
   * Use `pattern` possibly alongside `format` to add regular expression constraints
-  * Add a new format option to the IANA registry (TBD)
+  * Register a new format attribute ({{iana-format}})
   * Define keywords in a custom vocabulary to add new constraints, especially
   constraints that go beyond syntactic
 
@@ -1678,14 +1678,17 @@ When the implementation is configured to produce annotations
 and the format-annotation vocabulary is 'true' in the meta-schema, it
 MUST treat the `format` keyword as an annotation, which means that
 a process consuming annotation output can see what formats
-should apply to which values.
+should apply to which values.  An implementation MUST produce annotations for format
+attributes it does not recognize, as for any other format attribute.
 
 ### Format-Assertion Vocabulary
 
 When the Format-Assertion vocabulary is 'true' in the meta-schema,
 implementations MUST provide full validation support for all of the formats
 defined by this specification. Implementations that cannot provide full
-validation support MUST refuse to process the schema.
+validation support MUST NOT validate any input against the schema.
+This does not prevent other processing of the schema, such as
+checking it against its meta-schema.
 
 An implementation that supports the Format-Assertion vocabulary:
 
@@ -1695,7 +1698,9 @@ An implementation that supports the Format-Assertion vocabulary:
 * MUST implement syntactic validation for all format attributes defined
   in this specification, and for any additional format attributes that
   it recognizes, such that there exist possible input values
-  of the correct type that will fail validation.
+  of the correct type that will fail validation;
+* MUST NOT validate any input against a schema that uses a format
+  attribute it does not recognize.
 
 
 The standard core and validation meta-schema
@@ -3348,21 +3353,19 @@ by implementations.  Its URI is:
 
 # Extending `format`
 
-The format keyword {{format-vocab}} may be extended by defining new attributes in an IANA registry. (TBD)
+The format keyword ({{format-vocab}}) may be extended by registering new format attributes ({{iana-format}}).
 
 ## Custom format attributes
 
 Save for agreement between
 parties, schema authors SHALL NOT expect a peer implementation to support
-custom format attributes. An implementation MUST NOT fail to produce unknown formats
-as annotations if the format-annotation vocabulary is required.
-When the Format-Assertion vocabulary is specified, implementations
-MUST fail upon encountering unknown formats.
+custom format attributes.  See {{format-implementation}} for how
+implementations handle format attributes they do not recognize.
 
 Vocabularies do not support specifically declaring different value sets for keywords.
 Due to this limitation, and the historically uneven implementation of this keyword,
 it is RECOMMENDED to define additional keywords in a custom vocabulary rather than
-additional format attributes if interoperability is desired.
+unregistered format attributes if interoperability is desired.
 
 ## Non-string values
 Format attributes in this specification are defined for string values.  New
@@ -3451,8 +3454,10 @@ keywords and their semantics.
 
 The values of the object properties MUST be booleans.
 If the value is true, then implementations that do not recognize
-the vocabulary MUST refuse to process any schemas that declare
-this meta-schema with "$schema".  If the value is false, implementations
+the vocabulary MUST NOT validate any input against schemas that
+declare this meta-schema with "$schema".  This does not prevent other
+processing of those schemas, such as checking them against their
+meta-schema.  If the value is false, implementations
 that do not recognize the vocabulary SHOULD proceed with processing
 such schemas.  The value has no impact if the implementation
 understands the vocabulary.
@@ -3682,6 +3687,83 @@ a JSON Schema-specific media type is defined as follows:
   {{integers}}, and
   {{regex-interop}} above.
 * Fragment identifier considerations: See {{fragments}}.
+
+## JSON Schema Format Attributes Registry {#iana-format}
+
+IANA is requested to create a new registry, "JSON Schema Format
+Attributes", in a new "JSON Schema" registry group.  The registry
+lists the format attribute values that can be used with the "format"
+keyword ({{format-vocab}}).
+
+The registration policy is Specification Required
+({{!RFC8126, Section 4.6}}).
+
+Each registration contains:
+
+Name:
+: The format attribute, as used in the "format" keyword.  Names
+  consist of lowercase ASCII letters, digits, and hyphens
+  ("-"), and begin with a letter.
+
+Input Types:
+: The input types that the format attribute applies to, such as
+  "string" ({{input}}).  Inputs of other types are accepted.
+
+Description:
+: A brief description of what the format attribute accepts.
+
+Reference:
+: A specification that defines the syntax the format attribute
+  checks, precisely enough for independent implementations to agree.
+
+Registering a format attribute does not change the requirements of the
+Format-Assertion vocabulary ({{format-implementation}}): implementations
+are required to support the format attributes defined in this
+specification, and MAY support others from this registry.
+
+### Instructions for Designated Experts
+
+The designated experts SHOULD check that a proposed format attribute:
+
+* checks syntax only: whether a value is accepted depends only on the
+  value itself and on static data such as calendar dates generally,
+  and not on external data, network lookups, or the
+  current date and time;
+* has a syntax definition that leaves little room for
+  implementations to disagree, and that names any parts that are
+  optional to check;
+* has a name that is not confusingly similar to a registered name.
+
+Experts are encouraged to ask for test cases of valid and invalid
+values.
+
+### Initial Registry Contents
+
+IANA is requested to populate the registry with the following entries.
+All of these initial format attributes have the Input Types value "string".
+
+| Name | Description | Reference |
+|---|---|---|
+| date-time | A date and time with a time zone offset | {{format-date-time}} |
+| date | A full calendar date | {{format-date}} |
+| time | A time of day with a time zone offset | {{format-time}} |
+| duration | An RFC 3339 duration | {{format-duration}} |
+| email | An email address (ASCII only) | {{format-email}} |
+| idn-email | An email address, allowing non-ASCII characters | {{format-idn-email}} |
+| hostname | An Internet host name (ASCII only) | {{format-hostname}} |
+| idn-hostname | A host name, allowing non-ASCII characters | {{format-idn-hostname}} |
+| ipv4 | An IPv4 address in dotted-quad form | {{format-ipv4}} |
+| ipv6 | An IPv6 address | {{format-ipv6}} |
+| uri | An absolute URI | {{format-uri}} |
+| uri-reference | A URI or a relative reference | {{format-uri-reference}} |
+| iri | An absolute IRI, allowing non-ASCII characters | {{format-iri}} |
+| iri-reference | An IRI or a relative reference | {{format-iri-reference}} |
+| uuid | A UUID, without a `urn:uuid:` prefix | {{format-uuid}} |
+| uri-template | A URI Template | {{format-uri-template}} |
+| json-pointer | A JSON Pointer | {{format-json-pointer}} |
+| relative-json-pointer | A Relative JSON Pointer | {{format-relative-json-pointer}} |
+| regex | A regular expression in the ECMA-262 dialect | {{format-regex}} |
+{: title="Initial contents of the JSON Schema Format Attributes registry"}
 
 --- back
 
