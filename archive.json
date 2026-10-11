@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-08T04:50:39.316377+00:00",
+  "timestamp": "2026-10-11T04:24:07.018177+00:00",
   "repo": "lisad/draft-ietf-jsonschema-json-schema",
   "labels": [
     {
@@ -4418,6 +4418,58 @@
       "mergeCommit": {
         "oid": "e7e8ef4ba4403c4909d4bd754e574671f1a7207a"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 76,
+      "id": "PR_kwDOR8mbas8AAAABHbzl0g",
+      "title": "Format: uri, hostname and regex",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/76",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-10-08T23:11:47Z",
+      "updatedAt": "2026-10-08T23:12:53Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "e7e8ef4ba4403c4909d4bd754e574671f1a7207a",
+      "headRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "headRefName": "format-regex-and-host",
+      "headRefOid": "3353048397c23303301ac0663e77571e1deb1c14",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 77,
+      "id": "PR_kwDOR8mbas8AAAABHkx86w",
+      "title": "Adds a request for IANA registry for format attributes & related text",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/77",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-10-09T16:45:10Z",
+      "updatedAt": "2026-10-09T16:45:23Z",
+      "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "baseRefName": "main",
+      "baseRefOid": "e7e8ef4ba4403c4909d4bd754e574671f1a7207a",
+      "headRepository": "lisad/draft-ietf-jsonschema-json-schema",
+      "headRefName": "format-iana",
+      "headRefOid": "9bdafb23924a1116a9245114f38e56b521691a47",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
