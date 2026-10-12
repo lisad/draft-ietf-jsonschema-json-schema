@@ -1811,7 +1811,7 @@ accepted by the "idn-email" attribute.
 
 ## Hostnames {#format-hostnames}
 
-These attributes apply to string inputs. 
+These attributes apply to string inputs.
 
 Note that these attributes restrict host names to the form used in protocols,
 which is narrower than what users can type into a browser.   Schema authors
