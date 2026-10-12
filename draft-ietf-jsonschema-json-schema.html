@@ -1862,6 +1862,17 @@ Source for this draft can be found at
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.18.2.3">
                 <p id="section-toc.1-1.18.2.3.1"><a href="#section-18.3" class="auto internal xref">18.3</a>.  <a href="#name-application-schema-instance" class="internal xref">application/schema-instance+json</a></p>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.18.2.4">
+                <p id="section-toc.1-1.18.2.4.1"><a href="#section-18.4" class="auto internal xref">18.4</a>.  <a href="#name-json-schema-format-attribut" class="internal xref">JSON Schema Format Attributes Registry</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.18.2.4.2.1">
+                    <p id="section-toc.1-1.18.2.4.2.1.1"><a href="#section-18.4.1" class="auto internal xref">18.4.1</a>.  <a href="#name-instructions-for-designated" class="internal xref">Instructions for Designated Experts</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.18.2.4.2.2">
+                    <p id="section-toc.1-1.18.2.4.2.2.1"><a href="#section-18.4.2" class="auto internal xref">18.4.2</a>.  <a href="#name-initial-registry-contents" class="internal xref">Initial Registry Contents</a></p>
+</li>
+                </ul>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.19">
@@ -3961,7 +3972,7 @@ a deadline, or a date in the past.<a href="#section-8.1-2" class="pilcrow">¶</a
             <p id="section-8.1-4.3.1">Use <code>pattern</code> possibly alongside <code>format</code> to add regular expression constraints<a href="#section-8.1-4.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-8.1-4.4">
-            <p id="section-8.1-4.4.1">Add a new format option to the IANA registry (TBD)<a href="#section-8.1-4.4.1" class="pilcrow">¶</a></p>
+            <p id="section-8.1-4.4.1">Register a new format attribute (<a href="#iana-format" class="auto internal xref">Section 18.4</a>)<a href="#section-8.1-4.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-8.1-4.5">
             <p id="section-8.1-4.5.1">Define keywords in a custom vocabulary to add new constraints, especially
@@ -4177,7 +4188,8 @@ or a well-known regular expression.<a href="#section-8.3-1" class="pilcrow">¶</
 and the format-annotation vocabulary is 'true' in the meta-schema, it
 MUST treat the <code>format</code> keyword as an annotation, which means that
 a process consuming annotation output can see what formats
-should apply to which values.<a href="#section-8.3.1-1" class="pilcrow">¶</a></p>
+should apply to which values.  An implementation MUST produce annotations for format
+attributes it does not recognize, as for any other format attribute.<a href="#section-8.3.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="format-assertion-vocabulary">
@@ -4188,7 +4200,9 @@ should apply to which values.<a href="#section-8.3.1-1" class="pilcrow">¶</a></
 <p id="section-8.3.2-1">When the Format-Assertion vocabulary is 'true' in the meta-schema,
 implementations MUST provide full validation support for all of the formats
 defined by this specification. Implementations that cannot provide full
-validation support MUST refuse to process the schema.<a href="#section-8.3.2-1" class="pilcrow">¶</a></p>
+validation support MUST NOT validate any input against the schema.
+This does not prevent other processing of the schema, such as
+checking it against its meta-schema.<a href="#section-8.3.2-1" class="pilcrow">¶</a></p>
 <p id="section-8.3.2-2">An implementation that supports the Format-Assertion vocabulary:<a href="#section-8.3.2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-8.3.2-3.1">
@@ -4202,7 +4216,11 @@ supports annotation production;<a href="#section-8.3.2-3.1.1" class="pilcrow">¶
               <p id="section-8.3.2-3.3.1">MUST implement syntactic validation for all format attributes defined
 in this specification, and for any additional format attributes that
 it recognizes, such that there exist possible input values
-of the correct type that will fail validation.<a href="#section-8.3.2-3.3.1" class="pilcrow">¶</a></p>
+of the correct type that will fail validation;<a href="#section-8.3.2-3.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.3.2-3.4">
+              <p id="section-8.3.2-3.4.1">MUST NOT validate any input against a schema that uses a format
+attribute it does not recognize.<a href="#section-8.3.2-3.4.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-8.3.2-4">The standard core and validation meta-schema
@@ -6339,7 +6357,7 @@ by implementations.  Its URI is:
       <h2 id="name-extending-format">
 <a href="#section-14" class="section-number selfRef">14. </a><a href="#name-extending-format" class="section-name selfRef">Extending <code>format</code></a>
       </h2>
-<p id="section-14-1">The format keyword <a href="#format-vocab" class="auto internal xref">Section 8</a> may be extended by defining new attributes in an IANA registry. (TBD)<a href="#section-14-1" class="pilcrow">¶</a></p>
+<p id="section-14-1">The format keyword (<a href="#format-vocab" class="auto internal xref">Section 8</a>) may be extended by registering new format attributes (<a href="#iana-format" class="auto internal xref">Section 18.4</a>).<a href="#section-14-1" class="pilcrow">¶</a></p>
 <div id="custom-format-attributes">
 <section id="section-14.1">
         <h3 id="name-custom-format-attributes">
@@ -6347,14 +6365,12 @@ by implementations.  Its URI is:
         </h3>
 <p id="section-14.1-1">Save for agreement between
 parties, schema authors SHALL NOT expect a peer implementation to support
-custom format attributes. An implementation MUST NOT fail to produce unknown formats
-as annotations if the format-annotation vocabulary is required.
-When the Format-Assertion vocabulary is specified, implementations
-MUST fail upon encountering unknown formats.<a href="#section-14.1-1" class="pilcrow">¶</a></p>
+custom format attributes.  See <a href="#format-implementation" class="auto internal xref">Section 8.3</a> for how
+implementations handle format attributes they do not recognize.<a href="#section-14.1-1" class="pilcrow">¶</a></p>
 <p id="section-14.1-2">Vocabularies do not support specifically declaring different value sets for keywords.
 Due to this limitation, and the historically uneven implementation of this keyword,
 it is RECOMMENDED to define additional keywords in a custom vocabulary rather than
-additional format attributes if interoperability is desired.<a href="#section-14.1-2" class="pilcrow">¶</a></p>
+unregistered format attributes if interoperability is desired.<a href="#section-14.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="non-string-values">
@@ -6461,8 +6477,10 @@ Each URI that appears as a property name identifies a specific set of
 keywords and their semantics.<a href="#section-15.1.1-3" class="pilcrow">¶</a></p>
 <p id="section-15.1.1-4">The values of the object properties MUST be booleans.
 If the value is true, then implementations that do not recognize
-the vocabulary MUST refuse to process any schemas that declare
-this meta-schema with "$schema".  If the value is false, implementations
+the vocabulary MUST NOT validate any input against schemas that
+declare this meta-schema with "$schema".  This does not prevent other
+processing of those schemas, such as checking them against their
+meta-schema.  If the value is false, implementations
 that do not recognize the vocabulary SHOULD proceed with processing
 such schemas.  The value has no impact if the implementation
 understands the vocabulary.<a href="#section-15.1.1-4" class="pilcrow">¶</a></p>
@@ -6793,6 +6811,233 @@ media type.  See JSON (<span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]<
         </ul>
 </section>
 </div>
+<div id="iana-format">
+<section id="section-18.4">
+        <h3 id="name-json-schema-format-attribut">
+<a href="#section-18.4" class="section-number selfRef">18.4. </a><a href="#name-json-schema-format-attribut" class="section-name selfRef">JSON Schema Format Attributes Registry</a>
+        </h3>
+<p id="section-18.4-1">IANA is requested to create a new registry, "JSON Schema Format
+Attributes", in a new "JSON Schema" registry group.  The registry
+lists the format attribute values that can be used with the "format"
+keyword (<a href="#format-vocab" class="auto internal xref">Section 8</a>).<a href="#section-18.4-1" class="pilcrow">¶</a></p>
+<p id="section-18.4-2">The registration policy is Specification Required
+(<span>[<a href="#RFC8126" class="cite xref">RFC8126</a>], <a href="https://rfc-editor.org/rfc/rfc8126#section-4.6" class="relref">Section 4.6</a></span>).<a href="#section-18.4-2" class="pilcrow">¶</a></p>
+<p id="section-18.4-3">Each registration contains:<a href="#section-18.4-3" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-18.4-4">
+          <dt id="section-18.4-4.1">Name:</dt>
+          <dd style="margin-left: 1.5em" id="section-18.4-4.2">
+            <p id="section-18.4-4.2.1">The format attribute, as used in the "format" keyword.  Names
+consist of lowercase ASCII letters, digits, and hyphens
+("-"), and begin with a letter.<a href="#section-18.4-4.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-18.4-4.3">Input Types:</dt>
+          <dd style="margin-left: 1.5em" id="section-18.4-4.4">
+            <p id="section-18.4-4.4.1">The input types that the format attribute applies to, such as
+"string" (<a href="#input" class="auto internal xref">Section 3.2</a>).  Inputs of other types are accepted.<a href="#section-18.4-4.4.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-18.4-4.5">Description:</dt>
+          <dd style="margin-left: 1.5em" id="section-18.4-4.6">
+            <p id="section-18.4-4.6.1">A brief description of what the format attribute accepts.<a href="#section-18.4-4.6.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-18.4-4.7">Reference:</dt>
+          <dd style="margin-left: 1.5em" id="section-18.4-4.8">
+            <p id="section-18.4-4.8.1">A specification that defines the syntax the format attribute
+checks, precisely enough for independent implementations to agree.<a href="#section-18.4-4.8.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
+<p id="section-18.4-5">Registering a format attribute does not change the requirements of the
+Format-Assertion vocabulary (<a href="#format-implementation" class="auto internal xref">Section 8.3</a>): implementations
+are required to support the format attributes defined in this
+specification, and MAY support others from this registry.<a href="#section-18.4-5" class="pilcrow">¶</a></p>
+<div id="instructions-for-designated-experts">
+<section id="section-18.4.1">
+          <h4 id="name-instructions-for-designated">
+<a href="#section-18.4.1" class="section-number selfRef">18.4.1. </a><a href="#name-instructions-for-designated" class="section-name selfRef">Instructions for Designated Experts</a>
+          </h4>
+<p id="section-18.4.1-1">The designated experts SHOULD check that a proposed format attribute:<a href="#section-18.4.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-18.4.1-2.1">
+              <p id="section-18.4.1-2.1.1">checks syntax only: whether a value is accepted depends only on the
+value itself and on static data such as calendar dates generally,
+and not on external data, network lookups, or the
+current date and time;<a href="#section-18.4.1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-18.4.1-2.2">
+              <p id="section-18.4.1-2.2.1">has a syntax definition that leaves little room for
+implementations to disagree, and that names any parts that are
+optional to check;<a href="#section-18.4.1-2.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-18.4.1-2.3">
+              <p id="section-18.4.1-2.3.1">has a name that is not confusingly similar to a registered name.<a href="#section-18.4.1-2.3.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-18.4.1-3">Experts are encouraged to ask for test cases of valid and invalid
+values.<a href="#section-18.4.1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="initial-registry-contents">
+<section id="section-18.4.2">
+          <h4 id="name-initial-registry-contents">
+<a href="#section-18.4.2" class="section-number selfRef">18.4.2. </a><a href="#name-initial-registry-contents" class="section-name selfRef">Initial Registry Contents</a>
+          </h4>
+<p id="section-18.4.2-1">IANA is requested to populate the registry with the following entries.
+All of these initial format attributes have the Input Types value "string".<a href="#section-18.4.2-1" class="pilcrow">¶</a></p>
+<span id="name-initial-contents-of-the-jso"></span><table class="center" id="table-3">
+            <caption>
+<a href="#table-3" class="selfRef">Table 3</a>:
+<a href="#name-initial-contents-of-the-jso" class="selfRef">Initial contents of the JSON Schema Format Attributes registry</a>
+            </caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">Name</th>
+                <th class="text-left" rowspan="1" colspan="1">Description</th>
+                <th class="text-left" rowspan="1" colspan="1">Reference</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">date-time</td>
+                <td class="text-left" rowspan="1" colspan="1">A date and time with a time zone offset</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <a href="#format-date-time" class="auto internal xref">Section 8.4.1</a>
+</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">date</td>
+                <td class="text-left" rowspan="1" colspan="1">A full calendar date</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <a href="#format-date" class="auto internal xref">Section 8.4.2</a>
+</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">time</td>
+                <td class="text-left" rowspan="1" colspan="1">A time of day with a time zone offset</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <a href="#format-time" class="auto internal xref">Section 8.4.3</a>
+</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">duration</td>
+                <td class="text-left" rowspan="1" colspan="1">An RFC 3339 duration</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <a href="#format-duration" class="auto internal xref">Section 8.4.4</a>
+</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">email</td>
+                <td class="text-left" rowspan="1" colspan="1">An email address (ASCII only)</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <a href="#format-email" class="auto internal xref">Section 8.5.1</a>
+</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">idn-email</td>
+                <td class="text-left" rowspan="1" colspan="1">An email address, allowing non-ASCII characters</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <a href="#format-idn-email" class="auto internal xref">Section 8.5.2</a>
+</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">hostname</td>
+                <td class="text-left" rowspan="1" colspan="1">An Internet host name (ASCII only)</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <a href="#format-hostname" class="auto internal xref">Section 8.6.1</a>
+</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">idn-hostname</td>
+                <td class="text-left" rowspan="1" colspan="1">A host name, allowing non-ASCII characters</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <a href="#format-idn-hostname" class="auto internal xref">Section 8.6.2</a>
+</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">ipv4</td>
+                <td class="text-left" rowspan="1" colspan="1">An IPv4 address in dotted-quad form</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <a href="#format-ipv4" class="auto internal xref">Section 8.7.1</a>
+</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">ipv6</td>
+                <td class="text-left" rowspan="1" colspan="1">An IPv6 address</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <a href="#format-ipv6" class="auto internal xref">Section 8.7.2</a>
+</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">uri</td>
+                <td class="text-left" rowspan="1" colspan="1">An absolute URI</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <a href="#format-uri" class="auto internal xref">Section 8.8.1</a>
+</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">uri-reference</td>
+                <td class="text-left" rowspan="1" colspan="1">A URI or a relative reference</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <a href="#format-uri-reference" class="auto internal xref">Section 8.8.2</a>
+</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">iri</td>
+                <td class="text-left" rowspan="1" colspan="1">An absolute IRI, allowing non-ASCII characters</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <a href="#format-iri" class="auto internal xref">Section 8.8.3</a>
+</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">iri-reference</td>
+                <td class="text-left" rowspan="1" colspan="1">An IRI or a relative reference</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <a href="#format-iri-reference" class="auto internal xref">Section 8.8.4</a>
+</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">uuid</td>
+                <td class="text-left" rowspan="1" colspan="1">A UUID, without a <code>urn:uuid:</code> prefix</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <a href="#format-uuid" class="auto internal xref">Section 8.8.5</a>
+</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">uri-template</td>
+                <td class="text-left" rowspan="1" colspan="1">A URI Template</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <a href="#format-uri-template" class="auto internal xref">Section 8.9.1</a>
+</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">json-pointer</td>
+                <td class="text-left" rowspan="1" colspan="1">A JSON Pointer</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <a href="#format-json-pointer" class="auto internal xref">Section 8.10.1</a>
+</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">relative-json-pointer</td>
+                <td class="text-left" rowspan="1" colspan="1">A Relative JSON Pointer</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <a href="#format-relative-json-pointer" class="auto internal xref">Section 8.10.2</a>
+</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">regex</td>
+                <td class="text-left" rowspan="1" colspan="1">A regular expression in the ECMA-262 dialect</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <a href="#format-regex" class="auto internal xref">Section 8.11.1</a>
+</td>
+              </tr>
+            </tbody>
+          </table>
+</section>
+</div>
+</section>
+</div>
 </section>
 </div>
 <div id="sec-combined-references">
@@ -6901,6 +7146,10 @@ media type.  See JSON (<span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]<
 <dt id="RFC6901">[RFC6901]</dt>
         <dd>
 <span class="refAuthor">Bryan, P., Ed.</span>, <span class="refAuthor">Zyp, K.</span>, and <span class="refAuthor">M. Nottingham, Ed.</span>, <span class="refTitle">"JavaScript Object Notation (JSON) Pointer"</span>, <span class="seriesInfo">RFC 6901</span>, <span class="seriesInfo">DOI 10.17487/RFC6901</span>, <time datetime="2013-04" class="refDate">April 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6901">https://www.rfc-editor.org/rfc/rfc6901</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8126">[RFC8126]</dt>
+        <dd>
+<span class="refAuthor">Cotton, M.</span>, <span class="refAuthor">Leiba, B.</span>, and <span class="refAuthor">T. Narten</span>, <span class="refTitle">"Guidelines for Writing an IANA Considerations Section in RFCs"</span>, <span class="seriesInfo">BCP 26</span>, <span class="seriesInfo">RFC 8126</span>, <span class="seriesInfo">DOI 10.17487/RFC8126</span>, <time datetime="2017-06" class="refDate">June 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8126">https://www.rfc-editor.org/rfc/rfc8126</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8259">[RFC8259]</dt>
         <dd>
@@ -7293,8 +7542,8 @@ which is used in the implementation of <code>unevaluatedProperties</code>.<a hre
 "X" and "Y", therefore regardless of the outcome of <code>properties</code>,
 the <code>additionalProperties</code> schema is never applied to those
 properties:<a href="#appendix-D-5" class="pilcrow">¶</a></p>
-<table class="center" id="table-3">
-        <caption><a href="#table-3" class="selfRef">Table 3</a></caption>
+<table class="center" id="table-4">
+        <caption><a href="#table-4" class="selfRef">Table 4</a></caption>
 <thead>
           <tr>
             <th class="text-left" rowspan="1" colspan="1">Input</th>
@@ -7369,8 +7618,8 @@ three different inputs, and how <code>unevaluatedProperties</code>
 implementations could use that result.  Note that <code>unevaluatedProperties</code>
 ends up applying to both properties in the third row, while
 <code>additionalProperties</code> never applied to either of them.<a href="#appendix-D-11" class="pilcrow">¶</a></p>
-<table class="center" id="table-4">
-        <caption><a href="#table-4" class="selfRef">Table 4</a></caption>
+<table class="center" id="table-5">
+        <caption><a href="#table-5" class="selfRef">Table 5</a></caption>
 <thead>
           <tr>
             <th class="text-left" rowspan="1" colspan="1">Input</th>
@@ -7435,8 +7684,8 @@ username fields, and preventing additional fields:<a href="#appendix-D-14" class
 </div>
 <p id="appendix-D-16">The length of the <code>prefixItems</code> keyword is 3, so <code>items</code> is applied
 to items at index 3 or higher, as shown in table below:<a href="#appendix-D-16" class="pilcrow">¶</a></p>
-<table class="center" id="table-5">
-        <caption><a href="#table-5" class="selfRef">Table 5</a></caption>
+<table class="center" id="table-6">
+        <caption><a href="#table-6" class="selfRef">Table 6</a></caption>
 <thead>
           <tr>
             <th class="text-left" rowspan="1" colspan="1">Input</th>
@@ -7519,8 +7768,8 @@ outcomes:<a href="#appendix-D-18" class="pilcrow">¶</a></p>
 information from the <code>prefixItems</code> evaluation. Then,
 <code>unevaluatedItems</code> uses the <code>prefixItems</code> information to start where <code>prefixItems</code>
 left off, applying only to indices not covered by the <code>prefixItems</code> evaluation.<a href="#appendix-D-20" class="pilcrow">¶</a></p>
-<table class="center" id="table-6">
-        <caption><a href="#table-6" class="selfRef">Table 6</a></caption>
+<table class="center" id="table-7">
+        <caption><a href="#table-7" class="selfRef">Table 7</a></caption>
 <thead>
           <tr>
             <th class="text-left" rowspan="1" colspan="1">Input</th>
@@ -7587,8 +7836,8 @@ left off, applying only to indices not covered by the <code>prefixItems</code> e
 while <code>items</code> was not.<a href="#appendix-D-22" class="pilcrow">¶</a></p>
 <p id="appendix-D-23">The following table summarizes which keywords have static values
 on which adjacent keywords depend:<a href="#appendix-D-23" class="pilcrow">¶</a></p>
-<table class="center" id="table-7">
-        <caption><a href="#table-7" class="selfRef">Table 7</a></caption>
+<table class="center" id="table-8">
+        <caption><a href="#table-8" class="selfRef">Table 8</a></caption>
 <thead>
           <tr>
             <th class="text-left" rowspan="1" colspan="1">Keyword</th>
@@ -7646,8 +7895,8 @@ on which adjacent keywords depend:<a href="#appendix-D-23" class="pilcrow">¶</a
       </table>
 <p id="appendix-D-25">The following table summarizes which keywords, when successful, produce
 information on which other keywords depend:<a href="#appendix-D-25" class="pilcrow">¶</a></p>
-<table class="center" id="table-8">
-        <caption><a href="#table-8" class="selfRef">Table 8</a></caption>
+<table class="center" id="table-9">
+        <caption><a href="#table-9" class="selfRef">Table 9</a></caption>
 <thead>
           <tr>
             <th class="text-left" rowspan="1" colspan="1">Keyword</th>

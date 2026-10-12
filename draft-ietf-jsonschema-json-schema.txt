@@ -265,6 +265,9 @@ Table of Contents
      18.1.  application/json-schema+json
      18.2.  application/schema+json
      18.3.  application/schema-instance+json
+     18.4.  JSON Schema Format Attributes Registry
+       18.4.1.  Instructions for Designated Experts
+       18.4.2.  Initial Registry Contents
    19. References
      19.1.  Normative References
      19.2.  Informative References
@@ -2093,7 +2096,7 @@ Table of Contents
    *  Use pattern possibly alongside format to add regular expression
       constraints
 
-   *  Add a new format option to the IANA registry (TBD)
+   *  Register a new format attribute (Section 18.4)
 
    *  Define keywords in a custom vocabulary to add new constraints,
       especially constraints that go beyond syntactic
@@ -2206,14 +2209,17 @@ Table of Contents
    format-annotation vocabulary is 'true' in the meta-schema, it MUST
    treat the format keyword as an annotation, which means that a process
    consuming annotation output can see what formats should apply to
-   which values.
+   which values.  An implementation MUST produce annotations for format
+   attributes it does not recognize, as for any other format attribute.
 
 8.3.2.  Format-Assertion Vocabulary
 
    When the Format-Assertion vocabulary is 'true' in the meta-schema,
    implementations MUST provide full validation support for all of the
    formats defined by this specification.  Implementations that cannot
-   provide full validation support MUST refuse to process the schema.
+   provide full validation support MUST NOT validate any input against
+   the schema.  This does not prevent other processing of the schema,
+   such as checking it against its meta-schema.
 
    An implementation that supports the Format-Assertion vocabulary:
 
@@ -2225,7 +2231,10 @@ Table of Contents
    *  MUST implement syntactic validation for all format attributes
       defined in this specification, and for any additional format
       attributes that it recognizes, such that there exist possible
-      input values of the correct type that will fail validation.
+      input values of the correct type that will fail validation;
+
+   *  MUST NOT validate any input against a schema that uses a format
+      attribute it does not recognize.
 
    The standard core and validation meta-schema includes this vocabulary
    in its "$vocabulary" keyword with a value of false.  (TODO: this
@@ -4076,22 +4085,20 @@ Table of Contents
 
 14.  Extending format
 
-   The format keyword Section 8 may be extended by defining new
-   attributes in an IANA registry.  (TBD)
+   The format keyword (Section 8) may be extended by registering new
+   format attributes (Section 18.4).
 
 14.1.  Custom format attributes
 
    Save for agreement between parties, schema authors SHALL NOT expect a
-   peer implementation to support custom format attributes.  An
-   implementation MUST NOT fail to produce unknown formats as
-   annotations if the format-annotation vocabulary is required.  When
-   the Format-Assertion vocabulary is specified, implementations MUST
-   fail upon encountering unknown formats.
+   peer implementation to support custom format attributes.  See
+   Section 8.3 for how implementations handle format attributes they do
+   not recognize.
 
    Vocabularies do not support specifically declaring different value
    sets for keywords.  Due to this limitation, and the historically
    uneven implementation of this keyword, it is RECOMMENDED to define
-   additional keywords in a custom vocabulary rather than additional
+   additional keywords in a custom vocabulary rather than unregistered
    format attributes if interoperability is desired.
 
 14.2.  Non-string values
@@ -4191,11 +4198,12 @@ Table of Contents
 
    The values of the object properties MUST be booleans.  If the value
    is true, then implementations that do not recognize the vocabulary
-   MUST refuse to process any schemas that declare this meta-schema with
-   "$schema".  If the value is false, implementations that do not
-   recognize the vocabulary SHOULD proceed with processing such schemas.
-   The value has no impact if the implementation understands the
-   vocabulary.
+   MUST NOT validate any input against schemas that declare this meta-
+   schema with "$schema".  This does not prevent other processing of
+   those schemas, such as checking them against their meta-schema.  If
+   the value is false, implementations that do not recognize the
+   vocabulary SHOULD proceed with processing such schemas.  The value
+   has no impact if the implementation understands the vocabulary.
 
    The "$vocabulary" keyword SHOULD be used in the root schema of any
    schema resource intended for use as a meta-schema.  It MUST NOT
@@ -4446,6 +4454,126 @@ Table of Contents
 
    *  Fragment identifier considerations: See Section 3.4.
 
+18.4.  JSON Schema Format Attributes Registry
+
+   IANA is requested to create a new registry, "JSON Schema Format
+   Attributes", in a new "JSON Schema" registry group.  The registry
+   lists the format attribute values that can be used with the "format"
+   keyword (Section 8).
+
+   The registration policy is Specification Required ([RFC8126],
+   Section 4.6).
+
+   Each registration contains:
+
+   Name:  The format attribute, as used in the "format" keyword.  Names
+      consist of lowercase ASCII letters, digits, and hyphens ("-"), and
+      begin with a letter.
+
+   Input Types:  The input types that the format attribute applies to,
+      such as "string" (Section 3.2).  Inputs of other types are
+      accepted.
+
+   Description:  A brief description of what the format attribute
+      accepts.
+
+   Reference:  A specification that defines the syntax the format
+      attribute checks, precisely enough for independent implementations
+      to agree.
+
+   Registering a format attribute does not change the requirements of
+   the Format-Assertion vocabulary (Section 8.3): implementations are
+   required to support the format attributes defined in this
+   specification, and MAY support others from this registry.
+
+18.4.1.  Instructions for Designated Experts
+
+   The designated experts SHOULD check that a proposed format attribute:
+
+   *  checks syntax only: whether a value is accepted depends only on
+      the value itself and on static data such as calendar dates
+      generally, and not on external data, network lookups, or the
+      current date and time;
+
+   *  has a syntax definition that leaves little room for
+      implementations to disagree, and that names any parts that are
+      optional to check;
+
+   *  has a name that is not confusingly similar to a registered name.
+
+   Experts are encouraged to ask for test cases of valid and invalid
+   values.
+
+18.4.2.  Initial Registry Contents
+
+   IANA is requested to populate the registry with the following
+   entries.  All of these initial format attributes have the Input Types
+   value "string".
+
+    +=======================+============================+===========+
+    | Name                  | Description                | Reference |
+    +=======================+============================+===========+
+    | date-time             | A date and time with a     | Section   |
+    |                       | time zone offset           | 8.4.1     |
+    +-----------------------+----------------------------+-----------+
+    | date                  | A full calendar date       | Section   |
+    |                       |                            | 8.4.2     |
+    +-----------------------+----------------------------+-----------+
+    | time                  | A time of day with a time  | Section   |
+    |                       | zone offset                | 8.4.3     |
+    +-----------------------+----------------------------+-----------+
+    | duration              | An RFC 3339 duration       | Section   |
+    |                       |                            | 8.4.4     |
+    +-----------------------+----------------------------+-----------+
+    | email                 | An email address (ASCII    | Section   |
+    |                       | only)                      | 8.5.1     |
+    +-----------------------+----------------------------+-----------+
+    | idn-email             | An email address, allowing | Section   |
+    |                       | non-ASCII characters       | 8.5.2     |
+    +-----------------------+----------------------------+-----------+
+    | hostname              | An Internet host name      | Section   |
+    |                       | (ASCII only)               | 8.6.1     |
+    +-----------------------+----------------------------+-----------+
+    | idn-hostname          | A host name, allowing non- | Section   |
+    |                       | ASCII characters           | 8.6.2     |
+    +-----------------------+----------------------------+-----------+
+    | ipv4                  | An IPv4 address in dotted- | Section   |
+    |                       | quad form                  | 8.7.1     |
+    +-----------------------+----------------------------+-----------+
+    | ipv6                  | An IPv6 address            | Section   |
+    |                       |                            | 8.7.2     |
+    +-----------------------+----------------------------+-----------+
+    | uri                   | An absolute URI            | Section   |
+    |                       |                            | 8.8.1     |
+    +-----------------------+----------------------------+-----------+
+    | uri-reference         | A URI or a relative        | Section   |
+    |                       | reference                  | 8.8.2     |
+    +-----------------------+----------------------------+-----------+
+    | iri                   | An absolute IRI, allowing  | Section   |
+    |                       | non-ASCII characters       | 8.8.3     |
+    +-----------------------+----------------------------+-----------+
+    | iri-reference         | An IRI or a relative       | Section   |
+    |                       | reference                  | 8.8.4     |
+    +-----------------------+----------------------------+-----------+
+    | uuid                  | A UUID, without a          | Section   |
+    |                       | urn:uuid: prefix           | 8.8.5     |
+    +-----------------------+----------------------------+-----------+
+    | uri-template          | A URI Template             | Section   |
+    |                       |                            | 8.9.1     |
+    +-----------------------+----------------------------+-----------+
+    | json-pointer          | A JSON Pointer             | Section   |
+    |                       |                            | 8.10.1    |
+    +-----------------------+----------------------------+-----------+
+    | relative-json-pointer | A Relative JSON Pointer    | Section   |
+    |                       |                            | 8.10.2    |
+    +-----------------------+----------------------------+-----------+
+    | regex                 | A regular expression in    | Section   |
+    |                       | the ECMA-262 dialect       | 8.11.1    |
+    +-----------------------+----------------------------+-----------+
+
+      Table 3: Initial contents of the JSON Schema Format Attributes
+                                 registry
+
 19.  References
 
 19.1.  Normative References
@@ -4563,6 +4691,11 @@ Table of Contents
               "JavaScript Object Notation (JSON) Pointer", RFC 6901,
               DOI 10.17487/RFC6901, April 2013,
               <https://www.rfc-editor.org/rfc/rfc6901>.
+
+   [RFC8126]  Cotton, M., Leiba, B., and T. Narten, "Guidelines for
+              Writing an IANA Considerations Section in RFCs", BCP 26,
+              RFC 8126, DOI 10.17487/RFC8126, June 2017,
+              <https://www.rfc-editor.org/rfc/rfc8126>.
 
    [RFC8259]  Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
               Interchange Format", STD 90, RFC 8259,
@@ -4914,7 +5047,7 @@ Appendix D.  Implementing keyword dependencies
     | "Y": "world"}   |                        | properties           |
     +-----------------+------------------------+----------------------+
 
-                                  Table 3
+                                  Table 4
 
    Note that the additionalProperties subschema is never applied to "X"
    or "Y" even when they are rejected by properties.
@@ -4969,7 +5102,7 @@ Appendix D.  Implementing keyword dependencies
    |"world"} |            |                       |properties           |
    +---------+------------+-----------------------+---------------------+
 
-                                  Table 4
+                                  Table 5
 
    Similarly, the length of the prefixItems keyword's value is used by
    items, and it produces information which is used by unevaluatedItems.
@@ -5011,7 +5144,7 @@ Appendix D.  Implementing keyword dependencies
    |                              |             | applied)            |
    +------------------------------+-------------+---------------------+
 
-                                 Table 5
+                                 Table 6
 
    As with our object properties example, using this schema (without
    items) via a reference requires using unevaluatedItems to get the
@@ -5067,7 +5200,7 @@ Appendix D.  Implementing keyword dependencies
    |                        |             |                  |applied)        |
    +------------------------+-------------+------------------+----------------+
 
-                                  Table 6
+                                  Table 7
 
    Note that in the fourth row, unevaluatedItems ends up applied to
    index 1, while items was not.
@@ -5095,7 +5228,7 @@ Appendix D.  Implementing keyword dependencies
     |                   | validations         |                      |
     +-------------------+---------------------+----------------------+
 
-                                 Table 7
+                                 Table 8
 
    The following table summarizes which keywords, when successful,
    produce information on which other keywords depend:
@@ -5140,7 +5273,7 @@ Appendix D.  Implementing keyword dependencies
     |                       | outcome        |                       |
     +-----------------------+----------------+-----------------------+
 
-                                 Table 8
+                                 Table 9
 
    Note that certain keywords always validate all remaining properties
    or indices when successful, so there is no need for them to track
