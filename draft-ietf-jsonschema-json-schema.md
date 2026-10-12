@@ -1811,12 +1811,13 @@ accepted by the "idn-email" attribute.
 
 ## Hostnames {#format-hostnames}
 
-These attributes apply to string inputs.  Hostname validation is done without
-performing an input mapping step which may change many invalid names to valid ones.
-Because browsers frequently do a mapping step, many domain names that a user
-might type in (e.g. with capital characters or full-width characters) are invalid as typed
-in yet the browser will attempt to resolve.  These format attributes are intended
-to accept a narrower set of hostnames.
+These attributes apply to string inputs. 
+
+Note that these attributes restrict host names to the form used in protocols,
+which is narrower than what users can type into a browser.   Schema authors
+who wish to allow values like "Café.example" or "ｅｘａｍｐｌｅ.com" as legitimate
+values for a field, but to disallow strings such as "Café Example",
+will need to take another approach to constrain values.
 
 
 ### "hostname" {#format-hostname}
