@@ -5,9 +5,9 @@
 Network Working Group                                  L. Dusseault, Ed.
 Internet-Draft                                  Data Transfer Initiative
 Intended status: Standards Track                               A. Wright
-Expires: 10 April 2027                                                  
+Expires: 15 April 2027                                                  
                                                               H. Andrews
-                                                          7 October 2026
+                                                         12 October 2026
 
 
                               JSON Schema
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 10 April 2027.
+   This Internet-Draft will expire on 15 April 2027.
 
 Copyright Notice
 
@@ -174,6 +174,7 @@ Table of Contents
        8.8.3.  "iri"
        8.8.4.  "iri-reference"
        8.8.5.  "uuid"
+       8.8.6.  Checking Scheme-Specific Syntax
      8.9.  Templates
        8.9.1.  "uri-template"
      8.10. JSON Pointers
@@ -2162,15 +2163,14 @@ Table of Contents
    | ipv6             | An IPv6 address      | 2001:db8::1            |
    | (Section 8.7.2)  |                      |                        |
    +------------------+----------------------+------------------------+
-   | uri              | An absolute URI      | https://example.com/   |
+   | uri              | A full URI           | https://example.com/   |
    | (Section 8.8.1)  |                      | a?b=c                  |
    +------------------+----------------------+------------------------+
    | uri-reference    | A URI or a relative  | ../a#b                 |
    | (Section 8.8.2)  | reference            |                        |
    +------------------+----------------------+------------------------+
-   | iri              | An absolute IRI,     | https://example.com/a  |
-   | (Section 8.8.3)  | allowing non-ASCII   |                        |
-   |                  | characters           |                        |
+   | iri              | A full IRI, allowing | https://example.com/a  |
+   | (Section 8.8.3)  | non-ASCII characters |                        |
    +------------------+----------------------+------------------------+
    | iri-reference    | An IRI or a relative | ../a#b                 |
    | (Section 8.8.4)  | reference            |                        |
@@ -2321,8 +2321,8 @@ Table of Contents
    As defined by the "Mailbox" ABNF rule in [RFC5321], Section 4.1.2.
    Along with its ABNF definitions, RFC 5321 has additional limitations
    on email addresses in [RFC5321], Section 4.5.3 which MUST be
-   enforced.  Hostnames in email addresses MUST be syntactically valid
-   hostnames.
+   enforced.  When the domain is not an address literal, it MUST be a
+   syntactically valid hostname.
 
    A reasonable _starting point_ for validation (once line returns are
    removed) is this regex, which is NOT a complete implementation
@@ -2348,18 +2348,31 @@ Table of Contents
 
    These attributes apply to string inputs.
 
-   A string input is accepted by these attributes if it is a valid
-   representation for an Internet hostname as follows:
+   Note that these attributes restrict host names to the form used in
+   protocols, which is narrower than what users can type into a browser.
+   Schema authors who wish to allow values like "Café.example" or
+   "ｅｘａｍｐｌｅ.com" as legitimate values for a field, but to disallow
+   strings such as "Café Example", will need to take another approach to
+   constrain values.
 
 8.6.1.  "hostname"
 
-   As defined by [RFC1123], Section 2.1, including host names produced
-   using the Punycode algorithm specified in [RFC5891], Section 4.4.
+   Each label follows the preferred name syntax of [RFC1034],
+   Section 3.5 (letters, digits, and interior hyphens, at most 63
+   characters), as relaxed by [RFC1123], Section 2.1 to allow a leading
+   digit.  The whole host name is at most 253 characters.  This includes
+   host names produced using the Punycode algorithm specified in
+   [RFC5891], Section 4.4.  Hostnames with "xn--" do not need to decode
+   to a valid IDN hostname (for example, xn--ls8h.example or xn--
+   zz.example).
 
 8.6.2.  "idn-hostname"
 
    As defined by either RFC 1123 as for hostname, or an
    internationalized hostname as defined by [RFC5890], Section 2.3.2.3.
+   The other IDNA2008 documents define what makes each label valid: the
+   protocol rules in [RFC5891], the permitted code points in [RFC5892],
+   and the rules for right-to-left scripts in [RFC5893].
 
    Note that all strings accepted by the "hostname" attribute are also
    accepted by the "idn-hostname" attribute.
@@ -2382,7 +2395,25 @@ Table of Contents
 
 8.8.  Resource Identifiers
 
-   These attributes apply to string inputs.
+   These attributes apply to string inputs.  Note that all valid URIs
+   are valid IRIs, and all valid URI References are also valid IRI
+   References.
+
+   Only general URI format checking is expected for the URI/IRI
+   constraints.  Implementations SHOULD NOT add checks for specific
+   schemes such as http or email URIs, as this would lead to
+   inconsistent validation results between implementations.
+
+   If per-format URI checking is desired, a schema author could possibly
+   combine the "uri" format constraint with a pattern regex constraint.
+   Specification authors can define additional format options in the
+   IANA registry.
+
+   Implementors using libraries are cautioned to check if the libraries
+   fix up URIs along with validating them.  For example a library that
+   quietly replaces space with "%20" or treats backslashes as slashes
+   would miss invalid URIs.  Other URI libraries check the rules of
+   specific schemes which goes beyond the requirements here.
 
 8.8.1.  "uri"
 
@@ -2409,16 +2440,36 @@ Table of Contents
 8.8.5.  "uuid"
 
    A string input is accepted by this attribute if it is a valid string
-   representation of a UUID, according to [RFC4122].
+   representation of a UUID, according to [RFC9562], Section 4.
 
-   Note that all valid URIs are valid IRIs, and all valid URI References
-   are also valid IRI References.
+   Note that the "uuid" format is for plain UUIDs, not UUIDs in URNs.
+   An example is "f81d4fae-7dec-11d0-a765-00a0c91e6bf6".  For UUIDs as
+   URNs, use the "uri" format with a "pattern", as shown in
+   Section 8.8.6.
 
-   Note also that the "uuid" format is for plain UUIDs, not UUIDs in
-   URNs.  An example is "f81d4fae-7dec-11d0-a765-00a0c91e6bf6".  For
-   UUIDs as URNs, use the "uri" format, with a "pattern" regular
-   expression of "^urn:uuid:" to indicate the URI scheme and URN
-   namespace.
+8.8.6.  Checking Scheme-Specific Syntax
+
+   This section is non-normative.
+
+   The "uri", "uri-reference", "iri" and "iri-reference" attributes
+   check only the generic syntax of resource identifiers.  Schema
+   authors who need the rules of a particular URI scheme can add them
+   with "pattern" alongside "format".
+
+   For example, [RFC9562], Section 4 defines a URN form for UUIDs, such
+   as "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6".  The following
+   schema constrains URIs to that form:
+
+   {
+     "type": "string",
+     "format": "uri",
+     "pattern":
+       "^urn:uuid:[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$"
+   }
+
+   The "format" keyword checks that the string is a URI, and "pattern"
+   adds the rules of the "urn:uuid" namespace: the prefix, followed by a
+   UUID in the hex-and-dash form.
 
 8.9.  Templates
 
@@ -2456,12 +2507,13 @@ Table of Contents
 
    This attribute applies to string inputs.
 
-   A regular expression, which SHOULD be valid according to the
-   [ECMA262] regular expression dialect.
-
-   Implementations that validate formats MUST accept at least the subset
-   of ECMA-262 defined in Regular Expressions (Section 17.3) section of
-   this specification, and SHOULD accept all valid ECMA-262 expressions.
+   A string input is accepted by this attribute if it is a valid regular
+   expression.  It is RECOMMENDED that implementations determine
+   validity using the "Pattern" grammar of [ECMA262], Section 22.2.1 in
+   Unicode mode (as with the "u" flag), including its early error rules
+   in [ECMA262], Section 22.2.1.1.  Implementations that validate
+   formats MUST accept at least the subset of ECMA-262 defined in
+   Section 17.3.
 
 9.  Vocabulary for the Contents of String-Encoded Data
 
@@ -4282,7 +4334,7 @@ Table of Contents
    Keywords MAY use regular expressions to express constraints, or
    constrain the input value to be a regular expression.  These regular
    expressions SHOULD be valid according to the regular expression
-   dialect described in [ECMA262], Section 21.2.1.
+   dialect described in [ECMA262], Section 22.2.1.
 
    Unless otherwise specified by a keyword, regular expressions MUST NOT
    be considered to be implicitly anchored at either end.  All regular
@@ -4399,9 +4451,9 @@ Table of Contents
 19.1.  Normative References
 
    [ECMA262]  European Computer Manufacturers Association, "ECMAScript
-              Language Specification 6th Edition", ECMA Standard ECMA-
-              262, June 2015, <https://ecma-international.org/wp-
-              content/uploads/ECMA-262_6th_edition_june_2015.pdf>.
+              2026 Language Specification, 17th Edition", ECMA Standard
+              ECMA-262, June 2026,
+              <https://262.ecma-international.org/17.0/>.
 
    [I-D.hha-relative-json-pointer]
               Luff, G., Andrews, H. H., and B. Hutton, "Relative JSON
@@ -4414,6 +4466,10 @@ Table of Contents
               Platform 1.0", W3C Recommendation REC-ldp-20150226, 26
               February 2015,
               <http://www.w3.org/TR/2015/REC-ldp-20150226/>.
+
+   [RFC1034]  Mockapetris, P., "Domain names - concepts and facilities",
+              STD 13, RFC 1034, DOI 10.17487/RFC1034, November 1987,
+              <https://www.rfc-editor.org/rfc/rfc1034>.
 
    [RFC1123]  Braden, R., Ed., "Requirements for Internet Hosts -
               Application and Support", STD 3, RFC 1123,
@@ -4452,11 +4508,6 @@ Table of Contents
               Identifiers (IRIs)", RFC 3987, DOI 10.17487/RFC3987,
               January 2005, <https://www.rfc-editor.org/rfc/rfc3987>.
 
-   [RFC4122]  Leach, P., Mealling, M., and R. Salz, "A Universally
-              Unique IDentifier (UUID) URN Namespace", RFC 4122,
-              DOI 10.17487/RFC4122, July 2005,
-              <https://www.rfc-editor.org/rfc/rfc4122>.
-
    [RFC4291]  Hinden, R. and S. Deering, "IP Version 6 Addressing
               Architecture", RFC 4291, DOI 10.17487/RFC4291, February
               2006, <https://www.rfc-editor.org/rfc/rfc4291>.
@@ -4478,6 +4529,16 @@ Table of Contents
               Applications (IDNA): Protocol", RFC 5891,
               DOI 10.17487/RFC5891, August 2010,
               <https://www.rfc-editor.org/rfc/rfc5891>.
+
+   [RFC5892]  Faltstrom, P., Ed., "The Unicode Code Points and
+              Internationalized Domain Names for Applications (IDNA)",
+              RFC 5892, DOI 10.17487/RFC5892, August 2010,
+              <https://www.rfc-editor.org/rfc/rfc5892>.
+
+   [RFC5893]  Alvestrand, H., Ed. and C. Karp, "Right-to-Left Scripts
+              for Internationalized Domain Names for Applications
+              (IDNA)", RFC 5893, DOI 10.17487/RFC5893, August 2010,
+              <https://www.rfc-editor.org/rfc/rfc5893>.
 
    [RFC6531]  Yao, J. and W. Mao, "SMTP Extension for Internationalized
               Email", RFC 6531, DOI 10.17487/RFC6531, February 2012,
@@ -4511,6 +4572,10 @@ Table of Contents
    [RFC8288]  Nottingham, M., "Web Linking", RFC 8288,
               DOI 10.17487/RFC8288, October 2017,
               <https://www.rfc-editor.org/rfc/rfc8288>.
+
+   [RFC9562]  Davis, K., Peabody, B., and P. Leach, "Universally Unique
+              IDentifiers (UUIDs)", RFC 9562, DOI 10.17487/RFC9562, May
+              2024, <https://www.rfc-editor.org/rfc/rfc9562>.
 
    [XMLNS]    Bray, T., Hollander, D., Layman, A., Tobin, R., and H.
               Thompson, "Namespaces in XML 1.0 (Third Edition)", W3C

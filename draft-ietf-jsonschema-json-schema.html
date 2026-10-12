@@ -1054,7 +1054,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Dusseault, et al.</td>
-<td class="center">Expires 10 April 2027</td>
+<td class="center">Expires 15 April 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1067,12 +1067,12 @@ svg {
 <dd class="internet-draft">draft-ietf-jsonschema-json-schema-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-10-07" class="published">7 October 2026</time>
+<time datetime="2026-10-12" class="published">12 October 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-04-10">10 April 2027</time></dd>
+<dd class="expires"><time datetime="2027-04-15">15 April 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1128,7 +1128,7 @@ Source for this draft can be found at
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 10 April 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 15 April 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1536,6 +1536,9 @@ Source for this draft can be found at
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.8.2.5">
                     <p id="section-toc.1-1.8.2.8.2.5.1"><a href="#section-8.8.5" class="auto internal xref">8.8.5</a>.  <a href="#name-uuid" class="internal xref">"uuid"</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.8.2.6">
+                    <p id="section-toc.1-1.8.2.8.2.6.1"><a href="#section-8.8.6" class="auto internal xref">8.8.6</a>.  <a href="#name-checking-scheme-specific-sy" class="internal xref">Checking Scheme-Specific Syntax</a></p>
 </li>
                 </ul>
 </li>
@@ -4085,7 +4088,7 @@ All of these format attributes apply to strings.<a href="#section-8.2-1" class="
             <tr>
               <td class="text-left" rowspan="1" colspan="1">
                 <code>uri</code> (<a href="#format-uri" class="auto internal xref">Section 8.8.1</a>)</td>
-              <td class="text-left" rowspan="1" colspan="1">An absolute URI</td>
+              <td class="text-left" rowspan="1" colspan="1">A full URI</td>
               <td class="text-left" rowspan="1" colspan="1">
                 <code>https://example.com/a?b=c</code>
 </td>
@@ -4101,7 +4104,7 @@ All of these format attributes apply to strings.<a href="#section-8.2-1" class="
             <tr>
               <td class="text-left" rowspan="1" colspan="1">
                 <code>iri</code> (<a href="#format-iri" class="auto internal xref">Section 8.8.3</a>)</td>
-              <td class="text-left" rowspan="1" colspan="1">An absolute IRI, allowing non-ASCII characters</td>
+              <td class="text-left" rowspan="1" colspan="1">A full IRI, allowing non-ASCII characters</td>
               <td class="text-left" rowspan="1" colspan="1">
                 <code>https://example.com/a</code>
 </td>
@@ -4331,7 +4334,7 @@ Internet email address as follows:<a href="#section-8.5-2" class="pilcrow">¶</a
 <p id="section-8.5.1-1">As defined by the "Mailbox" ABNF rule in
 <span>[<a href="#RFC5321" class="cite xref">RFC5321</a>], <a href="https://rfc-editor.org/rfc/rfc5321#section-4.1.2" class="relref">Section 4.1.2</a></span>.  Along with its ABNF definitions, RFC 5321 has additional limitations
 on email addresses in <span>[<a href="#RFC5321" class="cite xref">RFC5321</a>], <a href="https://rfc-editor.org/rfc/rfc5321#section-4.5.3" class="relref">Section 4.5.3</a></span> which MUST be enforced.
-Hostnames in email addresses MUST be syntactically valid hostnames.<a href="#section-8.5.1-1" class="pilcrow">¶</a></p>
+When the domain is not an address literal, it MUST be a syntactically valid hostname.<a href="#section-8.5.1-1" class="pilcrow">¶</a></p>
 <p id="section-8.5.1-2">A reasonable <em>starting point</em> for validation (once line returns are removed) is
 this regex, which is NOT a complete implementation without further address checking
 (it doesn't check domain-label or IP address rules), and length checking.
@@ -4366,16 +4369,23 @@ accepted by the "idn-email" attribute.<a href="#section-8.5.2-2" class="pilcrow"
 <a href="#section-8.6" class="section-number selfRef">8.6. </a><a href="#name-hostnames" class="section-name selfRef">Hostnames</a>
         </h3>
 <p id="section-8.6-1">These attributes apply to string inputs.<a href="#section-8.6-1" class="pilcrow">¶</a></p>
-<p id="section-8.6-2">A string input is accepted by these attributes if it is a valid
-representation for an Internet hostname as follows:<a href="#section-8.6-2" class="pilcrow">¶</a></p>
+<p id="section-8.6-2">Note that these attributes restrict host names to the form used in protocols,
+which is narrower than what users can type into a browser.   Schema authors
+who wish to allow values like "Café.example" or "ｅｘａｍｐｌｅ.com" as legitimate
+values for a field, but to disallow strings such as "Café Example",
+will need to take another approach to constrain values.<a href="#section-8.6-2" class="pilcrow">¶</a></p>
 <div id="format-hostname">
 <section id="section-8.6.1">
           <h4 id="name-hostname">
 <a href="#section-8.6.1" class="section-number selfRef">8.6.1. </a><a href="#name-hostname" class="section-name selfRef">"hostname"</a>
           </h4>
-<p id="section-8.6.1-1">As defined by <span>[<a href="#RFC1123" class="cite xref">RFC1123</a>], <a href="https://rfc-editor.org/rfc/rfc1123#section-2.1" class="relref">Section 2.1</a></span>,
-including host names produced using the Punycode algorithm
-specified in <span>[<a href="#RFC5891" class="cite xref">RFC5891</a>], <a href="https://rfc-editor.org/rfc/rfc5891#section-4.4" class="relref">Section 4.4</a></span>.<a href="#section-8.6.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.6.1-1">Each label follows the preferred name syntax of <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>], <a href="https://rfc-editor.org/rfc/rfc1034#section-3.5" class="relref">Section 3.5</a></span>
+(letters, digits, and interior hyphens, at most 63 characters),
+as relaxed by <span>[<a href="#RFC1123" class="cite xref">RFC1123</a>], <a href="https://rfc-editor.org/rfc/rfc1123#section-2.1" class="relref">Section 2.1</a></span> to allow a leading digit.  The whole host name is at most
+253 characters.  This includes host names produced using the Punycode algorithm
+specified in <span>[<a href="#RFC5891" class="cite xref">RFC5891</a>], <a href="https://rfc-editor.org/rfc/rfc5891#section-4.4" class="relref">Section 4.4</a></span>.  Hostnames with "xn--"
+do not need to decode to a valid IDN hostname (for example,
+xn--ls8h.example or xn--zz.example).<a href="#section-8.6.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="format-idn-hostname">
@@ -4385,7 +4395,10 @@ specified in <span>[<a href="#RFC5891" class="cite xref">RFC5891</a>], <a href="
           </h4>
 <p id="section-8.6.2-1">As defined by either RFC 1123 as for hostname, or an
 internationalized hostname as defined by
-<span>[<a href="#RFC5890" class="cite xref">RFC5890</a>], <a href="https://rfc-editor.org/rfc/rfc5890#section-2.3.2.3" class="relref">Section 2.3.2.3</a></span>.<a href="#section-8.6.2-1" class="pilcrow">¶</a></p>
+<span>[<a href="#RFC5890" class="cite xref">RFC5890</a>], <a href="https://rfc-editor.org/rfc/rfc5890#section-2.3.2.3" class="relref">Section 2.3.2.3</a></span>.  The other IDNA2008 documents define
+what makes each label valid: the protocol rules in <span>[<a href="#RFC5891" class="cite xref">RFC5891</a>]</span>,
+the permitted code points in <span>[<a href="#RFC5892" class="cite xref">RFC5892</a>]</span>, and the rules for
+right-to-left scripts in <span>[<a href="#RFC5893" class="cite xref">RFC5893</a>]</span>.<a href="#section-8.6.2-1" class="pilcrow">¶</a></p>
 <p id="section-8.6.2-2">Note that all strings accepted by the "hostname" attribute are also
 accepted by the "idn-hostname" attribute.<a href="#section-8.6.2-2" class="pilcrow">¶</a></p>
 </section>
@@ -4426,7 +4439,19 @@ syntax as defined in
         <h3 id="name-resource-identifiers">
 <a href="#section-8.8" class="section-number selfRef">8.8. </a><a href="#name-resource-identifiers" class="section-name selfRef">Resource Identifiers</a>
         </h3>
-<p id="section-8.8-1">These attributes apply to string inputs.<a href="#section-8.8-1" class="pilcrow">¶</a></p>
+<p id="section-8.8-1">These attributes apply to string inputs.
+Note that all valid URIs are valid IRIs, and all valid URI References are also valid IRI References.<a href="#section-8.8-1" class="pilcrow">¶</a></p>
+<p id="section-8.8-2">Only general URI format checking is expected for the URI/IRI constraints.
+Implementations SHOULD NOT add checks for specific schemes such as http or email URIs,
+as this would lead to inconsistent validation results between
+implementations.<a href="#section-8.8-2" class="pilcrow">¶</a></p>
+<p id="section-8.8-3">If per-format URI checking is desired, a schema author could
+possibly combine the "uri" format constraint with a <code>pattern</code> regex constraint.  Specification
+authors can define additional format options in the IANA registry.<a href="#section-8.8-3" class="pilcrow">¶</a></p>
+<p id="section-8.8-4">Implementors using libraries are cautioned to check if the libraries fix up URIs along with validating them.
+For example a library that quietly replaces space with "%20" or treats backslashes as
+slashes would miss invalid URIs.  Other URI libraries check the rules of specific schemes
+which goes beyond the requirements here.<a href="#section-8.8-4" class="pilcrow">¶</a></p>
 <div id="format-uri">
 <section id="section-8.8.1">
           <h4 id="name-uri">
@@ -4471,13 +4496,38 @@ according to <span>[<a href="#RFC3987" class="cite xref">RFC3987</a>], <a href="
 <a href="#section-8.8.5" class="section-number selfRef">8.8.5. </a><a href="#name-uuid" class="section-name selfRef">"uuid"</a>
           </h4>
 <p id="section-8.8.5-1">A string input is accepted by this attribute if it is a valid
-string representation of a UUID, according to <span>[<a href="#RFC4122" class="cite xref">RFC4122</a>]</span>.<a href="#section-8.8.5-1" class="pilcrow">¶</a></p>
-<p id="section-8.8.5-2">Note that all valid URIs are valid IRIs, and all valid URI References are
-also valid IRI References.<a href="#section-8.8.5-2" class="pilcrow">¶</a></p>
-<p id="section-8.8.5-3">Note also that the "uuid" format is for plain UUIDs, not UUIDs in URNs.  An example
-is "f81d4fae-7dec-11d0-a765-00a0c91e6bf6".  For UUIDs as URNs, use the "uri" format,
-with a "pattern" regular expression of "^urn:uuid:" to indicate the URI scheme and
-URN namespace.<a href="#section-8.8.5-3" class="pilcrow">¶</a></p>
+string representation of a UUID, according to <span>[<a href="#RFC9562" class="cite xref">RFC9562</a>], <a href="https://rfc-editor.org/rfc/rfc9562#section-4" class="relref">Section 4</a></span>.<a href="#section-8.8.5-1" class="pilcrow">¶</a></p>
+<p id="section-8.8.5-2">Note that the "uuid" format is for plain UUIDs, not UUIDs in URNs.  An example
+is "f81d4fae-7dec-11d0-a765-00a0c91e6bf6".  For UUIDs as URNs, use the "uri" format
+with a "pattern", as shown in <a href="#format-uri-schemes" class="auto internal xref">Section 8.8.6</a>.<a href="#section-8.8.5-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="format-uri-schemes">
+<section id="section-8.8.6">
+          <h4 id="name-checking-scheme-specific-sy">
+<a href="#section-8.8.6" class="section-number selfRef">8.8.6. </a><a href="#name-checking-scheme-specific-sy" class="section-name selfRef">Checking Scheme-Specific Syntax</a>
+          </h4>
+<p id="section-8.8.6-1">This section is non-normative.<a href="#section-8.8.6-1" class="pilcrow">¶</a></p>
+<p id="section-8.8.6-2">The "uri", "uri-reference", "iri" and "iri-reference" attributes check only
+the generic syntax of resource identifiers.  Schema authors who need the
+rules of a particular URI scheme can add them with "pattern" alongside
+"format".<a href="#section-8.8.6-2" class="pilcrow">¶</a></p>
+<p id="section-8.8.6-3">For example, <span>[<a href="#RFC9562" class="cite xref">RFC9562</a>], <a href="https://rfc-editor.org/rfc/rfc9562#section-4" class="relref">Section 4</a></span> defines a URN form for UUIDs, such
+as "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6".  The following schema
+constrains URIs to that form:<a href="#section-8.8.6-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-8.8.6-4">
+<pre>
+{
+  "type": "string",
+  "format": "uri",
+  "pattern":
+    "^urn:uuid:[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$"
+}
+</pre><a href="#section-8.8.6-4" class="pilcrow">¶</a>
+</div>
+<p id="section-8.8.6-5">The "format" keyword checks that the string is a URI, and "pattern" adds
+the rules of the "urn:uuid" namespace: the prefix, followed by a UUID in
+the hex-and-dash form.<a href="#section-8.8.6-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -4541,11 +4591,13 @@ according to <span>[<a href="#RFC6901" class="cite xref">RFC6901</a>], <a href="
 <a href="#section-8.11.1" class="section-number selfRef">8.11.1. </a><a href="#name-regex" class="section-name selfRef">"regex"</a>
           </h4>
 <p id="section-8.11.1-1">This attribute applies to string inputs.<a href="#section-8.11.1-1" class="pilcrow">¶</a></p>
-<p id="section-8.11.1-2">A regular expression, which SHOULD be valid according to the
-<span>[<a href="#ECMA262" class="cite xref">ECMA262</a>]</span> regular expression dialect.<a href="#section-8.11.1-2" class="pilcrow">¶</a></p>
-<p id="section-8.11.1-3">Implementations that validate formats MUST accept at least the subset of
-ECMA-262 defined in <span><a href="#regex-interop" class="internal xref">Regular Expressions</a> (<a href="#regex-interop" class="auto internal xref">Section 17.3</a>)</span>
-section of this specification, and SHOULD accept all valid ECMA-262 expressions.<a href="#section-8.11.1-3" class="pilcrow">¶</a></p>
+<p id="section-8.11.1-2">A string input is accepted by this attribute if it is a valid
+regular expression.  It is RECOMMENDED that implementations determine
+validity using the "Pattern" grammar of <span>[<a href="#ECMA262" class="cite xref">ECMA262</a>]</span>, Section 22.2.1
+in Unicode mode (as with the "u" flag), including its early error
+rules in <span>[<a href="#ECMA262" class="cite xref">ECMA262</a>]</span>, Section 22.2.1.1.  Implementations that validate
+formats MUST accept at least the subset of ECMA-262 defined in
+<a href="#regex-interop" class="auto internal xref">Section 17.3</a>.<a href="#section-8.11.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -6573,7 +6625,7 @@ part.<a href="#section-17.2-2" class="pilcrow">¶</a></p>
 <p id="section-17.3-1">Keywords MAY use regular expressions to express constraints, or constrain
 the input value to be a regular expression.
 These regular expressions SHOULD be valid according to the regular expression
-dialect described in <span>[<a href="#ECMA262" class="cite xref">ECMA262</a>]</span>, Section 21.2.1.<a href="#section-17.3-1" class="pilcrow">¶</a></p>
+dialect described in <span>[<a href="#ECMA262" class="cite xref">ECMA262</a>]</span>, Section 22.2.1.<a href="#section-17.3-1" class="pilcrow">¶</a></p>
 <p id="section-17.3-2">Unless otherwise specified by a keyword, regular expressions MUST NOT be
 considered to be implicitly anchored at either end.  All regular expression
 keywords in this specification are un-anchored.<a href="#section-17.3-2" class="pilcrow">¶</a></p>
@@ -6756,7 +6808,7 @@ media type.  See JSON (<span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]<
 <dl class="references">
 <dt id="ECMA262">[ECMA262]</dt>
         <dd>
-<span class="refAuthor">European Computer Manufacturers Association</span>, <span class="refTitle">"ECMAScript Language Specification 6th Edition"</span>, <span class="seriesInfo">ECMA Standard ECMA-262</span>, <time datetime="2015-06" class="refDate">June 2015</time>, <span>&lt;<a href="https://ecma-international.org/wp-content/uploads/ECMA-262_6th_edition_june_2015.pdf">https://ecma-international.org/wp-content/uploads/ECMA-262_6th_edition_june_2015.pdf</a>&gt;</span>. </dd>
+<span class="refAuthor">European Computer Manufacturers Association</span>, <span class="refTitle">"ECMAScript 2026 Language Specification, 17th Edition"</span>, <span class="seriesInfo">ECMA Standard ECMA-262</span>, <time datetime="2026-06" class="refDate">June 2026</time>, <span>&lt;<a href="https://262.ecma-international.org/17.0/">https://262.ecma-international.org/17.0/</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.hha-relative-json-pointer">[I-D.hha-relative-json-pointer]</dt>
         <dd>
@@ -6765,6 +6817,10 @@ media type.  See JSON (<span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]<
 <dt id="LDP">[LDP]</dt>
         <dd>
 <span class="refAuthor">Speicher, S.</span>, <span class="refAuthor">Arwe, J.</span>, and <span class="refAuthor">A. Malhotra</span>, <span class="refTitle">"Linked Data Platform 1.0"</span>, <span class="seriesInfo">W3C Recommendation REC-ldp-20150226</span>, <time datetime="2015-02-26" class="refDate">26 February 2015</time>, <span>&lt;<a href="http://www.w3.org/TR/2015/REC-ldp-20150226/">http://www.w3.org/TR/2015/REC-ldp-20150226/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC1034">[RFC1034]</dt>
+        <dd>
+<span class="refAuthor">Mockapetris, P.</span>, <span class="refTitle">"Domain names - concepts and facilities"</span>, <span class="seriesInfo">STD 13</span>, <span class="seriesInfo">RFC 1034</span>, <span class="seriesInfo">DOI 10.17487/RFC1034</span>, <time datetime="1987-11" class="refDate">November 1987</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc1034">https://www.rfc-editor.org/rfc/rfc1034</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC1123">[RFC1123]</dt>
         <dd>
@@ -6798,10 +6854,6 @@ media type.  See JSON (<span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]<
         <dd>
 <span class="refAuthor">Duerst, M.</span> and <span class="refAuthor">M. Suignard</span>, <span class="refTitle">"Internationalized Resource Identifiers (IRIs)"</span>, <span class="seriesInfo">RFC 3987</span>, <span class="seriesInfo">DOI 10.17487/RFC3987</span>, <time datetime="2005-01" class="refDate">January 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3987">https://www.rfc-editor.org/rfc/rfc3987</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC4122">[RFC4122]</dt>
-        <dd>
-<span class="refAuthor">Leach, P.</span>, <span class="refAuthor">Mealling, M.</span>, and <span class="refAuthor">R. Salz</span>, <span class="refTitle">"A Universally Unique IDentifier (UUID) URN Namespace"</span>, <span class="seriesInfo">RFC 4122</span>, <span class="seriesInfo">DOI 10.17487/RFC4122</span>, <time datetime="2005-07" class="refDate">July 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4122">https://www.rfc-editor.org/rfc/rfc4122</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC4291">[RFC4291]</dt>
         <dd>
 <span class="refAuthor">Hinden, R.</span> and <span class="refAuthor">S. Deering</span>, <span class="refTitle">"IP Version 6 Addressing Architecture"</span>, <span class="seriesInfo">RFC 4291</span>, <span class="seriesInfo">DOI 10.17487/RFC4291</span>, <time datetime="2006-02" class="refDate">February 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4291">https://www.rfc-editor.org/rfc/rfc4291</a>&gt;</span>. </dd>
@@ -6821,6 +6873,14 @@ media type.  See JSON (<span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]<
 <dt id="RFC5891">[RFC5891]</dt>
         <dd>
 <span class="refAuthor">Klensin, J.</span>, <span class="refTitle">"Internationalized Domain Names in Applications (IDNA): Protocol"</span>, <span class="seriesInfo">RFC 5891</span>, <span class="seriesInfo">DOI 10.17487/RFC5891</span>, <time datetime="2010-08" class="refDate">August 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5891">https://www.rfc-editor.org/rfc/rfc5891</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC5892">[RFC5892]</dt>
+        <dd>
+<span class="refAuthor">Faltstrom, P., Ed.</span>, <span class="refTitle">"The Unicode Code Points and Internationalized Domain Names for Applications (IDNA)"</span>, <span class="seriesInfo">RFC 5892</span>, <span class="seriesInfo">DOI 10.17487/RFC5892</span>, <time datetime="2010-08" class="refDate">August 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5892">https://www.rfc-editor.org/rfc/rfc5892</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC5893">[RFC5893]</dt>
+        <dd>
+<span class="refAuthor">Alvestrand, H., Ed.</span> and <span class="refAuthor">C. Karp</span>, <span class="refTitle">"Right-to-Left Scripts for Internationalized Domain Names for Applications (IDNA)"</span>, <span class="seriesInfo">RFC 5893</span>, <span class="seriesInfo">DOI 10.17487/RFC5893</span>, <time datetime="2010-08" class="refDate">August 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5893">https://www.rfc-editor.org/rfc/rfc5893</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC6531">[RFC6531]</dt>
         <dd>
@@ -6849,6 +6909,10 @@ media type.  See JSON (<span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]<
 <dt id="RFC8288">[RFC8288]</dt>
         <dd>
 <span class="refAuthor">Nottingham, M.</span>, <span class="refTitle">"Web Linking"</span>, <span class="seriesInfo">RFC 8288</span>, <span class="seriesInfo">DOI 10.17487/RFC8288</span>, <time datetime="2017-10" class="refDate">October 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8288">https://www.rfc-editor.org/rfc/rfc8288</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9562">[RFC9562]</dt>
+        <dd>
+<span class="refAuthor">Davis, K.</span>, <span class="refAuthor">Peabody, B.</span>, and <span class="refAuthor">P. Leach</span>, <span class="refTitle">"Universally Unique IDentifiers (UUIDs)"</span>, <span class="seriesInfo">RFC 9562</span>, <span class="seriesInfo">DOI 10.17487/RFC9562</span>, <time datetime="2024-05" class="refDate">May 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9562">https://www.rfc-editor.org/rfc/rfc9562</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="XMLNS">[XMLNS]</dt>
       <dd>
