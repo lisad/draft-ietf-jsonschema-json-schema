@@ -5,9 +5,9 @@
 Network Working Group                                  L. Dusseault, Ed.
 Internet-Draft                                  Data Transfer Initiative
 Intended status: Standards Track                               A. Wright
-Expires: 11 April 2027                                                  
+Expires: 15 April 2027                                                  
                                                               H. Andrews
-                                                          8 October 2026
+                                                         12 October 2026
 
 
                               JSON Schema
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 April 2027.
+   This Internet-Draft will expire on 15 April 2027.
 
 Copyright Notice
 
@@ -2346,13 +2346,14 @@ Table of Contents
 
 8.6.  Hostnames
 
-   These attributes apply to string inputs.  Hostname validation is done
-   without performing an input mapping step which may change many
-   invalid names to valid ones.  Because browsers frequently do a
-   mapping step, many domain names that a user might type in (e.g. with
-   capital characters or full-width characters) are invalid as typed in
-   yet the browser will attempt to resolve.  These format attributes are
-   intended to accept a narrower set of hostnames.
+   These attributes apply to string inputs.
+
+   Note that these attributes restrict host names to the form used in
+   protocols, which is narrower than what users can type into a browser.
+   Schema authors who wish to allow values like "Café.example" or
+   "ｅｘａｍｐｌｅ.com" as legitimate values for a field, but to disallow
+   strings such as "Café Example", will need to take another approach to
+   constrain values.
 
 8.6.1.  "hostname"
 
