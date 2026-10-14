@@ -5,9 +5,9 @@
 Network Working Group                                  L. Dusseault, Ed.
 Internet-Draft                                  Data Transfer Initiative
 Intended status: Standards Track                               A. Wright
-Expires: 15 April 2027                                                  
+Expires: 17 April 2027                                                  
                                                               H. Andrews
-                                                         12 October 2026
+                                                         14 October 2026
 
 
                               JSON Schema
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 April 2027.
+   This Internet-Draft will expire on 17 April 2027.
 
 Copyright Notice
 
@@ -284,10 +284,11 @@ Table of Contents
    Appendix G.  Important changes from JSON Schema 2020-12
    Appendix H.  Acknowledgments
    Appendix I.  Change Log
-     I.1.  draft-ietf-jsonschema-json-schema-03
-     I.2.  draft-ietf-jsonschema-json-schema-02
-     I.3.  draft-ietf-jsonschema-json-schema-01
-     I.4.  draft-ietf-jsonschema-json-schema-00
+     I.1.  draft-ietf-jsonschema-json-schema-04
+     I.2.  draft-ietf-jsonschema-json-schema-03
+     I.3.  draft-ietf-jsonschema-json-schema-02
+     I.4.  draft-ietf-jsonschema-json-schema-01
+     I.5.  draft-ietf-jsonschema-json-schema-00
    Authors' Addresses
 
 1.  Introduction
@@ -5507,8 +5508,10 @@ Appendix G.  Important changes from JSON Schema 2020-12
       "application/schema+json" is registered as an obsolete alias
       (Section 18).
 
-   *  Format checking returns to being a requirement, meeting authors'
-      expectations.
+   *  Format checking is more clearly a requirement, meeting schema
+      authors' expectations.  Several format attributes are much more
+      narrowly defined so that implementations validate more
+      consistently with each other.
 
 Appendix H.  Acknowledgments
 
@@ -5525,7 +5528,22 @@ Appendix I.  Change Log
 
    This section to be removed before leaving Internet-Draft status.
 
-I.1.  draft-ietf-jsonschema-json-schema-03
+I.1.  draft-ietf-jsonschema-json-schema-04
+
+   *  Remove footnotes, folding into text or resolving issue or
+      deleting.
+
+   *  Strengthen requirements for 'format' in several ways, both overall
+      and for individual format attributes.
+
+   *  Request an IANA registry for format attributes.
+
+   *  Updates the IANA registry request for "application/json-
+      schema+json".
+
+   *  Move some more details on vocabularies to the meta-schema section.
+
+I.2.  draft-ietf-jsonschema-json-schema-03
 
    *  Define and use "JSON text" and "JSON value" better.
 
@@ -5541,7 +5559,7 @@ I.1.  draft-ietf-jsonschema-json-schema-03
    *  Simplify language around how a keyword should "validate" or
       "accept" input.
 
-I.2.  draft-ietf-jsonschema-json-schema-02
+I.3.  draft-ietf-jsonschema-json-schema-02
 
    *  Add a section near the front of the document explaining what
       sections are written for distinct readers
@@ -5553,7 +5571,7 @@ I.2.  draft-ietf-jsonschema-json-schema-02
       core text and into an informative appendix, simplifying the main
       text for readers who are not implementing
 
-I.3.  draft-ietf-jsonschema-json-schema-01
+I.4.  draft-ietf-jsonschema-json-schema-01
 
    *  Clarify terminology by using JSON Text when talking about
       serialized JSON, and structured document when talking about what a
@@ -5562,7 +5580,7 @@ I.3.  draft-ietf-jsonschema-json-schema-01
    *  Add examples for $anchor, $ref, $defs, $comment, allOf, if and
       then
 
-I.4.  draft-ietf-jsonschema-json-schema-00
+I.5.  draft-ietf-jsonschema-json-schema-00
 
    Compared to the "2020-12" version of JSON Schema, this draft makes
    the following changes.
