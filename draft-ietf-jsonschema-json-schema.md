@@ -116,9 +116,7 @@ starting point for a WG and a wide consensus process.
 
 ## Notational Conventions
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
-"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
-interpreted as described in {{!RFC2119}}.
+{::boilerplate bcp14-tagged}
 
 For brevity, the converse of logical statements is assumed, except for values described as undefined; that is,
 "only &lt;X&gt; is accepted" shall imply "&lt;not X&gt; is rejected".
@@ -1856,9 +1854,8 @@ representation of an IP address as follows:
 
 ### "ipv4" {#format-ipv4}
 
-An IPv4 address according to the "dotted-quad" ABNF
-syntax as defined in
-{{!RFC2673, Section 3.2}}.
+An IPv4 address according to the "IPv4address" ABNF
+rule in {{!RFC3986, Section 3.2.2}}.
 
 ### "ipv6" {#format-ipv6}
 
