@@ -4301,8 +4301,9 @@ that can affect implementations.
 * "application/json-schema+json" is the media type for JSON Schema.
   "application/schema+json" is registered as an obsolete alias
   ({{iana-considerations}}).
-* Format checking returns to being a requirement, meeting authors'
-  expectations.
+* Format checking is more clearly a requirement, meeting schema authors'
+  expectations.  Several format attributes are much more narrowly defined
+  so that implementations validate more consistently with each other.
 
 # Acknowledgments
 
@@ -4330,6 +4331,15 @@ and Karen Etheridge.
 # Change Log
 
 This section to be removed before leaving Internet-Draft status.
+
+## draft-ietf-jsonschema-json-schema-04
+
+* Remove footnotes, folding into text or resolving issue or deleting.
+* Strengthen requirements for 'format' in several ways, both overall
+and for individual format attributes.
+* Request an IANA registry for format attributes.
+* Updates the IANA registry request for "application/json-schema+json".
+* Move some more details on vocabularies to the meta-schema section.
 
 ## draft-ietf-jsonschema-json-schema-03
 
