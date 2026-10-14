@@ -31,8 +31,8 @@ build HTML output:
 ## For implementors
 
 The examples in this specification's tests may be useful for implementors, especially the lists
-of valid and invalid URIs, email addresses, and dates, times and durations.
+of valid and invalid URIs, email addresses, and dates, times and durations and IDN hostnames.
 
-To test the date, time and duration cases against the jsonschema library:
+E.g. To test the date, time and duration cases against the jsonschema library:
 
 % python3.11 validate-date-time-formats.py
