@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-13T05:45:17.076465+00:00",
+  "timestamp": "2026-10-15T03:30:19.455363+00:00",
   "repo": "lisad/draft-ietf-jsonschema-json-schema",
   "labels": [
     {
@@ -4503,24 +4503,26 @@
       "id": "PR_kwDOR8mbas8AAAABH_dP-w",
       "title": "Adds changes sections for next draft version",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/78",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "lisad",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Preparing for next submission to datatracker",
       "createdAt": "2026-10-12T15:05:35Z",
-      "updatedAt": "2026-10-12T15:05:36Z",
+      "updatedAt": "2026-10-14T00:27:33Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "05c161908f83a0d48c3c3481514b69bf4b275fd4",
       "headRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "headRefName": "changes-since",
       "headRefOid": "06ac31b861ceef7d32613a20d835190fc2464e77",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-10-14T00:27:33Z",
+      "mergedAt": "2026-10-14T00:27:33Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "4c6098e0e33820425d1a980af98252350ee3c572"
+      },
       "comments": [],
       "reviews": []
     }
