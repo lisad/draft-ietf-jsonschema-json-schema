@@ -1670,7 +1670,10 @@ All of these format attributes apply to strings.
 ## General Format Implementation Requirements {#format-implementation}
 
 It is RECOMMENDED that implementations use a common parsing library for each format,
-or a well-known regular expression.
+or a well-known regular expression.  However, note that parsing libraries often
+are too lenient (e.g. accepting date-time values without timezone offsets, or
+times without seconds), making reasonable assumptions in order to successfully parse
+a value, whereas validation should usually be stricter.
 
 ### Format-Annotation Vocabulary
 

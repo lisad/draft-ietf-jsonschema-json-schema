@@ -7,6 +7,7 @@ on:
       - 'email-format.regex'
       - 'validate-email-regex.py'
       - 'validate-uri-formats.py'
+      - 'validate-date-time-formats.py'
       - 'validate-examples.py'
       - 'requirements.txt'
 
@@ -61,3 +62,15 @@ jobs:
         run: pip install -r requirements.txt
       - name: Check URI and IRI cases against the RFC grammars
         run: python validate-uri-formats.py
+
+  test-date-time-formats:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Test date, time and duration cases against jsonschema
+        run: python validate-date-time-formats.py

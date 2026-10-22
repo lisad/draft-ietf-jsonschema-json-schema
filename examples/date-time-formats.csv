@@ -1,0 +1,71 @@
+value,format,valid,comment
+2026-09-30T14:30:00Z,date-time,yes,basic UTC
+2026-09-30t14:30:00z,date-time,yes,lowercase 't' and 'z'
+2026-09-30T14:30:00.123456789+05:30,date-time,yes,nanosecond fraction and positive offset
+2026-09-30T14:30:00-00:00,date-time,yes,"""-00:00"" offset (RFC 9557 prefers 'Z')"
+0000-01-01T00:00:00Z,date-time,skip,should be valid: year zero is four digits
+2024-02-29T00:00:00Z,date-time,yes,leap year
+2000-02-29T00:00:00Z,date-time,yes,century divisible by 400 is a leap year
+1998-12-31T23:59:60Z,date-time,skip,should be valid: real leap second
+1998-12-31T15:59:60-08:00,date-time,skip,should be valid: leap second shifted by the offset
+2026-09-30 14:30:00Z,date-time,no,space separator (RFC 3339 prose allows; ABNF does not)
+2026-09-30T14:30:00,date-time,no,missing offset
+2026-09-30T14:30Z,date-time,no,missing seconds
+2026-09-30T14:30:00+0530,date-time,no,offset without colon
+2026-09-30T14:30:00+05,date-time,no,offset with hour only
+20260930T143000Z,date-time,no,ISO 8601 basic format
+"2026-09-30T14:30:00,5Z",date-time,no,comma before fraction
+2026-09-30T14:30:00.Z,date-time,no,empty fraction
++12026-09-30T14:30:00Z,date-time,no,expanded year
+026-09-30T14:30:00Z,date-time,no,three-digit year
+2026-02-29T00:00:00Z,date-time,no,not a leap year
+1900-02-29T00:00:00Z,date-time,no,century not divisible by 400 is not a leap year
+2026-04-31T00:00:00Z,date-time,no,April has 30 days
+2026-13-01T00:00:00Z,date-time,no,month 13
+2026-00-10T00:00:00Z,date-time,no,month 00
+2026-09-00T00:00:00Z,date-time,no,day 00
+2026-09-30T24:00:00Z,date-time,no,hour 24
+2026-09-30T14:60:00Z,date-time,no,minute 60
+2026-09-30T14:30:60Z,date-time,no,second 60 when it is not the end of a month
+2026-09-30T14:30:00+24:00,date-time,no,offset hour 24
+2026-09-30T14:30:00Z[Europe/Paris],date-time,no,RFC 9557 suffix is not RFC 3339
+٢٠٢٦-09-30T14:30:00Z,date-time,no,Arabic-Indic digits are not DIGIT
+"2026-09-30T14:30:00Z
+",date-time,skip,should be invalid: trailing newline
+2026-09-30,date,yes,basic date
+2024-02-29,date,yes,leap year
+2026-9-30,date,no,one-digit month
+20260930,date,no,ISO 8601 basic format
+2026-W40-3,date,no,ISO 8601 week date
+2026-273,date,no,ISO 8601 ordinal date
+2026-09,date,no,year and month only
+2026-02-30,date,no,February 30
+2026-09-30T00:00:00Z,date,no,date-time is not a date
+14:30:00Z,time,yes,basic time
+14:30:00.5+05:30,time,yes,fraction and offset
+23:59:60Z,time,skip,should be valid: leap second
+15:59:60-08:00,time,skip,should be valid: leap second shifted by the offset
+14:30:00,time,no,missing offset
+14:30Z,time,no,missing seconds
+143000Z,time,no,ISO 8601 basic format
+24:00:00Z,time,no,hour 24
+14:30:60Z,time,no,second 60 when it is not 23:59 UTC
+T14:30:00Z,time,no,leading 'T'
+P3DT4H,duration,yes,days and hours
+P1Y2M3DT4H5M6S,duration,yes,every element
+PT30S,duration,yes,seconds only
+P2W,duration,yes,weeks
+P0D,duration,yes,zero duration
+P1M,duration,yes,'M' before 'T' is months
+PT1M,duration,yes,'M' after 'T' is minutes
+PT36H,duration,yes,hours above 24 are not carried over
+p3d,duration,skip,should be valid: ABNF string literals are case-insensitive
+PT1H5S,duration,skip,should be invalid: hours then seconds without minutes
+P1Y3D,duration,skip,should be invalid: years then days without months
+P1W2D,duration,no,weeks cannot combine with other elements
+P,duration,no,no elements
+PT,duration,no,'T' with no time elements
+P1H,duration,no,hours without 'T'
+PT1.5S,duration,skip,should be invalid: fractional element
+-P1D,duration,skip,should be invalid: negative duration
+P0003-06-04T12:30:05,duration,no,ISO 8601 alternative format
