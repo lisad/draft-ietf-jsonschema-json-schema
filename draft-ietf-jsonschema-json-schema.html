@@ -30,11 +30,11 @@ for "application/json" documents.
     Jinja2 3.1.6
     lxml 6.1.1
     natsort 8.4.0
-    platformdirs 4.12.2
+    platformdirs 4.13.4
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.9.1
+    wcwidth 0.9.2
 -->
 <link href="draft-ietf-jsonschema-json-schema.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1050,11 +1050,11 @@ svg {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">JSON Schema</td>
-<td class="right">October 2026</td>
+<td class="right">November 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Dusseault, et al.</td>
-<td class="center">Expires 17 April 2027</td>
+<td class="center">Expires 6 May 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1067,12 +1067,12 @@ svg {
 <dd class="internet-draft">draft-ietf-jsonschema-json-schema-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-10-14" class="published">14 October 2026</time>
+<time datetime="2026-11-02" class="published">2 November 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-04-17">17 April 2027</time></dd>
+<dd class="expires"><time datetime="2027-05-06">6 May 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1128,7 +1128,7 @@ Source for this draft can be found at
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 17 April 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 6 May 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1975,9 +1975,10 @@ starting point for a WG and a wide consensus process.<a href="#section-1-3" clas
         <h3 id="name-notational-conventions">
 <a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-notational-conventions" class="section-name selfRef">Notational Conventions</a>
         </h3>
-<p id="section-1.1-1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
-"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
-interpreted as described in <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span>.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
+"<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
+described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
+appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.1-2">For brevity, the converse of logical statements is assumed, except for values described as undefined; that is,
 "only &lt;X&gt; is accepted" shall imply "&lt;not X&gt; is rejected".<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 </section>
@@ -2232,14 +2233,14 @@ documentation, data or code based on a schema.<a href="#section-2-33" class="pil
         </h3>
 <p id="section-3.1-1">A JSON Schema, with its specific rules or constraints to describe and
 validate JSON data, is represented in digital form as a JSON schema document.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.1-2">A JSON Schema MUST be an <em>object</em> or a boolean.
+<p id="section-3.1-2">A JSON Schema <span class="bcp14">MUST</span> be an <em>object</em> or a boolean.
 When a schema is an object, it can be seen to be a schema from the '$schema'
 keyword in the object.  See below for special treatment of the boolean schemas.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 <p id="section-3.1-3">Schemas are used to validate inputs that may be <span><a href="#input" class="internal xref">instances</a> (<a href="#input" class="auto internal xref">Section 3.2</a>)</span> of the schema,
 but each schema can itself
 be interpreted as an instance (see <a href="#meta-schemas" class="auto internal xref">Section 15</a> for when and
 how this happens).<a href="#section-3.1-3" class="pilcrow">¶</a></p>
-<p id="section-3.1-4">Schema documents SHOULD always be given the media type "application/schema+json",
+<p id="section-3.1-4">Schema documents <span class="bcp14">SHOULD</span> always be given the media type "application/schema+json",
 even when playing the role of an instance.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
 <div id="trivial-schema-documents">
 <section id="section-3.1.1">
@@ -2278,7 +2279,7 @@ and implementations.<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
           </h4>
 <p id="section-3.1.2-1">A JSON Schema resource is a schema which is
 canonically identified (in the sense of <span>[<a href="#RFC6596" class="cite xref">RFC6596</a>]</span>) by an
-absolute URI (<span>[<a href="#RFC3986" class="cite xref">RFC3986</a>], <a href="https://rfc-editor.org/rfc/rfc3986#section-4.3" class="relref">Section 4.3</a></span>).  Schema resources MAY
+absolute URI (<span>[<a href="#RFC3986" class="cite xref">RFC3986</a>], <a href="https://rfc-editor.org/rfc/rfc3986#section-4.3" class="relref">Section 4.3</a></span>).  Schema resources <span class="bcp14">MAY</span>
 also be identified by URIs, including URIs with fragments,
 if the resulting secondary resource (as defined by
 <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>], <a href="https://rfc-editor.org/rfc/rfc3986#section-3.5" class="relref">Section 3.5</a></span>) is identical
@@ -2318,7 +2319,7 @@ they are processed in the same way, with the same available behaviors.<a href="#
         <h3 id="name-input">
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-input" class="section-name selfRef">Input</a>
         </h3>
-<p id="section-3.2-1">Any <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>-compliant JSON value or document MAY be used as input.
+<p id="section-3.2-1">Any <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>-compliant JSON value or document <span class="bcp14">MAY</span> be used as input.
 An instance of a schema is an input that is in the valid set of
 that schema.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2-2">An input value has one of JSON's six primitive types, and a range of possible
@@ -2359,7 +2360,7 @@ values depending on the type:<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 representations of numbers that are equal within the data model, are
 outside the scope of JSON Schema.  JSON Schema
 <a href="#vocabularies" class="auto internal xref">Section 15.1</a> that wish
-to work with such differences in lexical representations SHOULD define
+to work with such differences in lexical representations <span class="bcp14">SHOULD</span> define
 keywords to precisely interpret formatted strings within the data model
 rather than relying on having the original JSON representation Unicode
 characters available.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
@@ -2442,10 +2443,10 @@ those values is undefined.<a href="#section-3.2.2-3" class="pilcrow">¶</a></p>
 <a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-keywords-2" class="section-name selfRef">Keywords</a>
         </h3>
 <p id="section-3.3-1">To ensure interoperability, all JSON Schema keywords, whether
-defined in this specification or elsewhere, MUST define
+defined in this specification or elsewhere, <span class="bcp14">MUST</span> define
 their behavior in terms of the categories defined in <a href="#terminology" class="auto internal xref">Section 2</a>
 and described in detail under <a href="#keyword-behaviors" class="auto internal xref">Section 12</a>.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
-<p id="section-3.3-2">A JSON Schema object MAY contain properties which are not
+<p id="section-3.3-2">A JSON Schema object <span class="bcp14">MAY</span> contain properties which are not
 recognized as known schema keywords.
 The behavior of such keywords is governed by <a href="#unrecognized" class="auto internal xref">Section 12.5</a>.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
 <p id="section-3.3-3">An empty schema is a JSON Schema with no properties, or only unknown
@@ -2459,7 +2460,7 @@ properties.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
         </h3>
 <p id="section-3.4-1">In accordance with section 3.1 of <span>[<a href="#RFC6839" class="cite xref">RFC6839</a>]</span>,
 the syntax and semantics of fragment identifiers specified for
-any +json media type SHOULD be as specified for "application/json".
+any +json media type <span class="bcp14">SHOULD</span> be as specified for "application/json".
 (At publication of this document, there is no fragment identification
 syntax defined for "application/json".)<a href="#section-3.4-1" class="pilcrow">¶</a></p>
 <p id="section-3.4-2">Additionally, the "application/schema+json" media type supports two
@@ -2470,12 +2471,12 @@ fragment identifier structure: JSON Pointers.<a href="#section-3.4-2" class="pil
 <span>[<a href="#RFC6901" class="cite xref">RFC6901</a>]</span>.
 For "application/schema+json", which supports two fragment identifier syntaxes,
 fragment identifiers matching the JSON Pointer syntax, including the empty string,
-MUST be interpreted as JSON Pointer fragment identifiers.<a href="#section-3.4-3" class="pilcrow">¶</a></p>
+<span class="bcp14">MUST</span> be interpreted as JSON Pointer fragment identifiers.<a href="#section-3.4-3" class="pilcrow">¶</a></p>
 <p id="section-3.4-4">Per the W3C's best practices for fragment identifiers
 (<span>[<a href="#W3C.WD-fragid-best-practices-20121025" class="cite xref">W3C.WD-fragid-best-practices-20121025</a>]</span>),
 plain name fragment identifiers in "application/schema+json" are reserved for referencing
 locally named schemas.  All fragment identifiers that do
-not match the JSON Pointer syntax MUST be interpreted as
+not match the JSON Pointer syntax <span class="bcp14">MUST</span> be interpreted as
 plain name fragment identifiers.<a href="#section-3.4-4" class="pilcrow">¶</a></p>
 <p id="section-3.4-5">Defining and referencing a plain name fragment identifier within an
 "application/schema+json" document are specified
@@ -2492,12 +2493,12 @@ in the <span><a href="#anchors" class="internal xref">"$anchor" keyword</a> (<a 
           <h4 id="name-required-and-recommended-vo">
 <a href="#section-3.5.1" class="section-number selfRef">3.5.1. </a><a href="#name-required-and-recommended-vo" class="section-name selfRef">Required and recommended vocabularies</a>
           </h4>
-<p id="section-3.5.1-1">This document defines a core vocabulary of keywords that MUST be supported by any
+<p id="section-3.5.1-1">This document defines a core vocabulary of keywords that <span class="bcp14">MUST</span> be supported by any
 implementation.  Its keywords are each prefixed
 with a "$" character to emphasize their required nature.  This vocabulary
 is essential to the functioning of the "application/schema+json" media
 type, and is used to bootstrap the loading of other vocabularies.<a href="#section-3.5.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.5.1-2">This document further defines a RECOMMENDED set of additional vocabularies
+<p id="section-3.5.1-2">This document further defines a <span class="bcp14">RECOMMENDED</span> set of additional vocabularies
 for standard use.<a href="#section-3.5.1-2" class="pilcrow">¶</a></p>
 <p id="section-3.5.1-3">These vocabularies together compose the standard JSON Schema dialect,
 which serves as the default dialect as discussed in <a href="#default-dialect" class="auto internal xref">Section 15.2</a>.<a href="#section-3.5.1-3" class="pilcrow">¶</a></p>
@@ -2508,13 +2509,13 @@ which serves as the default dialect as discussed in <a href="#default-dialect" c
           <h4 id="name-requirements-for-handling-e">
 <a href="#section-3.5.2" class="section-number selfRef">3.5.2. </a><a href="#name-requirements-for-handling-e" class="section-name selfRef">Requirements for handling extensions</a>
           </h4>
-<p id="section-3.5.2-1">Additional schema keywords and schema vocabularies MAY be defined
-by any entity.  Save for explicit agreement, schema authors SHALL NOT
+<p id="section-3.5.2-1">Additional schema keywords and schema vocabularies <span class="bcp14">MAY</span> be defined
+by any entity.  Save for explicit agreement, schema authors <span class="bcp14">SHALL NOT</span>
 expect these additional keywords and vocabularies to be supported by
 implementations that do not explicitly document such support.
 Keywords that an implementation does not support are considered
 to be unrecognized; their behavior is governed by <a href="#unrecognized" class="auto internal xref">Section 12.5</a>.<a href="#section-3.5.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.5.2-2">Implementations MAY provide the ability to register or load handlers
+<p id="section-3.5.2-2">Implementations <span class="bcp14">MAY</span> provide the ability to register or load handlers
 for vocabularies that they do not support directly.  The exact mechanism
 for registering and implementing such handlers is implementation-dependent.<a href="#section-3.5.2-2" class="pilcrow">¶</a></p>
 </section>
@@ -2532,19 +2533,19 @@ such as descriptive metadata and usage hints.<a href="#section-3.5.3-1" class="p
 <p id="section-3.5.3-2">Each schema object is independently evaluated against each input location
 to which it applies.  This greatly simplifies implementation requirements
 by ensuring that implementations do not need to maintain state across
-the document-wide validation process.  Keywords MUST NOT modify the input
-during evaluation.  Annotations MAY be used to indicate that modification
+the document-wide validation process.  Keywords <span class="bcp14">MUST NOT</span> modify the input
+during evaluation.  Annotations <span class="bcp14">MAY</span> be used to indicate that modification
 is desired, however the exact mechanism of modification is deferred to
 applications or other specifications building on JSON Schema.<a href="#section-3.5.3-2" class="pilcrow">¶</a></p>
-<p id="section-3.5.3-3">In all validator implementations, equivalent JSON values MUST return the same validation result and annotations. For example, selection between equivalent character escapes, or use of whitespace, does not affect the result. This also means that a validation keyword MUST NOT accept or reject based on third factors (those factors besides the schema and the input itself). A separate "outside verification" scheme that queries external data sources is possible, but outside the scope of this document.<a href="#section-3.5.3-3" class="pilcrow">¶</a></p>
+<p id="section-3.5.3-3">In all validator implementations, equivalent JSON values <span class="bcp14">MUST</span> return the same validation result and annotations. For example, selection between equivalent character escapes, or use of whitespace, does not affect the result. This also means that a validation keyword <span class="bcp14">MUST NOT</span> accept or reject based on third factors (those factors besides the schema and the input itself). A separate "outside verification" scheme that queries external data sources is possible, but outside the scope of this document.<a href="#section-3.5.3-3" class="pilcrow">¶</a></p>
 <p id="section-3.5.3-4">This specification defines a set of assertion keywords, as well as a small vocabulary
 of metadata keywords that can be used to annotate the JSON instance with
 useful information.<a href="#section-3.5.3-4" class="pilcrow">¶</a></p>
-<p id="section-3.5.3-5">Implementations MAY allow configuring annotations
+<p id="section-3.5.3-5">Implementations <span class="bcp14">MAY</span> allow configuring annotations
 in such ways as limiting output to certain annotation keywords, aggregating values together, or other features to enhance performance.
-Implementations MAY allow annotation output to be bypassed entirely.<a href="#section-3.5.3-5" class="pilcrow">¶</a></p>
-<p id="section-3.5.3-6">Annotations MAY be presented as a single data structure, or as a stream of events, however if the input is rejected during processing, this voids all annotations previously emitted from that input.
-See <a href="#relevance" class="auto internal xref">Section 12.2</a> for detailed guidance on when previously emitted annotations MUST be discarded.<a href="#section-3.5.3-6" class="pilcrow">¶</a></p>
+Implementations <span class="bcp14">MAY</span> allow annotation output to be bypassed entirely.<a href="#section-3.5.3-5" class="pilcrow">¶</a></p>
+<p id="section-3.5.3-6">Annotations <span class="bcp14">MAY</span> be presented as a single data structure, or as a stream of events, however if the input is rejected during processing, this voids all annotations previously emitted from that input.
+See <a href="#relevance" class="auto internal xref">Section 12.2</a> for detailed guidance on when previously emitted annotations <span class="bcp14">MUST</span> be discarded.<a href="#section-3.5.3-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2556,12 +2557,12 @@ See <a href="#relevance" class="auto internal xref">Section 12.2</a> for detaile
       <h2 id="name-vocabulary-for-core-keyword">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-vocabulary-for-core-keyword" class="section-name selfRef">Vocabulary for Core Keywords</a>
       </h2>
-<p id="section-4-1">Core keywords MUST be implemented by any implementation indicating support
+<p id="section-4-1">Core keywords <span class="bcp14">MUST</span> be implemented by any implementation indicating support
 for the "application/schema+json" media type.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">The behavior of a false value for this vocabulary (and only this
 vocabulary) is undefined, as is the behavior when "$vocabulary"
 is present but the Core vocabulary is not included.  However, it
-is RECOMMENDED that implementations detect these cases and raise
+is <span class="bcp14">RECOMMENDED</span> that implementations detect these cases and raise
 an error when they occur.  It is not meaningful to declare that
 a meta-schema optionally uses Core.<a href="#section-4-2" class="pilcrow">¶</a></p>
 <p id="section-4-3">The current URI for the Core vocabulary is:<a href="#section-4-3" class="pilcrow">¶</a></p>
@@ -2569,14 +2570,14 @@ a meta-schema optionally uses Core.<a href="#section-4-2" class="pilcrow">¶</a>
 <p id="section-4-5">The current URI for the corresponding meta-schema is:<a href="#section-4-5" class="pilcrow">¶</a></p>
 <p id="section-4-6"><a href="https://json-schema.org/draft/2020-12/meta/core">https://json-schema.org/draft/2020-12/meta/core</a>.<a href="#section-4-6" class="pilcrow">¶</a></p>
 <p id="section-4-7">While the "$" prefix is not formally reserved for the Core vocabulary,
-it is RECOMMENDED that extension keywords (in vocabularies or otherwise)
+it is <span class="bcp14">RECOMMENDED</span> that extension keywords (in vocabularies or otherwise)
 begin with a character other than "$" to avoid possible future collisions.<a href="#section-4-7" class="pilcrow">¶</a></p>
 <div id="environment">
 <section id="section-4.1">
         <h3 id="name-environment">
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-environment" class="section-name selfRef">Environment</a>
         </h3>
-<p id="section-4.1-1">Environment keywords MUST be read by implementations before other keywords
+<p id="section-4.1-1">Environment keywords <span class="bcp14">MUST</span> be read by implementations before other keywords
 may be evaluated, as they are capable of impacting the behavior of other keywords.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <div id="schema">
 <section id="section-4.1.1">
@@ -2586,17 +2587,17 @@ may be evaluated, as they are capable of impacting the behavior of other keyword
 <p id="section-4.1.1-1">The "$schema" keyword is both used as a JSON Schema dialect identifier and
 as the identifier of a resource which is itself a JSON Schema, which describes the
 set of valid schemas written for this particular dialect.<a href="#section-4.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1.1-2">The value of this keyword MUST be a full <code>URI</code>
-(<span>[<a href="#RFC3986" class="cite xref">RFC3986</a>], <a href="https://rfc-editor.org/rfc/rfc3986#section-3" class="relref">Section 3</a></span>) and this URI MUST be normalized.
-The current schema MUST be an instance of the meta-schema identified by this URI.<a href="#section-4.1.1-2" class="pilcrow">¶</a></p>
-<p id="section-4.1.1-3">If this URI identifies a retrievable resource, that resource SHOULD be of
+<p id="section-4.1.1-2">The value of this keyword <span class="bcp14">MUST</span> be a full <code>URI</code>
+(<span>[<a href="#RFC3986" class="cite xref">RFC3986</a>], <a href="https://rfc-editor.org/rfc/rfc3986#section-3" class="relref">Section 3</a></span>) and this URI <span class="bcp14">MUST</span> be normalized.
+The current schema <span class="bcp14">MUST</span> be an instance of the meta-schema identified by this URI.<a href="#section-4.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.1.1-3">If this URI identifies a retrievable resource, that resource <span class="bcp14">SHOULD</span> be of
 media type "application/schema+json".<a href="#section-4.1.1-3" class="pilcrow">¶</a></p>
-<p id="section-4.1.1-4">The "$schema" keyword SHOULD be used in the document root schema object,
-and MAY be used in the root schema objects of embedded schema resources.
-It MUST NOT appear in non-resource root schema objects.  If absent from
+<p id="section-4.1.1-4">The "$schema" keyword <span class="bcp14">SHOULD</span> be used in the document root schema object,
+and <span class="bcp14">MAY</span> be used in the root schema objects of embedded schema resources.
+It <span class="bcp14">MUST NOT</span> appear in non-resource root schema objects.  If absent from
 the document root schema, the resulting behavior is implementation-defined,
 however, using this specification's default dialect (<a href="#default-dialect" class="auto internal xref">Section 15.2</a>)
-is RECOMMENDED.<a href="#section-4.1.1-4" class="pilcrow">¶</a></p>
+is <span class="bcp14">RECOMMENDED</span>.<a href="#section-4.1.1-4" class="pilcrow">¶</a></p>
 <p id="section-4.1.1-5">Values for this property are defined elsewhere in this and other documents,
 and by other parties.<a href="#section-4.1.1-5" class="pilcrow">¶</a></p>
 </section>
@@ -2626,16 +2627,16 @@ the structure of a parent schema).<a href="#section-4.1.3-1" class="pilcrow">¶<
 <p id="section-4.1.3-2">Requirements on $id value:<a href="#section-4.1.3-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.1.3-3.1">
-              <p id="section-4.1.3-3.1.1">MUST be a string<a href="#section-4.1.3-3.1.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.3-3.1.1"><span class="bcp14">MUST</span> be a string<a href="#section-4.1.3-3.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.1.3-3.2">
-              <p id="section-4.1.3-3.2.1">MUST be a valid URI reference (<span>[<a href="#RFC3986" class="cite xref">RFC3986</a>], <a href="https://rfc-editor.org/rfc/rfc3986#section-4.1" class="relref">Section 4.1</a></span>)<a href="#section-4.1.3-3.2.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.3-3.2.1"><span class="bcp14">MUST</span> be a valid URI reference (<span>[<a href="#RFC3986" class="cite xref">RFC3986</a>], <a href="https://rfc-editor.org/rfc/rfc3986#section-4.1" class="relref">Section 4.1</a></span>)<a href="#section-4.1.3-3.2.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.1.3-3.3">
-              <p id="section-4.1.3-3.3.1">SHOULD be normalized<a href="#section-4.1.3-3.3.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.3-3.3.1"><span class="bcp14">SHOULD</span> be normalized<a href="#section-4.1.3-3.3.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.1.3-3.4">
-              <p id="section-4.1.3-3.4.1">MUST NOT have a fragment (<span>[<a href="#RFC3986" class="cite xref">RFC3986</a>], <a href="https://rfc-editor.org/rfc/rfc3986#section-3.5" class="relref">Section 3.5</a></span>)<a href="#section-4.1.3-3.4.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.3-3.4.1"><span class="bcp14">MUST NOT</span> have a fragment (<span>[<a href="#RFC3986" class="cite xref">RFC3986</a>], <a href="https://rfc-editor.org/rfc/rfc3986#section-3.5" class="relref">Section 3.5</a></span>)<a href="#section-4.1.3-3.4.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-4.1.3-4">The value of an $id may be a full URI or a <em>relative reference</em>
@@ -2655,7 +2656,7 @@ $ref keyword (<a href="#refs" class="auto internal xref">Section 4.2.1</a>) in w
             <h5 id="name-identifying-the-root-schema">
 <a href="#section-4.1.3.1" class="section-number selfRef">4.1.3.1. </a><a href="#name-identifying-the-root-schema" class="section-name selfRef">Identifying the root schema</a>
             </h5>
-<p id="section-4.1.3.1-1">The root schema of a JSON Schema document SHOULD contain an "$id" keyword
+<p id="section-4.1.3.1-1">The root schema of a JSON Schema document <span class="bcp14">SHOULD</span> contain an "$id" keyword
 with an absolute-URI (<span>[<a href="#RFC3986" class="cite xref">RFC3986</a>], <a href="https://rfc-editor.org/rfc/rfc3986#section-4.3" class="relref">Section 4.3</a></span>; containing a scheme,
 but no fragment).<a href="#section-4.1.3.1-1" class="pilcrow">¶</a></p>
 </section>
@@ -2688,10 +2689,10 @@ without imposing any particular semantics on that extension.
 See the section on <span><a href="#refs" class="internal xref">"$dynamicRef"</a> (<a href="#refs" class="auto internal xref">Section 4.2.1</a>)</span>
 for details.<a href="#section-4.1.4-4" class="pilcrow">¶</a></p>
 <p id="section-4.1.4-5">In most cases, the normal fragment behavior both suffices and
-is more intuitive.  Therefore it is RECOMMENDED that "$anchor"
+is more intuitive.  Therefore it is <span class="bcp14">RECOMMENDED</span> that "$anchor"
 be used to create plain name fragments unless there is a clear
 need for "$dynamicAnchor".<a href="#section-4.1.4-5" class="pilcrow">¶</a></p>
-<p id="section-4.1.4-6">If present, the value of this keyword MUST be a string and MUST start with
+<p id="section-4.1.4-6">If present, the value of this keyword <span class="bcp14">MUST</span> be a string and <span class="bcp14">MUST</span> start with
 a letter ([A-Za-z]) or underscore ("_"), followed by any number of letters,
 digits ([0-9]), hyphens ("-"), underscores ("_"), and periods (".").
 This matches the US-ASCII part of XML's NCName production, per <span>[<a href="#XMLNS" class="cite xref">XMLNS</a>]</span>.<a href="#section-4.1.4-6" class="pilcrow">¶</a></p>
@@ -2760,7 +2761,7 @@ self-reference.<a href="#section-4.2.1-2" class="pilcrow">¶</a></p>
 locator, only an identifier. Even if it is a network locator,
 implementations should refer to <a href="#loading-schemas" class="auto internal xref">Section 11.1.2</a> about loading
 such schemas.<a href="#section-4.2.1-3" class="pilcrow">¶</a></p>
-<p id="section-4.2.1-4">The value of the "$ref" keyword MUST be a string which is a URI-Reference.
+<p id="section-4.2.1-4">The value of the "$ref" keyword <span class="bcp14">MUST</span> be a string which is a URI-Reference.
 Resolved against the current URI base, it produces the URI of the schema
 to apply.  This resolution is safe to perform on schema load, as the
 process of evaluating an input cannot change how the reference resolves.<a href="#section-4.2.1-4" class="pilcrow">¶</a></p>
@@ -2773,12 +2774,12 @@ extension mechanism that is primarily useful with recursive schemas
 runtime-determined extension target are defined with "$dynamicAnchor",
 and only exhibit runtime dynamic behavior when referenced with
 "$dynamicRef".<a href="#section-4.2.1-6" class="pilcrow">¶</a></p>
-<p id="section-4.2.1-7">The value of the "$dynamicRef" property MUST be a string which is
+<p id="section-4.2.1-7">The value of the "$dynamicRef" property <span class="bcp14">MUST</span> be a string which is
 a URI-Reference.  Resolved against the current URI base, it produces
 the URI used as the starting point for runtime resolution.  This initial
 resolution is safe to perform on schema load.<a href="#section-4.2.1-7" class="pilcrow">¶</a></p>
 <p id="section-4.2.1-8">If the initially resolved starting point URI includes a fragment that
-was created by the "$dynamicAnchor" keyword, the initial URI MUST be
+was created by the "$dynamicAnchor" keyword, the initial URI <span class="bcp14">MUST</span> be
 replaced by the URI (including the fragment) for the outermost schema
 resource in the <span><a href="#scopes" class="internal xref">dynamic scope</a> (<a href="#scopes" class="auto internal xref">Section 12.1</a>)</span> that defines
 an identically named fragment with "$dynamicAnchor".<a href="#section-4.2.1-8" class="pilcrow">¶</a></p>
@@ -2796,8 +2797,8 @@ For an example of <code>$dynamicRef</code>, see <a href="#recursive-example" cla
 <p id="section-4.2.2-1">The "$defs" keyword reserves a location for schema
 authors to inline re-usable JSON Schemas into a more general schema.
 The keyword does not directly affect the validation result.<a href="#section-4.2.2-1" class="pilcrow">¶</a></p>
-<p id="section-4.2.2-2">This keyword's value MUST be an object.
-Each member value of this object MUST be a valid JSON Schema.<a href="#section-4.2.2-2" class="pilcrow">¶</a></p>
+<p id="section-4.2.2-2">This keyword's value <span class="bcp14">MUST</span> be an object.
+Each member value of this object <span class="bcp14">MUST</span> be a valid JSON Schema.<a href="#section-4.2.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="defs-example">
@@ -2842,26 +2843,26 @@ referenced in multiple property definitions.<a href="#section-4.2.3-1" class="pi
         </h3>
 <p id="section-4.3-1">This keyword reserves a location for comments from schema authors
 to readers or maintainers of the schema.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
-<p id="section-4.3-2">The value of this keyword MUST be a string. Implementations MUST NOT present this
-string to end users.  Tools for editing schemas SHOULD support displaying and
-editing this keyword.  The value of this keyword MAY be used in debug or error
+<p id="section-4.3-2">The value of this keyword <span class="bcp14">MUST</span> be a string. Implementations <span class="bcp14">MUST NOT</span> present this
+string to end users.  Tools for editing schemas <span class="bcp14">SHOULD</span> support displaying and
+editing this keyword.  The value of this keyword <span class="bcp14">MAY</span> be used in debug or error
 output which is intended for developers making use of schemas.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
-<p id="section-4.3-3">Schema vocabularies SHOULD allow "$comment" within any object containing
-vocabulary keywords.  Implementations MAY assume "$comment" is allowed
-unless the vocabulary specifically forbids it.  Vocabularies MUST NOT
+<p id="section-4.3-3">Schema vocabularies <span class="bcp14">SHOULD</span> allow "$comment" within any object containing
+vocabulary keywords.  Implementations <span class="bcp14">MAY</span> assume "$comment" is allowed
+unless the vocabulary specifically forbids it.  Vocabularies <span class="bcp14">MUST NOT</span>
 specify any effect of "$comment" beyond what is described in this
 specification.<a href="#section-4.3-3" class="pilcrow">¶</a></p>
 <p id="section-4.3-4">Tools that translate other media types or programming languages
-to and from application/schema+json MAY choose to convert that media type or
+to and from application/schema+json <span class="bcp14">MAY</span> choose to convert that media type or
 programming language's native comments to or from "$comment" values.
 The behavior of such translation when both native comments and "$comment"
 properties are present is implementation-dependent.<a href="#section-4.3-4" class="pilcrow">¶</a></p>
-<p id="section-4.3-5">Implementations MAY strip "$comment" values at any point during processing.
+<p id="section-4.3-5">Implementations <span class="bcp14">MAY</span> strip "$comment" values at any point during processing.
 In particular, this allows for shortening schemas when the size of deployed
 schemas is a concern.<a href="#section-4.3-5" class="pilcrow">¶</a></p>
-<p id="section-4.3-6">Implementations MUST NOT take any other action based on the presence, absence,
+<p id="section-4.3-6">Implementations <span class="bcp14">MUST NOT</span> take any other action based on the presence, absence,
 or contents of "$comment" properties.  In particular, the value of "$comment"
-MUST NOT be produced as an annotation result.<a href="#section-4.3-6" class="pilcrow">¶</a></p>
+<span class="bcp14">MUST NOT</span> be produced as an annotation result.<a href="#section-4.3-6" class="pilcrow">¶</a></p>
 <p id="section-4.3-7">For an example using <code>$comment</code>, see <a href="#defs-example" class="auto internal xref">Section 4.2.3</a> above, where a comment
 explains to schema maintainers where a value limit comes from.<a href="#section-4.3-7" class="pilcrow">¶</a></p>
 </section>
@@ -2874,8 +2875,8 @@ explains to schema maintainers where a value limit comes from.<a href="#section-
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-vocabulary-for-subschema-ap" class="section-name selfRef">Vocabulary for Subschema Applicators</a>
       </h2>
 <p id="section-5-1">This section defines keywords that
-are RECOMMENDED for use as the basis of other vocabularies.<a href="#section-5-1" class="pilcrow">¶</a></p>
-<p id="section-5-2">Meta-schemas that do not use "$vocabulary" SHOULD be considered to
+are <span class="bcp14">RECOMMENDED</span> for use as the basis of other vocabularies.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">Meta-schemas that do not use "$vocabulary" <span class="bcp14">SHOULD</span> be considered to
 require this vocabulary as if its URI were present with a value of true.<a href="#section-5-2" class="pilcrow">¶</a></p>
 <p id="section-5-3">The current URI for this vocabulary, known as the Applicator vocabulary, is:<a href="#section-5-3" class="pilcrow">¶</a></p>
 <p id="section-5-4">&lt;https://json-schema.org/draft/2020-12/vocab/applicator&gt;.<a href="#section-5-4" class="pilcrow">¶</a></p>
@@ -2915,25 +2916,25 @@ as the parent schema is being applied.  They allow combining
 or modifying the subschema results in various ways.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.2-2">With the exception of the cooperative "if", "then", and "else" keywords,
 subschemas of these keywords evaluate the input completely independently
-such that the results of one such subschema MUST NOT impact the results of sibling
+such that the results of one such subschema <span class="bcp14">MUST NOT</span> impact the results of sibling
 subschemas.  Therefore subschemas may be applied in
 any order.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
-<p id="section-5.2-3">"if", "then", and "else" MUST NOT interact with each other across
+<p id="section-5.2-3">"if", "then", and "else" <span class="bcp14">MUST NOT</span> interact with each other across
 subschema boundaries.  In other words, an "if" in one
-branch of an "allOf" MUST NOT have an impact on a "then"
+branch of an "allOf" <span class="bcp14">MUST NOT</span> have an impact on a "then"
 or "else" in another branch.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
 <p id="section-5.2-4">There is no default behavior for "if", "then", or "else"
-when they are not present.  In particular, they MUST NOT
+when they are not present.  In particular, they <span class="bcp14">MUST NOT</span>
 be treated as if present with an empty schema, and
-when "if" is not present, both "then" and "else" MUST be
+when "if" is not present, both "then" and "else" <span class="bcp14">MUST</span> be
 entirely ignored.<a href="#section-5.2-4" class="pilcrow">¶</a></p>
 <div id="allOf">
 <section id="section-5.2.1">
           <h4 id="name-allof">
 <a href="#section-5.2.1" class="section-number selfRef">5.2.1. </a><a href="#name-allof" class="section-name selfRef">"allOf"</a>
           </h4>
-<p id="section-5.2.1-1">This keyword's value MUST be a non-empty array.
-Each item of the array MUST be a valid JSON Schema.<a href="#section-5.2.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.2.1-1">This keyword's value <span class="bcp14">MUST</span> be a non-empty array.
+Each item of the array <span class="bcp14">MUST</span> be a valid JSON Schema.<a href="#section-5.2.1-1" class="pilcrow">¶</a></p>
 <p id="section-5.2.1-2">This keyword accepts only if every subschema in its value accepts the input.<a href="#section-5.2.1-2" class="pilcrow">¶</a></p>
 <p id="section-5.2.1-3">The <code>allOf</code> keyword is useful for combining multiple conditionals
 in a schema.  See the example for <code>if</code> below in <a href="#allof-if-example" class="auto internal xref">Section 5.2.5.1</a>.<a href="#section-5.2.1-3" class="pilcrow">¶</a></p>
@@ -2990,10 +2991,10 @@ and a collection.<a href="#section-5.2.1.1-1" class="pilcrow">¶</a></p>
           <h4 id="name-anyof">
 <a href="#section-5.2.2" class="section-number selfRef">5.2.2. </a><a href="#name-anyof" class="section-name selfRef">"anyOf"</a>
           </h4>
-<p id="section-5.2.2-1">This keyword's value MUST be a non-empty array.
-Each item of the array MUST be a valid JSON Schema.<a href="#section-5.2.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2.2-1">This keyword's value <span class="bcp14">MUST</span> be a non-empty array.
+Each item of the array <span class="bcp14">MUST</span> be a valid JSON Schema.<a href="#section-5.2.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.2.2-2">This keyword accepts only if at least one schema in its value accepts the input.<a href="#section-5.2.2-2" class="pilcrow">¶</a></p>
-<p id="section-5.2.2-3">Note that in general all subschemas MUST be examined to ensure that
+<p id="section-5.2.2-3">Note that in general all subschemas <span class="bcp14">MUST</span> be examined to ensure that
 keyword dependencies from each subschema are discovered, although
 see <a href="#keyword-behaviors" class="auto internal xref">Section 12</a> for possible short-circuiting conditions.<a href="#section-5.2.2-3" class="pilcrow">¶</a></p>
 <p id="section-5.2.2-4">Examples of using anyOf:<a href="#section-5.2.2-4" class="pilcrow">¶</a></p>
@@ -3015,8 +3016,8 @@ both <code>required</code> keywords inside the <code>anyOf</code> keyword allows
           <h4 id="name-oneof">
 <a href="#section-5.2.3" class="section-number selfRef">5.2.3. </a><a href="#name-oneof" class="section-name selfRef">"oneOf"</a>
           </h4>
-<p id="section-5.2.3-1">This keyword's value MUST be a non-empty array.
-Each item of the array MUST be a valid JSON Schema.<a href="#section-5.2.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.2.3-1">This keyword's value <span class="bcp14">MUST</span> be a non-empty array.
+Each item of the array <span class="bcp14">MUST</span> be a valid JSON Schema.<a href="#section-5.2.3-1" class="pilcrow">¶</a></p>
 <p id="section-5.2.3-2">This keyword accepts only if exactly one schema in its value accepts the input.<a href="#section-5.2.3-2" class="pilcrow">¶</a></p>
 <p id="section-5.2.3-3">Similar to anyOf and allOf, oneOf can be used in combination with object
 definitions to allow only one object definition to be satisfied.  Compare
@@ -3030,7 +3031,7 @@ not both.  A task might have a duration or a due date but not both.<a href="#sec
           <h4 id="name-not">
 <a href="#section-5.2.4" class="section-number selfRef">5.2.4. </a><a href="#name-not" class="section-name selfRef">"not"</a>
           </h4>
-<p id="section-5.2.4-1">This keyword's value MUST be a valid JSON Schema.<a href="#section-5.2.4-1" class="pilcrow">¶</a></p>
+<p id="section-5.2.4-1">This keyword's value <span class="bcp14">MUST</span> be a valid JSON Schema.<a href="#section-5.2.4-1" class="pilcrow">¶</a></p>
 <p id="section-5.2.4-2">This keyword accepts the input only if its subschema rejects the input.<a href="#section-5.2.4-2" class="pilcrow">¶</a></p>
 <p id="section-5.2.4-3">For example, a product schema could require the property
 <code>expiration_date</code> if the <code>validity</code> property does
@@ -3054,7 +3055,7 @@ possibly the briefest is<a href="#section-5.2.4-3" class="pilcrow">¶</a></p>
           <h4 id="name-if">
 <a href="#section-5.2.5" class="section-number selfRef">5.2.5. </a><a href="#name-if" class="section-name selfRef">"if"</a>
           </h4>
-<p id="section-5.2.5-1">This keyword's value MUST be a valid JSON Schema.<a href="#section-5.2.5-1" class="pilcrow">¶</a></p>
+<p id="section-5.2.5-1">This keyword's value <span class="bcp14">MUST</span> be a valid JSON Schema.<a href="#section-5.2.5-1" class="pilcrow">¶</a></p>
 <p id="section-5.2.5-2">This keyword always accepts the input.
 However, it affects whether "then" or "else" is evaluated,
 depending on whether its subschema accepts or rejects the input.<a href="#section-5.2.5-2" class="pilcrow">¶</a></p>
@@ -3109,13 +3110,13 @@ conditionally restrict a "postal-code" value on the "country" value.<a href="#se
           <h4 id="name-then">
 <a href="#section-5.2.6" class="section-number selfRef">5.2.6. </a><a href="#name-then" class="section-name selfRef">"then"</a>
           </h4>
-<p id="section-5.2.6-1">This keyword's value MUST be a valid JSON Schema.<a href="#section-5.2.6-1" class="pilcrow">¶</a></p>
+<p id="section-5.2.6-1">This keyword's value <span class="bcp14">MUST</span> be a valid JSON Schema.<a href="#section-5.2.6-1" class="pilcrow">¶</a></p>
 <p id="section-5.2.6-2">When an adjacent "if" is present and its subschema accepts the input,
 this keyword's result is the result of the "then" subschema evaluating the same input.
 Otherwise this keyword is ignored.<a href="#section-5.2.6-2" class="pilcrow">¶</a></p>
 <p id="section-5.2.6-3">This keyword has no effect when "if" is absent, or
 when its subschema rejects the input.
-Implementations MUST NOT evaluate
+Implementations <span class="bcp14">MUST NOT</span> evaluate
 the input against this keyword, for either validation
 or annotation production purposes, in such cases.<a href="#section-5.2.6-3" class="pilcrow">¶</a></p>
 <p id="section-5.2.6-4">See the example above in <a href="#allof-if-example" class="auto internal xref">Section 5.2.5.1</a> for
@@ -3128,13 +3129,13 @@ and below for an example using if/then/else.<a href="#section-5.2.6-4" class="pi
           <h4 id="name-else">
 <a href="#section-5.2.7" class="section-number selfRef">5.2.7. </a><a href="#name-else" class="section-name selfRef">"else"</a>
           </h4>
-<p id="section-5.2.7-1">This keyword's value MUST be a valid JSON Schema.<a href="#section-5.2.7-1" class="pilcrow">¶</a></p>
+<p id="section-5.2.7-1">This keyword's value <span class="bcp14">MUST</span> be a valid JSON Schema.<a href="#section-5.2.7-1" class="pilcrow">¶</a></p>
 <p id="section-5.2.7-2">When an adjacent "if" is present and its subschema rejects the input,
 this keyword's result is the result of the "else" subschema evaluating the same input.
 Otherwise this keyword is ignored.<a href="#section-5.2.7-2" class="pilcrow">¶</a></p>
 <p id="section-5.2.7-3">This keyword has no effect when "if" is absent, or
 when the input is accepted by its
-subschema.  Implementations MUST NOT evaluate
+subschema.  Implementations <span class="bcp14">MUST NOT</span> evaluate
 the input against this keyword, for either validation
 or annotation production purposes, in such cases.<a href="#section-5.2.7-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.2.7-4">
@@ -3159,8 +3160,8 @@ or annotation production purposes, in such cases.<a href="#section-5.2.7-3" clas
           </h4>
 <p id="section-5.2.8-1">This keyword specifies subschemas that are evaluated whenever the input
 is an object and contains a certain property.<a href="#section-5.2.8-1" class="pilcrow">¶</a></p>
-<p id="section-5.2.8-2">This keyword's value MUST be an object.
-Each value in the object MUST be a valid JSON Schema.<a href="#section-5.2.8-2" class="pilcrow">¶</a></p>
+<p id="section-5.2.8-2">This keyword's value <span class="bcp14">MUST</span> be an object.
+Each value in the object <span class="bcp14">MUST</span> be a valid JSON Schema.<a href="#section-5.2.8-2" class="pilcrow">¶</a></p>
 <p id="section-5.2.8-3">If the object key is a property in the instance, the entire
 input must be accepted by the subschema.  Its use is
 dependent on the presence of the property.<a href="#section-5.2.8-3" class="pilcrow">¶</a></p>
@@ -3210,7 +3211,7 @@ subschema(s) to array items, and combining their results.<a href="#section-5.3-1
           <h4 id="name-prefixitems">
 <a href="#section-5.3.1" class="section-number selfRef">5.3.1. </a><a href="#name-prefixitems" class="section-name selfRef">"prefixItems"</a>
           </h4>
-<p id="section-5.3.1-1">The value of "prefixItems" MUST be a non-empty array of valid JSON Schemas.<a href="#section-5.3.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.3.1-1">The value of "prefixItems" <span class="bcp14">MUST</span> be a non-empty array of valid JSON Schemas.<a href="#section-5.3.1-1" class="pilcrow">¶</a></p>
 <p id="section-5.3.1-2">This keyword accepts an array input only if every subschema accepts
 the input item at the same array index, if any.  This keyword
 does not constrain the length of the array.  If the array is longer
@@ -3225,7 +3226,7 @@ an empty array.<a href="#section-5.3.1-3" class="pilcrow">¶</a></p>
           <h4 id="name-items">
 <a href="#section-5.3.2" class="section-number selfRef">5.3.2. </a><a href="#name-items" class="section-name selfRef">"items"</a>
           </h4>
-<p id="section-5.3.2-1">The value of "items" MUST be a valid JSON Schema.<a href="#section-5.3.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.3.2-1">The value of "items" <span class="bcp14">MUST</span> be a valid JSON Schema.<a href="#section-5.3.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.3.2-2">This keyword accepts the input only if its subschema accepts every item
 at an index not covered by the adjacent prefixItems
 (or every item, if prefixItems is absent).<a href="#section-5.3.2-2" class="pilcrow">¶</a></p>
@@ -3241,16 +3242,16 @@ requires the input to be a list of points objects.<a href="#section-5.3.2-4" cla
           <h4 id="name-contains">
 <a href="#section-5.3.3" class="section-number selfRef">5.3.3. </a><a href="#name-contains" class="section-name selfRef">"contains"</a>
           </h4>
-<p id="section-5.3.3-1">The value of this keyword MUST be a valid JSON Schema.<a href="#section-5.3.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.3.3-1">The value of this keyword <span class="bcp14">MUST</span> be a valid JSON Schema.<a href="#section-5.3.3-1" class="pilcrow">¶</a></p>
 <p id="section-5.3.3-2">This keyword accepts an array input only if the number of elements
 accepted by its subschema is within the inclusive range of
 the minimum and (if any) maximum number of occurrences.<a href="#section-5.3.3-2" class="pilcrow">¶</a></p>
 <p id="section-5.3.3-3">The minimum and maximum numbers of occurrences are provided by the
 "minContains" and "maxContains" keywords, respectively, within the
 same schema object as "contains".  If "minContains" is absent, the
-minimum SHALL be 1.  If "maxContains" is absent, the maximum SHALL
+minimum <span class="bcp14">SHALL</span> be 1.  If "maxContains" is absent, the maximum <span class="bcp14">SHALL</span>
 be unbounded.<a href="#section-5.3.3-3" class="pilcrow">¶</a></p>
-<p id="section-5.3.3-4">In general, the subschema MUST be applied to every array element
+<p id="section-5.3.3-4">In general, the subschema <span class="bcp14">MUST</span> be applied to every array element
 even after enough matches to satisfy "minContains" and "maxContains"
 have been found, in order to support
 keyword dependencies, although see <a href="#keyword-behaviors" class="auto internal xref">Section 12</a> for
@@ -3299,8 +3300,8 @@ properties and combining their results.<a href="#section-5.4-1" class="pilcrow">
           <h4 id="name-properties">
 <a href="#section-5.4.1" class="section-number selfRef">5.4.1. </a><a href="#name-properties" class="section-name selfRef">"properties"</a>
           </h4>
-<p id="section-5.4.1-1">The value of "properties" MUST be an object.
-Each value of this object MUST be a valid JSON Schema.<a href="#section-5.4.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.4.1-1">The value of "properties" <span class="bcp14">MUST</span> be an object.
+Each value of this object <span class="bcp14">MUST</span> be a valid JSON Schema.<a href="#section-5.4.1-1" class="pilcrow">¶</a></p>
 <p id="section-5.4.1-2">This keyword accepts only if, for every name that appears in both
 the input and as a name within this keyword's value,
 the subschema accepts the corresponding input property value.<a href="#section-5.4.1-2" class="pilcrow">¶</a></p>
@@ -3334,7 +3335,7 @@ with two properties required.<a href="#section-5.4.1-4" class="pilcrow">¶</a></
           <h4 id="name-additionalproperties">
 <a href="#section-5.4.2" class="section-number selfRef">5.4.2. </a><a href="#name-additionalproperties" class="section-name selfRef">"additionalProperties"</a>
           </h4>
-<p id="section-5.4.2-1">The value of "additionalProperties" MUST be a valid JSON Schema.<a href="#section-5.4.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.4.2-1">The value of "additionalProperties" <span class="bcp14">MUST</span> be a valid JSON Schema.<a href="#section-5.4.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.4.2-2">The behavior of this keyword depends on the presence of
 "properties" and "patternProperties" within the same schema object.
 Validation with "additionalProperties" applies only to the child
@@ -3358,10 +3359,10 @@ constrained to the format of a phone number by "additionalProperties".<a href="#
           <h4 id="name-patternproperties">
 <a href="#section-5.4.3" class="section-number selfRef">5.4.3. </a><a href="#name-patternproperties" class="section-name selfRef">"patternProperties"</a>
           </h4>
-<p id="section-5.4.3-1">The value of "patternProperties" MUST be an object. Each property name
-of this object SHOULD be a valid regular expression, according to the
+<p id="section-5.4.3-1">The value of "patternProperties" <span class="bcp14">MUST</span> be an object. Each property name
+of this object <span class="bcp14">SHOULD</span> be a valid regular expression, according to the
 ECMA-262 regular expression dialect. Each property value of this object
-MUST be a valid JSON Schema.<a href="#section-5.4.3-1" class="pilcrow">¶</a></p>
+<span class="bcp14">MUST</span> be a valid JSON Schema.<a href="#section-5.4.3-1" class="pilcrow">¶</a></p>
 <p id="section-5.4.3-2">This keyword accepts only if, for each input name that matches any
 of those regular expressions, the corresponding property value
 is accepted by each matching subschema.
@@ -3396,7 +3397,7 @@ A field like "office_phone" is constrained to the format given.<a href="#section
           <h4 id="name-propertynames">
 <a href="#section-5.4.4" class="section-number selfRef">5.4.4. </a><a href="#name-propertynames" class="section-name selfRef">"propertyNames"</a>
           </h4>
-<p id="section-5.4.4-1">The value of "propertyNames" MUST be a valid JSON Schema.<a href="#section-5.4.4-1" class="pilcrow">¶</a></p>
+<p id="section-5.4.4-1">The value of "propertyNames" <span class="bcp14">MUST</span> be a valid JSON Schema.<a href="#section-5.4.4-1" class="pilcrow">¶</a></p>
 <p id="section-5.4.4-2">If the input is an object, this keyword accepts only if every property name in
 the input is accepted by the keyword's subschema.
 Note the property name that the schema is testing will always be a string.<a href="#section-5.4.4-2" class="pilcrow">¶</a></p>
@@ -3443,7 +3444,7 @@ roles for an incident response process, but no undefined roles.<a href="#section
 subschemas to array items or object properties that have not been
 successfully evaluated within the current schema evaluation or any of its
 relevant and valid sub-evaluations (see <a href="#relevance" class="auto internal xref">Section 12.2</a>).<a href="#section-6-1" class="pilcrow">¶</a></p>
-<p id="section-6-2">Meta-schemas that do not use "$vocabulary" SHOULD be considered to
+<p id="section-6-2">Meta-schemas that do not use "$vocabulary" <span class="bcp14">SHOULD</span> be considered to
 require this vocabulary as if its URI were present with a value of true.<a href="#section-6-2" class="pilcrow">¶</a></p>
 <p id="section-6-3">The current URI for this vocabulary, known as the Unevaluated Applicator
 vocabulary, is:<a href="#section-6-3" class="pilcrow">¶</a></p>
@@ -3475,15 +3476,15 @@ vocabulary are notable exceptions:<a href="#section-6.1-1" class="pilcrow">¶</a
         <h3 id="name-unevaluateditems">
 <a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-unevaluateditems" class="section-name selfRef">"unevaluatedItems"</a>
         </h3>
-<p id="section-6.2-1">The value of "unevaluatedItems" MUST be a valid JSON Schema.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
-<p id="section-6.2-2">The "unevaluatedItems" subschema MUST be applied only to those
+<p id="section-6.2-1">The value of "unevaluatedItems" <span class="bcp14">MUST</span> be a valid JSON Schema.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-2">The "unevaluatedItems" subschema <span class="bcp14">MUST</span> be applied only to those
 items that were <em>not</em> evaluated by "prefixItems", "items", or
 "contains" in the current schema evaluation or a successful
 sub-evaluation, or by "unevaluatedItems" in a successful
 sub-evaluation.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
 <p id="section-6.2-3">This means that "prefixItems", "items", "contains",
-and all in-place applicators MUST be evaluated before this keyword can
-be evaluated.  Authors of extension keywords MUST NOT define an in-place
+and all in-place applicators <span class="bcp14">MUST</span> be evaluated before this keyword can
+be evaluated.  Authors of extension keywords <span class="bcp14">MUST NOT</span> define an in-place
 applicator that would need to be evaluated after this keyword.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
 <p id="section-6.2-4">Omitting this keyword has the same assertion behavior as
 an empty schema.<a href="#section-6.2-4" class="pilcrow">¶</a></p>
@@ -3522,16 +3523,16 @@ would fail on <code>unevaluatedItems</code> because the string was not evaluated
         <h3 id="name-unevaluatedproperties">
 <a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-unevaluatedproperties" class="section-name selfRef">"unevaluatedProperties"</a>
         </h3>
-<p id="section-6.3-1">The value of "unevaluatedProperties" MUST be a valid JSON Schema.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
-<p id="section-6.3-2">The "unevaluatedProperties" subschema MUST be applied only to those
+<p id="section-6.3-1">The value of "unevaluatedProperties" <span class="bcp14">MUST</span> be a valid JSON Schema.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-2">The "unevaluatedProperties" subschema <span class="bcp14">MUST</span> be applied only to those
 properties that were <em>not</em> evaluated by "properties",
 "patternProperties", or "additionalProperties"
 in the current schema evaluation or a successful
 sub-evaluation, or by "unevaluatedProperties" in a successful
 sub-evaluation.<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 <p id="section-6.3-3">This means that "properties", "patternProperties", "additionalProperties",
-and all in-place applicators MUST be evaluated before this keyword can
-be evaluated.  Authors of extension keywords MUST NOT define an in-place
+and all in-place applicators <span class="bcp14">MUST</span> be evaluated before this keyword can
+be evaluated.  Authors of extension keywords <span class="bcp14">MUST NOT</span> define an in-place
 applicator that would need to be evaluated after this keyword.<a href="#section-6.3-3" class="pilcrow">¶</a></p>
 <p id="section-6.3-4">Omitting this keyword has the same assertion behavior as
 an empty schema.<a href="#section-6.3-4" class="pilcrow">¶</a></p>
@@ -3560,7 +3561,7 @@ data is an object such as<a href="#section-6.3-5" class="pilcrow">¶</a></p>
       </h2>
 <p id="section-7-1">Validation keywords in a schema impose requirements for successful validation of an
 input.  These keywords are all assertions without any annotation behavior.<a href="#section-7-1" class="pilcrow">¶</a></p>
-<p id="section-7-2">Meta-schemas that do not use "$vocabulary" SHOULD be considered to
+<p id="section-7-2">Meta-schemas that do not use "$vocabulary" <span class="bcp14">SHOULD</span> be considered to
 require this vocabulary as if its URI were present with a value of true.<a href="#section-7-2" class="pilcrow">¶</a></p>
 <p id="section-7-3">The current URI for this vocabulary, known as the Validation vocabulary, is:<a href="#section-7-3" class="pilcrow">¶</a></p>
 <p id="section-7-4">&lt;https://json-schema.org/draft/2020-12/vocab/validation&gt;.<a href="#section-7-4" class="pilcrow">¶</a></p>
@@ -3576,9 +3577,9 @@ require this vocabulary as if its URI were present with a value of true.<a href=
           <h4 id="name-type">
 <a href="#section-7.1.1" class="section-number selfRef">7.1.1. </a><a href="#name-type" class="section-name selfRef">"type"</a>
           </h4>
-<p id="section-7.1.1-1">The value of this keyword MUST be either a string or an array. If it is
-an array, elements of the array MUST be strings and MUST be unique.<a href="#section-7.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-7.1.1-2">String values MUST be one of the six primitive types
+<p id="section-7.1.1-1">The value of this keyword <span class="bcp14">MUST</span> be either a string or an array. If it is
+an array, elements of the array <span class="bcp14">MUST</span> be strings and <span class="bcp14">MUST</span> be unique.<a href="#section-7.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-7.1.1-2">String values <span class="bcp14">MUST</span> be one of the six primitive types
 ("null", "boolean", "object", "array", "number", or "string"),
 or "integer" which matches any number with a zero fractional part.<a href="#section-7.1.1-2" class="pilcrow">¶</a></p>
 <p id="section-7.1.1-3">If the value of "type" is a string, this keyword accepts exactly when
@@ -3592,8 +3593,8 @@ its type matches any of the types indicated by the strings in the array.<a href=
           <h4 id="name-enum">
 <a href="#section-7.1.2" class="section-number selfRef">7.1.2. </a><a href="#name-enum" class="section-name selfRef">"enum"</a>
           </h4>
-<p id="section-7.1.2-1">The value of this keyword MUST be an array. This array SHOULD have at
-least one element. Elements in the array SHOULD be unique.<a href="#section-7.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.1.2-1">The value of this keyword <span class="bcp14">MUST</span> be an array. This array <span class="bcp14">SHOULD</span> have at
+least one element. Elements in the array <span class="bcp14">SHOULD</span> be unique.<a href="#section-7.1.2-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.2-2">This keyword accepts exactly when the input is
 <span><a href="#equal" class="internal xref">equal to</a> (<a href="#equal" class="auto internal xref">Section 3.2.1</a>)</span> one of the elements in this keyword's array value.<a href="#section-7.1.2-2" class="pilcrow">¶</a></p>
 <p id="section-7.1.2-3">Elements in the array might be of any type, including null.<a href="#section-7.1.2-3" class="pilcrow">¶</a></p>
@@ -3604,7 +3605,7 @@ least one element. Elements in the array SHOULD be unique.<a href="#section-7.1.
           <h4 id="name-const">
 <a href="#section-7.1.3" class="section-number selfRef">7.1.3. </a><a href="#name-const" class="section-name selfRef">"const"</a>
           </h4>
-<p id="section-7.1.3-1">The value of this keyword MAY be of any type, including null.<a href="#section-7.1.3-1" class="pilcrow">¶</a></p>
+<p id="section-7.1.3-1">The value of this keyword <span class="bcp14">MAY</span> be of any type, including null.<a href="#section-7.1.3-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.3-2">Use of this keyword is functionally equivalent to an
 enum (<a href="#enum" class="auto internal xref">Section 7.1.2</a>) with a single value.<a href="#section-7.1.3-2" class="pilcrow">¶</a></p>
 <p id="section-7.1.3-3">This keyword accepts exactly when the input is
@@ -3623,7 +3624,7 @@ enum (<a href="#enum" class="auto internal xref">Section 7.1.2</a>) with a singl
           <h4 id="name-multipleof">
 <a href="#section-7.2.1" class="section-number selfRef">7.2.1. </a><a href="#name-multipleof" class="section-name selfRef">"multipleOf"</a>
           </h4>
-<p id="section-7.2.1-1">The value of "multipleOf" MUST be a number, strictly greater than 0.<a href="#section-7.2.1-1" class="pilcrow">¶</a></p>
+<p id="section-7.2.1-1">The value of "multipleOf" <span class="bcp14">MUST</span> be a number, strictly greater than 0.<a href="#section-7.2.1-1" class="pilcrow">¶</a></p>
 <p id="section-7.2.1-2">With a numeric input value, this keyword accepts the input only if division by this keyword's value yields an integer.<a href="#section-7.2.1-2" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-7.2.1-3">
 <pre>
@@ -3651,7 +3652,7 @@ to a single pack.<a href="#section-7.2.1-4" class="pilcrow">¶</a></p>
           <h4 id="name-maximum">
 <a href="#section-7.2.2" class="section-number selfRef">7.2.2. </a><a href="#name-maximum" class="section-name selfRef">"maximum"</a>
           </h4>
-<p id="section-7.2.2-1">The value of "maximum" MUST be a number, representing an inclusive upper limit
+<p id="section-7.2.2-1">The value of "maximum" <span class="bcp14">MUST</span> be a number, representing an inclusive upper limit
 for a numeric input value.<a href="#section-7.2.2-1" class="pilcrow">¶</a></p>
 <p id="section-7.2.2-2">If the input value is a number, then this keyword only accepts inputs
 less than or exactly equal to "maximum".<a href="#section-7.2.2-2" class="pilcrow">¶</a></p>
@@ -3663,7 +3664,7 @@ less than or exactly equal to "maximum".<a href="#section-7.2.2-2" class="pilcro
           <h4 id="name-exclusivemaximum">
 <a href="#section-7.2.3" class="section-number selfRef">7.2.3. </a><a href="#name-exclusivemaximum" class="section-name selfRef">"exclusiveMaximum"</a>
           </h4>
-<p id="section-7.2.3-1">The value of "exclusiveMaximum" MUST be a number, representing an exclusive upper
+<p id="section-7.2.3-1">The value of "exclusiveMaximum" <span class="bcp14">MUST</span> be a number, representing an exclusive upper
 limit for a numeric input value.<a href="#section-7.2.3-1" class="pilcrow">¶</a></p>
 <p id="section-7.2.3-2">If the input value is a number, then this keyword only accepts inputs
 strictly less than (not equal to) "exclusiveMaximum".<a href="#section-7.2.3-2" class="pilcrow">¶</a></p>
@@ -3674,7 +3675,7 @@ strictly less than (not equal to) "exclusiveMaximum".<a href="#section-7.2.3-2" 
           <h4 id="name-minimum">
 <a href="#section-7.2.4" class="section-number selfRef">7.2.4. </a><a href="#name-minimum" class="section-name selfRef">"minimum"</a>
           </h4>
-<p id="section-7.2.4-1">The value of "minimum" MUST be a number, representing an inclusive lower limit
+<p id="section-7.2.4-1">The value of "minimum" <span class="bcp14">MUST</span> be a number, representing an inclusive lower limit
 for a numeric input value.<a href="#section-7.2.4-1" class="pilcrow">¶</a></p>
 <p id="section-7.2.4-2">If the input value is a number, then then this keyword only accepts inputs
 greater than or exactly equal to "minimum".<a href="#section-7.2.4-2" class="pilcrow">¶</a></p>
@@ -3685,7 +3686,7 @@ greater than or exactly equal to "minimum".<a href="#section-7.2.4-2" class="pil
           <h4 id="name-exclusiveminimum">
 <a href="#section-7.2.5" class="section-number selfRef">7.2.5. </a><a href="#name-exclusiveminimum" class="section-name selfRef">"exclusiveMinimum"</a>
           </h4>
-<p id="section-7.2.5-1">The value of "exclusiveMinimum" MUST be a number, representing an exclusive lower
+<p id="section-7.2.5-1">The value of "exclusiveMinimum" <span class="bcp14">MUST</span> be a number, representing an exclusive lower
 limit for a numeric input value.<a href="#section-7.2.5-1" class="pilcrow">¶</a></p>
 <p id="section-7.2.5-2">If the input value is a number, then this keyword only accepts inputs
 strictly greater than (not equal to) "exclusiveMinimum".<a href="#section-7.2.5-2" class="pilcrow">¶</a></p>
@@ -3720,7 +3721,7 @@ value, so it is included by "maximum".<a href="#section-7.2.5-4" class="pilcrow"
           <h4 id="name-maxlength">
 <a href="#section-7.3.1" class="section-number selfRef">7.3.1. </a><a href="#name-maxlength" class="section-name selfRef">"maxLength"</a>
           </h4>
-<p id="section-7.3.1-1">The value of this keyword MUST be a non-negative integer.<a href="#section-7.3.1-1" class="pilcrow">¶</a></p>
+<p id="section-7.3.1-1">The value of this keyword <span class="bcp14">MUST</span> be a non-negative integer.<a href="#section-7.3.1-1" class="pilcrow">¶</a></p>
 <p id="section-7.3.1-2">This keyword accepts a string input value only if its
 length is less than, or equal to, the value of this keyword.<a href="#section-7.3.1-2" class="pilcrow">¶</a></p>
 <p id="section-7.3.1-3">The length of a string input value is defined as the number of its
@@ -3732,7 +3733,7 @@ characters as defined by <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>
           <h4 id="name-minlength">
 <a href="#section-7.3.2" class="section-number selfRef">7.3.2. </a><a href="#name-minlength" class="section-name selfRef">"minLength"</a>
           </h4>
-<p id="section-7.3.2-1">The value of this keyword MUST be a non-negative integer.<a href="#section-7.3.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.3.2-1">The value of this keyword <span class="bcp14">MUST</span> be a non-negative integer.<a href="#section-7.3.2-1" class="pilcrow">¶</a></p>
 <p id="section-7.3.2-2">This keyword accepts a string input value only if its
 length is greater than, or equal to, the value of this keyword.<a href="#section-7.3.2-2" class="pilcrow">¶</a></p>
 <p id="section-7.3.2-3">The length of a string input value is defined as the number of its
@@ -3745,7 +3746,7 @@ characters as defined by <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>
           <h4 id="name-pattern">
 <a href="#section-7.3.3" class="section-number selfRef">7.3.3. </a><a href="#name-pattern" class="section-name selfRef">"pattern"</a>
           </h4>
-<p id="section-7.3.3-1">The value of this keyword MUST be a string. This string SHOULD be a
+<p id="section-7.3.3-1">The value of this keyword <span class="bcp14">MUST</span> be a string. This string <span class="bcp14">SHOULD</span> be a
 valid regular expression, according to the ECMA-262 regular expression
 dialect.<a href="#section-7.3.3-1" class="pilcrow">¶</a></p>
 <p id="section-7.3.3-2">This keyword accepts a string input value only if the regular
@@ -3766,7 +3767,7 @@ expressions are not implicitly anchored.<a href="#section-7.3.3-2" class="pilcro
           <h4 id="name-maxitems">
 <a href="#section-7.4.1" class="section-number selfRef">7.4.1. </a><a href="#name-maxitems" class="section-name selfRef">"maxItems"</a>
           </h4>
-<p id="section-7.4.1-1">The value of this keyword MUST be a non-negative integer.<a href="#section-7.4.1-1" class="pilcrow">¶</a></p>
+<p id="section-7.4.1-1">The value of this keyword <span class="bcp14">MUST</span> be a non-negative integer.<a href="#section-7.4.1-1" class="pilcrow">¶</a></p>
 <p id="section-7.4.1-2">This keyword accepts an array input value only if its size is
 less than, or equal to, the value of this keyword.<a href="#section-7.4.1-2" class="pilcrow">¶</a></p>
 </section>
@@ -3776,7 +3777,7 @@ less than, or equal to, the value of this keyword.<a href="#section-7.4.1-2" cla
           <h4 id="name-minitems">
 <a href="#section-7.4.2" class="section-number selfRef">7.4.2. </a><a href="#name-minitems" class="section-name selfRef">"minItems"</a>
           </h4>
-<p id="section-7.4.2-1">The value of this keyword MUST be a non-negative integer.<a href="#section-7.4.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.4.2-1">The value of this keyword <span class="bcp14">MUST</span> be a non-negative integer.<a href="#section-7.4.2-1" class="pilcrow">¶</a></p>
 <p id="section-7.4.2-2">This keyword accepts an array input value only if its size is
 greater than, or equal to, the value of this keyword.<a href="#section-7.4.2-2" class="pilcrow">¶</a></p>
 <p id="section-7.4.2-3">Omitting this keyword has the same behavior as a value of 0.<a href="#section-7.4.2-3" class="pilcrow">¶</a></p>
@@ -3787,7 +3788,7 @@ greater than, or equal to, the value of this keyword.<a href="#section-7.4.2-2" 
           <h4 id="name-uniqueitems">
 <a href="#section-7.4.3" class="section-number selfRef">7.4.3. </a><a href="#name-uniqueitems" class="section-name selfRef">"uniqueItems"</a>
           </h4>
-<p id="section-7.4.3-1">The value of this keyword MUST be a boolean.<a href="#section-7.4.3-1" class="pilcrow">¶</a></p>
+<p id="section-7.4.3-1">The value of this keyword <span class="bcp14">MUST</span> be a boolean.<a href="#section-7.4.3-1" class="pilcrow">¶</a></p>
 <p id="section-7.4.3-2">If this keyword has boolean value false, this keyword is ignored (vacuously accepts).
 If it has boolean value true, this keyword accepts only array inputs where no two elements are equal (<a href="#equal" class="auto internal xref">Section 3.2.1</a>).<a href="#section-7.4.3-2" class="pilcrow">¶</a></p>
 <p id="section-7.4.3-3">Omitting this keyword has the same behavior as a value of false.<a href="#section-7.4.3-3" class="pilcrow">¶</a></p>
@@ -3817,8 +3818,8 @@ label cannot be applied twice ("uniqueItems").<a href="#section-7.4.3-5" class="
           <h4 id="name-maxcontains">
 <a href="#section-7.4.4" class="section-number selfRef">7.4.4. </a><a href="#name-maxcontains" class="section-name selfRef">"maxContains"</a>
           </h4>
-<p id="section-7.4.4-1">The value of this keyword MUST be a non-negative integer.<a href="#section-7.4.4-1" class="pilcrow">¶</a></p>
-<p id="section-7.4.4-2">This keyword SHALL be ignored by itself (it implicitly succeeds); its validation
+<p id="section-7.4.4-1">The value of this keyword <span class="bcp14">MUST</span> be a non-negative integer.<a href="#section-7.4.4-1" class="pilcrow">¶</a></p>
+<p id="section-7.4.4-2">This keyword <span class="bcp14">SHALL</span> be ignored by itself (it implicitly succeeds); its validation
 effect is to modify the behavior of "contains" by setting the maximum
 number of array elements permitted to match the "contains" schema.<a href="#section-7.4.4-2" class="pilcrow">¶</a></p>
 <p id="section-7.4.4-3">As an example of <code>maxContains</code> and how it modifies <code>contains</code>, the example
@@ -3831,8 +3832,8 @@ assignee of type 'owner', though other types of assignees are unlimited.<a href=
           <h4 id="name-mincontains">
 <a href="#section-7.4.5" class="section-number selfRef">7.4.5. </a><a href="#name-mincontains" class="section-name selfRef">"minContains"</a>
           </h4>
-<p id="section-7.4.5-1">The value of this keyword MUST be a non-negative integer.<a href="#section-7.4.5-1" class="pilcrow">¶</a></p>
-<p id="section-7.4.5-2">This keyword SHALL be ignored by itself (it implicitly succeeds); its validation
+<p id="section-7.4.5-1">The value of this keyword <span class="bcp14">MUST</span> be a non-negative integer.<a href="#section-7.4.5-1" class="pilcrow">¶</a></p>
+<p id="section-7.4.5-2">This keyword <span class="bcp14">SHALL</span> be ignored by itself (it implicitly succeeds); its validation
 effect is to modify the behavior of "contains" by modifying the minimum
 number of array elements required to match the "contains" schema.<a href="#section-7.4.5-2" class="pilcrow">¶</a></p>
 <p id="section-7.4.5-3">Omitting this keyword has the same behavior as a value of 1.<a href="#section-7.4.5-3" class="pilcrow">¶</a></p>
@@ -3854,7 +3855,7 @@ exactly one owner AND at least one reviewer (hint: using <code>allOf</code> is o
           <h4 id="name-maxproperties">
 <a href="#section-7.5.1" class="section-number selfRef">7.5.1. </a><a href="#name-maxproperties" class="section-name selfRef">"maxProperties"</a>
           </h4>
-<p id="section-7.5.1-1">The value of this keyword MUST be a non-negative integer.<a href="#section-7.5.1-1" class="pilcrow">¶</a></p>
+<p id="section-7.5.1-1">The value of this keyword <span class="bcp14">MUST</span> be a non-negative integer.<a href="#section-7.5.1-1" class="pilcrow">¶</a></p>
 <p id="section-7.5.1-2">This keyword accepts an object input only if its
 number of properties is less than, or equal to, the value of this
 keyword.<a href="#section-7.5.1-2" class="pilcrow">¶</a></p>
@@ -3882,7 +3883,7 @@ giving more than one.<a href="#section-7.5.1-4" class="pilcrow">¶</a></p>
           <h4 id="name-minproperties">
 <a href="#section-7.5.2" class="section-number selfRef">7.5.2. </a><a href="#name-minproperties" class="section-name selfRef">"minProperties"</a>
           </h4>
-<p id="section-7.5.2-1">The value of this keyword MUST be a non-negative integer.<a href="#section-7.5.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.5.2-1">The value of this keyword <span class="bcp14">MUST</span> be a non-negative integer.<a href="#section-7.5.2-1" class="pilcrow">¶</a></p>
 <p id="section-7.5.2-2">This keyword accepts an object input only if its
 number of properties is greater than, or equal to, the value of this
 keyword.<a href="#section-7.5.2-2" class="pilcrow">¶</a></p>
@@ -3894,8 +3895,8 @@ keyword.<a href="#section-7.5.2-2" class="pilcrow">¶</a></p>
           <h4 id="name-required">
 <a href="#section-7.5.3" class="section-number selfRef">7.5.3. </a><a href="#name-required" class="section-name selfRef">"required"</a>
           </h4>
-<p id="section-7.5.3-1">The value of this keyword MUST be an array.
-Elements of this array, if any, MUST be strings, and MUST be unique.<a href="#section-7.5.3-1" class="pilcrow">¶</a></p>
+<p id="section-7.5.3-1">The value of this keyword <span class="bcp14">MUST</span> be an array.
+Elements of this array, if any, <span class="bcp14">MUST</span> be strings, and <span class="bcp14">MUST</span> be unique.<a href="#section-7.5.3-1" class="pilcrow">¶</a></p>
 <p id="section-7.5.3-2">This keyword accepts an object input only if every item in the array is
 the name of a property in the object.<a href="#section-7.5.3-2" class="pilcrow">¶</a></p>
 <p id="section-7.5.3-3">Omitting this keyword has the same behavior as an empty array.<a href="#section-7.5.3-3" class="pilcrow">¶</a></p>
@@ -3906,9 +3907,9 @@ the name of a property in the object.<a href="#section-7.5.3-2" class="pilcrow">
           <h4 id="name-dependentrequired">
 <a href="#section-7.5.4" class="section-number selfRef">7.5.4. </a><a href="#name-dependentrequired" class="section-name selfRef">"dependentRequired"</a>
           </h4>
-<p id="section-7.5.4-1">The value of this keyword MUST be an object.  Properties in
-this object, if any, MUST be arrays.  Elements in each array,
-if any, MUST be strings, and MUST be unique.<a href="#section-7.5.4-1" class="pilcrow">¶</a></p>
+<p id="section-7.5.4-1">The value of this keyword <span class="bcp14">MUST</span> be an object.  Properties in
+this object, if any, <span class="bcp14">MUST</span> be arrays.  Elements in each array,
+if any, <span class="bcp14">MUST</span> be strings, and <span class="bcp14">MUST</span> be unique.<a href="#section-7.5.4-1" class="pilcrow">¶</a></p>
 <p id="section-7.5.4-2">This keyword specifies properties that are required if a specific
 other property is present.  Their requirement is dependent on the
 presence of the other property.<a href="#section-7.5.4-2" class="pilcrow">¶</a></p>
@@ -3982,10 +3983,10 @@ a deadline, or a date in the past.<a href="#section-8.1-2" class="pilcrow">¶</a
   constraints that go beyond syntactic<a href="#section-8.1-4.5.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-8.1-5">The value of this keyword is called a format attribute. It MUST be a string. A
+<p id="section-8.1-5">The value of this keyword is called a format attribute. It <span class="bcp14">MUST</span> be a string. A
 format attribute can generally only validate a given set of input types. If
 the type of the input is not in this set, validation for this
-format attribute and input SHOULD succeed.  All format attributes defined
+format attribute and input <span class="bcp14">SHOULD</span> succeed.  All format attributes defined
 in this section apply to strings, but a format attribute can be specified
 to apply to any input type in the <span><a href="#input" class="internal xref">input data model</a> (<a href="#input" class="auto internal xref">Section 3.2</a>)</span>.<a href="#section-8.1-5" class="pilcrow">¶</a></p>
 <p id="section-8.1-6">The format keyword is part of two vocabularies, both required.  The
@@ -4180,7 +4181,7 @@ All of these format attributes apply to strings.<a href="#section-8.2-1" class="
         <h3 id="name-general-format-implementati">
 <a href="#section-8.3" class="section-number selfRef">8.3. </a><a href="#name-general-format-implementati" class="section-name selfRef">General Format Implementation Requirements</a>
         </h3>
-<p id="section-8.3-1">It is RECOMMENDED that implementations use a common parsing library for each format,
+<p id="section-8.3-1">It is <span class="bcp14">RECOMMENDED</span> that implementations use a common parsing library for each format,
 or a well-known regular expression.<a href="#section-8.3-1" class="pilcrow">¶</a></p>
 <div id="format-annotation-vocabulary">
 <section id="section-8.3.1">
@@ -4189,9 +4190,9 @@ or a well-known regular expression.<a href="#section-8.3-1" class="pilcrow">¶</
           </h4>
 <p id="section-8.3.1-1">When the implementation is configured to produce annotations
 and the format-annotation vocabulary is 'true' in the meta-schema, it
-MUST treat the <code>format</code> keyword as an annotation, which means that
+<span class="bcp14">MUST</span> treat the <code>format</code> keyword as an annotation, which means that
 a process consuming annotation output can see what formats
-should apply to which values.  An implementation MUST produce annotations for format
+should apply to which values.  An implementation <span class="bcp14">MUST</span> produce annotations for format
 attributes it does not recognize, as for any other format attribute.<a href="#section-8.3.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -4201,28 +4202,28 @@ attributes it does not recognize, as for any other format attribute.<a href="#se
 <a href="#section-8.3.2" class="section-number selfRef">8.3.2. </a><a href="#name-format-assertion-vocabulary" class="section-name selfRef">Format-Assertion Vocabulary</a>
           </h4>
 <p id="section-8.3.2-1">When the Format-Assertion vocabulary is 'true' in the meta-schema,
-implementations MUST provide full validation support for all of the formats
+implementations <span class="bcp14">MUST</span> provide full validation support for all of the formats
 defined by this specification. Implementations that cannot provide full
-validation support MUST NOT validate any input against the schema.
+validation support <span class="bcp14">MUST NOT</span> validate any input against the schema.
 This does not prevent other processing of the schema, such as
 checking it against its meta-schema.<a href="#section-8.3.2-1" class="pilcrow">¶</a></p>
 <p id="section-8.3.2-2">An implementation that supports the Format-Assertion vocabulary:<a href="#section-8.3.2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-8.3.2-3.1">
-              <p id="section-8.3.2-3.1.1">MUST still produce "format" as an annotation if the implementation
+              <p id="section-8.3.2-3.1.1"><span class="bcp14">MUST</span> still produce "format" as an annotation if the implementation
 supports annotation production;<a href="#section-8.3.2-3.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-8.3.2-3.2">
-              <p id="section-8.3.2-3.2.1">MUST evaluate "format" as an assertion;<a href="#section-8.3.2-3.2.1" class="pilcrow">¶</a></p>
+              <p id="section-8.3.2-3.2.1"><span class="bcp14">MUST</span> evaluate "format" as an assertion;<a href="#section-8.3.2-3.2.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-8.3.2-3.3">
-              <p id="section-8.3.2-3.3.1">MUST implement syntactic validation for all format attributes defined
+              <p id="section-8.3.2-3.3.1"><span class="bcp14">MUST</span> implement syntactic validation for all format attributes defined
 in this specification, and for any additional format attributes that
 it recognizes, such that there exist possible input values
 of the correct type that will fail validation;<a href="#section-8.3.2-3.3.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-8.3.2-3.4">
-              <p id="section-8.3.2-3.4.1">MUST NOT validate any input against a schema that uses a format
+              <p id="section-8.3.2-3.4.1"><span class="bcp14">MUST NOT</span> validate any input against a schema that uses a format
 attribute it does not recognize.<a href="#section-8.3.2-3.4.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
@@ -4253,7 +4254,7 @@ implement the additional constraints in RFC 3339 as well as the ABNF.<a href="#s
 <p id="section-8.4-4">Software libraries for using dates, times and durations sometimes accept values
 that are syntactically incorrect according to RFC 3339 rules,
 for example values that do follow ISO 8601 <span>[<a href="#ISO8601" class="cite xref">ISO8601</a>]</span> but not RFC 3339's profile.  Validation
-implementations SHOULD reject these.<a href="#section-8.4-4" class="pilcrow">¶</a></p>
+implementations <span class="bcp14">SHOULD</span> reject these.<a href="#section-8.4-4" class="pilcrow">¶</a></p>
 <div id="format-date-time">
 <section id="section-8.4.1">
           <h4 id="name-date-time">
@@ -4322,7 +4323,7 @@ but these are not valid in RFC 3339.<a href="#section-8.4.4-3.1.1" class="pilcro
               <p id="section-8.4.4-3.3.1">Fractional elements ("PT1.5S") are not allowed.<a href="#section-8.4.4-3.3.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-8.4.4-3.4">
-              <p id="section-8.4.4-3.4.1">Time elements MUST come after a 'T' to avoid confusing "M" for
+              <p id="section-8.4.4-3.4.1">Time elements <span class="bcp14">MUST</span> come after a 'T' to avoid confusing "M" for
 "minute" with "M" for "month".<a href="#section-8.4.4-3.4.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-8.4.4-3.5">
@@ -4354,8 +4355,8 @@ Internet email address as follows:<a href="#section-8.5-2" class="pilcrow">¶</a
           </h4>
 <p id="section-8.5.1-1">As defined by the "Mailbox" ABNF rule in
 <span>[<a href="#RFC5321" class="cite xref">RFC5321</a>], <a href="https://rfc-editor.org/rfc/rfc5321#section-4.1.2" class="relref">Section 4.1.2</a></span>.  Along with its ABNF definitions, RFC 5321 has additional limitations
-on email addresses in <span>[<a href="#RFC5321" class="cite xref">RFC5321</a>], <a href="https://rfc-editor.org/rfc/rfc5321#section-4.5.3" class="relref">Section 4.5.3</a></span> which MUST be enforced.
-When the domain is not an address literal, it MUST be a syntactically valid hostname.<a href="#section-8.5.1-1" class="pilcrow">¶</a></p>
+on email addresses in <span>[<a href="#RFC5321" class="cite xref">RFC5321</a>], <a href="https://rfc-editor.org/rfc/rfc5321#section-4.5.3" class="relref">Section 4.5.3</a></span> which <span class="bcp14">MUST</span> be enforced.
+When the domain is not an address literal, it <span class="bcp14">MUST</span> be a syntactically valid hostname.<a href="#section-8.5.1-1" class="pilcrow">¶</a></p>
 <p id="section-8.5.1-2">A reasonable <em>starting point</em> for validation (once line returns are removed) is
 this regex, which is NOT a complete implementation without further address checking
 (it doesn't check domain-label or IP address rules), and length checking.
@@ -4439,9 +4440,8 @@ representation of an IP address as follows:<a href="#section-8.7-2" class="pilcr
           <h4 id="name-ipv4">
 <a href="#section-8.7.1" class="section-number selfRef">8.7.1. </a><a href="#name-ipv4" class="section-name selfRef">"ipv4"</a>
           </h4>
-<p id="section-8.7.1-1">An IPv4 address according to the "dotted-quad" ABNF
-syntax as defined in
-<span>[<a href="#RFC2673" class="cite xref">RFC2673</a>], <a href="https://rfc-editor.org/rfc/rfc2673#section-3.2" class="relref">Section 3.2</a></span>.<a href="#section-8.7.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.7.1-1">An IPv4 address according to the "IPv4address" ABNF
+rule in <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>], <a href="https://rfc-editor.org/rfc/rfc3986#section-3.2.2" class="relref">Section 3.2.2</a></span>.<a href="#section-8.7.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="format-ipv6">
@@ -4463,7 +4463,7 @@ syntax as defined in
 <p id="section-8.8-1">These attributes apply to string inputs.
 Note that all valid URIs are valid IRIs, and all valid URI References are also valid IRI References.<a href="#section-8.8-1" class="pilcrow">¶</a></p>
 <p id="section-8.8-2">Only general URI format checking is expected for the URI/IRI constraints.
-Implementations SHOULD NOT add checks for specific schemes such as http or email URIs,
+Implementations <span class="bcp14">SHOULD NOT</span> add checks for specific schemes such as http or email URIs,
 as this would lead to inconsistent validation results between
 implementations.<a href="#section-8.8-2" class="pilcrow">¶</a></p>
 <p id="section-8.8-3">If per-format URI checking is desired, a schema author could
@@ -4613,11 +4613,11 @@ according to <span>[<a href="#RFC6901" class="cite xref">RFC6901</a>], <a href="
           </h4>
 <p id="section-8.11.1-1">This attribute applies to string inputs.<a href="#section-8.11.1-1" class="pilcrow">¶</a></p>
 <p id="section-8.11.1-2">A string input is accepted by this attribute if it is a valid
-regular expression.  It is RECOMMENDED that implementations determine
+regular expression.  It is <span class="bcp14">RECOMMENDED</span> that implementations determine
 validity using the "Pattern" grammar of <span>[<a href="#ECMA262" class="cite xref">ECMA262</a>]</span>, Section 22.2.1
 in Unicode mode (as with the "u" flag), including its early error
 rules in <span>[<a href="#ECMA262" class="cite xref">ECMA262</a>]</span>, Section 22.2.1.1.  Implementations that validate
-formats MUST accept at least the subset of ECMA-262 defined in
+formats <span class="bcp14">MUST</span> accept at least the subset of ECMA-262 defined in
 <a href="#regex-interop" class="auto internal xref">Section 17.3</a>.<a href="#section-8.11.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -4640,9 +4640,9 @@ non-JSON data encoded in a JSON string.<a href="#section-9.1-1" class="pilcrow">
 <p id="section-9.1-2">These properties provide additional information required to interpret JSON data
 as rich multimedia documents.  They describe the type of content, how it is encoded,
 and/or how it may be validated.  They do not function as validation assertions;
-a malformed string-encoded document MUST NOT cause the containing instance
+a malformed string-encoded document <span class="bcp14">MUST NOT</span> cause the containing instance
 to be considered invalid.<a href="#section-9.1-2" class="pilcrow">¶</a></p>
-<p id="section-9.1-3">Meta-schemas that do not use "$vocabulary" SHOULD be considered to
+<p id="section-9.1-3">Meta-schemas that do not use "$vocabulary" <span class="bcp14">SHOULD</span> be considered to
 require this vocabulary as if its URI were present with a value of true.<a href="#section-9.1-3" class="pilcrow">¶</a></p>
 <p id="section-9.1-4">The current URI for this vocabulary, known as the Content vocabulary, is:<a href="#section-9.1-4" class="pilcrow">¶</a></p>
 <p id="section-9.1-5">&lt;https://json-schema.org/draft/2020-12/vocab/content&gt;.<a href="#section-9.1-5" class="pilcrow">¶</a></p>
@@ -4656,17 +4656,17 @@ require this vocabulary as if its URI were present with a value of true.<a href=
 <a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-implementation-requirements" class="section-name selfRef">Implementation Requirements</a>
         </h3>
 <p id="section-9.2-1">Due to security and performance concerns, as well as the open-ended nature of
-possible content types, implementations MUST NOT automatically decode, parse,
+possible content types, implementations <span class="bcp14">MUST NOT</span> automatically decode, parse,
 and/or validate the string contents by default.  This additionally supports
 the use case of embedded documents intended for processing by a different
 consumer than that which processed the containing document.<a href="#section-9.2-1" class="pilcrow">¶</a></p>
 <p id="section-9.2-2">All keywords in this section apply only to strings, and have no
 effect on other data types.<a href="#section-9.2-2" class="pilcrow">¶</a></p>
-<p id="section-9.2-3">Implementations MAY offer the ability to decode, parse, and/or validate
-the string contents automatically.  However, it MUST NOT perform these
-operations by default, and MUST provide the validation result of each
+<p id="section-9.2-3">Implementations <span class="bcp14">MAY</span> offer the ability to decode, parse, and/or validate
+the string contents automatically.  However, it <span class="bcp14">MUST NOT</span> perform these
+operations by default, and <span class="bcp14">MUST</span> provide the validation result of each
 string-encoded document separately from the enclosing document.  This
-process SHOULD be equivalent to fully evaluating the input against
+process <span class="bcp14">SHOULD</span> be equivalent to fully evaluating the input against
 the original schema, followed by using the annotations to decode, parse,
 and/or validate each string-encoded document.<a href="#section-9.2-3" class="pilcrow">¶</a></p>
 <p id="section-9.2-4">See also the <span><a href="#security" class="internal xref">Security Considerations</a> (<a href="#security" class="auto internal xref">Section 16</a>)</span>
@@ -4680,7 +4680,7 @@ processing inputs according to these keywords.<a href="#section-9.2-4" class="pi
 <a href="#section-9.3" class="section-number selfRef">9.3. </a><a href="#name-contentencoding" class="section-name selfRef">"contentEncoding"</a>
         </h3>
 <p id="section-9.3-1">If the input value is a string, this property defines that the string
-SHOULD be interpreted as encoded binary data and decoded using the encoding
+<span class="bcp14">SHOULD</span> be interpreted as encoded binary data and decoded using the encoding
 named by this property.<a href="#section-9.3-1" class="pilcrow">¶</a></p>
 <p id="section-9.3-2">Possible values indicating base 16, 32, and 64 encodings with several
 variations are listed in <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>.  Additionally,
@@ -4691,7 +4691,7 @@ into ASCII characters.  It is not related to HTTP's Content-Encoding header,
 which is used to encode (e.g. compress or encrypt)
 the content of HTTP request and responses.<a href="#section-9.3-2" class="pilcrow">¶</a></p>
 <p id="section-9.3-3">As "base64" is defined in both RFCs, the definition
-from RFC 4648 SHOULD be assumed unless the string is specifically intended
+from RFC 4648 <span class="bcp14">SHOULD</span> be assumed unless the string is specifically intended
 for use in a MIME context.  Note that all of these encodings result in
 strings consisting only of 7-bit ASCII characters.  Therefore, this keyword
 has no meaning for strings containing characters outside of that range.<a href="#section-9.3-3" class="pilcrow">¶</a></p>
@@ -4699,7 +4699,7 @@ has no meaning for strings containing characters outside of that range.<a href="
 indicates that the encoding is the identity encoding, meaning that
 no transformation was needed in order to represent the content in
 a UTF-8 string.<a href="#section-9.3-4" class="pilcrow">¶</a></p>
-<p id="section-9.3-5">The value of this property MUST be a string.<a href="#section-9.3-5" class="pilcrow">¶</a></p>
+<p id="section-9.3-5">The value of this property <span class="bcp14">MUST</span> be a string.<a href="#section-9.3-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="contentmediatype">
@@ -4710,7 +4710,7 @@ a UTF-8 string.<a href="#section-9.3-4" class="pilcrow">¶</a></p>
 <p id="section-9.4-1">If the input value is a string, this property indicates the media type
 of the contents of the string.  If "contentEncoding" is present,
 this property describes the decoded string.<a href="#section-9.4-1" class="pilcrow">¶</a></p>
-<p id="section-9.4-2">The value of this property MUST be a string, which MUST be a media type,
+<p id="section-9.4-2">The value of this property <span class="bcp14">MUST</span> be a string, which <span class="bcp14">MUST</span> be a media type,
 as defined by <span>[<a href="#RFC2046" class="cite xref">RFC2046</a>]</span>.<a href="#section-9.4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -4721,9 +4721,9 @@ as defined by <span>[<a href="#RFC2046" class="cite xref">RFC2046</a>]</span>.<a
         </h3>
 <p id="section-9.5-1">If the input value is a string, and if "contentMediaType" is present, this
 property contains a schema which describes the structure of the string.<a href="#section-9.5-1" class="pilcrow">¶</a></p>
-<p id="section-9.5-2">This keyword MAY be used with any media type that can be mapped into
+<p id="section-9.5-2">This keyword <span class="bcp14">MAY</span> be used with any media type that can be mapped into
 JSON Schema's data model.<a href="#section-9.5-2" class="pilcrow">¶</a></p>
-<p id="section-9.5-3">The value of this property MUST be a valid JSON schema. It SHOULD be ignored if
+<p id="section-9.5-3">The value of this property <span class="bcp14">MUST</span> be a valid JSON schema. It <span class="bcp14">SHOULD</span> be ignored if
 "contentMediaType" is not present.<a href="#section-9.5-3" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -4757,7 +4757,7 @@ and their values should be interpretable as base64-encoded PNG images.<a href="#
 <p id="section-9.6-6">Instances described by this schema are expected to be strings containing HTML,
 using whatever character set the JSON string was decoded into.
 Per <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>], <a href="https://rfc-editor.org/rfc/rfc8259#section-8.1" class="relref">Section 8.1</a></span>, outside of an entirely closed
-system, this MUST be UTF-8.<a href="#section-9.6-6" class="pilcrow">¶</a></p>
+system, this <span class="bcp14">MUST</span> be UTF-8.<a href="#section-9.6-6" class="pilcrow">¶</a></p>
 <p id="section-9.6-7">This example describes a JWT that is MACed using the HMAC SHA-256
 algorithm, and requires the "iss" and "exp" fields in its claim set.<a href="#section-9.6-7" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-9.6-8">
@@ -4807,7 +4807,7 @@ there is no need for further encoding or decoding.<a href="#section-9.6-9" class
 for documentation and user interface display purposes.  They are not intended
 to form a comprehensive set of features.  Rather, additional vocabularies
 can be defined for more complex annotation-based applications.<a href="#section-10-1" class="pilcrow">¶</a></p>
-<p id="section-10-2">Meta-schemas that do not use "$vocabulary" SHOULD be considered to
+<p id="section-10-2">Meta-schemas that do not use "$vocabulary" <span class="bcp14">SHOULD</span> be considered to
 require this vocabulary as if its URI were present with a value of true.<a href="#section-10-2" class="pilcrow">¶</a></p>
 <p id="section-10-3">The current URI for this vocabulary, known as the Meta-Data vocabulary, is:<a href="#section-10-3" class="pilcrow">¶</a></p>
 <p id="section-10-4">&lt;https://json-schema.org/draft/2020-12/vocab/meta-data&gt;.<a href="#section-10-4" class="pilcrow">¶</a></p>
@@ -4818,7 +4818,7 @@ require this vocabulary as if its URI were present with a value of true.<a href=
         <h3 id="name-title-and-description">
 <a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-title-and-description" class="section-name selfRef">"title" and "description"</a>
         </h3>
-<p id="section-10.1-1">The value of both of these keywords MUST be a string.<a href="#section-10.1-1" class="pilcrow">¶</a></p>
+<p id="section-10.1-1">The value of both of these keywords <span class="bcp14">MUST</span> be a string.<a href="#section-10.1-1" class="pilcrow">¶</a></p>
 <p id="section-10.1-2">Both of these keywords can be used to decorate a user interface with
 information about the data produced by this user interface. A title will
 preferably be short, whereas a description will provide explanation about
@@ -4922,7 +4922,7 @@ and "description".<a href="#section-10.1.1-9" class="pilcrow">¶</a></p>
         </h3>
 <p id="section-10.2-1">There are no restrictions placed on the value of this keyword.<a href="#section-10.2-1" class="pilcrow">¶</a></p>
 <p id="section-10.2-2">This keyword can be used to supply a default JSON value associated with a
-particular schema. It is RECOMMENDED that a default value be an instance of
+particular schema. It is <span class="bcp14">RECOMMENDED</span> that a default value be an instance of
 the associated schema.<a href="#section-10.2-2" class="pilcrow">¶</a></p>
 <p id="section-10.2-3">Because annotations can only appear in output if they are attached to
 a location that exists, this keyword's annotation behavior is only useful
@@ -4940,15 +4940,15 @@ from schemas.<a href="#section-10.2-4" class="pilcrow">¶</a></p>
         <h3 id="name-deprecated">
 <a href="#section-10.3" class="section-number selfRef">10.3. </a><a href="#name-deprecated" class="section-name selfRef">"deprecated"</a>
         </h3>
-<p id="section-10.3-1">The value of this keyword MUST be a boolean.  When multiple occurrences
+<p id="section-10.3-1">The value of this keyword <span class="bcp14">MUST</span> be a boolean.  When multiple occurrences
 of this keyword are applicable to a single sub-instance, applications
-SHOULD consider the instance location to be deprecated if any occurrence
+<span class="bcp14">SHOULD</span> consider the instance location to be deprecated if any occurrence
 specifies a true value.<a href="#section-10.3-1" class="pilcrow">¶</a></p>
 <p id="section-10.3-2">If "deprecated" has a value of boolean true, it indicates that applications
-SHOULD refrain from usage of the declared property. It MAY mean the property
+<span class="bcp14">SHOULD</span> refrain from usage of the declared property. It <span class="bcp14">MAY</span> mean the property
 is going to be removed in the future.<a href="#section-10.3-2" class="pilcrow">¶</a></p>
 <p id="section-10.3-3">A root schema containing "deprecated" with a value of true indicates that
-the entire resource being described MAY be removed in the future.<a href="#section-10.3-3" class="pilcrow">¶</a></p>
+the entire resource being described <span class="bcp14">MAY</span> be removed in the future.<a href="#section-10.3-3" class="pilcrow">¶</a></p>
 <p id="section-10.3-4">The "deprecated" keyword applies to each instance location to which the
 schema object containing the keyword successfully applies.  This can
 result in scenarios where every array item or object property
@@ -4961,16 +4961,16 @@ is deprecated even though the containing array or object is not.<a href="#sectio
         <h3 id="name-readonly-and-writeonly">
 <a href="#section-10.4" class="section-number selfRef">10.4. </a><a href="#name-readonly-and-writeonly" class="section-name selfRef">"readOnly" and "writeOnly"</a>
         </h3>
-<p id="section-10.4-1">The value of these keywords MUST be a boolean.  When multiple occurrences
+<p id="section-10.4-1">The value of these keywords <span class="bcp14">MUST</span> be a boolean.  When multiple occurrences
 of these keywords are applicable to a single sub-instance, the resulting
-behavior SHOULD be as for a true value if any occurrence specifies a true value,
-and SHOULD be as for a false value otherwise.<a href="#section-10.4-1" class="pilcrow">¶</a></p>
+behavior <span class="bcp14">SHOULD</span> be as for a true value if any occurrence specifies a true value,
+and <span class="bcp14">SHOULD</span> be as for a false value otherwise.<a href="#section-10.4-1" class="pilcrow">¶</a></p>
 <p id="section-10.4-2">If "readOnly" has a value of boolean true, it indicates that the value
 of the instance is managed exclusively by the owning authority, and
 attempts by an application to modify the value of this property are
 expected to be ignored or rejected by that owning authority.<a href="#section-10.4-2" class="pilcrow">¶</a></p>
 <p id="section-10.4-3">An instance document that is marked as "readOnly" for the entire document
-MAY be ignored if sent to the owning authority, or MAY result in an
+<span class="bcp14">MAY</span> be ignored if sent to the owning authority, or <span class="bcp14">MAY</span> result in an
 error, at the authority's discretion.<a href="#section-10.4-3" class="pilcrow">¶</a></p>
 <p id="section-10.4-4">If "writeOnly" has a value of boolean true, it indicates that the value
 is never present when the instance is retrieved from the owning authority.
@@ -4978,14 +4978,14 @@ It can be present when sent to the owning authority to update or create
 the document (or the resource it represents), but it will not be included
 in any updated or newly created version of the instance.<a href="#section-10.4-4" class="pilcrow">¶</a></p>
 <p id="section-10.4-5">An instance document that is marked as "writeOnly" for the entire document
-MAY be returned as a blank document of some sort, or MAY produce an error
+<span class="bcp14">MAY</span> be returned as a blank document of some sort, or <span class="bcp14">MAY</span> produce an error
 upon retrieval, or have the retrieval request ignored, at the authority's
 discretion.<a href="#section-10.4-5" class="pilcrow">¶</a></p>
 <p id="section-10.4-6">For example, "readOnly" would be used to mark a database-generated serial
 number as read-only, while "writeOnly" would be used to mark a password
 input field.<a href="#section-10.4-6" class="pilcrow">¶</a></p>
 <p id="section-10.4-7">These keywords can be used to assist in user interface instance generation.
-In particular, an application MAY choose to use a widget that hides
+In particular, an application <span class="bcp14">MAY</span> choose to use a widget that hides
 input values as they are typed for write-only fields.<a href="#section-10.4-7" class="pilcrow">¶</a></p>
 <p id="section-10.4-8">Omitting these keywords has the same behavior as values of false.<a href="#section-10.4-8" class="pilcrow">¶</a></p>
 <div id="readonly-and-writeonly-example">
@@ -5063,11 +5063,11 @@ write-only flags or find a custom data-oriented solution.<a href="#section-10.4.
         <h3 id="name-examples">
 <a href="#section-10.5" class="section-number selfRef">10.5. </a><a href="#name-examples" class="section-name selfRef">"examples"</a>
         </h3>
-<p id="section-10.5-1">The value of this keyword MUST be an array.
+<p id="section-10.5-1">The value of this keyword <span class="bcp14">MUST</span> be an array.
 There are no restrictions placed on the values within the array.<a href="#section-10.5-1" class="pilcrow">¶</a></p>
 <p id="section-10.5-2">This keyword can be used to provide sample JSON values associated with a
 particular schema, for the purpose of illustrating usage.  It is
-RECOMMENDED that these values be instances of the associated schema.<a href="#section-10.5-2" class="pilcrow">¶</a></p>
+<span class="bcp14">RECOMMENDED</span> that these values be instances of the associated schema.<a href="#section-10.5-2" class="pilcrow">¶</a></p>
 <p id="section-10.5-3">Because annotations can only appear in output if they are attached to
 a location that exists, this keyword's annotation behavior is only useful
 for use cases such as determining whether the value provided matches one
@@ -5103,14 +5103,14 @@ situation identifiable by a URI of any known scheme.<a href="#section-11.1.1-2" 
 (embedded in content), the base URI is that determined per
 <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>], <a href="https://rfc-editor.org/rfc/rfc3986#section-5" class="relref">Section 5</a></span>.<a href="#section-11.1.1-3" class="pilcrow">¶</a></p>
 <p id="section-11.1.1-4">If no source is known, or no URI scheme is known for the source, a suitable
-implementation-specific default URI MAY be used as described in
-<span>[<a href="#RFC3986" class="cite xref">RFC3986</a>], <a href="https://rfc-editor.org/rfc/rfc3986#section-5.1.4" class="relref">Section 5.1.4</a></span>.  It is RECOMMENDED
+implementation-specific default URI <span class="bcp14">MAY</span> be used as described in
+<span>[<a href="#RFC3986" class="cite xref">RFC3986</a>], <a href="https://rfc-editor.org/rfc/rfc3986#section-5.1.4" class="relref">Section 5.1.4</a></span>.  It is <span class="bcp14">RECOMMENDED</span>
 that implementations document any default base URI that they assume.<a href="#section-11.1.1-4" class="pilcrow">¶</a></p>
 <p id="section-11.1.1-5">If a schema object is embedded in a document of another media type, then
 the initial base URI is determined according to the rules of that
 media type.<a href="#section-11.1.1-5" class="pilcrow">¶</a></p>
 <p id="section-11.1.1-6">Unless the "$id" keyword described in an earlier section is present in the
-root schema, this base URI SHOULD be considered the canonical URI of the
+root schema, this base URI <span class="bcp14">SHOULD</span> be considered the canonical URI of the
 schema document's root schema resource.<a href="#section-11.1.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -5122,7 +5122,7 @@ schema document's root schema resource.<a href="#section-11.1.1-6" class="pilcro
 <p id="section-11.1.2-1">Although it's impossible to cover all use cases, we start by assuming
 that an implementation given a schema with references to other schemas
 not in the same document can be given instructions about those other
-documents, and the implementation therefore SHOULD NOT automatically
+documents, and the implementation therefore <span class="bcp14">SHOULD NOT</span> automatically
 dereference network locations or search the network for schemas not
 already loaded in.<a href="#section-11.1.2-1" class="pilcrow">¶</a></p>
 <p id="section-11.1.2-2">What should implementations do when the referenced schema is not known?
@@ -5140,15 +5140,15 @@ requirement of pre-loading schema documents is not feasible.<a href="#section-11
 <p id="section-11.1.2-4">When schemas are downloaded,
 for example by a generic user-agent that does not know until runtime which schemas to download,
 see <span><a href="#hypermedia" class="internal xref">Usage for Hypermedia</a> (<a href="#hypermedia" class="auto internal xref">Section 11.5</a>)</span>.<a href="#section-11.1.2-4" class="pilcrow">¶</a></p>
-<p id="section-11.1.2-5">Implementations SHOULD be able to associate arbitrary URIs with an arbitrary
+<p id="section-11.1.2-5">Implementations <span class="bcp14">SHOULD</span> be able to associate arbitrary URIs with an arbitrary
 schema and/or automatically associate a schema's "$id"-given URI, depending
 on the trust that the implementation has in the schema.  Such URIs and schemas
 can be supplied to an implementation prior to processing instances, or may
 be noted within a schema document as it is processed, producing associations
 as shown in <a href="#id-examples" class="auto internal xref">Appendix A</a>.<a href="#section-11.1.2-5" class="pilcrow">¶</a></p>
-<p id="section-11.1.2-6">A schema MAY (and likely will) have multiple URIs, but there is no way for a
+<p id="section-11.1.2-6">A schema <span class="bcp14">MAY</span> (and likely will) have multiple URIs, but there is no way for a
 URI to identify more than one schema. When multiple schemas try to identify
-as the same URI, an implementation SHOULD raise an error condition.<a href="#section-11.1.2-6" class="pilcrow">¶</a></p>
+as the same URI, an implementation <span class="bcp14">SHOULD</span> raise an error condition.<a href="#section-11.1.2-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="detecting-a-meta-schema">
@@ -5156,7 +5156,7 @@ as the same URI, an implementation SHOULD raise an error condition.<a href="#sec
           <h4 id="name-detecting-a-meta-schema">
 <a href="#section-11.1.3" class="section-number selfRef">11.1.3. </a><a href="#name-detecting-a-meta-schema" class="section-name selfRef">Detecting a Meta-Schema</a>
           </h4>
-<p id="section-11.1.3-1">Implementations MUST recognize a schema as a meta-schema if it
+<p id="section-11.1.3-1">Implementations <span class="bcp14">MUST</span> recognize a schema as a meta-schema if it
 is being examined because it was identified as such by another
 schema's "$schema" keyword.  This means that a single schema
 document might sometimes be considered a regular schema, and
@@ -5167,10 +5167,10 @@ it is processed under those rules.  However, when loaded a second
 time as a result of checking its own "$schema" value, it is treated
 as a meta-schema.  So the same document is processed both ways in
 the course of one session.<a href="#section-11.1.3-2" class="pilcrow">¶</a></p>
-<p id="section-11.1.3-3">Implementations MAY allow a schema to be explicitly passed as a meta-schema,
+<p id="section-11.1.3-3">Implementations <span class="bcp14">MAY</span> allow a schema to be explicitly passed as a meta-schema,
 for implementation-specific purposes, such as pre-loading a commonly
 used meta-schema and checking its vocabulary support requirements
-up front.  Meta-schema authors MUST NOT expect such features to be
+up front.  Meta-schema authors <span class="bcp14">MUST NOT</span> expect such features to be
 interoperable across implementations.<a href="#section-11.1.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -5188,7 +5188,7 @@ URI reference against the current base URI per
 <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>.<a href="#section-11.2-1" class="pilcrow">¶</a></p>
 <p id="section-11.2-2">If the resulting URI identifies a schema within the current document, or
 within another schema document that has been made available to the implementation,
-then that schema SHOULD be used automatically.<a href="#section-11.2-2" class="pilcrow">¶</a></p>
+then that schema <span class="bcp14">SHOULD</span> be used automatically.<a href="#section-11.2-2" class="pilcrow">¶</a></p>
 <p id="section-11.2-3">For example, consider this schema:<a href="#section-11.2-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-11.2-4">
 <pre>
@@ -5229,7 +5229,7 @@ the implementation, it can also be used automatically.<a href="#section-11.2-7" 
 In JSON Schema, different contexts and use cases may make any
 of these three approaches the most convenient and least brittle; but relative
 references do require the most care in implementations.<a href="#section-11.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-11.2.1-2">A fully conformant implementation MUST handle relative references, with the
+<p id="section-11.2.1-2">A fully conformant implementation <span class="bcp14">MUST</span> handle relative references, with the
 following guidance hopefully
 keeping implementation logic and overhead to a reasonable level.
 A schema's $id acts as a base URI (see <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>], <a href="https://rfc-editor.org/rfc/rfc3986#section-5.1.1" class="relref">Section 5.1.1</a></span>) for
@@ -5260,7 +5260,7 @@ subschemas.<a href="#section-11.2.2-2" class="pilcrow">¶</a></p>
 <p id="section-11.2.2-3">Since URIs involving JSON Pointer fragments relative to the parent
 schema resource's URI cease to be valid when the embedded schema
 is moved to a separate document and referenced, applications and schemas
-SHOULD NOT use such URIs to identify embedded schema resources or
+<span class="bcp14">SHOULD NOT</span> use such URIs to identify embedded schema resources or
 locations within them.<a href="#section-11.2.2-3" class="pilcrow">¶</a></p>
 <p id="section-11.2.2-4">Consider the following schema document that contains another
 schema resource embedded within it:<a href="#section-11.2.2-4" class="pilcrow">¶</a></p>
@@ -5314,7 +5314,7 @@ functioning similarly to a retrieval URI for a resource.  While this URI
 is valid, it is more robust to use the "$id" of the embedded or referenced
 resource unless it is specifically desired to identify the object containing
 the "$ref" in the second (non-embedded) arrangement.<a href="#section-11.2.2-12" class="pilcrow">¶</a></p>
-<p id="section-11.2.2-13">Schema authors SHOULD NOT rely on URIs that use a base other than the
+<p id="section-11.2.2-13">Schema authors <span class="bcp14">SHOULD NOT</span> rely on URIs that use a base other than the
 resource's canonical URI.  Implementations may not support them, and
 non-canonical URIs can also be more fragile in the face of refactoring.<a href="#section-11.2.2-13" class="pilcrow">¶</a></p>
 <p id="section-11.2.2-14">Further examples of such non-canonical URI construction, as well as
@@ -5334,7 +5334,7 @@ has multiple embedded JSON Schema Resources bundled into the same document to
 ease transportation. This kind of schema is recognizable by the presence of "$id" outside
 of the document root, since "$id" in a subschema indicates an embedded
 schema resource.<a href="#section-11.3-1" class="pilcrow">¶</a></p>
-<p id="section-11.3-2">Each embedded Schema Resource MUST be treated as an individual Schema Resource, following standard
+<p id="section-11.3-2">Each embedded Schema Resource <span class="bcp14">MUST</span> be treated as an individual Schema Resource, following standard
 schema loading and processing requirements, including determining vocabulary support.<a href="#section-11.3-2" class="pilcrow">¶</a></p>
 <div id="bundling">
 <section id="section-11.3.1">
@@ -5343,24 +5343,24 @@ schema loading and processing requirements, including determining vocabulary sup
           </h4>
 <p id="section-11.3.1-1">The bundling process for creating a Compound Schema Document is defined as taking
 references (such as "$ref") to an external Schema Resource and embedding the referenced
-Schema Resources within the referring document. Bundling SHOULD be done in such a way that
+Schema Resources within the referring document. Bundling <span class="bcp14">SHOULD</span> be done in such a way that
 all URIs (used for referencing) in the base document and any referenced/embedded
 documents do not require altering.<a href="#section-11.3.1-1" class="pilcrow">¶</a></p>
-<p id="section-11.3.1-2">Each embedded JSON Schema Resource MUST identify itself with a URI using the "$id" keyword,
-and SHOULD make use of the "$schema" keyword to identify the dialect it is using, in the root of the
-schema resource. It is RECOMMENDED that the URI identifier value of "$id" be an absolute URI.<a href="#section-11.3.1-2" class="pilcrow">¶</a></p>
-<p id="section-11.3.1-3">When the Schema Resource referenced by a by-reference applicator is bundled, it is RECOMMENDED that
+<p id="section-11.3.1-2">Each embedded JSON Schema Resource <span class="bcp14">MUST</span> identify itself with a URI using the "$id" keyword,
+and <span class="bcp14">SHOULD</span> make use of the "$schema" keyword to identify the dialect it is using, in the root of the
+schema resource. It is <span class="bcp14">RECOMMENDED</span> that the URI identifier value of "$id" be an absolute URI.<a href="#section-11.3.1-2" class="pilcrow">¶</a></p>
+<p id="section-11.3.1-3">When the Schema Resource referenced by a by-reference applicator is bundled, it is <span class="bcp14">RECOMMENDED</span> that
 the Schema Resource be located as a value of a "$defs" object at the containing schema's root.
-The key of the "$defs" for the now embedded Schema Resource MAY be the "$id" of the bundled schema
+The key of the "$defs" for the now embedded Schema Resource <span class="bcp14">MAY</span> be the "$id" of the bundled schema
 or some other form of application defined unique identifier (such as a UUID). This key is not
 intended to be referenced in JSON Schema, but may be used by an application to aid the
 bundling process.<a href="#section-11.3.1-3" class="pilcrow">¶</a></p>
-<p id="section-11.3.1-4">A Schema Resource MAY be embedded in a location other than "$defs" where the location is defined
+<p id="section-11.3.1-4">A Schema Resource <span class="bcp14">MAY</span> be embedded in a location other than "$defs" where the location is defined
 as a schema value.<a href="#section-11.3.1-4" class="pilcrow">¶</a></p>
-<p id="section-11.3.1-5">A Bundled Schema Resource MUST NOT be bundled by replacing the schema object from which it was
+<p id="section-11.3.1-5">A Bundled Schema Resource <span class="bcp14">MUST NOT</span> be bundled by replacing the schema object from which it was
 referenced, or by wrapping the Schema Resource in other applicator keywords.<a href="#section-11.3.1-5" class="pilcrow">¶</a></p>
 <p id="section-11.3.1-6">In order to produce identical output, references in the containing schema document to the
-previously external Schema Resources MUST NOT be changed, and now resolve to a schema using the
+previously external Schema Resources <span class="bcp14">MUST NOT</span> be changed, and now resolve to a schema using the
 "$id" of an embedded Schema Resource. Such identical output includes validation evaluation and URIs
 or paths used in resulting annotations or errors.<a href="#section-11.3.1-6" class="pilcrow">¶</a></p>
 <p id="section-11.3.1-7">While the bundling process will often be the main method for creating a Compound Schema Document,
@@ -5375,8 +5375,8 @@ Schema Resources existing on their own previously.<a href="#section-11.3.1-7" cl
           </h4>
 <p id="section-11.3.2-1">When multiple schema resources are present in a single document,
 schema resources which do not define with which dialect they should be processed
-MUST be processed with the same dialect as the enclosing resource.<a href="#section-11.3.2-1" class="pilcrow">¶</a></p>
-<p id="section-11.3.2-2">Since any schema that can be referenced can also be embedded, embedded schema resources MAY
+<span class="bcp14">MUST</span> be processed with the same dialect as the enclosing resource.<a href="#section-11.3.2-1" class="pilcrow">¶</a></p>
+<p id="section-11.3.2-2">Since any schema that can be referenced can also be embedded, embedded schema resources <span class="bcp14">MAY</span>
 specify different processing dialects using the "$schema" values from their enclosing resource.<a href="#section-11.3.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -5386,13 +5386,13 @@ specify different processing dialects using the "$schema" values from their encl
 <a href="#section-11.3.3" class="section-number selfRef">11.3.3. </a><a href="#name-validating" class="section-name selfRef">Validating</a>
           </h4>
 <p id="section-11.3.3-1">Given that a Compound Schema Document may have embedded resources which identify as using different
-dialects, these documents SHOULD NOT be validated by applying a meta-schema
-to the Compound Schema Document as an instance. It is RECOMMENDED that an alternate
+dialects, these documents <span class="bcp14">SHOULD NOT</span> be validated by applying a meta-schema
+to the Compound Schema Document as an instance. It is <span class="bcp14">RECOMMENDED</span> that an alternate
 validation process be provided in order to validate Schema Documents. Each Schema Resource
-SHOULD be separately validated against its associated meta-schema.<a href="#section-11.3.3-1" class="pilcrow">¶</a></p>
+<span class="bcp14">SHOULD</span> be separately validated against its associated meta-schema.<a href="#section-11.3.3-1" class="pilcrow">¶</a></p>
 <p id="section-11.3.3-2">A Compound Schema Document in which all embedded resources identify as using the same
 dialect, or in which "$schema" is omitted and therefore defaults to that of the enclosing resource,
-MAY be validated by applying the appropriate meta-schema.<a href="#section-11.3.3-2" class="pilcrow">¶</a></p>
+<span class="bcp14">MAY</span> be validated by applying the appropriate meta-schema.<a href="#section-11.3.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -5407,10 +5407,10 @@ MAY be validated by applying the appropriate meta-schema.<a href="#section-11.3.
           <h4 id="name-guarding-against-infinite-r">
 <a href="#section-11.4.1" class="section-number selfRef">11.4.1. </a><a href="#name-guarding-against-infinite-r" class="section-name selfRef">Guarding Against Infinite Recursion</a>
           </h4>
-<p id="section-11.4.1-1">A schema MUST NOT be run into an infinite loop evaluating input. For
+<p id="section-11.4.1-1">A schema <span class="bcp14">MUST NOT</span> be run into an infinite loop evaluating input. For
 example, if two schemas "#alice" and "#bob" both have an "allOf" property
 that refers to the other, a naive implementation might get stuck in an infinite
-recursive loop trying to validate the input.  Schemas SHOULD NOT make
+recursive loop trying to validate the input.  Schemas <span class="bcp14">SHOULD NOT</span> make
 use of infinite recursive nesting like this; the behavior is undefined.<a href="#section-11.4.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -5422,7 +5422,7 @@ use of infinite recursive nesting like this; the behavior is undefined.<a href="
 <p id="section-11.4.2-1">The effect of specifying the same fragment name multiple times within
 the same resource, using any combination of "$anchor" and/or
 "$dynamicAnchor", or of specifying the same URI for multiple resources
-within the same document, is undefined.  Implementations MAY
+within the same document, is undefined.  Implementations <span class="bcp14">MAY</span>
 raise an error if such usage is detected.<a href="#section-11.4.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -5450,7 +5450,7 @@ of blindly interpreting targets as schemas.<a href="#section-11.4.3-2" class="pi
 semantics to "$defs" do not allow for any intervening "$id" keywords,
 and therefore will behave correctly under implementations that attempt
 to use any reference target as a schema.  However, this behavior is
-implementation-specific and MUST NOT be relied upon for interoperability.<a href="#section-11.4.3-3" class="pilcrow">¶</a></p>
+implementation-specific and <span class="bcp14">MUST NOT</span> be relied upon for interoperability.<a href="#section-11.4.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -5473,7 +5473,7 @@ Web linking (<span>[<a href="#RFC8288" class="cite xref">RFC8288</a>]</span>).<a
           <h4 id="name-linking-to-a-schema">
 <a href="#section-11.5.1" class="section-number selfRef">11.5.1. </a><a href="#name-linking-to-a-schema" class="section-name selfRef">Linking to a Schema</a>
           </h4>
-<p id="section-11.5.1-1">It is RECOMMENDED that instances described by a schema provide a link to
+<p id="section-11.5.1-1">It is <span class="bcp14">RECOMMENDED</span> that instances described by a schema provide a link to
 a downloadable JSON Schema using the link relation "describedby", as defined by
 Linked Data Protocol 1.0, (<span>[<a href="#LDP" class="cite xref">LDP</a>]</span>) Section 8.1.<a href="#section-11.5.1-1" class="pilcrow">¶</a></p>
 <p id="section-11.5.1-2">In HTTP, such links can be attached to any response using the
@@ -5496,11 +5496,11 @@ distributing schemas. Misbehaving clients can pose problems for server
 maintainers if they pull a schema over the network more frequently than
 necessary, when it's instead possible to cache a schema for a long period of
 time.<a href="#section-11.5.2-1" class="pilcrow">¶</a></p>
-<p id="section-11.5.2-2">HTTP servers SHOULD set long-lived caching headers on JSON Schemas.
-HTTP clients SHOULD observe caching headers and not re-request documents within
+<p id="section-11.5.2-2">HTTP servers <span class="bcp14">SHOULD</span> set long-lived caching headers on JSON Schemas.
+HTTP clients <span class="bcp14">SHOULD</span> observe caching headers and not re-request documents within
 their freshness period.
-Distributed systems SHOULD make use of a shared cache and/or caching proxy.<a href="#section-11.5.2-2" class="pilcrow">¶</a></p>
-<p id="section-11.5.2-3">Clients SHOULD set or prepend a User-Agent header specific to the JSON Schema
+Distributed systems <span class="bcp14">SHOULD</span> make use of a shared cache and/or caching proxy.<a href="#section-11.5.2-2" class="pilcrow">¶</a></p>
+<p id="section-11.5.2-3">Clients <span class="bcp14">SHOULD</span> set or prepend a User-Agent header specific to the JSON Schema
 implementation or software product. Since symbols are listed in decreasing order
 of significance, the JSON Schema library name/version should precede the more
 generic HTTP library name (if any). For example:<a href="#section-11.5.2-3" class="pilcrow">¶</a></p>
@@ -5509,7 +5509,7 @@ generic HTTP library name (if any). For example:<a href="#section-11.5.2-3" clas
         User-Agent: product-name/5.4.1 so-cool-json-schema/1.0.2 curl/7.43.0
 </pre><a href="#section-11.5.2-4" class="pilcrow">¶</a>
 </div>
-<p id="section-11.5.2-5">Clients SHOULD be able to make requests with a "From" header so that server
+<p id="section-11.5.2-5">Clients <span class="bcp14">SHOULD</span> be able to make requests with a "From" header so that server
 operators can contact the owner of a potentially misbehaving script.<a href="#section-11.5.2-5" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -5528,18 +5528,18 @@ a boolean result.  Annotations attach information that applications
 may use in any way they see fit.
 Applicators apply subschemas to parts of input and combine
 their results.<a href="#section-12-1" class="pilcrow">¶</a></p>
-<p id="section-12-2">Extension keywords SHOULD stay within these categories, keeping in mind
+<p id="section-12-2">Extension keywords <span class="bcp14">SHOULD</span> stay within these categories, keeping in mind
 that annotations in particular are extremely flexible.  Complex behavior
 is usually better delegated to applications on the basis of annotation
 data than implemented directly as schema keywords.  However, extension
-keywords MAY define other behaviors for specialized purposes.<a href="#section-12-2" class="pilcrow">¶</a></p>
+keywords <span class="bcp14">MAY</span> define other behaviors for specialized purposes.<a href="#section-12-2" class="pilcrow">¶</a></p>
 <p id="section-12-3">Evaluating an input against a schema involves processing all of the
 keywords in the schema against the appropriate locations within the input.
 Typically, applicator keywords are processed until a schema object with no
 applicators (and therefore no subschemas) is reached.  The appropriate
 location in the input is evaluated against the assertion and
 annotation keywords in the schema object.<a href="#section-12-3" class="pilcrow">¶</a></p>
-<p id="section-12-4">The validation result of a schema object containing keywords MUST
+<p id="section-12-4">The validation result of a schema object containing keywords <span class="bcp14">MUST</span>
 be the logical AND of the validation results of its keywords.
 The interactions of keyword and schema results with annotations,
 errors, and keyword dependencies are defined by <a href="#relevance" class="auto internal xref">Section 12.2</a>, while the
@@ -5547,7 +5547,7 @@ relationship of subschema results to the results of the applicator
 keyword that applied them is described by <a href="#applicators" class="auto internal xref">Section 12.7</a>.<a href="#section-12-4" class="pilcrow">¶</a></p>
 <p id="section-12-5">Evaluation of a parent schema object can complete once all of its
 subschemas have been evaluated, although in some circumstances evaluation
-may be short-circuited due to assertion results.  Implementations MAY
+may be short-circuited due to assertion results.  Implementations <span class="bcp14">MAY</span>
 short-circuit evaluation if analysis of the schema at load time shows that
 no annotation production or keyword dependency communication could be
 impacted, <strong>and</strong> if the runtime configuration does not request "verbose"
@@ -5611,15 +5611,15 @@ to the validation results of its parent evaluations:<a href="#section-12.2-3" cl
             <p id="section-12.2-4.1.1">All keyword evaluations are initially considered to be relevant<a href="#section-12.2-4.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-12.2-4.2">
-            <p id="section-12.2-4.2.1">A schema object evaluation that rejects the input MUST cause all
+            <p id="section-12.2-4.2.1">A schema object evaluation that rejects the input <span class="bcp14">MUST</span> cause all
 keyword sub-evaluations that accepted the input to become irrelevant<a href="#section-12.2-4.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-12.2-4.3">
-            <p id="section-12.2-4.3.1">A keyword that accepts the input MUST cause all keyword sub-evaluations
+            <p id="section-12.2-4.3.1">A keyword that accepts the input <span class="bcp14">MUST</span> cause all keyword sub-evaluations
 that rejected the input to become irrelevant<a href="#section-12.2-4.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-12.2-4.4">
-            <p id="section-12.2-4.4.1">A schema object that accepts the input MUST NOT impact relevance<a href="#section-12.2-4.4.1" class="pilcrow">¶</a></p>
+            <p id="section-12.2-4.4.1">A schema object that accepts the input <span class="bcp14">MUST NOT</span> impact relevance<a href="#section-12.2-4.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-12.2-4.5">
             <p id="section-12.2-4.5.1">A keyword object that rejects the input has no necessary effect on
@@ -5627,14 +5627,14 @@ relevance, but will cause its parent schema evaluation to reject,
 triggering the appropriate relevancy transitions<a href="#section-12.2-4.5.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-12.2-4.6">
-            <p id="section-12.2-4.6.1">Once a keyword evaluation becomes irrelevant, it MUST NOT ever
+            <p id="section-12.2-4.6.1">Once a keyword evaluation becomes irrelevant, it <span class="bcp14">MUST NOT</span> ever
 subsequently be deemed relevant.<a href="#section-12.2-4.6.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-12.2-5">Annotations and errors MUST only be included in output if the output
+<p id="section-12.2-5">Annotations and errors <span class="bcp14">MUST</span> only be included in output if the output
 configuration includes them; note that only "verbose" (<a href="#verbose" class="auto internal xref">Section 13.4.4</a>)
 output formats include irrelevant output.<a href="#section-12.2-5" class="pilcrow">¶</a></p>
-<p id="section-12.2-6">Dependency information MUST only be used from evaluations considered
+<p id="section-12.2-6">Dependency information <span class="bcp14">MUST</span> only be used from evaluations considered
 to be relevant at the time of the depending keyword's evaluation,
 regardless of output choice.<a href="#section-12.2-6" class="pilcrow">¶</a></p>
 </section>
@@ -5644,31 +5644,31 @@ regardless of output choice.<a href="#section-12.2-6" class="pilcrow">¶</a></p>
         <h3 id="name-keyword-interactions">
 <a href="#section-12.3" class="section-number selfRef">12.3. </a><a href="#name-keyword-interactions" class="section-name selfRef">Keyword Interactions</a>
         </h3>
-<p id="section-12.3-1">Keywords MAY be defined with a partial value, such as a URI-reference,
+<p id="section-12.3-1">Keywords <span class="bcp14">MAY</span> be defined with a partial value, such as a URI-reference,
 which must be resolved against another value, such as another
 URI-reference or a full URI, which is found through the lexical
 structure of the structured document.  The "$id", "$ref", and
 "$dynamicRef" core keywords, and the "base" JSON Hyper-Schema
 keyword, are examples of this sort of behavior.<a href="#section-12.3-1" class="pilcrow">¶</a></p>
 <p id="section-12.3-2">Note that some keywords, such as "$schema", apply to the lexical
-scope of the entire schema resource, and therefore MUST only
+scope of the entire schema resource, and therefore <span class="bcp14">MUST</span> only
 appear in a schema resource's root schema.<a href="#section-12.3-2" class="pilcrow">¶</a></p>
-<p id="section-12.3-3">A keyword MAY depend on the value or outcome of other keywords
+<p id="section-12.3-3">A keyword <span class="bcp14">MAY</span> depend on the value or outcome of other keywords
 within the same dynamic scopes or its successful subscopes.<a href="#section-12.3-3" class="pilcrow">¶</a></p>
 <p id="section-12.3-4">No constraints are placed on the mechanism of communication
 within implementations.<a href="#section-12.3-4" class="pilcrow">¶</a></p>
 <p id="section-12.3-5">Interactions within the same dynamic scope that depend only
-on adjacent keyword values SHOULD be determined statically.
+on adjacent keyword values <span class="bcp14">SHOULD</span> be determined statically.
 Other interactions, including all those involving dynamic
 subscopes, are expected to be handled as runtime communication.<a href="#section-12.3-5" class="pilcrow">¶</a></p>
 <p id="section-12.3-6">Note that dependencies involving either dynamic subscopes
 or evaluation of adjacent keywords impose an ordering
 on keyword evaluation.
-Such keywords MUST NOT result in a circular dependency.
-Keywords MAY modify their behavior based on the presence or absence
+Such keywords <span class="bcp14">MUST NOT</span> result in a circular dependency.
+Keywords <span class="bcp14">MAY</span> modify their behavior based on the presence or absence
 of another keyword in the same
 <span><a href="#schema-document" class="internal xref">schema object</a> (<a href="#schema-document" class="auto internal xref">Section 3.1</a>)</span>.<a href="#section-12.3-6" class="pilcrow">¶</a></p>
-<p id="section-12.3-7">Keywords MUST NOT define interactions outside of these mechanisms.<a href="#section-12.3-7" class="pilcrow">¶</a></p>
+<p id="section-12.3-7">Keywords <span class="bcp14">MUST NOT</span> define interactions outside of these mechanisms.<a href="#section-12.3-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="default-behaviors">
@@ -5676,17 +5676,16 @@ of another keyword in the same
         <h3 id="name-default-behaviors">
 <a href="#section-12.4" class="section-number selfRef">12.4. </a><a href="#name-default-behaviors" class="section-name selfRef">Default Behaviors</a>
         </h3>
-<p id="section-12.4-1">A missing keyword MUST NOT produce a false assertion result, MUST
-NOT produce annotation results, and MUST NOT cause any other schema
+<p id="section-12.4-1">A missing keyword <span class="bcp14">MUST NOT</span> produce a false assertion result, <span class="bcp14">MUST NOT</span> produce annotation results, and <span class="bcp14">MUST NOT</span> cause any other schema
 to be evaluated as part of its own behavioral definition.
 However, given that missing keywords do not contribute annotations,
 the lack of annotation results may indirectly change the behavior
 of other keywords.<a href="#section-12.4-1" class="pilcrow">¶</a></p>
 <p id="section-12.4-2">In some cases, the missing keyword assertion behavior of a keyword is
 identical to that produced by a certain value, and keyword definitions
-SHOULD note such values where known.  However, even if the value which
+<span class="bcp14">SHOULD</span> note such values where known.  However, even if the value which
 produces the default behavior would produce annotation results if
-present, the default behavior still MUST NOT result in annotations.<a href="#section-12.4-2" class="pilcrow">¶</a></p>
+present, the default behavior still <span class="bcp14">MUST NOT</span> result in annotations.<a href="#section-12.4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="unrecognized">
@@ -5694,10 +5693,10 @@ present, the default behavior still MUST NOT result in annotations.<a href="#sec
         <h3 id="name-handling-unrecognized-or-un">
 <a href="#section-12.5" class="section-number selfRef">12.5. </a><a href="#name-handling-unrecognized-or-un" class="section-name selfRef">Handling unrecognized or unsupported keywords</a>
         </h3>
-<p id="section-12.5-1">Implementations SHOULD treat keywords they do not recognize, or that
+<p id="section-12.5-1">Implementations <span class="bcp14">SHOULD</span> treat keywords they do not recognize, or that
 they recognize but do not support, as annotations, where the value of
 the keyword is the value of the annotation.  Whether an implementation
-produces these annotations or not, they MUST otherwise ignore the keywords.<a href="#section-12.5-1" class="pilcrow">¶</a></p>
+produces these annotations or not, they <span class="bcp14">MUST</span> otherwise ignore the keywords.<a href="#section-12.5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="identifiers">
@@ -5709,8 +5708,8 @@ produces these annotations or not, they MUST otherwise ignore the keywords.<a hr
 resolved in <span><a href="#refs" class="internal xref">schema references</a> (<a href="#refs" class="auto internal xref">Section 4.2.1</a>)</span>, or both.
 The Core vocabulary defined in this document defines several
 identifying keywords, most notably "$id".<a href="#section-12.6-1" class="pilcrow">¶</a></p>
-<p id="section-12.6-2">Canonical schema URIs MUST NOT change while processing an input, but
-keywords that affect URI-reference resolution MAY have behavior that
+<p id="section-12.6-2">Canonical schema URIs <span class="bcp14">MUST NOT</span> change while processing an input, but
+keywords that affect URI-reference resolution <span class="bcp14">MAY</span> have behavior that
 is only fully determined at runtime.<a href="#section-12.6-2" class="pilcrow">¶</a></p>
 <p id="section-12.6-3">While custom identifier keywords are possible, vocabulary designers should
 take care not to disrupt the functioning of core keywords. For example,
@@ -5739,8 +5738,8 @@ keyword.<a href="#section-12.7-2" class="pilcrow">¶</a></p>
 <p id="section-12.7-3">Applicator keywords also define how subschema or referenced schema
 boolean <span><a href="#assertions" class="internal xref">assertion</a> (<a href="#assertions" class="auto internal xref">Section 12.8</a>)</span>
 results are modified and/or combined to produce the boolean result
-of the applicator.  Applicators MAY apply any boolean logic operation
-to the assertion results of subschemas, but MUST NOT introduce new
+of the applicator.  Applicators <span class="bcp14">MAY</span> apply any boolean logic operation
+to the assertion results of subschemas, but <span class="bcp14">MUST NOT</span> introduce new
 assertion conditions of their own.<a href="#section-12.7-3" class="pilcrow">¶</a></p>
 <div id="referenced-and-referencing-schemas">
 <section id="section-12.7.1">
@@ -5823,7 +5822,7 @@ then including "null" in "type" would not have any useful effect.<a href="#secti
 <p id="section-12.9-1">JSON Schema can annotate an instance with information, whenever the instance
 validates against the schema object containing the annotation, and all of its
 parent schema objects.  The annotation value produced by each annotation
-keyword MUST be the keyword's value.<a href="#section-12.9-1" class="pilcrow">¶</a></p>
+keyword <span class="bcp14">MUST</span> be the keyword's value.<a href="#section-12.9-1" class="pilcrow">¶</a></p>
 <p id="section-12.9-2">Annotations are attached to specific locations in an instance.
 Since many subschemas can be applied to any single
 location, applications may need to decide how to handle differing
@@ -5837,7 +5836,7 @@ on behalf of applications.<a href="#section-12.9-3" class="pilcrow">¶</a></p>
 annotations requires examining all schemas that apply to an instance
 location, even if they cannot change the overall assertion result.
 The only exception is that subschemas of a schema object that has
-failed validation MAY be skipped, as annotations are not retained
+failed validation <span class="bcp14">MAY</span> be skipped, as annotations are not retained
 for failing schemas.<a href="#section-12.9-4" class="pilcrow">¶</a></p>
 <div id="producing-annotations">
 <section id="section-12.9.1">
@@ -5850,7 +5849,7 @@ produce annotations as they do not make use of keywords.<a href="#section-12.9.1
 <p id="section-12.9.1-2">See <a href="#relevance" class="auto internal xref">Section 12.2</a> for conditions under which annotations
 appear in output, and how they are managed throughout the
 evaluation process.<a href="#section-12.9.1-2" class="pilcrow">¶</a></p>
-<p id="section-12.9.1-3">A produced annotation MUST include the following information:<a href="#section-12.9.1-3" class="pilcrow">¶</a></p>
+<p id="section-12.9.1-3">A produced annotation <span class="bcp14">MUST</span> include the following information:<a href="#section-12.9.1-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-12.9.1-4.1">
               <p id="section-12.9.1-4.1.1">The name of the keyword that produces the annotation<a href="#section-12.9.1-4.1.1" class="pilcrow">¶</a></p>
@@ -5864,7 +5863,7 @@ such as "$ref" were followed to reach the absolute schema location.<a href="#sec
 </li>
             <li class="normal" id="section-12.9.1-4.4">
               <p id="section-12.9.1-4.4.1">The absolute schema location of the attaching keyword, as a URI.
-This MAY be omitted if it is the same as the schema location path
+This <span class="bcp14">MAY</span> be omitted if it is the same as the schema location path
 from above.<a href="#section-12.9.1-4.4.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-12.9.1-4.5">
@@ -5900,9 +5899,9 @@ undesirable interactions with references in certain circumstances.<a href="#sect
 <p id="section-12.11-1">While none of the vocabularies defined as part of this or the associated documents
 define a keyword which may target and/or load input data, it is possible that
 other vocabularies may wish to do so.<a href="#section-12.11-1" class="pilcrow">¶</a></p>
-<p id="section-12.11-2">Keywords MAY be defined to use JSON Pointers or Relative JSON Pointers to examine
+<p id="section-12.11-2">Keywords <span class="bcp14">MAY</span> be defined to use JSON Pointers or Relative JSON Pointers to examine
 parts of an input outside the current evaluation location.<a href="#section-12.11-2" class="pilcrow">¶</a></p>
-<p id="section-12.11-3">Keywords that allow adjusting the location using a Relative JSON Pointer SHOULD
+<p id="section-12.11-3">Keywords that allow adjusting the location using a Relative JSON Pointer <span class="bcp14">SHOULD</span>
 default to using the current location if a default is desirable.<a href="#section-12.11-3" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -5914,7 +5913,7 @@ default to using the current location if a default is desirable.<a href="#sectio
 <a href="#section-13" class="section-number selfRef">13. </a><a href="#name-output-formatting" class="section-name selfRef">Output Formatting</a>
       </h2>
 <p id="section-13-1">JSON Schema is defined to be platform-independent.  As such, to increase compatibility
-across platforms, implementations SHOULD conform to a standard validation output
+across platforms, implementations <span class="bcp14">SHOULD</span> conform to a standard validation output
 format.  This section describes the minimum requirements that consumers will need to
 properly interpret validation results.<a href="#section-13-1" class="pilcrow">¶</a></p>
 <div id="format">
@@ -5923,8 +5922,8 @@ properly interpret validation results.<a href="#section-13-1" class="pilcrow">¶
 <a href="#section-13.1" class="section-number selfRef">13.1. </a><a href="#name-format" class="section-name selfRef">Format</a>
         </h3>
 <p id="section-13.1-1">JSON Schema output is defined using the JSON Schema data model.
-Implementations MAY deviate from this as supported by their
-specific languages and platforms, however it is RECOMMENDED that the output be
+Implementations <span class="bcp14">MAY</span> deviate from this as supported by their
+specific languages and platforms, however it is <span class="bcp14">RECOMMENDED</span> that the output be
 convertible to the JSON format defined herein via serialization or other means.<a href="#section-13.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -5952,10 +5951,10 @@ structure based on the structure of the schema.<a href="#section-13.2-2.3.1" cla
 structure that matches the exact structure of the schema.<a href="#section-13.2-2.4.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-13.2-3">An implementation SHOULD provide at least one of the "flag", "basic", or "detailed"
-format and MAY provide the "verbose" format.  If it provides one or more of the
-"detailed" or "verbose" formats, it MUST also provide the "flag" format.
-Implementations SHOULD specify in their documentation which formats they support.<a href="#section-13.2-3" class="pilcrow">¶</a></p>
+<p id="section-13.2-3">An implementation <span class="bcp14">SHOULD</span> provide at least one of the "flag", "basic", or "detailed"
+format and <span class="bcp14">MAY</span> provide the "verbose" format.  If it provides one or more of the
+"detailed" or "verbose" formats, it <span class="bcp14">MUST</span> also provide the "flag" format.
+Implementations <span class="bcp14">SHOULD</span> specify in their documentation which formats they support.<a href="#section-13.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="minimum-information">
@@ -5964,18 +5963,18 @@ Implementations SHOULD specify in their documentation which formats they support
 <a href="#section-13.3" class="section-number selfRef">13.3. </a><a href="#name-minimum-information" class="section-name selfRef">Minimum Information</a>
         </h3>
 <p id="section-13.3-1">Beyond the simplistic "flag" output, additional information is useful to aid in
-debugging a schema or input.  Each sub-result SHOULD contain the information
+debugging a schema or input.  Each sub-result <span class="bcp14">SHOULD</span> contain the information
 contained within this section at a minimum.<a href="#section-13.3-1" class="pilcrow">¶</a></p>
 <p id="section-13.3-2">A single object that contains all of these components is considered an
 output unit.<a href="#section-13.3-2" class="pilcrow">¶</a></p>
-<p id="section-13.3-3">Implementations MAY elect to provide additional information.<a href="#section-13.3-3" class="pilcrow">¶</a></p>
+<p id="section-13.3-3">Implementations <span class="bcp14">MAY</span> elect to provide additional information.<a href="#section-13.3-3" class="pilcrow">¶</a></p>
 <div id="keyword-relative-location">
 <section id="section-13.3.1">
           <h4 id="name-keyword-relative-location">
 <a href="#section-13.3.1" class="section-number selfRef">13.3.1. </a><a href="#name-keyword-relative-location" class="section-name selfRef">Keyword Relative Location</a>
           </h4>
 <p id="section-13.3.1-1">The relative location of the validating keyword that follows the evaluation
-path.  The value MUST be expressed as a JSON Pointer, and it MUST include
+path.  The value <span class="bcp14">MUST</span> be expressed as a JSON Pointer, and it <span class="bcp14">MUST</span> include
 any by-reference applicators such as "$ref" or "$dynamicRef".<a href="#section-13.3.1-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-13.3.1-2">
 <pre>
@@ -5994,18 +5993,18 @@ due to the inclusion of these by-reference applicator keywords.<a href="#section
           </h4>
 <p id="section-13.3.2-1">The absolute, dereferenced location of the validating keyword (where "absolute"
 is used in a different sense than the "absolute-URI" terminology from RFC3986, in that
-the definition does not exclude fragments).  The value MUST
+the definition does not exclude fragments).  The value <span class="bcp14">MUST</span>
 be expressed as a full URI using the canonical URI of the relevant schema resource
-with a JSON Pointer fragment, and it MUST NOT include by-reference applicators
+with a JSON Pointer fragment, and it <span class="bcp14">MUST NOT</span> include by-reference applicators
 such as "$ref" or "$dynamicRef" as non-terminal path components.
-It MAY end in such keywords if the error or annotation is for that
+It <span class="bcp14">MAY</span> end in such keywords if the error or annotation is for that
 keyword, such as an unresolvable reference.<a href="#section-13.3.2-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-13.3.2-2">
 <pre>
 https://example.com/schemas/common#/$defs/count/minimum
 </pre><a href="#section-13.3.2-2" class="pilcrow">¶</a>
 </div>
-<p id="section-13.3.2-3">This information MAY be omitted only if either the dynamic scope did not pass
+<p id="section-13.3.2-3">This information <span class="bcp14">MAY</span> be omitted only if either the dynamic scope did not pass
 over a reference or if the schema does not declare an absolute URI as its "$id".<a href="#section-13.3.2-3" class="pilcrow">¶</a></p>
 <p id="section-13.3.2-4">The JSON key for this information is "absoluteKeywordLocation".<a href="#section-13.3.2-4" class="pilcrow">¶</a></p>
 </section>
@@ -6016,7 +6015,7 @@ over a reference or if the schema does not declare an absolute URI as its "$id".
 <a href="#section-13.3.3" class="section-number selfRef">13.3.3. </a><a href="#name-instance-location" class="section-name selfRef">Instance Location</a>
           </h4>
 <p id="section-13.3.3-1">The location of the JSON value within the instance.  The
-value MUST be expressed as a JSON Pointer.<a href="#section-13.3.3-1" class="pilcrow">¶</a></p>
+value <span class="bcp14">MUST</span> be expressed as a JSON Pointer.<a href="#section-13.3.3-1" class="pilcrow">¶</a></p>
 <p id="section-13.3.3-2">The JSON key for this information is "instanceLocation".<a href="#section-13.3.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -6051,8 +6050,8 @@ a keyword with nested results can also have a local error or annotation.<a href=
         <h3 id="name-output-structure">
 <a href="#section-13.4" class="section-number selfRef">13.4. </a><a href="#name-output-structure" class="section-name selfRef">Output Structure</a>
         </h3>
-<p id="section-13.4-1">The output MUST be an object containing a boolean property named "valid".  When
-additional information about the result is required, the output MUST also contain
+<p id="section-13.4-1">The output <span class="bcp14">MUST</span> be an object containing a boolean property named "valid".  When
+additional information about the result is required, the output <span class="bcp14">MUST</span> also contain
 "errors" or "annotations" as described below.<a href="#section-13.4-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-13.4-2.1">
@@ -6070,8 +6069,8 @@ successful validation<a href="#section-13.4-2.3.1" class="pilcrow">¶</a></p>
         </ul>
 <p id="section-13.4-3">Unless otherwise specified or required for the overall output structure,
 output units for irrelevant keyword evaluations (<a href="#relevance" class="auto internal xref">Section 12.2</a>)
-SHOULD be omitted, and annotations and errors from such evaluations
-MUST be omitted.<a href="#section-13.4-3" class="pilcrow">¶</a></p>
+<span class="bcp14">SHOULD</span> be omitted, and annotations and errors from such evaluations
+<span class="bcp14">MUST</span> be omitted.<a href="#section-13.4-3" class="pilcrow">¶</a></p>
 <p id="section-13.4-4">For these examples, the following schema and input will be used.<a href="#section-13.4-4" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-13.4-5">
 <pre>
@@ -6124,7 +6123,7 @@ examples for passing schemas that produce annotations.<a href="#section-13.4-7" 
 </li>
         </ul>
 <p id="section-13.4-10">Note that the error message wording as depicted in these examples is not a
-requirement of this specification.  Implementations SHOULD craft error messages
+requirement of this specification.  Implementations <span class="bcp14">SHOULD</span> craft error messages
 tailored for their audience or provide a templating mechanism that allows their
 users to craft their own messages.<a href="#section-13.4-10" class="pilcrow">¶</a></p>
 <div id="flag">
@@ -6142,7 +6141,7 @@ needs to be fulfilled.<a href="#section-13.4.1-1" class="pilcrow">¶</a></p>
 </pre><a href="#section-13.4.1-2" class="pilcrow">¶</a>
 </div>
 <p id="section-13.4.1-3">Because no errors or annotations are returned with this format, it is
-RECOMMENDED that implementations supporting short-circuiting logic
+<span class="bcp14">RECOMMENDED</span> that implementations supporting short-circuiting logic
 (<a href="#keyword-behaviors" class="auto internal xref">Section 12</a>) use it to return
 failure or success as soon as the outcome can be determined.<a href="#section-13.4.1-3" class="pilcrow">¶</a></p>
 </section>
@@ -6275,7 +6274,7 @@ validation where the error's location is important.<a href="#section-13.4.4-1" c
 <p id="section-13.4.4-2">The primary difference between this and the "Detailed" structure is that
 all results are returned, including information from irrelevant (<a href="#relevance" class="auto internal xref">Section 12.2</a>)
 keyword evaluations.  Because of this, it
-is RECOMMENDED that each node also carry a <code>valid</code> property to indicate the
+is <span class="bcp14">RECOMMENDED</span> that each node also carry a <code>valid</code> property to indicate the
 validation result for that node, which can also be used to determine which
 output units are relevant and which are only included because of the verbosity.<a href="#section-13.4.4-2" class="pilcrow">¶</a></p>
 <p id="section-13.4.4-3">Because this output structure can be quite large, a smaller example is given
@@ -6367,12 +6366,12 @@ by implementations.  Its URI is:
 <a href="#section-14.1" class="section-number selfRef">14.1. </a><a href="#name-custom-format-attributes" class="section-name selfRef">Custom format attributes</a>
         </h3>
 <p id="section-14.1-1">Save for agreement between
-parties, schema authors SHALL NOT expect a peer implementation to support
+parties, schema authors <span class="bcp14">SHALL NOT</span> expect a peer implementation to support
 custom format attributes.  See <a href="#format-implementation" class="auto internal xref">Section 8.3</a> for how
 implementations handle format attributes they do not recognize.<a href="#section-14.1-1" class="pilcrow">¶</a></p>
 <p id="section-14.1-2">Vocabularies do not support specifically declaring different value sets for keywords.
 Due to this limitation, and the historically uneven implementation of this keyword,
-it is RECOMMENDED to define additional keywords in a custom vocabulary rather than
+it is <span class="bcp14">RECOMMENDED</span> to define additional keywords in a custom vocabulary rather than
 unregistered format attributes if interoperability is desired.<a href="#section-14.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -6415,7 +6414,7 @@ as well as their general syntax.<a href="#section-15-4.1.2.1.1" class="pilcrow">
           <p id="section-15-4.2.1">Describing valid schema syntax<a href="#section-15-4.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-15-4.2.2.1">
-              <p id="section-15-4.2.2.1.1">A schema MUST successfully validate against its meta-schema, which
+              <p id="section-15-4.2.2.1.1">A schema <span class="bcp14">MUST</span> successfully validate against its meta-schema, which
 constrains the syntax of the available keywords.  The syntax described
 is expected to be compatible with the vocabularies declared; while
 it is possible to describe an incompatible syntax, such a meta-schema
@@ -6443,9 +6442,9 @@ involve different sets of vocabularies.  Each vocabulary typically identifies
 a meta-schema consisting only of the vocabulary's keywords.<a href="#section-15.1-1" class="pilcrow">¶</a></p>
 <p id="section-15.1-2">Since vocabularies are identified by URIs in the meta-schema, generic
 implementations can load extensions to support previously unknown
-vocabularies.  A vocabulary URI is an identifier.  It MAY be a URL, but if
+vocabularies.  A vocabulary URI is an identifier.  It <span class="bcp14">MAY</span> be a URL, but if
 so the nature of the retrievable resource is undefined.  Vocabulary authors
-MAY use the URL of the vocabulary specification, in a human-readable media
+<span class="bcp14">MAY</span> use the URL of the vocabulary specification, in a human-readable media
 type such as text/html or text/plain, as the vocabulary URI.<a href="#section-15.1-2" class="pilcrow">¶</a></p>
 <p id="section-15.1-3">A schema vocabulary can be defined by anything from an informal description
 to a standards proposal, depending on the audience and interoperability
@@ -6465,31 +6464,31 @@ those that are not part of any vocabulary.<a href="#section-15.1-4" class="pilcr
 <p id="section-15.1.1-1">In a meta-schema, the $vocabulary keyword identifies the
 vocabularies available for use in schemas described by that meta-schema.
 It is also used to indicate whether each vocabulary is required or optional;
-an implementation MUST understand the required vocabularies
+an implementation <span class="bcp14">MUST</span> understand the required vocabularies
 in order to successfully process the schema. Together, this information forms
-a dialect. Any vocabulary that is understood by the implementation MUST be
+a dialect. Any vocabulary that is understood by the implementation <span class="bcp14">MUST</span> be
 processed in a manner consistent with the semantic definitions contained
 within the vocabulary.<a href="#section-15.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-15.1.1-2">Meta-schemas that do not use "$vocabulary" MUST be considered to require the
+<p id="section-15.1.1-2">Meta-schemas that do not use "$vocabulary" <span class="bcp14">MUST</span> be considered to require the
 Core vocabulary as if its URI were present with a value of true. Meta-schemas
-that do use this keyword MUST explicitly list the Core vocabulary, which MUST
+that do use this keyword <span class="bcp14">MUST</span> explicitly list the Core vocabulary, which <span class="bcp14">MUST</span>
 have a value of true indicating that it is required.<a href="#section-15.1.1-2" class="pilcrow">¶</a></p>
-<p id="section-15.1.1-3">The value of this keyword MUST be an object.  The property names in the
-object MUST be absolute URIs and each URI MUST be normalized.
+<p id="section-15.1.1-3">The value of this keyword <span class="bcp14">MUST</span> be an object.  The property names in the
+object <span class="bcp14">MUST</span> be absolute URIs and each URI <span class="bcp14">MUST</span> be normalized.
 Each URI that appears as a property name identifies a specific set of
 keywords and their semantics.<a href="#section-15.1.1-3" class="pilcrow">¶</a></p>
-<p id="section-15.1.1-4">The values of the object properties MUST be booleans.
+<p id="section-15.1.1-4">The values of the object properties <span class="bcp14">MUST</span> be booleans.
 If the value is true, then implementations that do not recognize
-the vocabulary MUST NOT validate any input against schemas that
+the vocabulary <span class="bcp14">MUST NOT</span> validate any input against schemas that
 declare this meta-schema with "$schema".  This does not prevent other
 processing of those schemas, such as checking them against their
 meta-schema.  If the value is false, implementations
-that do not recognize the vocabulary SHOULD proceed with processing
+that do not recognize the vocabulary <span class="bcp14">SHOULD</span> proceed with processing
 such schemas.  The value has no impact if the implementation
 understands the vocabulary.<a href="#section-15.1.1-4" class="pilcrow">¶</a></p>
-<p id="section-15.1.1-5">The "$vocabulary" keyword SHOULD be used in the root schema of any schema
-resource intended for use as a meta-schema.  It MUST NOT appear in subschemas.<a href="#section-15.1.1-5" class="pilcrow">¶</a></p>
-<p id="section-15.1.1-6">The "$vocabulary" keyword MUST be ignored in schema resources that
+<p id="section-15.1.1-5">The "$vocabulary" keyword <span class="bcp14">SHOULD</span> be used in the root schema of any schema
+resource intended for use as a meta-schema.  It <span class="bcp14">MUST NOT</span> appear in subschemas.<a href="#section-15.1.1-5" class="pilcrow">¶</a></p>
+<p id="section-15.1.1-6">The "$vocabulary" keyword <span class="bcp14">MUST</span> be ignored in schema resources that
 are not being processed as a meta-schema.  This allows validating
 a meta-schema M against its own meta-schema M' without requiring
 the implementation to understand the vocabularies declared by M.<a href="#section-15.1.1-6" class="pilcrow">¶</a></p>
@@ -6500,7 +6499,7 @@ the implementation to understand the vocabularies declared by M.<a href="#sectio
           <h4 id="name-default-vocabularies">
 <a href="#section-15.1.2" class="section-number selfRef">15.1.2. </a><a href="#name-default-vocabularies" class="section-name selfRef">Default vocabularies</a>
           </h4>
-<p id="section-15.1.2-1">If "$vocabulary" is absent, an implementation MAY determine
+<p id="section-15.1.2-1">If "$vocabulary" is absent, an implementation <span class="bcp14">MAY</span> determine
 behavior based on the meta-schema if it is recognized from the
 URI value of the referring schema's "$schema" keyword.
 This is how behavior (such as Hyper-Schema usage) has been
@@ -6508,10 +6507,10 @@ recognized prior to the existence of vocabularies.<a href="#section-15.1.2-1" cl
 <p id="section-15.1.2-2">If the meta-schema, as referenced by the schema, is not recognized,
 or is missing, then the behavior is implementation-defined.
 If the implementation is built for a specific purpose,
-then it SHOULD assume the use of all of the most relevant vocabularies
+then it <span class="bcp14">SHOULD</span> assume the use of all of the most relevant vocabularies
 for that purpose.<a href="#section-15.1.2-2" class="pilcrow">¶</a></p>
 <p id="section-15.1.2-3">For example, an implementation that is a validator
-SHOULD assume the use of all vocabularies in this
+<span class="bcp14">SHOULD</span> assume the use of all vocabularies in this
 specification.<a href="#section-15.1.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -6536,9 +6535,9 @@ for use as a meta-schema.  This is demonstrated in
           <h4 id="name-updates-to-meta-schema-and-">
 <a href="#section-15.1.4" class="section-number selfRef">15.1.4. </a><a href="#name-updates-to-meta-schema-and-" class="section-name selfRef">Updates to Meta-Schema and Vocabulary URIs</a>
           </h4>
-<p id="section-15.1.4-1">Updated vocabulary and meta-schema URIs MAY be published between
+<p id="section-15.1.4-1">Updated vocabulary and meta-schema URIs <span class="bcp14">MAY</span> be published between
 specification drafts in order to correct errors.  Implementations
-SHOULD consider URIs dated after this specification draft and
+<span class="bcp14">SHOULD</span> consider URIs dated after this specification draft and
 before the next to indicate the same syntax and semantics
 as those listed here.<a href="#section-15.1.4-1" class="pilcrow">¶</a></p>
 </section>
@@ -6571,11 +6570,11 @@ defined in <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span> apply
 <p id="section-16-2">Instances and schemas are both frequently written by untrusted third parties, to
 be deployed on public Internet servers. Implementations should take care that
 the parsing and validating against schemas does not consume excessive system
-resources. Implementations MUST NOT fall into an infinite loop.<a href="#section-16-2" class="pilcrow">¶</a></p>
+resources. Implementations <span class="bcp14">MUST NOT</span> fall into an infinite loop.<a href="#section-16-2" class="pilcrow">¶</a></p>
 <p id="section-16-3">A malicious party could cause an implementation to repeatedly produce a copy
-of a very large value as an annotation.  Implementations SHOULD guard against
+of a very large value as an annotation.  Implementations <span class="bcp14">SHOULD</span> guard against
 excessive consumption of system resources in such a scenario.<a href="#section-16-3" class="pilcrow">¶</a></p>
-<p id="section-16-4">Servers MUST ensure that malicious parties cannot change the functionality of
+<p id="section-16-4">Servers <span class="bcp14">MUST</span> ensure that malicious parties cannot change the functionality of
 existing schemas by uploading a schema with a pre-existing or very similar "$id".<a href="#section-16-4" class="pilcrow">¶</a></p>
 <p id="section-16-5">Individual JSON Schema vocabularies are liable to also have their own security
 considerations. Consult the respective specifications for more information.<a href="#section-16-5" class="pilcrow">¶</a></p>
@@ -6583,12 +6582,12 @@ considerations. Consult the respective specifications for more information.<a hr
 implementation can display them to end-users in violation of a spec, or
 fail to strip them if such behavior is expected.<a href="#section-16-6" class="pilcrow">¶</a></p>
 <p id="section-16-7">A malicious schema author could place executable code or other dangerous
-material within a "$comment".  Implementations MUST NOT parse or otherwise
+material within a "$comment".  Implementations <span class="bcp14">MUST NOT</span> parse or otherwise
 take action based on "$comment" contents.<a href="#section-16-7" class="pilcrow">¶</a></p>
 <p id="section-16-8">JSON Schema validation allows the use of Regular Expressions, which have numerous
 different (often incompatible) implementations.
 Some implementations allow the embedding of arbitrary code, which is outside the
-scope of JSON Schema and MUST NOT be permitted.
+scope of JSON Schema and <span class="bcp14">MUST NOT</span> be permitted.
 Regular expressions can often also be crafted to be extremely expensive to compute
 (with so-called "catastrophic backtracking"), resulting in a denial-of-service
 attack.<a href="#section-16-8" class="pilcrow">¶</a></p>
@@ -6634,7 +6633,7 @@ represent in memory the full range of values describable by JSON.<a href="#secti
         </h3>
 <p id="section-17.2-1">Some programming languages and parsers use different internal representations
 for floating point numbers than they do for integers.<a href="#section-17.2-1" class="pilcrow">¶</a></p>
-<p id="section-17.2-2">For consistency, integer JSON numbers SHOULD NOT be encoded with a fractional
+<p id="section-17.2-2">For consistency, integer JSON numbers <span class="bcp14">SHOULD NOT</span> be encoded with a fractional
 part.<a href="#section-17.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -6643,18 +6642,18 @@ part.<a href="#section-17.2-2" class="pilcrow">¶</a></p>
         <h3 id="name-regular-expressions">
 <a href="#section-17.3" class="section-number selfRef">17.3. </a><a href="#name-regular-expressions" class="section-name selfRef">Regular Expressions</a>
         </h3>
-<p id="section-17.3-1">Keywords MAY use regular expressions to express constraints, or constrain
+<p id="section-17.3-1">Keywords <span class="bcp14">MAY</span> use regular expressions to express constraints, or constrain
 the input value to be a regular expression.
-These regular expressions SHOULD be valid according to the regular expression
+These regular expressions <span class="bcp14">SHOULD</span> be valid according to the regular expression
 dialect described in <span>[<a href="#ECMA262" class="cite xref">ECMA262</a>]</span>, Section 22.2.1.<a href="#section-17.3-1" class="pilcrow">¶</a></p>
-<p id="section-17.3-2">Unless otherwise specified by a keyword, regular expressions MUST NOT be
+<p id="section-17.3-2">Unless otherwise specified by a keyword, regular expressions <span class="bcp14">MUST NOT</span> be
 considered to be implicitly anchored at either end.  All regular expression
 keywords in this specification are un-anchored.<a href="#section-17.3-2" class="pilcrow">¶</a></p>
-<p id="section-17.3-3">Regular expressions SHOULD be built with the "u" flag (or equivalent) to provide
+<p id="section-17.3-3">Regular expressions <span class="bcp14">SHOULD</span> be built with the "u" flag (or equivalent) to provide
 Unicode support, or processed in such a way which provides Unicode support as
 defined by ECMA-262.<a href="#section-17.3-3" class="pilcrow">¶</a></p>
 <p id="section-17.3-4">Furthermore, given the high disparity in regular expression constructs support,
-schema authors SHOULD limit themselves to the following regular expression
+schema authors <span class="bcp14">SHOULD</span> limit themselves to the following regular expression
 tokens:<a href="#section-17.3-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-17.3-5.1">
@@ -6683,7 +6682,7 @@ versions;<a href="#section-17.3-5.5.1" class="pilcrow">¶</a></p>
             <p id="section-17.3-5.7.1">simple grouping ("(...)") and alternation ("|").<a href="#section-17.3-5.7.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-17.3-6">Finally, implementations MUST NOT take regular expressions to be
+<p id="section-17.3-6">Finally, implementations <span class="bcp14">MUST NOT</span> take regular expressions to be
 anchored, neither at the beginning nor at the end. This means, for instance,
 the pattern "es" matches "expression".<a href="#section-17.3-6" class="pilcrow">¶</a></p>
 </section>
@@ -6855,13 +6854,13 @@ checks, precisely enough for independent implementations to agree.<a href="#sect
 <p id="section-18.4-5">Registering a format attribute does not change the requirements of the
 Format-Assertion vocabulary (<a href="#format-implementation" class="auto internal xref">Section 8.3</a>): implementations
 are required to support the format attributes defined in this
-specification, and MAY support others from this registry.<a href="#section-18.4-5" class="pilcrow">¶</a></p>
+specification, and <span class="bcp14">MAY</span> support others from this registry.<a href="#section-18.4-5" class="pilcrow">¶</a></p>
 <div id="instructions-for-designated-experts">
 <section id="section-18.4.1">
           <h4 id="name-instructions-for-designated">
 <a href="#section-18.4.1" class="section-number selfRef">18.4.1. </a><a href="#name-instructions-for-designated" class="section-name selfRef">Instructions for Designated Experts</a>
           </h4>
-<p id="section-18.4.1-1">The designated experts SHOULD check that a proposed format attribute:<a href="#section-18.4.1-1" class="pilcrow">¶</a></p>
+<p id="section-18.4.1-1">The designated experts <span class="bcp14">SHOULD</span> check that a proposed format attribute:<a href="#section-18.4.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-18.4.1-2.1">
               <p id="section-18.4.1-2.1.1">checks syntax only: whether a value is accepted depends only on the
@@ -7086,10 +7085,6 @@ All of these initial format attributes have the Input Types value "string".<a hr
         <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC2673">[RFC2673]</dt>
-        <dd>
-<span class="refAuthor">Crawford, M.</span>, <span class="refTitle">"Binary Labels in the Domain Name System"</span>, <span class="seriesInfo">RFC 2673</span>, <span class="seriesInfo">DOI 10.17487/RFC2673</span>, <time datetime="1999-08" class="refDate">August 1999</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2673">https://www.rfc-editor.org/rfc/rfc2673</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC3339">[RFC3339]</dt>
         <dd>
 <span class="refAuthor">Klyne, G.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"Date and Time on the Internet: Timestamps"</span>, <span class="seriesInfo">RFC 3339</span>, <span class="seriesInfo">DOI 10.17487/RFC3339</span>, <time datetime="2002-07" class="refDate">July 2002</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3339">https://www.rfc-editor.org/rfc/rfc3339</a>&gt;</span>. </dd>
@@ -7153,6 +7148,10 @@ All of these initial format attributes have the Input Types value "string".<a hr
 <dt id="RFC8126">[RFC8126]</dt>
         <dd>
 <span class="refAuthor">Cotton, M.</span>, <span class="refAuthor">Leiba, B.</span>, and <span class="refAuthor">T. Narten</span>, <span class="refTitle">"Guidelines for Writing an IANA Considerations Section in RFCs"</span>, <span class="seriesInfo">BCP 26</span>, <span class="seriesInfo">RFC 8126</span>, <span class="seriesInfo">DOI 10.17487/RFC8126</span>, <time datetime="2017-06" class="refDate">June 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8126">https://www.rfc-editor.org/rfc/rfc8126</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8174">[RFC8174]</dt>
+        <dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8259">[RFC8259]</dt>
         <dd>
@@ -8023,9 +8022,9 @@ keyword.  As semantic conflicts are not generally detectable through
 schema validation, implementations are not expected to detect such
 conflicts.  If conflicting vocabularies are declared, the resulting
 behavior is undefined.<a href="#appendix-E.1-3" class="pilcrow">¶</a></p>
-<p id="appendix-E.1-4">Vocabulary authors SHOULD provide a meta-schema that validates the
+<p id="appendix-E.1-4">Vocabulary authors <span class="bcp14">SHOULD</span> provide a meta-schema that validates the
 expected usage of the vocabulary's keywords on their own.  Such meta-schemas
-SHOULD not forbid additional keywords, and MUST not forbid any
+<span class="bcp14">SHOULD</span> not forbid additional keywords, and <span class="bcp14">MUST</span> not forbid any
 keywords from the Core vocabulary.<a href="#appendix-E.1-4" class="pilcrow">¶</a></p>
 <p id="appendix-E.1-5">It is recommended that meta-schema authors reference each vocabulary's
 meta-schema using the <span><a href="#allOf" class="internal xref">"allOf"</a> (<a href="#allOf" class="auto internal xref">Section 5.2.1</a>)</span> keyword,
