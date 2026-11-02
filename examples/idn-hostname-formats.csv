@@ -1,0 +1,45 @@
+value,valid,comment
+www.example.com,yes,ASCII host name; every valid hostname is a valid idn-hostname
+EXAMPLE.com,yes,uppercase is allowed in ASCII labels
+localhost,yes,single label
+1host.example,yes,leading digit allowed by RFC 1123
+a-b.example,yes,interior hyphen
+münchen.example,yes,U-label with Latin letter u-umlaut
+-münchen.example,no,prefix '-' not allowed
+München.example,no,capital letter needs to be mapped before it is valid.
+xn--mnchen-3ya.example,yes,A-label form of münchen.example
+xn--mnchen-3ya.münchen.example,yes,A-labels and U-labels may be mixed
+例え.テスト,yes,CJK and katakana labels
+пример.испытание,yes,Cyrillic labels
+عربي.example,yes,right-to-left Arabic label passes the bidi rule
+ß.example,yes,sharp s is PVALID in IDNA2008 (IDNA2003 mapped it to ss)
+ς.example,yes,Greek final sigma is PVALID in IDNA2008
+l·l.example,yes,middle dot is allowed between two l's (CONTEXTO rule)
+xn--zz.example,yes,valid as a hostname even though the A-label does not decode
+xn--ls8h.example,yes,valid as a hostname even though it decodes to a disallowed emoji
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.example,yes,label of 63 characters
+üüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüü.example,yes,U-label whose A-label form is 63 characters
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,yes,253 characters in total
+,no,empty string
+.,no,single dot; empty labels
+.example,no,leading dot; empty label
+a..example,no,empty label between dots
+-a.example,no,label starts with a hyphen
+a-.example,no,label ends with a hyphen
+ab--c.example,yes,"IDNA2008 forbids hyphens in 3rd and 4th position, but it is a valid hostname"
+under_score.example,no,underscore is not allowed
+exa mple.com,no,space is not allowed
+Bücher.example,no,uppercase is DISALLOWED in a U-label; UTS #46 mapping would lowercase it
+Café.example,no,uppercase is DISALLOWED in a U-label; UTS #46 mapping would lowercase it
+ｅｘａｍｐｌｅ.com,no,full-width letters are DISALLOWED; UTS #46 mapping would convert them
+例え。テスト,no,ideographic full stop U+3002 is not a label separator in IDNA2008
+über.example,no,label is not in Normalization Form C (u followed by combining diaeresis)
+́a.example,no,label begins with a combining mark
+😀.example,no,emoji are DISALLOWED in IDNA2008
+a‍b.example,no,zero width joiner not following a virama (CONTEXTJ rule)
+a·b.example,no,middle dot not between two l's (CONTEXTO rule)
+٠١٢.example,no,"label starts with Arabic-Indic digits, which fails the bidi rule"
+a١.example,no,left-to-right label containing an Arabic-Indic digit fails the bidi rule
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.example,no,label of 64 characters
+üüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüü.example,no,U-label whose A-label form is 64 characters
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,no,254 characters in total

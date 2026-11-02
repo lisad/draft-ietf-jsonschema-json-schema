@@ -31,4 +31,4 @@ build HTML output:
 ## For implementors
 
 The examples in this specification's tests may be useful for implementors, especially the lists
-of valid and invalid URIs and email addresses.
+of valid and invalid URIs, email addresses and IDN hostnames.
