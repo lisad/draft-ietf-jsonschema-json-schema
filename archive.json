@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-20T03:43:10.655114+00:00",
+  "timestamp": "2026-11-03T05:37:02.696311+00:00",
   "repo": "lisad/draft-ietf-jsonschema-json-schema",
   "labels": [
     {
@@ -4531,24 +4531,26 @@
       "id": "PR_kwDOR8mbas8AAAABI8In2g",
       "title": "IDN examples and ID nits",
       "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/pull/79",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "lisad",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-10-16T22:14:16Z",
-      "updatedAt": "2026-10-19T22:40:21Z",
+      "updatedAt": "2026-11-02T18:56:05Z",
       "baseRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "baseRefName": "main",
       "baseRefOid": "4c6098e0e33820425d1a980af98252350ee3c572",
       "headRepository": "lisad/draft-ietf-jsonschema-json-schema",
       "headRefName": "idn-examples",
       "headRefOid": "e26bbd4c723c92af28dceeb8ab024ddcac795a68",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-11-02T18:56:05Z",
+      "mergedAt": "2026-11-02T18:56:05Z",
+      "mergedBy": "lisad",
+      "mergeCommit": {
+        "oid": "133b58d495ca2d71fdb57b767af9b9d5ec4be473"
+      },
       "comments": [],
       "reviews": []
     }
