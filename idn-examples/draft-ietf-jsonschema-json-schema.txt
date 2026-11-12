@@ -5,9 +5,9 @@
 Network Working Group                                  L. Dusseault, Ed.
 Internet-Draft                                  Data Transfer Initiative
 Intended status: Standards Track                               A. Wright
-Expires: 19 April 2027                                                  
+Expires: 16 May 2027                                                    
                                                               H. Andrews
-                                                         16 October 2026
+                                                        12 November 2026
 
 
                               JSON Schema
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 April 2027.
+   This Internet-Draft will expire on 16 May 2027.
 
 Copyright Notice
 
@@ -2204,7 +2204,11 @@ Table of Contents
 8.3.  General Format Implementation Requirements
 
    It is RECOMMENDED that implementations use a common parsing library
-   for each format, or a well-known regular expression.
+   for each format, or a well-known regular expression.  However, note
+   that parsing libraries often are too lenient (e.g. accepting date-
+   time values without timezone offsets, or times without seconds),
+   making reasonable assumptions in order to successfully parse a value,
+   whereas validation should usually be stricter.
 
 8.3.1.  Format-Annotation Vocabulary
 
