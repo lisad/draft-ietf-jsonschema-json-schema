@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-11-03T05:37:02.696311+00:00",
+  "timestamp": "2026-11-12T06:00:02.108730+00:00",
   "repo": "lisad/draft-ietf-jsonschema-json-schema",
   "labels": [
     {
@@ -555,6 +555,37 @@
       "updatedAt": "2026-09-22T23:21:02Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 80,
+      "id": "I_kwDOR8mbas8AAAABeE2FpQ",
+      "title": "Add example of YAML validation by JSON Schema",
+      "url": "https://github.com/lisad/draft-ietf-jsonschema-json-schema/issues/80",
+      "state": "OPEN",
+      "author": "lisad",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "And CBOR too?",
+      "createdAt": "2026-11-10T18:33:35Z",
+      "updatedAt": "2026-11-10T21:08:18Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "handrews",
+          "authorAssociation": "COLLABORATOR",
+          "body": "CBOR is tricky, not all of it maps down cleanly to JSON as I understand it.  We'd need to make some decisions around that.  YAML has an RFC that defines the JSON-compatible subset (more or less) so we can cite that (it's what we do for OpenAPI).  Does CBOR have something similar?",
+          "createdAt": "2026-11-10T18:35:44Z",
+          "updatedAt": "2026-11-10T18:35:44Z"
+        },
+        {
+          "author": "lisad",
+          "authorAssociation": "OWNER",
+          "body": "Good questions, I bet we could get some help with the CBOR stuff.  This was prompted by the JSON Schema Community video chat where people were talking about being confused by \"YAML Schema\" and never considering that they could apply their JSON Schema to YAML.  I imagine to include a YAML example, we'd just translate one of the existing early examples from JSON to YAML and explain the switch.  Alternatively we could have an informational appendix, only that would bury the information deeper in a part of the document that even fewer readers would get to.  Either way, the references would be informational. ",
+          "createdAt": "2026-11-10T21:08:18Z",
+          "updatedAt": "2026-11-10T21:08:18Z"
+        }
+      ]
     }
   ],
   "pulls": [
